@@ -29,7 +29,7 @@ Note that most sections have short demo clips.
 
 2. Within the project folder run `yarn install`
 
-7. Run 'yarn build`
+7. Run `yarn build`
 
 9. For live reload / hot module replacement functionality run `yarn serve`
 
