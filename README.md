@@ -1,6 +1,6 @@
 ## Family Tree 365 - Open Source Family Tree Software - Nuxt Client
  ![Latest Stable Version](https://img.shields.io/github/release/familytree365/nuxt.svg) 
-[![StyleCI](https://github.styleci.io/repos/135390590/shield?branch=master)](https://github.styleci.io/repos/135390590)
+[![StyleCI](https://github.styleci.io/repos/399057031/shield?branch=master)](https://github.styleci.io/repos/399057031)
 [![CircleCI](https://circleci.com/gh/familytree365/nuxt.svg?style=svg)](https://circleci.com/gh/familytree365/nuxt)
 
 
