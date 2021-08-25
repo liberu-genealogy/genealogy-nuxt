@@ -29,6 +29,9 @@ import { EnsoChartCard as ChartCard } from '@enso-ui/charts/bulma';
 
 export default {
     name: 'dashboard.index',
+    head: {
+        title: 'Dashboard'
+    },
     meta: {
         breadcrumb: 'dashboard',
         title: 'Dashboard'

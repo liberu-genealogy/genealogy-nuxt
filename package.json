@@ -9,7 +9,7 @@
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint": "yarn lint:js",
-    "postinstall": "opencollective-postinstall && patch-package"
+    "postinstall": "opencollective-postinstall && patch-package && rm -rf node_modules/@enso-ui/mixins"
   },
   "dependencies": {
     "@enso-ui/charts": "^2.0.20",

@@ -64,7 +64,11 @@ export default {
         "~/plugins/bootEnums.js",
         "~/plugins/i18n.js",
         "~/plugins/pRoute.js",
+        "~/plugins/filters.js",
+        "~/plugins/numberFormat.js",
+        "~/plugins/shortNumber.js",
         "~/plugins/vue-fb-customer-chat.js",
+
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
