@@ -14,6 +14,8 @@
   "dependencies": {
     "@enso-ui/charts": "^2.0.20",
     "@enso-ui/enums": "^1.0.3",
+    "@enso-ui/forms": "^2.3.19",
+    "@enso-ui/laravel-validation": "^1.1.0",
     "@enso-ui/route-mapper": "^1.0.1",
     "@enso-ui/sentry": "^1.0.4",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -30,7 +32,8 @@
     "opencollective-postinstall": "^2.0.3",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",
-    "pusher-js": "^7.0.3"
+    "pusher-js": "^7.0.3",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
