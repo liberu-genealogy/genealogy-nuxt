@@ -5,7 +5,7 @@ jobs:
   build:
     executor:
       name: node/default
-      tag: '16'
+      tag: '14'
     steps:
       - checkout
       - node/with-cache:
