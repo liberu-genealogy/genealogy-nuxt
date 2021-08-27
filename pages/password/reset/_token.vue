@@ -29,9 +29,9 @@ import Confirmation from '~/components/auth/fields/Confirmation.vue';
 
 export default {
     name: 'password.reset',
-    head: {
-        title: 'Reset Password'
-    },
+    // head: {
+    //     title: 'Reset Password'
+    // },
     meta: {
         guestGuard: true,
         title: 'Reset Password'

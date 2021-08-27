@@ -1,0 +1,39 @@
+.vue-filter .tabs-wrapper .tabs {
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    li {
+        a:hover {
+            border-color: $warning;
+        }
+
+        &.is-active a {
+            background-color: rgba($warning, 0.5);
+            border-color: $warning;
+        }
+    }
+}
+
+.vue-filter {
+    background-color: $box-background-color;
+
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        &.is-#{$name} {
+            .tabs-wrapper .tabs li {
+                a:hover {
+                    border-color: $color;
+                }
+
+                &.is-active a {
+                    background-color: $color;
+                    border-color: $color;
+                }
+            }
+        }
+    }
+}

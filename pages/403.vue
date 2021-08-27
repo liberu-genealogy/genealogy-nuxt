@@ -6,7 +6,7 @@
                 size="2x"/>
         </span>
         <p class="subtitle is-3">
-            {{ this.$i18n('You are not authorized here') }}
+            {{ i18n('You are not authorized here') }}
         </p>
     </div>
 </template>
@@ -19,9 +19,13 @@ library.add(faBan);
 
 export default {
     name: 'unauthorized',
-    head: {
+    // head: {
+    //     title: 'Unauthorized'
+    // },
+    meta: {
         title: 'Unauthorized'
-    }
+    },
+    inject: ['i18n'],
 };
 </script>
 
