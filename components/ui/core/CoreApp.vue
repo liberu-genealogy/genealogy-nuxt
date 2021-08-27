@@ -1,6 +1,8 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
-import { canAccess, errorHandler, routerErrorHandler } from '~/mixins';
+import canAccess from '~/mixins/canAccess';
+import errorHandler from '~/mixins/errorHandler';
+import routerErrorHandler from '~/mixins/routerErrorHandler';
 import RouteMapper from '@enso-ui/route-mapper';
 import toastr from '@enso-ui/toastr';
 

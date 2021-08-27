@@ -34,12 +34,12 @@ export default {
     // },
     meta: {
         guestGuard: true,
-        title: 'Reset Password'
+        title: 'Reset Password',
     },
 
     components: { AuthForm, Email, PasswordStrength, Password, Confirmation },
 
-    // inject: ['routerErrorHandler'],
+    inject: ['routerErrorHandler'],
 
     data: (v) => ({
         payload: {

@@ -11,7 +11,7 @@
         <template v-slot:footer>
             <nuxt-link class="is-pulled-right"
                 :to="{ name: 'password.email' }">
-                {{ $i18n('Forgot password') }}
+                {{ i18n('Forgot password') }}
             </nuxt-link>
             <div class="is-clearfix"/>
         </template>
@@ -28,14 +28,16 @@ import Remember from '~/components/auth/fields/Remember.vue';
 
 export default {
     name: 'login',
-    components: { AuthForm, Email, Password, Remember },
-    head: {
-        title: 'Login'
-    },
+
+    inject: ['i18n', 'route'],
+
     meta: {
         guestGuard: true,
-        title: 'Login'
+        title: 'Login',
     },
+
+    components: { AuthForm, Email, Password, Remember },
+
     data: () => ({
         errors: new Errors(),
         payload: {

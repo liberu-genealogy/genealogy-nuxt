@@ -29,6 +29,8 @@ export default {
 
     components: { Submit },
 
+    inject: ['routerErrorHandler'],
+
     data: () => ({
         errors: new Errors(),
         state: {

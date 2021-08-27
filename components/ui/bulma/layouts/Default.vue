@@ -40,7 +40,7 @@
 <script>
 import { SlideDown, HorizontalSlide } from '@enso-ui/transitions';
 import ScrollToTop from '@enso-ui/scroll-to-top/bulma';
-import Bookmarks from '@enso-ui/bookmarks/src/bulma/components/Bookmarks.vue';
+import Bookmarks from '~/components/bookmarks/bulma/components/Bookmarks.vue';
 import CoreDefault from '../../core/layouts/Default.vue';
 import NavbarRefresh from '../components/navbar/NavbarRefresh.vue';
 import Sidebar from '../components/menu/Sidebar.vue';
@@ -69,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss">
-    @import '@enso-ui/themes/bulma/variables';
+    @import '~/assets/themes/variables';
 
     .app-main {
         display: flex;

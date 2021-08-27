@@ -4,6 +4,7 @@ const themes = themeImporter(
   require.context('~/assets/themes', false, /.*\.lazy\.scss$/)
 )
 
+console.log('themes--------:', themes)
 export const state = () => ({
   home: true,
   themes: {},

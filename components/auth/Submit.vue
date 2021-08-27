@@ -6,7 +6,7 @@
         <span class="icon is-small">
             <fa :icon="icon"/>
         </span>
-        <span>{{ $i18n(action) }}</span>
+        <span>{{ i18n(action) }}</span>
     </button>
 </template>
 
@@ -19,6 +19,8 @@ library.add(faLock, faUser);
 
 export default {
     name: 'Submit',
+
+    inject: ['errors', 'i18n', 'route', 'state', 'toastr'],
 
     props: {
         action: {
@@ -58,7 +60,7 @@ export default {
             this.state.successful = false;
             this.$emit('submitting');
 
-            this.$axios.post(this.$pRoute(this.endpoint), this.payload, this.config)
+            this.$axios.post(this.route(this.endpoint), this.payload, this.config)
                 .then(({ data }) => {
                     this.state.successful = true;
                     this.$emit('success', data);

@@ -6,7 +6,7 @@
                 class="input"
                 type="email"
                 :class="{ 'is-danger': errors.has('email'), 'is-success': successful }"
-                :placeholder="$i18n('Email')"
+                :placeholder="i18n('Email')"
                 autocomplete="email"
                 @input="$emit('input', $event.target.value); errors.clear('email')">
             <span class="icon is-small is-left">
@@ -40,7 +40,7 @@ export default {
 
     directives: { focus },
 
-    // inject: ['errors', 'i18n', 'state'],
+    inject: ['errors', 'i18n', 'state'],
 
     props: {
         value: {

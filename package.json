@@ -12,6 +12,7 @@
     "postinstall": "opencollective-postinstall && patch-package && rm -rf node_modules/@enso-ui/mixins"
   },
   "dependencies": {
+    "@enso-ui/accessories": "^3.0.2",
     "@enso-ui/charts": "^2.0.20",
     "@enso-ui/enums": "^1.0.3",
     "@enso-ui/forms": "^2.3.19",
@@ -19,8 +20,11 @@
     "@enso-ui/route-mapper": "^1.0.1",
     "@enso-ui/scroll-to-top": "^2.0.3",
     "@enso-ui/sentry": "^1.0.4",
+    "@enso-ui/switch": "^1.0.20",
+    "@enso-ui/tables": "^2.6.13",
     "@enso-ui/toastr": "^2.1.2",
     "@enso-ui/transitions": "^1.1.1",
+    "@enso-ui/typeahead": "^2.3.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@nuxtjs/axios": "^5.13.6",
@@ -39,6 +43,8 @@
     "postinstall-postinstall": "^2.1.0",
     "pusher-js": "^7.0.3",
     "vue-fb-customer-chat": "^0.2.0",
+    "vue-pull-refresh": "^0.2.7",
+    "vuedraggable": "^2.24.3",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
