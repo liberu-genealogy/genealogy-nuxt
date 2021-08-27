@@ -19,9 +19,9 @@ import Email from '~/components/auth/fields/Email.vue';
 
 export default {
     name: 'password.email',
-    head: {
-        title: 'Email Reset Link'
-    },
+    // head: {
+    //     title: 'Email Reset Link'
+    // },
     meta: {
         guestGuard: true,
         title: 'Email Reset Link',

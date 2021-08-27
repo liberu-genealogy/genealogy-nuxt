@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import CoreAuth from './CoreAuth.vue';
+import CoreAuth from '~/components/auth/core/layouts/Auth.vue';
 import Router from '../Router.vue';
 
 export default {

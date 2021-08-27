@@ -1,10 +1,8 @@
-// import themeImporter from '../../importers/themeImporter'
+import themeImporter from '~/importers/themeImporter'
 
-// const themes = themeImporter(
-//   require.context('@enso-ui/themes/bulma', false, /.*\.lazy\.scss$/)
-// )
-
-const themes = []
+const themes = themeImporter(
+  require.context('~/assets/themes', false, /.*\.lazy\.scss$/)
+)
 
 export const state = () => ({
   home: true,

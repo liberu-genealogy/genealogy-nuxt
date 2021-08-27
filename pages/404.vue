@@ -6,7 +6,7 @@
                 size="2x"/>
         </span>
         <p class="subtitle is-3">
-            {{ this.$i18n('The requested page does not exist') }}
+            {{ i18n('The requested page does not exist') }}
         </p>
     </div>
 </template>
@@ -19,8 +19,12 @@ library.add(faExclamationTriangle);
 
 export default {
     name: 'notFound',
-    head: {
+    // head: {
+    //     title: '404'
+    // },
+    meta: {
         title: '404'
-    }
+    },
+    inject: ['i18n'],
 };
 </script>

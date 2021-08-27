@@ -71,12 +71,15 @@ export default {
         "~/plugins/filters.js",
         "~/plugins/numberFormat.js",
         "~/plugins/shortNumber.js",
-        "~/plugins/vue-fb-customer-chat.js",
+        "~/plugins/toastr.js",
+        "~/plugins/fontawesome.js",
+        "~/plugins/themeRegister.js",
 
+        "~/plugins/vue-fb-customer-chat.js",
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
-    components: true,
+    // components: true,
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     // buildModules: [

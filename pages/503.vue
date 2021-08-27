@@ -6,7 +6,7 @@
                 size="2x"/>
         </span>
         <p class="subtitle is-3 mx-6">
-            {{ this.$i18n('The application is briefly unavailable for scheduled maintenance. Please check back in a few minutes') }}
+            {{ i18n('The application is briefly unavailable for scheduled maintenance. Please check back in a few minutes') }}
         </p>
     </div>
 </template>
@@ -19,8 +19,12 @@ library.add(faTools);
 
 export default {
     name: 'maintenanceMode',
-    head: {
+    // head: {
+    //     title: 'Maintenance Mode'
+    // },
+    meta: {
         title: 'Maintenance Mode'
-    }
+    },
+    inject: ['i18n'],
 };
 </script>

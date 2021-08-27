@@ -1,5 +1,5 @@
 <template>
-    <nuxt-child :key="$route.path"/>
+    <NuxtChild :key="$route.path"/>
 </template>
 
 <script>
