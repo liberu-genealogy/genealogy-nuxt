@@ -73,7 +73,8 @@ export default {
         "~/plugins/shortNumber.js",
         "~/plugins/toastr.js",
         "~/plugins/fontawesome.js",
-        "~/plugins/themeRegister.js",
+        "~/plugins/themesSettingRegister.js",
+        "~/plugins/bookmarksSettingRegister.js",
 
         "~/plugins/vue-fb-customer-chat.js",
     ],

@@ -5,7 +5,7 @@
                 class="input"
                 :type="meta.content"
                 :class="{ 'is-danger': errors.has('password'), 'is-success': successful }"
-                :placeholder="$i18n('Password')"
+                :placeholder="i18n('Password')"
                 :autocomplete="autocomplete"
                 @input="$emit('input', $event.target.value); errors.clear('password')">
             <span class="icon is-small is-left">
@@ -46,7 +46,7 @@ export default {
 
     directives: { focus },
 
-    // inject: ['errors', 'i18n', 'state'],
+    inject: ['errors', 'i18n', 'state'],
 
     components: { RevealPassword },
 

@@ -12,7 +12,7 @@
 
 <script>
 import CoreAuth from '~/components/auth/core/layouts/Auth.vue';
-import Router from '../Router.vue';
+import Router from '~/components/ui/bulma/pages/Router.vue';
 
 export default {
     name: 'Auth',

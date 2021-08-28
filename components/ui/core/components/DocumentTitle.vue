@@ -2,7 +2,7 @@
 import { mapState, mapGetters } from 'vuex';
 
 export default {
-    name: 'DocumentTitle',
+    name: 'CoreDocumentTitle',
 
     inject: ['i18n'],
 

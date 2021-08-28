@@ -2,7 +2,7 @@
 import { mapState, mapActions } from 'vuex';
 
 export default {
-    name: 'Auth',
+    name: 'CoreAuth',
 
     computed: {
         ...mapState(['guestState']),

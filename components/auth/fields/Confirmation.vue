@@ -5,7 +5,7 @@
                 class="input"
                 :type="meta.content"
                 :class="{ 'is-danger': errors.has('password'), 'is-success': successful }"
-                :placeholder="$i18n('Repeat Password')"
+                :placeholder="i18n('Repeat Password')"
                 @input="$emit('input', $event.target.value); errors.clear('password')">
             <span class="icon is-small is-left">
                 <fa icon="lock"/>
@@ -42,7 +42,7 @@ export default {
 
     directives: { focus },
 
-    // inject: ['errors', 'i18n', 'state'],
+    inject: ['errors', 'i18n', 'state'],
 
     components: { RevealPassword },
 
