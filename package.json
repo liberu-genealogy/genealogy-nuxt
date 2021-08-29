@@ -32,7 +32,7 @@
     "@sentry/integrations": "^6.11.0",
     "animate.css": "^4.1.1",
     "bulma-extensions": "^6.2.7",
-    "core-js": "^3.15.1",
+    "core-js": "^3.16.3",
     "flatpickr": "^4.6.9",
     "laravel-echo": "^1.11.1",
     "nuxt": "^2.15.7",
