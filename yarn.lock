@@ -5811,10 +5811,10 @@ klona@^2.0.4:
   resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.4.tgz#7bb1e3affb0cb8624547ef7e8f6708ea2e39dfc0"
   integrity sha512-ZRbnvdg/NxqzC7L9Uyqzf4psi1OM4Cuc+sJAkQPjO6XkQIJTNbfK2Rsmbw8fx1p2mkZdp2FZYo2+LwXYY/uwIA==
 
-laravel-echo@^1.11.1:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.11.1.tgz#aba6e53a95063b428379934b7bd6eb756aed129a"
-  integrity sha512-ldyiI3tjL+WVHfCbMDcMmyD99rKcQYG0g6Y3mgLvM+0Zw8cOkBKYNlqMjMuYJPjHQqL/zvX4ARq0tzFQk1U82g==
+laravel-echo@^1.11.2:
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.11.2.tgz#64b62f114b98bcc30b96df0addf586022ae827ea"
+  integrity sha512-LiMTeWDLgI/bCTXJ8r96NcwE2sjWhzt3cIPDFri27EfMt9fcc1D/DBfXU5urOHaWrFwDQEHrdNzS16ewEQaWtA==
 
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
