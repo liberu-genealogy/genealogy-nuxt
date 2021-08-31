@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { EnsoForm } from '@enso-ui/bulma';
+import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
     name: 'Create',

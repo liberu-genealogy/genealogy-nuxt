@@ -1,16 +1,16 @@
 <template>
     <div>
-    <v-select
-      label="name"
-      v-model="selected_option"
-      :reduce="person => person.id"
-      :options="persons"
-      @input="setSelected"/>
-    <div id="tree"/>
-    <button id="saveButton">
-Export my PNG
-</button>
-  </div>
+        <v-select
+        label="name"
+        v-model="selected_option"
+        :reduce="person => person.id"
+        :options="persons"
+        @input="setSelected"/>
+        <div id="tree"/>
+        <button id="saveButton">
+            Export my PNG
+        </button>
+    </div>
 </template>
 <script>
 import * as d3Base from 'd3';
