@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { init as sentryInit, setContext } from '@sentry/browser'
 import { Vue as SentryVue } from '@sentry/integrations'
 import reportable from '@enso-ui/sentry'
+// import bootEnums from '~/utils/bootEnums'
 
 const legacyBuild = (data, state, commit) => {
   commit('setUser', data.user)
@@ -39,10 +40,10 @@ export const getters = {
   requests: (state) => state.requests.length,
   requestIndex:
     (state) =>
-    ({ url, method }) =>
-      state.requests.findIndex(
-        (request) => method === request.method && url === request.url
-      ),
+      ({ url, method }) =>
+        state.requests.findIndex(
+          (request) => method === request.method && url === request.url
+        ),
 }
 
 export const mutations = {
@@ -68,6 +69,7 @@ export const mutations = {
       redirect: { name: route },
     }),
   setEnums: (state, enums) => {
+    console.log('setEnums-this:', this)
     state.enums = this.$bootEnums(enums, this.$i18n)
   },
   setImpersonating: (state, impersonating) => {

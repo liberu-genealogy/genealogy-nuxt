@@ -1033,6 +1033,25 @@
   resolved "https://registry.yarnpkg.com/@enso-ui/enums/-/enums-1.0.3.tgz#40ae40f7c115c2500959009e21ca6f8b4b5bff08"
   integrity sha512-48NTFa1yain1d8p6ssLxqJJEV5vWz8qg5Hn4U+ZWLEBpOVH4BUU4uB2dN1chCAJwHf0vP7F1g1/wOv1ijtwLqA==
 
+"@enso-ui/filters@^2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@enso-ui/filters/-/filters-2.0.5.tgz#741cf3465bd1b1840d251a83ce75ee007c6c46ef"
+  integrity sha512-qkpCeV86vLVhbjRkjPxRStAl05eyGkw2c5vMN4hc5s2UjqiXt8s6AN3gJPyZ+HjyXMUrVdCHCr3aldMH5jRc8w==
+  dependencies:
+    "@enso-ui/datepicker" "^1.1"
+    "@enso-ui/select" "^2.0"
+    "@enso-ui/strings" "^1.0"
+    "@enso-ui/switch" "^1.0"
+    "@enso-ui/transitions" "^1.0"
+    "@fortawesome/fontawesome-svg-core" "^1.2.2"
+    "@fortawesome/free-solid-svg-icons" "^5.2.0"
+    "@fortawesome/vue-fontawesome" "^0.1.1"
+    bulma "^0.9.0"
+    date-fns "^2.0.0"
+    v-tooltip "^2.0.0"
+    vue "^2.5.16"
+    vuex "^3.0.0"
+
 "@enso-ui/forms@^2.3.19":
   version "2.3.19"
   resolved "https://registry.yarnpkg.com/@enso-ui/forms/-/forms-2.3.19.tgz#15f2964f0968635bee26de766ae7b7cda45e75ef"
@@ -1170,6 +1189,11 @@
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@enso-ui/sentry/-/sentry-1.0.4.tgz#dd814d8c71a26f279f08f8c40d2ce7249c333460"
   integrity sha512-fIGsCp3rbbd9wTLpQXDuJ+syHRbfN+da6PBdg47XnA/3dxSrdwoIqHYEL5jGibU9KX4JTEIeVBCeHbI63nmv6w==
+
+"@enso-ui/strings@^1.0":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@enso-ui/strings/-/strings-1.0.11.tgz#011a1dfa4af4b991d9c785b9ef71594078230dd7"
+  integrity sha512-IpAtAjDYXVAVMcbTh77q3XIVA4kltGrwT3PSZgV3/bsYo8nnBvOLwsy/vVzJWIXRhDMencaXR+OX1GmLYrY3Pw==
 
 "@enso-ui/switch@^1.0", "@enso-ui/switch@^1.0.20":
   version "1.0.20"
