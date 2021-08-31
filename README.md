@@ -31,7 +31,7 @@ Note that most sections have short demo clips.
 
 7. Run `yarn build`
 
-9. For live reload / hot module replacement functionality run `yarn serve`
+9. For live reload / hot module replacement functionality run `yarn dev`
 
 ### Thanks
 
