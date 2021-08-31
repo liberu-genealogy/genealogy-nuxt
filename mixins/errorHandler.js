@@ -43,46 +43,44 @@ const report = vm => (vm.$store.state.meta.env === 'production'
     : toastError(vm));
 
 export default {
-    methods(vm) {
-        return ({
-            errorHandler(error) {
-                if (vm.$axios.isCancel(error)) {
-                    return;
-                }
+    methods: {
+        errorHandler(error) {
+            if (this.$axios.isCancel(error)) {
+                return;
+            }
 
-                if (!error.response) {
-                    throw error;
-                }
+            if (!error.response) {
+                throw error;
+            }
 
-                const { status, data } = error.response;
+            const { status, data } = error.response;
 
-                switch (status) {
-                case 401: case 419:
-                    redirectToLogin(this);
-                    break;
-                case 409: case 429: case 488:
-                    this.toastr.warning(this.i18n(data.message));
-                    break;
-                case 403:
-                    this.$router.push({ name: 'unauthorized' })
-                        .catch(routerErrorHandler);
-                    break;
-                case 404:
-                    this.$router.push({ name: 'notFound' })
-                        .catch(routerErrorHandler);
-                    break;
-                case 413:
-                    this.toastr.warning(this.i18n('Request Entity Too Large'));
-                    break;
-                case 503:
-                    this.$router.push({ name: 'maintenanceMode' })
-                        .catch(routerErrorHandler);
-                    break;
-                default:
-                    report(this);
-                    break;
-                }
-            },
-        })
+            switch (status) {
+            case 401: case 419:
+                redirectToLogin(this);
+                break;
+            case 409: case 429: case 488:
+                this.toastr.warning(this.i18n(data.message));
+                break;
+            case 403:
+                this.$router.push({ name: 'unauthorized' })
+                    .catch(routerErrorHandler);
+                break;
+            case 404:
+                this.$router.push({ name: 'notFound' })
+                    .catch(routerErrorHandler);
+                break;
+            case 413:
+                this.toastr.warning(this.i18n('Request Entity Too Large'));
+                break;
+            case 503:
+                this.$router.push({ name: 'maintenanceMode' })
+                    .catch(routerErrorHandler);
+                break;
+            default:
+                report(this);
+                break;
+            }
+        },
     },
 };

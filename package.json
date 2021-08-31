@@ -15,6 +15,7 @@
     "@enso-ui/accessories": "^3.0.2",
     "@enso-ui/charts": "^2.0.20",
     "@enso-ui/enums": "^1.0.3",
+    "@enso-ui/filters": "^2.0.5",
     "@enso-ui/forms": "^2.3.19",
     "@enso-ui/laravel-validation": "^1.1.0",
     "@enso-ui/route-mapper": "^1.0.1",

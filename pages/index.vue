@@ -3,5 +3,5 @@
 </template>
 
 <script>
-export default {name: '/'}
+export default {name: 'index'}
 </script>

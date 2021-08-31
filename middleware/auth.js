@@ -9,7 +9,7 @@ export default function ({ store, redirect, route, from }) {
 
     if (store.state.auth.isAuth) {
         if (guestGuard) {
-            redirect({ name: '/' });
+            redirect({ name: 'index' });
         } else if (store.state.appUpdate) {
             redirect(from)
         } else if (!authorized(store, route)) {
@@ -26,6 +26,3 @@ export default function ({ store, redirect, route, from }) {
         }
     }
 }
-// export default function (context) {
-//     console.log('middleware---------:', context.route, context.store)
-// }
