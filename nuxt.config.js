@@ -75,6 +75,12 @@ export default {
     "~/plugins/fontawesome.js",
     "~/plugins/themesSettingRegister.js",
     "~/plugins/bookmarksSettingRegister.js",
+    "~/plugins/tutorialSettingRegister.js",
+    "~/plugins/notificationsRegister.js",
+    "~/plugins/localisationRegister.js",
+    "~/plugins/ioRegister.js",
+    "~/plugins/tasksNavbarRegister.js",
+    "~/plugins/usersRegister.js",
 
     "~/plugins/date-fns/format.js",
     "~/plugins/date-fns/formatDistance.js",
