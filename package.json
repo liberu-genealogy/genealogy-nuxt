@@ -35,8 +35,8 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@nuxtjs/axios": "^5.13.6",
-    "@sentry/browser": "^6.11.0",
-    "@sentry/integrations": "^6.11.0",
+    "@sentry/browser": "^6.12.0",
+    "@sentry/integrations": "^6.12.0",
     "animate.css": "^4.1.1",
     "bulma-extensions": "^6.2.7",
     "core-js": "^3.15.1",
@@ -47,7 +47,7 @@
     "favico.js": "^0.3.10",
     "flag-icon-css": "^3.5.0",
     "flatpickr": "^4.6.9",
-    "laravel-echo": "^1.11.1",
+    "laravel-echo": "^1.11.2",
     "nuxt": "^2.15.7",
     "nuxt-vuex-router-sync": "^0.0.3",
     "opencollective": "^1.0.3",
@@ -70,10 +70,10 @@
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^2.0.0",
-    "eslint-plugin-vue": "^7.12.1",
+    "eslint-plugin-vue": "^7.17.0",
     "fibers": "^5.0.0",
     "prettier": "^2.3.2",
-    "sass": "^1.38.0",
+    "sass": "^1.38.2",
     "sass-loader": "10"
   }
 }
