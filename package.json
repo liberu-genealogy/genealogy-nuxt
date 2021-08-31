@@ -34,7 +34,7 @@
     "bulma-extensions": "^6.2.7",
     "core-js": "^3.16.4",
     "flatpickr": "^4.6.9",
-    "laravel-echo": "^1.11.1",
+    "laravel-echo": "^1.11.2",
     "nuxt": "^2.15.7",
     "nuxt-vuex-router-sync": "^0.0.3",
     "opencollective": "^1.0.3",
