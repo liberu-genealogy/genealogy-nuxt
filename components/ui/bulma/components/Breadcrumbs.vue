@@ -6,10 +6,10 @@
                     <li v-for="breadcrumb in breadcrumbs"
                         :key="breadcrumb.name"
                         :class="{'is-active': !hasNavigation(breadcrumb)}">
-                        <router-link v-if="breadcrumb.route"
+                        <nuxt-link v-if="breadcrumb.route"
                             :to="{ name: breadcrumb.route }">
                             {{ i18n(breadcrumb.name) }}
-                        </router-link>
+                        </nuxt-link>
                         <a v-else>
                             {{ i18n(breadcrumb.name) }}
                         </a>

@@ -2,9 +2,10 @@ import Vue from 'vue'
 import { init as sentryInit, setContext } from '@sentry/browser'
 import { Vue as SentryVue } from '@sentry/integrations'
 import reportable from '@enso-ui/sentry'
-// import bootEnums from '~/utils/bootEnums'
+import bootEnums from '~/utils/bootEnums'
 
-const legacyBuild = (data, state, commit) => {
+const legacyBuild = (data, state, commit, _router, _i18n) => {
+  const enums = bootEnums(data.enums, _i18n)
   commit('setUser', data.user)
   commit('preferences/set', data.preferences)
   commit('setImpersonating', data.impersonating)
@@ -13,11 +14,11 @@ const legacyBuild = (data, state, commit) => {
   commit('localisation/setRtl', data.rtl)
   commit('localisation/setI18n', data.i18n)
   commit('layout/setThemes', data.themes)
-  commit('setEnums', data.enums)
+  commit('setEnums', enums)
   commit('websockets/configure', data.websockets)
   commit('setMeta', data.meta)
   commit('setRoutes', data.routes)
-  commit('setDefaultRoute', data.implicitRoute)
+  commit('setDefaultRoute', { route: data.implicitRoute, _router })
 }
 
 export const state = () => ({
@@ -58,19 +59,19 @@ export const mutations = {
     state.appUpdate = true
   },
   removeRequest: (state, index) => state.requests.splice(index, 1),
-  setCsrfToken: (state, token) => {
+  setCsrfToken: (state, { token, $axios }) => {
     state.meta.csrfToken = token
-    this.$axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+    $axios.defaults.headers.common['X-CSRF-TOKEN'] = token
     window.Laravel = { csrfToken: token }
   },
-  setDefaultRoute: (state, route) =>
-    this.$router.addRoute({
+  setDefaultRoute: (state, { route, _router }) => {
+    _router.addRoute({
       path: '/',
       redirect: { name: route },
-    }),
+    })
+  },
   setEnums: (state, enums) => {
-    console.log('setEnums-this:', this)
-    state.enums = this.$bootEnums(enums, this.$i18n)
+    state.enums = enums
   },
   setImpersonating: (state, impersonating) => {
     state.impersonating = impersonating
@@ -100,20 +101,34 @@ export const actions = {
     const { state, commit, dispatch } = context
     commit('appState', false)
 
+    const _router = this.$router;
+    const _i18n = this.$i18n;
+
     this.$axios
       .get('/api/core/home')
       .then(({ data }) => {
         if (data.user) {
-          legacyBuild(data, state, commit)
+          legacyBuild(data, state, commit, _router, _i18n)
         } else {
-          data.forEach(({ mutation, state }) => commit(mutation, state))
+          data.forEach(({ mutation, state }) => {
+            if (mutation === 'setEnums') {
+              const enums = bootEnums(state, _i18n)
+              commit(mutation, enums)
+            }
+            else if (mutation === 'setDefaultRoute') {
+              commit(mutation, { route: state, _router })
+            }
+            else {
+              commit(mutation, state)
+            }
+          })
         }
 
         commit(
           'layout/sidebar/update',
           state.preferences.global.expandedSidebar
         )
-        commit('setCsrfToken', state.meta.csrfToken)
+        commit('setCsrfToken', { token: state.meta.csrfToken, $axios: this.$axios })
 
         if (state.meta.sentryDsn) {
           sentryInit({
@@ -143,7 +158,7 @@ export const actions = {
       .catch((error) => {
         if (error.response && error.response.status === 401) {
           commit('auth/logout')
-          this.$router.push({ name: 'login' })
+          _router.push({ name: 'login' })
         } else {
           throw error
         }
@@ -168,7 +183,7 @@ export const actions = {
             state.route.name
           )
         ) {
-          this.$router.push({ name: 'login' })
+          _router.push({ name: 'login' })
         }
       })
   },
