@@ -60,7 +60,7 @@ export default {
             this.setShowQuote(this.meta.showQuote);
 
             if (data.csrfToken) {
-                this.setCsrfToken(data.csrfToken);
+                this.setCsrfToken({token: data.csrfToken, $axios: this.$axios});
             }
 
             setTimeout(() => {

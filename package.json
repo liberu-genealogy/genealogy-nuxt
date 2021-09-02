@@ -6,10 +6,10 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint": "yarn lint:js",
-    "postinstall": "opencollective-postinstall && patch-package && rm -rf node_modules/@enso-ui/mixins node_modules/@enso-ui/google"
+    "postinstall": "opencollective-postinstall && patch-package && rm -rf node_modules/@enso-ui/mixins node_modules/@enso-ui/google",
+    "inspect": "nuxt webpack --depth > webpack.config.js"
   },
   "dependencies": {
     "@enso-ui/accessories": "^3.0.2",
@@ -74,6 +74,7 @@
     "fibers": "^5.0.0",
     "prettier": "^2.3.2",
     "sass": "^1.38.2",
-    "sass-loader": "10"
+    "sass-loader": "^10.2.0",
+    "style-loader": "^3.2.1"
   }
 }

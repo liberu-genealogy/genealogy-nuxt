@@ -4,7 +4,6 @@ const themes = themeImporter(
   require.context('~/assets/themes', false, /.*\.lazy\.scss$/)
 )
 
-console.log('themes--------:', themes)
 export const state = () => ({
   home: true,
   themes: {},
@@ -38,27 +37,27 @@ export const mutations = {
 
 export const actions = {
   setTheme({ state, rootGetters }, theme = null) {
-    if (!theme) {
-      theme = state.themes[rootGetters['preferences/theme']]
-      localStorage.setItem('theme', theme)
-    }
+    // if (!theme) {
+    //   theme = state.themes[rootGetters['preferences/theme']]
+    //   localStorage.setItem('theme', theme)
+    // }
 
-    Object.keys(themes).forEach((theme) => {
-      themes[theme].unuse()
-    })
+    // Object.keys(themes).forEach((theme) => {
+    //   themes[theme].unuse()
+    // })
 
-    try {
-      themes[theme].use()
-    } catch (e) {
-      themes.light.use()
-    }
+    // try {
+    //   themes[theme].use()
+    // } catch (e) {
+    //   themes.light.use()
+    // }
   },
   loadTheme({ dispatch }) {
-    const theme = localStorage.getItem('theme') || 'light'
+    // const theme = localStorage.getItem('theme') || 'light'
 
-    if (theme) {
-      dispatch('setTheme', theme)
-    }
+    // if (theme) {
+    //   dispatch('setTheme', theme)
+    // }
   },
   switchTheme({ commit, dispatch }) {
     commit('toggleLights')

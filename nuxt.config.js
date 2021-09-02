@@ -1,4 +1,5 @@
 import getSiteMeta from "./utils/getSiteMeta";
+import { cloneDeep } from "lodash";
 
 const meta = getSiteMeta();
 
@@ -9,10 +10,12 @@ export default {
     host: process.env.HOST || 'localhost' // default: localhost
   },
 
-  publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL || 'http://localhost:8000',
-    appEnv: process.env.APP_ENV || 'production'
-  },
+  // publicRuntimeConfig: {
+  //   axios: {
+  //     browserBaseURL: process.env.BASE_URL || 'http://localhost:8000',
+  //   },
+  //   appEnv: process.env.APP_ENV || 'production'
+  // },
 
   sitemap: [
     {
@@ -117,17 +120,16 @@ export default {
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api/': process.env.BASE_URL || 'http://localhost:8000',
+    '/broadcasting/': process.env.BASE_URL || 'http://localhost:8000'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    // babel: {
-    //   plugins: [
-    //     '@babel/plugin-proposal-optional-chaining',
-    //     '@babel/plugin-proposal-nullish-coalescing-operator',
-    //   ],
-    // },
-
     filenames: {
       app: ({ isDev }) => isDev ? '[name].js' : '[chunkhash].js',
       chunk: ({ isDev }) => isDev ? '[name].js' : '[chunkhash].js',
@@ -147,5 +149,63 @@ export default {
       "@enso-ui/route-mapper",
       "d3-dag",
     ],
+
+    extend(config) {
+
+      const isScssRule = rule => rule.test.toString() === '/\\.scss$/i';
+
+      config.module.rules.forEach(rule => {
+        if (isScssRule(rule)) {
+          const normalRule = rule.oneOf.find(({ resourceQuery, test }) => resourceQuery === undefined && test === undefined);
+
+          const lazyRule = cloneDeep(normalRule)
+
+          lazyRule.test = /\.lazy\.scss$/;
+          const idx = lazyRule.use.findIndex(({ loader }) => loader.includes('vue-style-loader'))
+          if (idx > -1) {
+            lazyRule.use.splice(idx, 1, {
+              loader: 'style-loader',
+              options: {
+                injectType: 'lazyStyleTag',
+                insert: function insertAtTop(element) {
+                  const parent = document.querySelector('head');
+                  parent.insertBefore(element, parent.firstChild);
+                },
+              }
+            })
+          }
+
+          rule.oneOf.push(lazyRule)
+        }
+      });
+
+
+      // const scssRules = config.module.rules.find('scss').oneOfs;
+      // const normalRule = scssRules.store.get('normal');
+      // const lazyRule = config.module.rules.find('scss').oneOf('scss-lazy');
+
+      // normalRule.uses.values().forEach(use => {
+      //   if (use.name !== 'vue-style-loader') {
+      //     lazyRule.use(use.name).merge(use.entries());
+      //     return;
+      //   }
+
+      //   lazyRule.use('style-loader')
+      //     .loader('style-loader')
+      //     .options({
+      //       injectType: 'lazyStyleTag',
+      //       insert: function insertAtTop(element) {
+      //         const parent = document.querySelector('head');
+      //         parent.insertBefore(element, parent.firstChild);
+      //       },
+      //     });
+      // });
+
+      // lazyRule.test(/\.lazy\.scss$/);
+
+      // scssRules.store.delete('normal', 'scss-lazy');
+      // scssRules.store.set('scss-lazy', lazyRule);
+      // scssRules.store.set('normal', normalRule);
+    }
   },
 };
