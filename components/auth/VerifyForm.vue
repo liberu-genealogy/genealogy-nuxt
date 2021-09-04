@@ -41,10 +41,7 @@
     export default {
         name: 'VerifyForm',
         directives: { focus },
-        inject: {
-            i18n: { from: 'i18n' },
-            routeResolver: { from: 'route' },
-        },
+        inject: ['i18n', 'route'],
 
         props: {
             action: {
@@ -74,7 +71,7 @@
         computed: {
             ...mapState(['meta']),
             token() {
-                return this.$route.query.token;
+                return this.route.query.token;
             },
 
             postParams() {
@@ -99,7 +96,7 @@
 	            this.loading = true;
 	            this.isSuccessful = false;
 
-                axios.post(this.verifyLink, this.postParams)
+                this.$axios.post(this.verifyLink, this.postParams)
 	                .then(({ data }) => {
                         this.loading = false;
                         this.isSuccessful = true;
@@ -124,7 +121,7 @@
 	            this.loading = true;
 	            this.isSuccessful = false;
 
-                axios.post(this.resendLink, this.postParams)
+                this.$axios.post(this.resendLink, this.postParams)
 	                .then(({ data }) => {
                         this.loading = false;
                         this.isSuccessful = true;
