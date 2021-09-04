@@ -6,7 +6,7 @@
         <span class="icon is-small">
             <fa :icon="icon"/>
         </span>
-        <span>{{ $i18n(action) }}</span>
+        <span>{{ i18n(action) }}</span>
     </button>
 </template>
 
@@ -14,13 +14,10 @@
 import { mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-import Errors from '@enso-ui/laravel-validation';
-
 library.add(faLock, faUser);
-
 export default {
     name: 'Submit',
-
+    inject: ['errors', 'i18n', 'route', 'state', 'toastr'],
     props: {
         action: {
             type: String,
@@ -39,15 +36,9 @@ export default {
             required: true,
         },
     },
-
     data: () => ({
         loading: false,
-        errors: new Errors(),
-        state: {
-            successful: false,
-        },
     }),
-
     computed: {
         ...mapGetters(['isWebview']),
         config() {
@@ -56,31 +47,27 @@ export default {
                 : {};
         },
     },
-
     methods: {
         submit() {
             this.loading = true;
             this.state.successful = false;
             this.$emit('submitting');
-
-            this.$axios.post('/login', this.payload, this.config)
+            this.$axios.post(this.route(this.endpoint), this.payload, this.config)
                 .then(({ data }) => {
                     this.state.successful = true;
                     this.$emit('success', data);
                 }).catch(error => {
                     const { status, data } = error.response;
-                    console.log("ERROR: ", error.response.data)
-
-                    // switch (status) {
-                    // case 422:
-                    //     this.errors.set(data.errors);
-                    //     break;
-                    // case 429:
-                    //     this.toastr.error(data.message);
-                    //     break;
-                    // default:
-                    //     throw error;
-                    // }
+                    switch (status) {
+                    case 422:
+                        this.errors.set(data.errors);
+                        break;
+                    case 429:
+                        this.toastr.error(data.message);
+                        break;
+                    default:
+                        throw error;
+                    }
                 }).finally(() => (this.loading = false));
         },
     },

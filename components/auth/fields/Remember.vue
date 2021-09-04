@@ -6,7 +6,7 @@
                 @change="$emit('input', !value)"
                 :checked="value"
                 type="checkbox">
-                {{ $i18n('Remember me') }}
+                {{ i18n('Remember me') }}
             </label>
         </div>
     </div>
@@ -15,6 +15,7 @@
 <script>
 export default {
     name: 'Remember',
+    inject: ['i18n'],
     props: {
         value: {
             type: Boolean,

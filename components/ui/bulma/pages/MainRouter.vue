@@ -12,10 +12,10 @@
 <script>
 export default {
     name: 'MainRouter',
-
+    inject: ['route'],
     computed: {
         keepAlive() {
-            const keepAlive = this.$route.meta.reduce((keepAlive, meta) => meta.keepAlive || keepAlive, false)
+            const keepAlive = this.route.meta.reduce((keepAlive, meta) => meta.keepAlive || keepAlive, false)
             return this.$route.meta && keepAlive;
         },
     },
