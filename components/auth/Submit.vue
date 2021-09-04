@@ -69,17 +69,18 @@ export default {
                     this.$emit('success', data);
                 }).catch(error => {
                     const { status, data } = error.response;
+                    console.log("ERROR: ", error.response.data)
 
-                    switch (status) {
-                    case 422:
-                        this.errors.set(data.errors);
-                        break;
-                    case 429:
-                        this.toastr.error(data.message);
-                        break;
-                    default:
-                        throw error;
-                    }
+                    // switch (status) {
+                    // case 422:
+                    //     this.errors.set(data.errors);
+                    //     break;
+                    // case 429:
+                    //     this.toastr.error(data.message);
+                    //     break;
+                    // default:
+                    //     throw error;
+                    // }
                 }).finally(() => (this.loading = false));
         },
     },

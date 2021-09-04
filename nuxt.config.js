@@ -104,6 +104,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
+    "@nuxtjs/proxy",
     "nuxt-vuex-router-sync",
   ],
 
@@ -121,12 +122,11 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    proxy: true,
-    prefix: "/api"
-  },
-  proxy: {
-    '/api/': process.env.BASE_URL || 'http://localhost:8000',
-    '/broadcasting/': process.env.BASE_URL || 'http://localhost:8000'
+    baseURL: 'http://localhost:8000/api',
+    headers: { //optional
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
