@@ -6,7 +6,7 @@
                 class="input"
                 type="email"
                 :class="{ 'is-danger': errors.has('email'), 'is-success': successful }"
-                :placeholder="i18n('Email')"
+                :placeholder="$i18n('Email')"
                 autocomplete="email"
                 @input="$emit('input', $event.target.value); errors.clear('email')">
             <span class="icon is-small is-left">
@@ -31,24 +31,26 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faExclamationTriangle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import Errors from '@enso-ui/laravel-validation';
 import { focus } from '@enso-ui/directives';
 
 library.add(faCheck, faExclamationTriangle, faEnvelope);
 
 export default {
     name: 'Email',
-
     directives: { focus },
-
-    inject: ['errors', 'i18n', 'state'],
-
     props: {
         value: {
             type: String,
             required: true,
         },
     },
-
+    data: () => ({
+        errors: new Errors(),
+        state: {
+            successful: false,
+        },
+    }),
     computed: {
         successful() {
             return this.state.successful;
