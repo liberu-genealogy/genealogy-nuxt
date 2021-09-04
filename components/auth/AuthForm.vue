@@ -26,11 +26,7 @@ import Submit from './Submit.vue';
 
 export default {
     name: 'AuthForm',
-
     components: { Submit },
-
-    inject: ['routerErrorHandler'],
-
     data: () => ({
         errors: new Errors(),
         state: {

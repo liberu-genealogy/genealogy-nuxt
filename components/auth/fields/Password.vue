@@ -5,7 +5,7 @@
                 class="input"
                 :type="meta.content"
                 :class="{ 'is-danger': errors.has('password'), 'is-success': successful }"
-                :placeholder="i18n('Password')"
+                :placeholder="$i18n('Password')"
                 :autocomplete="autocomplete"
                 @input="$emit('input', $event.target.value); errors.clear('password')">
             <span class="icon is-small is-left">
@@ -38,18 +38,14 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { focus } from '@enso-ui/directives';
 import RevealPassword from '@enso-ui/forms/src/bulma/parts/RevealPassword.vue';
+import Errors from '@enso-ui/laravel-validation';
 
 library.add(faExclamationTriangle);
 
 export default {
     name: 'Password',
-
     directives: { focus },
-
-    inject: ['errors', 'i18n', 'state'],
-
     components: { RevealPassword },
-
     props: {
         autocomplete: {
             type: String,
@@ -70,6 +66,10 @@ export default {
     data: () => ({
         meta: {
             content: 'password',
+        },
+        errors: new Errors(),
+        state: {
+            successful: false,
         },
     }),
 };
