@@ -122,7 +122,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://localhost:8000/api',
+    baseURL: process.env.BASE_URL || 'http://localhost:8000/api',
     headers: { //optional
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
