@@ -63,7 +63,21 @@ export default {
   css: ["~/assets/style/enso.scss", "animate.css/animate.compat.css"],
 
   router: {
-    middleware: 'auth'
+    // middleware: 'auth',
+    extendRoutes(routes, resolve) {
+      routes.push(
+      {
+        name: 'register',
+        path: '/register',
+        component: resolve(__dirname, 'pages/auth/register.vue')
+      },
+      {
+        name: 'verify',
+        path: '/verify',
+        component: resolve(__dirname, 'pages/auth/verify.vue')
+      },
+      )
+    }
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
