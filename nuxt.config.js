@@ -63,7 +63,7 @@ export default {
   css: ["~/assets/style/enso.scss", "animate.css/animate.compat.css"],
 
   router: {
-    middleware: 'auth',
+    // middleware: 'auth',
     extendRoutes(routes, resolve) {
       routes.push(
       {
