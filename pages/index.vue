@@ -260,6 +260,7 @@
 import { mapState } from 'vuex'
 export default {
     name: 'default.index',
+    layout: 'default',
     meta: {
         guestGuard: true,
         title: 'Landing Page'
@@ -293,6 +294,6 @@ export default {
 }
 </script>
 
- <style scoped>
+<style scoped>
     @import '~/assets/css/base.css';
 </style>
