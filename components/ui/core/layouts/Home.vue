@@ -44,15 +44,18 @@ export default {
         redirectIfNeeded() {
             if (this.intendedRoute) {
                 const { name, params, query } = this.intendedRoute;
-                this.$router.push({ name, params, query })
-                    .catch(this.routerErrorHandler);
+                if (name === 'login' || name ==='dashboard') {
+                    this.$router.push({name: 'dashboard'});
+                } else {
+                    this.$router.push({ name, params, query });
+                }
                 this.setIntendedRoute(null);
             } else if (this.intendedPath) {
                 this.$router.push({ path: this.intendedPath })
                     .catch(this.routerErrorHandler);
                 this.setIntendedPath(null);
             } else if (this.$route.meta.guestGuard) {
-                this.$router.push({ path: '/' })
+                this.$router.push({ path: '/login' })
                     .catch(this.routerErrorHandler);
             }
         },

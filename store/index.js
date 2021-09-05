@@ -66,7 +66,7 @@ export const mutations = {
   },
   setDefaultRoute: (state, { route, _router }) => {
     _router.addRoute({
-      path: '/',
+      path: '/dashboard',
       redirect: { name: route },
     })
   },
