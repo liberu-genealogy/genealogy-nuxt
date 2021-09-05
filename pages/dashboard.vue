@@ -34,9 +34,9 @@ export default {
     },
     meta: {
         breadcrumb: 'dashboard',
-        title: 'Dashboard'
+        title: 'Dashboard',
     },
-    components: { ChartCard },
+    components: { ChartCard }
 };
 
 </script>

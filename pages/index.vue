@@ -259,8 +259,11 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-    name: 'index',
-    layout: 'none',
+    name: 'default.index',
+    meta: {
+        guestGuard: true,
+        title: 'Landing Page'
+    },
     data() {
         return {
             isDark: false,

@@ -36,6 +36,10 @@ export default {
         title: 'Login',
     },
 
+    head: {
+        title: "Login"
+    },
+
     components: { AuthForm, Email, Password, Remember },
 
     data: () => ({
