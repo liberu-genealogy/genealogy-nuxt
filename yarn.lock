@@ -1088,10 +1088,10 @@
   resolved "https://registry.yarnpkg.com/@enso-ui/enums/-/enums-1.0.3.tgz#40ae40f7c115c2500959009e21ca6f8b4b5bff08"
   integrity sha512-48NTFa1yain1d8p6ssLxqJJEV5vWz8qg5Hn4U+ZWLEBpOVH4BUU4uB2dN1chCAJwHf0vP7F1g1/wOv1ijtwLqA==
 
-"@enso-ui/filters@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@enso-ui/filters/-/filters-2.0.5.tgz#741cf3465bd1b1840d251a83ce75ee007c6c46ef"
-  integrity sha512-qkpCeV86vLVhbjRkjPxRStAl05eyGkw2c5vMN4hc5s2UjqiXt8s6AN3gJPyZ+HjyXMUrVdCHCr3aldMH5jRc8w==
+"@enso-ui/filters@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@enso-ui/filters/-/filters-2.1.1.tgz#5d5bfb0681f224e663fede411079bb35050bbe37"
+  integrity sha512-hB0Paey2aRQzeMfvHe65/fOZAIS1OTg2m9QIGgyonOIZl95XHASXVJZsdlRKBURIF6S0D9//MI/+xQfbKJMAPQ==
   dependencies:
     "@enso-ui/datepicker" "^1.1"
     "@enso-ui/select" "^2.0"
