@@ -38,6 +38,11 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'system.menus.edit',
+}
+</router>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -47,7 +52,6 @@ import { EnsoForm } from '@enso-ui/forms/bulma';
 library.add([faSave, faSlidersH]);
 
 export default {
-    name: 'system.menus.edit',
 
     meta: {
         breadcrumb: 'edit',

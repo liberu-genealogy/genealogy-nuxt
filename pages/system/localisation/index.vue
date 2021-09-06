@@ -8,6 +8,11 @@
         </template>
     </enso-table>
 </template>
+<router>
+{
+    name: 'system.localisation.index',
+}
+</router>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -17,7 +22,6 @@ import { EnsoTable } from '@enso-ui/tables/bulma';
 library.add(faEdit);
 
 export default {
-    name: 'system.localisation.index',
     meta: {
         breadcrumb: 'index',
         title: 'Localisation',

@@ -5,12 +5,16 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'administration.userGroups.create',
+}
+</router>
 
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'administration.userGroups.create',
     meta: {
         breadcrumb: 'create',
         title: 'Create User Group',

@@ -1,7 +1,8 @@
 <template>
   <Tutorial/>
 </template>
-
-<script>
-export default {name: 'index'}
-</script>
+<router>
+{
+  name: 'index'
+}
+</router>

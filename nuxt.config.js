@@ -6,15 +6,8 @@ const meta = getSiteMeta();
 export default {
   ssr: false,
 
-  server: {
-    host: process.env.HOST || 'localhost' // default: localhost
-  },
-
-  // publicRuntimeConfig: {
-  //   axios: {
-  //     browserBaseURL: process.env.BASE_URL || 'http://localhost:8000',
-  //   },
-  //   appEnv: process.env.APP_ENV || 'production'
+  // server: {
+  //   host: process.env.HOST || 'localhost' // default: localhost
   // },
 
   sitemap: [
@@ -25,7 +18,6 @@ export default {
     }
 
   ],
-  // Global page headers: https://go.nuxtjs.dev/config-head
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     htmlAttrs: {
@@ -95,10 +87,11 @@ export default {
   // components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  // buildModules: [
-  //     // https://go.nuxtjs.dev/eslint
-  //     "@nuxtjs/eslint-module",
-  // ],
+  buildModules: [
+    // https://go.nuxtjs.dev/eslint
+    // "@nuxtjs/eslint-module",
+    '@nuxtjs/router-extras',
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -118,6 +111,13 @@ export default {
       }
     ]
   },
+
+  // publicRuntimeConfig: {
+  //   axios: {
+  //     browserBaseURL: process.env.BASE_URL || 'http://localhost:8000',
+  //   },
+  //   appEnv: process.env.APP_ENV || 'production'
+  // },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

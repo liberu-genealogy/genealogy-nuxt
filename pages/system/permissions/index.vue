@@ -9,13 +9,17 @@
         </template>
     </enso-table>
 </template>
+<router>
+{
+    name: 'system.permissions.index',
+}
+</router>
 
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import cssClass from '~/utils/permission';
 
 export default {
-    name: 'system.permissions.index',
     meta: {
         breadcrumb: 'index',
         title: 'Permissions',

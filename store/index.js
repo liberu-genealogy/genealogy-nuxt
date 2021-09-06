@@ -183,7 +183,7 @@ export const actions = {
             state.route.name
           )
         ) {
-          _router.push({ name: 'login' })
+          this.$router.push({ name: 'login' })
         }
       })
   },

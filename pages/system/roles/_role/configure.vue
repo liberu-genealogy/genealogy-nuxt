@@ -45,6 +45,11 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'system.roles.configure',
+}
+</router>
 
 <script>
 import { mapState } from 'vuex';
@@ -52,7 +57,6 @@ import cssClass from '~/utils/permission';
 import { CheckboxManager } from '@enso-ui/checkbox/bulma';
 
 export default {
-    name: 'system.roles.configure',
     // path: ':role/configure',
     meta: {
         breadcrumb: 'configure',

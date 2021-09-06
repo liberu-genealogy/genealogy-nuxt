@@ -27,8 +27,6 @@ import Password from '~/components/auth/fields/Password.vue';
 import Remember from '~/components/auth/fields/Remember.vue';
 
 export default {
-    name: 'login',
-
     inject: ['i18n', 'route'],
 
     meta: {

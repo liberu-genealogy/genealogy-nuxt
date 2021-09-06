@@ -62,6 +62,11 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'administration.people.edit',
+}
+</router>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -74,7 +79,6 @@ import { Addresses } from '@enso-ui/addresses/bulma';
 library.add(faUser);
 
 export default {
-    name: 'administration.people.edit',
     meta: {
         breadcrumb: 'edit',
         title: 'Edit Person',

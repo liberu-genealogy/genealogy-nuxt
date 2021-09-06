@@ -15,7 +15,7 @@ export default {
             }
 
             const { extendedDocumentTitle, appName } = this.meta;
-            const { title } = this.$route.meta;
+            const title = this.$nuxt.$options.context.route.meta.reduce((title, meta) => meta.title || title, false)
 
             return extendedDocumentTitle
                 ? `${this.i18n(title)} | ${appName}`

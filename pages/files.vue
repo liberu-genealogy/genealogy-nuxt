@@ -78,6 +78,11 @@
         </div>
     </enso-tabs>
 </template>
+<router>
+{
+    name: 'core.files.index',
+}
+</router>
 
 <script>
 import { debounce } from 'lodash';
@@ -94,7 +99,6 @@ import File from '~/components/files/bulma/pages/files/components/File.vue';
 library.add(faSearch, faUndo, faSyncAlt);
 
 export default {
-    name: 'core.files.index',
     meta: {
         breadcrumb: 'files',
         title: 'Files',

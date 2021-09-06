@@ -58,6 +58,11 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'administration.teams.index'
+}
+</router>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -67,7 +72,6 @@ import Team from '~/components/teams/bulma/pages/teams/components/Team.vue';
 library.add(faPlus, faSearch, faSpinner);
 
 export default {
-    name: 'administration.teams.index',
     meta: {
         breadcrumb: 'index',
         title: 'Teams',
