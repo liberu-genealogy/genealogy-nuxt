@@ -155,12 +155,54 @@
 							<span>{{ i18n(action) }}</span>
 					</button>
 				</div>
+				<div class="field is-pulled-right">
+				Already have an account?
+				<router-link
+					:to="'/login'"
+					>
+					{{ i18n(' Log in') }}
+				</router-link>
+				</div>
 			</form>
-			<router-link
-				:to="'/login'"
-				class="is-pulled-right">
-				{{ i18n('Log in') }}
-			</router-link>
+
+            <div class="columns mt-6">
+                <div class="column">
+                <button class="button is-dark"
+                        :class="{ 'is-loading': loading }"
+                        type="button"
+                        @click.prevent="socialLogin('github')">
+                        <span class="icon is-small">
+                            <fa :icon="['fab', 'github']"/>
+                        </span>
+                        <span>{{ i18n('Github') }}</span>
+                </button>
+                </div>
+                
+                <div class="column">
+                <button class="button is-light is-outline"
+                        :class="{ 'is-loading': loading }"
+                        type="button"
+                        @click.prevent="socialLogin('google')">
+                        <span class="icon is-small">
+                            <fa :icon="['fab', 'google']"/>
+                        </span>
+                        <span>{{ i18n('Google') }}</span>
+                </button>
+                </div>
+
+                <div class="column">
+                <button class="button is-info"
+                        :class="{ 'is-loading': loading }"
+                        type="button"
+                        @click.prevent="socialLogin('facebook')">
+                        <span class="icon is-small">
+                            <fa :icon="['fab', 'facebook']"/>
+                        </span>
+                        <span>{{ i18n('Facebook') }}</span>
+                </button>
+                </div>
+            </div> 
+
 			<div>
 				<br /><br />
 				<router-link
@@ -299,6 +341,12 @@
 						}
 				});
 			},
+			 socialLogin(service) {
+				this.$axios.get(`api/login/${service}`).then(response=>{
+					// console.log(response.data);
+					window.location.href = response.data;
+				})
+			}
 		},
 	};
 </script>

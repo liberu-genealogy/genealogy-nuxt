@@ -9,12 +9,14 @@
         <remember v-model="payload.remember"
             v-if="!isWebview"/>
         <template v-slot:footer>
-            <nuxt-link class="is-pulled-right"
+            <nuxt-link class="is-pulled-right mt-1"
                 :to="{ name: 'password.email' }">
                 {{ i18n('Forgot password') }}
             </nuxt-link>
             <div class="is-clearfix"/>
-            <div class="buttons">
+            <label for="">Login With</label>
+            <div class="columns mt-4">
+                <div class="column">
                 <button class="button is-dark"
                         :class="{ 'is-loading': loading }"
                         type="button"
@@ -24,7 +26,21 @@
                         </span>
                         <span>{{ i18n('Github') }}</span>
                 </button>
+                </div>
                 
+                <div class="column">
+                <button class="button is-light is-outline"
+                        :class="{ 'is-loading': loading }"
+                        type="button"
+                        @click.prevent="socialLogin('google')">
+                        <span class="icon is-small">
+                            <fa :icon="['fab', 'google']"/>
+                        </span>
+                        <span>{{ i18n('Google') }}</span>
+                </button>
+                </div>
+
+                <div class="column">
                 <button class="button is-info"
                         :class="{ 'is-loading': loading }"
                         type="button"
@@ -34,19 +50,8 @@
                         </span>
                         <span>{{ i18n('Facebook') }}</span>
                 </button>
-
-                <button class="button is-white"
-                        :class="{ 'is-loading': loading }"
-                        type="button"
-                        @click.prevent="socialLogin('google')">
-                        <span class="icon is-small">
-                            <fa :icon="['fab', 'google']"/>
-                        </span>
-                        <span>{{ i18n('Google') }}</span>
-                </button>
-            </div>
-
-            </div>
+                </div>
+            </div>  
         </template>
     </auth-form>
 </template>
