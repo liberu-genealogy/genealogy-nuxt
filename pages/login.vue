@@ -36,6 +36,10 @@ export default {
         title: 'Login',
     },
 
+    head: {
+        title: "Login"
+    },
+
     components: { AuthForm, Email, Password, Remember },
 
     data: () => ({
@@ -66,6 +70,7 @@ export default {
             setTimeout(() => {
                 this.login();
                 this.home(true);
+                this.$router.push("/dashboard");
             }, 500);
         },
     },

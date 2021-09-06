@@ -259,8 +259,12 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-    name: 'index',
-    layout: 'none',
+    name: 'default.index',
+    layout: 'default',
+    meta: {
+        guestGuard: true,
+        title: 'Landing Page'
+    },
     data() {
         return {
             isDark: false,
@@ -290,6 +294,6 @@ export default {
 }
 </script>
 
- <style scoped>
+<style scoped>
     @import '~/assets/css/base.css';
 </style>

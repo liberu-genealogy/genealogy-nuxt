@@ -215,6 +215,9 @@
 	export default {
 		name: 'RegisterForm',
 		components: { RevealPassword },
+		meta: {
+	        guestGuard: true
+	    },
 		directives: { focus },
 		inject: {
 			i18n: { from: 'i18n' },
@@ -275,7 +278,7 @@
 			submit() {
 				this.loading = true;
 				this.isSuccessful = false;
-				axios.post(this.registerLink, this.postParams)
+				this.$axios.post(this.registerLink, this.postParams)
 					.then(({ data }) => {
 						this.loading = false;
 						this.isSuccessful = true;

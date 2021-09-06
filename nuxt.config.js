@@ -63,20 +63,12 @@ export default {
   css: ["~/assets/style/enso.scss", "animate.css/animate.compat.css"],
 
   router: {
-    // middleware: 'auth',
-    extendRoutes(routes, resolve) {
-      routes.push(
-      {
-        name: 'register',
-        path: '/register',
-        component: resolve(__dirname, 'pages/auth/register.vue')
-      },
-      {
-        name: 'verify',
-        path: '/verify',
-        component: resolve(__dirname, 'pages/auth/verify.vue')
-      },
-      )
+    middleware: 'auth',
+  },
+  auth: {
+    redirect: {
+      logout: '/login',
+      home: '/dashboard'
     }
   },
 

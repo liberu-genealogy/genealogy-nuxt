@@ -10,6 +10,9 @@
 
 	export default {
 		name: 'Verify',
+		meta: {
+			guestGuard: true
+		},
 		components: { VerifyForm },
 
 		computed: {

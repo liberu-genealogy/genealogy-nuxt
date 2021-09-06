@@ -9,7 +9,7 @@ export default function ({ store, redirect, route, from }) {
 
     if (store.state.auth.isAuth) {
         if (guestGuard) {
-            redirect({ name: 'index' });
+            redirect({ name: 'dashboard' });
         } else if (store.state.appUpdate) {
             redirect(from)
         } else if (!authorized(store, route)) {

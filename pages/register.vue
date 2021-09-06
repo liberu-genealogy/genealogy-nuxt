@@ -11,6 +11,9 @@
 
 	export default {
 		name: 'Register',
+		meta: {
+	        guestGuard: true
+	    },
 		components: { RegisterForm },
 		computed: {
 			...mapState(['meta']),
