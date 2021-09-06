@@ -10,6 +10,25 @@
                 <img src="~assets/images/logo1.svg" alt="" width="300px" />
               </NuxtLink>
             </div>
+            <div class="auth-inner-content my-6">
+              <div
+                class="
+                  has-text-white has-text-weight-regular
+                  is-flex
+                  ai--fs
+                  mb-5
+                "
+                v-for="(dataText, index) in rightText"
+                :key="index"
+              >
+                <img
+                  :src="require('~/assets/images/bcheckmark.webp')"
+                  alt=""
+                  class="bullet mt-1 mr-3"
+                />
+                {{ dataText.text }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -50,24 +69,36 @@
         type: String,
       },
     },
-
-    data: () => ({
-      first_name: "",
-      last_name: "",
-      email: "",
-      errors: new Errors(),
-      isSuccessful: false,
-      loading: false,
-      password: "",
-      passwordMeta: {
-        content: "password",
-      },
-      password_confirmation: null,
-      confirmationMeta: {
-        content: "password",
-      },
-      terms: "true",
-    }),
+    data() {
+      return {
+        first_name: "",
+        last_name: "",
+        email: "",
+        errors: new Errors(),
+        isSuccessful: false,
+        loading: false,
+        password: "",
+        passwordMeta: {
+          content: "password",
+        },
+        password_confirmation: null,
+        confirmationMeta: {
+          content: "password",
+        },
+        terms: "true",
+        rightText: [
+          {
+            text: "Family Tree 365 is a secure online website which you can use to create your own family tree(s) with.",
+          },
+          {
+            text: "It has a tree viewer and DNA support more features are planned such as the inclusion of archive databases and collections",
+          },
+          {
+            text: "Set up your first family tree free of charge. We offer different pricing levels with optional subscriptions if you need to create extra trees.",
+          },
+        ],
+      };
+    },
 
     computed: {
       ...mapState(["meta"]),
