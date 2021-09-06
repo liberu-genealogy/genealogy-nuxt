@@ -14,6 +14,28 @@
                 {{ i18n('Forgot password') }}
             </nuxt-link>
             <div class="is-clearfix"/>
+
+                <button class="button is-dark"
+                        :class="{ 'is-loading': loading }"
+                        type="button"
+                        @click.prevent="socialLogin('github')">
+                        <span class="icon is-small">
+                            <fa :icon="['fab', 'github']"/>
+                        </span>
+                        <span>{{ i18n('Github') }}</span>
+                </button>
+                
+                <button class="button is-info"
+                        :class="{ 'is-loading': loading }"
+                        type="button"
+                        @click.prevent="socialLogin('facebook')">
+                        <span class="icon is-small">
+                            <fa :icon="['fab', 'facebook']"/>
+                        </span>
+                        <span>{{ i18n('Facebook') }}</span>
+                </button>
+
+            </div>
         </template>
     </auth-form>
 </template>
@@ -22,10 +44,13 @@
 import { mapState, mapGetters, mapMutations } from 'vuex';
 import Errors from '@enso-ui/laravel-validation';
 import AuthForm from '~/components/auth/AuthForm.vue';
+import Submit from '~/components/auth/Submit.vue';
 import Email from '~/components/auth/fields/Email.vue';
 import Password from '~/components/auth/fields/Password.vue';
 import Remember from '~/components/auth/fields/Remember.vue';
-
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
+library.add(faFacebook, faGithub);
 export default {
     name: 'login',
 
@@ -40,7 +65,7 @@ export default {
         title: "Login"
     },
 
-    components: { AuthForm, Email, Password, Remember },
+    components: { AuthForm, Email, Password, Remember, Submit },
 
     data: () => ({
         errors: new Errors(),
@@ -73,6 +98,13 @@ export default {
                 this.$router.push("/dashboard");
             }, 500);
         },
+
+        socialLogin(service) {
+            this.$axios.get(`api/login/${service}`).then(response=>{
+                // console.log(response.data);
+                window.location.href = response.data;
+            })
+        }
     },
 };
 </script>
