@@ -24,5 +24,5 @@ export const actions = {
             commit('appState', false, { root: true });
             commit('logout');
         });
-    },
+    }
 };
