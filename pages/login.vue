@@ -14,7 +14,7 @@
                 {{ i18n('Forgot password') }}
             </nuxt-link>
             <div class="is-clearfix"/>
-
+            <div class="buttons">
                 <button class="button is-dark"
                         :class="{ 'is-loading': loading }"
                         type="button"
@@ -35,6 +35,17 @@
                         <span>{{ i18n('Facebook') }}</span>
                 </button>
 
+                <button class="button is-white"
+                        :class="{ 'is-loading': loading }"
+                        type="button"
+                        @click.prevent="socialLogin('google')">
+                        <span class="icon is-small">
+                            <fa :icon="['fab', 'google']"/>
+                        </span>
+                        <span>{{ i18n('Google') }}</span>
+                </button>
+            </div>
+
             </div>
         </template>
     </auth-form>
@@ -49,8 +60,8 @@ import Email from '~/components/auth/fields/Email.vue';
 import Password from '~/components/auth/fields/Password.vue';
 import Remember from '~/components/auth/fields/Remember.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
-library.add(faFacebook, faGithub);
+import { faFacebook, faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
+library.add(faFacebook, faGithub, faGoogle);
 export default {
     name: 'login',
 
