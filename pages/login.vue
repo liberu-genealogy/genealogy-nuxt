@@ -36,7 +36,15 @@
       title: "Login",
     },
 
+<<<<<<< HEAD
     components: { AuthForm, Email, Password, Remember, LoginRegister },
+=======
+    head: {
+        title: "Login"
+    },
+
+    components: { AuthForm, Email, Password, Remember, Submit },
+>>>>>>> rebase
 
     data: () => ({
       errors: new Errors(),
@@ -63,11 +71,27 @@
           this.setCsrfToken({ token: data.csrfToken, $axios: this.$axios });
         }
 
+<<<<<<< HEAD
         setTimeout(() => {
           this.login();
           this.home(true);
         }, 500);
       },
+=======
+            setTimeout(() => {
+                this.login();
+                this.home(true);
+                this.$router.push("/dashboard");
+            }, 500);
+        },
+
+        socialLogin(service) {
+            this.$axios.get(`api/login/${service}`).then(response=>{
+                // console.log(response.data);
+                window.location.href = response.data;
+            })
+        }
+>>>>>>> rebase
     },
   };
 </script>

@@ -159,11 +159,8 @@ export default {
   // },
 
   proxy: {
-    "/api/": {
-      target: "http://familytree.test",
-      pathRewrite: { "^/api/": "" },
-      changeOrigin: true,
-    },
+    "/api/": process.env.BASE_URL || "http://localhost:8000",
+    "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
   },
 
   // proxy: {

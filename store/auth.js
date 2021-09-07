@@ -23,7 +23,6 @@ export const actions = {
         this.$axios.post('/api/logout').then(() => {
             commit('appState', false, { root: true });
             commit('logout');
-            router.push({ name: 'login' });
         });
-    },
+    }
 };
