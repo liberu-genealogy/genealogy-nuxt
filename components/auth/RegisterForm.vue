@@ -268,7 +268,7 @@
     email,
     minLength,
     maxLength,
-    sameAs,
+    sameAs,x
   } from "vuelidate/lib/validators";
 
   import { library } from "@fortawesome/fontawesome-svg-core";

@@ -44,7 +44,7 @@ export default {
         content:
           "Our user-friendly yet powerful platform lets you create your own family tree the quick and easy way. No technical knowledge is required. Start your family tree today - free!",
       },
-      { property: "og:image:width", content: "2500" },
+      { property: "og:image:wi`dth", content: "2500" },
       { property: "og:image:height", content: "780" },
       { name: "twitter:site", content: "@familytree365" },
       { name: "twitter:card", content: "summary_large_image" },
