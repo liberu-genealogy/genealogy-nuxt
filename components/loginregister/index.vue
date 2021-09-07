@@ -71,9 +71,6 @@
 
 <script>
   export default {
-    layout() {
-      return "loginregisterLayout"
-    },
     data() {
       return {
         error: false,

@@ -121,6 +121,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     "@nuxtjs/i18n",
+    "@nuxtjs/proxy",
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     "nuxt-vuex-router-sync",
@@ -152,9 +153,17 @@ export default {
       "Access-Control-Allow-Origin": "*",
     },
   },
+  // proxy: {
+  //   "/api/": process.env.BASE_URL || "http://localhost:8000",
+  //   "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
+  // },
+
   proxy: {
-    "/api/": process.env.BASE_URL || "http://localhost:8000",
-    "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
+    "/api/": {
+      target: "http://familytree.test",
+      pathRewrite: { "^/api/": "" },
+      changeOrigin: true,
+    },
   },
 
   // proxy: {

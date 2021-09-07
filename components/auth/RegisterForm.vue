@@ -343,7 +343,7 @@
         this.isSuccessful = false;
 
         this.$axios
-          .$post(`http://familytree.test/api/register`, this.registration)
+          .$post("/api/", this.registration)
           .then(({ data }) => {
             this.loading = false;
             this.isSuccessful = true;
