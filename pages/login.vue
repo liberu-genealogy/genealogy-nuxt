@@ -1,5 +1,6 @@
 <template>
-  <auth-form
+  <LoginRegister> hello </LoginRegister>
+  <!-- <auth-form
     action="Login"
     icon="user"
     endpoint="login"
@@ -15,7 +16,7 @@
       </nuxt-link>
       <div class="is-clearfix" />
     </template>
-  </auth-form>
+  </auth-form> -->
 </template>
 
 <script>
@@ -25,6 +26,7 @@
   import Email from "~/components/auth/fields/Email.vue";
   import Password from "~/components/auth/fields/Password.vue";
   import Remember from "~/components/auth/fields/Remember.vue";
+  import LoginRegister from "~/components/loginregister/index.vue";
 
   export default {
     name: "login",
@@ -34,7 +36,7 @@
       title: "Login",
     },
 
-    components: { AuthForm, Email, Password, Remember },
+    components: { AuthForm, Email, Password, Remember, LoginRegister },
 
     data: () => ({
       errors: new Errors(),

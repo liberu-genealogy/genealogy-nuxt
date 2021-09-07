@@ -55,16 +55,13 @@
                 extra trees.
               </div>
             </div>
-            <img
-              class="auth-img"
-              src="~assets/images/mockup03@2x.webp"
-              alt=""
-            />
+
+            <slot name="footerImageForm" />
           </div>
         </div>
       </div>
 
-      <slot />
+      <slot name="form" />
     </div>
   </div>
 </template>
