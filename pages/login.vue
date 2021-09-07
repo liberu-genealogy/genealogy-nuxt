@@ -1,5 +1,136 @@
 <template>
-  <LoginRegister> hello </LoginRegister>
+  <LoginRegister>
+    <template #form>
+      <div
+        class="
+          column
+          is-6-tablet is-7-desktop is-7-widescreen is-7-fullhd is-gapless
+        "
+      >
+        <div class="auth-form is-gapless">
+          <form @submit.prevent="login()">
+            <div class="mb-5">
+              <NuxtLink
+                to="/"
+                class="
+                  is-size-6 is-flex
+                  has-text-link has-text-weight-medium
+                  mb-2
+                "
+              >
+                Back to Home
+              </NuxtLink>
+              <h1 class="is-size-4 has-text-black has-text-weight-bold">
+                Sign in to your account
+              </h1>
+            </div>
+
+            <!-- <div
+              v-for="(error, index) in errors"
+              :key="index"
+              class="notification is-danger"
+            >
+              {{ error[0] }}
+            </div> -->
+
+            <div class="mb-5">
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input
+                    class="input"
+                    type="email"
+                    placeholder="Email address"
+                    v-model="email"
+                  />
+                </p>
+              </div>
+            </div>
+            <div class="mb-5">
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input
+                    class="input"
+                    type="password"
+                    placeholder="Password"
+                    v-model="password"
+                  />
+                </p>
+              </div>
+            </div>
+            <div class="mb-5">
+              <div class="columns is-mobile is-gapless">
+                <div class="column">
+                  <label class="checkbox">
+                    <input class="mr-1" type="checkbox" />
+                    Remember me
+                  </label>
+                </div>
+                <div class="column has-text-right">
+                  <NuxtLink
+                    to="/forgotpassword"
+                    class="has-text-link has-text-weight-medium"
+                  >
+                    Forgot password?
+                  </NuxtLink>
+                </div>
+              </div>
+            </div>
+            <div class="mb-6">
+              <button
+                type="submit"
+                class="
+                  button
+                  theme-button theme-button-xl
+                  has-background-primary
+                  is-uppercase
+                  has-text-weight-medium has-text-white
+                "
+              >
+                Login
+              </button>
+            </div>
+            <div>
+              <p
+                class="
+                  is-size-6
+                  has-text-dark has-text-centered has-text-weight-regular
+                "
+              >
+                Don't have an account?
+                <NuxtLink
+                  to="/register"
+                  class="has-text-link has-text-weight-medium"
+                >
+                  Register Now
+                </NuxtLink>
+              </p>
+            </div>
+          </form>
+          <div class="divider">or</div>
+          <a
+            @click="loginSocial('google')"
+            href="javascript:;"
+            class="btn cnt-g"
+          >
+            <img src="~assets/images/google.jpg" />
+            {{ "Continue with google" }}
+          </a>
+          <a
+            @click="loginSocial('facebook')"
+            href="javascript:;"
+            class="btn cnt-g mb-5"
+          >
+            <img src="~assets/images/facebook.png" />
+            {{ "Continue with Facebook" }}
+          </a>
+        </div>
+      </div>
+    </template>
+
+    <template #footerImageForm>
+      <img class="auth-img" src="~assets/images/mockup01@2x.webp" alt="" />
+    </template>
+  </LoginRegister>
   <!-- <auth-form
     action="Login"
     icon="user"
@@ -45,6 +176,9 @@
         password: "",
         remember: false,
       },
+      email: "",
+      password: "",
+      remember: false,
     }),
 
     computed: {
@@ -53,6 +187,22 @@
     },
 
     methods: {
+      loginSocial(provider) {
+        this.provider = provider;
+        const newWindow = openWindow("", "message");
+        let url = "/api/login/" + provider;
+        this.$axios
+          .get(url)
+          .then((res) => {
+            console.log(res);
+            newWindow.location.href = res.data;
+            //window.location.href = url;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+
       ...mapMutations("auth", ["login"]),
       ...mapMutations("layout", ["home"]),
       ...mapMutations(["setShowQuote", "setCsrfToken"]),

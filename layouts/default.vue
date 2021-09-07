@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="has-background-white">
     <nuxt />
   </div>
   <!-- <core-app>
