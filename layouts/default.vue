@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
   <div class="">
-=======
-  <div>
->>>>>>> rebase
     <nuxt />
   </div>
   <!-- <core-app>
