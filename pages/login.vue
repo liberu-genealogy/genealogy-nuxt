@@ -71,3 +71,7 @@
     },
   };
 </script>
+<style lang="scss">
+ @import '~/assets/css/bulma.css';
+ @import '~/assets/css/fontawesome.min.css';
+</style>

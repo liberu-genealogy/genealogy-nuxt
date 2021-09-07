@@ -8,14 +8,14 @@
                         <img src="~assets/images/logo1.svg">
                     </a>
                     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-                        data-target="navbarBasicExample">
+                        data-target="navbarBasicExample" >
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                     </a>
                 </div>
                 <div id="navbarBasicExample" class="navbar-menu">
-                    <nav class="navbar-end">
+                    <nav class="navbar-end" style="margin-right: 0 !important;">
                         <a data-scroll class="navbar-item" href="#home">
                             Home
                         </a>
@@ -296,4 +296,9 @@ export default {
 
 <style scoped>
     @import '~/assets/css/base.css';
+    @media screen and (max-width: 1006px) {
+        .navbar.is-fixed-top  {
+            display: inline !important;
+        }
+    }
 </style>
