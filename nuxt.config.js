@@ -7,7 +7,7 @@ export default {
   ssr: false,
 
   server: {
-    host: process.env.HOST || 'localhost' // default: localhost
+    host: process.env.HOST || "localhost", // default: localhost
   },
 
   // publicRuntimeConfig: {
@@ -19,11 +19,10 @@ export default {
 
   sitemap: [
     {
-      hostname: process.env.BASE_URL || 'http://localhost:3000',
-      path: '/sitemap.xml',
+      hostname: process.env.BASE_URL || "http://localhost:3000",
+      path: "/sitemap.xml",
       gzip: true,
-    }
-
+    },
   ],
   // Global page headers: https://go.nuxtjs.dev/config-head
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -31,7 +30,8 @@ export default {
     htmlAttrs: {
       lang: "en-GB",
     },
-    title: "Family Tree 365 - Start your family tree today - free! Your first tree is 100% free. Sign-up to begin your genealogy journey today!",
+    title:
+      "Family Tree 365 - Start your family tree today - free! Your first tree is 100% free. Sign-up to begin your genealogy journey today!",
     meta: [
       ...meta,
       { charset: "utf-8" },
@@ -44,7 +44,7 @@ export default {
         content:
           "Our user-friendly yet powerful platform lets you create your own family tree the quick and easy way. No technical knowledge is required. Start your family tree today - free!",
       },
-      { property: "og:image:width", content: "2500" },
+      { property: "og:image:wi`dth", content: "2500" },
       { property: "og:image:height", content: "780" },
       { name: "twitter:site", content: "@familytree365" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -60,16 +60,28 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["~/assets/style/enso.scss", "animate.css/animate.compat.css"],
+  css: [
+    "~/assets/style/enso.scss",
+    "animate.css/animate.compat.css",
+    "~/assets/css/base.css",
+  ],
 
   router: {
-    middleware: 'auth',
-  },
-  auth: {
-    redirect: {
-      logout: '/login',
-      home: '/dashboard'
-    }
+    // middleware: 'auth',
+    extendRoutes(routes, resolve) {
+      routes.push(
+        {
+          name: "register",
+          path: "/register",
+          component: resolve(__dirname, "pages/register.vue"),
+        },
+        {
+          name: "verify",
+          path: "/verify",
+          component: resolve(__dirname, "pages/verify.vue"),
+        }
+      );
+    },
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -98,7 +110,7 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  // components: true,
+  //components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   // buildModules: [
@@ -108,45 +120,71 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    "@nuxtjs/i18n",
+    "@nuxtjs/proxy",
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     "nuxt-vuex-router-sync",
   ],
+
+  i18n: {
+    locales: ["en", "fr", "es"],
+    defaultLocale: "en",
+  },
 
   nuxtContentAlgolia: {
     appId: process.env.ALGOLIA_APP_ID,
     apiKey: process.env.ALGOLIA_API_KEY,
     paths: [
       {
-        name: 'articles',
-        index: 'articles',
-        fields: ['title', 'description', 'bodyPlainText']
-      }
-    ]
+        name: "articles",
+        index: "articles",
+        fields: ["title", "description", "bodyPlainText"],
+      },
+    ],
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    proxy: true
+    proxy: true,
+    credentials: false,
+    common: {
+      Accept: "application/json, text/plain, */*",
+      "Access-Control-Allow-Origin": "*",
+    },
   },
+  // proxy: {
+  //   "/api/": process.env.BASE_URL || "http://localhost:8000",
+  //   "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
+  // },
+
   proxy: {
-    '/api/': process.env.BASE_URL || 'http://localhost:8000',
-    '/broadcasting/': process.env.BASE_URL || 'http://localhost:8000'
+    "/api/": process.env.BASE_URL || "http://localhost:8000",
+    "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
   },
+
+  // proxy: {
+  //   "/register": {
+  //     target: `${process.env.BASE_URL}/register`,
+  //     pathRewrite: { "^/register/": "" },
+  //   },
+  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     filenames: {
-      app: ({ isDev }) => isDev ? '[name].js' : '[chunkhash].js',
-      chunk: ({ isDev }) => isDev ? '[name].js' : '[chunkhash].js',
-      css: ({ isDev }) => isDev ? '[name].css' : '[contenthash].css',
-      img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[hash:7].[ext]',
-      font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[hash:7].[ext]',
-      video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[hash:7].[ext]'
+      app: ({ isDev }) => (isDev ? "[name].js" : "[chunkhash].js"),
+      chunk: ({ isDev }) => (isDev ? "[name].js" : "[chunkhash].js"),
+      css: ({ isDev }) => (isDev ? "[name].css" : "[contenthash].css"),
+      img: ({ isDev }) => (isDev ? "[path][name].[ext]" : "img/[hash:7].[ext]"),
+      font: ({ isDev }) =>
+        isDev ? "[path][name].[ext]" : "fonts/[hash:7].[ext]",
+      video: ({ isDev }) =>
+        isDev ? "[path][name].[ext]" : "videos/[hash:7].[ext]",
     },
 
     transpile: [
-      '@enso-ui/strings',
+      "@enso-ui/strings",
 
       "@enso-ui/enums",
       "@sentry/browser",
@@ -157,34 +195,37 @@ export default {
     ],
 
     extend(config) {
+      const isScssRule = (rule) => rule.test.toString() === "/\\.scss$/i";
 
-      const isScssRule = rule => rule.test.toString() === '/\\.scss$/i';
-
-      config.module.rules.forEach(rule => {
+      config.module.rules.forEach((rule) => {
         if (isScssRule(rule)) {
-          const normalRule = rule.oneOf.find(({ resourceQuery, test }) => resourceQuery === undefined && test === undefined);
+          const normalRule = rule.oneOf.find(
+            ({ resourceQuery, test }) =>
+              resourceQuery === undefined && test === undefined
+          );
 
-          const lazyRule = cloneDeep(normalRule)
+          const lazyRule = cloneDeep(normalRule);
 
           lazyRule.test = /\.lazy\.scss$/;
-          const idx = lazyRule.use.findIndex(({ loader }) => loader.includes('vue-style-loader'))
+          const idx = lazyRule.use.findIndex(({ loader }) =>
+            loader.includes("vue-style-loader")
+          );
           if (idx > -1) {
             lazyRule.use.splice(idx, 1, {
-              loader: 'style-loader',
+              loader: "style-loader",
               options: {
-                injectType: 'lazyStyleTag',
+                injectType: "lazyStyleTag",
                 insert: function insertAtTop(element) {
-                  const parent = document.querySelector('head');
+                  const parent = document.querySelector("head");
                   parent.insertBefore(element, parent.firstChild);
                 },
-              }
-            })
+              },
+            });
           }
 
-          rule.oneOf.push(lazyRule)
+          rule.oneOf.push(lazyRule);
         }
       });
-
 
       // const scssRules = config.module.rules.find('scss').oneOfs;
       // const normalRule = scssRules.store.get('normal');
@@ -212,6 +253,6 @@ export default {
       // scssRules.store.delete('normal', 'scss-lazy');
       // scssRules.store.set('scss-lazy', lazyRule);
       // scssRules.store.set('normal', normalRule);
-    }
+    },
   },
 };
