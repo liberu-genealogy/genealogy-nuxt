@@ -147,9 +147,16 @@ export default {
   axios: {
     proxy: true,
   },
+  // proxy: {
+  //   "/api/": process.env.BASE_URL || "http://localhost:8000",
+  //   "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
+  // },
+
   proxy: {
-    "/api/": process.env.BASE_URL || "http://localhost:8000",
-    "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
+    "/register": {
+      target: `${process.env.BASE_URL}/register`,
+      pathRewrite: { "^/register/": "" },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -28,7 +28,6 @@
                 'is-danger': errors.has('first_name'),
                 'is-success': isSuccessful,
               }"
-              :placeholder="i18n('First Name')"
               @input="errors.clear('first_name')"
             />
             <span class="icon is-small is-left">
@@ -65,7 +64,6 @@
                 'is-danger': errors.has('last_name'),
                 'is-success': isSuccessful,
               }"
-              :placeholder="i18n('Last Name')"
               @input="errors.clear('last_name')"
             />
             <span class="icon is-small is-left">
@@ -102,7 +100,6 @@
                 'is-danger': errors.has('email'),
                 'is-success': isSuccessful,
               }"
-              :placeholder="i18n('Email')"
               @input="errors.clear('email')"
             />
             <span class="icon is-small is-left">
@@ -138,7 +135,6 @@
                 'is-danger': errors.has('password'),
                 'is-success': isSuccessful,
               }"
-              :placeholder="i18n('Password')"
               @input="errors.clear('password')"
             />
             <span class="icon is-small is-left">
@@ -184,7 +180,6 @@
                 'is-danger': errors.has('password'),
                 'is-success': isSuccessful,
               }"
-              :placeholder="i18n('Repeat Password')"
               @input="errors.clear('password')"
             />
             <span class="icon is-small is-left">
@@ -240,32 +235,32 @@
             <span class="icon is-small">
               <fa :icon="'user'" />
             </span>
-            <span>{{ i18n(action) }}</span>
+            <span>{{ action }}</span>
           </button>
         </div>
       </form>
       <router-link :to="'/login'" class="is-pulled-right">
-        {{ i18n("Log in") }}
+        {{ "Log in" }}
       </router-link>
       <div>
         <br /><br />
         <router-link :to="{ name: 'about.index' }" class="is-pulled-left">
-          {{ i18n("About") }}&nbsp;
+          {{ "About" }}&nbsp;
         </router-link>
         <router-link :to="{ name: 'contact.index' }" class="is-pulled-right">
-          {{ i18n("Contact") }} &nbsp;
+          {{ "Contact" }} &nbsp;
         </router-link>
       </div>
       <br />
       <div>
         <router-link :to="{ name: 'privacy.index' }" class="is-pulled-left">
-          {{ i18n("Privacy Policy") }}
+          {{ "Privacy Policy" }}
         </router-link>
         <router-link
           :to="{ name: 'termsandconditions.index' }"
           class="is-pulled-right"
         >
-          {{ i18n("Terms and Conditions") }}
+          {{ "Terms and Conditions" }}
         </router-link>
       </div>
       <br /><br /><br />
@@ -298,9 +293,6 @@
     name: "RegisterForm",
     components: { RevealPassword },
     directives: { focus },
-    inject: {
-      i18n: { from: "i18n" },
-    },
 
     props: {
       action: {
@@ -368,8 +360,8 @@
       submit() {
         this.loading = true;
         this.isSuccessful = false;
-        axios
-          .post(this.registerLink, this.postParams)
+        this.$axios
+          .$post(this.registerLink, this.postParams)
           .then(({ data }) => {
             this.loading = false;
             this.isSuccessful = true;
