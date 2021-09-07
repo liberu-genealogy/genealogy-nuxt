@@ -1,122 +1,47 @@
 <template>
-  <div>
-    <div class="container auth is-fluid px-0">
-      <div class="columns is-multiline is-gapless">
-        <div
-          class="column is-6-tablet is-5-desktop is-5-widescreen is-5-fullhd"
-        >
-          <div class="auth has-background-primary">
-            <div class="auth-content">
-              <div class="has-text-centered">
-                <NuxtLink to="/"
-                  ><img src="~assets/images/logo1.svg" alt="" width="300px"
-                /></NuxtLink>
-              </div>
-              <div class="auth-inner-content my-6">
-                <div
-                  class="
-                    has-text-white has-text-weight-regular
-                    is-flex
-                    ai--fs
-                    mb-5
-                  "
-                >
-                  <img
-                    src="~assets/images/bcheckmark.webp"
-                    alt=""
-                    class="bullet mt-1 mr-3"
-                  />
-                  Family Tree 365 is a secure online website which you can use
-                  to create your own family tree(s) with.
-                </div>
-                <div
-                  class="
-                    has-text-white has-text-weight-regular
-                    is-flex
-                    ai--fs
-                    mb-5
-                  "
-                >
-                  <img
-                    src="~assets/images/bcheckmark.webp"
-                    alt=""
-                    class="bullet mt-1 mr-3"
-                  />
-                  It has a tree viewer and DNA support more features are planned
-                  such as the inclusion of archive databases and collections
-                </div>
-                <div
-                  class="has-text-white has-text-weight-regular is-flex ai--fs"
-                >
-                  <img
-                    src="~assets/images/bcheckmark.webp"
-                    alt=""
-                    class="bullet mt-1 mr-3"
-                  />
-                  Set up your first family tree free of charge. We offer
-                  different pricing levels with optional subscriptions if you
-                  need to create extra trees.
-                </div>
-              </div>
-              <img
-                class="auth-img"
-                src="~assets/images/mockup03@2x.webp"
-                alt=""
-              />
-            </div>
-          </div>
+  <LoginRegister>
+    <form
+      @submit.prevent="submit()"
+      class="
+        column
+        is-6-tablet is-7-desktop is-7-widescreen is-7-fullhd is-gapless is-flex
+        ai--c
+      "
+    >
+      <div class="auth-form is-gapless">
+        <div class="mb-5">
+          <NuxtLink
+            to="/"
+            class="is-size-6 is-flex has-text-link has-text-weight-medium mb-2"
+          >
+            <font-awesome-icon
+              :icon="['fas', 'angle-left']"
+              class="mt-1 mr-2"
+            />Back to Home</NuxtLink
+          >
+          <h1 class="is-size-4 has-text-black has-text-weight-bold">
+            Create your account
+          </h1>
         </div>
-        <form
-          @submit.prevent="submit()"
-          class="
-            column
-            is-6-tablet
-            is-7-desktop
-            is-7-widescreen
-            is-7-fullhd
-            is-gapless
-            is-flex
-            ai--c
-          "
-        >
-          <div class="auth-form is-gapless">
-            <div class="mb-5">
-              <NuxtLink
-                to="/"
-                class="
-                  is-size-6 is-flex
-                  has-text-link has-text-weight-medium
-                  mb-2
-                "
-              >
-                <font-awesome-icon
-                  :icon="['fas', 'angle-left']"
-                  class="mt-1 mr-2"
-                />Back to Home</NuxtLink
-              >
-              <h1 class="is-size-4 has-text-black has-text-weight-bold">
-                Create your account
-              </h1>
-            </div>
-            <div v-if="error" class="notification is-danger">
-              {{ message }}
-            </div>
-            <!-- <div v-for="error in errors" class="notification is-danger">
+        <div v-if="error" class="notification is-danger">
+          {{ message }}
+        </div>
+        <!-- <div v-for="error in errors" class="notification is-danger">
               {{ error[0] }}
             </div> -->
-            <div class="mb-5">
-              <div class="columns">
-                <div class="column">
-                  <div class="field">
-                    <p class="control has-icons-left has-icons-right">
-                      <input
-                        class="input is-large"
-                        type="text"
-                        placeholder="First name"
-                        v-model="registration.first_name"
-                      />
-                    </p>
-                    <!-- <div v-if="$v.registration.first_name.$error">
+        <div class="mb-5">
+          <div class="columns">
+            <div class="column">
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input
+                    class="input is-large"
+                    type="text"
+                    placeholder="First name"
+                    v-model="registration.first_name"
+                  />
+                </p>
+                <!-- <div v-if="$v.registration.first_name.$error">
                       <p
                         class="help"
                         :class="{
@@ -136,22 +61,22 @@
                         Minimum length is 3 characters
                       </p>
                     </div> -->
-                  </div>
-                </div>
-                <div class="column">
-                  <div class="field">
-                    <p class="control has-icons-left has-icons-right">
-                      <input
-                        class="input is-large"
-                        type="text"
-                        placeholder="Last name"
-                        v-model="registration.last_name"
-                      />
-                      <span class="icon is-small is-left">
-                        <font-awesome-icon :icon="['fas', 'user']" />
-                      </span>
-                    </p>
-                    <!-- <div v-if="$v.registration.last_name.$error">
+              </div>
+            </div>
+            <div class="column">
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input
+                    class="input is-large"
+                    type="text"
+                    placeholder="Last name"
+                    v-model="registration.last_name"
+                  />
+                  <span class="icon is-small is-left">
+                    <font-awesome-icon :icon="['fas', 'user']" />
+                  </span>
+                </p>
+                <!-- <div v-if="$v.registration.last_name.$error">
                       <p
                         class="help"
                         :class="{
@@ -171,25 +96,25 @@
                         Minimum length is 3 characters
                       </p>
                     </div> -->
-                  </div>
-                </div>
               </div>
             </div>
+          </div>
+        </div>
 
-            <div class="mb-5">
-              <div class="field">
-                <p class="control has-icons-left has-icons-right">
-                  <input
-                    class="input is-large"
-                    type="text"
-                    placeholder="Email address"
-                    v-model="registration.email"
-                  />
-                  <span class="icon is-small is-left">
-                    <font-awesome-icon :icon="['fas', 'envelope']" />
-                  </span>
-                </p>
-                <!-- <div v-if="$v.registration.email.$error">
+        <div class="mb-5">
+          <div class="field">
+            <p class="control has-icons-left has-icons-right">
+              <input
+                class="input is-large"
+                type="text"
+                placeholder="Email address"
+                v-model="registration.email"
+              />
+              <span class="icon is-small is-left">
+                <font-awesome-icon :icon="['fas', 'envelope']" />
+              </span>
+            </p>
+            <!-- <div v-if="$v.registration.email.$error">
                   <p class="help" v-if="!$v.registration.email.required">
                     Field is required
                   </p>
@@ -197,22 +122,22 @@
                     Please enter a valid email address
                   </p>
                 </div> -->
-              </div>
-            </div>
-            <div class="mb-5">
-              <div class="field">
-                <p class="control has-icons-left has-icons-right">
-                  <input
-                    class="input is-large"
-                    type="password"
-                    placeholder="Password"
-                    v-model="registration.password"
-                  />
-                  <span class="icon is-small is-left">
-                    <font-awesome-icon :icon="['fas', 'lock']" />
-                  </span>
-                </p>
-                <!-- <div v-if="$v.registration.password.$error">
+          </div>
+        </div>
+        <div class="mb-5">
+          <div class="field">
+            <p class="control has-icons-left has-icons-right">
+              <input
+                class="input is-large"
+                type="password"
+                placeholder="Password"
+                v-model="registration.password"
+              />
+              <span class="icon is-small is-left">
+                <font-awesome-icon :icon="['fas', 'lock']" />
+              </span>
+            </p>
+            <!-- <div v-if="$v.registration.password.$error">
                   <p
                     class="help"
                     :class="{ 'is-danger': $v.registration.password.$error }"
@@ -228,22 +153,22 @@
                     Minimum length is 8 characters
                   </p>
                 </div> -->
-              </div>
-            </div>
-            <div class="mb-5">
-              <div class="field">
-                <p class="control has-icons-left has-icons-right">
-                  <input
-                    class="input is-large"
-                    type="password"
-                    placeholder="Confirm Password"
-                    v-model="registration.password_confirmation"
-                  />
-                  <span class="icon is-small is-left">
-                    <font-awesome-icon :icon="['fas', 'lock']" />
-                  </span>
-                </p>
-                <!-- <div v-if="$v.registration.password_confirmation.$error">
+          </div>
+        </div>
+        <div class="mb-5">
+          <div class="field">
+            <p class="control has-icons-left has-icons-right">
+              <input
+                class="input is-large"
+                type="password"
+                placeholder="Confirm Password"
+                v-model="registration.password_confirmation"
+              />
+              <span class="icon is-small is-left">
+                <font-awesome-icon :icon="['fas', 'lock']" />
+              </span>
+            </p>
+            <!-- <div v-if="$v.registration.password_confirmation.$error">
                   <p
                     class="help"
                     :class="{
@@ -272,24 +197,24 @@
                     Password must match
                   </p>
                 </div> -->
-              </div>
-            </div>
-            <div class="mb-5">
-              <div class="columns is-mobile is-gapless">
-                <div class="column">
-                  <label class="checkbox">
-                    <input
-                      type="checkbox"
-                      v-model="registration.conditions_terms"
-                    />
-                    Agree to
-                    <NuxtLink
-                      to="/termsandconditions"
-                      class="has-text-link has-text-weight-medium"
-                      >terms and conditions</NuxtLink
-                    >
-                  </label>
-                  <!-- <div v-if="$v.registration.conditions_terms.$error">
+          </div>
+        </div>
+        <div class="mb-5">
+          <div class="columns is-mobile is-gapless">
+            <div class="column">
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  v-model="registration.conditions_terms"
+                />
+                Agree to
+                <NuxtLink
+                  to="/termsandconditions"
+                  class="has-text-link has-text-weight-medium"
+                  >terms and conditions</NuxtLink
+                >
+              </label>
+              <!-- <div v-if="$v.registration.conditions_terms.$error">
                     <p
                       class="help"
                       :class="{
@@ -300,45 +225,44 @@
                       Field is required
                     </p>
                   </div> -->
-                </div>
-              </div>
-            </div>
-            <div class="mb-6">
-              <button
-                class="
-                  button
-                  theme-button theme-button-xl
-                  has-background-primary
-                  is-uppercase
-                  has-text-weight-medium has-text-white
-                "
-              >
-                register
-              </button>
-            </div>
-            <div>
-              <p
-                class="
-                  is-size-6
-                  has-text-dark has-text-centered has-text-weight-regular
-                "
-              >
-                Already have an account?<NuxtLink
-                  to="/login"
-                  class="has-text-link has-text-weight-medium"
-                >
-                  Sign in
-                </NuxtLink>
-              </p>
             </div>
           </div>
-        </form>
+        </div>
+        <div class="mb-6">
+          <button
+            class="
+              button
+              theme-button theme-button-xl
+              has-background-primary
+              is-uppercase
+              has-text-weight-medium has-text-white
+            "
+          >
+            register
+          </button>
+        </div>
+        <div>
+          <p
+            class="
+              is-size-6
+              has-text-dark has-text-centered has-text-weight-regular
+            "
+          >
+            Already have an account?<NuxtLink
+              to="/login"
+              class="has-text-link has-text-weight-medium"
+            >
+              Sign in
+            </NuxtLink>
+          </p>
+        </div>
       </div>
-    </div>
-  </div>
+    </form>
+  </LoginRegister>
 </template>
 
 <script>
+  import LoginRegister from "../../components/loginregister/index.vue";
   import {
     required,
     email,
@@ -362,6 +286,9 @@
   import "vue-loading-overlay/dist/vue-loading.css";
   export default {
     middleware: "guest",
+    components: {
+      LoginRegister,
+    },
 
     data() {
       return {
@@ -416,11 +343,11 @@
         this.isSuccessful = false;
 
         this.$axios
-          .$post(`${process.env.BASE_URL}/register`, this.registration)
+          .$post(`http://familytree.test/api/register`, this.registration)
           .then(({ data }) => {
             this.loading = false;
             this.isSuccessful = true;
-             this.$emit("success", data);
+            //  this.$emit("success", data);
           })
           .catch((error) => {
             this.loading = false;

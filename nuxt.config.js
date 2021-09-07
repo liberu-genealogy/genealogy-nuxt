@@ -146,18 +146,23 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
-  },
-  // proxy: {
-  //   "/api/": process.env.BASE_URL || "http://localhost:8000",
-  //   "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
-  // },
-
-  proxy: {
-    "/register": {
-      target: `${process.env.BASE_URL}/register`,
-      pathRewrite: { "^/register/": "" },
+    credentials: false,
+    common: {
+      Accept: "application/json, text/plain, */*",
+      "Access-Control-Allow-Origin": "*",
     },
   },
+  proxy: {
+    "/api/": process.env.BASE_URL || "http://localhost:8000",
+    "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
+  },
+
+  // proxy: {
+  //   "/register": {
+  //     target: `${process.env.BASE_URL}/register`,
+  //     pathRewrite: { "^/register/": "" },
+  //   },
+  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
