@@ -73,12 +73,12 @@ export default {
         {
           name: "register",
           path: "/register",
-          component: resolve(__dirname, "pages/auth/register.vue"),
+          component: resolve(__dirname, "pages/register.vue"),
         },
         {
           name: "verify",
           path: "/verify",
-          component: resolve(__dirname, "pages/auth/verify.vue"),
+          component: resolve(__dirname, "pages/verify.vue"),
         }
       );
     },
