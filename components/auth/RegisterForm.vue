@@ -34,7 +34,7 @@
                 Create your account
               </h1>
             </div>
-            <div v-if="error" class="notification is-danger">
+            <div v-if="message" class="notification is-danger">
               {{ message }}
             </div>
             <div
@@ -289,8 +289,9 @@
       first_name: "",
       last_name: "",
       email: "",
-      errors: new Errors(),
+      // errors: new Errors(),
       errorInput: "",
+      message: "",
       isSuccessful: false,
       loading: false,
       password: "",
@@ -357,11 +358,12 @@
                 this.errorInput = data.errors;
                 break;
               case 429:
-                console.log(data);
-                this.$toastr.error(data.message);
+                // this.$toastr.error(data.message); // error Toastr can't displayed
+                this.message = data.message;
                 break;
               case 500:
-                console.log(data);
+                this.message = data.message;
+                this.$forceUpdate();
                 break;
               default:
                 throw error;
