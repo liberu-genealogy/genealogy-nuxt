@@ -35,26 +35,48 @@
 
             <div class="mb-5">
               <div class="field">
-                <p class="control has-icons-left has-icons-right">
-                  <input
-                    class="input"
-                    type="email"
-                    placeholder="Email address"
-                    v-model="payload.email"
-                  />
-                </p>
+                <ValidationProvider
+                  name="Email"
+                  rule="required|email"
+                  v-slot="{ errors }"
+                >
+                  <p class="control has-icons-left has-icons-right">
+                    <input
+                      class="input"
+                      :class="{ 'is-danger': errors[0] }"
+                      type="email"
+                      placeholder="Email address"
+                      v-model="payload.email"
+                    />
+                  </p>
+
+                  <p
+                    v-if="errors[0]"
+                    class="has-text-danger p-2"
+                    v-text="errors[0]"
+                  ></p>
+                </ValidationProvider>
               </div>
             </div>
             <div class="mb-5">
               <div class="field">
-                <p class="control has-icons-left has-icons-right">
-                  <input
-                    class="input"
-                    type="password"
-                    placeholder="Password"
-                    v-model="payload.password"
-                  />
-                </p>
+                <ValidationProviders name="Password" rule="required">
+                  <p class="control has-icons-left has-icons-right">
+                    <input
+                      class="input"
+                      :class="{ 'is-danger': errors[0] }"
+                      type="password"
+                      placeholder="Password"
+                      v-model="payload.password"
+                    />
+                  </p>
+
+                  <p
+                    v-if="errors[0]"
+                    class="has-text-danger p-2"
+                    v-text="errors[0]"
+                  ></p>
+                </ValidationProviders>
               </div>
             </div>
             <div class="mb-5">

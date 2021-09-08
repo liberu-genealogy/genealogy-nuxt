@@ -1,5 +1,13 @@
 import getSiteMeta from "./utils/getSiteMeta";
 import { cloneDeep } from "lodash";
+import { messages } from "vee-validate/dist/locale/en.json";
+import {
+  ValidationProvider,
+  ValidationObserver,
+  extend,
+  Rules,
+  setInteractionMode,
+} from "vee-validate/dist/vee-validate.full.esm";
 
 const meta = getSiteMeta();
 
@@ -103,7 +111,7 @@ export default {
     "~/plugins/ioRegister.js",
     "~/plugins/tasksNavbarRegister.js",
     "~/plugins/usersRegister.js",
-
+    "~/plugins/Validator.js",
     "~/plugins/date-fns/format.js",
     "~/plugins/date-fns/formatDistance.js",
 
@@ -186,6 +194,7 @@ export default {
 
     transpile: [
       "@enso-ui/strings",
+      "vee-validate/dist/rules",
 
       "@enso-ui/enums",
       "@sentry/browser",
@@ -226,6 +235,22 @@ export default {
 
           rule.oneOf.push(lazyRule);
         }
+      });
+
+      setInteractionMode("eager");
+      extend("password", { // Add validation for password confirm
+        params: ["target"],
+        validate(value, { target }) {
+          return value === target;
+        },
+        message: "Password confirmation does not match",
+      });
+
+      Object.keys(Rules).forEach((rule) => {
+        extend(rule, {
+          ...Rules[rule],
+          message: messages[rule],
+        });
       });
 
       // const scssRules = config.module.rules.find('scss').oneOfs;
