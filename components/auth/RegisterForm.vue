@@ -238,6 +238,31 @@
                 </NuxtLink>
               </p>
             </div>
+            <div class="divider">or</div>
+            <a
+                @click="loginSocial('google')"
+                href="javascript:;"
+                class="btn cnt-g"
+            >
+                <img src="~assets/images/google.jpg" />
+                Continue with google
+            </a>
+            <a
+                @click="loginSocial('facebook')"
+                href="javascript:;"
+                class="btn cnt-g"
+            >
+                <img src="~assets/images/facebook.png" />
+                Continue with Facebook
+            </a>
+            <a
+                @click="loginSocial('github')"
+                href="javascript:;"
+                class="btn cnt-g mb-5"
+            >
+                <img src="~assets/images/github.png" />
+                Continue with Github
+            </a>
           </div>
         </form>
       </ValidationObserver>
@@ -339,6 +364,21 @@
     },
 
     methods: {
+      loginSocial(provider) {
+        this.provider = provider;
+        //const newWindow = openWindow("", "message");
+
+        let url = "/api/login/" + provider;
+        this.$axios
+          .get(url)
+          .then((res) => {
+            console.log(res);
+            window.location.href = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
       submit() {
         this.loading = true;
         this.isSuccessful = false;

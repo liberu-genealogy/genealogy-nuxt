@@ -274,8 +274,7 @@
           .get(url)
           .then((res) => {
             console.log(res);
-            openWindow.location.href = res.data;
-            //window.location.href = url;
+            window.location.href = res.data;
           })
           .catch((err) => {
             console.log(err);
