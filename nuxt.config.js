@@ -60,7 +60,12 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css "~/assets/style/enso.scss",
-  css: ["animate.css/animate.compat.css", "~/assets/css/base.css"],
+  css: [
+    "animate.css/animate.compat.css",
+    "~/assets/css/base.css",
+    "~/assets/style/enso.scss",
+    "~/assets/css/fontawesome.min.css",
+  ],
 
   router: {
     // middleware: 'auth',

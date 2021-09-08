@@ -40,7 +40,7 @@
                     class="input"
                     type="email"
                     placeholder="Email address"
-                    v-model="email"
+                    v-model="payload.email"
                   />
                 </p>
               </div>
@@ -52,7 +52,7 @@
                     class="input"
                     type="password"
                     placeholder="Password"
-                    v-model="password"
+                    v-model="payload.password"
                   />
                 </p>
               </div>
@@ -61,7 +61,11 @@
               <div class="columns is-mobile is-gapless">
                 <div class="column">
                   <label class="checkbox">
-                    <input class="mr-1" type="checkbox" />
+                    <input
+                      v-model="payload.remember"
+                      class="mr-1"
+                      type="checkbox"
+                    />
                     Remember me
                   </label>
                 </div>
@@ -181,6 +185,12 @@
       remember: false,
     }),
 
+    watch: {
+      remember(value) {
+        console.log(value);
+      },
+    },
+
     computed: {
       ...mapState(["meta"]),
       ...mapGetters(["isWebview"]),
@@ -221,7 +231,57 @@
     },
   };
 </script>
-<style lang="scss">
- @import '~/assets/css/bulma.css';
- @import '~/assets/css/fontawesome.min.css';
+<style>
+  @import "~/assets/css/bulma.css";
+  @import "~/assets/css/fontawesome.min.css";
+  .auth-form .cnt-g {
+    width: 100%;
+    border: 1px solid #e4e4e4;
+    border-radius: 3px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 10px;
+    margin-top: 13px;
+    color: #707070;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    box-shadow: none !important;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .auth-form .cnt-g img {
+    max-height: 20px;
+    float: left;
+    margin-top: 15px;
+  }
+
+  .auth-form .divider {
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+    line-height: 1;
+    color: #4f4e60;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  .auth-form .divider:before,
+  .auth-form .divider:after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    width: 47%;
+    height: 1px;
+    background-color: #e4e4e4;
+  }
+
+  .auth-form .divider:before {
+    left: 0;
+  }
+
+  .auth-form .divider:after {
+    right: 0;
+  }
 </style>
