@@ -145,7 +145,7 @@
             class="btn cnt-g"
           >
             <img src="~assets/images/google.jpg" />
-            {{ "Continue with google" }}
+            Continue with google
           </a>
           <a
             @click="loginSocial('facebook')"
@@ -153,7 +153,7 @@
             class="btn cnt-g mb-5"
           >
             <img src="~assets/images/facebook.png" />
-            {{ "Continue with Facebook" }}
+            Continue with Facebook
           </a>
         </div>
       </div>
@@ -208,6 +208,7 @@
         password: "",
         remember: false,
       },
+      provider: null,
       email: "",
       password: "",
       remember: false,
@@ -233,7 +234,8 @@
 
       loginSocial(provider) {
         this.provider = provider;
-        const newWindow = openWindow("", "message");
+        //const newWindow = openWindow("", "message");
+
         let url = "/api/login/" + provider;
         this.$axios
           .get(url)
