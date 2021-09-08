@@ -1,6 +1,7 @@
 import getSiteMeta from "./utils/getSiteMeta";
 import { cloneDeep } from "lodash";
 import { messages } from "vee-validate/dist/locale/en.json";
+
 import {
   ValidationProvider,
   ValidationObserver,
@@ -237,21 +238,7 @@ export default {
         }
       });
 
-      setInteractionMode("eager");
-      extend("password", { // Add validation for password confirm
-        params: ["target"],
-        validate(value, { target }) {
-          return value === target;
-        },
-        message: "Password confirmation does not match",
-      });
-
-      Object.keys(Rules).forEach((rule) => {
-        extend(rule, {
-          ...Rules[rule],
-          message: messages[rule],
-        });
-      });
+      setInteractionMode("lazy");
 
       // const scssRules = config.module.rules.find('scss').oneOfs;
       // const normalRule = scssRules.store.get('normal');

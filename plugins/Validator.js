@@ -13,6 +13,15 @@ Vue.component("ValidationObserver", ValidationObserver);
 export default ({ app }, inject) => {
   // Inject $hello(msg) in Vue, context and store.
   inject("validate", () => {
+    extend("password", {
+      // Add validation for password confirm
+      params: ["target"],
+      validate(value, { target }) {
+        return value === target;
+      },
+      message: "Password confirmation does not match",
+    });
+
     Object.keys(Rules).forEach((rule) => {
       extend(rule, {
         ...Rules[rule],

@@ -43,69 +43,54 @@
             <div class="columns">
               <div class="column">
                 <div class="field">
-                  <p class="control has-icons-left has-icons-right">
-                    <input
-                      class="input is-large"
-                      type="text"
-                      placeholder="First name"
-                      v-model="registration.first_name"
-                    />
-                  </p>
-                  <!-- <div v-if="$v.registration.first_name.$error">
-                      <p
-                        class="help"
-                        :class="{
-                          'is-danger': $v.registration.first_name.$error,
-                        }"
-                        v-if="!$v.registration.first_name.required"
-                      >
-                        Field is required
-                      </p>
-                      <p
-                        class="help"
-                        :class="{
-                          'is-danger': $v.registration.first_name.$error,
-                        }"
-                        v-else-if="!$v.registration.first_name.minLength"
-                      >
-                        Minimum length is 3 characters
-                      </p>
-                    </div> -->
+                  <ValidationProvider
+                    name="First Name"
+                    rules="required|min:3"
+                    v-slot="{ errors }"
+                  >
+                    <p class="control has-icons-left has-icons-right">
+                      <input
+                        class="input is-large"
+                        type="text"
+                        :class="{ 'is-danger': errors[0] }"
+                        placeholder="First name"
+                        v-model="registration.first_name"
+                      />
+                    </p>
+                    <p
+                      v-if="errors[0]"
+                      class="has-text-danger p-2 is-size-7"
+                      v-text="errors[0]"
+                    ></p>
+                  </ValidationProvider>
                 </div>
               </div>
               <div class="column">
                 <div class="field">
-                  <p class="control has-icons-left has-icons-right">
-                    <input
-                      class="input is-large"
-                      type="text"
-                      placeholder="Last name"
-                      v-model="registration.last_name"
-                    />
-                    <span class="icon is-small is-left">
-                      <font-awesome-icon :icon="['fas', 'user']" />
-                    </span>
-                  </p>
-                  <!-- <div v-if="$v.registration.last_name.$error">
-                      <p
-                        class="help"
-                        :class="{
-                          'is-danger': $v.registration.last_name.$error,
-                        }"
-                        v-if="!$v.registration.last_name.required"
-                      >
-                        Field is required
-                      </p>
-                      <p
-                        class="help"
-                        :class="{
-                          'is-danger': $v.registration.last_name.$error,
-                        }"
-                        v-else-if="!$v.registration.last_name.minLength"
-                      >
-                        Minimum length is 3 characters
-                      </p>
-                    </div> -->
+                  <ValidationProvider
+                    name="Last Name"
+                    v-slot="{ errors }"
+                    rules="required|min:3"
+                  >
+                    <p class="control has-icons-left has-icons-right">
+                      <input
+                        class="input is-large"
+                        type="text"
+                        :class="{ 'is-danger': errors[0] }"
+                        placeholder="Last name"
+                        v-model="registration.last_name"
+                      />
+                      <span class="icon is-small is-left">
+                        <font-awesome-icon :icon="['fas', 'user']" />
+                      </span>
+                    </p>
+
+                    <p
+                      v-if="errors[0]"
+                      class="has-text-danger p-2 is-size-7"
+                      v-text="errors[0]"
+                    ></p>
+                  </ValidationProvider>
                 </div>
               </div>
             </div>
@@ -113,128 +98,112 @@
 
           <div class="mb-5">
             <div class="field">
-              <p class="control has-icons-left has-icons-right">
-                <input
-                  class="input is-large"
-                  type="text"
-                  placeholder="Email address"
-                  v-model="registration.email"
-                />
-                <span class="icon is-small is-left">
-                  <font-awesome-icon :icon="['fas', 'envelope']" />
-                </span>
-              </p>
-              <!-- <div v-if="$v.registration.email.$error">
-                  <p class="help" v-if="!$v.registration.email.required">
-                    Field is required
-                  </p>
-                  <p class="help" v-if="!$v.registration.email.email">
-                    Please enter a valid email address
-                  </p>
-                </div> -->
+              <ValidationProvider
+                name="Email"
+                v-slot="{ errors }"
+                rules="required|email"
+              >
+                <p class="control has-icons-left has-icons-right">
+                  <input
+                    class="input is-large"
+                    type="text"
+                    :class="{ 'is-danger': errors[0] }"
+                    placeholder="Email address"
+                    v-model="registration.email"
+                  />
+                  <span class="icon is-small is-left">
+                    <font-awesome-icon :icon="['fas', 'envelope']" />
+                  </span>
+                </p>
+                <p
+                  v-if="errors[0]"
+                  class="has-text-danger p-2 is-size-7"
+                  v-text="errors[0]"
+                ></p>
+              </ValidationProvider>
             </div>
           </div>
           <div class="mb-5">
             <div class="field">
-              <p class="control has-icons-left has-icons-right">
-                <input
-                  class="input is-large"
-                  type="password"
-                  placeholder="Password"
-                  v-model="registration.password"
-                />
-                <span class="icon is-small is-left">
-                  <font-awesome-icon :icon="['fas', 'lock']" />
-                </span>
-              </p>
-              <!-- <div v-if="$v.registration.password.$error">
-                  <p
-                    class="help"
-                    :class="{ 'is-danger': $v.registration.password.$error }"
-                    v-if="!$v.registration.password.required"
-                  >
-                    Field is required
-                  </p>
-                  <p
-                    class="help"
-                    :class="{ 'is-danger': $v.registration.password.$error }"
-                    v-else-if="!$v.registration.password.minLength"
-                  >
-                    Minimum length is 8 characters
-                  </p>
-                </div> -->
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="Password"
+                vid="password"
+                rules="required|min:8"
+              >
+                <p class="control has-icons-left has-icons-right">
+                  <input
+                    class="input is-large"
+                    :class="{ 'is-danger': errors[0] }"
+                    type="password"
+                    placeholder="Password"
+                    v-model="registration.password"
+                  />
+                  <span class="icon is-small is-left">
+                    <font-awesome-icon :icon="['fas', 'lock']" />
+                  </span>
+                </p>
+                <p
+                  v-if="errors[0]"
+                  class="has-text-danger p-2 is-size-7"
+                  v-text="errors[0]"
+                ></p>
+              </ValidationProvider>
             </div>
           </div>
           <div class="mb-5">
             <div class="field">
-              <p class="control has-icons-left has-icons-right">
-                <input
-                  class="input is-large"
-                  type="password"
-                  placeholder="Confirm Password"
-                  v-model="registration.password_confirmation"
-                />
-                <span class="icon is-small is-left">
-                  <font-awesome-icon :icon="['fas', 'lock']" />
-                </span>
-              </p>
-              <!-- <div v-if="$v.registration.password_confirmation.$error">
-                  <p
-                    class="help"
-                    :class="{
-                      'is-danger': $v.registration.password_confirmation.$error,
-                    }"
-                    v-if="!$v.registration.password_confirmation.required"
-                  >
-                    Field is required
-                  </p>
-                  <p
-                    class="help"
-                    :class="{
-                      'is-danger': $v.registration.password_confirmation.$error,
-                    }"
-                    v-else-if="!$v.registration.password_confirmation.minLength"
-                  >
-                    Minimum length is 8 characters
-                  </p>
-                  <p
-                    class="help"
-                    :class="{
-                      'is-danger': $v.registration.password_confirmation.$error,
-                    }"
-                    v-else-if="!$v.registration.password_confirmation.sameAs"
-                  >
-                    Password must match
-                  </p>
-                </div> -->
+              <ValidationProvider
+                name="Password Confirm"
+                rules="confirmed:Password"
+                v-slot="{ errors }"
+              >
+                <p class="control has-icons-left has-icons-right">
+                  <input
+                    class="input is-large"
+                    type="password"
+                    :class="{ 'is-danger': errors[0] }"
+                    placeholder="Confirm Password"
+                    v-model="registration.password_confirmation"
+                  />
+                  <span class="icon is-small is-left">
+                    <font-awesome-icon :icon="['fas', 'lock']" />
+                  </span>
+                </p>
+
+                <p
+                  v-if="errors[0]"
+                  class="has-text-danger p-2 is-size-7"
+                  v-text="errors[0]"
+                ></p>
+              </ValidationProvider>
             </div>
           </div>
-          <div class="mb-5">
+          <div class="mb-5 px-1">
             <div class="columns is-mobile is-gapless">
               <div class="column">
-                <label class="checkbox">
-                  <input
-                    type="checkbox"
-                    v-model="registration.conditions_terms"
-                  />
-                  Agree to
-                  <NuxtLink
-                    to="/termsandconditions"
-                    class="has-text-link has-text-weight-medium"
-                    >terms and conditions</NuxtLink
-                  >
-                </label>
-                <!-- <div v-if="$v.registration.conditions_terms.$error">
-                    <p
-                      class="help"
-                      :class="{
-                        'is-danger': $v.registration.conditions_terms.$error,
-                      }"
-                      v-if="!$v.registration.conditions_terms.checked"
+                <ValidationProvider
+                  name="Terms And Conditions"
+                  :rules="{ required: { allowFalse: false } }"
+                  v-slot="{ errors }"
+                >
+                  <label class="checkbox">
+                    <input
+                      type="checkbox"
+                      v-model="registration.conditions_terms"
+                    />
+                    Agree to
+                    <NuxtLink
+                      to="/termsandconditions"
+                      class="has-text-link has-text-weight-medium"
+                      >terms and conditions</NuxtLink
                     >
-                      Field is required
-                    </p>
-                  </div> -->
+                  </label>
+
+                  <div v-if="errors[0]">
+                    <p class="help has-text-danger" v-text="errors[0]"></p>
+                  </div>
+                </ValidationProvider>
               </div>
             </div>
           </div>
@@ -258,11 +227,12 @@
                 has-text-dark has-text-centered has-text-weight-regular
               "
             >
-              Already have an account?<NuxtLink
+              Already have an account?
+              <NuxtLink
                 to="/login"
                 class="has-text-link has-text-weight-medium"
+                v-text="'Sign in'"
               >
-                Sign in
               </NuxtLink>
             </p>
           </div>

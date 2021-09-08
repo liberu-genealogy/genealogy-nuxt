@@ -8,7 +8,7 @@
         "
       >
         <div class="auth-form is-gapless">
-          <form @submit.prevent="login()">
+          <div>
             <div class="mb-5">
               <NuxtLink
                 to="/"
@@ -37,7 +37,8 @@
               <div class="field">
                 <ValidationProvider
                   name="Email"
-                  rule="required|email"
+                  ref="email"
+                  rules="required|email"
                   v-slot="{ errors }"
                 >
                   <p class="control has-icons-left has-icons-right">
@@ -60,7 +61,12 @@
             </div>
             <div class="mb-5">
               <div class="field">
-                <ValidationProviders name="Password" rule="required">
+                <ValidationProvider
+                  name="Password"
+                  ref="password"
+                  v-slot="{ errors }"
+                  rules="required"
+                >
                   <p class="control has-icons-left has-icons-right">
                     <input
                       class="input"
@@ -76,7 +82,7 @@
                     class="has-text-danger p-2"
                     v-text="errors[0]"
                   ></p>
-                </ValidationProviders>
+                </ValidationProvider>
               </div>
             </div>
             <div class="mb-5">
@@ -103,7 +109,7 @@
             </div>
             <div class="mb-6">
               <button
-                type="submit"
+                @click="validate"
                 class="
                   button
                   theme-button theme-button-xl
@@ -131,7 +137,7 @@
                 </NuxtLink>
               </p>
             </div>
-          </form>
+          </div>
           <div class="divider">or</div>
           <a
             @click="loginSocial('google')"
@@ -219,6 +225,12 @@
     },
 
     methods: {
+      validate() {
+        this.$refs.email.validate().then((res) => {
+          console.log(res.valid);
+        });
+      },
+
       loginSocial(provider) {
         this.provider = provider;
         const newWindow = openWindow("", "message");
