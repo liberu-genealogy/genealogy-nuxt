@@ -349,6 +349,7 @@
             this.$emit("success", data);
           })
           .catch((error) => {
+            console.log(error);
             this.loading = false;
             const { status, data } = error.response;
             switch (status) {
@@ -358,6 +359,9 @@
               case 429:
                 console.log(data);
                 this.$toastr.error(data.message);
+                break;
+              case 500:
+                console.log(data);
                 break;
               default:
                 throw error;
