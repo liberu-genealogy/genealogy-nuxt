@@ -254,7 +254,7 @@
         };
       },
       loginLink() {
-        return "/api/login";
+        return "/login";
       },
     },
 
@@ -269,7 +269,7 @@
         this.provider = provider;
         //const newWindow = openWindow("", "message");
 
-        let url = "/api/login/" + provider;
+        let url = "/login/" + provider;
         this.$axios
           .get(url)
           .then((res) => {
