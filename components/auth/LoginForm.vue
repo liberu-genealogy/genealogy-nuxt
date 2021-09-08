@@ -182,7 +182,7 @@
 </template>
 <script>
   import LoginRegister from "~/components/loginregister/index.vue";
-  import { mapState } from "vuex";
+  import { mapState, mapGetters } from "vuex";
   import { library } from "@fortawesome/fontawesome-svg-core";
   import {
     faEnvelope,
@@ -218,11 +218,6 @@
 
     data: () => ({
       errors: new Errors(),
-      payload: {
-        email: "",
-        password: "",
-        remember: false,
-      },
       provider: null,
       email: "",
       password: "",
@@ -231,6 +226,7 @@
 
     computed: {
       ...mapState(["meta"]),
+      ...mapGetters(["isWebview"]),
       hasPassword() {
         return this.password !== null && this.password.length;
       },
@@ -256,6 +252,9 @@
       loginLink() {
         return "/login";
       },
+      config() {
+        return this.isWebview ? { headers: { isWebview: true } } : {};
+      },
     },
 
     methods: {
@@ -265,7 +264,7 @@
         });
       },
 
-      loginSocial(provider) {
+    loginSocial(provider) {
         this.provider = provider;
         //const newWindow = openWindow("", "message");
 
@@ -279,13 +278,13 @@
           .catch((err) => {
             console.log(err);
           });
-    },
+      },
 
     submit() {
         this.loading = true;
         this.isSuccessful = false;
         this.$axios
-          .$post(this.loginLink, this.postParams)
+          .$post(this.loginLink, this.postParams, this.config)
           .then(({ data }) => {
             this.loading = false;
             this.isSuccessful = true;
