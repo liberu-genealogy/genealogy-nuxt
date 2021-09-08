@@ -1,11 +1,12 @@
 <template>
     <div>
         <v-select
-        label="name"
-        v-model="selected_option"
-        :reduce="person => person.id"
-        :options="persons"
-        @input="setSelected"/>
+            label="name"
+            v-model="selected_option"
+            :reduce="person => person.id"
+            :options="persons"
+            @input="setSelected"
+        />
         <div id="tree"/>
         <button id="saveButton">
             Export my PNG
@@ -24,8 +25,10 @@ import { sampleData } from './data';
 
 const d3 = { ...d3Base, tip: d3Tip() };
 Array.prototype.remove = function () {
-    let what; const a = arguments; let L = a.length; let
-        ax;
+    let what; 
+    const a = arguments; 
+    let L = a.length; 
+    let ax;
     while (L && this.length) {
         what = a[--L];
         while ((ax = this.indexOf(what)) !== -1) {

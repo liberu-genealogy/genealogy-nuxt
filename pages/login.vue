@@ -9,13 +9,13 @@
         <remember v-model="payload.remember"
             v-if="!isWebview"/>
         <template v-slot:footer>
-            <nuxt-link class="is-pulled-right mt-1"
+            <nuxt-link class="mt-1 is-pulled-right"
                 :to="{ name: 'password.email' }">
                 {{ i18n('Forgot password') }}
             </nuxt-link>
             <div class="is-clearfix"/>
             <label for="">Login With</label>
-            <div class="columns mt-4">
+            <div class="mt-4 columns">
                 <div class="column">
                 <button class="button is-dark"
                         :class="{ 'is-loading': loading }"
@@ -89,7 +89,9 @@ export default {
             email: '',
             password: '',
             remember: false,
-        }
+            device_name: '',
+        },
+        loading: false,
     }),
 
     computed: {
