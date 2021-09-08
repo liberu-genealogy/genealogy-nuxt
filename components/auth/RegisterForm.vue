@@ -1,243 +1,246 @@
 <template>
   <LoginRegister>
     <template #form>
-      <form
-        @submit.prevent="submit()"
-        class="
-          column
-          is-6-tablet
-          is-7-desktop
-          is-7-widescreen
-          is-7-fullhd
-          is-gapless
-          is-flex
-          ai--c
-        "
-      >
-        <div class="auth-form is-gapless">
-          <div class="mb-5">
-            <NuxtLink
-              to="/"
-              class="
-                is-size-6 is-flex
-                has-text-link has-text-weight-medium
-                mb-2
-              "
+      <ValidationObserver slim v-slot="{ handleSubmit }">
+        <form
+          @submit.prevent="handleSubmit(submit)"
+          class="
+            column
+            is-6-tablet
+            is-7-desktop
+            is-7-widescreen
+            is-7-fullhd
+            is-gapless
+            is-flex
+            ai--c
+          "
+        >
+          <div class="auth-form is-gapless">
+            <div class="mb-5">
+              <NuxtLink
+                to="/"
+                class="
+                  is-size-6 is-flex
+                  has-text-link has-text-weight-medium
+                  mb-2
+                "
+              >
+                <font-awesome-icon
+                  :icon="['fas', 'angle-left']"
+                  class="mt-1 mr-2"
+                />Back to Home</NuxtLink
+              >
+              <h1 class="is-size-4 has-text-black has-text-weight-bold">
+                Create your account
+              </h1>
+            </div>
+            <div v-if="error" class="notification is-danger">
+              {{ message }}
+            </div>
+            <div
+              v-for="(error, index) in errorInput"
+              :key="index"
+              class="notification is-danger"
             >
-              <font-awesome-icon
-                :icon="['fas', 'angle-left']"
-                class="mt-1 mr-2"
-              />Back to Home</NuxtLink
-            >
-            <h1 class="is-size-4 has-text-black has-text-weight-bold">
-              Create your account
-            </h1>
-          </div>
-          <div v-if="error" class="notification is-danger">
-            {{ message }}
-          </div>
-          <!-- <div v-for="error in errors" class="notification is-danger">
               {{ error[0] }}
-            </div> -->
-          <div class="mb-5">
-            <div class="columns">
-              <div class="column">
-                <div class="field">
-                  <ValidationProvider
-                    name="First Name"
-                    rules="required|min:3"
-                    v-slot="{ errors }"
-                  >
-                    <p class="control has-icons-left has-icons-right">
-                      <input
-                        class="input is-large"
-                        type="text"
-                        :class="{ 'is-danger': errors[0] }"
-                        placeholder="First name"
-                        v-model="registration.first_name"
-                      />
-                    </p>
-                    <p
-                      v-if="errors[0]"
-                      class="has-text-danger p-2 is-size-7"
-                      v-text="errors[0]"
-                    ></p>
-                  </ValidationProvider>
-                </div>
-              </div>
-              <div class="column">
-                <div class="field">
-                  <ValidationProvider
-                    name="Last Name"
-                    v-slot="{ errors }"
-                    rules="required|min:3"
-                  >
-                    <p class="control has-icons-left has-icons-right">
-                      <input
-                        class="input is-large"
-                        type="text"
-                        :class="{ 'is-danger': errors[0] }"
-                        placeholder="Last name"
-                        v-model="registration.last_name"
-                      />
-                      <span class="icon is-small is-left">
-                        <font-awesome-icon :icon="['fas', 'user']" />
-                      </span>
-                    </p>
-
-                    <p
-                      v-if="errors[0]"
-                      class="has-text-danger p-2 is-size-7"
-                      v-text="errors[0]"
-                    ></p>
-                  </ValidationProvider>
-                </div>
-              </div>
             </div>
-          </div>
-
-          <div class="mb-5">
-            <div class="field">
-              <ValidationProvider
-                name="Email"
-                v-slot="{ errors }"
-                rules="required|email"
-              >
-                <p class="control has-icons-left has-icons-right">
-                  <input
-                    class="input is-large"
-                    type="text"
-                    :class="{ 'is-danger': errors[0] }"
-                    placeholder="Email address"
-                    v-model="registration.email"
-                  />
-                  <span class="icon is-small is-left">
-                    <font-awesome-icon :icon="['fas', 'envelope']" />
-                  </span>
-                </p>
-                <p
-                  v-if="errors[0]"
-                  class="has-text-danger p-2 is-size-7"
-                  v-text="errors[0]"
-                ></p>
-              </ValidationProvider>
-            </div>
-          </div>
-          <div class="mb-5">
-            <div class="field">
-              <ValidationProvider
-                v-slot="{ errors }"
-                name="Password"
-                vid="password"
-                rules="required|min:8"
-              >
-                <p class="control has-icons-left has-icons-right">
-                  <input
-                    class="input is-large"
-                    :class="{ 'is-danger': errors[0] }"
-                    type="password"
-                    placeholder="Password"
-                    v-model="registration.password"
-                  />
-                  <span class="icon is-small is-left">
-                    <font-awesome-icon :icon="['fas', 'lock']" />
-                  </span>
-                </p>
-                <p
-                  v-if="errors[0]"
-                  class="has-text-danger p-2 is-size-7"
-                  v-text="errors[0]"
-                ></p>
-              </ValidationProvider>
-            </div>
-          </div>
-          <div class="mb-5">
-            <div class="field">
-              <ValidationProvider
-                name="Password Confirm"
-                rules="confirmed:Password"
-                v-slot="{ errors }"
-              >
-                <p class="control has-icons-left has-icons-right">
-                  <input
-                    class="input is-large"
-                    type="password"
-                    :class="{ 'is-danger': errors[0] }"
-                    placeholder="Confirm Password"
-                    v-model="registration.password_confirmation"
-                  />
-                  <span class="icon is-small is-left">
-                    <font-awesome-icon :icon="['fas', 'lock']" />
-                  </span>
-                </p>
-
-                <p
-                  v-if="errors[0]"
-                  class="has-text-danger p-2 is-size-7"
-                  v-text="errors[0]"
-                ></p>
-              </ValidationProvider>
-            </div>
-          </div>
-          <div class="mb-5 px-1">
-            <div class="columns is-mobile is-gapless">
-              <div class="column">
-                <ValidationProvider
-                  name="Terms And Conditions"
-                  :rules="{ required: { allowFalse: false } }"
-                  v-slot="{ errors }"
-                >
-                  <label class="checkbox">
-                    <input
-                      type="checkbox"
-                      v-model="registration.conditions_terms"
-                    />
-                    Agree to
-                    <NuxtLink
-                      to="/termsandconditions"
-                      class="has-text-link has-text-weight-medium"
-                      >terms and conditions</NuxtLink
+            <div class="mb-5">
+              <div class="columns">
+                <div class="column">
+                  <div class="field">
+                    <ValidationProvider
+                      name="First Name"
+                      rules="required|min:3"
+                      v-slot="{ errors }"
                     >
-                  </label>
-
-                  <div v-if="errors[0]">
-                    <p class="help has-text-danger" v-text="errors[0]"></p>
+                      <p class="control has-icons-left has-icons-right">
+                        <input
+                          class="input is-large"
+                          type="text"
+                          :class="{ 'is-danger': errors[0] }"
+                          placeholder="First name"
+                          v-model="first_name"
+                        />
+                      </p>
+                      <p
+                        v-if="errors[0]"
+                        class="has-text-danger p-2 is-size-7"
+                        v-text="errors[0]"
+                      ></p>
+                    </ValidationProvider>
                   </div>
+                </div>
+                <div class="column">
+                  <div class="field">
+                    <ValidationProvider
+                      name="Last Name"
+                      v-slot="{ errors }"
+                      rules="required|min:3"
+                    >
+                      <p class="control has-icons-left has-icons-right">
+                        <input
+                          class="input is-large"
+                          type="text"
+                          :class="{ 'is-danger': errors[0] }"
+                          placeholder="Last name"
+                          v-model="last_name"
+                        />
+                        <span class="icon is-small is-left">
+                          <font-awesome-icon :icon="['fas', 'user']" />
+                        </span>
+                      </p>
+
+                      <p
+                        v-if="errors[0]"
+                        class="has-text-danger p-2 is-size-7"
+                        v-text="errors[0]"
+                      ></p>
+                    </ValidationProvider>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-5">
+              <div class="field">
+                <ValidationProvider
+                  name="Email"
+                  v-slot="{ errors }"
+                  rules="required|email"
+                >
+                  <p class="control has-icons-left has-icons-right">
+                    <input
+                      class="input is-large"
+                      type="text"
+                      :class="{ 'is-danger': errors[0] }"
+                      placeholder="Email address"
+                      v-model="email"
+                    />
+                    <span class="icon is-small is-left">
+                      <font-awesome-icon :icon="['fas', 'envelope']" />
+                    </span>
+                  </p>
+                  <p
+                    v-if="errors[0]"
+                    class="has-text-danger p-2 is-size-7"
+                    v-text="errors[0]"
+                  ></p>
                 </ValidationProvider>
               </div>
             </div>
-          </div>
-          <div class="mb-6">
-            <button
-              class="
-                button
-                theme-button theme-button-xl
-                has-background-primary
-                is-uppercase
-                has-text-weight-medium has-text-white
-              "
-            >
-              register
-            </button>
-          </div>
-          <div>
-            <p
-              class="
-                is-size-6
-                has-text-dark has-text-centered has-text-weight-regular
-              "
-            >
-              Already have an account?
-              <NuxtLink
-                to="/login"
-                class="has-text-link has-text-weight-medium"
-                v-text="'Sign in'"
+            <div class="mb-5">
+              <div class="field">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Password"
+                  vid="password"
+                  rules="required|min:8"
+                >
+                  <p class="control has-icons-left has-icons-right">
+                    <input
+                      class="input is-large"
+                      :class="{ 'is-danger': errors[0] }"
+                      type="password"
+                      placeholder="Password"
+                      v-model="password"
+                    />
+                    <span class="icon is-small is-left">
+                      <font-awesome-icon :icon="['fas', 'lock']" />
+                    </span>
+                  </p>
+                  <p
+                    v-if="errors[0]"
+                    class="has-text-danger p-2 is-size-7"
+                    v-text="errors[0]"
+                  ></p>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div class="mb-5">
+              <div class="field">
+                <ValidationProvider
+                  name="Password Confirm"
+                  rules="required|confirmed:password"
+                  v-slot="{ errors }"
+                >
+                  <p class="control has-icons-left has-icons-right">
+                    <input
+                      class="input is-large"
+                      :type="passwordMeta.content"
+                      :class="{ 'is-danger': errors[0] }"
+                      placeholder="Confirm Password"
+                      v-model="password_confirmation"
+                    />
+                    <span class="icon is-small is-left">
+                      <font-awesome-icon :icon="['fas', 'lock']" />
+                    </span>
+                  </p>
+
+                  <p
+                    v-if="errors[0]"
+                    class="has-text-danger p-2 is-size-7"
+                    v-text="errors[0]"
+                  ></p>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div class="mb-5 px-1">
+              <div class="columns is-mobile is-gapless">
+                <div class="column">
+                  <ValidationProvider
+                    name="Terms And Conditions"
+                    :rules="{ required: { allowFalse: false } }"
+                    v-slot="{ errors }"
+                  >
+                    <label class="checkbox">
+                      <input type="checkbox" v-model="terms" />
+                      Agree to
+                      <NuxtLink
+                        to="/termsandconditions"
+                        class="has-text-link has-text-weight-medium"
+                        >terms and conditions</NuxtLink
+                      >
+                    </label>
+
+                    <div v-if="errors[0]">
+                      <p class="help has-text-danger" v-text="errors[0]"></p>
+                    </div>
+                  </ValidationProvider>
+                </div>
+              </div>
+            </div>
+            <div class="mb-6">
+              <button
+                class="
+                  button
+                  theme-button theme-button-xl
+                  has-background-primary
+                  is-uppercase
+                  has-text-weight-medium has-text-white
+                "
               >
-              </NuxtLink>
-            </p>
+                register
+              </button>
+            </div>
+            <div>
+              <p
+                class="
+                  is-size-6
+                  has-text-dark has-text-centered has-text-weight-regular
+                "
+              >
+                Already have an account?
+                <NuxtLink
+                  to="/login"
+                  class="has-text-link has-text-weight-medium"
+                  v-text="'Sign in'"
+                >
+                </NuxtLink>
+              </p>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </ValidationObserver>
     </template>
 
     <template #footerImageForm>
@@ -248,17 +251,8 @@
 
 <script>
   import LoginRegister from "~/components/loginregister/index.vue";
-  import {
-    required,
-    email,
-    minLength,
-    maxLength,
-    sameAs,
-    x,
-  } from "vuelidate/lib/validators";
-
+  import { mapState } from "vuex";
   import { library } from "@fortawesome/fontawesome-svg-core";
-
   import {
     faEnvelope,
     faCheck,
@@ -266,83 +260,103 @@
     faLock,
     faUser,
   } from "@fortawesome/free-solid-svg-icons";
+  import { focus } from "@enso-ui/directives";
+  import Errors from "@enso-ui/laravel-validation";
+  import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
 
   library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
-  import "vue-loading-overlay/dist/vue-loading.css";
   export default {
-    middleware: "guest",
-    components: {
-      LoginRegister,
-    },
+    name: "RegisterForm",
+    components: { LoginRegister },
+    directives: { focus },
+    // inject: {
+    //   i18n: { from: "i18n" },
+    // },
 
-    data() {
-      return {
-        error: false,
-        message: "",
-        errors: null,
-        isLoading: false,
-        fullPage: true,
-        color: "#4fcf8d",
-        backgroundColor: "#ffffff",
-        registration: {
-          first_name: "",
-          last_name: "",
-          email: "",
-          password: "",
-          password_confirmation: "",
-          conditions_terms: false,
-        },
-      };
-    },
-    validations: {
-      registration: {
-        first_name: {
-          required,
-          minLength: minLength(3),
-        },
-        last_name: {
-          required,
-          minLength: minLength(3),
-        },
-        email: {
-          required,
-          email,
-        },
-        password: {
-          required,
-          minLength: minLength(8),
-        },
-        password_confirmation: {
-          required,
-          minLength: minLength(8),
-          sameAsPassword: sameAs("password"),
-        },
-        conditions_terms: {
-          checked: (value) => value === true,
-        },
+    props: {
+      action: {
+        required: true,
+        type: String,
+      },
+      route: {
+        required: true,
+        type: String,
       },
     },
+
+    data: () => ({
+      first_name: "",
+      last_name: "",
+      email: "",
+      errors: new Errors(),
+      errorInput: "",
+      isSuccessful: false,
+      loading: false,
+      password: "",
+      passwordMeta: {
+        content: "password",
+      },
+      password_confirmation: null,
+      confirmationMeta: {
+        content: "password",
+      },
+      terms: "",
+    }),
+
+    computed: {
+      ...mapState(["meta"]),
+      hasPassword() {
+        return this.password !== null && this.password.length;
+      },
+      match() {
+        return this.hasPassword && this.password === this.password_confirmation;
+      },
+      postParams() {
+        return this.registerParams;
+      },
+      registerParams() {
+        const {
+          email,
+          password,
+          first_name,
+          last_name,
+          password_confirmation,
+        } = this;
+
+        return {
+          email,
+          password,
+          first_name,
+          last_name,
+          password_confirmation,
+        };
+      },
+      registerLink() {
+        return "/api/register";
+      },
+    },
+
     methods: {
       submit() {
         this.loading = true;
         this.isSuccessful = false;
-
         this.$axios
-          .$post("/api/", this.registration)
+          .$post(this.registerLink, this.postParams)
           .then(({ data }) => {
             this.loading = false;
             this.isSuccessful = true;
-            //  this.$emit("success", data);
+            this.$emit("success", data);
           })
           .catch((error) => {
             this.loading = false;
             const { status, data } = error.response;
             switch (status) {
               case 422:
-                this.errors.set(data.errors);
+                this.errorInput = data.errors;
                 break;
               case 429:
+                console.log(data);
                 this.$toastr.error(data.message);
                 break;
               default:
@@ -350,32 +364,6 @@
             }
           });
       },
-      // async register() {
-      //   this.$v.$touch();
-
-      //   if (this.$v.$invalid) {
-      //     console.log("fail");
-
-      //     return -1;
-      //   }
-
-      //   try {
-      //     this.isLoading = true;
-
-      //     const response = await this.$axios.$post(
-      //       "/api/register",
-      //       this.registration
-      //     );
-
-      //     this.$router.push("/login");
-      //     this.isLoading = false;
-      //   } catch (error) {
-      //     this.isLoading = false;
-      //     this.error = true;
-      //     this.message = error.response.data.message;
-      //     this.errors = error.response.data.errors;
-      //   }
-      // },
     },
   };
 </script>
