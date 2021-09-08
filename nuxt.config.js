@@ -123,6 +123,7 @@ export default {
   modules: [
     "@nuxtjs/i18n",
     "@nuxtjs/proxy",
+    "@nuxtjs/auth-next",
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     "nuxt-vuex-router-sync",
