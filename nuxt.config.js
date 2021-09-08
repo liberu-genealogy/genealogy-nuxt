@@ -1,14 +1,5 @@
 import getSiteMeta from "./utils/getSiteMeta";
 import { cloneDeep } from "lodash";
-import { messages } from "vee-validate/dist/locale/en.json";
-
-import {
-  ValidationProvider,
-  ValidationObserver,
-  extend,
-  Rules,
-  setInteractionMode,
-} from "vee-validate/dist/vee-validate.full.esm";
 
 const meta = getSiteMeta();
 
@@ -237,8 +228,6 @@ export default {
           rule.oneOf.push(lazyRule);
         }
       });
-
-      setInteractionMode("lazy");
 
       // const scssRules = config.module.rules.find('scss').oneOfs;
       // const normalRule = scssRules.store.get('normal');
