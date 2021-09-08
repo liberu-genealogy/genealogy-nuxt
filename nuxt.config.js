@@ -19,7 +19,7 @@ export default {
 
   sitemap: [
     {
-      hostname: process.env.BASE_URL || "http://localhost:3000",
+      hostname: process.env.BASE_URL || "http://localhost:8000",
       path: "/sitemap.xml",
       gzip: true,
     },

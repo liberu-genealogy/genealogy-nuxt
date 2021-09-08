@@ -109,7 +109,7 @@
             </div>
             <div class="mb-6">
               <button
-                @click="validate"
+                @click="login"
                 class="
                   button
                   theme-button theme-button-xl
@@ -150,10 +150,18 @@
           <a
             @click="loginSocial('facebook')"
             href="javascript:;"
-            class="btn cnt-g mb-5"
+            class="btn cnt-g"
           >
             <img src="~assets/images/facebook.png" />
             Continue with Facebook
+          </a>
+          <a
+            @click="loginSocial('github')"
+            href="javascript:;"
+            class="btn cnt-g mb-5"
+          >
+            <img src="~assets/images/enso-favicon.png" />
+            Continue with Github
           </a>
         </div>
       </div>
