@@ -2,7 +2,7 @@
   <div>
     <NuxtLink class="is-size-7 has-text-weight-medium has-text-link"
               to="/subscription">Stripe</NuxtLink>
-<!--    <loading :active.sync="isLoading" :color="color" :background-color="backgroundColor"> </loading>-->
+    <loading :active.sync="isLoading" :color="color" :background-color="backgroundColor"> </loading>
     <div class="currency-div">
       <span>Currency: </span>
       <div class="currency-inside-div">
@@ -113,18 +113,24 @@
 </template>
 
 <script>
-// import Loading from 'vue-loading-overlay';
-// import 'vue-loading-overlay/dist/vue-loading.css';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+import vSelect from 'vue-select';
 
 export default {
   layout: 'auth',
   components: {
-    // Loading
+    vSelect,
+    Loading
   },
   data() {
     return {
       isLoading: false,
-      plans: []
+      plans: [],
+      currency_options: ['USD', 'GBP', 'EUR', 'AUD'],
+      selected_currency: 'GBP',
+      selected_currency_symbol: '£',
+      selected_currency_rate: 1,
     }
   },
   mounted() {
@@ -132,14 +138,48 @@ export default {
   },
   methods: {
     async loadPlans() {
-      console.log('hh');
-      const response = await this.$axios.post("http://localhost:8000/api/paypal/plans", {email: 'heru0502@gmail.com'});
-      console.log("response", response);
+      this.isLoading = true;
+      const response = await this.$axios.get("/api/paypal/plans", {email: 'heru0502@gmail.com'});
 
       this.plans = response.data;
       this.isLoading = false;
-    }
+    },
+    async selectCurrency(currency) {
+      this.selected_currency = currency;
+      const response = await this.$axios.$get('https://api.currencyfreaks.com/latest?apikey=b864b83a27f5411c804e70762945b59a')
+          .then(res => {
+            console.log(res.rates);
+            switch (currency) {
+              case 'GBP':
+                this.selected_currency_symbol = '£';
+                this.selected_currency_rate = 1;
+                break;
+              case 'USD':
+                this.selected_currency_symbol = '$';
+                this.selected_currency_rate = 1 / res.rates.GBP;
+                break;
+              case 'EUR':
+                this.selected_currency_symbol = '€';
+                this.selected_currency_rate = res.rates.EUR / res.rates.GBP;
+                break;
+              case 'AUD':
+                this.selected_currency_symbol = '$';
+                this.selected_currency_rate = res.rates.AUD / res.rates.GBP;
+                break;
+              default:
+                this.selected_currency_symbol = '£';
+                this.selected_currency_rate = 1;
+                break;
+            }
+          })
+          .catch(() => { });
+    },
   }
 
 }
 </script>
+
+<style>
+@import '~/assets/css/admin.css';
+@import "~/node_modules/vue-select/dist/vue-select.css";
+</style>
