@@ -21,6 +21,7 @@
     "@enso-ui/filters": "^2.1.1",
     "@enso-ui/forms": "^2.3.19",
     "@enso-ui/laravel-validation": "^1.1.0",
+    "@enso-ui/modal": "^2.0.6",
     "@enso-ui/progress-indicator": "^1.1.5",
     "@enso-ui/route-mapper": "^1.0.1",
     "@enso-ui/scroll-to-top": "^2.0.3",
