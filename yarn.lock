@@ -1172,7 +1172,7 @@
     vue "^2.5.16"
     vue-router "^3.0.1"
 
-"@enso-ui/modal@^2.0":
+"@enso-ui/modal@^2.0", "@enso-ui/modal@^2.0.6":
   version "2.0.6"
   resolved "https://registry.npmjs.org/@enso-ui/modal/-/modal-2.0.6.tgz"
   integrity sha512-+tfSIbZ+O1j1wWDXCABAzxWeNYFu3qBF7GvGVYM60lwzxY9IL4KcUTNml/VM/5f4PQnePZDDGpzU9gWNfxt0ww==
@@ -10644,10 +10644,10 @@ vue-loader@^15.9.7:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-loading-overlay@^4.0.4:
-  version "4.0.4"
-  resolved "https://registry.npmjs.org/vue-loading-overlay/-/vue-loading-overlay-4.0.4.tgz"
-  integrity sha512-ADIEUXLo+IEpK8hd2+iqhZtEV3m0WNh5FlGvAc6FWG0KJAEHGTGUFdugQgAtM6Y3iFZc/ovzMd7A9dN+7QC7hw==
+vue-loading-overlay@^3.0.0:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/vue-loading-overlay/-/vue-loading-overlay-3.4.2.tgz#34792a83218df1d35dff50121ce9fac2114f1c38"
+  integrity sha512-xcB+NPjl76eA0uggm707x3ZFgrNosZXpynHipyS3K+rrK1NztOV49R1LY+/4ij5W1KYANp7eRI2EIHrxCpmWAw==
 
 vue-meta@^2.4.0:
   version "2.4.0"
@@ -10687,6 +10687,11 @@ vue-router@^3.0.1, vue-router@^3.5.1:
   version "3.5.2"
   resolved "https://registry.npmjs.org/vue-router/-/vue-router-3.5.2.tgz"
   integrity sha512-807gn82hTnjCYGrnF3eNmIw/dk7/GE4B5h69BlyCK9KHASwSloD1Sjcn06zg9fVG4fYH2DrsNBZkpLtb25WtaQ==
+
+vue-select@^3.12.2:
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/vue-select/-/vue-select-3.13.0.tgz#78d519984139156adcbf56af260fb6c2a69093a6"
+  integrity sha512-+PcWtfA1i3WVtkVwBPQknnOZL6QWSD2XiAVbSn0xAQvjOrmGAg7z+o9HkezXhtGdEstloJOdM8SujrUVyphKqg==
 
 vue-server-renderer@^2.6.12:
   version "2.6.14"
