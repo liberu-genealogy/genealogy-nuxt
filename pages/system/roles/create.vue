@@ -5,12 +5,16 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'system.roles.create',
+}
+</router>
 
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'system.roles.create',
     meta: {
         breadcrumb: 'create',
         title: 'Create Role',

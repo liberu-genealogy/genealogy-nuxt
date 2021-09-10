@@ -20,12 +20,16 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'system.localisation.edit',
+}
+</router>
 
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'system.localisation.edit',
     meta: {
         breadcrumb: 'edit',
         title: 'Edit Language',

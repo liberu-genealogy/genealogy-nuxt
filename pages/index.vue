@@ -8,14 +8,14 @@
                         <img src="~assets/images/logo1.svg">
                     </a>
                     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-                        data-target="navbarBasicExample">
+                        data-target="navbarBasicExample" >
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                     </a>
                 </div>
                 <div id="navbarBasicExample" class="navbar-menu">
-                    <nav class="navbar-end">
+                    <nav class="navbar-end" style="margin-right: 0 !important;">
                         <a data-scroll class="navbar-item" href="#home">
                             Home
                         </a>
@@ -257,7 +257,7 @@
     </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
     name: 'default.index',
     layout: 'default',
@@ -272,14 +272,17 @@ export default {
         };
     },
     computed: {
-        ...mapState('auth', ['isAuth'])
+        ...mapState('auth', ['isAuth']),
+        ...mapMutations("auth", ["logout"]),
     },
     created() {
         window.addEventListener('scroll', this.handleScroll);
     },
     methods: {
         async logout() {
-          await this.$auth.logout();
+            await this.$auth.logout();
+            this.$store.commit("logout")
+
         },
         handleScroll() {
             if (window.scrollY >= 10) {
@@ -296,4 +299,14 @@ export default {
 
 <style scoped>
     @import '~/assets/css/base.css';
+    @media screen and (max-width: 1006px) {
+        .navbar.is-fixed-top  {
+            display: inline !important;
+        }
+    }
 </style>
+<router>
+{
+  name: 'index'
+}
+</router>

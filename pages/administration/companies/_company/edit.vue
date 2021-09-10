@@ -37,6 +37,11 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'administration.companies.edit',
+}
+</router>
 
 <script>
 import { Tab } from '@enso-ui/tabs/bulma';
@@ -46,7 +51,6 @@ import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import People from '~/components/companies/bulma/pages/companies/components/People.vue';
 
 export default {
-    name: 'administration.companies.edit',
     meta: {
         breadcrumb: 'edit',
         title: 'Edit Company',

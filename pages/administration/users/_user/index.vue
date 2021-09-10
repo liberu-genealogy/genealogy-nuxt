@@ -5,12 +5,16 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'administration.users.show'
+}
+</router>
 
 <script>
 import UserProfile from '~/components/users/bulma/pages/users/components/UserProfile.vue';
 
 export default {
-    name: 'administration.users.show',
     meta: {
         breadcrumb: 'show',
         title: 'User Profile',

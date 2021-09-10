@@ -9,12 +9,16 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'integrations.google.settings.index',
+}
+</router>
 
 <script>
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'integrations.google.settings.index',
     meta: {
         breadcrumb: 'settings',
         title: 'Settings',

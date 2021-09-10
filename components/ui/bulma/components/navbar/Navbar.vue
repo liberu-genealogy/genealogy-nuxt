@@ -94,10 +94,7 @@ export default {
 @import '~/assets/themes/variables';
 
 .navbar {
-    height: $navbar-height;
     z-index: 3;
-    -webkit-box-shadow: 0 1px 1px hsla(0, 0%, 4%, .35);
-    box-shadow: 0 1px 1px hsla(0, 0%, 4%, .35);
 
     .navbar-item.logo .image img {
         max-width: 100%;

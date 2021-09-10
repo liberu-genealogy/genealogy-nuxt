@@ -7,6 +7,11 @@
         }).catch(routerErrorHandler)"
         @write-config-file="toastr.success($event.message)"/>
 </template>
+<router>
+{
+    name: 'system.roles.index',
+}
+</router>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -16,7 +21,6 @@ import { EnsoTable } from '@enso-ui/tables/bulma';
 library.add([faSave, faSlidersH]);
 
 export default {
-    name: 'system.roles.index',
     meta: {
         breadcrumb: 'index',
         title: 'Roles',

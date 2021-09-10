@@ -8,12 +8,16 @@
         </template>
     </enso-table>
 </template>
+<router>
+{
+    name: 'system.tutorials.index',
+}
+</router>
 
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
 export default {
-    name: 'system.tutorials.index',
     meta: {
         breadcrumb: 'index',
         title: 'Tutorials',

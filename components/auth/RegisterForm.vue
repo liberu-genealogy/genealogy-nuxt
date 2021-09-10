@@ -1,367 +1,419 @@
 <template>
-	<div class="login">
-		<div class="box has-padding-medium">
-			<h3 class="title is-3 has-text-black has-text-centered has-margin-bottom-medium">
-			   	<figure class="image is-24x24 logo is-clickable"	 @click="$router.push({ name: 'login' })">
-					<img src="/images/logo.svg">
-				</figure>
-				{{ meta.appName }}
-			</h3>
-			<form class="has-margin-bottom-medium"	 @submit.prevent="submit()">
-				<div class="field">
-					<div class="control has-icons-left has-icons-right">
-						<input 	v-model="first_name"
-								v-focus
-							   	class="input"
-							   	type="text"
-							   	:class="{ 'is-danger': errors.has('first_name'), 'is-success': isSuccessful }"
-							   	:placeholder="i18n('First Name')"
-							   	@input="errors.clear('first_name')">
-						<span class="icon is-small is-left">
-							<fa icon="user"/>
-						</span>
-						<span v-if="isSuccessful" class="icon is-small is-right has-text-success">
-							<fa icon="check"/>
-						</span>
-						<span v-if="errors.has('first_name')" class="icon is-small is-right has-text-danger">
-							<fa icon="exclamation-triangle"/>
-						</span>
-					</div>
-					<p 	class="has-text-left has-text-danger is-size-7"
-					   	v-if="errors.has('first_name')">
-						{{ errors.get('first_name') }}
-					</p>
-				</div>
-				<div class="field">
-					<div class="control has-icons-left has-icons-right">
-						<input v-model="last_name"
-							   v-focus
-							   class="input"
-							   type="text"
-							   :class="{ 'is-danger': errors.has('last_name'), 'is-success': isSuccessful }"
-							   :placeholder="i18n('Last Name')"
-							   @input="errors.clear('last_name')">
-						<span class="icon is-small is-left">
-							<fa icon="user"/>
-						</span>
-						<span 	v-if="isSuccessful"
-								class="icon is-small is-right has-text-success">
-							<fa icon="check"/>
-						</span>
-						<span v-if="errors.has('last_name')" class="icon is-small is-right has-text-danger">
-							<fa icon="exclamation-triangle"/>
-						</span>
-					</div>
-					<p class="has-text-left has-text-danger is-size-7"  v-if="errors.has('last_name')">
-						{{ errors.get('last_name') }}
-					</p>
-				</div>
-				<div class="field">
-					<div class="control has-icons-left has-icons-right">
-						<input 	v-model="email"
-							   	v-focus
-							   	class="input"
-							   	type="email"
-							   	:class="{ 'is-danger': errors.has('email'), 'is-success': isSuccessful }"
-							   	:placeholder="i18n('Email')"
-							   	@input="errors.clear('email')">
-						<span class="icon is-small is-left">
-							<fa icon="envelope"/>
-						</span>
-						<span v-if="isSuccessful" class="icon is-small is-right has-text-success">
-							<fa icon="check"/>
-						</span>
-						<span v-if="errors.has('email')" class="icon is-small is-right has-text-danger">
-							<fa icon="exclamation-triangle"/>
-						</span>
-					</div>
-					<p 	class="has-text-left has-text-danger is-size-7"
-					   	v-if="errors.has('email')">
-						{{ errors.get('email') }}
-					</p>
-				</div>
-				<div class="field">
-					<div class="control has-icons-left has-icons-right">
-						<input 	v-model="password"
-							   	class="input"
-							   	:type="passwordMeta.content"
-							   	:class="{ 'is-danger': errors.has('password'), 'is-success': isSuccessful }"
-							   	:placeholder="i18n('Password')"
-							   	@input="errors.clear('password')">
-						<span class="icon is-small is-left">
-							<fa icon="lock"/>
-						</span>
-						<reveal-password 	:meta="passwordMeta"
-											:class="{ 'is-spaced': isSuccessful || errors.has('password') }"
-										   	v-if="password"/>
-						<span v-if="isSuccessful"  class="icon is-small is-right has-text-success">
-							<fa icon="check"/>
-						</span>
-						<span v-if="errors.has('password')"	 class="icon is-small is-right has-text-danger">
-							<fa icon="exclamation-triangle"/>
-						</span>
-						<slot 	name="password-strength"
-							 	:password="password"
-							 	:has-password="hasPassword"/>
-					</div>
-					<p 	class="has-text-left has-text-danger is-size-7"
-					   	v-if="errors.has('password')">
-						{{ errors.get('password') }}
-					</p>
-				</div>
-				<div class="field">
-					<div class="control has-icons-left has-icons-right">
-						<input v-model="password_confirmation"
-							   class="input"
-							   :type="confirmationMeta.content"
-							   :class="{ 'is-danger': errors.has('password'), 'is-success': isSuccessful }"
-							   :placeholder="i18n('Repeat Password')"
-							   @input="errors.clear('password')">
-						<span class="icon is-small is-left">
-							<fa icon="lock"/>
-						</span>
-						<reveal-password 	:meta="confirmationMeta"
-										   	:class="{ 'is-spaced': match || isSuccessful || errors.has('password')}"
-										   	v-if="password_confirmation"/>
-						<span 	v-if="errors.has('password')"
-								class="icon is-small is-right has-text-danger">
-							<fa icon="exclamation-triangle"/>
-						</span>
-						<span 	v-if="match && !errors.has('password') || isSuccessful"
-								class="icon is-small is-right has-text-success">
-							<fa icon="check"/>
-						</span>
-					</div>
-					<p 	class="has-text-left has-text-danger is-size-7"
-					   	v-if="errors.has('password')">
-						{{ errors.get('password') }}
-					</p>
-				</div>
-				<div class="form-group">
-					<label>Agree to <a href="/termsandconditions" target="_blank">terms and conditions</a> </label>
-					<input type="radio" id="yes" value="true" v-model="terms">
-					<label for="yes">Yes</label>
-					<input type="radio" id="no" value="false" v-model="terms">
-					<label for="no">No</label>
-				</div>
-				<div class="field">
-					<button v-if="terms === 'true'" class="button is-primary is-fullwidth"
-						 	:class="{ 'is-loading': loading }"
-						 	type="submit"
-						 	@click.prevent="submit()">
-							<span class="icon is-small">
-								<fa :icon="'user'"/>
-							</span>
-							<span>{{ i18n(action) }}</span>
-					</button>
-				</div>
-				<div class="field is-pulled-right">
-				Already have an account?
-				<router-link
-					:to="'/login'"
-					>
-					{{ i18n(' Log in') }}
-				</router-link>
-				</div>
-			</form>
-
-            <div class="columns mt-6">
+  <LoginRegister>
+    <template #form>
+      <ValidationObserver slim v-slot="{ handleSubmit }">
+        <form
+          @submit.prevent="handleSubmit(submit)"
+          class="
+            column
+            is-6-tablet
+            is-7-desktop
+            is-7-widescreen
+            is-7-fullhd
+            is-gapless
+            is-flex
+            ai--c
+          "
+        >
+          <div class="auth-form is-gapless">
+            <div class="mb-5">
+              <NuxtLink
+                to="/"
+                class="
+                  is-size-6 is-flex
+                  has-text-link has-text-weight-medium
+                  mb-2
+                "
+              >
+                <font-awesome-icon
+                  :icon="['fas', 'angle-left']"
+                  class="mt-1 mr-2"
+                />Back to Home</NuxtLink
+              >
+              <h1 class="is-size-4 has-text-black has-text-weight-bold">
+                Create your account
+              </h1>
+            </div>
+            <div v-if="message" class="notification is-danger">
+              {{ message }}
+            </div>
+            <div
+              v-for="(error, index) in errorInput"
+              :key="index"
+              class="notification is-danger"
+            >
+              {{ error[0] }}
+            </div>
+            <div class="mb-5">
+              <div class="columns">
                 <div class="column">
-                <button class="button is-dark"
-                        :class="{ 'is-loading': loading }"
-                        type="button"
-                        @click.prevent="socialLogin('github')">
-                        <span class="icon is-small">
-                            <fa :icon="['fab', 'github']"/>
-                        </span>
-                        <span>{{ i18n('Github') }}</span>
-                </button>
+                  <div class="field">
+                    <ValidationProvider
+                      name="First Name"
+                      rules="required|min:3"
+                      v-slot="{ errors }"
+                    >
+                      <p class="control has-icons-left has-icons-right">
+                        <input
+                          class="input is-large"
+                          type="text"
+                          :class="{ 'is-danger': errors[0] }"
+                          placeholder="First name"
+                          v-model="first_name"
+                        />
+                      </p>
+                      <p
+                        v-if="errors[0]"
+                        class="has-text-danger p-2 is-size-7"
+                        v-text="errors[0]"
+                      ></p>
+                    </ValidationProvider>
+                  </div>
                 </div>
-                
                 <div class="column">
-                <button class="button is-light is-outline"
-                        :class="{ 'is-loading': loading }"
-                        type="button"
-                        @click.prevent="socialLogin('google')">
-                        <span class="icon is-small">
-                            <fa :icon="['fab', 'google']"/>
+                  <div class="field">
+                    <ValidationProvider
+                      name="Last Name"
+                      v-slot="{ errors }"
+                      rules="required|min:3"
+                    >
+                      <p class="control has-icons-left has-icons-right">
+                        <input
+                          class="input is-large"
+                          type="text"
+                          :class="{ 'is-danger': errors[0] }"
+                          placeholder="Last name"
+                          v-model="last_name"
+                        />
+                        <span class="icon is-small is-left">
+                          <font-awesome-icon :icon="['fas', 'user']" />
                         </span>
-                        <span>{{ i18n('Google') }}</span>
-                </button>
-                </div>
+                      </p>
 
+                      <p
+                        v-if="errors[0]"
+                        class="has-text-danger p-2 is-size-7"
+                        v-text="errors[0]"
+                      ></p>
+                    </ValidationProvider>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-5">
+              <div class="field">
+                <ValidationProvider
+                  name="Email"
+                  v-slot="{ errors }"
+                  rules="required|email"
+                >
+                  <p class="control has-icons-left has-icons-right">
+                    <input
+                      class="input is-large"
+                      type="text"
+                      :class="{ 'is-danger': errors[0] }"
+                      placeholder="Email address"
+                      v-model="email"
+                    />
+                    <span class="icon is-small is-left">
+                      <font-awesome-icon :icon="['fas', 'envelope']" />
+                    </span>
+                  </p>
+                  <p
+                    v-if="errors[0]"
+                    class="has-text-danger p-2 is-size-7"
+                    v-text="errors[0]"
+                  ></p>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div class="mb-5">
+              <div class="field">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Password"
+                  vid="password"
+                  rules="required|min:8"
+                >
+                  <p class="control has-icons-left has-icons-right">
+                    <input
+                      class="input is-large"
+                      :class="{ 'is-danger': errors[0] }"
+                      type="password"
+                      placeholder="Password"
+                      v-model="password"
+                    />
+                    <span class="icon is-small is-left">
+                      <font-awesome-icon :icon="['fas', 'lock']" />
+                    </span>
+                  </p>
+                  <p
+                    v-if="errors[0]"
+                    class="has-text-danger p-2 is-size-7"
+                    v-text="errors[0]"
+                  ></p>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div class="mb-5">
+              <div class="field">
+                <ValidationProvider
+                  name="Password Confirm"
+                  rules="required|confirmed:password"
+                  v-slot="{ errors }"
+                >
+                  <p class="control has-icons-left has-icons-right">
+                    <input
+                      class="input is-large"
+                      :type="passwordMeta.content"
+                      :class="{ 'is-danger': errors[0] }"
+                      placeholder="Confirm Password"
+                      v-model="password_confirmation"
+                    />
+                    <span class="icon is-small is-left">
+                      <font-awesome-icon :icon="['fas', 'lock']" />
+                    </span>
+                  </p>
+
+                  <p
+                    v-if="errors[0]"
+                    class="has-text-danger p-2 is-size-7"
+                    v-text="errors[0]"
+                  ></p>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div class="mb-5 px-1">
+              <div class="columns is-mobile is-gapless">
                 <div class="column">
-                <button class="button is-info"
-                        :class="{ 'is-loading': loading }"
-                        type="button"
-                        @click.prevent="socialLogin('facebook')">
-                        <span class="icon is-small">
-                            <fa :icon="['fab', 'facebook']"/>
-                        </span>
-                        <span>{{ i18n('Facebook') }}</span>
-                </button>
-                </div>
-            </div> 
+                  <ValidationProvider
+                    name="Terms And Conditions"
+                    :rules="{ required: { allowFalse: false } }"
+                    v-slot="{ errors }"
+                  >
+                    <label class="checkbox">
+                      <input type="checkbox" v-model="terms" />
+                      Agree to
+                      <NuxtLink
+                        to="/termsandconditions"
+                        class="has-text-link has-text-weight-medium"
+                        >terms and conditions</NuxtLink
+                      >
+                    </label>
 
-			<div>
-				<br /><br />
-				<router-link
-							 :to="{ name: 'about.index' }"
-							 class="is-pulled-left">
-					{{ i18n('About') }}&nbsp;
-				</router-link>
-				<router-link
-							 :to="{ name: 'contact.index' }"
-							 class="is-pulled-right">
-					{{ i18n('Contact') }} &nbsp;
-				</router-link>
-			</div>
-			<br />
-			<div>
-				<router-link
-							 :to="{ name: 'privacy.index' }"
-							 class="is-pulled-left">
-					{{ i18n('Privacy Policy') }}
-				</router-link>
-				<router-link
-							 :to="{ name: 'termsandconditions.index' }"
-							 class="is-pulled-right">
-					{{ i18n('Terms and Conditions') }}
-				</router-link>
-			</div>
-			<br /><br /><br />
-			<div>
-				Copyright 2020 Genealogia Ltd. International House, 12 Constance Street
-				London, E16 2DQ. Company Number: 12734769
-			</div>
-			<div class="is-clearfix"/>
-			</div>
-		</div>
-	</div>
+                    <div v-if="errors[0]">
+                      <p class="help has-text-danger" v-text="errors[0]"></p>
+                    </div>
+                  </ValidationProvider>
+                </div>
+              </div>
+            </div>
+            <div class="mb-6">
+              <button
+                class="
+                  button
+                  theme-button theme-button-xl
+                  has-background-primary
+                  is-uppercase
+                  has-text-weight-medium has-text-white
+                "
+              >
+                register
+              </button>
+            </div>
+            <div>
+              <p
+                class="
+                  is-size-6
+                  has-text-dark has-text-centered has-text-weight-regular
+                "
+              >
+                Already have an account?
+                <NuxtLink
+                  to="/login"
+                  class="has-text-link has-text-weight-medium"
+                  v-text="'Sign in'"
+                >
+                </NuxtLink>
+              </p>
+            </div>
+            <div class="divider">or</div>
+            <a
+                @click="loginSocial('google')"
+                href="javascript:;"
+                class="btn cnt-g"
+            >
+                <img src="~assets/images/google.jpg" />
+                Continue with google
+            </a>
+            <a
+                @click="loginSocial('facebook')"
+                href="javascript:;"
+                class="btn cnt-g"
+            >
+                <img src="~assets/images/facebook.png" />
+                Continue with Facebook
+            </a>
+            <a
+                @click="loginSocial('github')"
+                href="javascript:;"
+                class="btn cnt-g mb-5"
+            >
+                <img src="~assets/images/github.png" />
+                Continue with Github
+            </a>
+          </div>
+        </form>
+      </ValidationObserver>
+    </template>
+
+    <template #footerImageForm>
+      <img class="auth-img" src="~assets/images/mockup03@2x.webp" alt="" />
+    </template>
+  </LoginRegister>
 </template>
 
 <script>
-	import { mapState } from 'vuex';
-	import { library } from '@fortawesome/fontawesome-svg-core';
-	import {
-		faEnvelope, faCheck, faExclamationTriangle, faLock, faUser,
-	} from '@fortawesome/free-solid-svg-icons';
-	import { focus } from '@enso-ui/directives';
-	import Errors from '@enso-ui/laravel-validation';
-	import RevealPassword from '@enso-ui/forms/src/bulma/parts/RevealPassword.vue';
+  import LoginRegister from "~/components/loginregister/index.vue";
+  import { mapState } from "vuex";
+  import { library } from "@fortawesome/fontawesome-svg-core";
+  import {
+    faEnvelope,
+    faCheck,
+    faExclamationTriangle,
+    faLock,
+    faUser,
+  } from "@fortawesome/free-solid-svg-icons";
+  import { focus } from "@enso-ui/directives";
+  import Errors from "@enso-ui/laravel-validation";
+  import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
 
-	library.add([
-		faEnvelope, faCheck, faExclamationTriangle, faLock, faUser,
-	]);
+  library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
-	export default {
-		name: 'RegisterForm',
-		components: { RevealPassword },
-		meta: {
-	        guestGuard: true
-	    },
-		directives: { focus },
-		inject: {
-			i18n: { from: 'i18n' },
-		},
+  export default {
+    name: "RegisterForm",
+    components: { LoginRegister },
+    directives: { focus },
+    // inject: {
+    //   i18n: { from: "i18n" },
+    // },
 
-		props: {
-			action: {
-					required: true,
-						type: String
-				},
-			route: {
-					required: true,
-						type: String
-				}
-		},
+    props: {
+      action: {
+        required: true,
+        type: String,
+      },
+      route: {
+        required: true,
+        type: String,
+      },
+    },
 
-		data: () => ({
-			first_name: '',
-			last_name: '',
-			email: '',
-			errors: new Errors(),
-			isSuccessful: false,
-			loading: false,
-			password: '',
-			passwordMeta: {
-				content: 'password',
-			},
-			password_confirmation: null,
-			confirmationMeta: {
-				content: 'password',
-			},
-			terms: 'true',
-		}),
+    data: () => ({
+      first_name: "",
+      last_name: "",
+      email: "",
+      // errors: new Errors(),
+      errorInput: "",
+      message: "",
+      isSuccessful: false,
+      loading: false,
+      password: "",
+      passwordMeta: {
+        content: "password",
+      },
+      password_confirmation: null,
+      confirmationMeta: {
+        content: "password",
+      },
+      terms: "",
+    }),
 
-		computed: {
-			...mapState(['meta']),
-			hasPassword() {
-				return this.password !== null && this.password.length;
-			},
-			match() {
-				return this.hasPassword
-						&& this.password === this.password_confirmation;
-			},
-			postParams() {
-				return this.registerParams;
-			},
-			registerParams() {
-				const { email, password, first_name, last_name, password_confirmation } = this;
+    computed: {
+      ...mapState(["meta"]),
+      hasPassword() {
+        return this.password !== null && this.password.length;
+      },
+      match() {
+        return this.hasPassword && this.password === this.password_confirmation;
+      },
+      postParams() {
+        return this.registerParams;
+      },
+      registerParams() {
+        const {
+          email,
+          password,
+          first_name,
+          last_name,
+          password_confirmation,
+        } = this;
 
-				return { email, password, first_name, last_name, password_confirmation};
-			},
-			registerLink() {
-				return '/api/register';
-			},
-		},
+        return {
+          email,
+          password,
+          first_name,
+          last_name,
+          password_confirmation,
+        };
+      },
+      registerLink() {
+        return "/register";
+      },
+    },
 
-		methods: {
-			submit() {
-				this.loading = true;
-				this.isSuccessful = false;
-				this.$axios.post(this.registerLink, this.postParams)
-					.then(({ data }) => {
-						this.loading = false;
-						this.isSuccessful = true;
-						this.$emit('success', data);
+    methods: {
+      loginSocial(provider) {
+        this.provider = provider;
+        //const newWindow = openWindow("", "message");
 
-					}).catch((error) => {
-						this.loading = false;
-						const { status, data } = error.response;
-						switch (status) {
-						case 422:
-								this.errors.set(data.errors);
-								break;
-							case 429:
-								this.$toastr.error(data.message);
-								break;
-							default:
-								throw error;
-						}
-				});
-			},
-			 socialLogin(service) {
-				this.$axios.get(`api/login/${service}`).then(response=>{
-					// console.log(response.data);
-					window.location.href = response.data;
-				})
-			}
-		},
-	};
+        let url = "/login/" + provider;
+        this.$axios
+          .get(url)
+          .then((res) => {
+            console.log(res);
+            window.location.href = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      submit() {
+        this.loading = true;
+        this.isSuccessful = false;
+        this.$axios
+          .$post(this.registerLink, this.postParams)
+          .then(({ data }) => {
+            this.loading = false;
+            this.isSuccessful = true;
+            this.$emit("success", data);
+          })
+          .catch((error) => {
+            console.log(error);
+            this.loading = false;
+            const { status, data } = error.response;
+            switch (status) {
+              case 422:
+                this.errorInput = data.errors;
+                break;
+              case 429:
+                // this.$toastr.error(data.message); // error Toastr can't displayed
+                this.message = data.message;
+                break;
+              case 500:
+                this.message = data.message;
+                this.$forceUpdate();
+                break;
+              default:
+                throw error;
+            }
+          });
+      },
+    },
+  };
 </script>
 
-<style lang="scss">
-	.login {
-		max-width: 400px;
-		margin: auto;
-
-		.is-spaced {
-			margin-right: 1.6em;
-		}
-
-		figure.logo {
-			display: inline-block;
-		}
-	}
+<style scoped>
+  @import "~/assets/css/base.css";
 </style>

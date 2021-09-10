@@ -5,12 +5,16 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'system.permissions.edit',
+}
+</router>
 
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'system.permissions.edit',
     meta: {
         breadcrumb: 'edit',
         title: 'Edit Permission',

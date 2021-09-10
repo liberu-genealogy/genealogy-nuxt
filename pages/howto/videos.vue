@@ -168,6 +168,11 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'howTo.videos.index',
+}
+</router>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -181,7 +186,6 @@ import HowToVideo from '~/components/how-to/bulma/pages/howTo/components/HowToVi
 library.add([faPlus, faUpload, faBan, faCheck, faPencilAlt, faTags]);
 
 export default {
-    name: 'howTo.videos.index',
     meta: {
         breadcrumb: 'how to',
         title: 'How To',
