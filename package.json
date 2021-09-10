@@ -65,7 +65,7 @@
     "vue-beautiful-chat": "^2.5.0",
     "vue-cal": "^3.10.1",
     "vue-fb-customer-chat": "^0.2.0",
-    "vue-loading-overlay": "^3.0.0",
+    "vue-loading-overlay": "^4.0.4",
     "vue-pull-refresh": "^0.2.7",
     "vue-video-player": "^5.0.2",
     "vue-select": "^3.12.2",
