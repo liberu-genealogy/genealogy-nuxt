@@ -1,9 +1,9 @@
 <template>
-    <AddressesCard />
+    <Addresses />
 </template>
 
 <script>
-import AddressesCard from '@/components/addresses/AddressesCard'
+import Addresses from '@/components/addresses/notes/Addresses'
 export default {
     name: 'Show',
 };
