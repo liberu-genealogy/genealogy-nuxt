@@ -66,7 +66,7 @@ export const mutations = {
   },
   setDefaultRoute: (state, { route, _router }) => {
     _router.addRoute({
-      path: '/',
+      path: '/dashboard',
       redirect: { name: route },
     })
   },
@@ -179,7 +179,7 @@ export const actions = {
         commit('guestState', true)
 
         if (
-          !['login', 'password.email', 'password.reset'].includes(
+          !['login', 'password.email', 'password.reset', 'default.index'].includes(
             state.route.name
           )
         ) {
