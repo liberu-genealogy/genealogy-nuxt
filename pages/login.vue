@@ -1,22 +1,59 @@
 <template>
-  <login-form action="Login" route="login" @success="init" />
-  <!-- <auth-form
-    action="Login"
-    icon="user"
-    endpoint="login"
-    :payload="payload"
-    @success="init"
-  >
-    <email v-model="payload.email" />
-    <password v-model="payload.password" />
-    <remember v-model="payload.remember" v-if="!isWebview" />
-    <template v-slot:footer>
-      <nuxt-link class="is-pulled-right" :to="{ name: 'password.email' }">
-        {{ "Forgot password" }}
-      </nuxt-link>
-      <div class="is-clearfix" />
-    </template>
-  </auth-form> -->
+    <auth-form action="Login"
+        icon="user"
+        endpoint="login"
+        :payload="payload"
+        @success="init">
+        <email v-model="payload.email"/>
+        <password v-model="payload.password"/>
+        <remember v-model="payload.remember"
+            v-if="!isWebview"/>
+        <template v-slot:footer>
+            <nuxt-link class="mt-1 is-pulled-right"
+                :to="{ name: 'password.email' }">
+                {{ i18n('Forgot password') }}
+            </nuxt-link>
+            <div class="is-clearfix"/>
+            <label for="">Login With</label>
+            <div class="mt-4 columns">
+                <div class="column">
+                <button class="button is-dark"
+                        :class="{ 'is-loading': loading }"
+                        type="button"
+                        @click.prevent="socialLogin('github')">
+                        <span class="icon is-small">
+                            <fa :icon="['fab', 'github']"/>
+                        </span>
+                        <span>{{ i18n('Github') }}</span>
+                </button>
+                </div>
+                
+                <div class="column">
+                <button class="button is-light is-outline"
+                        :class="{ 'is-loading': loading }"
+                        type="button"
+                        @click.prevent="socialLogin('google')">
+                        <span class="icon is-small">
+                            <fa :icon="['fab', 'google']"/>
+                        </span>
+                        <span>{{ i18n('Google') }}</span>
+                </button>
+                </div>
+
+                <div class="column">
+                <button class="button is-info"
+                        :class="{ 'is-loading': loading }"
+                        type="button"
+                        @click.prevent="socialLogin('facebook')">
+                        <span class="icon is-small">
+                            <fa :icon="['fab', 'facebook']"/>
+                        </span>
+                        <span>{{ i18n('Facebook') }}</span>
+                </button>
+                </div>
+            </div>  
+        </template>
+    </auth-form>
 </template>
 
 <script>
@@ -53,11 +90,22 @@ export default {
     //   remember: false,
     // }),
 
+    data: () => ({
+        errors: new Errors(),
+        payload: {
+            email: '',
+            password: '',
+            remember: false,
+            device_name: '',
+        },
+        loading: false,
+    }),
     // watch: {
     //   remember(value) {
     //     console.log(value);
     //   },
     // },
+
 
     computed: {
       ...mapState(["meta"]),
