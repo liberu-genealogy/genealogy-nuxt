@@ -68,7 +68,7 @@ export default {
   ],
 
   router: {
-    // middleware: 'auth',
+    // middleware: ['auth'],
     extendRoutes(routes, resolve) {
       routes.push(
         {
@@ -149,11 +149,20 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
-    credentials: false,
+    credentials: true,
     common: {
       Accept: "application/json, text/plain, */*",
       "Access-Control-Allow-Origin": "*",
     },
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          logout: { url: '/api/logout', method: 'post' },
+        }
+      }
+    }
   },
   // proxy: {
   //   "/api/": process.env.BASE_URL || "http://localhost:8000",

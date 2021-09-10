@@ -250,7 +250,7 @@
         };
       },
       loginLink() {
-        return "/login";
+        return "api/login";
       },
       config() {
         return this.isWebview ? { headers: { isWebview: true } } : {};
@@ -268,12 +268,12 @@
         this.provider = provider;
         //const newWindow = openWindow("", "message");
 
-        let url = "/login/" + provider;
+        let url = "login/" + provider;
         this.$axios
           .get(url)
           .then((res) => {
             console.log(res);
-            window.location.href = res.data;
+            window.location.href = res;
           })
           .catch((err) => {
             console.log(err);
@@ -284,32 +284,35 @@
         this.loading = true;
         this.isSuccessful = false;
         this.$axios
-          .$post(this.loginLink, this.postParams, this.config)
-          .then(({ data }) => {
-            this.loading = false;
-            this.isSuccessful = true;
-            this.$emit("success", data);
-          })
-          .catch((error) => {
-            console.log(error);
-            this.loading = false;
-            const { status, data } = error.response;
-            switch (status) {
-              case 422:
-                this.errorInput = data.errors;
-                break;
-              case 429:
-                // this.$toastr.error(data.message); // error Toastr can't displayed
-                this.message = data.message;
-                break;
-              case 500:
-                this.message = data.message;
-                this.$forceUpdate();
-                break;
-              default:
-                throw error;
-            }
-          });
+        .get('/sanctum/csrf-cookie').then(response =>{
+          console.log(response)
+          this.$axios.post('/api/login', this.postParams)
+            .then(({ data }) => {
+              this.loading = false;
+              this.isSuccessful = true;
+              this.$emit("success", data);
+            })
+            .catch((error) => {
+              console.log(error);
+              this.loading = false;
+              const { status, data } = error.response;
+              switch (status) {
+                case 422:
+                  this.errorInput = data.errors;
+                  break;
+                case 429:
+                  // this.$toastr.error(data.message); // error Toastr can't displayed
+                  this.message = data.message;
+                  break;
+                case 500:
+                  this.message = data.message;
+                  this.$forceUpdate();
+                  break;
+                default:
+                  throw error;
+              }
+            });
+        })
       },
     },
   };

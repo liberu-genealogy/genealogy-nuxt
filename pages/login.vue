@@ -69,7 +69,7 @@
       ...mapMutations(["setShowQuote", "setCsrfToken"]),
       init(data) {
         this.setShowQuote(this.meta.showQuote);
-        console.log(data);
+        // console.log(data);
         // this.setCsrfToken(data.csrfToken);
         if (data.csrfToken) {
           this.setCsrfToken({ token: data.csrfToken, $axios: this.$axios });

@@ -257,7 +257,7 @@
     </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
     name: 'default.index',
     layout: 'default',
@@ -272,14 +272,17 @@ export default {
         };
     },
     computed: {
-        ...mapState('auth', ['isAuth'])
+        ...mapState('auth', ['isAuth']),
+        ...mapMutations("auth", ["logout"]),
     },
     created() {
         window.addEventListener('scroll', this.handleScroll);
     },
     methods: {
         async logout() {
-          await this.$auth.logout();
+            await this.$auth.logout();
+            this.$store.commit("logout")
+
         },
         handleScroll() {
             if (window.scrollY >= 10) {
