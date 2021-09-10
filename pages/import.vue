@@ -61,6 +61,11 @@
         </enso-table>
     </div>
 </template>
+<router>
+{
+    name: 'import.index',
+}
+</router>
 
 <script>
 import { mapState } from 'vuex';
@@ -77,7 +82,6 @@ import Param from '~/components/data-import/bulma/pages/dataImport/components/Pa
 library.add(faDownload, faTrashAlt, faFileExcel, faBan, faSync);
 
 export default {
-    name: 'import.index',
     meta: {
         breadcrumb: 'data import',
         title: 'Data Import',

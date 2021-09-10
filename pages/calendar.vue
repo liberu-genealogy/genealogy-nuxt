@@ -19,6 +19,11 @@
             v-if="event"/>
     </div>
 </template>
+<router>
+{
+    name: 'core.calendar.index',
+}
+</router>
 
 <script>
 import { mapMutations } from 'vuex';
@@ -27,7 +32,6 @@ import CalendarFilter from '~/components/calendar/bulma/pages/calendar/component
 import EventForm from '~/components/calendar/bulma/pages/calendar/components/EventForm.vue';
 
 export default {
-    name: 'core.calendar.index',
     meta: {
         breadcrumb: 'calendar',
         title: 'Calendar',

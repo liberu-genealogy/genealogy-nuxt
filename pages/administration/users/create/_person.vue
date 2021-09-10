@@ -14,12 +14,16 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'administration.users.create'
+}
+</router>
 
 <script>
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'administration.users.create',
     meta: {
         breadcrumb: 'create',
         title: 'Create User',

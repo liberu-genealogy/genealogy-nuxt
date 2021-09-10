@@ -5,12 +5,16 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'system.tutorials.edit',
+}
+</router>
 
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'system.tutorials.edit',
     // path: ':tutorial/edit',
     meta: {
         breadcrumb: 'edit',

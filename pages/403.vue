@@ -10,6 +10,11 @@
         </p>
     </div>
 </template>
+<router>
+{
+    name: 'unauthorized',
+}
+</router>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -18,7 +23,6 @@ import { faBan } from '@fortawesome/free-solid-svg-icons';
 library.add(faBan);
 
 export default {
-    name: 'unauthorized',
     // head: {
     //     title: 'Unauthorized'
     // },

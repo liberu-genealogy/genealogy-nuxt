@@ -12,16 +12,17 @@
         <email v-model="payload.email"/>
     </auth-form>
 </template>
+<router>
+{
+    name: 'password.email'
+}
+</router>
 
 <script>
 import AuthForm from '~/components/auth/AuthForm.vue';
 import Email from '~/components/auth/fields/Email.vue';
 
 export default {
-    name: 'password.email',
-    // head: {
-    //     title: 'Email Reset Link'
-    // },
     meta: {
         guestGuard: true,
         title: 'Email Reset Link',

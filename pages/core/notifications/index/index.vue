@@ -72,6 +72,11 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'core.notifications.index',
+}
+</router>
 
 <script>
 import debounce from 'lodash/debounce';
@@ -84,7 +89,6 @@ import {
 library.add(faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync);
 
 export default {
-    name: 'core.notifications.index',
     // path: '/core/notifications/index',
     meta: {
         breadcrumb: 'notifications',

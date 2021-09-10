@@ -5,12 +5,16 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'tasks.edit',
+}
+</router>
 
 <script>
 import BaseForm from '~/components/tasks/bulma/pages/tasks/BaseForm.vue';
 
 export default {
-    name: 'tasks.edit',
     meta: {
         breadcrumb: 'edit',
         title: 'Edit Task',

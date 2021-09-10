@@ -19,7 +19,11 @@
             :match="match"/>
     </auth-form>
 </template>
-
+<router>
+{
+    name: 'password.reset',
+}
+</router>
 <script>
 import AuthForm from '~/components/auth/AuthForm.vue';
 import PasswordStrength from '~/components/auth/PasswordStrength.vue';
@@ -28,7 +32,6 @@ import Password from '~/components/auth/fields/Password.vue';
 import Confirmation from '~/components/auth/fields/Confirmation.vue';
 
 export default {
-    name: 'password.reset',
     // head: {
     //     title: 'Reset Password'
     // },

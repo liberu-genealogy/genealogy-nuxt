@@ -1,19 +1,21 @@
 <template>
-  <div class="login">
-    <div class="box p-3">
-      <div class="logo mb-3 is-flex">
-        <figure
-          class="image is-48x48 is-clickable is-flex"
-          @click="$router.push({ name: 'login' }).catch(routerErrorHandler)"
-        >
-          <img src="/images/logo.svg" :alt="meta.appName" />
-        </figure>
-      </div>
-      <form class="mb-2" @submit.prevent="submit()">
-        <slot />
-        <submit v-bind="$attrs" v-on="$listeners" />
-        <slot name="footer" />
-      </form>
+    <div class="login">
+        <div class="box p-3">
+            <div class="logo mb-3 is-flex">
+                <figure class="image is-48x48  is-clickable is-flex"
+                    @click="$router.push({ name: 'login' }).catch(routerErrorHandler)">
+                    <img src="~assets/images/logo.svg"
+                        :alt="meta.appName">
+                </figure>
+            </div>
+            <form class="mb-2"
+                @submit.prevent="submit()">
+                <slot/>
+                <submit v-bind="$attrs"
+                    v-on="$listeners"/>
+                <slot name="footer"/>
+            </form>
+        </div>
     </div>
   </div>
 </template>

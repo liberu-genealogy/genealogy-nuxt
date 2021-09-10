@@ -112,6 +112,11 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'administration.users.edit'
+}
+</router>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -130,7 +135,6 @@ import Sessions from '~/components/users/bulma/pages/users/components/Sessions.v
 library.add(faUserTie, faTrashAlt, faKey, faRedo);
 
 export default {
-    name: 'administration.users.edit',
     meta: {
         breadcrumb: 'edit',
         title: 'Edit User',

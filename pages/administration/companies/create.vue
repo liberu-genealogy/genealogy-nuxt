@@ -5,12 +5,16 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'administration.companies.create',
+}
+</router>
 
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'administration.companies.create',
     meta: {
         breadcrumb: 'create',
         title: 'Create Company',

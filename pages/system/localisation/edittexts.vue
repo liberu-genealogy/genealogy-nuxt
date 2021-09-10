@@ -141,6 +141,11 @@
         </div>
     </div>
 </template>
+<router>
+{
+    name: 'system.localisation.editTexts',
+}
+</router>
 
 <script>
 import { mapState } from 'vuex';
@@ -153,7 +158,6 @@ import VueSwitch from '@enso-ui/switch/bulma';
 library.add(faSearch, faTrashAlt);
 
 export default {
-    name: 'system.localisation.editTexts',
     meta: {
         breadcrumb: 'edit texts',
         title: 'Edit Texts',

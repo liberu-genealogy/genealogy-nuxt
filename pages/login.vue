@@ -29,8 +29,9 @@
   import Remember from "~/components/auth/fields/Remember.vue";
   import LoginRegister from "~/components/loginregister/index.vue";
 
-  export default {
-    name: "login",
+export default {
+    inject: ['i18n', 'route'],
+
 
     meta: {
       guestGuard: true,

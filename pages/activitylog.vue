@@ -11,13 +11,17 @@
             @reload="offset = 0; fetch()"/>
     </div>
 </template>
+<router>
+{
+    name: 'core.activityLogs.index',
+}
+</router>
 
 <script>
 import Timeline from '~/components/activity-log/bulma/pages/activityLog/components/Timeline.vue';
 import Filters from '~/components/activity-log/bulma/pages/activityLog/components/Filters.vue';
 
 export default {
-    name: 'core.activityLogs.index',
     meta: {
         breadcrumb: 'activity log',
         title: 'Activity Log',

@@ -116,6 +116,11 @@
             ref="filterState"/>
     </div>
 </template>
+<router>
+{
+    name: 'tasks.index',
+}
+</router>
 
 <script>
 import { mapState } from 'vuex';
@@ -135,7 +140,6 @@ import Flags from '~/components/tasks/bulma/pages/tasks/components/Flags.vue';
 library.add(faClock, faInfoCircle, faCog);
 
 export default {
-    name: 'tasks.index',
     meta: {
         breadcrumb: 'index',
         title: 'Tasks',

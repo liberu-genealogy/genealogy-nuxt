@@ -305,3 +305,8 @@ export default {
         }
     }
 </style>
+<router>
+{
+  name: 'index'
+}
+</router>
