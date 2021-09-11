@@ -141,8 +141,8 @@ export default {
         },
         setFields({ form }) {
             this.form = form;
-            this.field('addressable_id').value = this.id;
-            this.field('addressable_type').value = this.type;
+            this.field('event_id').value = this.id;
+            this.field('event_type').value = this.type;
             this.localityParams.region_id = this.field('region_id').value;
             this.$emit('form-loaded', form);
         },
