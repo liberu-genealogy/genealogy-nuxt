@@ -1,37 +1,5 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@Freeman-md 
-enso-ui
-/
-addresses
-Public
-5
-0
-0
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-addresses/src/bulma/AddressForm.vue
-@aocneanu
-aocneanu vue3 preps: moves v-bind="$attrs" to top
-Latest commit 5f7a065 on Jul 1
- History
- 2 contributors
-@raftx24@aocneanu
-188 lines (174 sloc)  6.36 KB
-  
 <template>
-    <modal portal="address-form"
+    <modal portal="events-form"
         v-on="$listeners">
         <enso-form class="box has-background-light"
             v-bind="$attrs"
@@ -113,7 +81,7 @@ import { Modal } from '@enso-ui/modal/bulma';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 library.add(faLocationArrow, faMapPin, faSearchLocation);
 export default {
-    name: 'AddressForm',
+    name: 'EventsForm',
     components: { Modal, EnsoForm, FormField },
     props: {
         id: {
@@ -173,8 +141,8 @@ export default {
         },
         setFields({ form }) {
             this.form = form;
-            this.field('addressable_id').value = this.id;
-            this.field('addressable_type').value = this.type;
+            this.field('event_id').value = this.id;
+            this.field('event_type').value = this.type;
             this.localityParams.region_id = this.field('region_id').value;
             this.$emit('form-loaded', form);
         },
