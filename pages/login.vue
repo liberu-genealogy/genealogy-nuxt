@@ -1,5 +1,6 @@
 <template>
-    <auth-form action="Login"
+    <login-form action="Login" route="login" @success="init" />
+    <!-- <auth-form action="Login"
         icon="user"
         endpoint="login"
         :payload="payload"
@@ -53,7 +54,7 @@
                 </div>
             </div>  
         </template>
-    </auth-form>
+    </auth-form> -->
 </template>
 
 <script>
@@ -63,13 +64,11 @@
   // import AuthForm from "~/components/auth/AuthForm.vue";
   // import Email from "~/components/auth/fields/Email.vue";
   // import Password from "~/components/auth/fields/Password.vue";
-  import Remember from "~/components/auth/fields/Remember.vue";
+  // import Remember from "~/components/auth/fields/Remember.vue";
   import LoginRegister from "~/components/loginregister/index.vue";
 
 export default {
-    inject: ['i18n', 'route'],
-
-
+    // inject: ['i18n', 'route'],
     meta: {
       guestGuard: true,
       title: "Login",
@@ -118,8 +117,6 @@ export default {
       ...mapMutations(["setShowQuote", "setCsrfToken"]),
       init(data) {
         this.setShowQuote(this.meta.showQuote);
-        // console.log(data);
-        // this.setCsrfToken(data.csrfToken);
         if (data.csrfToken) {
           this.setCsrfToken({ token: data.csrfToken, $axios: this.$axios });
         }

@@ -11,13 +11,6 @@ export default {
     host: process.env.HOST || "localhost", // default: localhost
   },
 
-  // publicRuntimeConfig: {
-  //   axios: {
-  //     browserBaseURL: process.env.BASE_URL || 'http://localhost:8000',
-  //   },
-  //   appEnv: process.env.APP_ENV || 'production'
-  // },
-
   sitemap: [
     {
       hostname: process.env.BASE_URL || "http://localhost:8000",
@@ -147,48 +140,61 @@ export default {
     ],
   },
 
-  // publicRuntimeConfig: {
-  //   axios: {
-  //     browserBaseURL: process.env.BASE_URL || 'http://localhost:8000',
-  //   },
-  //   appEnv: process.env.APP_ENV || 'production'
-  // },
+  publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: process.env.BASE_URL || 'http://localhost:8000',
+    },
+    appEnv: process.env.APP_ENV || 'production'
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
     credentials: true,
     common: {
-      Accept: "application/json, text/plain, */*",
-      "Access-Control-Allow-Origin": "*",
+      'Accept': 'application/json, text/plain, */*'
     },
   },
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          logout: { url: '/api/logout', method: 'post' },
-        }
-      }
-    }
-  },
   // proxy: {
-  //   "/api/": process.env.BASE_URL || "http://localhost:8000",
-  //   "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
-  // },
-
-  proxy: {
-    "/api/": process.env.BASE_URL || "http://localhost:8000",
-    "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
-  },
-
-  // proxy: {
-  //   "/register": {
-  //     target: `${process.env.BASE_URL}/register`,
-  //     pathRewrite: { "^/register/": "" },
-  //   },
-  // },
-
+    //   "/api/": process.env.BASE_URL || "http://localhost:8000",
+    //   "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
+    // },
+    
+    proxy: {
+      "/api/": { target: process.env.BASE_URL || "http://localhost:8000", pathRewrite: {'^/api/': ''} },
+      "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
+    },
+    
+    // proxy: {
+    //   "/register": {
+    //     target: `${process.env.BASE_URL}/register`,
+    //     pathRewrite: { "^/register/": "" },
+    //   },
+    // },
+      
+    // auth: {
+    //   strategies: {
+    //   cookie: {
+    //     cookie: {
+    //     name: 'XSRF-TOKEN',
+    //     }
+    //   },
+    //     'laravelSanctum': {
+    //       provider: 'laravel/sanctum',
+    //       url: process.env.BASE_URL || "http://localhost:8000",
+    //       endpoints: {
+    //         login: { url: '/api/login', method: 'post' },
+    //         logout: { url: '/api/logout', method: 'post' },
+    //       }
+    //     },
+    //   },
+    //   redirect: {
+    //     login: '/login',
+    //     logout: '/login',
+    //     callback: '/login',
+    //     home: '/'
+    //   }
+    // },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     filenames: {

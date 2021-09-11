@@ -35,7 +35,7 @@
                           Sign in
                         </NuxtLink>
 
-                        <a v-else @click.prevent="logout()" class="navbar-item">
+                        <a v-else @click.prevent="logoutAccount()" class="navbar-item">
                                 Log Out</a>
                         <div class="navbar-item" v-if="!isAuth">
                             <div class="buttons">
@@ -257,7 +257,7 @@
     </div>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
     name: 'default.index',
     layout: 'default',
@@ -273,15 +273,17 @@ export default {
     },
     computed: {
         ...mapState('auth', ['isAuth']),
-        ...mapMutations("auth", ["logout"]),
+        ...mapActions('auth', ['logout'])
     },
     created() {
         window.addEventListener('scroll', this.handleScroll);
     },
     methods: {
-        async logout() {
-            await this.$auth.logout();
-            this.$store.commit("logout")
+        async logoutAccount() {
+            // this.store.dispatch('logout');
+            // console.log('login')
+            // await this.$auth.logout();
+            // this.$store.commit("logout")
 
         },
         handleScroll() {

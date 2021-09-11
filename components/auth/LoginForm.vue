@@ -222,6 +222,7 @@
       email: "",
       password: "",
       remember: false,
+      device_name: 'mac',
     }),
 
     computed: {
@@ -268,7 +269,7 @@
         this.provider = provider;
         //const newWindow = openWindow("", "message");
 
-        let url = "login/" + provider;
+        let url = "api/login/" + provider;
         this.$axios
           .get(url)
           .then((res) => {
@@ -281,16 +282,23 @@
       },
 
     submit() {
-        this.loading = true;
-        this.isSuccessful = false;
-        this.$axios
+      this.loading = true;
+      this.isSuccessful = false;
+      this.oldLogin()
+    },
+
+    oldLogin() {
+      this.$axios
         .get('/sanctum/csrf-cookie').then(response =>{
-          console.log(response)
-          this.$axios.post('/api/login', this.postParams)
+          this.$axios.post('/api/login', {
+            email: this.email,
+            password: this.password,
+          }, this.config)
             .then(({ data }) => {
               this.loading = false;
               this.isSuccessful = true;
               this.$emit("success", data);
+              this.$route.push('/')
             })
             .catch((error) => {
               console.log(error);
@@ -313,7 +321,7 @@
               }
             });
         })
-      },
+    }
     },
   };
 </script>
