@@ -121,6 +121,7 @@ export default {
           this.setCsrfToken({ token: data.csrfToken, $axios: this.$axios });
         }
         setTimeout(() => {
+          this.$router.push('/');
           this.login();
           this.home(true);
         }, 500);

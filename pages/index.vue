@@ -280,7 +280,10 @@ export default {
     methods: {
         ...mapActions('auth', ['logout']),
         async logoutAccount() {
-            await this.logout()
+            await this.logout();
+            setTimeout(() => {
+                this.$router.push('/login')
+            }, 500)
         },
 
         handleScroll() {

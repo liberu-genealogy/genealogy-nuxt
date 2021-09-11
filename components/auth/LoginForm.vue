@@ -298,7 +298,6 @@
               this.loading = false;
               this.isSuccessful = true;
               this.$emit("success", data);
-              this.$route.push('/');
             })
             .catch((error) => {
               console.log(error);
