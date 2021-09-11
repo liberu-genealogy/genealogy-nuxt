@@ -359,7 +359,7 @@
         };
       },
       registerLink() {
-        return "/register";
+        return "api/register";
       },
     },
 
@@ -368,7 +368,7 @@
         this.provider = provider;
         //const newWindow = openWindow("", "message");
 
-        let url = "/login/" + provider;
+        let url = "api/login/" + provider;
         this.$axios
           .get(url)
           .then((res) => {
@@ -382,33 +382,37 @@
       submit() {
         this.loading = true;
         this.isSuccessful = false;
+        
         this.$axios
-          .$post(this.registerLink, this.postParams)
-          .then(({ data }) => {
-            this.loading = false;
-            this.isSuccessful = true;
-            this.$emit("success", data);
+        .get('/sanctum/csrf-cookie').then(() =>{
+          this.$axios
+            .post(this.registerLink, this.postParams)
+            .then(({ data }) => {
+              this.loading = false;
+              this.isSuccessful = true;
+              this.$emit("success", data);
+            })
+            .catch((error) => {
+              console.log(error);
+              this.loading = false;
+              const { status, data } = error.response;
+              switch (status) {
+                case 422:
+                  this.errorInput = data.errors;
+                  break;
+                case 429:
+                  // this.$toastr.error(data.message); // error Toastr can't displayed
+                  this.message = data.message;
+                  break;
+                case 500:
+                  this.message = data.message;
+                  this.$forceUpdate();
+                  break;
+                default:
+                  throw error;
+              }
+            });
           })
-          .catch((error) => {
-            console.log(error);
-            this.loading = false;
-            const { status, data } = error.response;
-            switch (status) {
-              case 422:
-                this.errorInput = data.errors;
-                break;
-              case 429:
-                // this.$toastr.error(data.message); // error Toastr can't displayed
-                this.message = data.message;
-                break;
-              case 500:
-                this.message = data.message;
-                this.$forceUpdate();
-                break;
-              default:
-                throw error;
-            }
-          });
       },
     },
   };

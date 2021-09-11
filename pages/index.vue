@@ -273,19 +273,16 @@ export default {
     },
     computed: {
         ...mapState('auth', ['isAuth']),
-        ...mapActions('auth', ['logout'])
     },
     created() {
         window.addEventListener('scroll', this.handleScroll);
     },
     methods: {
+        ...mapActions('auth', ['logout']),
         async logoutAccount() {
-            // this.store.dispatch('logout');
-            // console.log('login')
-            // await this.$auth.logout();
-            // this.$store.commit("logout")
-
+            await this.logout()
         },
+
         handleScroll() {
             if (window.scrollY >= 10) {
                 this.isClear = false;

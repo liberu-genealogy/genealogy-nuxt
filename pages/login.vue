@@ -120,7 +120,6 @@ export default {
         if (data.csrfToken) {
           this.setCsrfToken({ token: data.csrfToken, $axios: this.$axios });
         }
-
         setTimeout(() => {
           this.login();
           this.home(true);

@@ -289,7 +289,7 @@
 
     oldLogin() {
       this.$axios
-        .get('/sanctum/csrf-cookie').then(response =>{
+        .get('/sanctum/csrf-cookie').then(() =>{
           this.$axios.post('/api/login', {
             email: this.email,
             password: this.password,
@@ -298,7 +298,7 @@
               this.loading = false;
               this.isSuccessful = true;
               this.$emit("success", data);
-              this.$route.push('/')
+              this.$route.push('/');
             })
             .catch((error) => {
               console.log(error);
