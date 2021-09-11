@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import AddressesCard from '@/components/addresses/AddressesCard'
+import AddressesCard from '@/components/sources/AddressesCard'
 export default {
     name: 'Show',
 };

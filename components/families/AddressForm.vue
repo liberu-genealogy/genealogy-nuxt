@@ -1,35 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@Freeman-md 
-enso-ui
-/
-addresses
-Public
-5
-0
-0
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-addresses/src/bulma/AddressForm.vue
-@aocneanu
-aocneanu vue3 preps: moves v-bind="$attrs" to top
-Latest commit 5f7a065 on Jul 1
- History
- 2 contributors
-@raftx24@aocneanu
-188 lines (174 sloc)  6.36 KB
-  
 <template>
     <modal portal="address-form"
         v-on="$listeners">
