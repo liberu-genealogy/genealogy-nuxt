@@ -1,9 +1,8 @@
 <template>
-    <AddressesCard />
+    <div />
 </template>
 
 <script>
-import AddressesCard from '@/components/individuals/AddressesCard'
 export default {
     name: 'Show',
 };

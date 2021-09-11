@@ -1,5 +1,5 @@
 <template>
-    <modal portal="address-form"
+    <modal portal="families-form"
         v-on="$listeners">
         <enso-form class="box has-background-light"
             v-bind="$attrs"
@@ -81,7 +81,7 @@ import { Modal } from '@enso-ui/modal/bulma';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 library.add(faLocationArrow, faMapPin, faSearchLocation);
 export default {
-    name: 'AddressForm',
+    name: 'FamiliesForm',
     components: { Modal, EnsoForm, FormField },
     props: {
         id: {
