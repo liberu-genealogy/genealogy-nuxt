@@ -1,0 +1,46 @@
+version: 2.1
+
+executors:
+  linux:
+    docker:
+      - image: cimg/base:2020.01
+orbs:
+  node: circleci/node@4.0.0
+
+jobs:
+  test:
+    parameters:
+      os:
+        type: executor
+      node-version:
+        type: string
+    executor: << parameters.os >>
+    steps:
+      - checkout
+      - node/install:
+          node-version: << parameters.node-version >>
+          install-yarn: true
+      - run: cp .env.example .env
+      - run:
+          name: Set yarn cache folder
+          command: |
+            yarn config set cache-folder ~/.yarn-cache
+      - restore_cache:
+                name: Restore Yarn Package Cache
+                keys:
+                  - yarn-packages-v0.2.0-{{ .Branch }}-{{ checksum "yarn.lock" }}
+                  - yarn-packages-v0.2.0-{{ .Branch }}- # used if checksum fail
+      - run: yarn install
+      - run:
+         name: yarn build
+         working_directory: ./
+         command: "yarn build || exit 1"
+
+workflows:
+  all-tests:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              os: [linux]
+              node-version: ["16.8.0", "14.17.5"]

@@ -1,0 +1,7 @@
+.is-divider {
+    border-top: 1px solid $grey-light;
+}
+
+.is-divider[data-title]::after {
+    background: $light;
+}

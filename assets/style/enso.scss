@@ -1,0 +1,13 @@
+@import "./app";
+
+[v-cloak] {
+    display: none;
+}
+
+*:focus {
+    outline: 0;
+}
+
+.animated {
+    animation-duration: 0.5s;
+}

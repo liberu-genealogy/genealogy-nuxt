@@ -1,0 +1,16 @@
+.box.info-box {
+    border-top: 2px solid $light;
+    transition: border-color .75s ease, box-shadow 0.3s ease-in-out;
+    position: relative;
+
+    .box-header {
+        border-radius: inherit;
+    }
+
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        &.is-#{$name} {
+            border-color: $color;
+        }
+    }
+}
