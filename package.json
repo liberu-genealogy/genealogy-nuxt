@@ -18,7 +18,7 @@
     "@enso-ui/checkbox": "^2.0.2",
     "@enso-ui/clipboard": "^1.0.4",
     "@enso-ui/enums": "^1.0.3",
-    "@enso-ui/filters": "^2.1.1",
+    "@enso-ui/filters": "^2.1.3",
     "@enso-ui/forms": "^2.3.19",
     "@enso-ui/laravel-validation": "^1.1.0",
     "@enso-ui/modal": "^2.0.6",
