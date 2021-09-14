@@ -55,7 +55,7 @@ export default {
   css: ["~/assets/style/enso.scss", "animate.css/animate.compat.css"],
 
   router: {
-    middleware: 'auth'
+    // middleware: 'auth'
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -76,7 +76,7 @@ export default {
     "~/plugins/ioRegister.js",
     "~/plugins/tasksNavbarRegister.js",
     "~/plugins/usersRegister.js",
-
+    "~/plugins/Validator.js",
     "~/plugins/date-fns/format.js",
     "~/plugins/date-fns/formatDistance.js",
 
@@ -142,7 +142,7 @@ export default {
 
     transpile: [
       '@enso-ui/strings',
-
+      "vee-validate/dist/rules",
       "@enso-ui/enums",
       "@sentry/browser",
       "@sentry/integrations",

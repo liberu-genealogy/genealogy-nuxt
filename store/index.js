@@ -178,13 +178,13 @@ export const actions = {
         commit('setRoutes', routes)
         commit('guestState', true)
 
-        if (
-          !['login', 'password.email', 'password.reset'].includes(
-            state.route.name
-          )
-        ) {
-          this.$router.push({ name: 'login' })
-        }
+        // if (
+        //   !['login', 'password.email', 'password.reset'].includes(
+        //     state.route.name
+        //   )
+        // ) {
+        //   this.$router.push({ name: 'login' })
+        // }
       })
   },
   setPageTitle({ commit }, title) {

@@ -1,5 +1,5 @@
 <template>
-  <Tutorial/>
+  <Home/>
 </template>
 <router>
 {
@@ -8,9 +8,9 @@
 </router>
 
 <script>
-import Tutorial from '~/components/Tutorial.vue'
+import Home from '~/components/Home.vue'
 
 export default {
-  components: { Tutorial },
+  components: { Home },
 }
 </script>

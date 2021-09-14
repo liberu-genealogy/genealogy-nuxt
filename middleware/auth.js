@@ -18,7 +18,7 @@ export default function ({ store, redirect, route, from }) {
     }
     else {
         if (!guestGuard) {
-            if (!['login', '/'].includes(window.location.pathname)) {
+            if (!['login'].includes(window.location.pathname)) {
                 store.commit('auth/setIntendedPath', window.location.pathname);
             }
 
