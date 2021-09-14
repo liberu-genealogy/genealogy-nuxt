@@ -117,7 +117,7 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import vSelect from 'vue-select';
 
 export default {
-  layout: 'auth',
+  layout: 'default',
   components: {
     vSelect,
     Loading
