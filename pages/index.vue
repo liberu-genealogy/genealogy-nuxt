@@ -6,6 +6,10 @@ import Home from '~/components/Home.vue'
 
 export default {
   components: { Home },
+      meta: {
+        guestGuard: true,
+    },
+
 }
 </script>
 <router>
