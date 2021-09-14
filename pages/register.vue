@@ -44,9 +44,15 @@ export default {
                 this.setCsrfToken({token: data.csrfToken, $axios: this.$axios});
             }
 
+            // setTimeout(() => {
+            //     this.login();
+            //     this.home(true);
+            // }, 500);
             setTimeout(() => {
-                this.login();
-                this.home(true);
+                redirect({ name: 'verify' });
+            // this.$router.push({ name: "verify" });
+            // this.login();
+            // this.home(true);
             }, 500);
         },
     },
