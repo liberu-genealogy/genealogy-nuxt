@@ -1,5 +1,5 @@
 <template>
-  <LoginRegister>
+  <AuthIndex>
     <template #form>
       <ValidationObserver slim v-slot="{ handleSubmit }">
         <form
@@ -271,11 +271,11 @@
     <template #footerImageForm>
       <img class="auth-img" src="~assets/images/mockup03@2x.webp" alt="" />
     </template>
-  </LoginRegister>
+  </AuthIndex>
 </template>
 
 <script>
-  import LoginRegister from "~/components/auth/Index.vue";
+  import AuthIndex from "~/components/auth/Index.vue";
   import { mapState } from "vuex";
   import { library } from "@fortawesome/fontawesome-svg-core";
   import {
@@ -293,7 +293,7 @@
 
   export default {
     name: "RegisterForm",
-    components: { LoginRegister },
+    components: { AuthIndex },
     directives: { focus },
     // inject: {
     //   i18n: { from: "i18n" },
@@ -416,8 +416,83 @@
       },
     },
   };
+
+  function openWindow(url, title, options = {}) {
+    if (typeof url === 'object') {
+        options = url
+        url = ''
+    }
+    options = {
+        url,
+        title,
+        width: 600,
+        height: 720,
+        ...options
+    }
+    const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screen.left
+    const dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screen.top
+    const width = window.innerWidth || document.documentElement.clientWidth || window.screen.width
+    const height = window.innerHeight || document.documentElement.clientHeight || window.screen.height
+    options.left = ((width / 2) - (options.width / 2)) + dualScreenLeft
+    options.top = ((height / 2) - (options.height / 2)) + dualScreenTop
+    const optionsStr = Object.keys(options).reduce((acc, key) => {
+        acc.push(`${key}=${options[key]}`)
+        return acc
+    }, []).join(',')
+    const newWindow = window.open(url, title, optionsStr)
+    if (window.focus) {
+        newWindow.focus()
+    }
+    // console.log(newWindow);
+    return newWindow
+}
 </script>
 
 <style scoped>
-  @import "~/assets/css/base.css";
+@import '~/assets/css/base.css';
+.auth-form .cnt-g {
+    width: 100%;
+    border: 1px solid #E4E4E4;
+    border-radius: 3px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 10px;
+    margin-top: 13px;
+    color: #707070;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    box-shadow: none !important;
+    text-align: center;
+    cursor: pointer;
+}
+.auth-form .cnt-g img {
+    max-height: 20px;
+    float: left;
+    margin-top: 15px;
+}
+.auth-form .divider {
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+    line-height: 1;
+    color: #4F4E60;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+.auth-form .divider:before,
+.auth-form .divider:after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    width: 47%;
+    height: 1px;
+    background-color: #E4E4E4;
+}
+.auth-form .divider:before {
+    left: 0;
+}
+.auth-form .divider:after {
+    right: 0;
+}
 </style>
