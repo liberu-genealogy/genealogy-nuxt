@@ -354,50 +354,5 @@
 </script>
 
 <style scoped>
-@import '~/assets/css/base.css';
-.auth-form .cnt-g {
-    width: 100%;
-    border: 1px solid #E4E4E4;
-    border-radius: 3px;
-    height: 50px;
-    line-height: 50px;
-    padding: 0 10px;
-    margin-top: 13px;
-    color: #707070;
-    font-size: 14px;
-    text-transform: uppercase;
-    font-weight: 600;
-    box-shadow: none !important;
-    text-align: center;
-    cursor: pointer;
-}
-.auth-form .cnt-g img {
-    max-height: 20px;
-    float: left;
-    margin-top: 15px;
-}
-.auth-form .divider {
-    text-align: center;
-    position: relative;
-    margin-top: 20px;
-    line-height: 1;
-    color: #4F4E60;
-    font-size: 10px;
-    text-transform: uppercase;
-}
-.auth-form .divider:before,
-.auth-form .divider:after {
-    content: "";
-    position: absolute;
-    top: 3px;
-    width: 47%;
-    height: 1px;
-    background-color: #E4E4E4;
-}
-.auth-form .divider:before {
-    left: 0;
-}
-.auth-form .divider:after {
-    right: 0;
-}
+  @import '~/assets/css/base.css';
 </style>
