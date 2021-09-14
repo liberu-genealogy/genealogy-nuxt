@@ -1,16 +1,15 @@
 <template>
-  <Tutorial/>
+  <Home/>
 </template>
+<script>
+import Home from '~/components/Home.vue'
+
+export default {
+  components: { Home },
+}
+</script>
 <router>
 {
   name: 'index'
 }
 </router>
-
-<script>
-import Tutorial from '~/components/Tutorial.vue'
-
-export default {
-  components: { Tutorial },
-}
-</script>

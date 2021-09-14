@@ -57,12 +57,16 @@
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",
     "pusher-js": "^7.0.3",
+    "vee-validate": "^3.4.12",
     "video.js": "^7.14.3",
     "vue-cal": "^3.10.1",
     "vue-fb-customer-chat": "^0.2.0",
+    "vue-loading-overlay": "^4.0.4",
     "vue-pull-refresh": "^0.2.7",
+    "vue-select": "^3.13.0",
     "vue-video-player": "^5.0.2",
     "vuedraggable": "^2.24.3",
+    "vuelidate": "^0.7.6",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {

@@ -345,7 +345,6 @@ footer .footer-seprator {
 }
 
 @media only screen and (min-width: 280px) and (max-width: 767px) {
-    body { overflow-x: hidden;}
     .hero-body { padding: 3rem 1.5rem; }
     .main-hero { min-height: auto; background-size: cover; background-position: center center; }
     .navbar-item img { max-height: 2rem;}
