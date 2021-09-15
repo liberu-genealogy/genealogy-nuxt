@@ -95,7 +95,14 @@ import { required, minLength } from 'vuelidate/lib/validators'
 Vue.use(Vuelidate)
 
 export default {
-  layout: 'auth',
+  layout: 'default',
+  head: {
+    title: 'Stripe'
+  },
+  meta: {
+    breadcrumb: 'stripe',
+    title: 'Stripe'
+  },
   data() {
     return {
       error: false,
@@ -106,7 +113,7 @@ export default {
         month_year: null,
         cvv: null,
         payment_method: 'pm_card_visa',
-        plan_id: 'prod_K8qE1w9KU5TgKw'
+        plan_id: 'price_1JUYYOAGwU4VOfbzZ1Gmdm8P'
       }
     };
   },
