@@ -62,6 +62,7 @@ export default {
             }
 
             setTimeout(() => {
+                this.$router.push('/dashboard');
                 this.login();
                 this.home(true);
             }, 500);

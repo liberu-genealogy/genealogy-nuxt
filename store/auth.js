@@ -21,9 +21,9 @@ export const mutations = {
 export const actions = {
     logout({ commit }) {
         this.$axios.post('/api/logout').then(() => {
+            this.$router.push({ name: 'default.index' });
             commit('appState', false, { root: true });
             commit('logout');
-            this.$router.push({ name: 'login' });
         });
     },
 };
