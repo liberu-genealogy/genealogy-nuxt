@@ -95,7 +95,14 @@ import { required, minLength } from 'vuelidate/lib/validators'
 Vue.use(Vuelidate)
 
 export default {
-  layout: 'auth',
+  layout: 'default',
+  head: {
+    title: 'Stripe'
+  },
+  meta: {
+    breadcrumb: 'stripe',
+    title: 'Stripe'
+  },
   data() {
     return {
       error: false,
