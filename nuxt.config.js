@@ -119,12 +119,12 @@ export default {
     ]
   },
 
-  // publicRuntimeConfig: {
-  //   axios: {
-  //     browserBaseURL: process.env.BASE_URL || 'http://localhost:8000',
-  //   },
-  //   appEnv: process.env.APP_ENV || 'production'
-  // },
+   publicRuntimeConfig: {
+     axios: {
+       browserBaseURL: process.env.BASE_URL || 'http://localhost:8000',
+     },
+     appEnv: process.env.APP_ENV || 'production'
+   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
