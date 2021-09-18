@@ -270,7 +270,7 @@
         let url = '/api/login/' + provider;
         this.$axios.get(url)
         .then(res => {
-            console.log(res)
+            // console.log(res)
             newWindow.location.href = res.data;
           //window.location.href = url;
         })

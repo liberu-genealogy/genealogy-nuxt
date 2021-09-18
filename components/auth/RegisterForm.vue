@@ -372,8 +372,9 @@
         this.$axios
           .get(url)
           .then((res) => {
-            console.log(res);
-            window.location.href = res.data;
+            // console.log(res);
+            // window.location.href = res.data;
+            newWindow.location.href = res.data;
           })
           .catch((err) => {
             console.log(err);
