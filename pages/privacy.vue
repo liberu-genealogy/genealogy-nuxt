@@ -539,6 +539,11 @@
 <script>
     import { mapGetters } from 'vuex'
 export default {
+
+    meta: {
+        guestGuard: true,
+    },
+    
     data() {
         return {
             isDark: false,
