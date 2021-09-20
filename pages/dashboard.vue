@@ -201,16 +201,6 @@ export default {
             color: '#4fcf8d',
             changedb: null,
             backgroundColor: '#ffffff',
-                }],
-                labels: [
-                    'Male',
-                    'Female',
-                    'Other'
-                ]
-            },
-            chartOptions: {
-                responsive: true,
-                maintainAspectRatio: false
             },
             trial: null,
             familiesjoined: 0,
