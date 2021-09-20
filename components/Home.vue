@@ -259,8 +259,6 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
-    name: 'default.index',
-    layout: 'default',
     meta: {
         guestGuard: true,
         title: 'Landing Page'

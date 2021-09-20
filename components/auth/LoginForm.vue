@@ -222,6 +222,7 @@
       email: "",
       password: "",
       remember: false,
+      device_name: 'mac',
     }),
 
     computed: {
@@ -298,7 +299,6 @@
               this.$emit("success", data);
             })
             .catch((error) => {
-              console.log(error);
               this.loading = false;
               const { status, data } = error.response;
               switch (status) {
