@@ -61,7 +61,8 @@ export const mutations = {
   removeRequest: (state, index) => state.requests.splice(index, 1),
   setCsrfToken: (state, { token, $axios }) => {
     state.meta.csrfToken = token
-    $axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+    $axios.defaults.withCredentials = true;
+    $axios.defaults.headers.common['X-XSRF-TOKEN'] = token
     window.Laravel = { csrfToken: token }
   },
   setDefaultRoute: (state, { route, _router }) => {
