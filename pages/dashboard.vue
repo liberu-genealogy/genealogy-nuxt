@@ -180,12 +180,10 @@
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { mapGetters, mapActions } from "vuex";
-import PieChart from '../components/PieChart.js';
 export default {
     layout: 'auth',
     components: {
         Loading,
-        PieChart
     },
     middleware: ['permission', 'verification'],
     meta: {
@@ -203,15 +201,6 @@ export default {
             color: '#4fcf8d',
             changedb: null,
             backgroundColor: '#ffffff',
-            pieChartData: {
-                datasets: [{
-                    label: 'Data One',
-                    data: [40,20,30],
-                    backgroundColor: [
-                        'rgba(79, 207, 141, 1)',
-                        'rgba(251, 145, 58, 1)',
-                        'rgba(244, 91, 21, 1)'
-                    ],
                 }],
                 labels: [
                     'Male',
@@ -270,26 +259,12 @@ export default {
                             this.selected_tree = tree.id
                         }
                     })
-        },
-        async loadChart() {
-            this.loaded = false
-            const { data: data } = await this.$axios.get("/api/dashboard");
-            const { data: trial } = await this.$axios.get("/api/trial");
-            this.pieChartData.datasets[0].data = data.chart
-            this.familiesjoined = data.familiesjoined
-            this.peoplesattached = data.peoplesattached
-            this.loaded = true
-            this.isLoading = false
-            this.trial = trial
         }
     },
     created() {
         this.loadRole()
         this.loadPermission()
         this.getCompanies()
-    },
-    async mounted () {
-        this.loadChart()
     },
 }
 </script>
