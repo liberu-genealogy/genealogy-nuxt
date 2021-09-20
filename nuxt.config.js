@@ -96,6 +96,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     // "@nuxtjs/eslint-module",
+    '@nuxtjs/fontawesome',
     '@nuxtjs/router-extras',
   ],
 
@@ -107,6 +108,12 @@ export default {
     "nuxt-route-meta"
   ],
 
+  fontawesome: {
+    icons: {
+      solid: true,
+      brands: true
+    }
+  },
   nuxtContentAlgolia: {
     appId: process.env.ALGOLIA_APP_ID,
     apiKey: process.env.ALGOLIA_API_KEY,
@@ -128,7 +135,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    proxy: true
+    proxy: true,
+    credentials: true
   },
   proxy: {
     '/api/': process.env.BASE_URL || 'http://localhost:8000',

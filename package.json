@@ -50,6 +50,7 @@
     "flatpickr": "^4.6.9",
     "laravel-echo": "^1.11.2",
     "nuxt": "^2.15.7",
+    "nuxt-fontawesome": "^0.4.0",
     "nuxt-route-meta": "^2.3.2",
     "nuxt-vuex-router-sync": "^0.0.3",
     "opencollective": "^1.0.3",
@@ -71,8 +72,10 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@nuxtjs/eslint-config": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/fontawesome": "^1.1.2",
     "@nuxtjs/router-extras": "^1.1.1",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",

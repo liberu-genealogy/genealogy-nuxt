@@ -49,7 +49,7 @@ export default {
             // }, 500);
             setTimeout(() => {
                 // redirect({ name: 'verify' });
-            this.$router.push('/verify');
+                this.$router.push('/verify');
             // this.login();
             // this.home(true);
             }, 500);

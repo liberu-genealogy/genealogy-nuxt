@@ -328,6 +328,7 @@
         content: "password",
       },
       terms: "",
+      device_name: 'mac',
     }),
 
     computed: {
@@ -383,11 +384,12 @@
       submit() {
         this.loading = true;
         this.isSuccessful = false;
-        
+        let user = this.postParams;
+
         this.$axios
-        .get('/sanctum/csrf-cookie').then(() =>{
+        .get('/sanctum/csrf-cookie').then(response =>{
           this.$axios
-            .post(this.registerLink, this.postParams)
+            .post(this.registerLink, user)
             .then(({ data }) => {
               this.loading = false;
               this.isSuccessful = true;
