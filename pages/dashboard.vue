@@ -201,7 +201,6 @@ export default {
             color: '#4fcf8d',
             changedb: null,
             backgroundColor: '#ffffff',
-            },
             trial: null,
             familiesjoined: 0,
             peoplesattached: 0,
