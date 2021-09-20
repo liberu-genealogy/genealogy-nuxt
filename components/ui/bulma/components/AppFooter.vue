@@ -91,7 +91,7 @@ export default {
     .footer {
         background: inherit;
         [dir='ltr'] & {
-            margin-left: $sidebar-width;
+            margin-left: 0;
             transition: margin-left .5s, width .5s;
         }
         [dir='rtl'] & {

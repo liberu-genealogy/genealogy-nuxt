@@ -1,10 +1,9 @@
 <template>
-    <dir class="has-background-white">
-        <nuxt/>
-    </dir>
+    <div>
+        <Nuxt/>
+    </div>
 </template>
 <script>
 export default {
-    inject: ['i18n', 'route'],
 }
 </script>

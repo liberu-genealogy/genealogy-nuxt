@@ -11,7 +11,6 @@ import RegisterForm from '~/components/auth/RegisterForm.vue';
 // import Remember from '~/components/auth/fields/Remember.vue';
 
 export default {
-    layout: 'index',
     meta: {
         guestGuard: true,
         title: 'Register',

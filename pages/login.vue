@@ -56,7 +56,6 @@ export default {
         ...mapMutations(['setShowQuote', 'setCsrfToken']),
         init(data) {
             this.setShowQuote(this.meta.showQuote);
-
             if (data.csrfToken) {
                 this.setCsrfToken({token: data.csrfToken, $axios: this.$axios});
             }
