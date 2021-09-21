@@ -184,10 +184,12 @@
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { mapGetters, mapActions } from "vuex";
+import PieChart from '../components/charts/PieChart';
 export default {
     layout: 'auth',
     components: {
         Loading,
+        PieChart
     },
     //middleware: ['permission', 'verification'],
     meta: {
@@ -196,7 +198,7 @@ export default {
     },
     data() {
         return {
-            loaded: false,
+            loaded: true,
             trees: [],
             companies: [],
             selected_company: null,
@@ -234,45 +236,41 @@ export default {
     computed: {
          ...mapGetters([
               'loggedInUser'])
-        // 'loggedInUser','getRole','getPermission'])
     },
     methods: {
-        // ...mapActions([
-        //         "loadRole",
-        //         "loadPermission"
-        //     ]),
         setSelectedCompany(value) {
             this.selected_tree = null
             this.getTree();
         },
-        setSelected(value) {
-            this.$axios.$post("/api/changedb", {
-                    company_id : this.selected_company , tree_id : this.selected_tree})
-                    console.log(response)
-                    this.loadChart()
-                    this.changedb = response.changedb
+        async setSelected(value) {
+            const response = this.$axios.$post("/api/dashboard/changedb", {
+                            company_id : this.selected_company,
+                            tree_id : this.selected_tree})
+            this.loadChart()
+            this.changedb = response.changedb
         },
         async getCompanies() {
             const response = await this.$axios.$get("/api/get_companies")
-                    this.companies = response
-                    this.companies.map((company) => {
-                        if(company.current_tenant == 1) {
-                            this.selected_company = company.id
-                            this.getTree()
-                        }
-                    })
+            this.companies = response
+            this.companies.map((company) => {
+                if(company.is_tenant == 1) {
+                    this.selected_company = company.id
+                    this.getTree()
+                }
+            })
         },
         async getTree() {
             this.selected_tree = null
-            const response = await this.$axios.$get("/api/get_tree",{
-                    params: { company_id : this.selected_company }
-                })
-                    this.trees = response
-                    this.trees.map((tree) => {
-                        if(tree.current_tenant == 1) {
-                            this.selected_tree = tree.id
-                        }
-                    })
+            console.log('ok-tree',this.selected_company);
+            const response = await this.$axios.$get("/api/trees/show",{
+                params: { company_id : this.selected_company }
+            })
+            this.trees.push(response)
+            this.trees.map((tree) => {
+                if(tree.current_tenant == 1) {
+                    this.selected_tree = tree.id
+                }
+            })
         },
         async loadChart() {
             this.loaded = false
@@ -287,8 +285,6 @@ export default {
         }
     },
     created() {
-        // this.loadRole()
-        // this.loadPermission()
         this.getCompanies()
     },
 }

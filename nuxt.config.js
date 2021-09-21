@@ -85,7 +85,7 @@ export default {
     "~/plugins/Validator.js",
     "~/plugins/date-fns/format.js",
     "~/plugins/date-fns/formatDistance.js",
-
+    '~/plugins/vue-select.js',
     "~/plugins/vue-fb-customer-chat.js",
   ],
 
