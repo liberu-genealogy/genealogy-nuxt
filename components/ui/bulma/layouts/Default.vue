@@ -27,7 +27,7 @@
                     <main-router v-if="appState"/>
                 </div>
             </section>
-            <scroll-to-top type="is-medium is-primary is-raised"/>
+            <!-- <scroll-to-top type="is-medium is-primary is-raised"/> -->
             <settings class="animated"
                 :class="settings.isVisible ? slideIn : slideOut"/>
             <app-footer class="animated slideInUp"
@@ -90,7 +90,7 @@ export default {
         transition: margin .5s;
 
         &.with-bookmarks {
-            margin-top: 82px;
+            margin-top: 110px;
         }
 
         &.is-collapsed {
@@ -127,6 +127,6 @@ export default {
 
     .wrapper.page-content {
         padding: 1.2em;
-        margin-top: 0;
+        background: white !important;
     }
 </style>

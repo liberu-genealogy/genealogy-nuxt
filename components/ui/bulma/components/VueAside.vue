@@ -26,5 +26,11 @@ export default {
         z-index: 2;
         -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.65);
         box-shadow: 0 1px 1px hsla(0,0%,4%,.65);
+
+        &.is-collapsed {
+            .wrapper-box {
+                padding: 0 !important;
+            }
+        }
     }
 </style>

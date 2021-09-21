@@ -10,7 +10,10 @@ export const getters = {
 };
 
 export const mutations = {
-    set: (state, menus) => (state.menus = menus),
+    set: (state, menus) => {
+        state.menus = menus
+        console.log('menu items', state.menus)
+    },
     activate: (state, { menu, active }) => (menu.active = active),
     toggle: (state, menu) => (menu.expanded = !menu.expanded),
     expand: (state, menu) => (menu.expanded = true),

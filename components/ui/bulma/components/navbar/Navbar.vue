@@ -4,26 +4,22 @@
             isMobile, isTouch, sidebar, meta, impersonating,
             toggleSidebar, canAccessTasks, items,
         }">
-            <nav class="navbar app-navbar is-fixed-top">
+            <nav class="navbar app-navbar is-fixed-top" :class="{'isAuthenticated':!!loggedInUser}">
                 <div class="navbar-brand">
                     <a class="navbar-item"
                         @click="toggleSidebar(isTouch)">
                         <span class="icon">
-                            <fa icon="bars"
+                            <font-awesome-icon :icon="['fas', 'bars']"
                                 :class="{ 'rotate': !sidebar.isExpanded || !sidebar.isVisible }"/>
                         </span>
                     </a>
                     <a class="navbar-item logo"
                         href="#">
-                        <figure class="image is-32x32 is-flex">
-                            <img src="~/assets/images/logo.svg">
+                        <figure class="image is-flex" style="width: 230px">
+                           <img src="~assets/images/main-logo.svg" alt="">
                         </figure>
-                        <h4 class="title is-4 animated ml-1"
-                            v-if="!isMobile">
-                            {{ meta.appName }}
-                        </h4>
                     </a>
-                    <div class="navbar-item"
+                   <!--  <div class="navbar-item"
                         v-if="meta.env !== 'production'">
                         <span class="tag is-warning is-clickable"
                             v-tooltip="meta.env">
@@ -31,17 +27,17 @@
                                 <fa icon="code"/>
                             </span>
                         </span>
-                    </div>
+                    </div> -->
                     <div class="navbar-item"
                         v-if="impersonating">
                         <a v-tooltip="i18n('Stop Impersonating')"
                             class="button is-small is-warning"
                             @click="$root.$emit('stop-impersonating')">
                             <span class="icon is-small">
-                                <fa icon="user"/>
+                                <font-awesome-icon :icon="['fas', 'user']" />
                             </span>
                             <span class="icon is-small">
-                                <fa icon="times"/>
+                                <font-awesome-icon :icon="['fas', 'user']" />
                             </span>
                         </a>
                     </div>
@@ -71,7 +67,7 @@ import CoreNavbar from '../../../core/components/navbar/Navbar.vue';
 import AppUpdate from './AppUpdate.vue';
 import SettingsControl from './SettingsControl.vue';
 import Search from './Search.vue';
-
+import { mapGetters, mapActions } from "vuex";
 library.add(faBars, faCode, faUser, faTimes);
 
 export default {
@@ -79,6 +75,9 @@ export default {
 
     directives: { tooltip: VTooltip },
 
+    computed: {
+        ...mapGetters(['loggedInUser'])
+    },
     components: {
         AppUpdate,
         CoreNavbar,
@@ -92,10 +91,21 @@ export default {
 
 <style lang="scss">
 @import '~/assets/themes/variables';
+@import '~/assets/css/base.css';
 
 .navbar {
     z-index: 3;
+    height: $navbar-height;
+    
+    &.isAuthenticated {
+        -webkit-box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    }
 
+    .navbar-end {
+        justify-content: flex-end !important;
+        margin-right: 0 !important
+    }
     .navbar-item.logo .image img {
         max-width: 100%;
         max-height: 100%;
@@ -104,12 +114,23 @@ export default {
         margin: auto;
     }
 
+    .navbar-brand {
+        min-height: 3.25em !important;
+    }
     .fa-bars {
         transition: transform .300s;
 
         &.rotate {
             transform: rotate(90deg);
         }
+    }
+
+    .icon {
+        color: #2b2b2b !important;
+    }
+
+    .navbar-link.is-arrowless span {
+        color: #2b2b2b;
     }
 }
 
