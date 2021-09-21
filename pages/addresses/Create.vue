@@ -20,6 +20,6 @@ export default {
 </style>
 <router>
 {
-    name: 'addresses.index'
+    name: 'addresses.create'
 }
 </router>
