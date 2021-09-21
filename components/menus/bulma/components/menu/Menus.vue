@@ -43,7 +43,7 @@ export default {
 
         li > ul {
             [dir='ltr'] & {
-                margin: 0 0 0 .5rem;
+                margin: 0 0 0 .7rem;
                 padding-left: 0;
             }
             [dir='rtl'] & {
@@ -55,5 +55,9 @@ export default {
 
     .menu-list-move {
         transition: transform 0.5s;
+    }
+
+    .menu-list li ul {
+        padding-right: 0 !important;
     }
 </style>

@@ -84,28 +84,28 @@ export default {
         @media screen and (min-width: 1024px) {
             width: 34em;
             [dir='ltr'] & {
-                left: calc(50% - 17em);
+                left: calc(50% - 10em);
             }
             [dir='rtl'] & {
-                right:calc(50% - 17em);
+                right:calc(50% - 10em);
             }
         }
         @media screen and (min-width: 768px) and (max-width: 1023px) {
             width: 24em;
             [dir='ltr'] & {
-                left: calc(50% - 13em);
+                left: calc(50% - 7em);
             }
             [dir='rtl'] & {
-                right:calc(50% - 13em);
+                right:calc(50% - 7em);
             }
         }
         @media screen and (max-width: 767px) {
             width: 22em;
             [dir='ltr'] & {
-                left: calc(50% - 11em);
+                left: calc(50% - 5em);
             }
             [dir='rtl'] & {
-                right:calc(50% - 11em);
+                right:calc(50% - 5em);
             }
         }
 

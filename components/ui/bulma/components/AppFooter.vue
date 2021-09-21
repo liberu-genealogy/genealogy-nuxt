@@ -2,66 +2,14 @@
     <base-app-footer>
         <template v-slot:default="{ meta }">
             <footer class="footer">
-                <div class="content has-text-centered">
-                    <div class="level">
-                        <div class="level-item">
-                            <strong class="mr-1">
-                                {{ meta.appName }} v{{ meta.version }}
-                            </strong>
-                            {{ i18n('built with') }}
-                            <span class="icon has-text-danger">
-                                <fa icon="heart"/>
-                            </span>
-                            <span class="ml-1">
-                                +
-                            </span>
-                            <a href="https://vuejs.org"
-                                target="_blank">
-                                <img src="~/assets/images/vue-badge.png"
-                                    :alt="i18n('Made with Vue')"
-                                    width="28"
-                                    height="28">
-                            </a>
-                            +
-                            <a href="https://laravel.com"
-                                class="ml-1"
-                                target="_blank">
-                                <img src="~/assets/images/laravel-badge.png"
-                                    :alt="i18n('Made with Laravel')"
-                                    width="28"
-                                    height="28">
-                            </a>
-                            <span class="ml-1">
-                                +
-                            </span>
-                            <a href="https://bulma.io"
-                                target="_blank">
-                                <img src="~/assets/images/bulma.svg"
-                                    :alt="i18n('Made with Bulma')"
-                                    width="28"
-                                    height="28">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="level">
-                        <div class="level-item">
-                            <strong>{{ i18n('Backed by') }}:</strong>
-                            <a href="https://earthlink.ro"
-                                target="_blank">
-                                <figure class="image earthlink">
-                                    <img src="~/assets/images/earthlink.svg">
-                                </figure>
-                            </a>
-                        </div>
-                    </div>
-                    <div>
-                        <a href="https://github.com/laravel-enso/enso"
-                            target="_blank">
-                            <span class="icon">
-                                <fa :icon="['fab', 'github']"/>
-                            </span>
-                        </a>
-                    </div>
+                <div class="content has-text-centered has-text-white">
+                    <strong class="mr-1 has-text-white" >
+                        Family Tree365 v1
+                    </strong>
+                   
+                    <span class="has-text-basic" style="font-size: 14px; font-weight: 400;">
+                         Copyright &copy; Family Tree 365 Ltd,<br> Unit A, 82 James Carter Road, Mildenhall, Suffolk, England, IP28 7DE<br> Company number 12734769
+                    </span>
                 </div>
             </footer>
         </template>
@@ -89,7 +37,8 @@ export default {
     @import '~/assets/themes/variables';
 
     .footer {
-        background: inherit;
+        background: #4FCF8D !important;
+        padding: 1rem 1.5rem 0.8rem !important;
         [dir='ltr'] & {
             margin-left: 0;
             transition: margin-left .5s, width .5s;

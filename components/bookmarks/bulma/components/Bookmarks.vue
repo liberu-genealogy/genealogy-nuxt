@@ -89,6 +89,8 @@ export default {
 
         &.with-sidebar {
             width: calc(100vw - #{$sidebar-width});
+            background-color: white;
+            
             [dir='ltr'] & {
                 margin-left: $sidebar-width;
             }
