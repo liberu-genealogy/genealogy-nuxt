@@ -4,7 +4,7 @@
         <div class="columns is-gapless is-multiline is-mobile">
             <div class="column is-12">
                 <h1 class="is-size-4 has-text-black">
-                    <span class="has-text-weight-medium">Hi {{ loggedInUser.first_name }}</span>, <span class="has-text-weight-light">
+                    <span class="has-text-weight-medium">Hi {{ loggedInUser.person.name }}</span>, <span class="has-text-weight-light">
                         Welcome Back!</span>
                 </h1>
             </div>
@@ -132,7 +132,7 @@
         </div>
         <div class="columns is-variable is-flex-desktop-only ai--s">
             <div class="column is-4-desktop is-6-tablet is-flex">
-                <div v-if="getRole[0] == 'free'" class="card has-background-primary has-text-centered">
+                <div v-if="loggedInUser.role.name == 'free'" class="card has-background-primary has-text-centered">
                     <div   class="card-content">
                         <p class="is-size-7">Buy Plan</p>
                         <NuxtLink to="subscription"
@@ -167,7 +167,7 @@
                          <v-select label="name"  v-model="selected_tree" :reduce="tree => tree.id" :options="trees" @input="setSelected"></v-select>
                         <font-awesome-icon :icon="['fas', 'user-circle']" class="has-text-primary mb-5" style="font-size: 55px;"/>
                         <p class="is-size-7 mb-2 has-text-weight-medium">{{ loggedInUser.email }}</p>
-                        <p class="is-size-7 mb-4 has-text-weight-medium">{{ loggedInUser.first_name }} {{ loggedInUser.last_name }}</p>
+                        <p class="is-size-7 mb-4 has-text-weight-medium">{{ loggedInUser.person.name }}</p>
                         <p class="is-size-7 is-uppercase">Use Tree</p>
                     </div>
                 </div>
@@ -175,19 +175,23 @@
         </div>
     </div>
 </template>
-
+<router>
+{
+    name: 'dashboard.index'
+}
+</router>
 <script>
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { mapGetters, mapActions } from "vuex";
 export default {
-    layout: 'auth',
     components: {
         Loading,
     },
-    middleware: ['permission', 'verification'],
+    //middleware: ['permission', 'verification'],
     meta: {
-        permission: { name: 'dashboard menu' }
+        permission: { name: 'dashboard menu' },
+        title: 'Dashboard'
     },
     data() {
         return {
@@ -196,7 +200,7 @@ export default {
             companies: [],
             selected_company: null,
             selected_tree: null,
-            isLoading: true,
+            isLoading: false,
             fullPage: true,
             color: '#4fcf8d',
             changedb: null,
@@ -204,18 +208,38 @@ export default {
             trial: null,
             familiesjoined: 0,
             peoplesattached: 0,
+            pieChartData: {
+                datasets: [{
+                    label: 'Data One',
+                    data: [40,20,30],
+                    backgroundColor: [
+                        'rgba(79, 207, 141, 1)',
+                        'rgba(251, 145, 58, 1)',
+                        'rgba(244, 91, 21, 1)'
+                    ],
+                }],
+                labels: [
+                    'Male',
+                    'Female',
+                    'Other'
+                ]
+            },
+            chartOptions: {
+                responsive: true,
+                maintainAspectRatio: false
+            },
         }
     },
     computed: {
          ...mapGetters([
-              'isAuthenticated',
-              'loggedInUser','getRole','getPermission'])
+              'loggedInUser'])
+        // 'loggedInUser','getRole','getPermission'])
     },
     methods: {
-        ...mapActions([
-                "loadRole",
-                "loadPermission"
-            ]),
+        // ...mapActions([
+        //         "loadRole",
+        //         "loadPermission"
+        //     ]),
         setSelectedCompany(value) {
             this.selected_tree = null
             this.getTree();
@@ -248,11 +272,22 @@ export default {
                             this.selected_tree = tree.id
                         }
                     })
+        },
+        async loadChart() {
+            this.loaded = false
+            const { data: data } = await this.$axios.get("/api/dashboard");
+            const { data: trial } = await this.$axios.get("/api/trial");
+            this.pieChartData.datasets[0].data = data.chart
+            this.familiesjoined = data.familiesjoined
+            this.peoplesattached = data.peoplesattached
+            this.loaded = true
+            this.isLoading = false
+            this.trial = trial
         }
     },
     created() {
-        this.loadRole()
-        this.loadPermission()
+        // this.loadRole()
+        // this.loadPermission()
         this.getCompanies()
     },
 }
