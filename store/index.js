@@ -39,6 +39,7 @@ export const getters = {
   routes: (state) => Object.keys(state.routes),
   isWebview: () => typeof ReactNativeWebView !== 'undefined',
   requests: (state) => state.requests.length,
+  loggedInUser: (state) => state.user,
   requestIndex:
     (state) =>
       ({ url, method }) =>
@@ -91,6 +92,7 @@ export const mutations = {
   },
   setUser: (state, user) => {
     state.user = user
+    console.log(state.user)
   },
   setUserAvatar: (state, avatarId) => {
     state.user.avatar.id = avatarId
@@ -108,22 +110,17 @@ export const actions = {
     this.$axios
       .get('/api/core/home')
       .then(({ data }) => {
-        if (data.user) {
-          legacyBuild(data, state, commit, _router, _i18n)
-        } else {
-          data.forEach(({ mutation, state }) => {
-            if (mutation === 'setEnums') {
-              const enums = bootEnums(state, _i18n)
-              commit(mutation, enums)
-            }
-            else if (mutation === 'setDefaultRoute') {
-              // commit(mutation, { route: state, _router })
-            }
-            else {
-              commit(mutation, state)
-            }
-          })
-        }
+       
+        data.forEach(({ mutation, state }) => {
+          if (mutation === 'setEnums') {
+            const enums = bootEnums(state, _i18n)
+            commit(mutation, enums)
+          } else if (mutation === 'setDefaultRoute') {
+            commit(mutation, { route: state, _router })
+          } else {
+            commit(mutation, state)
+          }
+        })
 
         commit(
           'layout/sidebar/update',
