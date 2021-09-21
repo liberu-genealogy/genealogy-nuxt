@@ -15,3 +15,8 @@ export default {
 
 <style lang="scss">
 </style>
+<router>
+{
+    name: 'addresses.index'
+}
+</router>
