@@ -1,7 +1,11 @@
 <template>
     <div/>
 </template>
-
+<router>
+{
+    name: 'authors.show'
+}
+</router>
 <script>
 export default {
 layout: 'auth',
