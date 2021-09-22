@@ -10,7 +10,11 @@
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Edit',
+layout: 'auth',
+    meta: {
+        permission: { name: 'families menu' },
+        title: 'Families - Edit'
+    },
 
     components: { EnsoForm },
 };
