@@ -7,7 +7,11 @@
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
 export default {
-    name: 'Index',
+layout: 'auth',
+    meta: {
+        permission: { name: 'chan menu' },
+        title: 'Chan - Index'
+    },
 
     components: { EnsoTable },
 };
