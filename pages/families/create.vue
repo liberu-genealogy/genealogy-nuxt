@@ -6,6 +6,11 @@
     </div>
 </template>
 
+<router>
+{
+    name: 'families.create'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
