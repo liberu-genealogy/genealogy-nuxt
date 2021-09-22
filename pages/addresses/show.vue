@@ -4,7 +4,11 @@
 
 <script>
 export default {
-    name: 'Show',
+layout: 'auth',
+    meta: {
+        permission: { name: 'addresses menu' },
+        title: 'Address - Show'
+    },
 };
 </script>
 
