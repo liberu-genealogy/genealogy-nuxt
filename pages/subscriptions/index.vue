@@ -112,11 +112,11 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   layout: 'auth',
   head: {
-    title: 'Subscripetion'
+    title: 'Subscription'
   },
   meta: {
-    breadcrumb: 'subscripetion',
-    title: 'Subscripetion'
+    breadcrumb: 'subscription',
+    title: 'Subscription'
   },
   components: {
     Loading
