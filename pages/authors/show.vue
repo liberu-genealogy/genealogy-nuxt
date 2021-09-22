@@ -4,7 +4,11 @@
 
 <script>
 export default {
-    name: 'Show',
+layout: 'auth',
+    meta: {
+        permission: { name: 'authors menu' },
+        title: 'Authors - Show'
+    },
 };
 </script>
 
