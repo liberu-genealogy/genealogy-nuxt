@@ -98,16 +98,19 @@
   </div>
 
 </template>
+<router>
+{
+    name: 'subscription.index'
+}
+</router>
+
 <script>
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import Vue from 'vue';
-import vSelect from 'vue-select';
 import { mapGetters, mapActions } from "vuex";
-Vue.component('v-select', vSelect);
 
 export default {
-  layout: 'default',
+  layout: 'auth',
   head: {
     title: 'Subscripetion'
   },
@@ -138,9 +141,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      'isAuthenticated',
-      'loggedInUser','loggedInUser','getRole','getPermission'])
+    ...mapGetters(['loggedInUser'])
   },
   methods: {
     handleSelectedFiles(event) {
@@ -237,22 +238,14 @@ export default {
     close() {
       this.isActive = false;
     },
-    ...mapActions([
-      "loadRole",
-      "loadPermission"
-    ]),
   },
   created() {
-    this.loadRole()
-    this.loadPermission()
     this.loadPlans();
-
   },
-
 };
 </script>
+
 <style>
 @import '~/assets/css/admin.css';
-@import "~/node_modules/vue-select/dist/vue-select.css";
 </style>
 

@@ -77,7 +77,8 @@ export default {
         flex-direction: column;
         opacity: 1;
         transition: all .15s ease;
-
+        background: white;
+        
         &.lights-off {
             opacity: 0;
         }
