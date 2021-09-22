@@ -10,7 +10,11 @@
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Create',
+layout: 'auth',
+    meta: {
+        permission: { name: 'authors menu' },
+        title: 'Authors - Create'
+    },
 
     components: { EnsoForm },
 };
