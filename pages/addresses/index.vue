@@ -7,7 +7,11 @@
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
 export default {
-    name: 'Index',
+layout: 'auth',
+    meta: {
+        permission: { name: 'addresses menu' },
+        title: 'Address - Index'
+    },
 
     components: { EnsoTable },
 };
