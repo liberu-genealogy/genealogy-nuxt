@@ -10,8 +10,11 @@
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Edit',
-
+layout: 'auth',
+    meta: {
+        permission: { name: 'addresses menu' },
+        title: 'Address - Edit'
+    },
     components: { EnsoForm },
 };
 </script>
