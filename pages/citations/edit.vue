@@ -10,7 +10,12 @@
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Edit',
+
+layout: 'auth',
+    meta: {
+        permission: { name: 'citations menu' },
+        title: 'Citations - Edit'
+    },
 
     components: { EnsoForm },
 };
