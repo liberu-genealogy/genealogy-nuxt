@@ -2,7 +2,11 @@
     <enso-table class="box is-paddingless raises-on-hover"
         id="chans"/>
 </template>
-
+<router>
+{
+    name: 'chan.index'
+}
+</router>
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
