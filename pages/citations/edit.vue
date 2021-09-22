@@ -6,6 +6,11 @@
     </div>
 </template>
 
+<router>
+{
+    name: 'citations.edit'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
