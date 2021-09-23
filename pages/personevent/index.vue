@@ -3,11 +3,21 @@
         id="person_events"/>
 </template>
 
+<router>
+{
+    name: 'personevent.index'
+}
+</router>
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
 export default {
-    name: 'Index',
+
+layout: 'auth',
+    meta: {
+        permission: { name: 'personevent menu' },
+        title: 'Person Event - Index'
+    },
 
     components: { EnsoTable },
 };
