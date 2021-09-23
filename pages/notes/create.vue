@@ -6,12 +6,20 @@
     </div>
 </template>
 
+<router>
+{
+    name: 'notes.create'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Create',
-
+layout: 'auth',
+    meta: {
+        permission: { name: 'notes menu' },
+        title: 'Notes - Create'
+    },
     components: { EnsoForm },
 };
 </script>
