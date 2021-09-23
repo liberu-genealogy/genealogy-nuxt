@@ -66,7 +66,7 @@ export default {
       routes.push({
         name: 'subscription.index',
         path: '/subscription',
-        component: resolve(__dirname, 'pages/subscriptions/index.vue')
+        component: resolve(__dirname, 'pages/subscription/index.vue')
       })
     }
   },
