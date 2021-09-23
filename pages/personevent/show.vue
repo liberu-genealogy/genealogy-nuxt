@@ -2,9 +2,18 @@
     <div/>
 </template>
 
+<router>
+{
+    name: 'personevent.show'
+}
+</router>
 <script>
 export default {
-    name: 'Show',
+layout: 'auth',
+    meta: {
+        permission: { name: 'personevent menu' },
+        title: 'Person Event - Show'
+    },
 };
 </script>
 
