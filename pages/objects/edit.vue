@@ -6,11 +6,20 @@
     </div>
 </template>
 
+<router>
+{
+    name: 'objects.edit'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Edit',
+layout: 'auth',
+    meta: {
+        permission: { name: 'object menu' },
+        title: 'Object - Edit'
+    },
 
     components: { EnsoForm },
 };
