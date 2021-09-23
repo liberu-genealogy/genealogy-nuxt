@@ -59,6 +59,7 @@
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",
     "pusher-js": "^7.0.3",
+    "socket.io-client": "^4.2.0",
     "vee-validate": "^3.4.12",
     "video.js": "^7.14.3",
     "vue-cal": "^3.10.1",

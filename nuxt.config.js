@@ -62,6 +62,7 @@ export default {
 
   router: {
     middleware: 'auth'
+
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -86,6 +87,8 @@ export default {
     "~/plugins/date-fns/format.js",
     "~/plugins/date-fns/formatDistance.js",
     '~/plugins/vue-select.js',
+    '~/plugins/vuelidate.js',
+    '~/plugins/echo.js',
     "~/plugins/vue-fb-customer-chat.js",
   ],
 

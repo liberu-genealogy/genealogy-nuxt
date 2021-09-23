@@ -36,7 +36,8 @@
                 {{selected_currency_symbol + (plan.amount * selected_currency_rate / 100).toFixed(2) }}
                 <div class="is-size-6 has-text-black is-uppercase has-text-weight-bold">{{ plan.nickname }}</div>
                 <div class="is-size-7 has-text-black has-text-weight-regular">{{ plan.title }}</div>
-                <NuxtLink  v-if="has_payment_method == false" :to="'/subscription/payment/' + plan.id" class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4">Subscribe</NuxtLink>
+                <NuxtLink  v-if="has_payment_method == false" :to="'/subscription/stripe/' + plan.id" class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4">Subscribe by card</NuxtLink>
+                <NuxtLink  v-if="has_payment_method == false" :to="'/subscription/paypal/' + plan.id" class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4">Subscribe by PayPal</NuxtLink>
                 <div v-if="has_payment_method && plan.subscribed === false">
                   <button @click="open(plan.id)"
                           class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4">

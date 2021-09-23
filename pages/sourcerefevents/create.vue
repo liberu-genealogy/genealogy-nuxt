@@ -5,13 +5,21 @@
         </div>
     </div>
 </template>
-
+<router>
+{
+    name: 'sourcerefevents.create'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
     name: 'Create',
-
+    layout: 'auth',
+    meta: {
+        permission: { name: 'sourcerefevents menu' },
+        title: 'Sourcerefevents - Create'
+    },
     components: { EnsoForm },
 };
 </script>

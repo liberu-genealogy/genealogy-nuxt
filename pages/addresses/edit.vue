@@ -5,7 +5,11 @@
         </div>
     </div>
 </template>
-
+<router>
+{
+    name: 'addresses.edit'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
@@ -21,8 +25,3 @@ layout: 'auth',
 
 <style lang="scss">
 </style>
-<router>
-{
-    name: 'addresses.edit'
-}
-</router>

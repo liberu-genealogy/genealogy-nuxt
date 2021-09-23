@@ -5,13 +5,21 @@
         </div>
     </div>
 </template>
-
+<router>
+{
+    name: 'sourcedata.create'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
     name: 'Create',
-
+    layout: 'auth',
+    meta: {
+        permission: { name: 'sourcedata menu' },
+        title: 'Sourcedata - Create'
+    },
     components: { EnsoForm },
 };
 </script>
