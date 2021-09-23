@@ -5,13 +5,21 @@
         </div>
     </div>
 </template>
-
+<router>
+{
+    name: 'personlds.edit'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Edit',
 
+layout: 'auth',
+    meta: {
+        permission: { name: 'personlds menu' },
+        title: 'Person LDS - Edit'
+    },
     components: { EnsoForm },
 };
 </script>
