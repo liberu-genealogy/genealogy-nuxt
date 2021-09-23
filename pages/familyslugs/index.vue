@@ -3,6 +3,11 @@
         id="family_slgs"/>
 </template>
 
+<router>
+{
+    name: 'familyslugs.index'
+}
+</router>
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
