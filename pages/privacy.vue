@@ -574,7 +574,11 @@ export default {
     },
 }
 </script>
-
+<router>
+{
+    name: 'privacy'
+}
+</router>
  <style scoped>
     @import '~/assets/css/base.css';
 </style>
