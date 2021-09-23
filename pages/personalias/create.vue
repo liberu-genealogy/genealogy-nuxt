@@ -6,11 +6,20 @@
     </div>
 </template>
 
+<router>
+{
+    name: 'personalias.create'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Create',
+layout: 'auth',
+    meta: {
+        permission: { name: 'personalias menu' },
+        title: 'Person Alias - Create'
+    },
 
     components: { EnsoForm },
 };
