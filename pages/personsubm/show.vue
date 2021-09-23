@@ -2,9 +2,19 @@
     <div/>
 </template>
 
+<router>
+{
+    name: 'personsubm.show'
+}
+</router>
 <script>
 export default {
-    name: 'Show',
+
+layout: 'auth',
+    meta: {
+        permission: { name: 'personsubm menu' },
+        title: 'Person Subm - Show'
+    },
 };
 </script>
 
