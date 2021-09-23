@@ -78,7 +78,11 @@
             </form>
     </div>
 </template>
-f
+<router>
+{
+    name: 'gedcom.index'
+}
+</router>
 <script>
 import { mapGetters } from 'vuex'
 import Loading from 'vue-loading-overlay'
@@ -91,12 +95,14 @@ export default {
     components: {
       Loading
     },
-
-    middleware: 'permission',
-
-    meta: {
-      permission: { name: 'gedcom import menu' }
+    head: {
+        title: 'Gedcom Import'
     },
+    // middleware: 'permission',
+
+    // meta: {
+    //   permission: { name: 'gedcom import menu' }
+    // },
 
     data: () => ({
       error: false,
@@ -120,9 +126,7 @@ export default {
     },
 
     computed: {
-       ...mapGetters([
-              'isAuthenticated',
-              'loggedInUser','loggedInUser']),
+       ...mapGetters(['loggedInUser']),
     },
 
     mounted() {
