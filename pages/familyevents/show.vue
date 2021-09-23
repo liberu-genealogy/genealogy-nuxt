@@ -1,10 +1,20 @@
 <template>
     <div/>
 </template>
-
+<router>
+{
+    name: 'familyevents.show'
+}
+</router>
 <script>
 export default {
-    name: 'Show',
+
+layout: 'auth',
+    meta: {
+        permission: { name: 'familyevents menu' },
+        title: 'Family Events - Show'
+    },
+
 };
 </script>
 
