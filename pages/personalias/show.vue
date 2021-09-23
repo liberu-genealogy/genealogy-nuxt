@@ -1,10 +1,19 @@
 <template>
     <div/>
 </template>
-
+<router>
+{
+    name: 'personalias.show'
+}
+</router>
 <script>
 export default {
-    name: 'Show',
+
+layout: 'auth',
+    meta: {
+        permission: { name: 'personalias menu' },
+        title: 'Person Alias - Show'
+    },
 };
 </script>
 
