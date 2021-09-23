@@ -5,13 +5,22 @@
         </div>
     </div>
 </template>
-
+<router>
+{
+    name: 'places.create'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
     name: 'Create',
 
+    layout: 'auth',
+	meta: {
+        permission: { name: 'places menu' },
+        title: 'Places - Create'
+    },
     components: { EnsoForm },
 };
 </script>
