@@ -5,12 +5,20 @@
         </div>
     </div>
 </template>
-
+<router>
+{
+    name: 'personevent.create'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Create',
+layout: 'auth',
+    meta: {
+        permission: { name: 'personevent menu' },
+        title: 'Person Event - Create'
+    },
 
     components: { EnsoForm },
 };
