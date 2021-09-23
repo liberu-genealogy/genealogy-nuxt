@@ -1,7 +1,7 @@
 <template>
     <base-app-footer>
         <template v-slot:default="{ meta }">
-            <footer class="footer">
+            <footer class="footer" :class="{'isAuthenticated':loggedInUser}">
                 <div class="content has-text-centered has-text-white">
                     <strong class="mr-1 has-text-white" >
                         Family Tree365 v1
@@ -21,7 +21,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import BaseAppFooter from '../../core/components/AppFooter.vue';
-
+import { mapGetters, mapActions } from "vuex";
 library.add(faHeart, faGithub);
 
 export default {
@@ -30,6 +30,10 @@ export default {
     inject: ['i18n'],
 
     components: { BaseAppFooter },
+
+    computed: {
+         ...mapGetters(['loggedInUser'])
+    },
 };
 </script>
 
@@ -37,8 +41,10 @@ export default {
     @import '~/assets/themes/variables';
 
     .footer {
-        background: #4FCF8D !important;
-        padding: 1rem 1.5rem 0.8rem !important;
+        &.isAuthenticated {
+            background: #4FCF8D !important;
+            padding: 1rem 1.5rem 0.8rem !important;
+        }
         [dir='ltr'] & {
             margin-left: 0;
             transition: margin-left .5s, width .5s;
