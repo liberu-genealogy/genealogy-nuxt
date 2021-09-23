@@ -123,7 +123,9 @@ export default {
   },
   meta: {
     breadcrumb: 'paypal',
-    title: 'Paypal'
+    title: 'Paypal',
+    permission: { name: 'subscription menu' },
+
   },
   components: {
     vSelect,
@@ -205,7 +207,11 @@ export default {
 
 }
 </script>
-
+<router>
+{
+    name: 'subscriptions.paypal.index'
+}
+</router>
 <style>
 @import '~/assets/css/admin.css';
 @import "~/node_modules/vue-select/dist/vue-select.css";

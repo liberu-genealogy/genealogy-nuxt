@@ -101,7 +101,8 @@ export default {
   },
   meta: {
     breadcrumb: 'stripe',
-    title: 'Stripe'
+    permission: { name: 'subscription menu' },
+    title: 'Stripe',
   },
   data() {
     return {
@@ -153,6 +154,13 @@ export default {
 }
 
 </script>
+
+<router>
+{
+    name: 'subscriptions.stripe.index'
+}
+</router>
+
 <style scoped>
 @import '~/assets/css/admin.css';
 </style>
