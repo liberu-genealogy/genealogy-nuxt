@@ -93,6 +93,8 @@ export default {
     "~/plugins/date-fns/format.js",
     "~/plugins/date-fns/formatDistance.js",
     '~/plugins/vue-select.js',
+    '~/plugins/vuelidate.js',
+    '~/plugins/echo.js',
     "~/plugins/vue-fb-customer-chat.js",
   ],
 
