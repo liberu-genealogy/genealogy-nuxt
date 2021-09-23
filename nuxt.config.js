@@ -61,14 +61,8 @@ export default {
   ],
 
   router: {
-    middleware: 'auth',
-    extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'subscription.index',
-        path: '/subscription',
-        component: resolve(__dirname, 'pages/subscription/index.vue')
-      })
-    }
+    middleware: 'auth'
+
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

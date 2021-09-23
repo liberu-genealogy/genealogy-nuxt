@@ -277,7 +277,7 @@
                     </div>
                 </div>
                 <div class="footer-action column is-5 is-flex ai--c jc--fe">
-                    <NuxtLink to="/register" v-if="!isAuthenticated"
+                    <NuxtLink to="/register" v-if="!loggedInUser"
                         class="button theme-button theme-button-xl has-background-primary has-text-weight-medium has-text-white">
                         Create Your Own Tree
                     </NuxtLink>
@@ -364,9 +364,7 @@ export default {
         };
     },
     computed: {
-         ...mapGetters([
-              'isAuthenticated',
-              'loggedInUser','isAuthenticated', 'loggedInUser'])
+         ...mapGetters(['loggedInUser'])
     },
     created() {
         window.addEventListener('scroll', this.handleScroll);
