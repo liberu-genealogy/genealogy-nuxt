@@ -3,11 +3,21 @@
         id="notes"/>
 </template>
 
+<router>
+{
+    name: 'notes.index'
+}
+</router>
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
 export default {
-    name: 'Index',
+
+layout: 'auth',
+    meta: {
+        permission: { name: 'notes menu' },
+        title: 'Notes - Index'
+    },
 
     components: { EnsoTable },
 };
