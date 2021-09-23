@@ -5,12 +5,21 @@
         </div>
     </div>
 </template>
-
+<router>
+{
+    name: 'personlds.create'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Create',
+
+layout: 'auth',
+    meta: {
+        permission: { name: 'personlds menu' },
+        title: 'Person LDS - Create'
+    },
 
     components: { EnsoForm },
 };
