@@ -209,7 +209,7 @@ export default {
 </script>
 <router>
 {
-    name: 'subscriptions.paypal.index'
+    name: 'subscription.paypal.index'
 }
 </router>
 <style>

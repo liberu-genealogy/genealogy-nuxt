@@ -157,7 +157,7 @@ export default {
 
 <router>
 {
-    name: 'subscriptions.stripe.index'
+    name: 'subscription.stripe.index'
 }
 </router>
 
