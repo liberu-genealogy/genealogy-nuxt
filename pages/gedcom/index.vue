@@ -53,13 +53,13 @@
                                     <p class="help"  :class="{ 'is-danger': $v.fileName.$error }" v-if="!$v.fileName.required">Field is required</p>
                                 </div>
 
-                                <b-progress
+                              <!--   <b-progress
                                   v-if="isLoading"
                                   type="is-success"
                                   :max="total"
                                   :value="complete"
                                   show-value
-                                />
+                                /> -->
 
                                 <button type="submit"
                                 class="button theme-button theme-button-xl has-background-primary is-uppercase has-text-weight-medium has-text-white">
@@ -156,7 +156,7 @@ export default {
 
         try {
           const response = await this.$axios
-            .$post("/api/gedcom", formData, {
+            .$post("/api/gedcom/store", formData, {
                 headers: {
                   'content-type': 'multipart/form-data',
                   'Access-Control-Allow-Origin': '*'
