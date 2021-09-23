@@ -6,11 +6,21 @@
     </div>
 </template>
 
+<router>
+{
+    name: 'personevent.edit'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Edit',
+
+layout: 'auth',
+    meta: {
+        permission: { name: 'personevent menu' },
+        title: 'Person Event - Edit'
+    },
 
     components: { EnsoForm },
 };
