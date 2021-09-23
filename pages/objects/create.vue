@@ -6,11 +6,20 @@
     </div>
 </template>
 
+<router>
+{
+    name: 'objects.create'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Create',
+layout: 'auth',
+    meta: {
+        permission: { name: 'object menu' },
+        title: 'Object - Create'
+    },
 
     components: { EnsoForm },
 };
