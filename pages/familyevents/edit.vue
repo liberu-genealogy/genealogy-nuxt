@@ -10,7 +10,13 @@
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Edit',
+
+layout: 'auth',
+    meta: {
+        permission: { name: 'familyevents menu' },
+        title: 'Family Events - Edit'
+    },
+
 
     components: { EnsoForm },
 };
