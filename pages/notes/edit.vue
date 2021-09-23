@@ -6,11 +6,21 @@
     </div>
 </template>
 
+<router>
+{
+    name: 'notes.edit'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    name: 'Edit',
+
+layout: 'auth',
+    meta: {
+        permission: { name: 'notes menu' },
+        title: 'Notes - Edit'
+    },
 
     components: { EnsoForm },
 };
