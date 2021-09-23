@@ -3,11 +3,21 @@
         id="person_subms"/>
 </template>
 
+<router>
+{
+    name: 'personsubm.index'
+}
+</router>
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
 export default {
-    name: 'Index',
+
+layout: 'auth',
+    meta: {
+        permission: { name: 'personsubm menu' },
+        title: 'Person Subm - Index'
+    },
 
     components: { EnsoTable },
 };
