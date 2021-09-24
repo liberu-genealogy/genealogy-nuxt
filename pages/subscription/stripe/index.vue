@@ -161,6 +161,3 @@ export default {
 }
 </router>
 
-<style scoped>
-@import '~/assets/css/admin.css';
-</style>

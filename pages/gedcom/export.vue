@@ -135,6 +135,3 @@
   }
 
 </script>
-<style scoped>
-  @import '~/assets/css/admin.css';
-</style>

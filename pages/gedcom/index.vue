@@ -184,5 +184,26 @@ export default {
 
 </script>
 <style scoped>
-    @import '~/assets/css/admin.css';
+.file.is-large.is-boxed{
+    border-radius: 5px;
+    padding:  5px 0;
+}
+.file-label {
+    color: #fff;
+    font-size: 1.25rem;
+    background: transparent !important;
+    border: none;
+    width: 100%;
+    text-align: center;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.file-cta {
+    padding:  0 !important;
+    background-color: #4FCF8D !important;
+}
+
 </style>
