@@ -1,7 +1,11 @@
 <template>
     <div/>
 </template>
-
+<router>
+{
+    name: 'addresses.show'
+}
+</router>
 <script>
 export default {
 layout: 'auth',
@@ -14,9 +18,5 @@ layout: 'auth',
 
 <style lang="scss">
 </style>
-<router>
-{
-    name: 'addresses.show'
-}
-</router>
+
 

@@ -5,13 +5,21 @@
         </div>
     </div>
 </template>
-
+<router>
+{
+    name: 'subn.create'
+}
+</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
     name: 'Create',
-
+    layout: 'auth',
+    meta: {
+        permission: { name: 'subn menu' },
+        title: 'subn - Create'
+    },
     components: { EnsoForm },
 };
 </script>
