@@ -245,8 +245,3 @@ export default {
   },
 };
 </script>
-
-<style>
-@import '~/assets/css/admin.css';
-</style>
-
