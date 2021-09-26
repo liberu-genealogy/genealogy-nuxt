@@ -3,7 +3,7 @@
     <stripe-checkout
       ref="checkoutRef"
       :pk="pk"
-      :items="items"
+      :lineItems="lineItems"
       :successUrl="successUrl"
       :cancelUrl="cancelUrl"
     />
