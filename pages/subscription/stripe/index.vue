@@ -30,7 +30,7 @@ export default {
     return {
       items: [
         {
-          sku: urlParams.get("name"),
+          price: urlParams.get("name"),
 
           quantity: 1,
         },
