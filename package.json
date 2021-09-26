@@ -38,6 +38,7 @@
     "@nuxtjs/proxy": "^2.1.0",
     "@sentry/browser": "^6.12.0",
     "@sentry/integrations": "^6.12.0",
+    "@vue-stripe/vue-stripe": "^4.2.5",
     "animate.css": "^4.1.1",
     "bulma-extensions": "^6.2.7",
     "chart.js": "2.9.4",

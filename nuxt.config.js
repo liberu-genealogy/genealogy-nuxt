@@ -18,6 +18,10 @@ export default {
     }
 
   ],
+
+
+
+
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     htmlAttrs: {
@@ -90,6 +94,7 @@ export default {
     '~/plugins/vuelidate.js',
     '~/plugins/echo.js',
     "~/plugins/vue-fb-customer-chat.js",
+    {src: '~/plugins/vue-stripe.js', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -143,6 +148,10 @@ export default {
       id: process.env.GOOGLE_ANALYTICS_ID
     }
    },
+
+  env: {
+    STRIPE_PK: process.env.STRIPE_KEY,
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

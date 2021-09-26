@@ -2331,6 +2331,11 @@
   dependencies:
     type-detect "4.0.8"
 
+"@stripe/stripe-js@^1.13.2":
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.18.0.tgz#687268d7cd68b44b92b86300d7c7f2a6e4df0b98"
+  integrity sha512-yBRHAMKHnF3kbzv0tpKB82kSow43wW5qXLK8ofg3V9NaaCyObSTO7wJfktWAtG/NBgkJOdUL+pV8dHBj0qvDkQ==
+
 "@tinymce/tinymce-vue@^3.0.1":
   version "3.2.8"
   resolved "https://registry.yarnpkg.com/@tinymce/tinymce-vue/-/tinymce-vue-3.2.8.tgz#014571b52ec8fa83665a7fa887bf65140207de71"
@@ -2590,6 +2595,14 @@
     "@babel/runtime" "^7.5.5"
     global "~4.4.0"
     is-function "^1.0.1"
+
+"@vue-stripe/vue-stripe@^4.2.5":
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/@vue-stripe/vue-stripe/-/vue-stripe-4.2.5.tgz#d83531e3fcaf21d9404a85af2aac89b3eb2fae66"
+  integrity sha512-LoEMHnlnI2+GzfKUNzCLtqOq+SWxkkDRUpLqb6TfXaOnnempJYpVm15i3E8ac2MOlc2VBzf4LJV2Wmp2Z369fg==
+  dependencies:
+    "@stripe/stripe-js" "^1.13.2"
+    vue-coerce-props "^1.0.0"
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
@@ -12341,6 +12354,11 @@ vue-client-only@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-client-only/-/vue-client-only-2.1.0.tgz#1a67a47b8ecacfa86d75830173fffee3bf8a4ee3"
   integrity sha512-vKl1skEKn8EK9f8P2ZzhRnuaRHLHrlt1sbRmazlvsx6EiC3A8oWF8YCBrMJzoN+W3OnElwIGbVjsx6/xelY1AA==
+
+vue-coerce-props@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vue-coerce-props/-/vue-coerce-props-1.0.0.tgz#af3d00aa419f0de79c2b020824c6c0387070d66e"
+  integrity sha512-4fdRMXO6FHzmE7H4soAph6QmPg3sL/RiGdd+axuxuU07f02LNMns0jMM88fmt1bvSbN+2Wyd8raho6p6nXUzag==
 
 vue-eslint-parser@^7.1.1, vue-eslint-parser@^7.10.0:
   version "7.10.0"
