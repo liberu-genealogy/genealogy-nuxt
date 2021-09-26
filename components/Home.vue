@@ -195,8 +195,8 @@
                 <div class="column is-4">
                     <img src="~assets/images/footer-logo.svg" width="180px" class="mb-5">
                     <div class="is-size-7 has-text-light has-text-weight-regular" style="line-height: 1.4rem;">
-                        Copyright &copy; Family Tree 365 Ltd,<br> Unit A, 82 James Carter Road, Mildenhall, Suffolk, England, IP28 7DE<br> Company
-                        number 12734769
+                        Copyright &copy; Genealogy Websites Ltd.<br>Registered Address: Kemp House, 160 City Road, London, United Kingdom, EC1V 2NX
+			<br>Company Number: 13641244
                     </div>
                     <p class="mt-2">
                         <a href="https://www.facebook.com/familytree365" target="_blank" class="is-size-7 has-text-link is-flex">
@@ -248,7 +248,7 @@
             <div class="content has-text-centered pt-6">
                 <div class="columns is-gapless">
                     <div class="column has-text-centered is-flex-desktop-only">
-                        <p class="is-size-7 has-text-light has-text-weight-regular">Copyright &copy; {{ new Date().getFullYear() }} Family Tree 365 Ltd</p>
+                        <p class="is-size-7 has-text-light has-text-weight-regular">Copyright &copy; {{ new Date().getFullYear() }} Genealogy Websites Ltd</p>
                     </div>
                 </div>
             </div>

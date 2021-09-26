@@ -4,12 +4,19 @@
             <footer class="footer" :class="{'isAuthenticated':loggedInUser}">
                 <div class="content has-text-centered has-text-white">
                     <strong class="mr-1 has-text-white" >
-                        Family Tree365 v1
+                        Family Tree 365 - public testing release.
                     </strong>
                    
                     <span class="has-text-basic" style="font-size: 14px; font-weight: 400;">
-                         Copyright &copy; Family Tree 365 Ltd,<br> Unit A, 82 James Carter Road, Mildenhall, Suffolk, England, IP28 7DE<br> Company number 12734769
+                         Copyright &copy; Genealogy Websites Ltd,<br>
+			 Kemp House, 160 City Road, London, United Kingdom, EC1V 2NX<br>
+			 Company number: 13641244 
                     </span>
+                   <p class="mt-2">
+                        <a href="https://www.facebook.com/familytree365" target="_blank" class="is-size-7 has-text-link is-flex">
+                            <i class="fab fa-facebook mr-2" style="margin-top: 0.2rem;"></i>Follow us on Facebook </a>
+                        </p>
+
                 </div>
             </footer>
         </template>

@@ -17,8 +17,8 @@
                 Privacy policy
               </h1>
               <div>
-                This privacy policy applies between you, the User of this Website and Family Tree 365 Ltd, the
-                owner and provider of this Website. Family Tree 365 Ltd takes the privacy of your information
+                This privacy policy applies between you, the User of this Website and Genealogy Websites Ltd, the
+                owner and provider of this Website. Genealogy Websites Ltd takes the privacy of your information
                 very seriously. This privacy policy applies to our use of any and all Data collected by us
                 or provided by you in relation to your use of the Website.
               </div>
@@ -34,7 +34,7 @@
               </div>
               <div> In this privacy policy, the following definitions are used: </div>
               <div>
-                Data collectively all information that you submit to Family Tree 365 Ltd via the Website. This
+                Data collectively all information that you submit to Genealogy Websites Ltd via the Website. This
                 definition incorporates, where applicable, the definitions provided in the Data Protection
                 Laws;
               </div>
@@ -53,7 +53,7 @@
                 GDPR the General Data Protection Regulation (EU) 2016/679;
               </div>
               <div class="mb-3">
-                Family Tree 365 Ltd, we or us Family Tree 365 Ltd, a company incorporated in England and Wales with
+                Genealogy Websites Ltd, we or us Genealogy Websites Ltd, a company incorporated in England and Wales with
                 registered number 12734769 whose registered office is at International House, 12 Constance
                 Street, London, E16 2DQ;
               </div>
@@ -64,8 +64,8 @@
               </div>
               <div class="mb-3">
                 User or you any third party that accesses the Website and is not either (i) employed by
-                Family Tree 365 Ltd and acting in the course of their employment or (ii) engaged as a consultant
-                or otherwise providing services to Family Tree 365 Ltd and accessing the Website in connection
+                Genealogy Websites Ltd and acting in the course of their employment or (ii) engaged as a consultant
+                or otherwise providing services to Genealogy Websites Ltd and accessing the Website in connection
                 with the provision of such services; and
               </div>
               <div class="mb-3">
@@ -99,13 +99,13 @@
                 Scope of this privacy policy
               </div>
               <div class="mb-3">
-                This privacy policy applies only to the actions of Family Tree 365 Ltd and Users with respect
+                This privacy policy applies only to the actions of Genealogy Websites Ltd and Users with respect
                 to this Website. It does not extend to any websites that can be accessed from this Website
                 including, but not limited to, any links we may provide to social media websites.
               </div>
               <div class="mb-3">
-                For purposes of the applicable Data Protection Laws, Family Tree 365 Ltd is the "data
-                controller". This means that Family Tree 365 Ltd determines the purposes for which, and the
+                For purposes of the applicable Data Protection Laws, Genealogy Websites Ltd is the "data
+                controller". This means that Genealogy Websites Ltd determines the purposes for which, and the
                 manner in which, your Data is processed.
               </div>
               <div class="is-size-6 has-text-black has-text-weight-medium my-5">
@@ -149,7 +149,7 @@
                 Data that is given to us by you
               </div>
               <div class="mb-3">
-                Family Tree 365 Ltd will collect your Data in a number of ways, for example:
+                Genealogy Websites Ltd will collect your Data in a number of ways, for example:
               </div>
               <div class="mb-3">
                 when you contact us through the Website, by telephone, post, e-mail or through any other
@@ -327,8 +327,8 @@
                 Changes of business ownership and control
               </div>
               <div>
-                Family Tree 365 Ltd may, from time to time, expand or reduce our business and this may involve
-                the sale and/or the transfer of control of all or part of Family Tree 365 Ltd. Data provided by
+                Genealogy Websites Ltd may, from time to time, expand or reduce our business and this may involve
+                the sale and/or the transfer of control of all or part of Genealogy Websites Ltd. Data provided by
                 Users will, where it is relevant to any part of our business so transferred, be transferred
                 along with that part and the new owner or newly controlling party will, under the terms of
                 this privacy policy, be permitted to use the Data for the purposes for which it was
@@ -345,9 +345,9 @@
                 Cookies
               </div>
               <div class="mb-3">
-                This Website may place and access certain Cookies on your computer. Family Tree 365 Ltd uses
+                This Website may place and access certain Cookies on your computer. Genealogy Websites Ltd uses
                 Cookies to improve your experience of using the Website and to improve our range of
-                services. Family Tree 365 Ltd has carefully chosen these Cookies and has taken steps to ensure
+                services. Genealogy Websites Ltd has carefully chosen these Cookies and has taken steps to ensure
                 that your privacy is protected and respected at all times.
               </div>
               <div class="mb-3">
@@ -356,7 +356,7 @@
               <div class="mb-3">
                 Before the Website places Cookies on your computer, you will be presented with a message
                 bar requesting your consent to set those Cookies. By giving your consent to the placing of
-                Cookies, you are enabling Family Tree 365 Ltd to provide a better experience and service to you.
+                Cookies, you are enabling Genealogy Websites Ltd to provide a better experience and service to you.
                 You may, if you wish, deny consent to the placing of Cookies; however certain features of
                 the Website may not function fully or as intended.
               </div>
@@ -420,10 +420,10 @@
                 Changes to this privacy policy
               </div>
               <div>
-                Family Tree 365 Ltd reserves the right to change this privacy policy as we may deem necessary
+                Genealogy Websites Ltd reserves the right to change this privacy policy as we may deem necessary
                 from time to time or as may be required by law. Any changes will be immediately posted on
                 the Website and you are deemed to have accepted the terms of the privacy policy on your
-                first use of the Website following the alterations. You may contact Family Tree 365 Ltd by email
+                first use of the Website following the alterations. You may contact Genealogy Websites Ltd by email
                 at <a href="mailto:support@familytree365.com" class="has-text-link">support@familytree365.com.</a>
               </div>
               <div class="is-size-6 has-text-black has-text-weight-medium my-5">
@@ -475,8 +475,7 @@
                 <div class="column is-4">
                     <img src="~assets/images/footer-logo.svg" width="180px" class="mb-5">
                     <div class="is-size-7 has-text-light has-text-weight-regular" style="line-height: 1.4rem;">
-                        Copyright &copy; Family Tree 365 Ltd,<br> Unit A, 82 James Carter Road, Mildenhall, Suffolk, England, IP28 7DE<br> Company
-                        number 12734769
+                        Copyright &copy; Genealogy Websites Ltd,<br>Kemp House, 160 City Road, London, United Kingdom, EC1V 2NX<br>Company Number: 13641244
                     </div>
                     <p class="mt-2">
                         <a href="https://www.facebook.com/familytree365" target="_blank" class="is-size-7 has-text-link is-flex">
@@ -528,7 +527,7 @@
             <div class="content has-text-centered pt-6">
                 <div class="columns is-gapless">
                     <div class="column has-text-centered is-flex-desktop-only">
-                        <p class="is-size-7 has-text-light has-text-weight-regular">Copyright &copy; {{ new Date().getFullYear() }} Family Tree 365 Ltd</p>
+                        <p class="is-size-7 has-text-light has-text-weight-regular">Copyright &copy; {{ new Date().getFullYear() }} Genealogy Websites Ltd</p>
                     </div>
                 </div>
             </div>
