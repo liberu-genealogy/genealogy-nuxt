@@ -28,7 +28,7 @@ export default {
     const urlParams = new URLSearchParams(window.location.search);
 
     return {
-      items: [
+      lineItems: [
         {
           price: urlParams.get("name"),
 
