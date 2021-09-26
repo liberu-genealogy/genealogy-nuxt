@@ -3,6 +3,7 @@
     <stripe-checkout
       ref="checkoutRef"
       :pk="pk"
+      :mode="mode"
       :lineItems="lineItems"
       :successUrl="successUrl"
       :cancelUrl="cancelUrl"
@@ -28,6 +29,8 @@ export default {
     const urlParams = new URLSearchParams(window.location.search);
 
     return {
+      mode: "subscription",
+
       lineItems: [
         {
           price: urlParams.get("name"),
