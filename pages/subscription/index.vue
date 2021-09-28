@@ -345,10 +345,3 @@ export default {
   },
 }
 </script>
-<<<<<<< HEAD:pages/subscription/index.vue
-=======
-
-<style>
-@import '~/assets/css/admin.css';
-</style>
->>>>>>> 6b0a56f983a51cd5ec3f96fae2a8ac0b705c8b27:pages/subscriptions/index.vue
