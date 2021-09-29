@@ -31,10 +31,7 @@ import d3Tip from 'd3-tip'
 import vSelect from 'vue-select'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
-
-import gedcom from '@/static/gedcom.json'
-import { sampleData } from './data'
-
+import FileSaver  from 'file-saver';
 const d3 = Object.assign({}, d3Base, {tip: d3Tip()})
 
 Array.prototype.remove = function () {
@@ -145,7 +142,6 @@ export default {
       // Set the dimensions and margins of the diagram
       let screen_width = width,
         screen_height = height
-      console.log(this.data.persons)
       // initialize panning, zooming
       this.zoom = d3.zoom()
         .on("zoom", (event, d) => this.g.attr("transform", event.transform))
@@ -196,7 +192,6 @@ export default {
         // .separation((a, b) => { return 1 });
 
       } catch (e) {
-        console.log('suig ma errior');
         console.log(e)
       }
 
@@ -235,11 +230,9 @@ export default {
       root.x0 = screen_height / 2
       root.y0 = screen_width / 2
 
-      console.log('root.neighbors ====', root.neighbors)
       // overwrite dag root nodes
       // this.dag.__private_0_t = [root]
 
-      console.log('root.dag ====', this.dag)
       // draw dag
       this.update(root)
     },
@@ -267,7 +260,6 @@ export default {
 
       // collapse neighbors which are visible and have been inserted by this node
       let vis_inserted_neighbors = d.neighbors.filter(n => n.visible && d.inserted_nodes.includes(n));
-      console.log('vis_inserted_neighbors =======', vis_inserted_neighbors)
       vis_inserted_neighbors.forEach(
         n => {
           // tag invisible
@@ -318,7 +310,6 @@ export default {
       // circles occur): make connections, save them to
       // destroy / rebuild on collapse
       let extended_neighbors = d.neighbors.filter(n => n.visible)
-      console.log('extended_neighbors =======', extended_neighbors)
       extended_neighbors.forEach(
         n => {
           // if child, make connection
@@ -519,7 +510,6 @@ export default {
     update(source) {
 
       // Assigns the x and y position for the nodes
-      console.log('update dag ====== ', this.dag)
       if (source.data.id !== this.data.start) return false;
 
       let dag_tree = this.tree(this.dag);
@@ -655,7 +645,13 @@ export default {
 
       d3.select('#saveButton').on('click', () => {
         let svgString = this.getSVGString(this.svg.node());
-        this.svgString2Image(svgString, 2 * width, 2 * height, 'png', this.onSave); // passes Blob and filesize String to the callback
+        this.svgString2Image(
+          svgString,
+          this.svg.node().getBBox().width,
+          this.svg.node().getBBox().height,
+          'png',
+          this.onSave
+        ); // passes Blob and filesize String to the callback
       });
     },
     // Creates a curved (diagonal) path from parent to the child nodes
@@ -767,16 +763,14 @@ export default {
       // do nothing if node is union
       if (d.data.isUnion) return;
 
-      console.log('click d ===============', this.is_extendable(d))
       // uncollapse if there are uncollapsed unions / children / partners
       if (this.is_extendable(d)) this.uncollapse(d)
       // collapse if fully uncollapsed
       else this.collapse(d)
-
       this.update(d);
     },
     onSave(dataBlob, filesize) {
-      // saveAs(dataBlob, 'D3 vis exported to PNG.png'); // FileSaver.js function
+      FileSaver.saveAs(dataBlob, 'D3 vis exported to PNG.png'); // FileSaver.js function
     }
   },
 }
@@ -804,5 +798,13 @@ export default {
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
   border-radius: 2px;
+}
+
+#saveButton {
+  border: 1px solid;
+  padding: 5px;
+  border-radius: 3px;
+  background-color: #4fcf8d;
+  color: white;
 }
 </style>

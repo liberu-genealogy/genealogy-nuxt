@@ -49,6 +49,7 @@
     "d3-tip": "^0.9.1",
     "driver.js": "^0.9.8",
     "favico.js": "^0.3.10",
+    "file-saver": "^2.0.5",
     "flag-icon-css": "^3.5.0",
     "flatpickr": "^4.6.9",
     "laravel-echo": "^1.11.2",
