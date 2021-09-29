@@ -59,6 +59,10 @@ export default {
     Loading
   },
 
+  head: {
+    title: "Pedigree Tree View"
+  },
+
   data: () => ({
     persons: [],
     selected_option: null,
@@ -141,7 +145,7 @@ export default {
       // Set the dimensions and margins of the diagram
       let screen_width = width,
         screen_height = height
-
+      console.log(this.data.persons)
       // initialize panning, zooming
       this.zoom = d3.zoom()
         .on("zoom", (event, d) => this.g.attr("transform", event.transform))
@@ -158,8 +162,8 @@ export default {
           let content = `
               <span style='margin-left: 2.5px;'><b>` + d.data.name + `</b></span><br>
                 <table style="margin-top: 2.5px;">
-                  <tr><td>born</td><td>` + (d.data.birthyear || "?") + ` in ` + (d.data.birthplace || "?") + `</td></tr>
-                  <tr><td>died</td><td>` + (d.data.deathyear || "?") + ` in ` + (d.data.deathplace || "?") + `</td></tr>
+                  <tr><td>born</td><td>` + (this.getFullDisplayBirthYear(d) || "?") + ` in ` + (d.data.birthday_plac || "?") + `</td></tr>
+                  <tr><td>died</td><td>` + (this.getFullDisplayDeathYear(d) || "?") + ` in ` + (d.data.deathday_plac || "?") + `</td></tr>
                 </table>`
 
           return content.replace(new RegExp("null", "g"), "?")
@@ -199,7 +203,7 @@ export default {
       // make dag from edge list
       this.dag = dagConnect()(this.data.links)
       // in order to make the family tree work, the dag
-      // must be a node with id undefined. create that node if
+      // must be a node with id undefined. create that persons node if
       // not done automaticaly
       if (!!this.dag.id) {
         let root = this.dag.copy()
@@ -455,16 +459,38 @@ export default {
       // sort children by birth year, filter undefined
       children = children
         .filter(c => c !== undefined)
-        .sort((a, b) => Math.sign((this.getBirthYear(a) || 0) - (this.getBirthYear(b) || 0)));
+        .sort((a, b) => Math.sign((this.getFullDisplayBirthYear(a) || 0) - (this.getFullDisplayDeathYear(b) || 0)));
       return children
     },
 
+    getFullDisplayBirthYear(node) {
+      let birthYear = ''
+      if (node.data.birth_year) {
+        return node.data.birth_year
+      }
+
+      if (node.data.birthday) {
+        return this.getBirthYear(node)
+      }
+    },
+
+    getFullDisplayDeathYear(node) {
+      let deathYear = ''
+      if (node.data.death_year) {
+        return node.data.death_year
+      }
+
+      if (node.data.deathday) {
+        return this.getDeathYear(node)
+      }
+    },
+
     getBirthYear(node) {
-      return new Date(node.data.birthyear || NaN).getFullYear()
+      return new Date(node.data.birthday || NaN).getFullYear()
     },
 
     getDeathYear(node) {
-      return new Date(node.data.deathyear || NaN).getFullYear()
+      return new Date(node.data.deathday || NaN).getFullYear()
     },
 
     find_path(n) {
@@ -540,9 +566,9 @@ export default {
         .text(
           (d) => {
             if (d.data.isUnion) return;
-            return (d.data.birthyear || "?") +
+            return (this.getFullDisplayBirthYear(d) || "?") + 
               " - " +
-              (d.data.deathyear || "?")
+              (this.getFullDisplayDeathYear(d) || "?")
           }
         );
 
