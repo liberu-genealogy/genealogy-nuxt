@@ -45,10 +45,10 @@
                 </label>
               </div>
             </div>
-            <a v-if="generatedFile" :href="generatedFile" class="field import_block">
+            <a v-if="generatedFile" class="field import_block">
               <div class="file is-large is-boxed has-background-primary">
                 <label class="file-label">
-                  <span class="file-cta" @click="handleExportFiles">
+                  <span class="file-cta" @click="downloadFile">
                       <span class="file-label">
                           <span class="file-icon">
                               <font-awesome-icon :icon="['fas', 'download']"/>
@@ -74,7 +74,7 @@
   import {required} from 'vuelidate/lib/validators'
   import Loading from 'vue-loading-overlay';
   import 'vue-loading-overlay/dist/vue-loading.css';
-
+  import FileSaver  from 'file-saver';
   export default {
     layout: 'auth',
     components: {
@@ -97,34 +97,31 @@
         response: null,
         inProgress: 0,
         interval: null,
-        generatedFile: null
+        generatedFile: null,
+        fileName: ''
       };
     },
     methods: {
-      async handleExportFiles() {
-        const response = this.$axios
-          .$post("/api/gedcom-export", {}, {
-            headers: {
-              'content-type': 'multipart/form-data',
-              'Access-Control-Allow-Origin': '*'
-            },
-          },)
-        this.inProgress = true;
-        this.isLoading = false;
-        this.generatedFile = response.file;
-
-
-        // this.interval = setInterval(() => {
-        //   this.checkJobCompleted();
-        // }, 3000)
-
-        (error => {
-          this.error = true;
-          this.inProgress = false;
-          this.errors = error.response.data.errors;
-        });
+      handleExportFiles() {
+        this.$axios.$get('/api/gedcom-export', {
+          headers: {
+            'content-type': 'multipart/form-data'
+          }
+        }).then(res => {
+          this.inProgress = true
+          this.isLoading = false
+          this.generatedFile =  new Blob([res.file])
+          this.fileName = res.name
+        }).catch(err => {
+          console.log("error");
+          console.log(err);
+        })
       },
-
+      downloadFile() {
+        FileSaver.saveAs(this.generatedFile, this.fileName);
+        this.generatedFile = null
+        this.fileName = ''
+      },
       async checkJobCompleted() {
         await this.$axios
            .$post("/api/check-gedcom-export", {}, {
@@ -139,3 +136,26 @@
   }
 
 </script>
+<style type="text/css" scoped>
+.file.is-large.is-boxed{
+    border-radius: 5px;
+    padding:  5px 0;
+}
+.file-label {
+    color: #fff;
+    font-size: 1.25rem;
+    background: transparent !important;
+    border: none;
+    width: 100%;
+    text-align: center;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.file-cta {
+    padding:  0 !important;
+    background-color: #4FCF8D !important;
+}
+</style>
