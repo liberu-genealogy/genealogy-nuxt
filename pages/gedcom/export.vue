@@ -65,6 +65,11 @@
     </div>
   </div>
 </template>
+<router>
+{
+  name: 'gedcomexport.index'
+}
+</router>
 <script>
   import {required} from 'vuelidate/lib/validators'
   import Loading from 'vue-loading-overlay';
@@ -75,9 +80,8 @@
     components: {
       Loading
     },
-    middleware: 'permission',
-    meta: {
-      permission: {name: 'gedcom import menu'}
+    head: {
+      title: 'Gedcom Export'
     },
     data() {
       return {
