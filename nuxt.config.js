@@ -91,7 +91,7 @@ export default {
     '~/plugins/date-fns/formatDistance.js',
     '~/plugins/vue-select.js',
     '~/plugins/vuelidate.js',
-    '~/plugins/echo.js',
+    //'~/plugins/echo.js',
     "~/plugins/vue-fb-customer-chat.js",
     {src: '~/plugins/vue-stripe.js', ssr: false},
   ],
