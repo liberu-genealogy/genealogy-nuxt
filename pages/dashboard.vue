@@ -147,9 +147,9 @@
             <div class="card-header-title has-text-black">Genders</div>
           </div>
           <div class="card-content" style="height: 400px">
-            <pie-chart
-              v-if="loaded"
-              :chartdata="pieChartData"
+            <Piechart
+            	v-if="loaded"
+              :data="pieChartData"
               :options="chartOptions"
               :height="300"
             />
@@ -339,7 +339,7 @@ export default {
   },
   data() {
     return {
-      loaded: true,
+      loaded: false,
       trees: [],
       companies: [],
       selected_company: null,
@@ -352,24 +352,8 @@ export default {
       trial: null,
       familiesjoined: 0,
       peoplesattached: 0,
-      pieChartData: {
-        datasets: [
-          {
-            label: 'Data One',
-            data: [40, 20, 30],
-            backgroundColor: [
-              'rgba(79, 207, 141, 1)',
-              'rgba(251, 145, 58, 1)',
-              'rgba(244, 91, 21, 1)',
-            ],
-          },
-        ],
-        labels: ['Male', 'Female', 'Other'],
-      },
-      chartOptions: {
-        responsive: true,
-        maintainAspectRatio: false,
-      },
+      pieChartData: null,
+      chartOptions: null,
       apiList: ['Geneanum', 'Open arch', 'Family search', 'Wikitree'],
       apiSelected: 'Geneanum',
       dateMenu: false,
@@ -459,11 +443,10 @@ export default {
     },
     async getTree() {
       this.selected_tree = null
-      console.log('ok-tree', this.selected_company)
       const response = await this.$axios.$get('/api/trees/show', {
-        params: { company_id: this.selected_company },
+        params: { start_id: this.selected_company, nest: 3 },
       })
-      this.trees.push(response)
+      this.trees = Object.values(response.persons)
       this.trees.map((tree) => {
         if (tree.current_tenant == 1) {
           this.selected_tree = tree.id
@@ -472,14 +455,15 @@ export default {
     },
     async loadChart() {
       this.loaded = false
-      const { data: data } = await this.$axios.get('/api/dashboard')
-      const { data: trial } = await this.$axios.get('/api/trial')
-      this.pieChartData.datasets[0].data = data.chart
-      this.familiesjoined = data.familiesjoined
-      this.peoplesattached = data.peoplesattached
+      const chartResponse = await this.$axios.get('/api/dashboard/pie')
+     // const { data: trial } = await this.$axios.get('/api/dashboard/trial')
+      this.pieChartData = chartResponse.data
+      this.chartOptions = chartResponse.options
+      //this.familiesjoined = data.familiesjoined
+      //this.peoplesattached = data.peoplesattached
       this.loaded = true
       this.isLoading = false
-      this.trial = trial
+      //this.trial = trial
     },
     search() {
       //this.result = null
@@ -487,7 +471,7 @@ export default {
       let url = '',
         params = {}
       if (this.apiSelected == 'Geneanum') {
-        url = '/api/geneanum/search-person/{nation}/burials'
+        url = '/api/geneanum/search-person/malta/burials'
       } else if (this.apiSelected == 'Open arch') {
         url = '/api/open-arch/search-person'
         params = {
