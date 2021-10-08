@@ -366,20 +366,8 @@
 
     methods: {
       loginSocial(provider) {
-        this.provider = provider;
-        //const newWindow = openWindow("", "message");
-
-        let url = "api/login/" + provider;
-        this.$axios
-          .get(url)
-          .then((res) => {
-            // console.log(res);
-            // window.location.href = res.data;
-            newWindow.location.href = res.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        this.provider = provider;        
+        window.location.href = `${process.env.baseUrl}/api/login/${provider}`;        
       },
       submit() {
         this.loading = true;
