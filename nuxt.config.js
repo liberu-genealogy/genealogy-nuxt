@@ -151,6 +151,7 @@ export default {
 
   env: {
     STRIPE_PK: process.env.STRIPE_KEY,
+    baseUrl: process.env.BASE_URL ||'http://localhost:3000'
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
