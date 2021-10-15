@@ -104,7 +104,7 @@
               </p>
               <div class="is-size-7 has-text-black has-text-weight-medium mt-1">
                         <NuxtLink
-              to="gedcom.index"
+              to="gedcom"
               class="
                 button
                 is-size-7 is-uppercase
@@ -112,7 +112,7 @@
                 is-light
                 mt-4
               "
-              >GEDCOM Imports
+              >GEDCOM Import
 		</NuxtLink>
               </div>
             </div>
