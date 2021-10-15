@@ -103,7 +103,17 @@
                 {{ peoplesattached }}
               </p>
               <div class="is-size-7 has-text-black has-text-weight-medium mt-1">
-                GEDCOM Imports
+                        <NuxtLink
+              to="gedcom"
+              class="
+                button
+                is-size-7 is-uppercase
+                has-text-weight-medium has-text-primary
+                is-light
+                mt-4
+              "
+              >GEDCOM Imports
+		</NuxtLink>
               </div>
             </div>
           </div>

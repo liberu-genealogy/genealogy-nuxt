@@ -14,7 +14,7 @@
   "dependencies": {
     "@enso-ui/accessories": "^3.0.2",
     "@enso-ui/addresses": "^1.3.8",
-    "@enso-ui/charts": "^2.0.20",
+    "@enso-ui/charts": "2.0.20",
     "@enso-ui/checkbox": "^2.0.2",
     "@enso-ui/clipboard": "^1.0.4",
     "@enso-ui/enums": "^1.0.3",
