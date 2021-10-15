@@ -104,7 +104,7 @@
               </p>
               <div class="is-size-7 has-text-black has-text-weight-medium mt-1">
                         <NuxtLink
-              to="gedcom"
+              to="/gedcom"
               class="
                 button
                 is-size-7 is-uppercase
@@ -246,7 +246,7 @@
           <div class="card-content">
             <p class="is-size-7">Buy Plan</p>
             <NuxtLink
-              to="subscription"
+              to="/subscription"
               class="
                 button
                 is-size-7 is-uppercase
