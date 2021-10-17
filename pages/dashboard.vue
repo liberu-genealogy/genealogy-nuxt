@@ -152,7 +152,7 @@
     </div>
     <div class="columns is-variable">
       <div class="column is-4-desktop is-6-tablet is-flex">
-        <div class="card has-background-white has-text-black">
+        <!-- <div class="card has-background-white has-text-black">
           <div class="card-header">
             <div class="card-header-title has-text-black">Genders</div>
           </div>
@@ -164,7 +164,9 @@
               :height="300"
             />
           </div>
-        </div>
+        </div> -->
+        <chart-card class="is-rounded raises-on-hover has-background-white has-text-black has-margin-bottom-large"
+    				source="/api/dashboard/pie"/>
       </div>
       <div class="column is-4-desktop is-6-tablet is-flex">
         <div class="card has-background-white has-text-black">
@@ -335,11 +337,14 @@ import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import { mapGetters, mapActions } from 'vuex'
 import PieChart from '../components/charts/PieChart'
+import { EnsoChartCard as ChartCard } from '@enso-ui/charts/bulma';
+import { Chart, colors } from '@enso-ui/charts';
 export default {
   layout: 'auth',
   components: {
     Loading,
     PieChart,
+    ChartCard
   },
   inject: ['errorHandler', 'route', 'toastr'],
   //middleware: ['permission', 'verification'],
@@ -434,12 +439,17 @@ export default {
       this.getTree()
     },
     async setSelected(value) {
-      const response = this.$axios.$post('/api/dashboard/changedb', {
+      const response = await this.$axios.$post('/api/dashboard/changedb', {
         company_id: this.selected_company,
         tree_id: this.selected_tree,
       })
       this.loadChart()
       this.changedb = response.changedb
+      this.familiesjoined = response.familiesjoined
+      this.peoplesattached = response.peoplesattached
+      console.log('changedb response', response)
+      console.log('familiesjoined', response.familiesjoined)
+      console.log('peoplesattached', response.peoplesattached)
     },
     async getCompanies() {
       const response = await this.$axios.$get('/api/get_companies')
@@ -469,8 +479,7 @@ export default {
      // const { data: trial } = await this.$axios.get('/api/dashboard/trial')
       this.pieChartData = chartResponse.data
       this.chartOptions = chartResponse.options
-      //this.familiesjoined = data.familiesjoined
-      //this.peoplesattached = data.peoplesattached
+     
       this.loaded = true
       this.isLoading = false
       //this.trial = trial
