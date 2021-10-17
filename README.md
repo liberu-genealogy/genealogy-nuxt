@@ -13,7 +13,7 @@ smart matching with other servers. This is the Nuxt client for the backend pleas
 
 ## Demo
 
-https://www.familytree365.com- register a free account
+https://www.familytree365.com - register a free account
 
 <!--h-->
 ### Official Laravel Enso Documentation
