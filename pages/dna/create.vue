@@ -114,14 +114,14 @@ layout: 'auth',
                 const formData = new FormData()
                 formData.append('file',  this.file)
                 this.$axios
-                .$post("/api/dnaupload", formData, {
+                .$post("/api/dna", formData, {
                     headers: {
                       'Content-Type': 'multipart/form-data'
                     }
                 })
 
                     this.isLoading = false
-                    this.$router.push('/dnaupload')
+                    this.$router.push('/dna')
                 .catch(error => {
                     this.error = true;
                     this.isLoading = false;
