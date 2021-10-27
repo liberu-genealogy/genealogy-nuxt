@@ -223,7 +223,10 @@ export default {
       })
       // find root node and assign data
       // TODO: [1] - fix find by n.id
-      let root = this.all_nodes.find(n => n.data.id === this.data.start)
+      //suman
+      //let root = this.all_nodes.find(n => n.data.id === this.data.start)
+      let root = this.all_nodes.find((n) => {
+        if(n.data){return n.data.id === this.data.start}})
       root.visible = true
       root.neighbors = []
       root.neighbors = this.getNeighbors(root)
@@ -380,7 +383,10 @@ export default {
       if (node.data.isUnion) return [];
       let u_id = node.data.parent_union;
       if (u_id) {
-        let union = this.all_nodes.find(n => n.data.id === u_id);
+        //let union = this.all_nodes.find(n => n.data.id === u_id);
+//suman
+        let union = this.all_nodes.find((n) => {
+        if(n.data){return n.data.id === u_id}})
         return [union].filter(u => u !== undefined);
       } else return [];
     },
@@ -456,22 +462,22 @@ export default {
 
     getFullDisplayBirthYear(node) {
       let birthYear = ''
-      if (node.data.birth_year) {
+      if (node.data && node.data.birth_year) {
         return node.data.birth_year
       }
 
-      if (node.data.birthday) {
+      if (node.data && node.data.birthday) {
         return this.getBirthYear(node)
       }
     },
 
     getFullDisplayDeathYear(node) {
       let deathYear = ''
-      if (node.data.death_year) {
+      if (node.data && node.data.death_year) {
         return node.data.death_year
       }
 
-      if (node.data.deathday) {
+      if (node.data && node.data.deathday) {
         return this.getDeathYear(node)
       }
     },
@@ -521,7 +527,9 @@ export default {
       // Update the nodes...
       let node = this.g.selectAll('g.node')
         .data(nodes, (d) => {
-          return d.data.id || (d.data.id = ++i);
+          //return d.data.id || (d.data.id = ++i);
+          //suman
+          if(d.data){return d.data.id || (d.data.id = ++i);}
         })
 
       // Enter any new nodes at the parent's previous position.
@@ -547,7 +555,9 @@ export default {
         .attr("dy", "-2")
         .attr("x", 13)
         .attr("text-anchor", "start")
-        .text(d => d.data.name);
+        .text((d) => {if(d.data){return d.data.name}});
+        //.text(d => d.data.name);
+        //suman
       // add birth date and death date as labels
       nodeEnter.append('text')
         .attr("dy", "10")
@@ -555,7 +565,7 @@ export default {
         .attr("text-anchor", "start")
         .text(
           (d) => {
-            if (d.data.isUnion) return;
+            if (d.data && d.data.isUnion) return;
             return (this.getFullDisplayBirthYear(d) || "?") + 
               " - " +
               (this.getFullDisplayDeathYear(d) || "?")
@@ -574,7 +584,9 @@ export default {
 
       // Update the node attributes and style
       nodeUpdate.select('circle.node')
-        .attr('r', d => 10 * !d.data.isUnion)
+        .attr('r', (d) => {if(d.data){10 * !d.data.isUnion}})
+        //.attr('r', d => 10 * !d.data.isUnion)
+        //suman
         .style("fill", (d) => {
           return this.is_extendable(d) ? "lightsteelblue" : "#fff";
         })
