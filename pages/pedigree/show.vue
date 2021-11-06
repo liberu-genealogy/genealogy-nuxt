@@ -96,6 +96,10 @@ export default {
         let gedComdata = await this.$axios
           .$get("/api/trees/show", {params})
         this.data = gedComdata
+        if(!this.data.links.length) {
+          console.log('no data found');
+          return;
+        }
         this.data.links = this.data.links
           .map((item) => item.map(childItem => childItem.toString()))
 
