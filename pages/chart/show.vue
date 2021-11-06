@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div id="tree"></div>
+    <div id="tree">dd</div>
   </div>
 </template>
 <router>
 {
-  name: 'charts.show'
+  name: 'tree.show'
 }
 </router>
 
@@ -22,7 +22,7 @@ export default {
         .then((res) => res.json())
         .then((res) => {
           const pedigreeChart = new WebtreesPedigreeChart.PedigreeChart(
-            "#webtrees-pedigree-chart-container",
+            "#tree",
             {
               labels: chartParams.labels,
               generations: optionGenerations,
@@ -33,9 +33,7 @@ export default {
               rtl: chartParams.rtl,
             }
           );
-
           pedigreeChart.cssFile = "/assets/css/svg.css";
-
           // Draw chart
           pedigreeChart.draw(res.data);
         });
