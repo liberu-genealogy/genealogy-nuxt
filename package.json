@@ -27,7 +27,7 @@
     "@enso-ui/scroll-to-top": "^2.0.3",
     "@enso-ui/sentry": "^1.0.4",
     "@enso-ui/switch": "^1.0.20",
-    "@enso-ui/tables": "^2.6.13",
+    "@enso-ui/tables": "^2.7.1",
     "@enso-ui/toastr": "^2.1.2",
     "@enso-ui/transitions": "^1.1.1",
     "@enso-ui/tree-view": "^1.0.4",

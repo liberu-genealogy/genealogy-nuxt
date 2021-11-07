@@ -1,158 +1,8 @@
-diff --git a/node_modules/@enso-ui/tables/src/bulma/parts/top/Control.vue b/node_modules/@enso-ui/tables/src/bulma/parts/top/Control.vue
-index 8005ca7..9f4f363 100644
---- a/node_modules/@enso-ui/tables/src/bulma/parts/top/Control.vue
-+++ b/node_modules/@enso-ui/tables/src/bulma/parts/top/Control.vue
-@@ -1,5 +1,5 @@
- <template>
--    <a class="button ml-1"
-+    <a class="button"
-         :class="button.class"
-         v-bind="$attrs"
-         v-on="$listeners">
-diff --git a/node_modules/@enso-ui/tables/src/bulma/parts/top/Controls.vue b/node_modules/@enso-ui/tables/src/bulma/parts/top/Controls.vue
-index 075a408..e2ecbdf 100644
---- a/node_modules/@enso-ui/tables/src/bulma/parts/top/Controls.vue
-+++ b/node_modules/@enso-ui/tables/src/bulma/parts/top/Controls.vue
-@@ -38,18 +38,21 @@
-                         </div>
-                         <div class="column table-buttons is-narrow-desktop is-half-touch has-text-right"
-                             v-if="state.template.buttons">
-+                            <dropdown-actions v-if="state.template.buttons.dropdown.length > 0"/>
-                             <template v-for="button in state.template.buttons.global">
-                                 <slot :name="button.slot"
-                                     :icon="button.icon"
-                                     :label="button.label"
-                                     :css-class="button.class"
-                                     v-if="button.slot"/>
--                                <control v-bind="controlBindings(button)"
-+                                <control class="ml-1"
-+                                    v-bind="controlBindings(button)"
-                                     :key="`${button.label}-${button.icon}`"
-                                     :button="button"
-                                     v-on="controlEvents(button)"
-                                     v-else-if="!button.selection"/>
--                                <control v-bind="controlBindings(button)"
-+                                <control class="ml-1"
-+                                    v-bind="controlBindings(button)"
-                                     :key="`${button.label}-${button.icon}`"
-                                     :button="button"
-                                     v-on="controlEvents(button)"
-@@ -75,13 +78,14 @@ import { library } from '@fortawesome/fontawesome-svg-core';
- import {
-     faSync, faUndo, faSearch, faInfoCircle,
- } from '@fortawesome/free-solid-svg-icons';
--import Search from './Search';
-+import Search from './Search.vue';
- import CoreControls from '../../../renderless/parts/top/CoreControls.vue';
- import LengthMenu from './LengthMenu.vue';
- import ColumnVisibility from './ColumnVisibility.vue';
- import StyleSelector from './StyleSelector.vue';
- import Labels from './filters/Labels.vue';
- import Scenarios from './filters/Scenarios.vue';
-+import DropdownActions from './DropdownActions.vue';
- import Control from './Control.vue';
- 
- library.add(faSync, faUndo, faSearch, faInfoCircle);
-@@ -97,6 +101,7 @@ export default {
-         StyleSelector,
-         Search,
-         Labels,
-+        DropdownActions,
-         Scenarios,
-     },
- };
-diff --git a/node_modules/@enso-ui/tables/src/bulma/parts/top/DropdownActions.vue b/node_modules/@enso-ui/tables/src/bulma/parts/top/DropdownActions.vue
-new file mode 100644
-index 0000000..b758be0
---- /dev/null
-+++ b/node_modules/@enso-ui/tables/src/bulma/parts/top/DropdownActions.vue
-@@ -0,0 +1,67 @@
-+<template>
-+    <core-dropdown-actions>
-+        <template v-slot:default="{ buttons, disabled, controlBindings,
-+            controlEvents, hasSelection }">
-+             <dropdown class="dropdown-actions is-right"
-+                ref="dropdown"
-+                :disabled="disabled">
-+                <template v-slot:label>
-+                    <span class="icon is-small">
-+                        <fa icon="cogs"/>
-+                    </span>
-+                </template>
-+                <template v-slot:items>
-+                    <dropdown-item v-for="button in buttons"
-+                        :key="button.name"
-+                        @mouseup="$refs.dropdown.hide()">
-+                        <control class="is-fullwidth"
-+                            v-bind="controlBindings(button)"
-+                            :key="`${button.label}-${button.icon}`"
-+                            :button="button"
-+                            v-on="controlEvents(button)"
-+                            v-if="!button.selection"/>
-+                        <control class="is-fullwidth"
-+                            v-bind="controlBindings(button)"
-+                            :key="`${button.label}-${button.icon}`"
-+                            :button="button"
-+                            v-on="controlEvents(button)"
-+                            v-else-if="hasSelection()"/>
-+                    </dropdown-item>
-+                </template>
-+            </dropdown>
-+        </template>
-+    </core-dropdown-actions>
-+</template>
-+
-+<script>
-+import { library } from '@fortawesome/fontawesome-svg-core';
-+import { faCogs } from '@fortawesome/free-solid-svg-icons';
-+import { Dropdown, DropdownItem } from '@enso-ui/dropdown/bulma';
-+import CoreDropdownActions from '../../../renderless/parts/top/CoreDropdownActions.vue';
-+import Control from './Control.vue';
-+
-+library.add(faCogs);
-+
-+export default {
-+    name: 'DropdownActions',
-+
-+    components: {
-+        CoreDropdownActions, Dropdown, DropdownItem, Control,
-+    },
-+};
-+</script>
-+
-+<style lang="scss">
-+    .vue-table .dropdown.dropdown-actions {
-+        width: unset;
-+
-+        .dropdown-menu {
-+            width: unset;
-+
-+            .dropdown-item {
-+                width: 200px;
-+                padding: 0;
-+            }
-+        }
-+    }
-+</style>
 diff --git a/node_modules/@enso-ui/tables/src/renderless/CoreTable.vue b/node_modules/@enso-ui/tables/src/renderless/CoreTable.vue
-index 47b8b53..eb18b05 100644
+index 3425092..eb18b05 100644
 --- a/node_modules/@enso-ui/tables/src/renderless/CoreTable.vue
 +++ b/node_modules/@enso-ui/tables/src/renderless/CoreTable.vue
-@@ -1,4 +1,5 @@
- <script>
-+import { debounce } from 'lodash';
- import Enum from '@enso-ui/enums';
- import NumberFormatter from './services/NumberFormatter';
- 
-@@ -191,6 +192,7 @@ export default {
-     },
- 
-     created() {
-+        this.fetch = debounce(this.fetch, this.template.debounce);
-         this.init();
-     },
- 
-@@ -205,7 +207,7 @@ export default {
+@@ -207,7 +207,7 @@ export default {
              return this.state.filterScenarios.find(({ active }) => active);
          },
          init() {
@@ -161,7 +11,7 @@ index 47b8b53..eb18b05 100644
                  .then(({ data }) => {
                      this.prepare(data);
                      this.$nextTick(() => {
-@@ -286,16 +288,16 @@ export default {
+@@ -288,16 +288,16 @@ export default {
                  this.ongoingRequest.cancel();
              }
  
@@ -181,7 +31,7 @@ index 47b8b53..eb18b05 100644
                      this.template.readPath,
                      this.readRequest(this.template.method),
                      { cancelToken: this.ongoingRequest.token },
-@@ -329,7 +331,7 @@ export default {
+@@ -331,7 +331,7 @@ export default {
              }).catch(error => {
                  this.meta.loading = false;
  
@@ -190,7 +40,7 @@ index 47b8b53..eb18b05 100644
                      this.errorHandler(error);
                  }
              });
-@@ -417,7 +419,7 @@ export default {
+@@ -419,7 +419,7 @@ export default {
                  : this.template.align;
          },
          exportData({ path, postEvent }) {
@@ -199,7 +49,7 @@ index 47b8b53..eb18b05 100644
                  path, this.readRequest(this.template.method, true),
              ).then(({ data }) => {
                  if (postEvent) {
-@@ -429,7 +431,7 @@ export default {
+@@ -431,7 +431,7 @@ export default {
              });
          },
          ajax(method, path, postEvent) {
@@ -208,50 +58,12 @@ index 47b8b53..eb18b05 100644
                  this.fetch();
  
                  if (postEvent) {
-@@ -445,16 +447,13 @@ export default {
+@@ -447,7 +447,7 @@ export default {
          }) {
              this.meta.loading = true;
  
 -            axios[method.toLowerCase()](path, this.readRequest(method, false, selection))
 +            this.$axios[method.toLowerCase()](path, this.readRequest(method, false, selection))
                  .then(({ data }) => {
--                    this.meta.loading = false;
                      if (postEvent) {
                          this.$emit(postEvent, data);
-                     }
--                }).catch(error => {
--                    this.meta.loading = false;
--                    this.errorHandler(error);
--                });
-+                }).catch(this.errorHandler)
-+                .finally(() => (this.meta.loading = false));
-         },
-         filterUpdate() {
-             if (this.state.ready) {
-diff --git a/node_modules/@enso-ui/tables/src/renderless/parts/top/CoreDropdownActions.vue b/node_modules/@enso-ui/tables/src/renderless/parts/top/CoreDropdownActions.vue
-new file mode 100644
-index 0000000..a4de629
---- /dev/null
-+++ b/node_modules/@enso-ui/tables/src/renderless/parts/top/CoreDropdownActions.vue
-@@ -0,0 +1,21 @@
-+<script>
-+export default {
-+    name: 'CoreDropdownActions',
-+
-+    inject: ['i18n', 'state', 'buttonAction'],
-+
-+    render() {
-+        return this.$scopedSlots.default({
-+            buttons: this.state.template.buttons.dropdown,
-+            disabled: this.state.meta.loading,
-+            controlBindings: button => ({
-+                href: button.action === 'href' ? button.path : null,
-+            }),
-+            controlEvents: button => ({
-+                click: () => this.buttonAction(button),
-+            }),
-+            hasSelection: this.hasSelection,
-+        });
-+    },
-+};
-+</script>
