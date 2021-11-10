@@ -2,7 +2,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import { terser } from "rollup-plugin-terser";
 
 export default [
-    // pedigree-chart.js
+
     {
         input: "assets/js/modules/index.js",
         output: [

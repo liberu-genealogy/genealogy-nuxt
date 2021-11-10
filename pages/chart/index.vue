@@ -24,11 +24,16 @@ export default {
       this.$axios
         .$get("/api/trees/show")
         // .then((res) => res.json())
+        // .then((response) => response.json())
         .then((res) => {
+          // console.log(res.data);
           const pedigreeChart = new PedigreeChart(
             "webtrees-pedigree-chart-container",
             {
-              labels: ["zoom", "move"],
+              labels: {
+                zoom: "Use Ctrl + scroll to zoom in the view",
+                move: "Move the view with two fingers",
+              },
               generations: 4,
               defaultColor: "#0000FF",
               fontColor: "#0000FF",
@@ -37,9 +42,9 @@ export default {
               rtl: "rtl",
             }
           );
-          pedigreeChart.cssFile = "/assets/css/svg.css";
+          pedigreeChart.cssFile = "assets/css/svg.css";
           // Draw chart
-          pedigreeChart.draw(res.data);
+          pedigreeChart.draw(res);
         });
     },
   },
