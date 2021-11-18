@@ -17,6 +17,39 @@ export default [
         ]
     },
     {
+        input: "assets/js/fan-chart/modules/index.js",
+        output: [
+            {
+                name: "WebtreesFanChart",
+                file: "assets/js/fan-chart/fan-chart.js",
+                format: "umd"
+            }
+        ],
+        plugins: [
+            resolve()
+        ]
+    },
+    {
+        input: "assets/js/fan-chart/modules/index.js",
+        output: [
+            {
+                name: "WebtreesFanChart",
+                file: "assets/js/fan-chart/fan-chart.min.js",
+                format: "umd"
+            }
+        ],plugins: [
+            resolve(),
+            terser({
+                mangle: true,
+                compress: true,
+                module: true,
+                output: {
+                    comments: false
+                }
+            })
+        ]
+    },
+    {
         input: "assets/js/modules/index.js",
         output: [
             {
