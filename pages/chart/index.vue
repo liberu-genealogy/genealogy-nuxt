@@ -44,6 +44,7 @@ export default {
           );
           pedigreeChart.cssFile = "assets/css/svg.css";
           // Draw chart
+          console.log(res)
           pedigreeChart.draw(res);
         });
     },
