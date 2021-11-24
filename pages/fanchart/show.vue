@@ -7,7 +7,7 @@
 }
 </router>
 <script>
-import { FanChart } from "/assets/js/modules/fan-chart/index";
+import { FanChart } from "/assets/js/fan-chart/modules/index";
 export default {
   layout: "auth",
   meta: {
