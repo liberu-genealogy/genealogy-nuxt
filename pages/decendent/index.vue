@@ -2,15 +2,15 @@
 
 <router>
 {
-    name: 'fanchart.index'
+    name: 'decendent.index'
 }
 </router>
 <script>
 export default {
   layout: "auth",
   meta: {
-    permission: { name: "fanchart menu" },
-    title: "Fancharts - Index",
+    permission: { name: "decendent menu" },
+    title: "Decendent - Index",
   },
 };
 </script>
