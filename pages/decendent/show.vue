@@ -3,7 +3,7 @@
 </template>
 <router>
 {
-    name: 'fanchart.show'
+    name: 'decendent.show'
 }
 </router>
 <script>
@@ -11,8 +11,8 @@ import { FanChart } from "/assets/js/fan-chart/modules/index";
 export default {
   layout: "auth",
   meta: {
-    permission: { name: "fanchart menu" },
-    title: "Fanchart - Show",
+    permission: { name: "decendentchart menu" },
+    title: "DecendentChart - Show",
   },
   methods: {
     fetchData() {
@@ -37,7 +37,7 @@ export default {
 
           pedigreeChart.cssFile = "assets/css/fanchart/svg.css";
           // Draw chart
-          // console.log(res);
+          console.log(res);
           pedigreeChart.draw(res);
 
           const fanChart = FanChart("#webtrees-fan-chart-container", {

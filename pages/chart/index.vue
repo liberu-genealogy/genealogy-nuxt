@@ -5,7 +5,7 @@
 
 <router>
 {
-    name: 'trees.index'
+    name: 'pedigree.index'
 }
 </router>
 <script>
@@ -44,7 +44,7 @@ export default {
           );
           pedigreeChart.cssFile = "assets/css/svg.css";
           // Draw chart
-          console.log(res)
+          console.log(res);
           pedigreeChart.draw(res);
         });
     },
