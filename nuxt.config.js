@@ -1,9 +1,10 @@
 import getSiteMeta from './utils/getSiteMeta'
 import { cloneDeep } from 'lodash'
+import { defineNuxtConfig } from '@nuxt/bridge'
 
 const meta = getSiteMeta()
 
-export default {
+export default defineNuxtConfig({
   ssr: false,
 
   // server: {
@@ -249,4 +250,4 @@ export default {
       // scssRules.store.set('normal', normalRule);
     },
   },
-}
+})
