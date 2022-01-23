@@ -3,14 +3,14 @@
   "version": "9.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxi",
-    "build": "nuxi generate",
-    "start": "nuxi start",
+    "dev": "nuxt",
+    "build": "nuxt generate",
+    "start": "nuxt start",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint": "yarn lint:js",
     "prepare": "rollup -c",
     "postinstall": "opencollective-postinstall && patch-package && rm -rf node_modules/@enso-ui/mixins node_modules/@enso-ui/google",
-    "inspect": "nuxi webpack --depth > webpack.config.js"
+    "inspect": "nuxt webpack --depth > webpack.config.js"
   },
   "dependencies": {
     "@enso-ui/accessories": "^3.0.2",
