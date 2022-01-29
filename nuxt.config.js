@@ -1,10 +1,15 @@
 import getSiteMeta from './utils/getSiteMeta'
 import { cloneDeep } from 'lodash'
+import { defineNuxtConfig } from '@nuxt/bridge'
 
 const meta = getSiteMeta()
 
-export default {
+export default defineNuxtConfig({
   ssr: false,
+
+  alias: {
+    tslib: "tslib/tslib.es6.js",
+  },
 
   // server: {
   //   host: process.env.HOST || 'localhost' // default: localhost
@@ -160,8 +165,8 @@ export default {
     credentials: true,
   },
   proxy: {
-    '/api/': process.env.BASE_URL || 'http://localhost:8000',
-    '/broadcasting/': process.env.BASE_URL || 'http://localhost:8000',
+    '/api/': process.env.BASE_URL || 'http://localhost:3000',
+    '/broadcasting/': process.env.BASE_URL || 'http://localhost:3000',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -249,4 +254,4 @@ export default {
       // scssRules.store.set('normal', normalRule);
     },
   },
-}
+})
