@@ -2790,7 +2790,7 @@
     let compare1 = f;
     let compare2 = f;
 
-    if (f.length === 1) {
+    if (f.length !== 2) {
       delta = (d, x) => f(d) - x;
       compare1 = ascending;
       compare2 = (d, x) => ascending(f(d), x);
@@ -4440,18 +4440,18 @@
     };
   }
 
-  var abs = Math.abs;
-  var atan2 = Math.atan2;
-  var cos = Math.cos;
-  var max = Math.max;
-  var min = Math.min;
-  var sin = Math.sin;
-  var sqrt = Math.sqrt;
+  const abs = Math.abs;
+  const atan2 = Math.atan2;
+  const cos = Math.cos;
+  const max = Math.max;
+  const min = Math.min;
+  const sin = Math.sin;
+  const sqrt = Math.sqrt;
 
-  var epsilon = 1e-12;
-  var pi = Math.PI;
-  var halfPi = pi / 2;
-  var tau = 2 * pi;
+  const epsilon = 1e-12;
+  const pi = Math.PI;
+  const halfPi = pi / 2;
+  const tau = 2 * pi;
 
   function acos(x) {
     return x > 1 ? 0 : x < -1 ? pi : Math.acos(x);

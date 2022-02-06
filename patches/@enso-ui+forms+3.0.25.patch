@@ -1,0 +1,31 @@
+diff --git a/node_modules/@enso-ui/forms/src/renderless/CoreForm.vue b/node_modules/@enso-ui/forms/src/renderless/CoreForm.vue
+index 609c7cb..f1961f7 100644
+--- a/node_modules/@enso-ui/forms/src/renderless/CoreForm.vue
++++ b/node_modules/@enso-ui/forms/src/renderless/CoreForm.vue
+@@ -149,7 +149,7 @@ export default {
+             this.modal = false;
+             this.state.loading = true;
+ 
+-            axios.delete(this.state.data.actions.destroy.path)
++            this.$axios.delete(this.state.data.actions.destroy.path)
+                 .then(({ data }) => {
+                     this.$emit('destroy', data);
+ 
+@@ -179,7 +179,7 @@ export default {
+         fetch() {
+             this.state.loading = true;
+ 
+-            return axios.get(this.path, { params: this.params })
++            return this.$axios.get(this.path, { params: this.params })
+                 .then(({ data }) => {
+                     this.state.data = data.form;
+                     this.setOriginal();
+@@ -274,7 +274,7 @@ export default {
+             const params = { ...this.submitData, _params: this.params };
+             this.$emit('submitting');
+ 
+-            axios[this.state.data.method](this.submitPath, params)
++            this.$axios[this.state.data.method](this.submitPath, params)
+                 .then(({ data }) => {
+                     this.$emit('submit', data);
+                     this.$emit('submitted');
