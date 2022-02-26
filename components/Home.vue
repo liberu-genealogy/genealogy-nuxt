@@ -231,14 +231,14 @@
                     </div>
                     <div class="is-flex mb-4">
                         <i class="fas fa-mobile-alt ml-2 mr-2 has-text-primary"></i>
-                        <a href="tel:+44 20 8064 1187" class="is-size-7 has-text-link is-flex">
-                          +44 20 8064 1187
+                        <a href="tel:+443330507906" class="is-size-7 has-text-link is-flex">
+                          +443330507906
                         </a>
                     </div>
                     <div class="is-flex ml-1 mb-5">
                         <i class="fab fa-whatsapp mr-2 has-text-primary"></i>
-                        <a href="https://api.whatsapp.com/send?phone=+44 20 8064 1187" class="is-size-7 has-text-link is-flex">
-                            +44 20 8064 1187
+                        <a href="https://api.whatsapp.com/send?phone=+443330507906" class="is-size-7 has-text-link is-flex">
+                            +443330507906
                         </a>
                     </div>
                 </div>
