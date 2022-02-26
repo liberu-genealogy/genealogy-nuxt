@@ -489,7 +489,7 @@ export default {
       let url = ''
       params = {}
       if (this.apiSelected == 'Geneanum') {
-        url = '/api/geneanum/search-person/malta/burials'
+        url = '/api/geneanum/search-person/malte/mariages'
       } else if (this.apiSelected == 'Open arch') {
           url = '/api/open-arch/search-person'
           params = {
