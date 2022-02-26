@@ -29,6 +29,7 @@
 import { VTooltip } from 'v-tooltip';
 import { clickOutside } from '@enso-ui/directives';
 import Loader from '@enso-ui/loader/bulma';
+import { ref, computed, useStore, watch } from 'vue';
 
 
 export default {
@@ -50,22 +51,18 @@ export default {
             default: false,
         },
     },
-
-    data: () => ({
-        dropdown: false,
-    }),
-
-    methods: {
-        hide() {
+    setup() {
+        const dropdown = ref(false)
+        function hide() {
             this.dropdown = false;
-        },
-        show() {
+        }
+        function show() {
             this.dropdown = true;
-        },
-        toggle() {
+        }
+        function toggle() {
             this.dropdown = !this.dropdown;
-        },
-    },
+        }
+    }
 };
 </script>
 

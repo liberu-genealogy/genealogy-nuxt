@@ -9,7 +9,7 @@
 </router>
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
-
+import { ref, computed } from 'vue';
 export default {
     name: 'Index',
     layout: 'auth',

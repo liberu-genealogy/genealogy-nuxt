@@ -20,6 +20,7 @@
 
 <script>
 import zxcvbn from 'zxcvbn';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'PasswordStrength',
@@ -30,17 +31,16 @@ export default {
             default: null,
         },
     },
-
-    methods: {
-        score() {
+    setup() {
+        function score() {
             return this.password
                 ? zxcvbn(this.password).score
                 : 6;
-        },
-        x(i) {
+        }
+        function x(i) {
             const x = 2.5 + (i-1) * 15 + (i-1) * 5;
             return `${x}%`;
-        },
-    },
+        }
+    }
 };
 </script>

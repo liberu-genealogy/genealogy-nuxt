@@ -27,6 +27,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import CoreThemeSelector from '~/components/themes/core/ThemeSelector.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faLightbulb);
 

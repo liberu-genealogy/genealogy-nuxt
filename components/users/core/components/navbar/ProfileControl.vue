@@ -1,33 +1,31 @@
 <script>
 import { mapState } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreProfileControl',
 
     inject: ['route', 'routerErrorHandler'],
 
-    data: () => ({
-        visible: false,
-    }),
-
-    computed: {
-        ...mapState(['user']),
-        ...mapState('layout', ['isTouch']),
-    },
-
-    methods: {
-        hide() {
+    setup() {
+        const visible = ref(false)
+        const store = useStore()
+        return {
+            one: computed(() => store.state[uesr]),
+            two: computed(() => store.state[layout].isTouch)
+        }
+        function hide() {
             this.visible = false;
-        },
-        toggle() {
+        }
+        function toggle() {
             this.visible = !this.visible;
-        },
-        visitProfile() {
+        }
+        function visitProfile() {
             this.$router.push({
                 name: 'administration.users.show',
                 params: { user: this.user.id },
             })
-        },
+        }
     },
 
     render() {

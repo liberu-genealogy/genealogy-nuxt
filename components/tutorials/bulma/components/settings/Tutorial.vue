@@ -26,7 +26,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import CoreTutorial from '../../../core/components/settings/Tutorial.vue';
-
+import { ref, computed, useStore, watch } from 'vue';
 library.add(faQuestion);
 
 export default {

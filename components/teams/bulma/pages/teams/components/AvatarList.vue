@@ -12,6 +12,7 @@
 <script>
 import { VTooltip } from 'v-tooltip';
 import Avatar from '~/components/users/bulma/pages/users/components/Avatar.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'AvatarList',

@@ -8,6 +8,7 @@
 
 <script>
 import { VTooltip } from 'v-tooltip';
+import { ref, computed, useStore } from 'vue';
 
 export default {
     name: 'Avatar',
@@ -23,11 +24,12 @@ export default {
         },
     },
 
-    computed: {
-        tooltip() {
-            return this.user.person?.appellative
-                ?? this.user.person?.name;
-        }
+    setup() {
+        const tooltip = computed(() => {
+            return this.user.person?appellative:''||this.user.person?name:''
+            // return this.user.person?.appellative
+            //     ?? this.user.person?.name;
+        })
     }
 };
 </script>

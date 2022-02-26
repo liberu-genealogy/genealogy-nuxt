@@ -131,61 +131,50 @@ import PasswordStrength from '~/components/auth/PasswordStrength.vue'; // TODO::
 import DeleteModal from '~/components/users/bulma/pages/users/components/DeleteModal.vue';
 import Tokens from '~/components/users/bulma/pages/users/components/Tokens.vue';
 import Sessions from '~/components/users/bulma/pages/users/components/Sessions.vue';
+import { ref, computed, useStore } from 'vue';
+
 
 library.add(faUserTie, faTrashAlt, faKey, faRedo);
 
 export default {
     meta: {
         breadcrumb: 'edit',
-        title: 'Edit User',
+        title: 'Edit User'
     },
-
-    components: {
-        Accessories,
-        DeleteModal,
-        EnsoForm,
-        FormField,
-        PasswordStrength,
-        Sessions,
-        Tab,
-        Tokens,
-    },
-
+    components: { Accessories, DeleteModal, EnsoForm, FormField, PasswordStrength, Sessions, Tab, Tokens },
     inject: ['i18n', 'canAccess', 'errorHandler', 'route', 'routerErrorHandler', 'toastr'],
-
-    data: () => ({
-        deletableUser: null,
-        ready: false,
-        pivotParams: { userGroups: { id: null } },
-        password: null,
-        passwordConfirmation: null,
-    }),
-
-    computed: {
-        ...mapState(['enums', 'user']),
-        canAccessSessions() {
+    setup() {
+        const deletableUser = ref(null)
+        const ready = ref(false)
+        const pivotParams = ref({ 
+            userGroups = { id: null }
+        })
+        const password = ref(null)
+        const passwordConfirmation = ref(null)
+        const store = useStore()
+        return {
+            two: computed(() => store.state[enums].user)
+        }
+        const canAccessSessions = computed(() => {
             return this.canAccess('administration.users.sessions.index')
                 && (`${this.user.role.id}` === this.enums.roles.Admin
                 || this.user.id === this.$route.params.user);
-        },
-        canAccessTokens() {
+        })
+        const canAccessTokens = computed(() => {
             return this.canAccess('administration.users.tokens.index');
-        },
-    },
-
-    methods: {
-        navigateToIndex() {
+        })
+        function navigateToIndex() {
             this.deletableUser = null;
-
             this.$nextTick(() => this.$router
                 .push({ name: 'administration.users.index' })
                 .catch(this.routerErrorHandler));
-        },
-        resetPassword() {
+        }
+        function resetPassword() {
             axios.post(this.route('administration.users.resetPassword', this.$route.params))
                 .then(({ data }) => this.toastr.success(data.message))
                 .catch(this.errorHandler);
-        },
-    },
-};
+        }
+    }
+}
+
 </script>

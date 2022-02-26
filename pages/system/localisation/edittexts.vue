@@ -154,49 +154,42 @@ import { faSearch, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { focus, selectOnFocus } from '@enso-ui/directives';
 import { EnsoSelect } from '@enso-ui/select/bulma';
 import VueSwitch from '@enso-ui/switch/bulma';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faSearch, faTrashAlt);
-
 export default {
-    meta: {
-        breadcrumb: 'edit texts',
-        title: 'Edit Texts',
-    },
-
+    meta: { breadcrumb: 'edit texts', title: 'Edit Texts' },
     inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'],
-
     directives: { focus, selectOnFocus },
-
     components: { EnsoSelect, VueSwitch },
-
-    data: () => ({
-        langFile: {},
-        originalLangFile: {},
-        locales: [],
-        selectedLocale: null,
-        query: null,
-        boxHeight: 0,
-        loading: false,
-        filterMissing: false,
-        filterCore: true,
-    }),
-
-    computed: {
-        ...mapState('layout', ['isMobile']),
-        ...mapState(['meta']),
-        styleObject() {
+    setup() {
+        const langFile = ref({})
+        const originalLangFile = ref({})
+        const locales = ref([])
+        const selectedLocale = ref(null)
+        const query = ref(null)
+        const boxHeight = ref(0)
+        const loading = ref(false)
+        const filterMissing = ref(false)
+        const filterCore = ref(true)
+        const store = useStore()
+        return {
+            one: computed(() => store.state[layout].isMobile),
+            two: computed(() => store.state[meta])
+        }
+        const styleObject = computed(() => {
             return {
                 'max-height': this.boxHeight,
                 'overflow-y': 'auto',
                 'overflow-x': 'hidden',
-            };
-        },
-        langKeys() {
+            }
+        })
+        const langKeys = computed(() => {
             return this.filterMissing
                 ? Object.keys(this.originalLangFile).filter(key => !this.originalLangFile[key])
                 : Object.keys(this.langFile);
-        },
-        filteredKeys() {
+        })
+        const filteredKeys = computed(() => {
             if (!this.query) {
                 return this.sortedKeys();
             }
@@ -205,44 +198,38 @@ export default {
 
             return this.langKeys.filter(key => (key.toLowerCase().indexOf(query) > -1
                 || (this.langFile[key] && this.langFile[key].toLowerCase().indexOf(query) > -1)));
-        },
-        isNewKey() {
+        })
+        const isNewKey = computed(() => {
             return this.selectedLocale
                 && this.query && this.filteredKeys.indexOf(this.query) === -1;
-        },
-        keysCount() {
+        })
+        const keysCount = computed(() => {
             return this.langKeys.length;
-        },
-        subDir() {
+        })
+        const subDir = computed(() => {
             return this.filterCore ? 'app' : 'enso';
-        },
-    },
-
-    watch: {
-        isMobile: {
-            handler: 'setBoxHeight',
-        },
-        filterCore: {
-            handler: 'getLangFile',
-        },
-    },
-
-    created() {
-        this.init();
-        this.setBoxHeight();
-    },
-
-    methods: {
-        init() {
+        })
+        const isMobile = ref('')
+        watch(isMobile, (handler) => {
+            const handler = ref('setBoxHeight')
+        })
+        const filterCore = ref('')
+        watch(filterCore, (handler) => {
+            const handler = ref('getLangFile')
+        })
+        created(() => {
+            this.init()
+            this.setBoxHeight()
+        })
+        function init() {
             this.loading = true;
-
             this.$axios.get(this.route('system.localisation.editTexts'))
                 .then(({ data }) => {
                     this.loading = false;
                     this.locales = data;
                 }).catch(this.errorHandler);
-        },
-        getLangFile() {
+        }
+        function getLangFile() {
             if (!this.selectedLocale) {
                 this.langFile = {};
                 this.updateOriginal();
@@ -259,10 +246,9 @@ export default {
                 this.langFile = data;
                 this.updateOriginal();
             }).catch(this.errorHandler);
-        },
-        saveLangFile() {
+        }
+        function saveLangFile() {
             this.loading = true;
-
             this.$axios.patch(this.route('system.localisation.saveLangFile', {
                 subDir: this.subDir,
                 language: this.selectedLocale,
@@ -272,37 +258,36 @@ export default {
                 this.loading = false;
                 this.toastr.success(data.message);
             }).catch(this.errorHandler);
-        },
-        addKey() {
+        }
+        function addKey() {
             this.$set(this.langFile, this.query, null);
             this.updateOriginal();
             this.focusIt();
-        },
-        removeKey(key) {
+        }
+        function removeKey(key) {
             this.$delete(this.langFile, key);
             this.updateOriginal();
-        },
-        focusIt(id = null) {
+        }
+        function focusIt(id = null) {
             id = id || this.query;
-
             this.$nextTick(() => {
                 document.getElementById(id).focus();
             });
-        },
-        setBoxHeight() {
+        }
+        function setBoxHeight() {
             this.boxHeight = document.body.clientHeight - (this.isMobile ? 420 : 388);
-        },
-        updateOriginal() {
+        }
+        function updateOriginal() {
             this.originalLangFile = JSON.parse(JSON.stringify(this.langFile));
-        },
-        merge() {
+        }
+        function merge() {
             this.$axios.patch(this.route('system.localisation.merge'))
                 .then(({ data }) => {
                     this.loading = false;
                     this.toastr.success(data.message);
                 }).catch(this.errorHandler);
-        },
-        sortedKeys() {
+        }
+        function sortedKeys() {
             return this.langKeys.sort((a, b) => {
                 if (a.toLowerCase() < b.toLowerCase()) {
                     return -1;
@@ -314,9 +299,9 @@ export default {
 
                 return 0;
             });
-        },
-    },
-};
+        }
+    }
+}
 </script>
 
 <style lang="scss" scoped>

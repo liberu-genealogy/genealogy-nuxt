@@ -13,6 +13,7 @@
 import Menus from '~/components/menus/bulma/components/menu/Menus.vue';
 import CoreSidebar from '../../../core/components/menu/Sidebar.vue';
 import VueAside from '../VueAside.vue';
+import { ref, computed } from 'vue';
 
 export default {
     name: 'Sidebar',

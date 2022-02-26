@@ -19,6 +19,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from '@enso-ui/modal/bulma';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faExternalLinkAlt);
 
@@ -35,12 +36,11 @@ export default {
             required: true,
         },
     },
-
-    computed: {
-        url() {
+    setup() {
+        const url = computed(() => {
             return this.route('core.files.show', this.file.id);
-        },
-    },
+        })
+    }
 };
 </script>
 

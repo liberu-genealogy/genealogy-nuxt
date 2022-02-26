@@ -34,6 +34,7 @@ import {
     Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent,
 } from '@enso-ui/card/bulma';
 import Documents from './Documents.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faCopy, faPlusSquare);
 
@@ -68,31 +69,28 @@ export default {
             default: '',
         },
     },
-
-    data: () => ({
-        query: '',
-        count: 0,
-    }),
-
-    computed: {
-        ...mapState('layout', ['isMobile']),
-        isEmpty() {
+    setup() {
+        const query = ref('')
+        const count = ref(0)
+        const store = useStore()
+        return {
+            one: computed(() => store.state[layout].isMobile)
+        }
+        const isEmpty = computed(() => {
             return this.count === 0;
-        },
-        uploadLink() {
+        })
+        const uploadLink = computed(() => {
             return this.route('core.documents.store');
-        },
-        displayTitle() {
+        })
+        const displayTitle = computed(() => {
             return !this.isMobile
                 ? this.title || this.i18n('Documents')
                 : null;
-        },
-    },
-
-    watch: {
-        count() {
+        })
+        const count = ref('')
+        watch(count, () => {
             this.$refs.card.resize();
-        },
+        })
     },
 };
 </script>

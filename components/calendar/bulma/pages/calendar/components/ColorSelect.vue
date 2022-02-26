@@ -29,7 +29,7 @@
 
 <script>
 import { VueSelect } from '@enso-ui/select/bulma';
-
+import { ref } from 'vue';
 export default {
     name: 'ColorSelect',
 

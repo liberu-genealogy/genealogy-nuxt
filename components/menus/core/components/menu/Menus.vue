@@ -1,5 +1,6 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreMenus',
@@ -16,35 +17,35 @@ export default {
             default: false,
         },
     },
-
-    computed: {
-        ...mapState('menu', ['editable']),
-        disabled() {
-            return !this.editable;
-        },
-    },
-
-    watch: {
-        collapsed: 'toggle',
-    },
-
-    mounted() {
-        if (this.collapsed) {
-            this.$el.style.height = 0;
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.state[menu].editable)
         }
-    },
-
-    methods: {
-        ...mapMutations('menu', ['organize']),
-        shrink(height) {
+        const disabled = computed(() => {
+            return !this.editable;
+        })
+        const collapsed = ref('')
+        watch(collapsed, () => {
+            const collapsed = ref('toggle')
+        })
+        onMounted(() => {
+            if (this.collapsed) {
+                this.$el.style.height = 0;
+            }
+        })
+        return {
+            ...mapMutations('menu', ['organize']),
+        }
+        function shrink(height) {
             this.$el.style.height = `${parseInt(this.$el.style.height, 10) - height}px`;
             this.$emit('shrink', height);
-        },
-        extend(height) {
+        }
+        function extend(height) {
             this.$el.style.height = `${height + parseInt(this.$el.style.height, 10)}px`;
             this.$emit('extend', height);
-        },
-        toggle() {
+        }
+        function toggle() {
             if (this.collapsed) {
                 const height = this.$el.scrollHeight;
 
@@ -62,13 +63,12 @@ export default {
 
             this.$el.style.height = `${this.$el.scrollHeight}px`;
             this.$emit('extend', this.$el.scrollHeight);
-        },
-        persist() {
+        }
+        function persist() {
             this.$axios.put(this.route('system.menus.organize'), { menus: this.menus })
                 .catch(this.errorHandler);
-        },
+        }
     },
-
     render() {
         return this.$scopedSlots.default({
             menus: this.menus,

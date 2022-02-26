@@ -60,6 +60,7 @@
   import { focus } from "@enso-ui/directives";
   import Errors from "@enso-ui/laravel-validation";
   import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
+  import { ref, useStore, computed, watch } from 'vue';
 
   library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
@@ -86,38 +87,34 @@
         type: String,
       },
     },
-
-    data: () => ({
-      errors: new Errors(),
-      isSuccessful: false,
-      loading: false,
-    }),
-
-    computed: {
-      ...mapState(["meta"]),
-      token() {
+    setup() {
+      const errors = new Errors()
+      const isSuccessful = ref(false)
+      const loading = ref(false)
+      const store = useStore()
+      return {
+        one: computed(() => store.state[meta])
+      }
+      const token = computed(() => {
         return this.route.query.token;
-      },
-
-      postParams() {
-        return this.verifyParams;
-      },
-      verifyParams() {
+      })
+      const postParams = computed(() => {
+         return this.verifyParams;
+      })
+      const verifyParams = computed(() => {
         const { token, loading } = this;
         return { token, loading };
-      },
-      verifyLink() {
+      })
+      const verifyLink = computed(() => {
         return "/api/verify";
-      },
-      resendLink() {
+      })
+      const resendLink = computed(() => {
         return "/api/resend";
-      },
-    },
-    mounted() {
-      this.verify();
-    },
-    methods: {
-      verify() {
+      })
+      onMounted(() => {
+        this.verify();
+      })
+      function verify() {
         this.loading = true;
         this.isSuccessful = false;
 
@@ -143,8 +140,8 @@
                 throw error;
             }
           });
-      },
-      resend() {
+      }
+      function resend() {
         this.loading = true;
         this.isSuccessful = false;
 
@@ -170,8 +167,8 @@
                 throw error;
             }
           });
-      },
-    },
+      }
+    }
   };
 </script>
 

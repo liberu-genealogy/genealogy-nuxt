@@ -92,50 +92,40 @@
 import Vue from 'vue'
 import Vuelidate from 'vuelidate'
 import { required, minLength } from 'vuelidate/lib/validators'
+import { ref, computed, useStore } from 'vue'
 Vue.use(Vuelidate)
-
 export default {
   layout: 'default',
-  head: {
-    title: 'Stripe'
-  },
-  meta: {
-    breadcrumb: 'stripe',
-    permission: { name: 'subscription menu' },
-    title: 'Stripe',
-  },
-  data() {
-    return {
-      error: false,
-      message: "",
-      payment: {
-        card_holder_name: null,
-        card_number: null,
-        month_year: null,
-        cvv: null,
-        plan_id: 'price_1JUYYOAGwU4VOfbzZ1Gmdm8P',
-      }
-    };
-  },
-  validations: {
-    payment: {
-      card_holder_name: {
-        required,
-      },
-      card_number: {
-        required,
-      },
-      month_year: {
-        required,
-      },
-      cvv: {
-        required,
-        minLength:minLength(3)
-      },
-    },
-  },
-  methods: {
-    submit() {
+  head: { title: 'Stripe' },
+  meta: { breadcrumb: 'stripe', permission: { name: 'subscription menu' }, title: 'Stripe'},
+  setup() {
+    const error = ref(false)
+    const message = ref('')
+    const payment = ref({
+      card_holder_name = ref(null),
+      card_number = ref(null),
+      month_year = ref(null),
+      cvv = ref(null),
+      plan_id = ref('price_1JUYYOAGwU4VOfbzZ1Gmdm8P')
+    })
+    return { error, message, payment }
+    const validations = ref({
+      payment = ref({
+        card_holder_name = ref({
+          required
+        }),
+        card_number = ref({
+          required
+        }),
+        month_year = ref({
+          required
+        }),
+        cvv = ref({
+          required, minLength:minLength(3)
+        })
+      })
+    })
+    function submit() {
       this.$v.$touch();
       if (this.$v.$invalid) {
         console.log("fail")
@@ -147,7 +137,7 @@ export default {
             .catch(error => {
               console.log(error)
             });
-      }
+        }
     }
   }
 }

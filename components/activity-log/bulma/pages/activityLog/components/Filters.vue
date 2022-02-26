@@ -37,6 +37,7 @@
 <script>
 import { mapState } from 'vuex';
 import { EnsoDateFilter, EnsoSelectFilter as SelectFilter } from '@enso-ui/filters/bulma';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'Filters',
@@ -52,8 +53,12 @@ export default {
             required: true,
         },
     },
-    computed: {
-        ...mapState(['enums']),
+    setup() {
+        const store = useStore()
+        return{
+            one: computed(() => store.state[enums])
+        }
+        const filters = ref('')
     },
     watch: {
         filters: {

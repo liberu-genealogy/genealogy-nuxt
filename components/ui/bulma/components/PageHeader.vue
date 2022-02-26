@@ -22,6 +22,7 @@
 <script>
 import CorePageHeader from '../../core/components/PageHeader.vue';
 import Breadcrumbs from './Breadcrumbs.vue';
+import { ref } from 'vue';
 
 export default {
     name: 'PageHeader',

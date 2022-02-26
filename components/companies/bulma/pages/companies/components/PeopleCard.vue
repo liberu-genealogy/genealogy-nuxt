@@ -31,6 +31,7 @@ import {
     Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent,
 } from '@enso-ui/card/bulma';
 import People from './People.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faAddressCard, faPlusSquare);
 
@@ -57,28 +58,25 @@ export default {
             default: null,
         },
     },
-
-    data: () => ({
-        query: '',
-        count: 0,
-    }),
-
-    computed: {
-        ...mapState('layout', ['isMobile']),
-        displayTitle() {
+    setup() {
+        const query = ref('')
+        const count = ref(0)
+        const store = useStore()
+        return{
+            one: computed(() => store.state[layout].isMobile)
+        }
+        const displayTitle = computed(() => {
             return !this.isMobile
                 ? this.title || this.i18n('People')
                 : null;
-        },
-        isEmpty() {
+        })
+        const isEmpty = computed(() => {
             return this.count === 0;
-        },
-    },
-
-    watch: {
-        count() {
+        })
+        const count = ref('')
+        watch(count, () => {
             this.$refs.card.resize();
-        },
-    },
+        })
+    }
 };
 </script>

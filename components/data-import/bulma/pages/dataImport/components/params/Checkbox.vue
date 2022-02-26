@@ -5,7 +5,7 @@
 
 <script>
 import VueSwitch from '@enso-ui/switch/bulma';
-
+import { ref, computed, useStore, watch} from 'vue';
 export default {
     name: 'Checkbox',
 

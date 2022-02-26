@@ -136,19 +136,14 @@ import { VTooltip, VPopover } from 'v-tooltip';
 import { clickOutside } from '@enso-ui/directives';
 import Filters from '~/components/tasks/bulma/pages/tasks/components/Filters.vue';
 import Flags from '~/components/tasks/bulma/pages/tasks/components/Flags.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faClock, faInfoCircle, faCog);
 
 export default {
-    meta: {
-        breadcrumb: 'index',
-        title: 'Tasks',
-    },
-
+    meta: { breadcrumb: 'index', title: 'Tasks' },
     inject: ['i18n', 'route', 'toastr', 'errorHandler'],
-
     directives: { tooltip: VTooltip, clickOutside },
-
     components: {
         Avatar,
         EnsoDatepicker,
@@ -160,45 +155,41 @@ export default {
         Flags,
         EnsoSelect,
     },
-
-    data: () => ({
-        apiVersion: 1.1,
-        ready: false,
-        filters: {
+    setup() {
+        const apiVersion = ref(1.1)
+        const ready = ref(false)
+        const filters = ref({
             tasks: {
                 completed: false,
                 flag: null,
                 allocated_to: null,
             },
-        },
-        intervals: {
+        })
+        const intervals = ref({
             tasks: {
                 reminder: {
                     min: null,
                     max: null,
                 },
-            },
-        },
-        params: {
+            }
+        })
+        const params = ref({
             dateInterval: 'today',
             overdue: null,
-        },
-    }),
-
-    computed: {
-        ...mapState(['enums', 'user', 'meta']),
-        canChangeAllocation() {
+        })
+        const store = useStore();
+        return {
+            one: computed(() => store.state[enums].user.meta)
+        }
+        const canChangeAllocation = computed(() => {
             return [
                 this.enums.roles.Admin, this.enums.roles.Supervisor,
             ].includes(`${this.user.role.id}`);
-        },
-        dateFormat() {
+        })
+        const dateFormat = computed(() => {
             return this.meta.dateTimeFormat.split(':s').shift();
-        },
-    },
-
-    methods: {
-        update(id, attribute, value) {
+        })
+        function update(id, attribute, value) {
             this.$axios.patch(this.route('tasks.update', { task: id }), {
                 [attribute]: value,
             }).then(({ data: { message } }) => {
@@ -211,13 +202,13 @@ export default {
                     this.errorHandler(error);
                 }
             });
-        },
+        }
+        function isOpen(ref) {
+            return this.$refs[ref]?isOpen:''
+        }
+    }
+}
 
-        isOpen(ref) {
-            return this.$refs[ref]?.isOpen;
-        },
-    },
-};
 </script>
 
 <style lang="scss">

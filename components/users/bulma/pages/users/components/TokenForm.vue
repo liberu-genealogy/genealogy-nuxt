@@ -11,6 +11,7 @@
 <script>
 import { Modal } from '@enso-ui/modal/bulma';
 import { EnsoForm } from '@enso-ui/forms/bulma';
+import { ref } from 'vue';
 
 export default {
     name: 'TokenForm',

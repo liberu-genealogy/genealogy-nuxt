@@ -23,6 +23,7 @@ import { Modal } from '@enso-ui/modal/bulma';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMinus, faPlus, faUserClock } from '@fortawesome/free-solid-svg-icons';
 import ColorSelect from './ColorSelect.vue';
+import { ref, computed, useStore } from 'vue';
 
 library.add(faUserClock, faPlus, faMinus);
 
@@ -39,15 +40,17 @@ export default {
             required: true,
         },
     },
-
-    computed: {
-        ...mapState(['meta']),
-        path() {
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.state[meata])
+        }
+        const path = computed(() => {
             return this.calendar.id
                 ? this.route('core.calendar.edit', { calendar: this.calendar.id })
                 : this.route('core.calendar.create');
-        },
-    },
+        })
+    }
 };
 </script>
 

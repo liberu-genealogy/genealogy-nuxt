@@ -1,45 +1,42 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreHome',
-
-    data: () => ({
-        loading: true,
-    }),
-
-    computed: {
-        ...mapState(['meta']),
-        ...mapState('auth', ['isAuth', 'intendedRoute', 'intendedPath']),
-        ...mapState(['appState', 'showQuote']),
-    },
-
-    watch: {
-        appState(appState) {
+    setup() {
+        const loading = ref(true)
+        const store = useStore()
+        const $data = ref(['isAuth', 'intendedRoute', 'intendedPath'])
+        return{
+            one: computed(() => store.state[meta]),
+            two: computed(() => store.state[auth].$data),
+            three: computed(() => store.state[appState].showQuote)
+        }
+        const appState = ref('')
+        watch(appState, (appState) => {
             if (appState) {
                 this.enterApp();
             }
-        },
-    },
-
-    created() {
-        this.loadAppState();
-    },
-
-    methods: {
-        ...mapMutations('auth', ['setIntendedRoute', 'setIntendedPath']),
-        ...mapMutations('layout', ['home']),
-        ...mapActions(['loadAppState']),
-        ...mapActions('layout', ['setTheme']),
-        enterApp() {
+        })
+        created(() => {
+            this.loadAppState();
+        })
+        return {
+            ...mapMutations('auth', ['setIntendedRoute', 'setIntendedPath']),
+            ...mapMutations('layout', ['home']),
+            ...mapActions(['loadAppState']),
+            ...mapActions('layout', ['setTheme']),
+        }
+        function enterApp() {
             this.redirectIfNeeded();
             this.loading = false;
 
             if (!this.showQuote) {
                 this.hide();
             }
-        },
-        redirectIfNeeded() {
+        }
+        function redirectIfNeeded() {
             if (this.intendedRoute) {
                 const { name, params, query } = this.intendedRoute;
                 this.$router.push({ name, params, query })
@@ -51,12 +48,12 @@ export default {
                 // this.$router.push({ path: '/' })
                 this.$router.push({ name: 'dashboard.index' })
             }
-        },
-        hide() {
+        }
+        function hide() {
             this.home(false);
-        },
+        }
     },
-
+    
     render() {
         return this.$scopedSlots.default({
             loading: this.loading,

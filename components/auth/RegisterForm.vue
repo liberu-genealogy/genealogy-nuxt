@@ -288,6 +288,7 @@
   import { focus } from "@enso-ui/directives";
   import Errors from "@enso-ui/laravel-validation";
   import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
+  import { ref, computed, useStore, watch } from 'vue';
 
   library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
@@ -295,10 +296,6 @@
     name: "RegisterForm",
     components: { AuthIndex },
     directives: { focus },
-    // inject: {
-    //   i18n: { from: "i18n" },
-    // },
-
     props: {
       action: {
         required: true,
@@ -309,40 +306,37 @@
         type: String,
       },
     },
-
-    data: () => ({
-      first_name: "",
-      last_name: "",
-      email: "",
-      // errors: new Errors(),
-      errorInput: "",
-      message: "",
-      isSuccessful: false,
-      loading: false,
-      password: "",
-      passwordMeta: {
-        content: "password",
-      },
-      password_confirmation: null,
-      confirmationMeta: {
-        content: "password",
-      },
-      terms: "",
-      device_name: 'mac',
-    }),
-
-    computed: {
-      ...mapState(["meta"]),
-      hasPassword() {
+    setup() {
+      const first_name = ref('')
+      const last_name = ref('')
+      const email = ref('')
+      const errorInput = ref('')
+      const message = ref('')
+      const isSuccessful = ref(false)
+      const loading = ref(false)
+      const passwordMeta = ref({
+        content: 'password'
+      })
+      const password_confirmation = ref(null)
+      const confirmationMeta = ref({
+        content: 'password'
+      })
+      const terms = ref('')
+      const device_name = ref('mac')
+      const store = useStore()
+      return {
+        one: computed(() => store.state[meta])
+      }
+      const hasPassword = computed(() => {
         return this.password !== null && this.password.length;
-      },
-      match() {
+      })
+      const match = computed(() => {
         return this.hasPassword && this.password === this.password_confirmation;
-      },
-      postParams() {
+      })
+      const postParams = computed(() => {
         return this.registerParams;
-      },
-      registerParams() {
+      })
+      const registerParams = computed(() => {
         const {
           email,
           password,
@@ -358,22 +352,18 @@
           last_name,
           password_confirmation,
         };
-      },
-      registerLink() {
+      })
+      const registerLink = computed(() => {
         return "api/register";
-      },
-    },
-
-    methods: {
-      loginSocial(provider) {
+      })
+      function loginSocial(provider) {
         this.provider = provider;        
-        window.location.href = `${process.env.baseUrl}/api/login/${provider}`;        
-      },
-      submit() {
+        window.location.href = `${process.env.baseUrl}/api/login/${provider}`;
+      }
+      function submit() {
         this.loading = true;
         this.isSuccessful = false;
         let user = this.postParams;
-
         this.$axios
         .get('/sanctum/csrf-cookie').then(response =>{
           this.$axios
@@ -404,9 +394,9 @@
               }
             });
           })
-      },
-    },
-  };
+      }
+    }
+}
 
   function openWindow(url, title, options = {}) {
     if (typeof url === 'object') {

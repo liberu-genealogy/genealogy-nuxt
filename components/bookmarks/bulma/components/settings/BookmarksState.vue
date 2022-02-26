@@ -22,7 +22,7 @@
 <script>
 import VueSwitch from '@enso-ui/switch/bulma';
 import CoreBookmarkState from '~/components/bookmarks/core/components/settings/BookmarksState.vue';
-
+import { ref, computed, useStore} from 'vue';
 export default {
     name: 'BookmarksState',
 

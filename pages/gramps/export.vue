@@ -28,7 +28,7 @@
             <div v-if="error" class="notification is-danger">
               {{ message }}
             </div>
-            <div v-for="error in errors" class="notification is-danger">
+            <div v-for="error in errors" :key="error" class="notification is-danger">
               {{ error[0] }}
             </div>
             <div class="field import_block">
@@ -75,34 +75,29 @@
   import Loading from 'vue-loading-overlay';
   import 'vue-loading-overlay/dist/vue-loading.css';
   import FileSaver  from 'file-saver';
+  import { ref, computed, useStore } from 'vue';
+
   export default {
     layout: 'auth',
-    components: {
-      Loading
-    },
-    head: {
-      title: 'Gramps XML Export'
-    },
-    data() {
-      return {
-        error: false,
-        message: "",
-        errors: null,
-        file: undefined,
-        fileName: '',
-        isLoading: false,
-        fullPage: true,
-        color: '#4fcf8d',
-        backgroundColor: '#ffffff',
-        response: null,
-        inProgress: 0,
-        interval: null,
-        generatedFile: null,
-        fileName: ''
-      };
-    },
-    methods: {
-      handleExportFiles() {
+    components: { Loading },
+    head: { title: 'Gramps XML Export'},
+    setup() {
+      const error = ref(false)
+      const message = ref('')
+      const errors = ref(null)
+      const file = ref('undefined')
+      const fileName = ref('')
+      const isLoading = ref(false)
+      const fullPage = ref(true)
+      const color = ref('#4fcf8d')
+      const backgroundColor = ref('#ffffff')
+      const response = ref(null)
+      const inProgress = ref(0)
+      const interval = ref(null)
+      const generatedFile = ref(null)
+      const fileName = ref('')
+      return { error, message, errors, file, fileName, isLoading, fullPage, color, backgroundColor, response, inProgress, interval, generatedFile, fileName }
+      function handleExportFiles() {
         this.$axios.$get('/api/gramps-export', {
           headers: {
             'content-type': 'multipart/form-data'
@@ -115,14 +110,14 @@
         }).catch(err => {
           console.log("error");
           console.log(err);
-        })
-      },
-      downloadFile() {
+        })        
+      }
+      function downloadFile() {
         FileSaver.saveAs(this.generatedFile, this.fileName);
         this.generatedFile = null
         this.fileName = ''
-      },
-      async checkJobCompleted() {
+      }
+      async function checkJobCompleted() {
         await this.$axios
            .$post("/api/check-gramps-export", {}, {
             headers: {
@@ -132,9 +127,9 @@
           })
           console.log(response);
       }
+
     }
   }
-
 </script>
 <style type="text/css" scoped>
 .file.is-large.is-boxed{

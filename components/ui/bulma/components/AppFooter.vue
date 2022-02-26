@@ -29,6 +29,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import BaseAppFooter from '../../core/components/AppFooter.vue';
 import { mapGetters, mapActions } from "vuex";
+import { ref, computed, useStore, watch } from 'vue';
 library.add(faHeart, faGithub);
 
 export default {
@@ -38,9 +39,12 @@ export default {
 
     components: { BaseAppFooter },
 
-    computed: {
-         ...mapGetters(['loggedInUser'])
-    },
+    setup() {
+        const store = useStore()
+        return{
+            one: computed(() => store.getters['${loggedInUser}'])
+        }
+    }
 };
 </script>
 

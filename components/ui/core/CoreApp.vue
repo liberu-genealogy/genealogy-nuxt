@@ -5,46 +5,40 @@ import errorHandler from '~/mixins/errorHandler';
 import routerErrorHandler from '~/mixins/routerErrorHandler';
 import RouteMapper from '@enso-ui/route-mapper';
 import toastr from '@enso-ui/toastr';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreApp',
 
     mixins: [canAccess, errorHandler, routerErrorHandler],
-
-    data: () => ({
-        routeMapper: null,
-        toastr,
-    }),
-
-    computed: {
-        ...mapState(['meta', 'routes']),
-        ...mapState('auth', ['isAuth']),
-        ...mapState('layout', ['home']),
-        ...mapGetters('localisation', ['rtl']),
-    },
-
-    watch: {
-        routes: {
-            handler() {
-                this.routeMapper = new RouteMapper(this.meta.appUrl, this.routes);
-            },
-            immediate: true,
-            deep: true,
-        },
-    },
-
-    created() {
-        this.loadTheme();
-    },
-
-    methods: {
-        ...mapActions('layout', ['loadTheme']),
-        i18n(key, params = null) {
+    setup() {
+        const routeMapper = ref(null)
+        const toastr = ref('')
+        const store = useStore()
+        return {
+            one: computed(() => store.state[meta].routes),
+            two: computed(() => store.state[auth].isAuth),
+            three: computed(() => store.state[layout].home),
+            four: computed(() => store.getters['${localisation}/rtl']),
+        }
+        const routes = ref('')
+        watch(routes, (handler) => {
+            this.routeMapper = new RouteMapper(this.meta.appUrl, this.routes);
+            const immediate = ref(true)
+            const deep = ref(true)
+        })
+        created(() => {
+            this.loadTheme();
+        })
+        return {
+            ...mapActions('layout', ['loadTheme']),
+        }
+        function i18n(key, params = null) {
             return this.$i18n(key, params);
-        },
-        route(name, params, absolute) {
+        }
+        function route(name, params, absolute) {
             return this.routeMapper.get(name, params, absolute);
-        },
+        }
     },
 
     provide() {

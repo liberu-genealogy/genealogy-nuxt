@@ -15,6 +15,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCogs } from '@fortawesome/free-solid-svg-icons';
 import CoreSettingsControl from '../../../core/components/navbar/SettingsControl.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faCogs);
 

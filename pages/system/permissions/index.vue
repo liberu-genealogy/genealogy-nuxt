@@ -18,6 +18,7 @@
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import cssClass from '~/utils/permission';
+import { ref, computed } from 'vue';
 
 export default {
     meta: {
@@ -26,11 +27,10 @@ export default {
     },
 
     components: { EnsoTable },
-
-    methods: {
-        cssClass(columnEnum, row) {
+    setup() {
+        function cssClass(columnEnum, row) {
             return cssClass(columnEnum, row);
-        },
-    },
+        }
+    }
 };
 </script>

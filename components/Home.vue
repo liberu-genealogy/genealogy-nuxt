@@ -7,8 +7,7 @@
                     <a class="navbar-item" href="#">
                         <img src="~assets/images/logo1.svg">
                     </a>
-                    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-                        data-target="navbarBasicExample" >
+                    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" >
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
@@ -39,8 +38,7 @@
                                 Log Out</a>
                         <div class="navbar-item" v-if="!isAuth">
                             <div class="buttons">
-                                <NuxtLink to="/register"
-                                    class="button theme-button has-background-secondary has-text-weight-medium has-text-white">
+                                <NuxtLink to="/register" class="button theme-button has-background-secondary has-text-weight-medium has-text-white">
                                     Create an account
                                 </NuxtLink>
                             </div>
@@ -59,8 +57,7 @@
                               It is designed to have extensive functionality while being simple to use, secure, and accessible.
                               You can easily import and export GEDCOM files, view and manipulate data, and unlock extra features. Sign-up to start your free family tree today!
                             </h2>
-                            <NuxtLink to="/register"
-                                class="button theme-button theme-button-xl has-background-secondary has-text-weight-medium has-text-white mt-6" v-if="!isAuth">
+                            <NuxtLink to="/register" class="button theme-button theme-button-xl has-background-secondary has-text-weight-medium has-text-white mt-6" v-if="!isAuth">
                                 Create Your Own Tree
                             </NuxtLink>
                             <div class="is-size-6 has-text-light mt-5" v-if="!isAuth"> <NuxtLink class="has-text-light" to="/login"> Already have an account? Sign in </NuxtLink></div>
@@ -140,8 +137,7 @@
                             <img src="~assets/images/Checkmark.svg" alt="" class="bullet mt-2 mr-3">
                       Set up your first family tree free of charge. We offer different pricing levels with optional subscriptions
                       if you need to create extra trees</div>
-                        <NuxtLink to="/register" v-if="!isAuth"
-                            class="button theme-button theme-button-xl has-background-primary has-text-weight-medium has-text-white mt-5">
+                        <NuxtLink to="/register" v-if="!isAuth" class="button theme-button theme-button-xl has-background-primary has-text-weight-medium has-text-white mt-5">
                             Create Your Own Tree
                         </NuxtLink>
                     </div>
@@ -157,8 +153,10 @@
                     <h1 class="is-size-2 has-text-black has-text-weight-bold">
                         Create &amp; manage your family tree
                     </h1>
-                    <div class="is-size-6 has-text-black has-text-weight-regular mt-2">Family Tree 365 lets you create and manage your family tree the quick and easy way.
-                      Register to access our user-friendly platform that gives you all the tools you need to create, manage, and research your family genealogy.</div>
+                    <div class="is-size-6 has-text-black has-text-weight-regular mt-2">
+                        Family Tree 365 lets you create and manage your family tree the quick and easy way.
+                        Register to access our user-friendly platform that gives you all the tools you need to create, manage, and research your family genealogy.
+                    </div>
                 </div>
                 <div class="column is-12 has-text-centered">
                     <div class="fadein">
@@ -179,13 +177,12 @@
                         Start Your Free Tree Now!
                     </h1>
                     <div class="is-size-6 has-text-white has-text-weight-regular">
-                      Your first tree is 100% free! If you need more, we offer affordable upgrades via our simple subscription plans.
-                      Need help? We can assist you to get started and explain Family Tree 365 features. Any issues? You can always contact our support team.
+                        Your first tree is 100% free! If you need more, we offer affordable upgrades via our simple subscription plans.
+                        Need help? We can assist you to get started and explain Family Tree 365 features. Any issues? You can always contact our support team.
                     </div>
                 </div>
                 <div class="footer-action column is-5 is-flex ai--c jc--fe">
-                    <NuxtLink to="/register" v-if="!isAuth"
-                        class="button theme-button theme-button-xl has-background-primary has-text-weight-medium has-text-white">
+                    <NuxtLink to="/register" v-if="!isAuth" class="button theme-button theme-button-xl has-background-primary has-text-weight-medium has-text-white">
                         Create Your Own Tree
                     </NuxtLink>
                 </div>
@@ -196,12 +193,13 @@
                     <img src="~assets/images/footer-logo.svg" width="180px" class="mb-5">
                     <div class="is-size-7 has-text-light has-text-weight-regular" style="line-height: 1.4rem;">
                         Copyright &copy; Genealogy Websites Ltd.<br>Registered Address: Kemp House, 160 City Road, London, United Kingdom, EC1V 2NX
-			<br>Company Number: 13641244
+			            <br>Company Number: 13641244
                     </div>
                     <p class="mt-2">
                         <a href="https://www.facebook.com/familytree365" target="_blank" class="is-size-7 has-text-link is-flex">
-                            <i class="fab fa-facebook mr-2" style="margin-top: 0.2rem;"></i>Follow us on Facebook </a>
-                        </p>
+                            <i class="fab fa-facebook mr-2" style="margin-top: 0.2rem;"></i>Follow us on Facebook
+                        </a>
+                    </p>
                 </div>
                 <div class="column is-5">
                     <h1 class="is-size-5 has-text-white has-text-weight-bold mb-5">
@@ -228,19 +226,20 @@
                     <div class="is-flex ml-1 mb-4">
                         <i class="fas fa-envelope mr-2 has-text-primary"></i>
                         <a href="mailto:support@familytree365.com" class="is-size-7 has-text-link">
-                            support@familytree365.com</a>
+                            support@familytree365.com
+                        </a>
                     </div>
                     <div class="is-flex mb-4">
-                        <!-- <img src="img/mobile.svg" alt="" class="ml-2 mr-2"> -->
                         <i class="fas fa-mobile-alt ml-2 mr-2 has-text-primary"></i>
                         <a href="tel:+44 20 8064 1187" class="is-size-7 has-text-link is-flex">
-                          +44 20 8064 1187</a>
+                          +44 20 8064 1187
+                        </a>
                     </div>
                     <div class="is-flex ml-1 mb-5">
                         <i class="fab fa-whatsapp mr-2 has-text-primary"></i>
-                        <a href="https://api.whatsapp.com/send?phone=+44 20 8064 1187"
-                            class="is-size-7 has-text-link is-flex">
-                            +44 20 8064 1187</a>
+                        <a href="https://api.whatsapp.com/send?phone=+44 20 8064 1187" class="is-size-7 has-text-link is-flex">
+                            +44 20 8064 1187
+                        </a>
                     </div>
                 </div>
             </div>
@@ -256,49 +255,56 @@
     </footer>
     </div>
 </template>
-<script>
-import { mapState, mapMutations, mapActions } from 'vuex'
-export default {
-    meta: {
-        guestGuard: true,
-        title: 'Landing Page'
-    },
-    data() {
-        return {
-            isDark: false,
-            isClear: true,
-        };
-    },
-    computed: {
-        ...mapState('auth', ['isAuth']),
-    },
-    created() {
-        window.addEventListener('scroll', this.handleScroll);
-    },
-    methods: {
-        ...mapActions('auth', ['logout']),
-        async logoutAccount() {
-            await this.logout();
-            // setTimeout(() => {
-            //     this.$router.push('/')
-            // }, 500)
-        },
 
-        handleScroll() {
-            if (window.scrollY >= 10) {
-                this.isClear = false;
-                this.isDark = true;
-            } else {
-                this.isClear = true;
-                this.isDark = false;
-            }
+<script>
+    import { mapState, mapMutations, mapActions } from 'vuex'
+    import { ref, computed } from 'vue'
+    import { useStore } from 'vuex'
+
+    export default {
+        meta: {
+            guestGuard: true,
+            title: 'Landing Page'
         },
-    },
-}
+        setup() {
+            const store = useStore();
+            const isDark = ref('false');
+            const isClear = ref('true');
+            return { isDark, isClear };
+        
+            return {
+                isAuth: computed(() => store.state[auth].isAuth,
+            )};
+
+            created(() => {
+                window.addEventListener('scroll', this.handleScroll);
+            });
+
+            async function logoutAccount() {
+                return{
+                    ...mapActions('auth', ['logout'])
+                }
+                await this.logout();
+            };
+            function handleScroll() {
+                if (window.scrollY >= 10) {
+                    this.isClear = false;
+                    this.isDark = true;
+                } else {
+                    this.isClear = true;
+                    this.isDark = false;
+                }
+            };
+        }
+    }
 </script>
 
 <style scoped>
     @import '~/assets/css/base.css';
+    @import '~/assets/css/bulma.css';
+    @import '~/assets/css/fontawesome.min.css';
+    @import '~/assets/css/svg.css';
+    
     @media screen and (max-width: 1006px) {
         .navbar.is-fixed-top  {
             display: inline !important;

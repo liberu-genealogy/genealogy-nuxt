@@ -42,6 +42,7 @@ import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFlag, faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from '@enso-ui/modal/bulma';
+import { ref, computed, useStore, watch } from 'vue';
 
 import('../styles/colors.scss');
 
@@ -65,12 +66,14 @@ export default {
             default: false,
         },
     },
-
-    computed: {
-        ...mapState(['enums']),
-        update() {
+    setup() {
+        const store = useStore()
+        return{
+            one: computed(() => store.state[enums])
+        }
+        const update = computed(() => {
             return this.enums.eventUpdateType;
-        },
-    },
+        })
+    }
 };
 </script>

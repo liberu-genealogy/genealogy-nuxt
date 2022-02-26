@@ -24,6 +24,7 @@
 import CoreSettings from '../../../core/components/settings/Settings.vue';
 import VueAside from '../VueAside.vue';
 import SidebarState from './SidebarState.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'Settings',

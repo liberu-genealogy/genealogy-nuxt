@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { ref, computed, useStore, watch } from 'vue';
 export default {
     name: 'DiscussionPreview',
 
@@ -48,26 +49,22 @@ export default {
             required: true,
         },
     },
-
-    computed: {
-        avatar() {
+    setup() {
+        const avatar= computed(() => {
             return this.route(
                 'core.avatars.show',
                 this.discussion.owner.avatar.id || 'null',
             );
-        },
-        body() {
+        })
+        const body = computed(() => {
             const div = document.createElement('div');
             div.innerHTML = this.discussion.body;
             return div.textContent || div.innerText || '';
-        },
-    },
-
-    methods: {
-        timeFromNow(date) {
+        })
+        function timeFromNow(date) {
             return this.$formatDistance(date);
-        },
-    },
+        }
+    }
 };
 </script>
 

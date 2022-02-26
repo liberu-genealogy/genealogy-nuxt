@@ -103,6 +103,7 @@ import { faUserClock, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import { Fade } from '@enso-ui/transitions';
 import ColorSelect from './ColorSelect.vue';
 import EventConfirmation from './EventConfirmation.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faUserClock, faPlus, faMinus);
 
@@ -121,63 +122,59 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        timeFormat: 'H:i',
-        confirm: null,
-    }),
-
-    computed: {
-        ...mapState(['meta', 'enums']),
-        isEdit() {
+    setup() {
+        const timeFormat = ref('H:i')
+        const confirm = ref(null)
+        const store = useStore()
+        return{
+            one: computed(() => store.state[meta].enums)
+        }
+        const isEdit = computed(() => {
             return this.event.id;
-        },
-        path() {
+        })
+        const path = computed(() => {
             return this.isEdit
                 ? this.route('core.calendar.events.edit', { event: this.event.id })
                 : this.route('core.calendar.events.create');
-        },
-        reminderFormat() {
+        })
+        const reminderFormat = computed(() => {
             return `${this.meta.dateFormat} ${this.timeFormat}`;
-        },
-    },
-
-    methods: {
-        init() {
+        })
+        function init() {
             this.$refs.form.field('start_date').value = this.date(this.event.start);
             this.$refs.form.field('start_time').value = this.time(this.event.start);
             this.$refs.form.field('end_date').value = this.date(this.event.end);
             this.$refs.form.field('end_time').value = this.time(this.event.end);
-        },
-        reminderFactory() {
+        }
+        function reminderFactory() {
             return {
                 id: null,
                 event_id: this.event.id,
                 scheduled_at: null,
             };
-        },
-        addReminder() {
+        }
+        function addReminder() {
             this.$refs.form.field('reminders')
                 .value.push(this.reminder());
-        },
-        date(date) {
+        }
+        function date(date) {
             return this.$format(date, 'Y-m-d');
-        },
-        time(dateTime) {
+        }
+        function time(dateTime) {
             return this.$format(dateTime, 'H:i');
-        },
-        changeFrequency(frequency) {
+        }
+        function changeFrequency(frequency) {
             this.$refs.form.field('recurrence_ends_at')
                 .meta.hidden = frequency === this.enums.eventFrequencies.Once;
-        },
-        submit($event, updateType) {
+        }
+        function submit($event, updateType) {
             if (this.needConfirm(updateType)) {
                 this.confirm = (updateType) => this.submit($event, updateType);
                 return;
             }
             this.submitForm({ ...this.$refs.form.formData, updateType });
-        },
-        submitForm(params) {
+        }
+        function submitForm(params) {
             this.$axios.patch(
                 this.route('core.calendar.events.update', { event: this.event.id }),
                 params,
@@ -195,12 +192,12 @@ export default {
 
                 this.$refs.form.errorHandler(error);
             });
-        },
-        needConfirm(updateType) {
+        }
+        function needConfirm(updateType) {
             return this.isEdit && updateType === undefined
                 && this.enums.eventFrequencies.Once !== `${this.event.frequency}`;
-        },
-    },
+        }
+    }
 };
 </script>
 

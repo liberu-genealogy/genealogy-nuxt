@@ -96,6 +96,7 @@ import Confirmation from '@enso-ui/confirmation/bulma';
 import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDistance';
 import Url from '@enso-ui/files/src/bulma/pages/files/components/Url.vue';
 import { Fade } from '@enso-ui/transitions';
+import { ref, computed, useStore, watch } from 'vue';
 // import files from '@enso-ui/mixins/files';
 
 library.add(
@@ -122,36 +123,29 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        temporaryLink: '',
-    }),
-
-    computed: {
-        downloadLink() {
+    setup() {
+        const temporaryLink = ref('')
+        const downloadLink = computed(() => {
             return this.route('core.files.download', this.file.id);
-        },
-        openLink() {
+        })
+        const openLink = computed(() => {
             return this.route('core.files.show', this.file.id);
-        },
-        size() {
+        })
+        const size = computed(() => {
             return this.$numberFormat(this.file.size);
-        },
-    },
-
-    methods: {
-        link() {
+        })
+        function link() {
             this.$axios.get(this.route('core.files.link', this.file.id))
                 .then(({ data }) => (this.temporaryLink = data.link))
                 .catch(this.errorHandler);
-        },
-        show() {
+        }
+        function show() {
             window.open(this.openLink, '_blank').focus();
-        },
-        timeFromNow(date) {
+        }
+        function timeFromNow(date) {
             return formatDistance(date);
-        },
-    },
+        }
+    }
 };
 </script>
 

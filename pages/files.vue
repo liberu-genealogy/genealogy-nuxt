@@ -94,7 +94,9 @@ import { EnsoDateFilter } from '@enso-ui/filters/bulma';
 import { Chart } from '@enso-ui/charts/bulma';
 import { EnsoUploader } from '@enso-ui/uploader/bulma';
 import { colors } from '@enso-ui/charts';
-import File from '~/components/files/bulma/pages/files/components/File.vue';
+import File from '~/components/files/bulma/pages/files/components/File.vue';3
+import { ref, computed, watch } from 'vue';
+import { useStore } from 'vuex';
 
 library.add(faSearch, faUndo, faSyncAlt);
 
@@ -104,39 +106,38 @@ export default {
         title: 'Files',
     },
 
-    inject: ['errorHandler', 'i18n', 'route'],
-
     components: {
-        EnsoTabs, Tab, File, Chart, EnsoDateFilter, EnsoUploader,
+        EnsoTabs, Tab, File, Chart, EnsoDateFilter, EnsoUploader
     },
+    setup() {
+        const inject = ref(['errorHandler', 'i18n', 'route']);
+        const loading =ref(false);
+        const files = ref([]);
+        const folders = ref([]);
+        const stats = ref({});
+        const query = ref(null);
+        const offset = ref(0);
+        const interval = ref({
+            min = null,
+            max = null
+        });
 
-    data: () => ({
-        loading: false,
-        files: [],
-        folders: [],
-        stats: {},
-        query: null,
-        offset: 0,
-        interval: {
-            min: null,
-            max: null,
-        },
-    }),
-
-    computed: {
-        ...mapState('layout', ['isMobile']),
-        ...mapGetters('preferences', { locale: 'lang' }),
-        uploadUrl() {
+        const store = useStore();
+        return {
+            one: computed(() => store.getters['${preferences}/locale:lang']),
+            two: computed(() => store.state[layout].isMobile),
+        }
+        const uploadUrl = computed(() => {
             return this.route('core.uploads.store');
-        },
-        colors() {
+        });
+        const colors = computed(() => {
             return colors.slice(0, this.folders.length);
-        },
-        foldersStats() {
+        });
+        const foldersStats = computed(() => {
             return this.folders.map(folder => this.content(folder)
                 .reduce((total, { size }) => (total += size), 0));
-        },
-        chartData() {
+        });
+        const chartData = computed(() => {
             return {
                 labels: this.folders,
                 datasets: [{
@@ -147,38 +148,31 @@ export default {
                         formatter: val => `${this.$numberFormat(val / 1000)} KB`,
                     },
                 }],
-            };
-        },
-        storageUsage() {
+            };  
+        });
+        const storageUsage = computed(() => {
             return this.stats.totalSpaceUsed
-                && this.$numberFormat(this.stats.totalSpaceUsed * 100 / this.stats.storageLimit, 2);
-        },
-        status() {
+                && this.$numberFormat(this.stats.totalSpaceUsed * 100 / this.stats.storageLimit, 2);            
+        });
+        const status = computed(() => {
             return this.storageUsage < 95
                 ? 'has-text-success'
                 : 'has-text-danger';
-        },
-    },
-
-    watch: {
-        query() {
+        });
+        const query = ref('');
+        watch(query, () => {
             this.reset();
-        },
-    },
-
-    created() {
-        this.fetch = debounce(this.fetch, 300);
-    },
-
-    methods: {
-        reset() {
+        });
+        created(() => {
+            this.fetch - debounce(this.fetch, 300);
+        });
+        function reset() {
             this.files = [];
             this.offset = 0;
             this.fetch();
-        },
-        fetch() {
+        }
+        function fetch() {
             this.loading = true;
-
             this.$axios.get(this.route('core.files.index'), {
                 params: { interval: this.interval, query: this.query, offset: this.offset },
             }).then(({ data }) => {
@@ -188,33 +182,32 @@ export default {
                 this.stats = data.stats;
                 this.loading = false;
             }).catch(this.errorHandler);
-        },
-        destroy(id) {
+        }
+        function destroy(id) {
             this.loading = true;
-
             this.$axios.delete(this.route('core.files.destroy', id, false))
                 .then(() => {
                     const index = this.files.findIndex(file => file.id === id);
                     this.files.splice(index, 1);
                     this.loading = false;
                 }).catch(this.errorHandler);
-        },
-        content(folder) {
+        }
+        function content(folder) {
             return this.files.filter(({ type }) => type === folder);
-        },
-        addUploadedFiles(files) {
+        }
+        function addUploadedFiles(files) {
             this.files.push(...files);
-        },
-        computeScrollPosition(event) {
+        }
+        function computeScrollPosition(event) {
             const position = event.target.scrollTop;
             const total = event.target.scrollHeight - event.target.clientHeight;
-
             if (position / total > 0.8) {
                 this.fetch();
             }
-        },
-    },
-};
+        }
+    }
+
+}
 </script>
 
 <style lang="scss">

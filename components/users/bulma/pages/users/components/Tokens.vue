@@ -64,6 +64,7 @@ import { faPlus, faSync, faSearch } from '@fortawesome/free-solid-svg-icons';
 import Url from '~/components/files/bulma/pages/files/components/Url.vue'; // TODO:: refactor to a package
 import Token from './Token.vue';
 import TokenForm from './TokenForm.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faPlus, faSync, faSearch);
 
@@ -83,45 +84,38 @@ export default {
         },
     },
 
-    data: () => ({
-        tokens: [],
-        query: '',
-        form: false,
-        token: '',
-    }),
-
-    computed: {
-        filtered() {
+    setup() {
+        const tokens = ref([])
+        const query = ref('')
+        const form = ref(false)
+        const token = ref('')
+        const filtered = computed(() => {
             const query = this.query.toLowerCase();
 
             return query
                 ? this.tokens.filter(({ name }) => name.toLowerCase().indexOf(query) > -1)
                 : this.tokens;
-        },
-        count() {
+        })
+        const count = computed(() => {
             return this.filtered.length;
-        },
-        create() {
+        })
+        const create = computed(() => {
             return this.route(
                 'administration.users.tokens.create',
                 this.$route.params,
             );
-        },
-    },
-
-    created() {
-        this.fetch();
-    },
-
-    methods: {
-        fetch() {
+        })
+        created(() => {
+            this.fetch();
+        })
+        function fetch() {
             axios.get(this.route('administration.users.tokens.index', this.$route.params))
                 .then(({ data }) => {
                     this.tokens = data;
                     this.$emit('update');
                 }).catch(this.errorHandler);
-        },
-        destroy({ id }, index) {
+        }
+        function destroy({ id }, index) {
             axios.delete(
                 this.route('administration.users.tokens.destroy', this.$route.params),
                 { params: { id } },
@@ -131,14 +125,14 @@ export default {
                 this.$emit('update');
                 this.toastr.success(data.message);
             }).catch(this.errorHandler);
-        },
-        onCreate({ token }) {
+        }
+        function onCreate({ token }) {
             this.fetch();
             this.form = false;
             setTimeout(() => {
                 this.token = token;
             }, 500);
-        },
-    },
+        }
+    }
 };
 </script>

@@ -8,20 +8,18 @@
 </router>
 <script>
 import { FanChart } from "/assets/js/fan-chart/modules/index";
+import { ref, computed, useStore } from 'vue';
 export default {
   layout: "auth",
   meta: {
     permission: { name: "fanchart menu" },
     title: "Fanchart - Show",
   },
-  methods: {
-    fetchData() {
+  setup() {
+    function fetchData() {
       this.$axios
         .$get("/api/trees/show")
-        // .then((res) => res.json())
-        // .then((response) => response.json())
         .then((res) => {
-          // console.log(res.data);
           const pedigreeChart = new FanChart("webtrees-fan-chart-container", {
             labels: {
               zoom: "Use Ctrl + scroll to zoom in the view",
@@ -34,12 +32,8 @@ export default {
             treeLayout: "right",
             rtl: "rtl",
           });
-
           pedigreeChart.cssFile = "assets/css/fanchart/svg.css";
-          // Draw chart
-          // console.log(res);
           pedigreeChart.draw(res);
-
           const fanChart = FanChart("#webtrees-fan-chart-container", {
             labels: res.labels,
             generations: 4,
@@ -47,7 +41,6 @@ export default {
             defaultColor: "#0000FF",
             fontColor: "#0000FF",
             fontScale: parseInt(storage.read("fontScale")),
-            // fontColor: data.fontColor,
             hideEmptySegments: storage.read("hideEmptySegments"),
             showColorGradients: storage.read("showColorGradients"),
             showParentMarriageDates: storage.read("showParentMarriageDates"),
@@ -55,12 +48,12 @@ export default {
             innerArcs: parseInt(storage.read("innerArcs")),
           });
         });
-    },
-  },
-  mounted() {
-    this.fetchData();
-  },
-};
+    }
+    onMounted(() => {
+      this.fetchData();
+    })
+  }
+}
 </script>
 
 <style lang="scss">

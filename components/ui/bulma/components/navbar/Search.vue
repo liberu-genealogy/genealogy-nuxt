@@ -57,6 +57,7 @@ import { faEye, faPencilAlt, faListUl } from '@fortawesome/free-solid-svg-icons'
 import { EnsoTypeahead } from '@enso-ui/typeahead/bulma';
 import { clickOutside } from '@enso-ui/directives';
 import CoreSearch from '../../../core/components/navbar/Search.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faEye, faPencilAlt, faListUl);
 
@@ -69,11 +70,11 @@ export default {
 
     inject: ['i18n'],
 
-    methods: {
-        clear() {
+    setup() {
+        function clear() {
             this.$refs.typeahead.clear();
-        },
-    },
+        }
+    }
 };
 </script>
 

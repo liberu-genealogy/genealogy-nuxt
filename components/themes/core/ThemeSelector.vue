@@ -1,24 +1,26 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreThemeSelector',
-
-    computed: {
-        ...mapState('layout', ['themes']),
-        ...mapGetters('preferences', ['theme']),
-        ...mapGetters('localisation', ['rtl']),
-        alternate() {
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.state[layout].themes),
+            two: computed(() => store.getters['${preferences}/theme']),
+            three: computed(() => store.getters['${localisation}/rtl'])
+        }
+        const alternate = computed(() => {
             return Object.keys(this.themes)
                 .find(theme => theme.replace('-rtl', '') !== this.theme.replace('-rtl', '')) + (this.rtl ? '-rtl' : '');
-        },
-        multiTheme() {
+        })
+        const multiTheme = computed(() => {
             return Object.keys(this.themes).length > 1;
-        },
-    },
-
-    methods: {
-        ...mapActions('preferences', ['setTheme']),
+        })
+        return {
+            ...mapActions('preferences', ['setTheme']),
+        }
     },
 
     render() {

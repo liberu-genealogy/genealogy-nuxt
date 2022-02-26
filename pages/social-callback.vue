@@ -8,44 +8,44 @@
 
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex';
+import { ref, computed, useStore } from 'vue';
 
-export default {
-	layout: 'index',
-	meta: {
-        guestGuard: true,
-        title: 'Login',
-    },
-    data() {
-        return {
-            token: this.$route.query.token ? this.$route.query.token : null,
-            status: this.$route.query.status ? this.$route.query.status : null
-        }
-    },
-    methods: {
-        ...mapMutations('auth', ['login']),
-        ...mapMutations('layout', ['home']),
-        ...mapMutations(['setShowQuote', 'setCsrfToken'])
-    },
-    mounted() {
-        
-        if(this.status == 'success'){
-            if (this.token) {
-                this.setCsrfToken({token: this.token, $axios: this.$axios});
+    export default {
+        layout: 'index',
+        meta: {
+            guestGuard: true,
+            title: 'Login',
+        },
+        setup () {
+            const token = ref('')
+            const status = ref('')
+            return{
+                token: this.$route.query.token ? this.$route.query.token : null,
+                status: this.$route.query.status ? this.$route.query.status : null,
+                ...mapMutations('auth', ['login']),
+                ...mapMutations('layout', ['home']),
+                ...mapMutations(['setShowQuote', 'setCsrfToken'])
             }
+            onMounted(() => {
+                if(this.status == 'success'){
+                    if (this.token) {
+                        this.setCsrfToken({token: this.token, $axios: this.$axios});
+                    }
 
-            setTimeout(() => {                
-                this.$router.push('/dashboard');
-                this.login();
-                this.home(true);
-            }, 500);        
-        }else{
-            setTimeout(() => {                
-                this.$router.push('/login');                
-            }, 500);        
+                    setTimeout(() => {                
+                        this.$router.push('/dashboard');
+                        this.login();
+                        this.home(true);
+                    }, 500);        
+                }else{
+                    setTimeout(() => {                
+                        this.$router.push('/login');                
+                    }, 500);        
+                }
+            })
         }
-        
     }
-}
+
 </script>
 
 <style lang="scss" scoped>

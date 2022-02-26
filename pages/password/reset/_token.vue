@@ -30,20 +30,15 @@ import PasswordStrength from '~/components/auth/PasswordStrength.vue';
 import Email from '~/components/auth/fields/Email.vue';
 import Password from '~/components/auth/fields/Password.vue';
 import Confirmation from '~/components/auth/fields/Confirmation.vue';
+import { ref, computed, useStore } from 'vue';
 
 export default {
-    // head: {
-    //     title: 'Reset Password'
-    // },
     meta: {
         guestGuard: true,
         title: 'Reset Password',
     },
-
     components: { AuthForm, Email, PasswordStrength, Password, Confirmation },
-
     inject: ['routerErrorHandler'],
-
     data: (v) => ({
         payload: {
             email: '',
@@ -53,22 +48,18 @@ export default {
         },
         status: null,
     }),
-
-    computed: {
-        match() {
+    setup() {
+        const match = computed(() => {
             const { password, password_confirmation } = this.payload;
-
             return password.length > 0
                 && password === password_confirmation;
-        },
-    },
-
-    methods: {
-        success({ status }) {
+        })
+        function success( { status } ) {
             this.status = status;
             setTimeout(() => this.$router.push({ name: 'login' })
                 .catch(this.routerErrorHandler), 500);
-        },
-    },
+        }
+
+    }
 };
 </script>

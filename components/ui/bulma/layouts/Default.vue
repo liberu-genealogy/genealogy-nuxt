@@ -48,6 +48,7 @@ import Settings from '../components/settings/Settings.vue';
 import AppFooter from '../components/AppFooter.vue';
 import MainRouter from '../pages/MainRouter.vue';
 import PageHeader from '../components/PageHeader.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'Default',

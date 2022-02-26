@@ -27,6 +27,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from '@enso-ui/modal/bulma';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faExclamationTriangle);
 

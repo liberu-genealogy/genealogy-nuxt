@@ -23,6 +23,7 @@ import Checkbox from './params/Checkbox.vue';
 import Input from './params/Input.vue';
 import Date from './params/Date.vue';
 import Select from './params/Select.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faFilter);
 
@@ -41,12 +42,11 @@ export default {
             required: true,
         },
     },
-    
-    computed: {
-        component() {
+    setup() {
+        const component = computed(() => {
             return ucfirst(this.param.type);
-        },
-    },
+        })
+    }
 };
 </script>
 

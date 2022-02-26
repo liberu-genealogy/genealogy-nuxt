@@ -91,6 +91,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHourglassStart, faHourglassEnd, faSpinner, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import Avatar from '~/components/users/bulma/pages/users/components/Avatar.vue';
 import CoreOperation from '../../../../core/components/navbar/io/Operation.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faHourglassStart, faHourglassEnd, faSpinner, faTimesCircle);
 

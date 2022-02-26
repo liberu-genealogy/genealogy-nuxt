@@ -18,33 +18,39 @@
 
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
+import { ref, computed, useStore } from 'vue';
 
 export default {
     meta: {
         breadcrumb: 'index',
-        title: 'Companies',
+        title: 'Companies'
     },
-
     components: { EnsoTable },
-
-    methods: {
-        visit({ row }) {
+    setup() {
+        function visit({row}) {
             window.open(row.website, '_blank').focus();
-        },
-        status(column, { status }) {
+        }
+        function status(column, { status }) {
             switch (`${status}`) {
-            case column.enum.Active:
-                return 'is-success';
-            case column.enum.Overdue:
-            case column.enum.Litigation:
-                return 'is-warning';
-            case column.enum.Insolvent:
-            case column.enum.Deregistered:
-                return 'is-danger';
-            default:
-                throw Error(`Unknown status: ${status}`);
+                case column.enum.Active:
+                    return 'is-success';
+                    break;
+                case column.enum.Overdue:
+                    break;
+                case column.enum.Litigation:
+                    return 'is-warning';
+                    break;
+                case column.enum.Insolvent:
+                    break;
+                case column.enum.Deregistered:
+                    return 'is-danger';
+                    break;
+                default:
+                    throw Error(`Unknown status: ${status}`);
+                    break;
             }
-        },
-    },
-};
+        }
+    }
+}
+
 </script>

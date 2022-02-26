@@ -200,51 +200,42 @@
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import vSelect from 'vue-select'
-
+import { ref, computed, useStore } from 'vue'
 export default {
   layout: 'default',
-  head: {
-    title: 'Paypal',
-  },
+  head: { title: 'Paypal' },
   meta: {
     breadcrumb: 'paypal',
     title: 'Paypal',
-    permission: { name: 'subscription menu' },
+    permission: { name: 'subscription menu' }
   },
-  components: {
-    vSelect,
-    Loading,
-  },
-  data() {
-    return {
-      error: false,
-      message: '',
-      isLoading: false,
-      fullPage: true,
-      color: '#4fcf8d',
-      backgroundColor: '#ffffff',
-      plans: [],
-      selectedPlanId: null,
-      currency_options: ['USD', 'GBP', 'EUR', 'AUD'],
-      selected_currency: 'GBP',
-      selected_currency_symbol: '£',
-      selected_currency_rate: 1,
-    }
-  },
-  mounted() {
-    this.loadPlans()
-  },
-  methods: {
-    async loadPlans() {
+  components: { vSelect, Loading },
+  setup() {
+    const error = ref(false)
+    const message = ref('')
+    const isLoading = ref(false)
+    const fullPage = ref(true)
+    const color = ref('#4fcf8d')
+    const backgroundColor = ref('#ffffff')
+    const plans = ref([])
+    const selectedPlanId = ref(null)
+    const currency_options = ref(['USD', 'GBP', 'EUR', 'AUD'])
+    const selected_currency = ref('GBP')
+    const selected_currency_symbol = ref('£')
+    const selected_currency_rate = ref(1)
+    return { error, message, isLoading, fullPage, color, backgroundColor, plans, selectedPlanId, currency_options, selected_currency, selected_currency_symbol, selected_currency_rate }
+    onMounted(() => {
+      this.loadPlans()
+    })
+    async function loadPlans() {
       this.isLoading = true
       const response = await this.$axios.get('/api/paypal/plans', {
         email: 'heru0502@gmail.com',
       })
-
       this.plans = response.data
       this.isLoading = false
-    },
-    async selectCurrency(currency) {
+    }
+    async function selectCurrency(currency) {
       this.selected_currency = currency
       const response = await this.$axios
         .$get(
@@ -276,8 +267,8 @@ export default {
           }
         })
         .catch(() => {})
-    },
-    async subscribe(plan) {
+    }
+    async function subscribe(plan) {
       this.isLoading = true
       var sendData = {
         ...plan,
@@ -294,8 +285,8 @@ export default {
       console.log(response)
       window.location.href = response
       this.isLoading = false
-    },
-  },
+    }
+  }
 }
 </script>
 <router>

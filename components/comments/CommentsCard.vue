@@ -32,6 +32,7 @@ import {
     Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent,
 } from '@enso-ui/card/bulma';
 import Comments from './Comments.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faComments, faPlusSquare);
 
@@ -66,35 +67,29 @@ export default {
             default: () => faComments,
         },
     },
-
-    data: () => ({
-        count: 0,
-        query: null,
-    }),
-
-    computed: {
-        ...mapState('layout', ['isMobile']),
-        displayTitle() {
+    setup() {
+        const count = ref(0)
+        const query = ref(null)
+        const store = useStore()
+        return {
+            one: computed(() => store.state[layout].isMobile)
+        }
+        const displayTitle = computed(() => {
             return !this.isMobile
                 ? this.title || this.i18n('Comments')
                 : null;
-        },
-        isEmpty() {
+        })
+        const isEmpty = computed(() => {
             return this.count === 0;
-        },
-    },
-
-    watch: {
-        count() {
+        })
+        const count = ref('')
+        watch(count, () => {
             this.$refs.card.resize();
-        },
-    },
-
-    methods: {
-        addComment() {
+        })
+        function addComment() {
             this.$refs.comments.create();
             this.$nextTick(() => this.$refs.card.expand());
-        },
-    },
+        }
+    }
 };
 </script>

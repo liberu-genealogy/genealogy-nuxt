@@ -11,22 +11,19 @@
 <script>
 import { EnsoTable } from "@enso-ui/tables/bulma";
 import { PedigreeChart } from "/assets/js/modules/index";
+import { ref, computed, useStore } from 'vue';
 export default {
   layout: "auth",
   meta: {
     permission: { name: "trees menu" },
     title: "Trees - Index",
   },
-
   components: { EnsoTable },
-  methods: {
-    fetchData() {
+  setup() {
+    function fetchData() {
       this.$axios
         .$get("/api/trees/show")
-        // .then((res) => res.json())
-        // .then((response) => response.json())
         .then((res) => {
-          // console.log(res.data);
           const pedigreeChart = new PedigreeChart(
             "webtrees-pedigree-chart-container",
             {
@@ -47,11 +44,11 @@ export default {
           console.log(res);
           pedigreeChart.draw(res);
         });
-    },
-  },
-  mounted() {
-    this.fetchData();
-  },
+    }
+    onMounted(() => {
+      this.fetchData();
+    })
+  }
 };
 </script>
 

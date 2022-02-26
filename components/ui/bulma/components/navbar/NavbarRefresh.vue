@@ -10,6 +10,7 @@
 
 import VuePullRefresh from 'vue-pull-refresh';
 import Navbar from './Navbar.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'NavbarRefresh',
@@ -29,11 +30,11 @@ export default {
         },
     }),
 
-    methods: {
-        refresh() {
+    setup() {
+        function refresh() {
             return new Promise(() => window.location.reload(true));
-        },
-    },
+        }
+    }
 };
 </script>
 

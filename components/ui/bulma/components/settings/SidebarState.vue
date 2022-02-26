@@ -22,6 +22,7 @@
 <script>
 import VueSwitch from '@enso-ui/switch/bulma';
 import CoreSidebarState from '../../../core/components/settings/SidebarState.vue';
+import { ref } from 'vue';
 
 export default {
     name: 'SidebarState',

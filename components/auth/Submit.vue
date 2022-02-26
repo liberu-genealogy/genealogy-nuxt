@@ -14,6 +14,7 @@
 import { mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faLock, faUser);
 
@@ -40,22 +41,18 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        loading: false,
-    }),
-
-    computed: {
-        ...mapGetters(['isWebview']),
-        config() {
+    setup() {
+        const loading = ref(false)
+        const store = useStore()
+        return {
+            onw: computed(() => store.getters['${isWebview}'])
+        }
+        const config = computed(() => {
             return this.isWebview
                 ? { headers: { isWebview: true } }
                 : {};
-        },
-    },
-
-    methods: {
-        submit() {
+        })
+        function submit() {
             this.loading = true;
             this.state.successful = false;
             this.$emit('submitting');
@@ -78,7 +75,9 @@ export default {
                         throw error;
                     }
                 }).finally(() => (this.loading = false));
-        },
-    },
+        }
+
+    }
+
 };
 </script>

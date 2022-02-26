@@ -339,53 +339,50 @@ import { mapGetters, mapActions } from 'vuex'
 import PieChart from '../components/charts/PieChart'
 import { EnsoChartCard as ChartCard } from '@enso-ui/charts/bulma';
 import { Chart, colors } from '@enso-ui/charts';
+import { ref, computed, watchEffect, watch } from 'vue';
+
 export default {
   layout: 'auth',
-  components: {
-    Loading,
-    PieChart,
-    ChartCard
-  },
-  inject: ['errorHandler', 'route', 'toastr'],
-  //middleware: ['permission', 'verification'],
+  components: { Loading, PieChart, ChartCard },
   meta: {
     permission: { name: 'dashboard menu' },
     title: 'Dashboard',
   },
-  data() {
-    return {
-      loaded: false,
-      trees: [],
-      companies: [],
-      selected_company: null,
-      selected_tree: null,
-      isLoading: false,
-      fullPage: true,
-      color: '#4fcf8d',
-      changedb: null,
-      backgroundColor: '#ffffff',
-      trial: null,
-      familiesjoined: 0,
-      peoplesattached: 0,
-      pieChartData: null,
-      chartOptions: null,
-      apiList: ['Geneanum', 'Open arch', 'Family search', 'Wikitree'],
-      apiSelected: 'Geneanum',
-      dateMenu: false,
-      filter: {
-        firstName: '',
-        lastName: '',
-        date: '',
-      },
-      totalCount: 0,
-      result: null,
-      loading: true,
-      options: {},
-    }
-  },
-  computed: {
-    ...mapGetters(['loggedInUser']),
-    headers() {
+  
+  setup() {
+    const inject = ref(['errorHandler', 'route', 'toastr']);
+    
+    const loaded = ref(false);
+    const trees = ref([]);
+    const companies = ref([]);
+    const selected_company = ref(null);
+    const selected_tree = ref(null);
+    const isLoading = ref(true);
+    const fullPage = ref(true);
+    const color = ref('#4fcf8d');
+    const changedb = ref(null);
+    const backgroundColor = ref('#ffffff');
+    const trial = ref(null);
+    const familiesjoined = ref(0);
+    const peoplesattached = ref(0);
+    const pieChartData = ref(null);
+    const chartOptions = ref(null);
+    const apiList = ref(['Geneanum', 'Open arch', 'Family search', 'Wikitree']);
+    const apiSelected = ref('Geneaum');
+    const dateMenu = ref(false);
+    const firstName = ref('');
+    const lastName = ref('');
+    const date = ref('');
+    const totalCount = ref(0);
+    const result = ref(null);
+    const loading = ref(true);
+    const options = ref({});
+    return { inject, loaded, trees, companies, selected_company, selected_tree, isLoading, fullPage, color, changedb, backgroundColor, trial, familiesjoined, peoplesattached, pieChartData, chartOptions, apiList, apiSelected, dateMenu, firstName, lastName, date, totalCount, result, loading, options };
+
+    const headers = computed(() => {
+      return {
+        ...mapGetters(['loggedInUser'])
+      };
       if (this.apiSelected == 'Geneanum')
         return [
           { text: 'ID', value: 'identifier', sortable: false },
@@ -422,27 +419,28 @@ export default {
           { text: 'Type', value: 'eventtype', sortable: false },
           { text: 'Archive', value: 'archive', sortable: false },
         ]
-    },
-  },
-  watch: {
-    options: {
-      handler() {
-        console.log(this.loading, this.options)
-        this.search()
-      },
-      deep: false,
-    },
-  },
-  methods: {
-    setSelectedCompany(value) {
-      this.selected_tree = null
-      this.getTree()
-    },
-    async setSelected(value) {
+    });
+    return { headers };
+    const handler = ref('');
+    watchEffect(() => {
+      options(() => {
+        console.log(handler.loading, handler,options);
+        handler.search();
+      });
+      const deep = ref(false);
+    });
+
+    function setSelectedCompany(value) {
+      this.selected_tree = null;
+      this.getTree();
+    };
+    return { setSelectedCompany };
+
+    async function setSelected(value) {
       const response = await this.$axios.$post('/api/dashboard/changedb', {
-        company_id: this.selected_company,
-        tree_id: this.selected_tree,
-      })
+        company_id = ref(this.selected_company),
+        tree_id = ref(this.selected_tree)
+      });
       this.loadChart()
       this.changedb = response.changedb
       this.familiesjoined = response.familiesjoined
@@ -450,18 +448,21 @@ export default {
       console.log('changedb response', response)
       console.log('familiesjoined', response.familiesjoined)
       console.log('peoplesattached', response.peoplesattached)
-    },
-    async getCompanies() {
+    };
+    return { setSelected };
+
+    async function getCompanies() {
       const response = await this.$axios.$get('/api/get_companies')
       this.companies = response
       this.companies.map((company) => {
         if (company.is_tenant == 1) {
-          this.selected_company = company.id
-          this.getTree()
+            this.selected_company = company.id
+            this.getTree()
         }
       })
-    },
-    async getTree() {
+    };
+
+    async function getTree() {
       this.selected_tree = null
       const response = await this.$axios.$get('/api/trees/show', {
         params: { start_id: this.selected_company, nest: 3 },
@@ -471,51 +472,48 @@ export default {
         if (tree.current_tenant == 1) {
           this.selected_tree = tree.id
         }
-      })
-    },
-    async loadChart() {
+      })      
+    };
+
+    async function loadChart() {
       this.loaded = false
       const chartResponse = await this.$axios.get('/api/dashboard/pie')
-     // const { data: trial } = await this.$axios.get('/api/dashboard/trial')
-      this.pieChartData = chartResponse.data
-      this.chartOptions = chartResponse.options
-     
+      this.pieChartData = chartResponse.data;
+      this.chartOptions = chartResponse.options;
       this.loaded = true
       this.isLoading = false
-      //this.trial = trial
-    },
-    search() {
-      //this.result = null
+    };
+
+    function search() {
       this.loading = true
-      let url = '',
-        params = {}
+      let url = ''
+      params = {}
       if (this.apiSelected == 'Geneanum') {
         url = '/api/geneanum/search-person/malta/burials'
       } else if (this.apiSelected == 'Open arch') {
-        url = '/api/open-arch/search-person'
-        params = {
-          name:
-            (this.filter.firstName || '') + ' ' + (this.filter.lastName || ''),
-          per_page: this.options?.itemsPerPage || 10,
-          page: this.options?.page || 1,
-        }
+          url = '/api/open-arch/search-person'
+          params = {
+            name: (this.filter.firstName || '') + ' ' + (this.filter.lastName || ''),
+            per_page: this.options ? itemsPerPage : 10,
+            page : this.options ? page : 1,
+          }
       } else if (this.apiSelected == 'Family search') {
         url = '/api/family-search/search'
         params = {
           givenName: this.filter.firstName || '',
           surname: this.filter.lastName || '',
-          count: this.options?.itemsPerPage || 10,
+          count: this.options?itemsPerPage : 10,
           offset:
-            ((this.options?.page || 1) - 1) *
-            (this.options?.itemsPerPage || 10),
+            ((this.options?page : 1) - 1) *
+            (this.options?itemsPerPage : 10),
         }
       } else if (this.apiSelected == 'Wikitree') {
         url = '/api/wikitree/search-person'
         params = {
           FirstName: this.filter.firstName || '',
           LastName: this.filter.lastName || '',
-          per_page: this.options?.itemsPerPage || 10,
-          page: this.options?.page || 1,
+          per_page: this.options?itemsPerPage : 10,
+          page: this.options?page : 1,
         }
       }
       this.$axios
@@ -528,10 +526,11 @@ export default {
           this.loading = false
         })
         .catch(this.errorHandler)
-    },
-  },
-  created() {
-    this.getCompanies()
+    };
+
+    created(() => {
+      this.getCompanies();
+    });
   },
 }
 </script>

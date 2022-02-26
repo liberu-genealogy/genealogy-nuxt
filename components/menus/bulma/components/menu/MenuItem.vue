@@ -53,6 +53,7 @@ import { faGripLines } from '@fortawesome/free-solid-svg-icons';
 import { Zoom } from '@enso-ui/transitions';
 import DropdownIndicator from '@enso-ui/dropdown-indicator';
 import CoreMenuItem from '../../../core/components/menu/MenuItem.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faGripLines);
 
@@ -63,28 +64,22 @@ export default {
 
     inject: ['i18n'],
 
-    data: () => ({
-        dropdown: false,
-    }),
-
-    computed: {
-        sidebar() {
+    setup() {
+        const dropdown = ref(false)
+        const sidebar = computed(() => {
             return document.querySelector('.aside.sidebar');
-        },
-    },
-
-    methods: {
-        adjust() {
+        })
+        function adjust() {
             this.$refs.dropdown.style['margin-top'] = `-${this.sidebar.scrollTop + 2}px`;
-        },
-        enter() {
+        }
+        function enter() {
             this.adjust();
             this.sidebar.addEventListener('scroll', this.adjust);
-        },
-        leave() {
+        }
+        function leave() {
             this.sidebar.removeEventListener('scroll', this.adjust);
-        },
-    },
+        }
+    }
 };
 </script>
 

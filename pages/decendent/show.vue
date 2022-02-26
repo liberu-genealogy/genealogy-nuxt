@@ -8,14 +8,15 @@
 </router>
 <script>
 import { FanChart } from "/assets/js/fan-chart/modules/index";
+import { ref, computed, useStore } from 'vue';
 export default {
-  layout: "auth",
+  layout: 'auth',
   meta: {
-    permission: { name: "decendentchart menu" },
-    title: "DecendentChart - Show",
+    permission: { name: 'decendentchart menu'},
+    title: 'DecendentChart - Show'
   },
-  methods: {
-    fetchData() {
+  setup() {
+    function fetchData() {
       this.$axios
         .$get("/api/trees/show")
         // .then((res) => res.json())
@@ -55,12 +56,13 @@ export default {
             innerArcs: parseInt(storage.read("innerArcs")),
           });
         });
-    },
-  },
-  mounted() {
-    this.fetchData();
-  },
-};
+    }
+    onMounted(() => {
+      this.fetchData();
+    })
+  }
+}
+
 </script>
 
 <style lang="scss">

@@ -33,19 +33,17 @@
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import Avatar from '~/components/users/bulma/pages/users/components/Avatar.vue';
 import DeleteModal from '~/components/users/bulma/pages/users/components/DeleteModal.vue';
+import { ref, computed, useStore } from 'vue';
 
 export default {
     meta: {
         breadcrumb: 'index',
         title: 'Users',
     },
-
     components: { EnsoTable, Avatar, DeleteModal },
-
     inject: ['canAccess', 'i18n'],
-
-    data: () => ({
-        deletableUser: null,
-    }),
+    setup() {
+        const deletableUser = ref(null)
+    }
 };
 </script>

@@ -36,6 +36,7 @@
 <script>
 import { Dropdown, DropdownItem } from '@enso-ui/dropdown/bulma';
 import CoreToastrPosition from '../../../core/components/settings/ToastrPosition.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'ToastrPosition',

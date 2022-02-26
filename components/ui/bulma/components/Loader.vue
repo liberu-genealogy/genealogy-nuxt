@@ -13,6 +13,7 @@
 <script>
 import ProgressBar from '@enso-ui/progress-bar';
 import CoreLoader from '~/components/ui/core/components/Loader.vue';
+import { ref } from 'vue';
 
 export default {
     name: 'Loader',

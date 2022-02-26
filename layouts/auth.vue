@@ -16,6 +16,7 @@
 </template>
 
 <script>
+
 import { Fade } from '@enso-ui/transitions';
 import CoreApp from '~/components/ui/core/CoreApp.vue';
 import DocumentTitle from '~/components/ui/core/components/DocumentTitle.vue';

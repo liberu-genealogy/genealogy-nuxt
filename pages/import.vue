@@ -78,6 +78,7 @@ import { EnsoSelect } from '@enso-ui/select/bulma';
 import Avatar from '~/components/users/bulma/pages/users/components/Avatar.vue';
 import ImportUploader from '~/components/data-import/bulma/pages/dataImport/components/ImportUploader.vue';
 import Param from '~/components/data-import/bulma/pages/dataImport/components/Param.vue';
+import { ref, computed, useStore } from 'vue';
 
 library.add(faDownload, faTrashAlt, faFileExcel, faBan, faSync);
 
@@ -96,40 +97,38 @@ export default {
         ImportUploader,
         Param,
     },
-
-    data: () => ({
-        type: null,
-        params: [],
-    }),
-
-    computed: {
-        ...mapState(['enums']),
-        filters() {
+    setup() {
+        const type = ref(null);
+        const params = ref([]);
+        
+        const store = useStore();
+        return {
+            two: computed(() => store.state[enums])
+        }
+        const filters  = computed(() => {
             return { data_imports: { type: this.type } };
-        },
-        importLink() {
+        })
+        const importLink = computed(() => {
             return this.canAccess('import.store')
                 && this.type
                 && this.route('import.store');
-        },
-        uploadParams() {
+        })
+        const uploadParams = computed(() => {
             return this.params.reduce((params, param) => {
                 params[param.name] = param.value;
                 return params;
             }, { type: this.type });
-        },
-    },
-
-    methods: {
-        template() {
+        })
+        function template () {
             this.$axios.get(this.route('import.show', this.type))
                 .then(({ data: { params } }) => (this.params = params))
                 .catch(this.errorHandler);
-        },
-        //  eslint-disable-next-line camelcase
-        rejected({ rejected_id }) {
+        }
+        function rejected () {
             window.location.href = this.route('import.rejected', rejected_id);
-        },
-    },
-};
+        }
+    }
+
+}
+
 </script>

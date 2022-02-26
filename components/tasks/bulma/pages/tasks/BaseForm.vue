@@ -19,6 +19,7 @@
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 import Flags from './components/Flags.vue';
+import { ref } from 'vue';
 
 export default {
     name: 'BaseForm',

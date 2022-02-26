@@ -46,7 +46,7 @@
         </div>
         <div class="columns is-multiline mt-3">
             <div class="column is-half-tablet"
-                v-for="(person, index) in filteredPeople"
+                v-for="(person, id) in filteredPeople"
                 :key="person.id">
                 <person :id="id"
                     :person="person"
@@ -104,6 +104,7 @@ import { faPlus, faSync, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from '@enso-ui/modal/bulma';
 import Person from './Person.vue';
 import PersonForm from './PersonForm.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faPlus, faSync, faSearch);
 
@@ -124,41 +125,31 @@ export default {
             default: '',
         },
     },
-
-    data: () => ({
-        loading: false,
-        people: [],
-        path: null,
-        internalQuery: '',
-        removedPerson: null,
-    }),
-
-    computed: {
-        filteredPeople() {
+    setup() {
+        const loading  = ref(false)
+        const people = ref([])
+        const path = ref(null)
+        const internalQuery = ref('')
+        const removedPerson = ref(null)
+        const filteredPeople = computed(() => {
             const query = this.internalQuery.toLowerCase();
 
             return query
                 ? this.people.filter(({ name, position }) => name.toLowerCase().indexOf(query) > -1
                     || position.toLowerCase().indexOf(query) > -1)
                 : this.people;
-        },
-        count() {
+        })
+        const count = computed(() => {
             return this.filteredPeople.length;
-        },
-    },
-
-    watch: {
-        query() {
+        })
+        const query = ref('')
+        watch(query, () => {
             this.internalQuery = this.query;
-        },
-    },
-
-    created() {
-        this.fetch();
-    },
-
-    methods: {
-        fetch() {
+        })
+        created(() => {
+            this.fetch();
+        })
+        function fetch() {
             this.loading = true;
 
             this.$axios.get(this.route(
@@ -169,20 +160,20 @@ export default {
                 this.$emit('update');
             }).catch(this.errorHandler)
                 .finally(() => (this.loading = false));
-        },
-        create() {
+        }
+        function create() {
             this.path = this.route(
                 'administration.companies.people.create',
                 { company: this.id },
             );
-        },
-        edit(person) {
+        }
+        function edit(person) {
             this.path = this.route(
                 'administration.companies.people.edit',
                 { company: this.id, person: person.id },
             );
-        },
-        destroy() {
+        }
+        function destroy() {
             this.loading = true;
 
             return this.$axios.delete(this.route(
@@ -195,8 +186,8 @@ export default {
                 this.$emit('update');
             }).catch(this.errorHandler)
                 .finally(() => (this.loading = false));
-        },
-        destroyPerson() {
+        }
+        function destroyPerson() {
             this.loading = true;
 
             return this.$axios.delete(
@@ -207,8 +198,8 @@ export default {
                     this.loading = false;
                     this.removedPerson = null;
                 });
-        },
-        navigateToPerson($event) {
+        }
+        function navigateToPerson($event) {
             this.path = null;
 
             this.$nextTick(() => {
@@ -217,8 +208,9 @@ export default {
                     params: { person: $event },
                 }).catch(this.routerErrorHandler);
             });
-        },
-    },
+        }
+
+    }
 };
 </script>
 <style>

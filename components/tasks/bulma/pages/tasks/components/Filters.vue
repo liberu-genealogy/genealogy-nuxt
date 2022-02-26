@@ -42,6 +42,7 @@ import {
 } from '@enso-ui/filters/bulma';
 import { faFlag, faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faFlag, faExclamation);
 
@@ -74,19 +75,20 @@ export default {
             { value: true, icon: 'exclamation', class: 'has-text-danger' },
         ],
     }),
-
-    computed: {
-        ...mapState(['enums']),
-        flagOptions() {
-            // eslint-disable-next-line no-underscore-dangle
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.state[enums])
+        }
+        const flagOptions = computed(() => {
             return this.enums.flags._keys().map(flag => ({
                 icon: 'flag',
                 value: flag * 1,
-                // eslint-disable-next-line no-underscore-dangle
                 class: `has-text-${this.enums.flags._get(flag).toLowerCase()}`,
             }));
-        },
-    },
+        })
+
+    }
 };
 </script>
 

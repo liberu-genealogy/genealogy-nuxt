@@ -1,17 +1,18 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreMenuOrganizer',
-
-    computed: {
-        ...mapState('menu', ['editable']),
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.state[menu].editable)
+        }
+        return {
+            ...mapMutations('menu', ['edit']),
+        }
     },
-
-    methods: {
-        ...mapMutations('menu', ['edit']),
-    },
-
     render() {
         return this.$scopedSlots.default({
             bindings: {

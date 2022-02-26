@@ -90,6 +90,7 @@ import { focus } from '@enso-ui/directives';
 import { Fade } from '@enso-ui/transitions';
 import { EnsoSelect } from '@enso-ui/select/bulma';
 import AvatarList from './AvatarList.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add([faBan, faPencilAlt, faTrash, faCheck]);
 
@@ -108,13 +109,9 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        loading: false,
-    }),
-
-    methods: {
-        store() {
+    setup() {
+        const loading = ref(false)
+        function store() {
             this.loading = true;
 
             this.$axios.post(this.route('administration.teams.store'), this.team)
@@ -132,8 +129,8 @@ export default {
                     }
                     this.errorHandler(error);
                 });
-        },
-        destroy() {
+        }
+        function destroy() {
             this.loading = true;
 
             this.$axios.delete(this.route('administration.teams.destroy', this.team.id))
@@ -143,8 +140,8 @@ export default {
                     this.team.edit = false;
                     this.$emit('destroy');
                 }).catch(this.errorHandler);
-        },
-    },
+        }
+    }
 };
 </script>
 

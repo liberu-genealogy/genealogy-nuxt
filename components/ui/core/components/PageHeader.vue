@@ -1,21 +1,22 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CorePageHeader',
-
-    computed: {
-        ...mapState(['pageTitle']),
-    },
-
-    created() {
-        if (this.$route.meta && this.$route.meta.title) {
-            this.setPageTitle(this.$route.meta.title);
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.state[pageTitle])
         }
-    },
-
-    methods: {
-        ...mapMutations(['setPageTitle']),
+        created(() => {
+            if (this.$route.meta && this.$route.meta.title) {
+                this.setPageTitle(this.$route.meta.title);
+            }
+        })
+        return {
+            ...mapMutations(['setPageTitle']),
+        }
     },
 
     render() {

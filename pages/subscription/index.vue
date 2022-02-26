@@ -196,49 +196,41 @@
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import { mapGetters, mapActions } from 'vuex'
-
+import { ref, computed, useStore } from 'vue'
 export default {
   layout: 'default',
-  head: {
-    title: 'Subscription',
-  },
-  meta: {
-    breadcrumb: 'subscription',
-    title: 'Subscription',
-  },
-  components: {
-    Loading,
-  },
-  data() {
+  head: { title: 'Subscription' },
+  meta: { breadcrumb: 'subscription', title: 'Subsciption' },
+  components: { Loading },
+  setup() {
+    const error = ref(false)
+    const message = ref('')
+    const isLoading = ref(false)
+    const fullPage = ref(true)
+    const color = ref('#4fcf8d')
+    const backgroundColor = ref('#ffffff')
+    const response = ref(null)
+    const has_payment_method = ref(false)
+    const plans = ref([])
+    const selectedPlanId = ref(null)
+    const currency_options = ref(['USD', 'GBP', 'EUR', 'AUD'])
+    const selected_currency = ref('GBP')
+    const selected_currency_symbol = ref('£')
+    const selected_currency_rate = ref(1)
+    const isActive = ref(false)
+    return { error, message, isLoading, fullPage, color, backgroundColor, response, has_payment_method, plans, selectedPlanId, currency_options, selected_currency, selected_currency_symbol, selected_currency_rate, isActive }
+    const store = useStore()
     return {
-      error: false,
-      message: '',
-      isLoading: false,
-      fullPage: true,
-      color: '#4fcf8d',
-      backgroundColor: '#ffffff',
-      response: null,
-      has_payment_method: false,
-      plans: [],
-      selectedPlanId: null,
-      currency_options: ['USD', 'GBP', 'EUR', 'AUD'],
-      selected_currency: 'GBP',
-      selected_currency_symbol: '£',
-      selected_currency_rate: 1,
-      isActive: false,
+      one: computed(() => store.getters['${loggedInUser}'])
     }
-  },
-  computed: {
-    ...mapGetters(['loggedInUser']),
-  },
-  methods: {
-    handleSelectedFiles(event) {
+    function handleSelectedFiles(event) {
       console.log(this.$refs.fileInput.files[0])
       this.file = this.$refs.fileInput.files[0]
       this.fileName = this.file.name
-    },
-    submit() {},
-    async loadPlans() {
+    }
+    function submit() {
+    }
+    async function loadPlans() {
       console.log('asdfhklasdflkasjdflasjdklfjasdlfjlasdfk')
       const response = await this.$axios.$get('/api/stripe/plans')
       console.log('response', response)
@@ -246,21 +238,14 @@ export default {
       this.getCurrentSubscription()
       this.plans = response
       this.isLoading = false
-    },
-    async getCurrentSubscription() {
+    }
+    async function getCurrentSubscription() {
       const response = await this.$axios.$get(
         '/api/stripe/current-subscription'
       )
-
       this.isLoading = false
       this.has_payment_method = response.has_payment_method
       if (response.subscribed) {
-        // this.plans
-        //     .find(plan => plan.id === response.plan_id)
-        //     .subscribed = true;
-        // this.plans
-        //     .find(plan => plan.id !== response.plan_id)
-        //     .subscribed = false;
         this.plans.find((plan) => {
           if (plan.id == response.plan_id) {
             plan.subscribed = true
@@ -270,8 +255,8 @@ export default {
         })
       }
       this.isLoading = false
-    },
-    subscribe() {
+    }
+    function subscribe() {
       this.isLoading = false
       this.isActive = false
       this.$axios.$post('/api/stripe/subscribe', {
@@ -280,16 +265,16 @@ export default {
 
       this.getCurrentSubscription()
       this.isLoading = false
-    },
-    unsubscribe() {
+    }
+    function unsubscribe() {
       this.isLoading = false
       this.isActive = false
       this.$axios.post('/api/stripe/unsubscribe')
 
       this.getCurrentSubscription()
       this.isLoading = false
-    },
-    async selectCurrency(currency) {
+    }
+    async function selectCurrency(currency) {
       const response = await this.$axios
         .$get(
           'https://api.currencyfreaks.com/latest?apikey=b864b83a27f5411c804e70762945b59a'
@@ -320,17 +305,17 @@ export default {
           }
         })
         .catch(() => {})
-    },
-    open(planId) {
+    }
+    function open(planId) {
       this.isActive = true
       this.selectedPlanId = planId
-    },
-    close() {
+    }
+    function close() {
       this.isActive = false
-    },
-  },
-  created() {
-    this.loadPlans()
-  },
+    }
+    created(() => {
+      this.loadPlans()
+    })
+  }
 }
 </script>

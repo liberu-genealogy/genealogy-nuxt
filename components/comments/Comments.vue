@@ -68,6 +68,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSync, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { mapState } from 'vuex';
 import Comment from './Comment.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faPlus, faSync, faSearch);
 
@@ -105,40 +106,36 @@ export default {
         path: v.$route.path,
         diffForHumansDate: null,
     }),
-
-    computed: {
-        ...mapState(['user']),
-        filteredComments() {
+    setup() {
+        const store = useStore()
+        return{
+            one: computed(() => store.state[user])
+        }
+        const filteredComments = computed(() => {
             const query = this.internalQuery.toLowerCase();
 
             return query
                 ? this.comments.filter(({ body, owner }) => body.toLowerCase().indexOf(query) > -1
                     || owner.person.name.toLowerCase().indexOf(query) > -1)
                 : this.comments;
-        },
-        count() {
+        })
+        const count = computed(() => {
             return this.filteredComments.length;
-        },
-        params() {
+        })
+        const params = computed(() => {
             return {
                 commentable_id: this.id,
                 commentable_type: this.type,
             };
-        },
-    },
-
-    watch: {
-        query() {
+        })
+        const query = ref('')
+        watch(query, () => {
             this.internalQuery = this.query;
-        },
-    },
-
-    created() {
-        this.fetch();
-    },
-
-    methods: {
-        fetch() {
+        })
+        created(() => {
+            this.fetch();
+        })
+        function fetch() {
             this.loading = true;
 
             this.$axios.get(
@@ -150,23 +147,22 @@ export default {
                 this.loading = false;
                 this.$emit('update');
             }).catch(this.errorHandler);
-        },
-
-        factory() {
+        }
+        function factory() {
             return {
                 body: '',
                 taggedUsers: [],
                 owner: this.user,
             };
-        },
-        create() {
+        }
+        function create() {
             if (this.comment) {
                 return;
             }
 
             this.comment = this.factory();
-        },
-        add() {
+        }
+        function add() {
             if (!this.comment.body.trim()) {
                 return;
             }
@@ -182,16 +178,16 @@ export default {
                 this.$emit('update');
                 this.loading = false;
             }).catch(this.errorHandler);
-        },
-        postParams() {
+        }   
+        function postParams() {
             return {
                 body: this.comment.body,
                 taggedUsers: this.comment.taggedUsers,
                 path: this.path,
                 ...this.params,
             };
-        },
-        update(comment) {
+        }
+        function update(comment) {
             this.syncTaggedUsers(comment);
             comment.path = this.path;
             this.loading = true;
@@ -203,15 +199,15 @@ export default {
                 Object.assign(comment, data);
                 this.loading = false;
             }).catch(this.errorHandler);
-        },
-        syncTaggedUsers(comment) {
+        }
+        function syncTaggedUsers(comment) {
             comment.taggedUsers.forEach((user, index) => {
                 if (!comment.body.includes(user.name)) {
                     comment.taggedUsers.splice(index, 1);
                 }
             });
-        },
-        destroy(index) {
+        }
+        function destroy(index) {
             this.loading = true;
 
             this.$axios.delete(this.route('core.comments.destroy', this.comments[index].id))
@@ -220,8 +216,8 @@ export default {
                     this.$emit('update');
                     this.loading = false;
                 }).catch(this.errorHandler);
-        },
-    },
+        }
+    }
 };
 </script>
 

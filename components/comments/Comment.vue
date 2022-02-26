@@ -99,6 +99,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Confirmation from '@enso-ui/confirmation/bulma';
 import Inputor from './Inputor.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faPencilAlt, faTrashAlt, faCheck, faBan);
 
@@ -129,16 +130,15 @@ export default {
             default: false,
         },
     },
-
-    data: () => ({
-        controls: false,
-        confirmation: false,
-        originalBody: null,
-    }),
-
-    computed: {
-        ...mapState(['meta', 'user']),
-        highlightTaggedUsers() {
+    setup() {
+        const controls = ref(false)
+        const confirmation = ref(false)
+        const originalBody = ref(null)
+        const store = useStore()
+        return {
+            one: computed(() => store.state[meta].user)
+        }
+        const highlightTaggedUsers = computed(() => {
             let { body } = this.comment;
 
             this.comment.taggedUsers
@@ -148,23 +148,20 @@ export default {
                 });
 
             return body;
-        },
-        isEditing() {
+        })
+        const isEditing = computed(() => {
             return this.originalBody !== null;
-        },
-        commentedAt() {
+        })
+        const commentedAt = computed(() => {
             return this.comment.updatedAt || this.comment.createdAt;
-        },
-    },
-
-    methods: {
-        cancelAdd() {
+        })
+        function cancelAdd() {
             this.comment.body = this.originalBody;
             this.controls = false;
             this.originalBody = null;
             this.$emit('cancel-edit');
-        },
-        update() {
+        }
+        function update() {
             if (!this.comment.body.trim()) {
                 return;
             }
@@ -179,14 +176,14 @@ export default {
             this.$emit('save');
 
             this.originalBody = null;
-        },
-        timeFromNow(date) {
+        }
+        function timeFromNow(date) {
             return this.$formatDistance(date);
-        },
-        dateFormat(date) {
+        }
+        function dateFormat(date) {
             return this.$format(date, `${this.meta.dateFormat} H:i`);
-        },
-    },
+        }
+    }
 };
 </script>
 

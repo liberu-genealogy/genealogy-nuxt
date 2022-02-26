@@ -76,6 +76,7 @@ import { faEye, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { clickOutside } from '@enso-ui/directives';
 import CoreProfileControl from '../../../core/components/navbar/ProfileControl.vue';
 import Avatar from '../../pages/users/components/Avatar.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faEye, faSignOutAlt);
 export default {
@@ -84,9 +85,11 @@ export default {
     directives: { clickOutside },
 
     components: { CoreProfileControl, Avatar },
-
-    methods: {
-        ...mapActions('auth', ['logout']),
+    
+    setup() {
+        return {
+            ...mapActions('auth', ['logout']),
+        }
     },
 
     inject: ['i18n'],

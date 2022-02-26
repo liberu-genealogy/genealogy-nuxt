@@ -87,6 +87,7 @@ import {
 import { VTooltip } from 'v-tooltip';
 import NavbarItem from '~/components/ui/bulma/components/navbar/NavbarItem.vue';
 import CoreTasks from '../../../core/components/navbar/Tasks.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faEye, faTasks, faClock, faFlag);
 

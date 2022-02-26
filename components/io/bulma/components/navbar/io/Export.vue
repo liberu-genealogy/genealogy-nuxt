@@ -35,6 +35,7 @@ import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import Operation from './Operation.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faCheck);
 
@@ -44,13 +45,14 @@ export default {
     components: { Operation },
 
     inject: ['i18n'],
-
-    computed: mapState(['enums']),
-
-    methods: {
-        shortNumber(value) {
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.state[enums])
+        }
+        function shortNumber(value) {
             return this.$shortNumber(value);
-        },
-    },
+        }
+    }
 };
 </script>

@@ -30,7 +30,7 @@
                                 <div v-if="error" class="notification is-danger">
                                     {{ message }}
                                 </div>
-                                <div v-for="error in errors" class="notification is-danger">
+                                <div v-for="error in errors" :key="error" class="notification is-danger">
                                     {{ error[0] }}
                                 </div>
                                 <input type="hidden" v-model="fileName" v-if="!isLoading">
@@ -88,6 +88,7 @@ import { mapGetters } from 'vuex'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import { required } from 'vuelidate/lib/validators'
+import { ref, computed, useStore } from 'vue'
 
 export default {
     layout: 'auth',
@@ -98,90 +99,74 @@ export default {
     head: {
         title: 'Gramps XML Import'
     },
-    // middleware: 'permission',
-
     meta: {
         permission: { name: 'gramps menu' },
         title: 'Gramps - Import'
     },
-
-    data: () => ({
-      error: false,
-      message: "",
-      errors:null,
-      file: undefined,
-      fileName: '',
-      isLoading: false,
-      fullPage: true,
-      color: '#4fcf8d',
-      backgroundColor: '#ffffff',
-      response : null,
-      total: 100,
-      complete: 0,
-    }),
-
-    validations: {
-      fileName: {
-        required,
-      },
-    },
-
-    computed: {
-       ...mapGetters(['loggedInUser']),
-    },
-
-    mounted() {
-      this.subscribeToUploadProgress()
-    },
-
-    methods: {
-      handleSelectedFiles(event) {
-        console.log(this.$refs.fileInput.files[0])
-        this.file = this.$refs.fileInput.files[0]
-        this.fileName = this.file.name
-      },
-
-      async submit() {
-        this.$v.$touch();
-
-        if (this.$v.$invalid) {
-          return -1
+    setup() {
+        const error = ref(false)
+        const message = ref('')
+        const errors = ref(null)
+        const file = ref('undefined')
+        const fileName = ref('')
+        const isLoading = ref(false)
+        const fullPage = ref(true)
+        const color = ref('#4fcf8d')
+        const backgroundColor = ref('#ffffff')
+        const response = ref(null)
+        const total = ref(100)
+        const complete = ref(0)
+        const validations = ref({
+            fileName: {required}
+        })
+        const store = useStore()
+        return {
+            one: computed(() => store.getters['${loggedInUser}'])
+        }
+        onMounted(() => {
+            this.subscribeToUploadProgress()
+        })
+        function handleSelectedFiles() {
+            console.log(this.$refs.fileInput.files[0])
+            this.file = this.$refs.fileInput.files[0]
+            this.fileName = this.file.name            
+        }
+        async function submit() {
+            this.$v.$touch();
+            if (this.$v.$invalid) {
+            return -1
+            }
+            this.total = 100
+            this.complete = 0
+            this.isLoading = true
+            let formData = new FormData()
+            formData.append('file',  this.file)
+            try {
+            const response = await this.$axios
+                .$post("/api/gramps/store", formData, {
+                    headers: {
+                    'content-type': 'multipart/form-data',
+                    'Access-Control-Allow-Origin': '*'
+                    }
+                })
+            this.isLoading = false
+            this.response = response[0]
+            } catch (error) {
+            this.error = true
+            this.message = error.response.data.message
+            this.errors =  error.response.data.errors
+            }
+        }
+        function subscribeToUploadProgress() {
+            this.$echo.channel(`user.${this.loggedInUser.id}`)
+                .listen('.grampsProgress', message => {
+                    this.total = message.total
+                    this.complete = message.complete
+                })
         }
 
-        this.total = 100
-        this.complete = 0
-
-        this.isLoading = true
-        let formData = new FormData()
-        formData.append('file',  this.file)
-
-        try {
-          const response = await this.$axios
-            .$post("/api/gramps/store", formData, {
-                headers: {
-                  'content-type': 'multipart/form-data',
-                  'Access-Control-Allow-Origin': '*'
-                }
-            })
-
-          this.isLoading = false
-          this.response = response[0]
-        } catch (error) {
-          this.error = true
-          this.message = error.response.data.message
-          this.errors =  error.response.data.errors
-        }
-      },
-
-      subscribeToUploadProgress() {
-        this.$echo.channel(`user.${this.loggedInUser.id}`)
-          .listen('.grampsProgress', message => {
-            this.total = message.total
-            this.complete = message.complete
-          })
-      }
-      }
     }
+}
 
 </script>
 <style scoped>

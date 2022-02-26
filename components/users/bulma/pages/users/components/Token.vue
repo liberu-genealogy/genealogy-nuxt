@@ -43,6 +43,7 @@ import {
     faTrashAlt, faInfoCircle, faCalendarAlt, faPencilAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import Confirmation from '@enso-ui/confirmation/bulma';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add([
     faCalendarAlt, faInfoCircle, faPencilAlt, faTrashAlt,
@@ -63,17 +64,13 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        confirmation: false,
-    }),
-
-    methods: {
-        lastUsed({ lastUsedAt }) {
+    setup () {
+        const confirmation = ref(false)
+        function lastUsed({ lastUsedAt }) {
             return lastUsedAt
                 ? `last used: ${this.$formatDistance(lastUsedAt)}`
                 : 'Not used yet';
-        },
-    },
+        }
+    }
 };
 </script>

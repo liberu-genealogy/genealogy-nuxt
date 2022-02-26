@@ -158,6 +158,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Uploader } from '@enso-ui/uploader/bulma';
 import Divider from '@enso-ui/divider';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faUser, faUserCircle, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt, faPencilAlt);
 
@@ -168,49 +169,48 @@ export default {
 
     components: { Uploader, Divider },
 
-    data: () => ({
-        profile: null,
-    }),
-
-    computed: {
-        ...mapState(['user', 'meta', 'enums', 'impersonating']),
-        ...mapState('auth', ['isAuth']),
-        ...mapState('layout', ['isMobile']),
-        ...mapGetters(['isWebview']),
-        isSelfVisiting() {
+    setup() {
+        const profile = ref(null)
+        const store=  useStore()
+        return {
+            ...mapState(['user', 'meta', 'enums', 'impersonating']),
+            one: computed(() => store.state[auth].isAuth),
+            two: computed(() => store.state[layout].isMobile),
+            three: computed(() => store.getters['${isWebview}'])
+        }
+        const isSelfVisiting = computed(() => {
             return this.user.id === this.profile.id;
-        },
-        avatarId() {
+        })
+        const avatarId = computed(() => {
             return this.isSelfVisiting
                 ? this.user.avatar.id
                 : this.profile.avatar.id;
-        },
-    },
-
-    created() {
-        if (this.isAuth) {
-            this.fetch();
+        })
+        created(() => {
+            if (this.isAuth) {
+                this.fetch();
+            }
+        })
+        return {
+            ...mapMutations(['setUserAvatar']),
         }
-    },
-
-    methods: {
-        ...mapMutations(['setUserAvatar']),
-        fetch() {
+        function fetch() {
             this.$axios.get(this.route(this.$route.name, this.$route.params.user))
                 .then(response => (this.profile = response.data.user))
                 .catch(this.errorHandler);
-        },
-        updateAvatar() {
+        }
+        function updateAvatar() {
             this.$axios.patch(this.route('core.avatars.update', this.user.avatar.id))
                 .then(({ data }) => this.setUserAvatar(data.avatarId))
                 .catch(this.errorHandler);
-        },
-        dateFormat(date) {
+        }
+        function dateFormat(date) {
             return date
                 ? this.$format(date, this.meta.dateFormat)
                 : null;
-        },
-    },
+        }
+
+    }
 };
 </script>
 

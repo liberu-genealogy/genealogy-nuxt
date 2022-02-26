@@ -1,11 +1,15 @@
 <script>
 import { mapState } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreAppFooter',
 
-    computed: {
-        ...mapState(['meta']),
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.state[meta])
+        }
     },
 
     render() {

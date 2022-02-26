@@ -48,32 +48,23 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSave, faSlidersH } from '@fortawesome/free-solid-svg-icons';
 import { EnsoForm } from '@enso-ui/forms/bulma';
+import { ref, computed, useStore } from 'vue';
 
 library.add([faSave, faSlidersH]);
 
 export default {
-    // path: ':role/edit',
-    meta: {
-        breadcrumb: 'edit',
-        title: 'Edit Role',
-    },
-
+    meta:{ breadcrumb: 'edit', title: 'Edit Role' },
     inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'],
-
     components: { EnsoForm },
-
-    data: () => ({
-        ready: false,
-    }),
-
-    methods: {
-        writeConfig() {
+    setup() {
+        const ready = ref(false)
+        function writeConfig() {
             this.$axios.post(this.route(
                 'system.roles.permissions.write',
                 this.$refs.form.routeParam('role'),
             )).then(({ data }) => this.toastr.success(data.message))
                 .catch(this.errorHandler);
-        },
-    },
-};
+        }
+    }
+}
 </script>

@@ -13,7 +13,7 @@
 </router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
-
+import { ref, computed, useStore } from 'vue';
 export default {
 layout: 'auth',
     meta: {

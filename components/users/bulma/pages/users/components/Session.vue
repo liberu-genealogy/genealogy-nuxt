@@ -65,6 +65,8 @@ library.add([
     faFreebsd, faSafari,
 ]);
 
+import { ref, computed, useStore, watch } from 'vue';
+
 export default {
     name: 'Session',
 
@@ -80,18 +82,14 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        confirmation: false,
-    }),
-
-    methods: {
-        lastActivity({ lastActivity }) {
+    setup() {
+        const confirmation = ref(false)
+        function lastActivity({ lastActivity }) {
             return lastActivity
                 ? `last used: ${this.$formatDistance(lastActivity)}`
                 : 'Not used yet';
-        },
-        os({ OS }) {
+        }
+        function os({ OS }) {
             switch (OS) {
             case 'Windows':
             case 'Windows NT':
@@ -117,8 +115,8 @@ export default {
             default:
                 return 'question-circle';
             }
-        },
-        browser({ browser }) {
+        }
+        function browser({ browser }) {
             switch (browser) {
             case 'Opera Mini':
             case 'Opera':
@@ -138,7 +136,7 @@ export default {
             default:
                 return 'question-circle';
             }
-        },
-    },
+        }
+    }
 };
 </script>

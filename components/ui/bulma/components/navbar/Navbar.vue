@@ -68,6 +68,7 @@ import AppUpdate from './AppUpdate.vue';
 import SettingsControl from './SettingsControl.vue';
 import Search from './Search.vue';
 import { mapGetters, mapActions } from "vuex";
+import { ref, computed, useStore, watch } from 'vue';
 library.add(faBars, faCode, faUser, faTimes);
 
 export default {
@@ -75,9 +76,6 @@ export default {
 
     directives: { tooltip: VTooltip },
 
-    computed: {
-        ...mapGetters(['loggedInUser'])
-    },
     components: {
         AppUpdate,
         CoreNavbar,
@@ -86,6 +84,12 @@ export default {
     },
 
     inject: ['i18n'],
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.getters['${loggedInUser}'])
+        }
+    }
 };
 </script>
 

@@ -26,6 +26,7 @@
 import Draggable from 'vuedraggable';
 import CoreMenus from '../../../core/components/menu/Menus.vue';
 import MenuItem from './MenuItem.vue';
+import { ref, computed } from 'vue';
 
 export default {
     name: 'Menus',

@@ -78,6 +78,7 @@ import Confirmation from '@enso-ui/confirmation/bulma';
 import files from '~/mixins/files'
 import Url from './Url.vue';
 import Preview from './Preview.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faEye, faCloudDownloadAlt, faTrashAlt, faLink, faCalendarAlt, faDatabase);
 
@@ -98,39 +99,32 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        preview: null,
-        temporaryLink: '',
-    }),
-
-    computed: {
-        size() {
+    setup() {
+        const preview = ref(null)
+        const temporaryLink = ref('')
+        const size = computed(() => {
             return this.$numberFormat(this.file.size / 1000);
-        },
-    },
-
-    methods: {
-        link() {
+        })
+        function link() {
             this.$axios.get(this.route('core.files.link', this.file.id))
                 .then(({ data }) => (this.temporaryLink = data.link))
                 .catch(this.errorHandler);
-        },
-        show() {
+        }
+        function show() {
             if (this.file.mimeType === 'application/pdf') {
                 this.preview = this.file;
                 return;
             }
 
             window.open(this.route('core.files.show', this.file.id), '_blank').focus();
-        },
-        timeFromNow(date) {
+        }
+        function timeFromNow(date) {
             return this.$formatDistance(date);
-        },
-        date(date) {
+        }
+        function date(date) {
             return this.$format(date);
-        },
-    },
+        }
+    }
 };
 </script>
 

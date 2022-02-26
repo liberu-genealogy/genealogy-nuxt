@@ -103,6 +103,7 @@ import {
 import Confirmation from '@enso-ui/confirmation/bulma';
 import { Uploader } from '@enso-ui/uploader';
 import 'video.js/dist/video-js.css';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add([faTrashAlt, faInfo, faTags, faEdit, faImage, faInfoCircle]);
 
@@ -136,19 +137,12 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        tagging: false,
-    }),
-
-    computed: {
-        tagList() {
+    setup() {
+        const tagging = ref(false)
+        const tagList = computed(() => {
             return this.tags.filter(({ id }) => this.video.tagList.includes(id));
-        },
-    },
-
-    methods: {
-        options() {
+        })
+        function options() {
             return {
                 muted: false,
                 language: 'en',
@@ -162,26 +156,26 @@ export default {
                     ? this.route('howTo.posters.show', this.video.poster.id)
                     : '',
             };
-        },
-        destroyPoster() {
+        }
+        function destroyPoster() {
             this.$axios.delete(this.route('howTo.posters.destroy', this.video.poster.id))
                 .then(({ data }) => {
                     this.toastr.success(data.message);
                     this.video.poster = null;
                 }).catch(this.errorHandler);
-        },
-        destroyVideo() {
+        }
+        function destroyVideo() {
             this.$axios.delete(this.route('howTo.videos.destroy', this.video.id))
                 .then(({ data }) => {
                     this.toastr.success(data.message);
                     this.$emit('delete');
                 }).catch(this.errorHandler);
-        },
-        removeTag(tag) {
+        }
+        function removeTag() {
             const index = this.video.tagList.findIndex(id => id === tag.id);
             this.video.tagList.splice(index, 1);
-        },
-    },
+        }
+    }
 };
 </script>
 

@@ -1,6 +1,7 @@
 <script>
 import { mapMutations } from 'vuex';
 import Driver from 'driver.js';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreTutorial',
@@ -28,16 +29,17 @@ export default {
             prevBtnText: v.i18n(v.labels.previous),
         }),
     }),
-
-    methods: {
-        ...mapMutations('layout/settings', { toggleSettingsBar: 'toggle' }),
-        fetch() {
+    setup() {
+        return {
+            ...mapMutations('layout/settings', { toggleSettingsBar: 'toggle' }),
+        }
+        function fetch() {
             this.$axios.get(this.route('system.tutorials.load'), {
                 params: { route: this.$route.name },
             }).then(({ data }) => this.start(data))
                 .catch(this.errorHandler);
-        },
-        start(steps) {
+        }
+        function start(steps) {
             if (!steps.length) {
                 return;
             }
@@ -45,8 +47,8 @@ export default {
             this.toggleSettingsBar();
             this.driver.defineSteps(this.localise(steps));
             this.driver.start();
-        },
-        localise(steps) {
+        }
+        function localise(steps) {
             return steps.map(({ element, popover }) => ({
                 element,
                 popover: {
@@ -55,9 +57,9 @@ export default {
                     title: this.i18n(popover.title),
                 },
             }));
-        },
+        }
     },
-
+    
     render() {
         return this.$scopedSlots.default({
             itemEvents: {

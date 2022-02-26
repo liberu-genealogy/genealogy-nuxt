@@ -23,6 +23,7 @@
 <script>
 import VueSwitch from '@enso-ui/switch/bulma';
 import CoreKeyCollector from '../../../core/components/settings/KeyCollector.vue';
+import { ref, computed } from 'vue';
 
 export default {
     name: 'KeyCollector',

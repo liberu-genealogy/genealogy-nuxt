@@ -66,6 +66,7 @@ import { EnsoUploader } from '@enso-ui/uploader/bulma';
 import File from '@enso-ui/files/src/bulma/pages/files/components/File.vue';
 import debounce from 'lodash/debounce';
 import Document from './Document.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faPlus, faSync, faSearch);
 
@@ -106,52 +107,43 @@ export default {
             type: Number,
         },
     },
-
-    data: () => ({
-        documents: [],
-        loading: false,
-        internalQuery: '',
-    }),
-
-    computed: {
-        params() {
+    setup() {
+        const documents = ref([])
+        const loading = ref(false)
+        const internalQuery = ref('')
+        const params = computed(() => {
             return {
                 documentable_type: this.type,
                 documentable_id: this.id,
                 query: this.internalQuery,
             };
-        },
-        count() {
+        })
+        const count = computed(() => {
             return this.documents.length;
-        },
-        uploadLink() {
+        })
+        const uploadLink = computed(() => {
             return this.canAccess('core.documents.store')
                 ? this.route('core.documents.store')
                 : null;
-        },
-        component() {
+        })
+        const component = computed(() => {
             return this.compact
                 ? 'document'
                 : 'file';
-        },
-    },
-
-    watch: {
-        query() {
+        })
+        const query = ref('')
+        const internalQuery = ref('')
+        watch(query, () => {
             this.internalQuery = this.query;
-        },
-        internalQuery() {
+        })
+        watch(internalQuery, () => {
+            this.fetch()
+        })
+        created(() => {
             this.fetch();
-        },
-    },
-
-    created() {
-        this.fetch();
-        this.fetch = debounce(this.fetch, 300);
-    },
-
-    methods: {
-        fetch() {
+            this.fetch = debounce(this.fetch, 300);
+        })
+        function fetch() {
             this.loading = true;
 
             this.$axios.get(this.route('core.documents.index'), {
@@ -161,8 +153,8 @@ export default {
                 this.loading = false;
                 this.$emit('update');
             }).catch(this.errorHandler);
-        },
-        destroy(index) {
+        }
+        function destroy(index) {
             this.loading = true;
 
             this.$axios.delete(this.route(
@@ -173,8 +165,8 @@ export default {
                 this.documents.splice(index, 1);
                 this.$emit('update');
             }).catch(this.errorHandler);
-        },
-    },
+        }
+    }
 };
 </script>
 

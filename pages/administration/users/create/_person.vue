@@ -22,17 +22,18 @@
 
 <script>
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
+import { ref, computed, useStore } from 'vue';
 
 export default {
     meta: {
         breadcrumb: 'create',
         title: 'Create User',
     },
-
     components: { EnsoForm, FormField },
-
-    data: () => ({
-        pivotParams: { userGroups: { id: null } },
-    }),
+    setup() {
+        const pivotParams = ref({
+            userGroups: { id: null }
+        })
+    }
 };
 </script>

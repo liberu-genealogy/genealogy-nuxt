@@ -17,6 +17,7 @@ import {
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faExclamationTriangle);
 
@@ -26,29 +27,26 @@ export default {
     directives: { tooltip: VTooltip },
 
     inject: ['i18n', 'toastr'],
-
-    data: () => ({
-        message: null,
-        title: null,
-        tooltip: null,
-    }),
-
-    computed: {
-        ...mapState(['meta']),
-        ...mapState('layout', ['isTouch']),
-        ...mapGetters('websockets', ['channels']),
-    },
-
-    created() {
-        this.connect();
-        this.listen();
-        this.$root.$on('notify-new-release', () => this.notify());
-    },
-
-    methods: {
-        ...mapMutations(['newRelease']),
-        ...mapActions('websockets', ['connect']),
-        listen() {
+    setup() {
+        const message = ref(null)
+        const title = ref(null)
+        const tooltip = ref(null)
+        const store = useStore()
+        return {
+            one: computed(() => store.state[meta]),
+            two: computed(() => store.state[layout].isTouch),
+            three: computed(() => store.getters['${websockets}/channels'])
+        }
+        created(() => {
+            this.connect();
+            this.listen();
+            this.$root.$on('notify-new-release', () => this.notify());
+        })
+        return {
+            ...mapMutations(['newRelease']),
+            ...mapActions('websockets', ['connect']),
+        }
+        function listen() {
             window.Echo.private(this.channels.appUpdates)
                 .listen('.new-update', ({ title, message, tooltip }) => {
                     this.newRelease();
@@ -57,15 +55,15 @@ export default {
                     this.tooltip = this.i18n(tooltip);
                     this.notify();
                 });
-        },
-        notify() {
+        }
+        function notify() {
             this.toastr.duration(30000)
                 .title(this.title)
                 .warning(this.message);
-        },
-        reload() {
+        }
+        function reload() {
             window.location.reload(true);
-        },
-    },
+        }
+    }
 };
 </script>

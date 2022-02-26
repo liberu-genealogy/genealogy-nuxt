@@ -80,6 +80,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Confirmation from '@enso-ui/confirmation/bulma';
 import Items from './Items.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faMinusSquare, faPlusSquare, faPencilAlt, faTrashAlt, faQuestionCircle);
 
@@ -102,22 +103,19 @@ export default {
             required: true,
         },
     },
-
-    computed: {
-        canHaveChildren() {
+    setup() {
+        const canHaveChildren = computed(() => {
             return !!this.item.items;
-        },
-        hasChildren() {
-            return this.item.items?.length > 0;
-        },
-        isExpanded() {
+        })
+        const hasChildren = computed(() => {
+            return this.item.items?length:0
+            // return this.item.items?.length > 0;
+        })
+        const isExpanded = computed(() => {
             return this.state.expanded
                 .some(current => this.is(current, this.item));
-        },
-    },
-
-    methods: {
-        bold(label, arg) {
+        })
+        function bold(label, arg) {
             let from;
 
             try {
@@ -127,14 +125,14 @@ export default {
             }
 
             return `${label}`.replace(from, '<b>$1</b>');
-        },
-        clear() {
+        }
+        function clear() {
             this.item.selected = false;
             this.$emit('input', null);
             this.$emit('deselected', this.item);
             this.state.selected = null;
-        },
-        destroy() {
+        }
+        function destroy() {
             const routePrefix = this.routePrefix(this.item);
             const route = this.route(`${routePrefix}.destroy`, this.item.id);
 
@@ -142,17 +140,17 @@ export default {
                 this.splice(this.item.id);
                 this.state.selected = null;
             }).catch(this.errorHandler);
-        },
-        edit() {
+        }
+        function edit() {
             this.state.item = this.state.selected;
             this.state.original = this.state.selected.name;
-        },
-        highlight(label) {
+        }
+        function highlight(label) {
             return this.state.query.toLowerCase().split(' ')
                 .filter(arg => arg !== '')
                 .reduce((label, arg) => this.bold(label, arg), label);
-        },
-        select() {
+        }
+        function select() {
             if (this.state.selected) {
                 this.state.selected.selected = false;
             }
@@ -162,8 +160,8 @@ export default {
             const input = this.state.objects ? this.item : this.item.id;
             this.$emit('input', input);
             this.$emit('selected', this.item);
-        },
-        toggle() {
+        }
+        function toggle() {
             if (!this.hasChildren) {
                 return;
             }
@@ -176,8 +174,8 @@ export default {
             } else {
                 this.state.expanded.push(this.item);
             }
-        },
-    },
+        }
+    }
 };
 </script>
 

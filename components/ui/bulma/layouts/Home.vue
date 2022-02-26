@@ -27,6 +27,7 @@
 import { focus } from '@enso-ui/directives';
 import Loader from '@enso-ui/loader/bulma';
 import CoreHome from '~/components/ui/core/layouts/Home.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'Home',

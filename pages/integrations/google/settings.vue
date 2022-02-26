@@ -17,26 +17,22 @@
 
 <script>
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
+import { ref, computed, useStore } from 'vue';
 
 export default {
     meta: {
         breadcrumb: 'settings',
         title: 'Settings',
     },
-
     components: { EnsoForm, FormField },
-
-    data: () => ({
-        form: null,
-        key: 1,
-    }),
-
-    methods: {
-        submit() {
+    setup() {
+        const form = ref(null)
+        const key = ref(1)
+        function submit() {
             if (!this.form.routeParam('settings')) {
                 this.key++;
             }
-        },
-    },
+        }
+    }
 };
 </script>

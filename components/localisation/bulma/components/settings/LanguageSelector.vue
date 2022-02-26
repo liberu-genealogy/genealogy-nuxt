@@ -37,6 +37,7 @@
 <script>
 import { Dropdown, DropdownItem } from '@enso-ui/dropdown/bulma';
 import CoreLanguageSelector from '../../../core/components/settings/LanguageSelector.vue';
+import { ref, computed } from 'vue';
 
 export default {
     name: 'LanguageSelector',

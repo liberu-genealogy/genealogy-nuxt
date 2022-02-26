@@ -23,6 +23,7 @@
 <script>
 import VueSwitch from '@enso-ui/switch/bulma';
 import CoreMenuOrganizer from '../../../core/components/settings/MenuOrganizer.vue';
+import { ref, computed, useStore } from 'vue';
 
 export default {
     name: 'MenuOrganizer',

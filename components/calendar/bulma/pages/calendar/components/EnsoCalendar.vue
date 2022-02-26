@@ -67,6 +67,7 @@ import VueCal from 'vue-cal';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFlag, faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 import EventConfirmation from './EventConfirmation';
+import { ref, computed, useStore, watch } from 'vue';
 
 import 'vue-cal/dist/drag-and-drop.js';
 import 'vue-cal/dist/i18n/ar.js';
@@ -97,24 +98,22 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        events: [],
-        vuecalEvent: null,
-        confirm: null,
-        hovering: null,
-        interval: null,
-        dragedEvent: null,
-        deleteEventFunction: null,
-    }),
-
-    computed: {
-        ...mapState(['enums', 'meta']),
-        ...mapGetters('preferences', ['lang']),
-        event() {
-            return this.vuecalEvent?.event;
-        },
-        params() {
+    setup() {
+        const events = ref([])
+        const vuecalEvent = ref(null)
+        const confirm = ref(null)
+        const hovering = ref(null)
+        const dragedEvent = ref(null)
+        const deleteEventFunction = ref(null)
+        const store = useStore()
+        return {
+            one: computed(() => store.getters['${preferences}/lang']),
+            two: computed(() => store.state[enums].meta)
+        }
+        const event = computed(() => {
+            return this.vuecalEvent?event:''
+        })
+        const params = computed(() => {
             if (!this.interval) {
                 return { calendars: this.calendars };
             }
@@ -132,58 +131,52 @@ export default {
                 startDate: `${this.dateFormat(this.interval.startDate)} 00:00:00`,
                 endDate: `${this.dateFormat(this.interval.endDate)} 23:59:59`,
             };
-        },
-        isFrequent() {
+        })
+        const isFrequent = computed(() => {
             return this.event
                 && `${this.event.frequency}` !== this.enums.eventFrequencies.Once;
-        },
-        dateChanged() {
+        })
+        const dateChanged = computed(() => {
             return this.vuecalEvent && this.vuecalEvent.oldDate && this.vuecalEvent.newDate
                 && this.dateFormat(this.vuecalEvent.oldDate) !== this.dateFormat(this.vuecalEvent.newDate);
-        },
-    },
-
-    watch: {
-        calendars: 'fetch',
-    },
-
-    mounted() {
-        this.resize();
-
-        window.addEventListener('resize', this.resize);
-    },
-    beforeDestroy() {
-        window.removeEventListener('resize', this.resize);
-    },
-
-    methods: {
-        resize() {
+        })
+        const calendars = ref('')
+        watch(calendars, () => {
+            const calendars = ref('fetch')
+        })
+        onMouted(() => {
+            this.resize();
+            window.addEventListener('resize', this.resize);
+        })
+        beforeUnmount(() => {
+            window.removeEventListener('resize', this.resize);
+        })
+        function resize() {
             this.$el.style.height = `${document.body.clientHeight - 170}px`;
-        },
-        fetch() {
+        }
+        function fetch() {
             if (this.calendars) {
                 this.$axios.get(this.route('core.calendar.events.index'), { params: this.params })
                     .then(({ data }) => (this.events = data))
                     .catch(this.errorHandler);
             }
-        },
-        setDragedEvent(event, deleteEventFunction) {
+        }
+        function setDragedEvent(event, deleteEventFunction) {
             this.dragedEvent = event;
             this.deleteEventFunction = deleteEventFunction;
             return event;
-        },
-        revert() {
+        }
+        function revert() {
             const index = this.events.findIndex((event) => event.id === this.event.id);
             this.events[index].end = new Date(this.vuecalEvent.originalEvent.end);
             this.events[index].start = new Date(this.vuecalEvent.originalEvent.start);
             this.events.splice(index, 1, this.events[index]);
-        },
-        update(updateType = null) {
+        }
+        function update(updateType = null) {
             if (this.needsConfirmation(updateType)) {
                 this.confirm = (updateType) => this.update(updateType);
                 return;
             }
-
             const payload = {
                 start_date: this.dateFormat(this.event.start),
                 end_date: this.dateFormat(this.event.end),
@@ -191,7 +184,6 @@ export default {
                 end_time: this.timeFormat(this.event.end),
                 updateType,
             };
-
             this.$axios.patch(
                 this.route('core.calendar.events.update', { event: this.event.id }),
                 payload,
@@ -202,12 +194,12 @@ export default {
                 this.revert();
                 this.errorHandler(e);
             });
-        },
-        updateInterval(interval) {
+        }
+        function updateInterval(interval) {
             this.interval = interval;
             this.fetch();
-        },
-        selectEvent(event, e) {
+        }
+        function selectEvent(event, e) {
             if (event.route) {
                 this.$router.push(event.route)
                     .catch(this.routerErrorHandler);
@@ -217,8 +209,8 @@ export default {
                 this.$emit('edit-event', event);
             }
             e.stopPropagation();
-        },
-        destroy(event, updateType = null) {
+        }
+        function destroy(event, updateType = null) {
             this.vuecalEvent = { event, originalEvent: event };
 
             if (this.needsConfirmation(updateType)) {
@@ -233,35 +225,35 @@ export default {
                 this.toastr.success(data.message);
                 this.fetch();
             }).catch(this.errorHandler);
-        },
-        needsConfirmation(updateType) {
+        }
+        function needsConfirmation(updateType) {
             return updateType === null
                 && this.isFrequent;
-        },
-        dateTimeFormat(daysCount, date) {
+        }
+        function dateTimeFormat(daysCount, date) {
             return daysCount > 1
                 ? this.$format(date, 'm-d h:i')
                 : this.$format(date, 'h:i');
-        },
-        dateFormat(date) {
+        }
+        function dateFormat(date) {
             return this.$format(date, 'Y-m-d');
-        },
-        timeFormat(dateTime) {
+        }
+        function timeFormat(dateTime) {
             return this.$format(dateTime, 'H:i');
-        },
-        cancelUpdate() {
+        }
+        function cancelUpdate() {
             this.revert();
             this.confirm = null;
             this.vuecalEvent = null;
-        },
-        eventDragCreated() {
+        }
+        function eventDragCreated() {
             if (this.dragedEvent) {
                 this.$emit('edit-event', this.dragedEvent);
                 this.deleteEventFunction();
                 this.dragedEvent = null;
             }
-        },
-    },
+        }
+    }
 };
 </script>
 

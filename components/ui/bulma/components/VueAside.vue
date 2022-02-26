@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { ref, computed, useStore, watch } from 'vue';
 export default {
     name: 'VueAside',
 };

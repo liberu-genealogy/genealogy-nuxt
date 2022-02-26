@@ -33,6 +33,7 @@
 <script>
 import { focus } from '@enso-ui/directives';
 import { Modal } from '@enso-ui/modal/bulma';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'DeleteModal',
@@ -49,14 +50,13 @@ export default {
             required: true,
         },
     },
-
-    methods: {
-        destroy(person = false) {
+    setup() {
+        function destroy(person = false) {
             axios.delete(this.route('administration.users.destroy', this.userId),
                 { params: { person: !!person } })
                 .then(({ data }) => this.$emit('destroyed', data))
                 .catch(this.errorHandler);
-        },
-    },
+        }
+    }
 };
 </script>

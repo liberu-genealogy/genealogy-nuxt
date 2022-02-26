@@ -7,6 +7,7 @@
 }
 </router>
 <script>
+import { ref, computed, useStore } from 'vue'
 export default {
 layout: 'auth',
     meta: {

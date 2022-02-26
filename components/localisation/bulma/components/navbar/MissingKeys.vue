@@ -20,6 +20,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLanguage, faCheck } from '@fortawesome/free-solid-svg-icons';
 import CoreMissingKeys from '../../../core/components/navbar/MissingKeys.vue';
+import { ref, computed } from 'vue';
 
 library.add(faLanguage, faCheck);
 

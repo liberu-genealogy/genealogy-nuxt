@@ -64,6 +64,7 @@
 
 import Confirmation from '@enso-ui/confirmation/bulma';
 import Inputor from './Inputor.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'Reply',
@@ -78,35 +79,28 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        controls: false,
-        confirmation: false,
-        edit: false,
-    }),
-
-    computed: {
-        avatar() {
+    setup() {
+        const controls = ref(false)
+        const confirmation = ref(false)
+        const edit = ref(false)
+        const avatar = computed(() => {
             return this.route(
                 'core.avatars.show',
                 this.reply.owner.avatar.id,
             );
-        },
-        edited() {
+        })
+        const edited = computed(() => {
             return this.reply.createdAt !== this.reply.updatedAt;
-        },
-    },
-
-    methods: {
-        timeFromNow(date) {
+        })
+        function timeFromNow(date) {
             return this.$formatDistance(date);
-        },
-        format(html) {
+        }
+        function format(html) {
             return html.replace(/<p>/gm, '<p class="is-marginless">')
                 .replace(/<h1>/gm, '<h1 class="is-marginless">')
                 .replace(/<h2>/gm, '<h2 class="is-marginless">');
-        },
-    },
+        }
+    }
 };
 </script>
 

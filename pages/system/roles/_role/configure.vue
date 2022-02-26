@@ -55,48 +55,37 @@
 import { mapState } from 'vuex';
 import cssClass from '~/utils/permission';
 import { CheckboxManager } from '@enso-ui/checkbox/bulma';
-
+import { ref, computed, useStore } from 'vue';
 export default {
-    // path: ':role/configure',
-    meta: {
-        breadcrumb: 'configure',
-        title: 'Configure Role',
-    },
-
+    meta: { breadcrumb: 'configure', title: 'Configure Role' },
     inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'],
-
     components: { CheckboxManager },
-
-    data: () => ({
-        data: null,
-    }),
-
-    computed: {
-        ...mapState(['enums']),
-    },
-
-    created() {
-        this.fetch();
-    },
-
-    methods: {
-        cssClass(item) {
+    setup() {
+        const data = ref(null)
+        const store = useStore()
+        return {
+            one: computed(() => store.state[enums])
+        }
+        created(() => {
+            this.fetch()
+        })
+        function cssClass(item) {
             return cssClass(this.enums.permissionTypes, item);
-        },
-        fetch() {
+        }
+        function fetch() {
             this.$axios.get(this.route('system.roles.permissions.get', this.$route.params.role))
                 .then(({ data }) => (this.data = data))
                 .catch(this.errorHandler);
-        },
-        update() {
+        }
+        function update() {
             this.$axios.post(
                 this.route('system.roles.permissions.set', this.$route.params.role),
                 { rolePermissions: this.data.rolePermissions },
             ).then(({ data }) => this.toastr.success(data.message))
                 .catch(this.errorHandler);
-        },
-    },
-};
+        }
+    }
+}
 </script>
 
 <style lang="scss">

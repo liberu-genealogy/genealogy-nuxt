@@ -1,6 +1,7 @@
 <script>
 import { debounce } from 'lodash';
 import { mapState, mapGetters, mapActions } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'Tasks',
@@ -13,52 +14,48 @@ export default {
             default: 200,
         },
     },
-
-    data: () => ({
-        echo: null,
-        loading: false,
-        offset: 0,
-        overdue: 0,
-        pending: 0,
-        tasks: [],
-    }),
-
-    computed: {
-        ...mapGetters('websockets', ['channels']),
-        ...mapState('layout', ['isTouch']),
-        ...mapState(['enums', 'meta']),
-    },
-
-    created() {
-        this.fetch = debounce(this.fetch, 500);
-        this.count();
-        this.connect();
-        this.listen();
-    },
-
-    methods: {
-        ...mapActions('websockets', ['connect']),
-        computeScrollPosition(event) {
+    setup() {
+        const echo = ref(null)
+        const loading = ref(false)
+        const offset = ref(0)
+        const overdue = ref(0)
+        const pending = ref(0)
+        const tasks = ref([])
+        const store = useStore()
+        return {
+            one: computed(() => store.getters['${websockets}/channels']),
+            two: computed(() => store.state[layout].isTouch),
+            three: computed(() => store.state[enums].meta)
+        }
+        created(() => {
+            this.fetch = debounce(this.fetch, 500);
+            this.count();
+            this.connect();
+            this.listen();
+        })
+        return{
+            ...mapActions('websockets', ['connect']),
+        }
+        function computeScrollPosition(event) {
             const a = event.target.scrollTop;
             const b = event.target.scrollHeight - event.target.clientHeight;
 
             if (a / b > 0.7) {
                 this.fetch();
             }
-        },
-        count() {
+        }
+        function count() {
             this.$axios.get(this.route('tasks.count'))
                 .then(({ data }) => this.updateCounters(data))
                 .catch(this.errorHandler);
-        },
-        dateTime(dateTime) {
+        }
+        function dateTime(dateTime) {
             return this.$format(dateTime, `${this.meta.dateFormat} H:i`);
-        },
-        flagClass(id) {
-            // eslint-disable-next-line no-underscore-dangle
+        }
+        function flagClass(id) {
             return `has-text-${this.enums.flags._get(id).toLowerCase()}`;
-        },
-        fetch() {
+        }
+        function fetch() {
             if (this.loading) {
                 return;
             }
@@ -72,27 +69,27 @@ export default {
                 this.offset = this.tasks.length;
                 this.loading = false;
             }).catch(this.errorHandler);
-        },
-        listen() {
+        }
+        function listen() {
             window.Echo.private(this.channels.task)
                 .listen('.updated', data => {
                     this.offset = 0;
                     this.tasks = [];
                     this.updateCounters(data);
                 });
-        },
-        updateCounters({ overdueCount, pendingCount }) {
+        }
+        function updateCounters({ overdueCount, pendingCount }) {
             this.overdue = overdueCount;
             this.pending = pendingCount;
-        },
-        visitTask({ id }) {
+        }
+        function visitTask({ id }) {
             this.$router.push({ name: 'tasks.edit', params: { task: id } })
                 .catch(this.routerErrorHandler);
-        },
-        visitTasks() {
+        }
+        function visitTasks() {
             this.$router.push({ name: 'tasks.index' })
                 .catch(this.routerErrorHandler);
-        },
+        }
     },
 
     render() {

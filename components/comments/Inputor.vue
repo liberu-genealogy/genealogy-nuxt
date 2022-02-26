@@ -45,6 +45,7 @@ import { mapState } from 'vuex';
 import debounce from 'lodash/debounce';
 import getCaretCoordinates from 'textarea-caret';
 import { focus, clickOutside } from '@enso-ui/directives';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'Inputor',
@@ -59,40 +60,33 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        items: [],
-        position: null,
-        query: null,
-    }),
-
-    computed: {
-        ...mapState(['user']),
-        hasText() {
+    setup() {
+        const items = ref([])
+        const position = ref(null)
+        const query = ref(null)
+        const store = useStore()
+        return {
+            one: computed(() => store.state[user])
+        }
+        const hasText = computed(() => {
             return this.comment.body.trim();
-        },
-        atwhoContainer() {
+        })
+        const atwhoContainer = computed(() => {
             return this.$el.querySelector('.atwho');
-        },
-        textarea() {
+        })
+        const textarea = computed(() => {
             return this.$el.querySelector('textarea');
-        },
-    },
-
-    watch: {
-        query() {
+        })
+        const query = ref('')
+        watch(query, () => {
             if (this.query !== null) {
                 this.fetch();
             }
-        },
-    },
-
-    created() {
-        this.fetch = debounce(this.fetch, 200);
-    },
-
-    methods: {
-        fetch() {
+        })
+        created(() => {
+            this.fetch = debounce(this.fetch, 200);
+        })
+        function fetch() {
             this.$axios.get(this.route('core.comments.users'), {
                 params: { query: this.query, paginate: 6 },
             }).then(({ data }) => {
@@ -103,8 +97,8 @@ export default {
                     this.position = 0;
                 }
             }).catch(this.errorHandler);
-        },
-        filter(event) {
+        }
+        function filter(event) {
             const arg = this.comment.body
                 .substr(0, this.textarea.selectionEnd)
                 .split(' ')
@@ -122,31 +116,31 @@ export default {
                 this.query = arg.substring(1);
                 this.atwho(event);
             }
-        },
-        atwho(event) {
+        }
+        function atwho(event) {
             const caret = getCaretCoordinates(event.target, event.target.selectionEnd);
             this.atwhoContainer.style.top = `${caret.top + 25}px`;
             this.atwhoContainer.style.left = `${caret.left - 15}px`;
-        },
-        onUp(event) {
+        }
+        function onUp(event) {
             if (this.position > 0) {
                 this.position--;
                 event.preventDefault();
             }
-        },
-        onDown(event) {
+        }
+        function onDown(event) {
             if (this.position < this.items.length - 1) {
                 this.position++;
                 event.preventDefault();
             }
-        },
-        onEnter(event) {
+        }
+        function onEnter(event) {
             if (this.position !== null) {
                 this.selectItem();
                 event.preventDefault();
             }
-        },
-        selectItem() {
+        }
+        function selectItem() {
             const { search, replace } = this.transform();
 
             this.comment.body = this.comment.body.replace(search, replace);
@@ -157,40 +151,36 @@ export default {
             this.$nextTick(() => {
                 this.textarea.selectionEnd = replace.length;
             });
-        },
-        hide() {
+        }
+        function hide() {
             this.items = [];
             this.position = null;
             this.query = null;
-        },
-        transform() {
+        }
+        function transform() {
             const item = this.items[this.position];
             const cursorPosition = this.textarea.selectionEnd;
             let search = this.comment.body.substr(0, cursorPosition);
             const atPosition = search.lastIndexOf('@');
-
             if (this.comment.body[search.length] === ' ') {
                 search += ' ';
             }
-
             let replace = search.substr(0, atPosition + 1) + item.person.name;
             replace += ' ';
-
             return { search, replace };
-        },
-        highlight(item) {
+        }
+        function highlight(item) {
             return item
                 .replace(new RegExp(`(${this.query})`, 'gi'), '<b>$1</b>');
-        },
-        tagUser() {
+        }
+        function tagUser() {
             const user = this.items[this.position];
-
             this.comment.taggedUsers.push({
                 id: user.id,
                 name: user.person.name,
             });
-        },
-    },
+        }
+    }
 };
 </script>
 

@@ -22,25 +22,22 @@
 
 <script>
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
+import { ref, computed, useStore } from 'vue';
 
 export default {
     meta: {
         breadcrumb: 'create',
-        title: 'Create Person',
+        title: 'Create Person'
     },
-
     components: { EnsoForm, FormField },
-
-    data: () => ({
-        companies: [],
-    }),
-
-    computed: {
-        params() {
+    setup() {
+        const companies = ref([])
+        const params = computed(() => {
             return {
-                id: this.companies,
-            };
-        },
-    },
-};
+                id: this.companies
+            }
+        })
+    }
+}
+
 </script>

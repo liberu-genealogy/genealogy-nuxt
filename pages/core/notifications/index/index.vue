@@ -85,37 +85,31 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync,
 } from '@fortawesome/free-solid-svg-icons';
+import { ref, computed, useStore } from 'vue';
 
 library.add(faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync);
 
 export default {
-    // path: '/core/notifications/index',
     meta: {
         breadcrumb: 'notifications',
-        title: 'Notifications',
+        title: 'Notifications'
     },
-
     inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler'],
-
-    data: () => ({
-        paginate: 200,
-        notifications: [],
-        offset: 0,
-        loading: false,
-    }),
-
-    computed: {
-        ...mapState(['user', 'meta']),
-        ...mapState('layout', ['isTouch']),
-    },
-
-    created() {
-        this.fetch = debounce(this.fetch, 500);
-        this.fetch();
-    },
-
-    methods: {
-        fetch() {
+    setup() {
+        const paginate = ref(200)
+        const notifications = ref([])
+        const offset = ref(0)
+        const loading = ref(false)
+        const store = useStore()
+        return{
+            one: computed(() => store.state[user].meta),
+            two: computed(() => store.state[layout].isTouch)
+        }
+        created(() => {
+            this.fetch = debounce(this.fetch, 500);
+            this.fetch();
+        })
+        function fetch() {
             if (this.loading) {
                 return;
             }
@@ -128,10 +122,10 @@ export default {
                 this.notifications = this.offset ? this.notifications.concat(data) : data;
                 this.offset = this.notifications.length;
                 this.loading = false;
-            }).catch(this.errorHandler);
-        },
-        read(notification) {
-            this.$axios.patch(this.route('core.notifications.read', notification.id))
+            }).catch(this.errorHandler); 
+        }
+        function read(notification) {
+                this.$axios.patch(this.route('core.notifications.read', notification.id))
                 .then(({ data }) => {
                     notification.read_at = data.read_at;
                     this.$root.$emit('read-notification', notification);
@@ -141,36 +135,35 @@ export default {
                             .catch(this.routerErrorHandler);
                     }
                 }).catch(this.errorHandler);
-        },
-        readAll() {
+        }
+        function readAll() {
             this.$axios.post(this.route('core.notifications.readAll'))
                 .then(() => this.updateAll())
                 .catch(this.errorHandler);
-        },
-        updateAll() {
+        }
+        function updateAll() {
             this.notifications.forEach(notification => {
                 notification.read_at = notification.read_at || this.$format(new Date(), 'Y-MM-DD H:mm:s');
             });
-
             this.unreadCount = 0;
-
             this.$root.$emit('read-all-notifications');
-        },
-        destroyAll() {
+        }
+        function destroyAll() {
             this.$axios.delete(this.route('core.notifications.destroyAll')).then(() => {
                 this.notifications = [];
                 this.$root.$emit('destroy-all-notifications');
             }).catch(this.errorHandler);
-        },
-        destroy(notification, index) {
+        }
+        function destroy(notification, index) {
             this.$axios.delete(this.route('core.notifications.destroy', notification.id)).then(() => {
                 this.notifications.splice(index, 1);
                 this.$root.$emit('destroy-notification', notification);
-            }).catch(this.errorHandler);
-        },
-        timeFromNow(date) {
+            }).catch(this.errorHandler);            
+        }
+        function timeFromNow() {
             return this.$formatDistance(date);
-        },
-    },
-};
+        }
+    }
+}
+
 </script>

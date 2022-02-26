@@ -49,39 +49,30 @@ import Accessories from '@enso-ui/accessories/bulma';
 import { Addresses } from '@enso-ui/addresses/bulma';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import People from '~/components/companies/bulma/pages/companies/components/People.vue';
+import { ref, computed, useStore } from 'vue';
 
 export default {
     meta: {
         breadcrumb: 'edit',
-        title: 'Edit Company',
+        title: 'Edit Company'
     },
-
-    components: {
-        EnsoForm,
-        FormField,
-        Accessories,
-        Tab,
-        Addresses,
-        People,
-    },
-
-    computed: {
-        companyId() {
+    components: { EnsoForm, FormField, Accessories, Tab, Addresses, People },
+    setup() {
+        const companyId = computed(() => {
             return Number.parseInt(this.$route.params.company, 10);
-        },
-        pivotParams() {
+        })
+        const pivotParams = computed(() => {
             return {
-                companies: { id: this.companyId },
-            };
-        },
-    },
-
-    methods: {
-        personRemoved(personId) {
+                companies: { id: this.companyId }
+            }
+        })
+        function personRemoved(personId) {
             if (this.$refs.form.field('mandatary').value === personId) {
                 this.$refs.form.field('mandatary').value = null;
             }
-        },
-    },
-};
+        }
+
+    }
+}
+
 </script>

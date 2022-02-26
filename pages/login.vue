@@ -20,52 +20,54 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
-import Errors from '@enso-ui/laravel-validation';
-import LoginForm from '~/components/auth/LoginForm.vue';
-// import Email from '~/components/auth/fields/Email.vue';
-// import Password from '~/components/auth/fields/Password.vue';
-// import Remember from '~/components/auth/fields/Remember.vue';
+    import { mapState, mapGetters, mapMutations } from 'vuex';
+    import Errors from '@enso-ui/laravel-validation';
+    import LoginForm from '~/components/auth/LoginForm.vue';
+    import { useStore } from 'vuex';
+    // import Email from '~/components/auth/fields/Email.vue';
+    // import Password from '~/components/auth/fields/Password.vue';
+    // import Remember from '~/components/auth/fields/Remember.vue';
 
-export default {
-    layout: 'index',
-    meta: {
-        guestGuard: true,
-        title: 'Login',
-    },
-
-    components: { LoginForm },
-
-    data: () => ({
-        errors: new Errors(),
-        payload: {
-            email: '',
-            password: '',
-            remember: false,
-        }
-    }),
-
-    computed: {
-        ...mapState(['meta']),
-        ...mapGetters(['isWebview']),
-    },
-
-    methods: {
-        ...mapMutations('auth', ['login']),
-        ...mapMutations('layout', ['home']),
-        ...mapMutations(['setShowQuote', 'setCsrfToken']),
-        init(data) {
-            this.setShowQuote(this.meta.showQuote);
-            if (data.csrfToken) {
-                this.setCsrfToken({token: data.csrfToken, $axios: this.$axios});
-            }
-
-            setTimeout(() => {
-                this.$router.push('/dashboard');
-                this.login();
-                this.home(true);
-            }, 500);
+    export default {
+        layout: 'index',
+        meta: {
+            guestGuard: true,
+            title: 'Login',
         },
-    },
-};
+        components: { LoginForm },
+
+        setup() {
+            const errors = new Errors();
+            const payload = [
+                email = ref(''),
+                password = ref(''),
+                remember = ref('false')
+            ];
+            const store = useStore();
+            return {
+                one: computed(() => store.getters['$isWebview']),
+                two: computed(() => store.state[meta])
+            };
+
+            return{
+                ...mapMutations('auth', ['login']),
+                ...mapMutations('layout', ['home']),
+                ...mapMutations(['setShowQuote', 'setCsrfToken']),
+            };
+
+            function init(data) {
+                this.setShowQuote(this.meta.showQuote);
+                if (data.csrfToken) {
+                    this.setCsrfToken({token: data.csrfToken, $axios: this.$axios});
+                }
+
+                setTimeout(() => {
+                    this.$router.push('/dashboard');
+                    this.login();
+                    this.home(true);
+                }, 500);
+            }
+        }
+    }
+
 </script>

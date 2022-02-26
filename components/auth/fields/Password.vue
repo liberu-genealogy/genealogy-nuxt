@@ -38,6 +38,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { focus } from '@enso-ui/directives';
 import RevealPassword from '@enso-ui/forms/src/bulma/parts/RevealPassword.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faExclamationTriangle);
 
@@ -60,17 +61,13 @@ export default {
             required: true,
         },
     },
-
-    computed: {
-        successful() {
-            return this.state.successful;
-        },
-    },
-
-    data: () => ({
-        meta: {
-            content: 'password',
-        },
-    }),
+    setup() {
+        const successful = computed(() => {
+            return this.state.successful
+        })
+        const meta = ref({
+            content: 'password'
+        })
+    }
 };
 </script>

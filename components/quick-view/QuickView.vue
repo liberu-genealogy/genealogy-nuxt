@@ -12,15 +12,18 @@
 <script>
 import { mapGetters } from 'vuex';
 import { SlideRight } from '@enso-ui/transitions';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'QuickView',
 
     components: { SlideRight },
-
-    computed: {
-        ...mapGetters('preferences', ['bookmarks']),
-    },
+    setup () {
+        const store = useStore()
+        return {
+            one: computed(() => store.getters['${preferences}/bookmarks'])
+        }
+    }
 };
 </script>
 

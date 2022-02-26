@@ -26,6 +26,7 @@
 <script>
 import { Modal } from '@enso-ui/modal/bulma';
 import { EnsoForm } from '@enso-ui/forms/bulma';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'PersonForm',
@@ -40,17 +41,13 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        id: null,
-    }),
-
-    methods: {
-        init({ form }) {
+    setup() {
+        const id = ref(null)
+        function init({ form }) {
             this.id = form.field('id').value;
             form.field('company_id').value = this.companyId;
-        },
-    },
+        }
+    }
 };
 </script>
 

@@ -32,6 +32,7 @@
 import { mapState } from 'vuex';
 import { faFlag, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faFlag, faTimes);
 
@@ -45,8 +46,12 @@ export default {
             default: null,
         },
     },
-
-    computed: mapState(['enums']),
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.state[enums])
+        }
+    }
 };
 </script>
 <style lang="scss">

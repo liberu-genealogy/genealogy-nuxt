@@ -9,6 +9,7 @@
 
 <script>
 import { EnsoSelect } from '@enso-ui/select/bulma';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'Select',
@@ -23,13 +24,12 @@ export default {
             required: true,
         },
     },
-
-    computed: {
-        placeholder() {
+    setup() {
+        const placeholder = computed(() => {
             return this.param.placeholder
                 ? this.i18n(this.param.placeholder)
                 : this.param.placeholder;
-        }
+        })
     }
 };
 </script>

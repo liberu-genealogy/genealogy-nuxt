@@ -8,6 +8,7 @@
 <script>
 import { mapState } from 'vuex';
 import { Datepicker } from '@enso-ui/datepicker/bulma';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'Date',
@@ -22,17 +23,19 @@ export default {
             required: true,
         },
     },
-
-    computed: {
-        ...mapState(['meta']),
-        dateFormat() {
-            return this.param.meta?.dateFormat
-                ?? this.meta.dateFormat;
-        },
-    },
-
-    created() {
-        this.param.type = 'date';
-    },
+    setup() {
+        const store= useStore()
+        return {
+            one: computed(() => store.state[meta])
+        }
+        const dateFormat = computed(() => {
+            return this.param.meta?dateFormat:this.meta.dateFormat
+            // return this.param.meta?.dateFormat
+            //     ?? this.meta.dateFormat;
+        })
+        created(() => {
+            this.param.type = 'date'
+        })
+    }
 };
 </script>

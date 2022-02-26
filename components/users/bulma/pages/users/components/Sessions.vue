@@ -42,6 +42,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSync, faSearch } from '@fortawesome/free-solid-svg-icons';
 import Session from './Session.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faPlus, faSync, faSearch);
 
@@ -58,41 +59,32 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        sessions: [],
-        query: '',
-        form: false,
-    }),
-
-    computed: {
-        filteredSessions() {
+    setup() {
+        const sessions = ref([])
+        const query = ref('')
+        const form = ref(false)
+        const filteredSessions = computed(() => {
             const query = this.query.toLowerCase();
-
             return query
                 ? this.sessions.filter(({ ipAddress, OS, browser }) => OS.toLowerCase().indexOf(query) > -1
                     || ipAddress.toLowerCase().indexOf(query) > -1
                     || browser.toLowerCase().indexOf(query) > -1)
                 : this.sessions;
-        },
-        count() {
+        })
+        const count = computed(() => {
             return this.filteredSessions.length;
-        },
-    },
-
-    created() {
-        this.fetch();
-    },
-
-    methods: {
-        fetch() {
+        })
+        created(() => {
+            this.fetch();
+        })
+        function fetch() {
             this.$axios.get(this.route('administration.users.sessions.index', this.$route.params))
                 .then(({ data }) => {
                     this.sessions = data;
                     this.$emit('update');
                 }).catch(this.errorHandler);
-        },
-        destroy({ id }, index) {
+        }
+        function destroy({ id }, index) {
             this.$axios.delete(
                 this.route('administration.users.sessions.destroy', this.$route.params),
                 { params: { id } },
@@ -102,7 +94,7 @@ export default {
                 this.$emit('update');
                 this.toastr.success(data.message);
             }).catch(this.errorHandler);
-        },
+        }
     },
 };
 </script>

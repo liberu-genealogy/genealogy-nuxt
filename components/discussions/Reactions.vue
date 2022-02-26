@@ -15,6 +15,7 @@
 <script>
 import { mapState } from 'vuex';
 import { VTooltip } from 'v-tooltip';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'Reactions',
@@ -33,13 +34,12 @@ export default {
             required: true,
         },
     },
-
-    computed: {
-        ...mapState(['user']),
-    },
-
-    methods: {
-        react() {
+    setup() {
+        const store = userStore()
+        return {
+            one: computed(() => store.state[user])
+        }
+        function react() {
             this.$axios.post(this.route('core.discussions.react'), {
                 reactableId: this.reactable.id,
                 reactableType: this.type,
@@ -47,11 +47,11 @@ export default {
                 type: 1,
             }).then(({ data }) => (this.reactable.reactions = data))
                 .catch(this.errorHandler);
-        },
-        avatar(avatarId) {
+        }
+        function avatar(avatarId) {
             return this.route('core.avatars.show', avatarId);
-        },
-    },
+        }
+    }
 };
 
 </script>

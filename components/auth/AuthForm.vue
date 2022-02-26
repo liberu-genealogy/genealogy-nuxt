@@ -31,23 +31,22 @@ export default {
 
     inject: ['routerErrorHandler'],
 
-    data: () => ({
-        errors: new Errors(),
-        state: {
-            successful: false,
-        },
-    }),
-
-    computed: {
-        ...mapState(['meta']),
-    },
-
-    provide() {
+    setup() {
+        const errors = new Errors()
+        const state = ref({
+            successful: false
+        })
+        const store = useStore;
         return {
-            state: this.state,
-            errors: this.errors,
+            one: computed(() => store.state[meta])
         }
-    },
+        provide(() => {
+            return{
+                state: this.state,
+                errors: this.errors
+            }
+        })
+    }
 };
 </script>
 

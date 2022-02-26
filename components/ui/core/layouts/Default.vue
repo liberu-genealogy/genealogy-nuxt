@@ -2,49 +2,46 @@
 import {
     mapState, mapGetters, mapMutations, mapActions,
 } from 'vuex';
+import { ref, computed, useStore, watch, onBeforeMount } from 'vue';
 
 export default {
     name: 'CoreDefault',
 
     inject: ['errorHandler', 'route', 'toastr'],
-
-    computed: {
-        ...mapState(['meta', 'appState']),
-        ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'sidebar', 'settings', 'footer']),
-        ...mapGetters('preferences', ['bookmarks']),
-        ...mapGetters('localisation', ['rtl']),
-        slideIn() {
+    setup() {
+        const store = useStore()
+        const $data = ref(['lightsOff', 'isTablet', 'isMobile', 'sidebar', 'settings', 'footer'])
+        return {
+            one: computed(() => store.state[meta].appState),
+            two: computed(() => store.state[layout].$data),
+            three: computed(() => store.getters['${preferences}/bookmarks']),
+            four: computed(() => store.getters['${localisation}/rtl'])
+        }
+        const slideIn = computed(() => {
             return this.rtl ? 'slideInLeft' : 'slideInRight';
-        },
-        slideOut() {
+        })
+        const slideOut = computed(() => {
             return this.rtl ? 'slideOutLeft' : 'slideOutRight';
-        },
-    },
-
-    watch: {
-        isTablet: {
-            handler() {
+        })
+        const isTablet = ref('')
+        watch(isTablet, (handler) => {
                 return this.isTablet
                     ? this.hideSidebar()
-                    : this.showSidebar();
-            },
-        },
-    },
-
-    created() {
-        this.$root.$on('start-impersonating', this.startImpersonating);
-        this.$root.$on('stop-impersonating', this.stopImpersonating);
-    },
-
-    beforeMount() {
-        this.addTouchBreakpointsListeners();
-    },
-
-    methods: {
-        ...mapMutations('layout', ['setIsTablet', 'setIsMobile', 'setIsTouch']),
-        ...mapMutations('layout/sidebar', { showSidebar: 'show', hideSidebar: 'hide' }),
-        ...mapActions(['loadAppState']),
-        addTouchBreakpointsListeners() {
+                    : this.showSidebar()
+        })
+        created(() => {
+            this.$root.$on('start-impersonating', this.startImpersonating);
+            this.$root.$on('stop-impersonating', this.stopImpersonating);
+        })
+        onBeforeMount(() => {
+            this.addTouchBreakpointsListeners();
+        })
+        return {
+            ...mapMutations('layout', ['setIsTablet', 'setIsMobile', 'setIsTouch']),
+            ...mapMutations('layout/sidebar', { showSidebar: 'show', hideSidebar: 'hide' }),
+            ...mapActions(['loadAppState']),
+        }
+        function addTouchBreakpointsListeners() {
             const { body } = document;
             const TabletMaxWidth = 1023;
             const MobileMaxWidth = 768;
@@ -71,23 +68,23 @@ export default {
             });
 
             handler();
-        },
-        startImpersonating(id) {
+        }
+        function startImpersonating(id) {
             this.$axios.get(this.route('core.impersonate.start', id))
                 .then(({ data }) => {
                     this.toastr.warning(data.message);
                     this.loadAppState();
                 }).catch(this.errorHandler);
-        },
-        stopImpersonating() {
+        }
+        function stopImpersonating() {
             this.$axios.get(this.route('core.impersonate.stop'))
                 .then(({ data }) => {
                     this.toastr.info(data.message);
                     this.loadAppState();
                 }).catch(this.errorHandler);
-        },
+        }
     },
-
+    
     render() {
         return this.$scopedSlots.default({
             appState: this.appState,

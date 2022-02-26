@@ -1,16 +1,20 @@
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreNavbar',
     inject: ['canAccess'],
-    computed: {
-        ...mapState(['meta', 'impersonating']),
-        ...mapState('layout', ['isMobile', 'isTouch', 'sidebar']),
-        ...mapGetters('layout/navbar', ['items']),
-    },
-    methods: {
-        ...mapMutations('layout/sidebar', { toggleSidebar: 'toggle' }),
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.state[meta].impersonating),
+            two: computed(() => store.state[layout].isMobile.isTouch.sidebar),
+            three: computed(() => store.getters['${layout/navbar}/items'])
+        }
+        return{
+            ...mapMutations('layout/sidebar', { toggleSidebar: 'toggle' }),
+        }
     },
     render() {
         return this.$scopedSlots.default({

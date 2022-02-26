@@ -32,6 +32,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faExclamationTriangle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { focus } from '@enso-ui/directives';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faCheck, faExclamationTriangle, faEnvelope);
 
@@ -48,11 +49,10 @@ export default {
             required: true,
         },
     },
-
-    computed: {
-        successful() {
-            return this.state.successful;
-        },
-    },
+    setup() {
+        const successful = computed(() => {
+            return this.state.successful
+        })
+    }
 };
 </script>

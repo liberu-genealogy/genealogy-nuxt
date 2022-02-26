@@ -90,6 +90,7 @@ import {
 import 'vue-cal/dist/vuecal.css';
 import { FilterState } from '@enso-ui/filters/renderless';
 import CalendarForm from './CalendarForm.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 import('../styles/colors.scss');
 
@@ -101,46 +102,42 @@ export default {
     components: { CalendarForm, VueCal, FilterState },
 
     inject: ['errorHandler', 'i18n', 'route'],
-
-    data: () => ({
-        apiVersion: 1.0,
-        calendars: [],
-        calendar: null,
-        selected: [],
-        filtered: {
-            calendars: [],
-        },
-    }),
-
-    computed: {
-        ...mapGetters('preferences', ['lang']),
-    },
-
-    methods: {
-        load() {
+    setup() {
+        const apiVersion = ref(1.0)
+        const calendars = ref([])
+        const calendar = ref(null)
+        const selected = ref([])
+        const filtered = ref({
+            calendars: []
+        })
+        const store = useStore()
+        return {
+            one: computed(() => store.getters['${preferences}/lang'])
+        }
+        function load() {
             this.fetch().then(() => {
                 this.selected = this.calendars.map(({ id }) => id)
                     .filter(id => !this.filtered.calendars.includes(id));
 
                 this.updateSelection();
             });
-        },
-        fetch() {
+        }
+        function fetch() {
             return this.$axios.get(this.route('core.calendar.index'))
                 .then(({ data }) => {
                     this.calendars = data;
                 }).catch(this.errorHandler);
-        },
-        updateSelection() {
+        }
+        function updateSelection() {
             this.filtered.calendars = this.calendars.map(({ id }) => id)
                 .filter(id => !this.selected.includes(id));
 
             this.$emit('update-selection', this.selected);
-        },
-        setCalendar(calendar) {
+        }
+        function setCalendar(calendar) {
             this.calendar = calendar;
-        },
-        updateCalendar({ calendar }) {
+        }
+        function updateCalendar({ calendar }) {
             this.fetch().then(() => {
                 if (!this.calendar.id) {
                     this.selected.push(calendar.id);
@@ -149,8 +146,8 @@ export default {
                 this.calendar = null;
                 this.updateSelection();
             });
-        },
-        destroy() {
+        }
+        function destroy() {
             this.fetch().then(() => {
                 const index = this.selected
                     .findIndex((id) => id === this.calendar.id);
@@ -159,8 +156,8 @@ export default {
                 this.calendar = null;
                 this.updateSelection();
             });
-        },
-    },
+        }
+    }
 };
 </script>
 

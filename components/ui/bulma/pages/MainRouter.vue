@@ -10,13 +10,14 @@
 </template>
 
 <script>
+import { ref, computed, useStore, watch } from 'vue';
 export default {
     name: 'MainRouter',
-
-    computed: {
-        keepAlive() {
-            return this.$route.meta?.keepAlive
-        },
-    },
+    setup() {
+        const keepAlive = computed(() => {
+            // return this.$route.meta?.keepAlive
+            return this.$route.meta?keepAlive:''
+        })
+    }
 };
 </script>

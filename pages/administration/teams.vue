@@ -68,63 +68,53 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Team from '~/components/teams/bulma/pages/teams/components/Team.vue';
+import { ref, computed, useStore } from 'vue';
 
 library.add(faPlus, faSearch, faSpinner);
 
-export default {
-    meta: {
-        breadcrumb: 'index',
-        title: 'Teams',
-    },
-
-    inject: ['errorHandler', 'i18n', 'route'],
-
-    components: { Team },
-
-    data: () => ({
-        loading: false,
-        ready: false,
-        teams: [],
-        team: null,
-        query: null,
-    }),
-
-    computed: {
-        filteredTeams() {
-            return this.query
-                ? this.teams.filter(({ edit, name }) => edit || name.toLowerCase()
-                    .indexOf(this.query.toLowerCase()) > -1)
-                : this.teams;
+    export default {
+        meta: {
+            breadcrumb: 'index',
+            title: 'Teams'
         },
-    },
+        inject: ['errorHandler', 'i18n', 'route'],
+        components: { Team },
+        setup() {
+            const loading = ref(false)
+            const ready = ref(false)
+            const teams = ref([])
+            const team = ref(null)
+            const query = ref(null)
+            const filteredTeams = computed(() => {
+                return this.query
+                    ? this.teams.filter(({ edit, name }) => edit || name.toLowerCase()
+                        .indexOf(this.query.toLowerCase()) > -1)
+                    : this.teams; 
+            })
+            created(() => {
+                this.fetch();
+            })
+            function fetch() {
+                this.loading = true;
+                this.$axios.get(this.route('administration.teams.index'))
+                    .then(({ data }) => {
+                        this.teams = data;
+                        this.loading = false;
+                        this.ready = true;
+                    })
+                    .catch(this.errorHandler);
+            }
+            function factory() {
+                const id  = ref(null)
+                const name = ref(null)
+                const userIds = ref([])
+                const users = ref([])
+                const edit = ref(true)
+                return { id, name, userIds, users, edit }
+            }
 
-    created() {
-        this.fetch();
-    },
-
-    methods: {
-        fetch() {
-            this.loading = true;
-
-            this.$axios.get(this.route('administration.teams.index'))
-                .then(({ data }) => {
-                    this.teams = data;
-                    this.loading = false;
-                    this.ready = true;
-                })
-                .catch(this.errorHandler);
-        },
-        factory() {
-            return {
-                id: null,
-                name: null,
-                userIds: [],
-                users: [],
-                edit: true,
-            };
-        },
-    },
-};
+        }
+    }
 </script>
 
 <style lang="scss" scoped>

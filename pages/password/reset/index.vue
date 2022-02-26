@@ -21,6 +21,7 @@
 <script>
 import AuthForm from '~/components/auth/AuthForm.vue';
 import Email from '~/components/auth/fields/Email.vue';
+import { ref, computed, useStore } from 'vue';
 
 export default {
     meta: {

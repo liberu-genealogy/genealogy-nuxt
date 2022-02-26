@@ -68,25 +68,24 @@
 
 <script>
   export default {
-    data() {
-      return {
-        error: false,
-        message: "",
-        errors: null,
-        isLoading: false,
-        fullPage: true,
-        color: "#4fcf8d",
-        backgroundColor: "#ffffff",
-        registration: {
-          first_name: "",
-          last_name: "",
-          email: "",
-          password: "",
-          password_confirmation: "",
-          conditions_terms: false,
-        },
-      };
-    },
+    setup() {
+      const error = ref(false)
+      const message = ref('')
+      const errors = ref(null)
+      const isLoading = ref(false)
+      const fullPage = ref(true)
+      const color = ref('#4fcf8d')
+      const backgroundColor = ref('#ffffff')
+      const registration = ref({
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+        conditions_terms: false
+      })
+      return { error, message, errors, isLoading, fullPage, color, backgroundColor, registration }
+    }
   };
 </script>
 

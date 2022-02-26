@@ -52,6 +52,7 @@ import { faCheck, faBan } from '@fortawesome/free-solid-svg-icons';
 import './mention/mention';
 import './upload/upload';
 import './mention/mention.scss';
+import { ref,computed, useStore, watch } from 'vue';
 
 library.add(faCheck, faBan);
 
@@ -109,39 +110,35 @@ export default {
             },
         },
     }),
-
-    computed: {
-        filled() {
+    setup() {
+        const filled = computed(() => {
             return (this.title
                 ? this.message.title
                     && this.message.title.trim().length > 3
                 : true)
                 && this.message.body
                 && this.message.body.trim().length > 10;
-        },
-    },
-
-    methods: {
-        openFileBrowser() {
+        })
+        function openFileBrowser() {
             this.$refs.fileInput.click();
-        },
-        save() {
+        }
+        function save() {
             if (this.message.id) {
                 this.$emit('update', this.taggedUsers());
                 return;
             }
 
             this.$emit('store', this.taggedUsers());
-        },
-        tag(user) {
+        }
+        function tag(user) {
             if (!this.tagged.find(({ id }) => id === user.id)) {
                 this.tagged.push(user);
             }
-        },
-        taggedUsers() {
+        }
+        function taggedUsers() {
             return this.tagged.filter((user) => this.message.body.indexOf(this.template(user)) > 0);
-        },
-        upload($event) {
+        }
+        function upload($event) {
             const Editor = this.$refs.quillEditor.quill;
             const formData = new FormData();
 
@@ -157,14 +154,15 @@ export default {
 
                     this.$refs.inputForm.reset();
                 }).catch(this.errorHandler);
-        },
-        avatar(avatarId) {
+        }
+        function avatar(avatarId) {
             return this.route('core.avatars.show', avatarId);
-        },
-        template(user) {
+        }
+        function template(user) {
             return `<img src="${this.route('core.avatars.show', user.avatar.id)}"> ${user.person.name}`;
-        },
-    },
+        }
+
+    }
 };
 </script>
 

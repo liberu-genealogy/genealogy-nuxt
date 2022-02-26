@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { ref, computed, useStore } from 'vue';
 export default {
     name: 'Event',
     inject: ['i18n', 'route', 'routerErrorHandler'],
@@ -29,28 +30,26 @@ export default {
             required: true,
         },
     },
-    computed: {
-        message() {
+    setup() {
+        const message = computed(() => {
             return Object.keys(this.event.meta.attributes)
                 .reduce((message, attribute) => message.split(`:${attribute}`)
                     .join(this.label(attribute)),
                 this.parsedMessage);
-        },
-        parsedMessage() {
+        })
+        const parsedMessage = computed(() => {
             return Array.isArray(this.event.meta.message)
                 ? this.event.meta.message
                     .map((segment) => this.i18n(segment))
                     .join(' ')
                 : this.event.meta.message;
-        },
-    },
-    methods: {
-        label(attribute) {
+        })
+        function label(attribute) {
             const { attributes } = this.event.meta;
             return ['user', 'label'].includes(attribute)
                 ? `<strong>${attributes[attribute]}</strong>`
                 : attributes[attribute];
-        },
-    },
+        }
+    }
 };
 </script>

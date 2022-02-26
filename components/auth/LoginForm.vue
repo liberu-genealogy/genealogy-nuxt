@@ -195,6 +195,7 @@
   import { focus } from "@enso-ui/directives";
   import Errors from "@enso-ui/laravel-validation";
   import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
+  import { ref, computed, useStore, watch } from 'vue';
 
   library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
@@ -202,10 +203,6 @@
     name: "LoginForm",
     components: { AuthIndex },
     directives: { focus },
-    // inject: {
-    //   i18n: { from: "i18n" },
-    // },
-
     props: {
       action: {
         required: true,
@@ -216,29 +213,28 @@
         type: String,
       },
     },
-
-    data: () => ({
-      errors: new Errors(),
-      provider: null,
-      email: "",
-      password: "",
-      remember: false,
-      device_name: 'mac',
-    }),
-
-    computed: {
-      ...mapState(["meta"]),
-      ...mapGetters(["isWebview"]),
-      hasPassword() {
-        return this.password !== null && this.password.length;
-      },
-      match() {
-        return this.hasPassword && this.password === this.password_confirmation;
-      },
-      postParams() {
-        return this.loginParams;
-      },
-      loginParams() {
+    setup(){
+      const errors = new Errors()
+      const provider = ref(null)
+      const email = ref('')
+      const password = ref('')
+      const remember = ref(false)
+      const device_name = ref('mac')
+      const store = useStore()
+      return {
+        one: computed(() => store.getters['${isWebview}']),
+        two: computed(() => store.state[meta])
+      }
+      const hasPassword = computed(() => {
+        return this.password   != null && this.password
+      })
+      const match = computed(() => {
+        return this.hasPassword && this.password === this.password_confirmation
+      })
+      const postParams = computed(() => {
+        return this.loginParams
+      })
+      const loginParams = computed(() => {
         const {
           email,
           password,
@@ -250,35 +246,29 @@
           password,
           remember
         };
-      },
-      loginLink() {
+      })
+      const loginLink = computed(() => {
         return "api/login";
-      },
-      config() {
+      })
+      const config = computed(() => {
         return this.isWebview ? { headers: { isWebview: true } } : {};
-      },
-    },
-
-    methods: {
-    validate() {
+      })
+      function validate() {
         this.$refs.email.validate().then((res) => {
           console.log(res.valid);
-        });
-      },
-
-    loginSocial(provider) {
-      this.provider = provider
-      window.location.href = `${process.env.baseUrl}/api/login/${provider}`;      
-    },
-
-    submit() {
-      this.loading = true;
-      this.isSuccessful = false;
-      this.oldLogin()
-    },
-
-    oldLogin() {
-      this.$axios
+        })
+      }
+      function loginSocial(provider) {
+        this.provider = provider
+        window.location.href = `${process.env.baseUrl}/api/login/${provider}`;    
+      }
+      function submit() {
+         this.loading = true;
+          this.isSuccessful = false;
+          this.oldLogin()
+      }
+      function oldLogin() {
+        this.$axios
         .get('/sanctum/csrf-cookie').then(() =>{
           this.$axios.post('/api/login', {
             email: this.email,
@@ -309,8 +299,8 @@
               }
             });
         })
+      }
     }
-    },
   };
 
   function openWindow(url, title, options = {}) {

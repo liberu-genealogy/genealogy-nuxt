@@ -54,6 +54,7 @@ import Draggable from 'vuedraggable';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faTrashAlt, faCircle } from '@fortawesome/free-solid-svg-icons';
 import CoreBookmarks from '~/components/bookmarks/core/components/Bookmarks.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faCheck, faTrashAlt, faCircle);
 

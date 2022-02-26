@@ -75,6 +75,7 @@ import { Tab } from '@enso-ui/tabs/bulma';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import Accessories from '@enso-ui/accessories/bulma';
 import { Addresses } from '@enso-ui/addresses/bulma';
+import { ref, computed, useStore } from 'vue';
 
 library.add(faUser);
 
@@ -83,26 +84,19 @@ export default {
         breadcrumb: 'edit',
         title: 'Edit Person',
     },
-
-    components: {
-        EnsoForm, Accessories, Tab, Addresses, FormField,
-    },
-
+    components: { EnsoForm, Accessories, Tab, Addresses, FormField },
     inject: ['i18n', 'routerErrorHandler'],
-
-    data: () => ({
-        companies: [],
-    }),
-
-    computed: {
-        personId() {
+    setup() {
+        const companies = ref([])
+        const personId = computed(() => {
             return Number.parseInt(this.$route.params.person, 10);
-        },
-        params() {
+        })
+        const params = computed(() => {
             return {
-                id: this.companies,
-            };
-        },
-    },
-};
+                id: this.companies
+            }
+        })
+    }
+}
+
 </script>

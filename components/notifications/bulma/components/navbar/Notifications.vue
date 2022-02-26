@@ -91,6 +91,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import NavbarItem from '~/components/ui/bulma/components/navbar/NavbarItem.vue';
 import CoreNotifications from '../../../core/components/navbar/Notifications.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faBell, faCheck, faEye, faCogs, faQuestion, faEnvelope, faFileExcel);
 

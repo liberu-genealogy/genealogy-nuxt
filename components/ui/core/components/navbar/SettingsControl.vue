@@ -1,11 +1,13 @@
 <script>
 import { mapMutations } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreSettingsControl',
-
-    methods: {
-        ...mapMutations('layout/settings', ['toggle']),
+    setup() {
+        return {
+            ...mapMutations('layout/settings', ['toggle']),
+        }
     },
 
     render() {

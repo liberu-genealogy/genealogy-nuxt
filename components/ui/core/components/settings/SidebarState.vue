@@ -1,17 +1,18 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreSidebarState',
-
-    computed: {
-        ...mapGetters('preferences', ['expandedSidebar']),
+    setup() {
+        const store = useStore()
+        return{
+            one: computed(() => store.getters['${preferences}/expandedSidebar'])
+        }
+        return {
+            ...mapActions('preferences', ['setSidebarState']),
+        }
     },
-
-    methods: {
-        ...mapActions('preferences', ['setSidebarState']),
-    },
-
     render() {
         return this.$scopedSlots.default({
             bindings: {

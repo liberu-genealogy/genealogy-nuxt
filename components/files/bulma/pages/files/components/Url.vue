@@ -29,6 +29,7 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { focus, selectOnFocus } from '@enso-ui/directives';
 import { Modal } from '@enso-ui/modal/bulma';
 import Clipboard from '@enso-ui/clipboard';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faCopy);
 
@@ -52,12 +53,11 @@ export default {
             required: true,
         },
     },
-
-    methods: {
-        copy() {
+    setup() {
+        const copy = computed(() => {
             this.$refs.clipboard.copy(this.link);
             this.toastr.success(this.i18n('Copied to clipboard'));
-        },
-    },
+        })
+    }
 };
 </script>
