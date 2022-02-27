@@ -6,7 +6,7 @@
 import { mapState, mapGetters, mapMutations } from 'vuex';
 import Errors from '@enso-ui/laravel-validation';
 import RegisterForm from '~/components/auth/RegisterForm.vue';
-import { ref, computed, useStore } from 'vue';
+import { ref, computed, useStore,watch } from 'vue';
 // import Email from '~/components/auth/fields/Email.vue';
 // import Password from '~/components/auth/fields/Password.vue';
 // import Remember from '~/components/auth/fields/Remember.vue';

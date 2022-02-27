@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
+import { mapState, mapGetters, mapMutations, onMounted } from 'vuex';
 import { ref, computed, useStore } from 'vue';
 
     export default {

@@ -353,7 +353,7 @@
 </template>
 <script>
     import { mapGetters } from 'vuex'
-    import { ref, computed, useStore } from 'vue'
+    import { ref, computed, useStore, watch } from 'vue'
 
     export default {
       meta: {

@@ -1,5 +1,6 @@
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreBookmarks',
@@ -12,54 +13,49 @@ export default {
             default: () => ([]),
         },
     },
-
-    data: () => ({
-        scrollInterval: null,
-        scrollStep: 5,
-    }),
-
-    computed: {
-        ...mapState('bookmarks', ['bookmarks']),
-        ...mapGetters('bookmarks', ['isExcluded', 'matches', 'stickies', 'index']),
-        container() {
+    setup() {
+        const scrollInterval = ref(null)
+        const scrollStep = ref(5)
+        const store = useStore()
+        return {
+            one: computed(() => store.state[bookmarks].bookmarks),
+            two: computed(() => store.getters['${bookmarks}/isExcluded/matches/stickies/index'])
+        }
+        const container = computed(() => {
             return this.$el.querySelector('.bookmark-items');
-        },
-    },
-
-    watch: {
-        $route(route) {
+        })
+        const $route = ref('')
+        watch($route, (route) => {
             this.add(route);
-        },
-    },
-
-    created() {
-        this.init();
-        this.exclude(this.excluded);
-        this.add(this.$route);
-    },
-
-    methods: {
-        ...mapMutations('bookmarks', ['init', 'set', 'exclude', 'push', 'stick', 'clear']),
-        ...mapMutations('bookmarks', { splice: 'remove' }),
-        add(bookmark) {
+        })
+        created(() => {
+            this.init();
+            this.exclude(this.excluded);
+            this.add(this.$route);
+        })
+        return {
+            ...mapMutations('bookmarks', ['init', 'set', 'exclude', 'push', 'stick', 'clear']),
+            ...mapMutations('bookmarks', { splice: 'remove' }),
+        }
+        function add(bookmark) {
             this.push(bookmark);
             this.$nextTick(this.focus);
-        },
-        uniqueId(bookmark) {
+        }
+        function uniqueId(bookmark) {
             const { name, params, query } = bookmark;
 
             return JSON.stringify({ name, params, query });
-        },
-        remove(bookmark) {
+        }
+        function remove(bookmark) {
             this.splice(bookmark);
             const { name, params, query } = this.bookmarks[this.bookmarks.length - 1];
             this.$router.push({ name, params, query })
-        },
-        item(index) {
+        }
+        function item(index) {
             const items = this.container.querySelectorAll('.control');
             return items[index];
-        },
-        focus() {
+        }
+        function focus() {
             clearInterval(this.scrollInterval);
 
             const bookmark = this.item(this.index(this.$route));
@@ -83,8 +79,8 @@ export default {
                 const remaining = amount % this.scrollStep;
                 this.scroll(amount, 1, remaining);
             }
-        },
-        scroll(amount, direction, remaining) {
+        }
+        function scroll(amount, direction, remaining) {
             if (remaining) {
                 this.container.scrollLeft += remaining * direction;
             }
@@ -97,7 +93,7 @@ export default {
 
                 this.container.scrollLeft += this.scrollStep * direction;
             }, 1);
-        },
+        }
     },
 
     render() {

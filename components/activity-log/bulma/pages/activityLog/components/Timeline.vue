@@ -45,6 +45,7 @@ import {
     faSpinner, faSyncAlt, faPlus, faPencilAlt, faTrashAlt, faFlag,
 } from '@fortawesome/free-solid-svg-icons';
 import Event from './Event.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faSpinner, faSyncAlt, faPlus, faPencilAlt, faTrashAlt, faFlag);
 
@@ -62,17 +63,18 @@ export default {
             required: true,
         },
     },
-    computed: {
-        ...mapState('layout', ['isTouch']),
-        days() {
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.state[layout].isTouch)
+        }
+        const days = computed(() => {
             return this.feed.reduce();
-        },
-    },
-    methods: {
-        formatDate(date) {
+        })
+        function formatDate(date) {
             return this.$format(date, 'l F d');
-        },
-    },
+        }
+    }
 };
 </script>
 

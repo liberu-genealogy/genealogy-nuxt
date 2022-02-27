@@ -8,7 +8,7 @@
 </router>
 <script>
 import { FanChart } from "/assets/js/fan-chart/modules/index";
-import { ref, computed, useStore } from 'vue';
+import { ref, computed, useStore, onMounted } from 'vue';
 export default {
   layout: 'auth',
   meta: {

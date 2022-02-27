@@ -88,7 +88,7 @@ import { mapGetters } from 'vuex'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import { required } from 'vuelidate/lib/validators'
-import { ref, computed, useStore } from 'vue'
+import { ref, computed, useStore, onMounted, watch } from 'vue'
 
 export default {
     layout: 'auth',

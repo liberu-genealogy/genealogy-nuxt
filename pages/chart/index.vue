@@ -11,7 +11,7 @@
 <script>
 import { EnsoTable } from "@enso-ui/tables/bulma";
 import { PedigreeChart } from "/assets/js/modules/index";
-import { ref, computed, useStore } from 'vue';
+import { ref, computed, useStore, onMounted } from 'vue';
 export default {
   layout: "auth",
   meta: {

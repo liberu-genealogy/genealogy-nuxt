@@ -23,6 +23,7 @@
 import { mapState } from 'vuex';
 import Errors from '@enso-ui/laravel-validation';
 import Submit from './Submit.vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'AuthForm',

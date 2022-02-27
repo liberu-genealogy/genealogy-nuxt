@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
-import { ref, computed, useStore, watch } from 'vue';
+import { ref, computed, useStore, watch, onMounted } from 'vue';
 
 export default {
     name: 'CoreMenus',

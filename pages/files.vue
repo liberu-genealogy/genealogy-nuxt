@@ -95,7 +95,7 @@ import { Chart } from '@enso-ui/charts/bulma';
 import { EnsoUploader } from '@enso-ui/uploader/bulma';
 import { colors } from '@enso-ui/charts';
 import File from '~/components/files/bulma/pages/files/components/File.vue';3
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, useStore } from 'vue';
 import { useStore } from 'vuex';
 
 library.add(faSearch, faUndo, faSyncAlt);

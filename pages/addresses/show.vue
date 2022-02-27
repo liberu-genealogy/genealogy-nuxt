@@ -18,5 +18,3 @@ layout: 'auth',
 
 <style lang="scss">
 </style>
-
-

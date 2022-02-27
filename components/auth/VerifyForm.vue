@@ -60,7 +60,7 @@
   import { focus } from "@enso-ui/directives";
   import Errors from "@enso-ui/laravel-validation";
   import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
-  import { ref, useStore, computed, watch } from 'vue';
+  import { ref, useStore, computed, watch, onMounted } from 'vue';
 
   library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
