@@ -64,7 +64,7 @@
     "flag-icon-css": "^3.5.0",
     "flatpickr": "^4.6.9",
     "laravel-echo": "^1.11.2",
-    "nuxt-edge": "latest",
+    "nuxt-edge": "^2.16.0-27358576.777a4b7f",
     "nuxt-fontawesome": "^0.4.0",
     "nuxt-route-meta": "^2.3.2",
     "nuxt-vuex-router-sync": "^0.0.3",
@@ -90,6 +90,9 @@
     "vuetify": "^2.5.8",
     "webpack": "^4.46.0",
     "zxcvbn": "^4.4.2"
+  },
+  "resolutions": {
+    "**/fsevents": "2.1.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",

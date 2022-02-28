@@ -140,6 +140,7 @@ export default {
         this.fileName = this.file.name
       },
 
+      
       async submit() {
         this.$v.$touch();
 
@@ -151,9 +152,11 @@ export default {
         this.complete = 0
 
         this.isLoading = true
-        let formData = new FormData()
+        let formData = new FormData();
         formData.append('file',  this.file)
+        formData.append('slug', new Date().getTime())
 
+       
         try {
           const response = await this.$axios
             .$post("/api/gedcom/store", formData, {
@@ -161,12 +164,14 @@ export default {
                   'content-type': 'multipart/form-data',
                   'Access-Control-Allow-Origin': '*'
                 }
-            })
+            }
+            )
 
           this.isLoading = false
           this.response = response[0]
         } catch (error) {
           this.error = true
+           this.isLoading = false
           this.message = error.response.data.message
           this.errors =  error.response.data.errors
         }
