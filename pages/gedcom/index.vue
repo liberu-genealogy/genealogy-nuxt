@@ -168,7 +168,8 @@ export default {
             )
 
           this.isLoading = false
-          this.response = response[0]
+          //this.response = response[0]
+          this.response = "Successfully Uploaded";
         } catch (error) {
           this.error = true
            this.isLoading = false
