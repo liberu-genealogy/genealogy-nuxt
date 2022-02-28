@@ -20,7 +20,7 @@
 <script>
 import Timeline from '~/components/activity-log/bulma/pages/activityLog/components/Timeline.vue';
 import Filters from '~/components/activity-log/bulma/pages/activityLog/components/Filters.vue';
-import { ref } from 'vue';
+import { ref, useStore, computed, watch } from 'vue';
 
 export default {
     meta: {

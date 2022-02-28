@@ -92,7 +92,7 @@
 import Vue from 'vue'
 import Vuelidate from 'vuelidate'
 import { required, minLength } from 'vuelidate/lib/validators'
-import { ref, computed, useStore } from 'vue'
+import { ref, computed, useStore, watch } from 'vue'
 Vue.use(Vuelidate)
 export default {
   layout: 'default',

@@ -31,7 +31,7 @@ import { mapMutations } from 'vuex';
 import EnsoCalendar from '~/components/calendar/bulma/pages/calendar/components/EnsoCalendar.vue';
 import CalendarFilter from '~/components/calendar/bulma/pages/calendar/components/CalendarFilter.vue';
 import EventForm from '~/components/calendar/bulma/pages/calendar/components/EventForm.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, useStore, onBeforeUnmount, watch } from 'vue';
 
     export default {
         meta: {

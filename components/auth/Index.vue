@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import { ref, computed, useStore, watch } from 'vue';
   export default {
     setup() {
       const error = ref(false)

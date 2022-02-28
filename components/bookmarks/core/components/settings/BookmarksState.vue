@@ -1,17 +1,19 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
 
 export default {
     name: 'CoreBookmarksState',
-
-    computed: {
-        ...mapGetters('preferences', ['bookmarks']),
-    },
-
-    methods: {
-        ...mapMutations('bookmarks', ['empty', 'push']),
-        ...mapActions('preferences', ['setBookmarksState']),
-        update(state) {
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.getters['${preferences}/bookmarks'])
+        }
+        return {
+            ...mapMutations('bookmarks', ['empty', 'push']),
+            ...mapActions('preferences', ['setBookmarksState']),
+        }
+        function update(state) {
             if (state) {
                 this.push(this.$route);
             } else {
@@ -19,9 +21,9 @@ export default {
             }
 
             this.setBookmarksState(state);
-        },
+        }
     },
-
+    
     render() {
         return this.$scopedSlots.default({
             bindings: {

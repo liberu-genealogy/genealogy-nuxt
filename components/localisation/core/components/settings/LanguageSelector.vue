@@ -1,19 +1,24 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex';
+import { ref, computed, useStore, watch } from 'vue';
+import { useContext } from 'unctx';
 
 export default {
     name: 'LanguageSelector',
 
-    computed: {
-        ...mapState('localisation', ['languages']),
-        ...mapGetters('preferences', ['lang']),
-        multiLanguage() {
+    setup() {
+        const store = useStore()
+        return {
+            one: computed(() => store.state[localisation].languages),
+            two: computed(() => store.getters['${preferences}/lang'])
+        }
+        const multiLanguage = computed(() => {
             return Object.keys(this.languages).length > 1;
-        },
-    },
+        })
+        return {
+            ...mapActions('preferences', ['setLang']),
+        }
 
-    methods: {
-        ...mapActions('preferences', ['setLang']),
     },
 
     render() {

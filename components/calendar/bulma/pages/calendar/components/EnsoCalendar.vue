@@ -67,7 +67,7 @@ import VueCal from 'vue-cal';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFlag, faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 import EventConfirmation from './EventConfirmation';
-import { ref, computed, useStore, watch } from 'vue';
+import { ref, computed, useStore, watch, onMouted, beforeUnmount } from 'vue';
 
 import 'vue-cal/dist/drag-and-drop.js';
 import 'vue-cal/dist/i18n/ar.js';

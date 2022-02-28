@@ -339,7 +339,7 @@ import { mapGetters, mapActions } from 'vuex'
 import PieChart from '../components/charts/PieChart'
 import { EnsoChartCard as ChartCard } from '@enso-ui/charts/bulma';
 import { Chart, colors } from '@enso-ui/charts';
-import { ref, computed, watchEffect, watch } from 'vue';
+import { ref, computed, watchEffect, watch, useStore } from 'vue';
 
 export default {
   layout: 'auth',

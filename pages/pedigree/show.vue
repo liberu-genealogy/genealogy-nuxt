@@ -32,7 +32,7 @@ import vSelect from 'vue-select'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import FileSaver  from 'file-saver';
-import { ref, computed, useStore } from 'vue';
+import { ref, computed, useStore, watch, onMounted } from 'vue';
 const d3 = Object.assign({}, d3Base, {tip: d3Tip()})
 
 Array.prototype.remove = function () {

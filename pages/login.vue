@@ -24,6 +24,7 @@
     import Errors from '@enso-ui/laravel-validation';
     import LoginForm from '~/components/auth/LoginForm.vue';
     import { useStore } from 'vuex';
+    import { ref, computed, useStore, watch } from 'vue';
     // import Email from '~/components/auth/fields/Email.vue';
     // import Password from '~/components/auth/fields/Password.vue';
     // import Remember from '~/components/auth/fields/Remember.vue';

@@ -78,7 +78,7 @@ import { EnsoSelect } from '@enso-ui/select/bulma';
 import Avatar from '~/components/users/bulma/pages/users/components/Avatar.vue';
 import ImportUploader from '~/components/data-import/bulma/pages/dataImport/components/ImportUploader.vue';
 import Param from '~/components/data-import/bulma/pages/dataImport/components/Param.vue';
-import { ref, computed, useStore } from 'vue';
+import { ref, computed, useStore, watch } from 'vue';
 
 library.add(faDownload, faTrashAlt, faFileExcel, faBan, faSync);
 
