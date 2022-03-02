@@ -1,1 +1,0 @@
-import{_ as e,c as t,o}from"./entry-f2f8a875.mjs";const s={layout:"auth",meta:{permission:{name:"notes menu"},title:"Notes - Show"}};function a(n,r,c,p,_,i){return o(),t("div")}var u=e(s,[["render",a]]);export{u as default};

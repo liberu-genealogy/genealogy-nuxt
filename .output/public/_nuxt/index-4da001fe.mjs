@@ -1,1 +1,0 @@
-import{_ as e,g as o,r as n,h as a,o as t}from"./entry-f2f8a875.mjs";const r={layout:"auth",meta:{permission:{name:"personasso menu"},title:"Person Asso - Index"},components:{EnsoTable:o}};function c(p,_,i,l,m,d){const s=n("enso-table");return t(),a(s,{class:"box is-paddingless raises-on-hover",id:"person_assos"})}var f=e(r,[["render",c]]);export{f as default};

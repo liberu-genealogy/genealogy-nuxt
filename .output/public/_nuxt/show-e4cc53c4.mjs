@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./entry-f2f8a875.mjs";const o={name:"Show",layout:"auth",meta:{permission:{name:"sourcedataevent menu"},title:"Sourcedataevent - Show"}};function n(r,s,c,m,p,u){return a(),t("div")}var i=e(o,[["render",n]]);export{i as default};

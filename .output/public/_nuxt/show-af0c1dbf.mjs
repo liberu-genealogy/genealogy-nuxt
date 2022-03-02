@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./entry-f2f8a875.mjs";const o={layout:"auth",meta:{permission:{name:"familyslugs menu"},title:"Family Slugs - Show"}};function s(r,n,c,i,l,m){return a(),t("div")}var u=e(o,[["render",s]]);export{u as default};

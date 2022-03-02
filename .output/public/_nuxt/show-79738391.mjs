@@ -1,1 +1,0 @@
-import{_ as e,c as o,o as t}from"./entry-f2f8a875.mjs";const s={name:"Show",layout:"auth",meta:{permission:{name:"sources menu"},title:"Sources - Show"}};function a(r,c,n,m,p,u){return t(),o("div")}var i=e(s,[["render",a]]);export{i as default};

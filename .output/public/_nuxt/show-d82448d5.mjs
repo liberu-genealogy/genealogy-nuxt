@@ -1,1 +1,0 @@
-import{_ as t,c as e,o}from"./entry-f2f8a875.mjs";const a={layout:"auth",meta:{permission:{name:"citations menu"},title:"Citations - Show"}};function s(n,r,c,i,p,_){return o(),e("div")}var u=t(a,[["render",s]]);export{u as default};

@@ -1,1 +1,0 @@
-import{_ as s,g as n,r as o,h as a,o as t}from"./entry-f2f8a875.mjs";const r={name:"Index",layout:"auth",meta:{permission:{name:"subn menu"},title:"subn - Index"},components:{EnsoTable:n}};function c(p,i,_,l,m,d){const e=o("enso-table");return t(),a(e,{class:"box is-paddingless raises-on-hover",id:"subns"})}var b=s(r,[["render",c]]);export{b as default};

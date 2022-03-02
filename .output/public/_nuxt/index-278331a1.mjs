@@ -1,1 +1,0 @@
-import{_ as e,g as t,Z as s,c as n,o}from"./entry-f2f8a875.mjs";const a={layout:"auth",meta:{permission:{name:"trees menu"},title:"Trees - Index"},components:{EnsoTable:t},setup(){s(()=>{this.fetchData()})}},r={id:"webtrees-pedigree-chart-container"};function c(i,p,d,_,m,u){return o(),n("div",r)}var l=e(a,[["render",c]]);export{l as default};

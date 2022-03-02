@@ -1,1 +1,0 @@
-import{_ as t,ax as e,h as n,o as a}from"./entry-f2f8a875.mjs";const c={layout:"index",components:{Home:e},meta:{guestGuard:!0}};function r(s,_,p,m,u,d){const o=e;return a(),n(o)}var f=t(c,[["render",r]]);export{f as default};

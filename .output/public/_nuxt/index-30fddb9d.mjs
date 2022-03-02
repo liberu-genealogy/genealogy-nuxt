@@ -1,1 +1,0 @@
-import{_ as o,g as n,r as s,h as a,o as t}from"./entry-f2f8a875.mjs";const r={layout:"auth",meta:{permission:{name:"dna menu"},title:"DNA - Index"},components:{EnsoTable:n}};function c(p,i,_,d,l,m){const e=s("enso-table");return t(),a(e,{class:"box is-paddingless raises-on-hover",id:"dna"})}var f=o(r,[["render",c]]);export{f as default};

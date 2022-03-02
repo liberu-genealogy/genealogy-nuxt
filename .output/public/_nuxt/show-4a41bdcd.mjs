@@ -1,1 +1,0 @@
-import{_ as e,g as t,Z as s,c as o,o as a,a as n}from"./entry-f2f8a875.mjs";const r={layout:"auth",meta:{permission:{name:"trees menu"},title:"Trees - Index"},components:{EnsoTable:t},setup(){s(()=>{this.fetchData()})}},c=n("div",{id:"tree"},null,-1),i=[c];function _(d,l,p,u,m,f){return a(),o("div",null,i)}var x=e(r,[["render",_]]);export{x as default};

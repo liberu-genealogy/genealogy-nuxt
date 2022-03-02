@@ -515,7 +515,7 @@ const htmlTemplate = (params) => `<!DOCTYPE html>
 </html>
 `;
 
-const STATIC_ASSETS_BASE = "/_nuxt/D:/task/family365/nuxt3-app/dist" + "/" + "1646239164";
+const STATIC_ASSETS_BASE = "/_nuxt/D:/task/family365/nuxt/dist" + "/" + "1646259751";
 const PAYLOAD_JS = "/payload.js";
 const getClientManifest = cachedImport(() => import('./client.manifest.mjs'));
 const getSSRApp = cachedImport(() => import('./server2.mjs'));

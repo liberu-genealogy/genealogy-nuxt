@@ -1,1 +1,0 @@
-import{_ as o,g as s,r as n,h as a,o as t}from"./entry-f2f8a875.mjs";const r={meta:{breadcrumb:"index",title:"People"},components:{EnsoTable:s}};function c(p,l,_,i,d,m){const e=n("enso-table");return t(),a(e,{class:"box is-paddingless raises-on-hover",id:"people"})}var f=o(r,[["render",c]]);export{f as default};

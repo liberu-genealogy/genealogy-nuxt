@@ -1,1 +1,0 @@
-import{_ as o,g as s,r as n,h as t,o as a}from"./entry-f2f8a875.mjs";const r={name:"Index",layout:"auth",meta:{permission:{name:"repositories menu"},title:"Repositories - Index"},components:{EnsoTable:s}};function i(p,c,_,l,m,d){const e=n("enso-table");return a(),t(e,{class:"box is-paddingless raises-on-hover",id:"repositories"})}var x=o(r,[["render",i]]);export{x as default};

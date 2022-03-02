@@ -1,1 +1,0 @@
-import{_ as e,c as t,o}from"./entry-f2f8a875.mjs";const a={name:"Show",layout:"auth",meta:{permission:{name:"types menu"},title:"Types - Show"}};function s(n,r,c,p,m,_){return o(),t("div")}var u=e(a,[["render",s]]);export{u as default};

@@ -1,1 +1,0 @@
-import{_ as e,c as t,o}from"./entry-f2f8a875.mjs";const n={layout:"auth",meta:{permission:{name:"personevent menu"},title:"Person Event - Show"}};function r(s,a,c,p,_,i){return o(),t("div")}var u=e(n,[["render",r]]);export{u as default};
