@@ -1,11 +1,6 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'personalias.show'
-}
-</router>
 <script>
 export default {
 

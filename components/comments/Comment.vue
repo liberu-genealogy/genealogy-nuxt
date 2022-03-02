@@ -94,10 +94,8 @@
 import { VTooltip } from 'v-tooltip';
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faPencilAlt, faTrashAlt, faCheck, faBan,
-} from '@fortawesome/free-solid-svg-icons';
-import Confirmation from '@enso-ui/confirmation/bulma';
+import { faPencilAlt, faTrashAlt, faCheck, faBan, } from '@fortawesome/free-solid-svg-icons';
+// import Confirmation from '@enso-ui/confirmation/bulma';
 import Inputor from './Inputor.vue';
 import { ref, computed, useStore, watch } from 'vue';
 
@@ -134,7 +132,7 @@ export default {
         const controls = ref(false)
         const confirmation = ref(false)
         const originalBody = ref(null)
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.state[meta].user)
         }

@@ -1,0 +1,1 @@
+import{_ as s,g as o,r as a,h as n,o as t}from"./entry-f2f8a875.mjs";const i={layout:"auth",meta:{permission:{name:"families menu"},title:"Families - Index"},components:{EnsoTable:o}};function r(c,l,m,p,_,d){const e=a("enso-table");return t(),n(e,{class:"box is-paddingless raises-on-hover",id:"families"})}var u=s(i,[["render",r]]);export{u as default};

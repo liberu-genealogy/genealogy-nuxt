@@ -2,11 +2,6 @@
     <enso-table class="box is-paddingless raises-on-hover"
         id="source_data_evens"/>
 </template>
-<router>
-{
-    name: 'sourcedataevent.index'
-}
-</router>
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import { ref, computed, useStore } from 'vue';

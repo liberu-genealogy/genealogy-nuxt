@@ -9,7 +9,7 @@ export default {
 
     setup() {
         const hover = ref(false)
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.state[localisation].keyCollector.missingKeys),
             two: computed(() => store.state[layout].isTouch)

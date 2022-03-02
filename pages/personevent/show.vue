@@ -2,11 +2,6 @@
     <div/>
 </template>
 
-<router>
-{
-    name: 'personevent.show'
-}
-</router>
 <script>
 export default {
 layout: 'auth',

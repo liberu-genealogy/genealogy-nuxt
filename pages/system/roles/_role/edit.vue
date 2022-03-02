@@ -38,12 +38,6 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'system.roles.edit',
-}
-</router>
-
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSave, faSlidersH } from '@fortawesome/free-solid-svg-icons';

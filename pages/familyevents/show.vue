@@ -1,11 +1,6 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'familyevents.show'
-}
-</router>
 <script>
 import { ref, computed, useStore } from 'vue'
 export default {

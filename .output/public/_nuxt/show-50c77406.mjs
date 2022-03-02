@@ -1,0 +1,1 @@
+import{_ as e,c as o,o as t}from"./entry-f2f8a875.mjs";const r={name:"Show",layout:"auth",meta:{permission:{name:"sourcerefevents menu"},title:"Sourcerefevents - Show"}};function s(a,n,c,m,p,u){return t(),o("div")}var f=e(r,[["render",s]]);export{f as default};

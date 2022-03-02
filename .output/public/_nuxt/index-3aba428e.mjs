@@ -1,0 +1,1 @@
+import{_ as s,g as o,r as n,h as a,o as t}from"./entry-f2f8a875.mjs";const r={layout:"auth",meta:{permission:{name:"personlds menu"},title:"Person LDS - Index"},components:{EnsoTable:o}};function c(p,l,_,i,d,m){const e=n("enso-table");return t(),a(e,{class:"box is-paddingless raises-on-hover",id:"person_lds"})}var f=s(r,[["render",c]]);export{f as default};

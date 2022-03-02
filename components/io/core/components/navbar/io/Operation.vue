@@ -17,7 +17,7 @@ export default {
         const elapsed = ref(null)
         const remaining = ref(null)
         const updater = ref(null)
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.state[enums])
         }

@@ -548,7 +548,7 @@
         const isClear = ref(true);
         return { isDark, isClear };
 
-        const store = useStore();
+        // const store = useStore();
         return {
           one: computed(() => store.getters['${loggedInUser}'])
         }
@@ -571,11 +571,6 @@
     }
 
 </script>
-<router>
-{
-    name: 'privacy'
-}
-</router>
  <style scoped>
     @import '~/assets/css/base.css';
 </style>

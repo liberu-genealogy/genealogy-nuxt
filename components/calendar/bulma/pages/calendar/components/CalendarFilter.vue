@@ -82,12 +82,10 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import VueCal from 'vue-cal';
+// import VueCal from 'vue-cal';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faPlus, faFlag, faArrowsAltH, faCrosshairs,
-} from '@fortawesome/free-solid-svg-icons';
-import 'vue-cal/dist/vuecal.css';
+import { faPlus, faFlag, faArrowsAltH, faCrosshairs,} from '@fortawesome/free-solid-svg-icons';
+// import 'vue-cal/dist/vuecal.css';
 import { FilterState } from '@enso-ui/filters/renderless';
 import CalendarForm from './CalendarForm.vue';
 import { ref, computed, useStore, watch } from 'vue';
@@ -110,7 +108,7 @@ export default {
         const filtered = ref({
             calendars: []
         })
-        const store = useStore()
+//         const store = useStore()
         return {
             one: computed(() => store.getters['${preferences}/lang'])
         }
@@ -161,7 +159,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style type="text/css">
     .small-calendar {
         height: 290px;
     }

@@ -1,10 +1,5 @@
 <template></template>
 
-<router>
-{
-    name: 'decendent.index'
-}
-</router>
 <script>
 import { ref, computed, useStore } from 'vue'
 export default {

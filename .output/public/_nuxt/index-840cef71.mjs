@@ -1,0 +1,1 @@
+import{_ as s,g as o,r as n,h as r,o as a}from"./entry-f2f8a875.mjs";const t={meta:{breadcrumb:"index",title:"User Groups"},components:{EnsoTable:o}};function c(p,_,i,d,l,m){const e=n("enso-table");return a(),r(e,{class:"box is-paddingless raises-on-hover",id:"userGroups"})}var b=s(t,[["render",c]]);export{b as default};

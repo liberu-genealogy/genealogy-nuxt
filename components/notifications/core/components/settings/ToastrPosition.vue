@@ -10,7 +10,7 @@ export default {
 
     setup() {
         const positions = ref('')
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.getters['${preferences}/toastrPosition'])
         }

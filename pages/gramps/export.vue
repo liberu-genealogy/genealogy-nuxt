@@ -65,13 +65,8 @@
     </div>
   </div>
 </template>
-<router>
-{
-  name: 'gramps.index'
-}
-</router>
 <script>
-  import {required} from 'vuelidate/lib/validators'
+  // import {required} from 'vuelidate/lib/validators'
   import Loading from 'vue-loading-overlay';
   import 'vue-loading-overlay/dist/vue-loading.css';
   import FileSaver  from 'file-saver';
@@ -95,7 +90,6 @@
       const inProgress = ref(0)
       const interval = ref(null)
       const generatedFile = ref(null)
-      const fileName = ref('')
       return { error, message, errors, file, fileName, isLoading, fullPage, color, backgroundColor, response, inProgress, interval, generatedFile, fileName }
       function handleExportFiles() {
         this.$axios.$get('/api/gramps-export', {

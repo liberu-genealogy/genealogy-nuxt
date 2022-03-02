@@ -1,0 +1,1 @@
+import{_ as s,g as o,r as n,h as a,o as t}from"./entry-f2f8a875.mjs";const r={layout:"auth",meta:{permission:{name:"addresses menu"},title:"Address - Index"},components:{EnsoTable:o}};function c(d,p,i,_,l,m){const e=n("enso-table");return t(),a(e,{class:"box is-paddingless raises-on-hover",id:"addrs"})}var f=s(r,[["render",c]]);export{f as default};

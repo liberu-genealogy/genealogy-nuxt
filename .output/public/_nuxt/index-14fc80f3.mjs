@@ -1,0 +1,1 @@
+import{_ as e}from"./entry-f2f8a875.mjs";const n={layout:"auth",meta:{permission:{name:"decendent menu"},title:"Decendent - Index"}};function t(r,a,o,s,c,d){return null}var i=e(n,[["render",t]]);export{i as default};

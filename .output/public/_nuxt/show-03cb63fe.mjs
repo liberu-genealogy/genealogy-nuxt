@@ -1,0 +1,1 @@
+import{_ as e,c as o,o as t}from"./entry-f2f8a875.mjs";const a={name:"Show",layout:"auth",meta:{permission:{name:"refn menu"},title:"Refn - Show"}};function n(r,s,c,m,p,_){return t(),o("div")}var i=e(a,[["render",n]]);export{i as default};

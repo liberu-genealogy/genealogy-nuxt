@@ -116,11 +116,6 @@
             ref="filterState"/>
     </div>
 </template>
-<router>
-{
-    name: 'tasks.index',
-}
-</router>
 
 <script>
 import { mapState } from 'vuex';
@@ -132,7 +127,7 @@ import { EnsoDatepicker } from '@enso-ui/datepicker/bulma';
 import Avatar from '~/components/users/bulma/pages/users/components/Avatar.vue';
 import { faClock, faInfoCircle, faCog } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { VTooltip, VPopover } from 'v-tooltip';
+// import { VTooltip, VPopover } from 'v-tooltip';
 import { clickOutside } from '@enso-ui/directives';
 import Filters from '~/components/tasks/bulma/pages/tasks/components/Filters.vue';
 import Flags from '~/components/tasks/bulma/pages/tasks/components/Flags.vue';
@@ -177,7 +172,7 @@ export default {
             dateInterval: 'today',
             overdue: null,
         })
-        const store = useStore();
+//         const store = useStore();
         return {
             one: computed(() => store.state[enums].user.meta)
         }
@@ -211,23 +206,19 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style type="text/css">
 .allocated-to {
     width: 250px;
-
-    .dropdown.vue-dropdown {
-        .dropdown-trigger .button.input .angle {
-            right: 0.5rem;
-        }
-
-        .dropdown-menu .dropdown-content .dropdown-item .icon.selected {
-            right: 0.6rem;
-        }
-    }
 }
-.reminder-picker {
-    .input {
-        width: 220px;
+.dropdown.vue-dropdown .dropdown-trigger .button.input .angle {
+        right: 0.5rem;
     }
+
+.dropdown-menu .dropdown-content .dropdown-item .icon.selected {
+    right: 0.6rem;
+}
+
+.reminder-picker .input {
+    width: 220px;
 }
 </style>

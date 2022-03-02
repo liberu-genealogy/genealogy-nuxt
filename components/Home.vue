@@ -27,10 +27,10 @@
                         <a data-scroll class="navbar-item" href="#overview">
                             Overview
                         </a>
-                        <NuxtLink to="/dashboard" class="navbar-item" v-if="isAuth">
+                        <NuxtLink to="/dashboard" class="navbar-item" v-if="!isAuth">
                           Dashboard
                         </NuxtLink>
-                        <NuxtLink to="/login" class="navbar-item" v-if="!isAuth">
+                        <NuxtLink to="/login" class="navbar-item" v-if="isAuth">
                           Sign in
                         </NuxtLink>
 
@@ -259,7 +259,6 @@
 <script>
     import { mapState, mapMutations, mapActions } from 'vuex'
     import { ref, computed } from 'vue'
-    import { useStore } from 'vuex'
 
     export default {
         meta: {
@@ -267,25 +266,24 @@
             title: 'Landing Page'
         },
         setup() {
-            const store = useStore();
             const isDark = ref('false');
             const isClear = ref('true');
             return { isDark, isClear };
         
-            return {
-                isAuth: computed(() => store.state[auth].isAuth,
-            )};
+            // return {
+            //     isAuth: computed(() => store.state[auth].isAuth,
+            // )};
 
             created(() => {
                 window.addEventListener('scroll', this.handleScroll);
             });
 
-            async function logoutAccount() {
-                return{
-                    ...mapActions('auth', ['logout'])
-                }
-                await this.logout();
-            };
+            // async function logoutAccount() {
+            //     return{
+            //         ...mapActions('auth', ['logout'])
+            //     }
+            //     await this.logout();
+            // };
             function handleScroll() {
                 if (window.scrollY >= 10) {
                     this.isClear = false;

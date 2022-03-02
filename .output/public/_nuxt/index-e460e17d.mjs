@@ -1,0 +1,1 @@
+import{_ as o,g as s,r as n,h as t,o as a}from"./entry-f2f8a875.mjs";const i={layout:"auth",meta:{permission:{name:"citations menu"},title:"Citations - Index"},components:{EnsoTable:s}};function r(c,p,_,l,m,d){const e=n("enso-table");return a(),t(e,{class:"box is-paddingless raises-on-hover",id:"citations"})}var f=o(i,[["render",r]]);export{f as default};

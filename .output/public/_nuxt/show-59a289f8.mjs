@@ -1,0 +1,1 @@
+import{_ as e,c as o,o as t}from"./entry-f2f8a875.mjs";const a={name:"Show",layout:"auth",meta:{permission:{name:"publications menu"},title:"Publications - Show"}};function n(s,c,r,i,p,m){return t(),o("div")}var _=e(a,[["render",n]]);export{_ as default};

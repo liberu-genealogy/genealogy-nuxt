@@ -168,17 +168,9 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'howTo.videos.index',
-}
-</router>
-
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faPlus, faUpload, faBan, faCheck, faPencilAlt, faTags,
-} from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faUpload, faBan, faCheck, faPencilAlt, faTags,} from '@fortawesome/free-solid-svg-icons';
 import { focus } from '@enso-ui/directives';
 import { Uploader } from '@enso-ui/uploader/bulma';
 import HowToVideo from '~/components/how-to/bulma/pages/howTo/components/HowToVideo.vue';
@@ -308,7 +300,6 @@ export default {
                     this.reset();
                 }).catch(this.errorHandler);
         }
-
     }
 };
 </script>

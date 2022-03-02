@@ -6,10 +6,10 @@
 import { mapState, mapGetters, mapMutations } from 'vuex';
 import Errors from '@enso-ui/laravel-validation';
 import RegisterForm from '~/components/auth/RegisterForm.vue';
-import { ref, computed, useStore,watch } from 'vue';
-// import Email from '~/components/auth/fields/Email.vue';
-// import Password from '~/components/auth/fields/Password.vue';
-// import Remember from '~/components/auth/fields/Remember.vue';
+import { ref, computed, useStore, watch } from 'vue';
+import Email from '~/components/auth/fields/Email.vue';
+import Password from '~/components/auth/fields/Password.vue';
+import Remember from '~/components/auth/fields/Remember.vue';
 
     export default {
         meta: {
@@ -21,11 +21,11 @@ import { ref, computed, useStore,watch } from 'vue';
         setup() {
             const errors = new Errors()
             const payload = ref({
-                email = '',
-                password = '',
-                remember = false
+                email: '',
+                password: '',
+                remember: false
             })
-            const store = useState()
+            // const store = useState()
             return{
                 one: computed(() => store.getters['${isWebview}']),
                 two: computed(() => store.state[meta])

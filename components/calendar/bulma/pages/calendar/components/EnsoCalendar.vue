@@ -63,20 +63,20 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import VueCal from 'vue-cal';
+// import VueCal from 'vue-cal';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFlag, faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 import EventConfirmation from './EventConfirmation';
-import { ref, computed, useStore, watch, onMouted, beforeUnmount } from 'vue';
+import { ref, computed, useStore, watch, onMounted, onBeforeUnmount } from 'vue';
 
-import 'vue-cal/dist/drag-and-drop.js';
-import 'vue-cal/dist/i18n/ar.js';
-import 'vue-cal/dist/i18n/de.js';
-import 'vue-cal/dist/i18n/fr.js';
-import 'vue-cal/dist/i18n/hu.js';
-import 'vue-cal/dist/i18n/nl.js';
-import 'vue-cal/dist/i18n/ro.js';
-import 'vue-cal/dist/i18n/es.js';
+// import 'vue-cal/dist/drag-and-drop.js';
+// import 'vue-cal/dist/i18n/ar.js';
+// import 'vue-cal/dist/i18n/de.js';
+// import 'vue-cal/dist/i18n/fr.js';
+// import 'vue-cal/dist/i18n/hu.js';
+// import 'vue-cal/dist/i18n/nl.js';
+// import 'vue-cal/dist/i18n/ro.js';
+// import 'vue-cal/dist/i18n/es.js';
 
 import('../styles/colors.scss');
 
@@ -105,7 +105,7 @@ export default {
         const hovering = ref(null)
         const dragedEvent = ref(null)
         const deleteEventFunction = ref(null)
-        const store = useStore()
+        // const store = useStore()s
         return {
             one: computed(() => store.getters['${preferences}/lang']),
             two: computed(() => store.state[enums].meta)
@@ -144,11 +144,11 @@ export default {
         watch(calendars, () => {
             const calendars = ref('fetch')
         })
-        onMouted(() => {
+        onMounted(() => {
             this.resize();
             window.addEventListener('resize', this.resize);
         })
-        beforeUnmount(() => {
+        onBeforeUnmount(() => {
             window.removeEventListener('resize', this.resize);
         })
         function resize() {
@@ -257,56 +257,54 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style type="text/css">
     .calendar-wrapper {
         height: 100%;
-        .vuecal {
-            border-radius: inherit;
-            .vuecal__body {
-                overflow: auto;
-                .vuecal__bg {
-                    overflow: visible;
-                }
-            }
-            .vuecal__cell:hover {
-                cursor: pointer;
-            }
+    }
+
+    .vuecal {
+        border-radius: inherit;
+    }
+    .vuecal__body {
+        overflow: auto;
+    }
+    .vuecal__bg {
+        overflow: visible;
+    }
+    .vuecal__cell:hover {
+        cursor: pointer;
+    }
+    .vuecal__event .event-body {
+            white-space: pre;
         }
-        .vuecal__event {
-            .event-body {
-                white-space: pre;
-            }
-        }
-        .vuecal__event-resize-handle {
-                &:after {
-                    top: 5px;
-                    left: calc(50% - 10px);
-                }
-                &:before {
-                    top: 10px;
-                    left: calc(50% - 10px);
-                }
-                &:after, &:before {
-                    display: block;
-                    content: "";
-                    position: absolute;
-                    width: 20px;
-                    height: 2px;
-                    transition-timing-function: ease;
-                    transition-duration: .15s;
-                    transition-property: transform;
-                    border-radius: 4px;
-                    background-color: #fff;
-                }
-            }
-        .vuecal__time-column {
-            height: auto;
-            .vuecal__time-cell .label {
-                color: inherit;
-                display: inherit;
-                font-size: inherit;
-                font-weight: inherit;
-            }
-        }
+
+    .vuecal__event-resize-handle :after {
+        top: 5px;
+        left: calc(50% - 10px);
+    }
+    .vuecal__event-resize-handle :before {
+        top: 10px;
+        left: calc(50% - 10px);
+    }
+    .vuecal__event-resize-handle :after, :before {
+        display: block;
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 2px;
+        transition-timing-function: ease;
+        transition-duration: .15s;
+        transition-property: transform;
+        border-radius: 4px;
+        background-color: #fff;
+    }
+    .vuecal__time-column {
+        height: auto;
+    }
+    .vuecal__time-cell .label {
+        color: inherit;
+        display: inherit;
+        font-size: inherit;
+        font-weight: inherit;
     }
 </style>

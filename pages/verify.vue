@@ -14,7 +14,7 @@
       },
       components: { VerifyForm },
       setup () {
-        const store = useStore()
+        // const store = useStore()
         return {
           two: computed(() => store.state[meta]),
           ...mapMutations("auth", ["login"]),

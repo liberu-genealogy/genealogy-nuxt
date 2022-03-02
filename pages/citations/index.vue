@@ -3,11 +3,6 @@
         id="citations"/>
 </template>
 
-<router>
-{
-    name: 'citations.index'
-}
-</router>
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 

@@ -6,11 +6,6 @@
     </div>
 </template>
 
-<router>
-{
-    name: 'notes.edit'
-}
-</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 

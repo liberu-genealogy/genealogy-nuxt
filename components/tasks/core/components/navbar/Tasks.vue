@@ -21,7 +21,7 @@ export default {
         const overdue = ref(0)
         const pending = ref(0)
         const tasks = ref([])
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.getters['${websockets}/channels']),
             two: computed(() => store.state[layout].isTouch),

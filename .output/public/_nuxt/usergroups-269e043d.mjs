@@ -1,0 +1,1 @@
+import{_ as o,r as t,h as s,o as a}from"./entry-f2f8a875.mjs";const n={key(e){return e.path},meta:{breadcrumb:"user groups",route:"administration.userGroups.index"}};function u(e,p,c,i,_,d){const r=t("NuxtChild");return a(),s(r,{key:e.$route.path})}var f=o(n,[["render",u]]);export{f as default};

@@ -1,0 +1,1 @@
+import{_ as e,c as s,o as t}from"./entry-f2f8a875.mjs";const o={layout:"auth",meta:{permission:{name:"addresses menu"},title:"Address - Show"}};function a(r,n,c,d,p,_){return t(),s("div")}var m=e(o,[["render",a]]);export{m as default};

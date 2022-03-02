@@ -33,7 +33,7 @@ export default {
         desktopNotifications: false,
     }),
     setup() {
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.getters['${websockets}/channels']),
             two: computed(() => store.getters['${isWebview}']),

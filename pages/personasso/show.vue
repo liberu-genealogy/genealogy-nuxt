@@ -2,11 +2,6 @@
     <div/>
 </template>
 
-<router>
-{
-    name: 'personasso.show'
-}
-</router>
 <script>
 export default {
 layout: 'auth',

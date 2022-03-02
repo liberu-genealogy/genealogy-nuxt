@@ -1,0 +1,1 @@
+import{_ as r,r as t,h as s,o as a}from"./entry-f2f8a875.mjs";const n={key(e){return e.path},meta:{breadcrumb:"roles",route:"system.roles.index"}};function c(e,p,u,_,l,d){const o=t("NuxtChild");return a(),s(o,{key:e.$route.path})}var i=r(n,[["render",c]]);export{i as default};

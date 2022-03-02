@@ -1,11 +1,6 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'personlds.show'
-}
-</router>
 <script>
 export default {
 

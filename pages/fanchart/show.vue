@@ -1,13 +1,8 @@
 <template>
   <div id="webtrees-fan-chart-container"></div>
 </template>
-<router>
-{
-    name: 'fanchart.show'
-}
-</router>
 <script>
-import { FanChart } from "/assets/js/fan-chart/modules/index";
+// import { FanChart } from "/assets/js/fan-chart/modules/index";
 import { ref, computed, useStore, onMounted, watch } from 'vue';
 export default {
   layout: "auth",

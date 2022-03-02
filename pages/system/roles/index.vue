@@ -7,11 +7,6 @@
         })"
         @write-config-file="toastr.success($event.message)"/>
 </template>
-<router>
-{
-    name: 'system.roles.index',
-}
-</router>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';

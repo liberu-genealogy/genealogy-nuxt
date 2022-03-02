@@ -66,13 +66,8 @@
         </form>
     </div>
 </template>
-<router>
-{
-    name: 'dna.create'
-}
-</router>
 <script>
-import { required } from 'vuelidate/lib/validators'
+// import { required } from 'vuelidate/lib/validators'
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { ref, computed, useStore } from 'vue';
@@ -87,7 +82,7 @@ export default {
     setup() {
         const error = ref(false)
         const message = ref('')
-        const error = ref(null)
+        // const error = ref(null)
         const file = ref('undefined')
         const fileName = ref('')
         const isLoading = ref(false)

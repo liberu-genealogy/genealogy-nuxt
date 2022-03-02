@@ -1,11 +1,6 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'sourcedataevent.show'
-}
-</router>
 <script>
 export default {
     name: 'Show',

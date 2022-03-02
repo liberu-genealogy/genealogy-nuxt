@@ -5,7 +5,7 @@ import { ref, computed, useStore, watch } from 'vue';
 export default {
     name: 'CoreThemeSelector',
     setup() {
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.state[layout].themes),
             two: computed(() => store.getters['${preferences}/theme']),

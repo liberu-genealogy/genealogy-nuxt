@@ -2,12 +2,6 @@
     <enso-table class="box is-paddingless raises-on-hover"
         id="menus"/>
 </template>
-<router>
-{
-    name: 'system.menus.index',
-}
-</router>
-
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 

@@ -1,0 +1,1 @@
+import{_ as e,c as o,o as a}from"./entry-f2f8a875.mjs";const s={layout:"auth",meta:{permission:{name:"personalias menu"},title:"Person Alias - Show"}};function t(r,n,c,i,p,_){return a(),o("div")}var m=e(s,[["render",t]]);export{m as default};

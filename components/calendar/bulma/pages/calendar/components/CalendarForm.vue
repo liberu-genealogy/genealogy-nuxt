@@ -18,8 +18,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import { EnsoForm } from '@enso-ui/forms/bulma';
-import { Modal } from '@enso-ui/modal/bulma';
+// import { EnsoForm } from '@enso-ui/forms/bulma';
+// import { Modal } from '@enso-ui/modal/bulma';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMinus, faPlus, faUserClock } from '@fortawesome/free-solid-svg-icons';
 import ColorSelect from './ColorSelect.vue';
@@ -41,7 +41,7 @@ export default {
         },
     },
     setup() {
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.state[meata])
         }
@@ -54,7 +54,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style type="text/css">
     .modal.calendar-modal .modal-content {
         overflow: visible;
         width: 400px;

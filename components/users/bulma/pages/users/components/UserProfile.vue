@@ -171,7 +171,7 @@ export default {
 
     setup() {
         const profile = ref(null)
-        const store=  useStore()
+        // const store=  useStore()
         return {
             ...mapState(['user', 'meta', 'enums', 'impersonating']),
             one: computed(() => store.state[auth].isAuth),

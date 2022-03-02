@@ -4,9 +4,9 @@
 
 <script>
 export default {
-    // key(route) {
-    //     return route.path
-    // },
+    key(route) {
+        return route.path
+    },
     meta: {
         breadcrumb: 'tutorials',
         route: 'system.tutorials.index',

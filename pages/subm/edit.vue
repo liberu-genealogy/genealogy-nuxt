@@ -5,11 +5,6 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'subm.edit'
-}
-</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 import { ref, computed, useStore } from 'vue';

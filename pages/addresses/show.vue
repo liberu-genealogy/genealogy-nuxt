@@ -1,11 +1,7 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'addresses.show'
-}
-</router>
+
 <script>
 export default {
 layout: 'auth',

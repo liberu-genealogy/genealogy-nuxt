@@ -62,11 +62,6 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'administration.people.edit',
-}
-</router>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';

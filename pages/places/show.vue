@@ -1,11 +1,6 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'places.show'
-}
-</router>
 <script>
 export default {
     name: 'Show',
