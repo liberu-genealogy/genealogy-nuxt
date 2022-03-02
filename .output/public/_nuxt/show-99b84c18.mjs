@@ -1,1 +1,0 @@
-import{_ as e,Z as t,c as a,o as n}from"./entry-f2f8a875.mjs";const o={layout:"auth",meta:{permission:{name:"decendentchart menu"},title:"DecendentChart - Show"},setup(){t(()=>{this.fetchData()})}},s={id:"webtrees-fan-chart-container"};function c(r,i,d,_,h,p){return n(),a("div",s)}var f=e(o,[["render",c]]);export{f as default};

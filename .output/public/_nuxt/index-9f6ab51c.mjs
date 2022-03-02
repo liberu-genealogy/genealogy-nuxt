@@ -1,1 +1,0 @@
-import{_ as s,g as o,r as n,h as a,o as t}from"./entry-f2f8a875.mjs";const c={name:"Index",layout:"auth",meta:{permission:{name:"places menu"},title:"Places - Index"},components:{EnsoTable:o}};function r(p,l,i,_,m,d){const e=n("enso-table");return t(),a(e,{class:"box is-paddingless raises-on-hover",id:"places"})}var x=s(c,[["render",r]]);export{x as default};

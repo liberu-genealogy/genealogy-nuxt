@@ -1,1 +1,0 @@
-import{_ as t,Z as e,c as a,o}from"./entry-f2f8a875.mjs";const n={layout:"auth",meta:{permission:{name:"fanchart menu"},title:"Fanchart - Show"},setup(){e(()=>{this.fetchData()})}},s={id:"webtrees-fan-chart-container"};function r(c,i,_,h,p,f){return o(),a("div",s)}var d=t(n,[["render",r]]);export{d as default};

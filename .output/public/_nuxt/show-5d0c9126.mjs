@@ -1,1 +1,0 @@
-import{_ as e,c as o,o as s}from"./entry-f2f8a875.mjs";const t={layout:"auth",meta:{permission:{name:"personasso menu"},title:"Person Asso - Show"}};function a(r,n,c,p,_,i){return s(),o("div")}var u=e(t,[["render",a]]);export{u as default};

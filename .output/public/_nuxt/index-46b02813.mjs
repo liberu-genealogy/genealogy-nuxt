@@ -1,1 +1,0 @@
-import{_ as t}from"./entry-f2f8a875.mjs";const e={layout:"auth",meta:{permission:{name:"fanchart menu"},title:"Fancharts - Index"}};function a(n,r,s,o,c,_){return null}var p=t(e,[["render",a]]);export{p as default};

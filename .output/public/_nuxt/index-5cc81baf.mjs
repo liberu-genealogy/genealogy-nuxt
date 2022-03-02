@@ -1,1 +1,0 @@
-import{_ as n,g as o,r as s,h as a,o as t}from"./entry-f2f8a875.mjs";const r={layout:"auth",meta:{permission:{name:"personanci menu"},title:"Person Anci - Index"},components:{EnsoTable:o}};function c(i,p,_,l,m,d){const e=s("enso-table");return t(),a(e,{class:"box is-paddingless raises-on-hover",id:"person_ancis"})}var f=n(r,[["render",c]]);export{f as default};

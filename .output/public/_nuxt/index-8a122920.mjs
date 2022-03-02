@@ -1,1 +1,0 @@
-import{_ as s,g as o,r as a,h as n,o as t}from"./entry-f2f8a875.mjs";const r={layout:"auth",meta:{permission:{name:"familyslugs menu"},title:"Family Slugs - Index"},components:{EnsoTable:o}};function l(c,i,m,p,_,d){const e=a("enso-table");return t(),n(e,{class:"box is-paddingless raises-on-hover",id:"family_slgs"})}var f=s(r,[["render",l]]);export{f as default};
