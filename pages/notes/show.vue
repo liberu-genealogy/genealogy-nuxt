@@ -1,11 +1,6 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'notes.show'
-}
-</router>
 <script>
 export default {
 

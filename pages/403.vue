@@ -10,11 +10,6 @@
         </p>
     </div>
 </template>
-<router>
-{
-    name: 'unauthorized',
-}
-</router>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';

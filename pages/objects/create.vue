@@ -5,15 +5,8 @@
         </div>
     </div>
 </template>
-
-<router>
-{
-    name: 'objects.create'
-}
-</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
-
 export default {
 layout: 'auth',
     meta: {

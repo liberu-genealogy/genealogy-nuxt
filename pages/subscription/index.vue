@@ -186,11 +186,6 @@
     </div>
   </div>
 </template>
-<router>
-{
-    name: 'subscription.index'
-}
-</router>
 
 <script>
 import Loading from 'vue-loading-overlay'
@@ -219,7 +214,7 @@ export default {
     const selected_currency_rate = ref(1)
     const isActive = ref(false)
     return { error, message, isLoading, fullPage, color, backgroundColor, response, has_payment_method, plans, selectedPlanId, currency_options, selected_currency, selected_currency_symbol, selected_currency_rate, isActive }
-    const store = useStore()
+    // const store = useStore()
     return {
       one: computed(() => store.getters['${loggedInUser}'])
     }

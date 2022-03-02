@@ -5,11 +5,6 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'system.tutorials.create',
-}
-</router>
 
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';

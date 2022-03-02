@@ -1,0 +1,1 @@
+import{_ as e,c as a,o}from"./entry-f2f8a875.mjs";const t={name:"Show",layout:"auth",meta:{permission:{name:"places menu"},title:"Places - Show"}};function s(c,n,r,p,m,_){return o(),a("div")}var l=e(t,[["render",s]]);export{l as default};

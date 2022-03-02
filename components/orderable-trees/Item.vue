@@ -75,9 +75,7 @@
 <script>
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faMinusSquare, faPlusSquare, faPencilAlt, faTrashAlt, faQuestionCircle,
-} from '@fortawesome/free-solid-svg-icons';
+import { faMinusSquare, faPlusSquare, faPencilAlt, faTrashAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import Confirmation from '@enso-ui/confirmation/bulma';
 import Items from './Items.vue';
 import { ref, computed, useStore, watch } from 'vue';

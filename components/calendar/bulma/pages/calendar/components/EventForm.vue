@@ -125,7 +125,7 @@ export default {
     setup() {
         const timeFormat = ref('H:i')
         const confirm = ref(null)
-        const store = useStore()
+        // const store = useStore()
         return{
             one: computed(() => store.state[meta].enums)
         }
@@ -201,7 +201,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style type="text/css">
     .modal.event-modal .modal-content {
         overflow: visible;
         width: 750px;

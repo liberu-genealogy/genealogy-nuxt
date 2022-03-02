@@ -90,10 +90,10 @@
 
 <script>
 import Vue from 'vue'
-import Vuelidate from 'vuelidate'
-import { required, minLength } from 'vuelidate/lib/validators'
+// import Vuelidate from 'vuelidate'
+// import { required, minLength } from 'vuelidate/lib/validators'
 import { ref, computed, useStore, watch } from 'vue'
-Vue.use(Vuelidate)
+// Vue.use(Vuelidate)
 export default {
   layout: 'default',
   head: { title: 'Stripe' },
@@ -102,25 +102,25 @@ export default {
     const error = ref(false)
     const message = ref('')
     const payment = ref({
-      card_holder_name = ref(null),
-      card_number = ref(null),
-      month_year = ref(null),
-      cvv = ref(null),
-      plan_id = ref('price_1JUYYOAGwU4VOfbzZ1Gmdm8P')
+      card_holder_name: ref(null),
+      card_number: ref(null),
+      month_year: ref(null),
+      cvv: ref(null),
+      plan_id: ref('price_1JUYYOAGwU4VOfbzZ1Gmdm8P')
     })
     return { error, message, payment }
     const validations = ref({
-      payment = ref({
-        card_holder_name = ref({
+      payment: ref({
+        card_holder_name: ref({
           required
         }),
-        card_number = ref({
+        card_number: ref({
           required
         }),
-        month_year = ref({
+        month_year: ref({
           required
         }),
-        cvv = ref({
+        cvv: ref({
           required, minLength:minLength(3)
         })
       })
@@ -143,10 +143,3 @@ export default {
 }
 
 </script>
-
-<router>
-{
-    name: 'subscription.stripe.index'
-}
-</router>
-

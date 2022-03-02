@@ -1,0 +1,1 @@
+import{_ as o,g as s,r as n,h as t,o as a}from"./entry-f2f8a875.mjs";const c={layout:"auth",meta:{permission:{name:"object menu"},title:"Object - Index"},components:{EnsoTable:s}};function r(p,i,_,l,m,d){const e=n("enso-table");return a(),t(e,{class:"box is-paddingless raises-on-hover",id:"objects"})}var u=o(c,[["render",r]]);export{u as default};

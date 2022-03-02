@@ -54,7 +54,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style type="text/css">
     .calendar-color {
         width: 10px;
         height: 10px;

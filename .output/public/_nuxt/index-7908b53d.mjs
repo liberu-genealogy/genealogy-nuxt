@@ -1,0 +1,1 @@
+import{_ as n,g as o,r as s,h as a,o as t}from"./entry-f2f8a875.mjs";const r={name:"Index",layout:"auth",meta:{permission:{name:"refn menu"},title:"Refn - Index"},components:{EnsoTable:o}};function c(p,i,_,l,m,d){const e=s("enso-table");return t(),a(e,{class:"box is-paddingless raises-on-hover",id:"refns"})}var u=n(r,[["render",c]]);export{u as default};

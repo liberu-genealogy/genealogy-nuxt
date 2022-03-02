@@ -9,7 +9,7 @@ export default {
 
     setup() {
         const visible = ref(false)
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.state[uesr]),
             two: computed(() => store.state[layout].isTouch)

@@ -23,11 +23,6 @@
             v-if="!!deletableUser"/>
     </div>
 </template>
-<router>
-{
-    name: 'administration.users.index'
-}
-</router>
 
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';

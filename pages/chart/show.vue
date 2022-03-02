@@ -3,16 +3,10 @@
     <div id="tree"></div>
   </div>
 </template>
-<router>
-{
-  name: 'pedigree.show'
-}
-</router>
-
 
 <script>
 import { EnsoTable } from "@enso-ui/tables/bulma";
-import { PedigreeChart } from "/assets/js/modules/index";
+// import { PedigreeChart } from "/assets/js/modules/index";
 import { ref, computed, useStore, onMounted } from 'vue';
 export default {
   layout: 'auth',

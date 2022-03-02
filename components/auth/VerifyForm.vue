@@ -91,7 +91,6 @@
       const errors = new Errors()
       const isSuccessful = ref(false)
       const loading = ref(false)
-      const store = useStore()
       return {
         one: computed(() => store.state[meta])
       }
@@ -172,20 +171,20 @@
   };
 </script>
 
-<style lang="scss">
+<style type="text/css">
   .login {
     max-width: 400px;
     margin: auto;
-
-    .is-spaced {
-      margin-right: 1.6em;
-    }
-
-    figure.logo {
-      display: inline-block;
-    }
-    .t-center {
-      text-align: center;
-    }
   }
+  .is-spaced {
+    margin-right: 1.6em;
+  }
+
+  figure.logo {
+    display: inline-block;
+  }
+  .t-center {
+    text-align: center;
+  }
+
 </style>

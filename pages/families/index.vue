@@ -3,11 +3,6 @@
         id="families"/>
 </template>
 
-<router>
-{
-    name: 'families.index'
-}
-</router>
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import { ref, computed, useStore } from 'vue';

@@ -1,0 +1,1 @@
+import{_ as t,r as a,h as r,o as n}from"./entry-f2f8a875.mjs";const s={key(o){return o.path},meta:{breadcrumb:"localisation",route:"system.localisation.index"}};function c(o,i,l,p,u,_){const e=a("NuxtChild");return n(),r(e,{key:o.$route.path})}var m=t(s,[["render",c]]);export{m as default};

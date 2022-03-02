@@ -220,7 +220,7 @@
       const password = ref('')
       const remember = ref(false)
       const device_name = ref('mac')
-      const store = useStore()
+      // const store = useStore()
       return {
         one: computed(() => store.getters['${isWebview}']),
         two: computed(() => store.state[meta])

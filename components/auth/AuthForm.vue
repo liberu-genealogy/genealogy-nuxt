@@ -37,7 +37,7 @@ export default {
         const state = ref({
             successful: false
         })
-        const store = useStore;
+        // const store = useStore;
         return {
             one: computed(() => store.state[meta])
         }
@@ -51,21 +51,21 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style type="text/css">
     .login {
         max-width: 400px;
         margin: auto;
-
-        .logo {
-            justify-content: center;
-        }
-
-        .is-spaced {
-            margin-right: 1.6em;
-        }
-
-        figure.logo {
-            display: inline-block;
-        }
     }
+    .logo {
+        justify-content: center;
+    }
+
+    .is-spaced {
+        margin-right: 1.6em;
+    }
+
+    figure.logo {
+        display: inline-block;
+    }
+ 
 </style>

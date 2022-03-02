@@ -323,7 +323,7 @@
       })
       const terms = ref('')
       const device_name = ref('mac')
-      const store = useStore()
+      // const store = useStore()
       return {
         one: computed(() => store.state[meta])
       }

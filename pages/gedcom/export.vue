@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loading :active.sync="isLoading" :color="color" :background-color="backgroundColor"></loading>
+    <!-- <loading :active.sync="isLoading" :color="color" :background-color="backgroundColor"></loading> -->
     <div class="columns is-gapless is-multiline is-mobile">
       <div class="column is-12">
         <h1 class="is-size-4 has-text-black">
@@ -12,8 +12,9 @@
           <ul>
             <li><a class="is-size-7 has-text-weight-medium has-text-link"
                    href="/dashboard">Home</a></li>
-            <li class="is-size-7 has-text-weight-medium is-active"><a href="/dashboard"
-                                                                      aria-current="page">Export Gedcom</a></li>
+            <li class="is-size-7 has-text-weight-medium is-active">
+              <a href="/dashboard" aria-current="page">Export Gedcom</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -23,13 +24,13 @@
         <div class="card has-background-white has-text-black" style="height: 500px;">
           <div class="card-content">
             <div v-if="response" class="notification is-success">
-              {{ response }}
+               response 
             </div>
             <div v-if="error" class="notification is-danger">
-              {{ message }}
+               message 
             </div>
             <div v-for="error in errors" :key="error" class="notification is-danger">
-              {{ error[0] }}
+               error[0] 
             </div>
             <div class="field import_block">
               <div class="file is-large is-boxed has-background-primary">
@@ -65,13 +66,9 @@
     </div>
   </div>
 </template>
-<router>
-{
-  name: 'gedcomexport.index'
-}
-</router>
+
 <script>
-  import {required} from 'vuelidate/lib/validators'
+  // import {required} from 'vuelidate/lib/validators'
   import Loading from 'vue-loading-overlay';
   import 'vue-loading-overlay/dist/vue-loading.css';
   import FileSaver  from 'file-saver';
@@ -99,7 +96,7 @@
       const inProgress = ref(0)
       const interval = ref(null)
       const generatedFile = ref(null)
-      const fileName = ref('')
+      // const fileName = ref('')
       function handleExportFiles() {
         this.$axios.$get('/api/gedcom-export', {
           headers: {

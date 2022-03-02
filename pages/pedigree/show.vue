@@ -19,16 +19,11 @@
     <button id='saveButton'>Export my PNG</button>
   </div>
 </template>
-<router>
-{
-  name: 'trees.show'
-}
-</router>
 <script>
-import * as d3Base from 'd3'
-import {coordQuad, dagConnect, dagStratify, decrossOpt, layeringSimplex, sugiyama} from 'd3-dag'
-import d3Tip from 'd3-tip'
-import vSelect from 'vue-select'
+// import * as d3Base from 'd3'
+// import {coordQuad, dagConnect, dagStratify, decrossOpt, layeringSimplex, sugiyama} from 'd3-dag'
+// import d3Tip from 'd3-tip'
+// import vSelect from 'vue-select'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import FileSaver  from 'file-saver';
@@ -75,7 +70,7 @@ export default {
     const color = ref('#4fcf8d')
     const backgroundColor = ref('#ffffff')
     created(() => {
-      this.persons = await this.$axios.$get("/api/get_person");
+      // this.persons = await this.$axios.$get("/api/get_person");
     })
     async function setSelected(value) {
       this.isLoading = true

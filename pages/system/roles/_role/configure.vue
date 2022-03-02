@@ -45,12 +45,6 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'system.roles.configure',
-}
-</router>
-
 <script>
 import { mapState } from 'vuex';
 import cssClass from '~/utils/permission';
@@ -62,7 +56,7 @@ export default {
     components: { CheckboxManager },
     setup() {
         const data = ref(null)
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.state[enums])
         }
@@ -88,7 +82,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style type="text/css">
     .level.permission .level-item {
         white-space: nowrap;
         overflow: hidden;

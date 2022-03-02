@@ -1,5 +1,5 @@
 <template>
-	<Home/>
+	<Home />
 </template>
 <script>
 import Home from '~/components/Home.vue'
@@ -9,12 +9,8 @@ export default {
 	components: { Home },
 		meta: {
 			guestGuard: true,
-	},
+	    },
 
 }
 </script>
-<router>
-{
-	name: 'index'
-}
-</router>
+

@@ -64,7 +64,7 @@ export default {
         },
     },
     setup() {
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.state[layout].isTouch)
         }

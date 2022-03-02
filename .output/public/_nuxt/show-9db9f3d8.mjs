@@ -1,0 +1,1 @@
+import{_ as e,c as t,o}from"./entry-f2f8a875.mjs";const a={layout:"auth",meta:{permission:{name:"object menu"},title:"Object - Show"}};function c(r,s,n,p,_,i){return o(),t("div")}var u=e(a,[["render",c]]);export{u as default};

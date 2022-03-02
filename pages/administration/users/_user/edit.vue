@@ -112,17 +112,10 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'administration.users.edit'
-}
-</router>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faUserTie, faTrashAlt, faKey, faRedo,
-} from '@fortawesome/free-solid-svg-icons';
+import { faUserTie, faTrashAlt, faKey, faRedo, } from '@fortawesome/free-solid-svg-icons';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import Accessories from '@enso-ui/accessories/bulma';
 import { Tab } from '@enso-ui/tabs/bulma';
@@ -147,11 +140,11 @@ export default {
         const deletableUser = ref(null)
         const ready = ref(false)
         const pivotParams = ref({ 
-            userGroups = { id: null }
+            userGroups:{ id: null }
         })
         const password = ref(null)
         const passwordConfirmation = ref(null)
-        const store = useStore()
+        // const store = useStore()
         return {
             two: computed(() => store.state[enums].user)
         }

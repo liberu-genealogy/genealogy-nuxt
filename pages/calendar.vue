@@ -20,11 +20,6 @@
             
     </div>
 </template>
-<router>
-{
-    name: 'core.calendar.index',
-}
-</router>
 
 <script>
 import { mapMutations } from 'vuex';

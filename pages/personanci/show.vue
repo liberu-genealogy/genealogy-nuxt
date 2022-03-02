@@ -1,12 +1,6 @@
 <template>
     <div/>
 </template>
-
-<router>
-{
-    name: 'personanci.show'
-}
-</router>
 <script>
 export default {
 

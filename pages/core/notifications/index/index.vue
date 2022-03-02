@@ -72,11 +72,6 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'core.notifications.index',
-}
-</router>
 
 <script>
 import debounce from 'lodash/debounce';
@@ -100,7 +95,7 @@ export default {
         const notifications = ref([])
         const offset = ref(0)
         const loading = ref(false)
-        const store = useStore()
+        // const store = useStore()
         return{
             one: computed(() => store.state[user].meta),
             two: computed(() => store.state[layout].isTouch)

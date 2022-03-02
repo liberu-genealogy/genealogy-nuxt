@@ -1,0 +1,1 @@
+import{_ as e,c as o,o as t}from"./entry-f2f8a875.mjs";const s={layout:"auth",meta:{permission:{name:"personlds menu"},title:"Person LDS - Show"}};function r(a,n,c,p,_,i){return t(),o("div")}var l=e(s,[["render",r]]);export{l as default};

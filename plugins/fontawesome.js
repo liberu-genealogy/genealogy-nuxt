@@ -57,3 +57,5 @@ library.add(
 Vue.component('fa', FontAwesomeIcon);
 Vue.component('fal', FontAwesomeLayers);
 Vue.component('falt', FontAwesomeLayersText);
+
+export default{}

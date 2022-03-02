@@ -1,0 +1,1 @@
+import{_ as e,r,h as a,o as n}from"./entry-f2f8a875.mjs";const s={meta:{breadcrumb:"administration"}};function c(t,i,p,_,d,m){const o=r("NuxtChild");return n(),a(o,{key:t.$route.path})}var f=e(s,[["render",c]]);export{f as default};

@@ -7,7 +7,7 @@ export default {
     name: 'LanguageSelector',
 
     setup() {
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.state[localisation].languages),
             two: computed(() => store.getters['${preferences}/lang'])

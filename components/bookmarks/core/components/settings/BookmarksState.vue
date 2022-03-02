@@ -5,7 +5,7 @@ import { ref, computed, useStore, watch } from 'vue';
 export default {
     name: 'CoreBookmarksState',
     setup() {
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.getters['${preferences}/bookmarks'])
         }

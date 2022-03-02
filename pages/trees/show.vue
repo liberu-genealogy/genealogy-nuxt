@@ -12,18 +12,18 @@
   </div>
 </template>
 <script>
-import * as d3Base from "d3";
-import {
-  coordQuad,
-  dagConnect,
-  dagStratify,
-  decrossOpt,
-  layeringSimplex,
-  sugiyama,
-} from "d3-dag";
-import d3Tip from "d3-tip";
-import vSelect from "vue-select";
-import { ref, computed, useStore, watch } from 'vue';
+// import * as d3Base from "d3";
+// import {
+//   coordQuad,
+//   dagConnect,
+//   dagStratify,
+//   decrossOpt,
+//   layeringSimplex,
+//   sugiyama,
+// } from "d3-dag";
+// import d3Tip from "d3-tip";
+// import vSelect from "vue-select";
+import { ref, computed, useStore, watch, onMounted } from 'vue';
 const d3 = { ...d3Base, tip: d3Tip() };
 Array.prototype.remove = function () {
   let what;
@@ -61,7 +61,7 @@ export default {
       this.fetchdata()
     })
     created(() => {
-      this.persons = await this.$axios.$get("/api/person");
+      // this.persons = await this.$axios.$get("/api/person");
     })
     async function setSelected(value) {
       this.isLoading = true;

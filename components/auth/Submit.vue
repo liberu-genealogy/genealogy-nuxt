@@ -43,7 +43,7 @@ export default {
     },
     setup() {
         const loading = ref(false)
-        const store = useStore()
+        // const store = useStore()
         return {
             onw: computed(() => store.getters['${isWebview}'])
         }

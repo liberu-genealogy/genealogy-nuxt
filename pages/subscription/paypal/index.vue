@@ -199,7 +199,7 @@
 <script>
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
-import vSelect from 'vue-select'
+// import vSelect from 'vue-select'
 import { ref, computed, useStore, onMounted, watch } from 'vue'
 export default {
   layout: 'default',
@@ -289,9 +289,4 @@ export default {
   }
 }
 </script>
-<router>
-{
-    name: 'subscription.paypal.index'
-}
-</router>
 

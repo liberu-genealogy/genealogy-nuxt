@@ -1,0 +1,1 @@
+import{_ as n,g as o,r as a,h as s,o as t}from"./entry-f2f8a875.mjs";const c={layout:"auth",meta:{permission:{name:"dnamatching menu"},title:"DNA Matching - Index"},components:{EnsoTable:o}};function r(i,p,m,_,d,l){const e=a("enso-table");return t(),s(e,{class:"box is-paddingless raises-on-hover",id:"dnamatching"})}var u=n(c,[["render",r]]);export{u as default};

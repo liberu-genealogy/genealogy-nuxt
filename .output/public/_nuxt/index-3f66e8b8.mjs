@@ -1,0 +1,1 @@
+import{_ as s,g as o,r as n,h as a,o as t}from"./entry-f2f8a875.mjs";const r={layout:"auth",meta:{permission:{name:"personalias menu"},title:"Person Alias - Index"},components:{EnsoTable:o}};function c(i,p,l,_,m,d){const e=n("enso-table");return t(),a(e,{class:"box is-paddingless raises-on-hover",id:"person_alias"})}var f=s(r,[["render",c]]);export{f as default};

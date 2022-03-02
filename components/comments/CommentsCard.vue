@@ -28,9 +28,7 @@
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faComments, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
-import {
-    Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent,
-} from '@enso-ui/card/bulma';
+// import { Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent, } from '@enso-ui/card/bulma';
 import Comments from './Comments.vue';
 import { ref, computed, useStore, watch } from 'vue';
 

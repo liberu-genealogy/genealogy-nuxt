@@ -61,18 +61,11 @@
         </enso-table>
     </div>
 </template>
-<router>
-{
-    name: 'import.index',
-}
-</router>
 
 <script>
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faDownload, faTrashAlt, faFileExcel, faBan, faSync,
-} from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faTrashAlt, faFileExcel, faBan, faSync, } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import { EnsoSelect } from '@enso-ui/select/bulma';
 import Avatar from '~/components/users/bulma/pages/users/components/Avatar.vue';
@@ -101,7 +94,7 @@ export default {
         const type = ref(null);
         const params = ref([]);
         
-        const store = useStore();
+        // const store = useStore();
         return {
             two: computed(() => store.state[enums])
         }

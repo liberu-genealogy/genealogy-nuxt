@@ -1,0 +1,1 @@
+import{_ as s,g as o,r as n,h as a,o as t}from"./entry-f2f8a875.mjs";const r={name:"Index",layout:"auth",meta:{permission:{name:"subm menu"},title:"subm - Index"},components:{EnsoTable:o}};function c(m,p,i,_,l,d){const e=n("enso-table");return t(),a(e,{class:"box is-paddingless raises-on-hover",id:"subms"})}var b=s(r,[["render",c]]);export{b as default};

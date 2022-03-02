@@ -35,9 +35,7 @@
 <script>
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faCheck, faTimes, faEnvelope, faPhone, faInfoCircle, faPencilAlt, faTrashAlt,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTimes, faEnvelope, faPhone, faInfoCircle, faPencilAlt, faTrashAlt, } from '@fortawesome/free-solid-svg-icons';
 import { ref, computed, useStore, watch } from 'vue';
 
 library.add([

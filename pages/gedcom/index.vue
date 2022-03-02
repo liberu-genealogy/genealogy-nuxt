@@ -1,6 +1,6 @@
 <template>
     <div>
-        <loading :active.sync="isLoading" :color="color" :background-color="backgroundColor"> </loading>
+        <!-- <loading :active.sync="isLoading" :color="color" :background-color="backgroundColor"> </loading> -->
             <div class="columns is-gapless is-multiline is-mobile">
                 <div class="column is-12">
                     <h1 class="is-size-4 has-text-black">
@@ -25,13 +25,13 @@
                         <div class="card has-background-white has-text-black" style="height: 500px;">
                             <div class="card-content">
                                 <div v-if="response" class="notification is-success">
-                                    {{ response }}
+                                     response 
                                 </div>
                                 <div v-if="error" class="notification is-danger">
-                                    {{ message }}
+                                     message 
                                 </div>
                                 <div v-for="error in errors" :key="error" class="notification is-danger">
-                                    {{ error[0] }}
+                                     error[0] 
                                 </div>
                                 <input type="hidden" v-model="fileName" v-if="!isLoading">
                                 <div class="field import_block" v-if="!isLoading">
@@ -78,16 +78,12 @@
             </form>
     </div>
 </template>
-<router>
-{
-    name: 'gedcom.index'
-}
-</router>
+
 <script>
 import { mapGetters } from 'vuex'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
-import { required } from 'vuelidate/lib/validators'
+// import { required } from 'vuelidate/lib/validators'
 import { ref, computed, useStore, onMounted, watch } from 'vue'
 
 export default {
@@ -114,7 +110,7 @@ export default {
         const validations = ref({
             fileName: { required }
         })
-        const store = useStore()
+        // const store = useStore()
         return{
             one: computed(() => store.getters['${loggedInUser}'])
         }

@@ -30,9 +30,7 @@
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
-import {
-    Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent,
-} from '@enso-ui/card/bulma';
+import { Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent, } from '@enso-ui/card/bulma';
 import Documents from './Documents.vue';
 import { ref, computed, useStore, watch } from 'vue';
 

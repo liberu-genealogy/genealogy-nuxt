@@ -53,7 +53,7 @@ export default {
 
     inject: ['i18n'],
     setup() {
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.state[enums])
         }

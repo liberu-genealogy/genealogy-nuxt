@@ -7,7 +7,7 @@ export default {
 
     setup() {
         const collect = ref(false)
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.state[meta])
         }

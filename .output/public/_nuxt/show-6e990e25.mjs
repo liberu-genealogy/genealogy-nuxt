@@ -1,0 +1,1 @@
+import{_ as e,c as o,o as a}from"./entry-f2f8a875.mjs";const r={name:"Show",meta:{permission:{name:"gramps menu"},title:"Gramps - Show"}};function s(t,n,c,m,p,_){return a(),o("div")}var f=e(r,[["render",s]]);export{f as default};

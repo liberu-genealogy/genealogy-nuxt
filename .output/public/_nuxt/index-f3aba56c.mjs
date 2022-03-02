@@ -1,0 +1,1 @@
+import{_ as s,g as o,r as n,h as t,o as a}from"./entry-f2f8a875.mjs";const r={name:"Index",layout:"auth",meta:{permission:{name:"types menu"},title:"Types - Index"},components:{EnsoTable:o}};function p(c,i,_,l,m,d){const e=n("enso-table");return a(),t(e,{class:"box is-paddingless raises-on-hover",id:"types"})}var x=s(r,[["render",p]]);export{x as default};

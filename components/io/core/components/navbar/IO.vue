@@ -9,7 +9,7 @@ export default {
     setup() {
         const imports = ref([])
         const exports = ref([])
-        const store = useStore()
+        // const store = useStore()
         return {
             one: computed(() => store.getters['${websockets}/channels']),
             two: computed(() => store.state[user].meta.enums)
@@ -89,7 +89,7 @@ export default {
                     throw Error(`Unknown io type: ${this.enums.ioTypes._get(type)}`)
             }
         }
-
+        
     },
 
     render() {

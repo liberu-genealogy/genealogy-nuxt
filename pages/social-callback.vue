@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, onMounted } from 'vuex';
-import { ref, computed, useStore } from 'vue';
+import { mapState, mapGetters, mapMutations } from 'vuex';
+import { ref, computed, useStore, onMounted } from 'vue';
 
     export default {
         layout: 'index',
@@ -48,7 +48,7 @@ import { ref, computed, useStore } from 'vue';
 
 </script>
 
-<style lang="scss" scoped>
+<style type="text/css" scoped>
 .container {
     text-align: center;
 }

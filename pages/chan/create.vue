@@ -5,11 +5,6 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'chan.create'
-}
-</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 import { ref, compured, useStore } from 'vue';

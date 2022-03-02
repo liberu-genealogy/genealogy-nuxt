@@ -1,11 +1,6 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'subn.show'
-}
-</router>
 <script>
 export default {
     name: 'Show',

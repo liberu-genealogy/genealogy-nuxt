@@ -37,11 +37,6 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'administration.companies.edit',
-}
-</router>
 
 <script>
 import { Tab } from '@enso-ui/tabs/bulma';

@@ -9,12 +9,6 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'integrations.google.settings.index',
-}
-</router>
-
 <script>
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import { ref, computed, useStore } from 'vue';

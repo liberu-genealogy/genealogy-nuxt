@@ -141,11 +141,6 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'system.localisation.editTexts',
-}
-</router>
 
 <script>
 import { mapState } from 'vuex';
@@ -172,7 +167,7 @@ export default {
         const loading = ref(false)
         const filterMissing = ref(false)
         const filterCore = ref(true)
-        const store = useStore()
+        // // const store = useStore()
         return {
             one: computed(() => store.state[layout].isMobile),
             two: computed(() => store.state[meta])
@@ -210,11 +205,18 @@ export default {
             return this.filterCore ? 'app' : 'enso';
         })
         const isMobile = ref('')
-        watch(isMobile, (handler) => {
+        const handler = ref('')
+        // watch(isMobile, (handler) => {
+        //     const handler = ref('setBoxHeight')
+        // })
+        watch(handler, (isMobile) => {
             const handler = ref('setBoxHeight')
         })
-        const filterCore = ref('')
-        watch(filterCore, (handler) => {
+        // const filterCore = ref('')
+        // watch(filterCore, (handler) => {
+        //     const handler = ref('getLangFile')
+        // })
+        watch(handler, (filterCore) => {
             const handler = ref('getLangFile')
         })
         created(() => {
@@ -304,7 +306,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style type="text/css" scoped>
     .has-shadow-bottom {
         -webkit-box-shadow: 0px 3px 5px -4px lightgray;
         box-shadow: 0px 3px 5px -4px lightgray;

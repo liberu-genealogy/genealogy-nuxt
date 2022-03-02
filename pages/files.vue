@@ -78,11 +78,6 @@
         </div>
     </enso-tabs>
 </template>
-<router>
-{
-    name: 'core.files.index',
-}
-</router>
 
 <script>
 import { debounce } from 'lodash';
@@ -94,9 +89,8 @@ import { EnsoDateFilter } from '@enso-ui/filters/bulma';
 import { Chart } from '@enso-ui/charts/bulma';
 import { EnsoUploader } from '@enso-ui/uploader/bulma';
 import { colors } from '@enso-ui/charts';
-import File from '~/components/files/bulma/pages/files/components/File.vue';3
+// import File from '~/components/files/bulma/pages/files/components/File.vue';
 import { ref, computed, watch, useStore } from 'vue';
-import { useStore } from 'vuex';
 
 library.add(faSearch, faUndo, faSyncAlt);
 
@@ -118,11 +112,11 @@ export default {
         const query = ref(null);
         const offset = ref(0);
         const interval = ref({
-            min = null,
-            max = null
+            min: null,
+            max: null
         });
 
-        const store = useStore();
+        // // const store = useStore();
         return {
             one: computed(() => store.getters['${preferences}/locale:lang']),
             two: computed(() => store.state[layout].isMobile),
@@ -159,7 +153,7 @@ export default {
                 ? 'has-text-success'
                 : 'has-text-danger';
         });
-        const query = ref('');
+        // const query = ref('');
         watch(query, () => {
             this.reset();
         });
@@ -210,18 +204,16 @@ export default {
 }
 </script>
 
-<style lang="scss">
-    .files-index {
-        input.search-files {
+<style type="text/css">
+    .files-index input.search-files {
             width: 100%;
         }
 
-        .control.has-icons-right .icon.clear-button {
-            pointer-events: all;
-        }
+    .control.has-icons-right .icon.clear-button {
+        pointer-events: all;
+    }
 
-        .tag.file-counter {
-            height: unset;
-        }
+    .tag.file-counter {
+        height: unset;
     }
 </style>

@@ -5,11 +5,6 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'types.edit'
-}
-</router>
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 import { ref, computed } from 'vue';

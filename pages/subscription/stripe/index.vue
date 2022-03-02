@@ -14,7 +14,7 @@
 
 <script>
 import { ref, computed, useStore } from 'vue'
-import { URLSearchParams } from 'url';
+// import { URLSearchParams } from 'url';
 export default {
   layout: 'default',
   head: { title: 'Stripe' },
@@ -33,8 +33,3 @@ export default {
   }
 }
 </script>
-<router>
-{
-    name: 'subscription.stripe.index'
-}
-</router>

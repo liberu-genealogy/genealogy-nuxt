@@ -5,12 +5,6 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'system.permissions.edit',
-}
-</router>
-
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 

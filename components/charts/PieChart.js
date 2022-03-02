@@ -1,4 +1,5 @@
-import { Pie } from 'vue-chartjs'
+// import { Pie } from 'vue-chartjs'
+import { onMounted } from 'vue'
 
 export default {
     extends: Pie,
@@ -12,7 +13,9 @@ export default {
             default: null
         }
     },
-    mounted () {
-        this.renderChart(this.data, this.options)
+    setup() {
+        onMounted(() => {
+            this.renderChart(this.data, this.options)
+        })
     }
 }

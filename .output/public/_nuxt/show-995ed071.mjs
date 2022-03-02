@@ -1,0 +1,1 @@
+import{_ as e,c as o,o as t}from"./entry-f2f8a875.mjs";const s={name:"Show",layout:"auth",meta:{permission:{name:"repositories menu"},title:"Repositories - Show"}};function r(a,n,c,i,p,m){return t(),o("div")}var u=e(s,[["render",r]]);export{u as default};

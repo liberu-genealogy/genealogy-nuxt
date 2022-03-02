@@ -1,0 +1,1 @@
+import{_ as o,g as s,r as a,h as n,o as t}from"./entry-f2f8a875.mjs";const r={name:"Index",layout:"auth",meta:{permission:{name:"sourcedata menu"},title:"Sourcedata - Index"},components:{EnsoTable:s}};function c(d,p,_,i,l,m){const e=a("enso-table");return t(),n(e,{class:"box is-paddingless raises-on-hover",id:"source_datas"})}var x=o(r,[["render",c]]);export{x as default};
