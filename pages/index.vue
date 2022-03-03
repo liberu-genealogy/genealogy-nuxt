@@ -1,6 +1,7 @@
 <template>
 	<Home />
 </template>
+
 <script>
 import Home from '~/components/Home.vue'
 
@@ -10,7 +11,5 @@ export default {
 		meta: {
 			guestGuard: true,
 	    },
-
 }
 </script>
-

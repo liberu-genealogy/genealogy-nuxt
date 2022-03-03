@@ -6,29 +6,9 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "nuxt3": "latest",
-    "sass-loader": "^12.6.0",
-    "stylus": "^0.56.0",
-    "stylus-loader": "^6.2.0",
-    "vue-loader": "^17.0.0",
-    "vue-template-compiler": "^2.6.14"
+    "nuxt3": "latest"
   },
   "dependencies": {
-    "@enso-ui/charts": "^4.0.0",
-    "@enso-ui/forms": "^3.0.25",
-    "@enso-ui/laravel-validation": "^2.0.6",
-    "@enso-ui/modal": "^3.0.13",
-    "@enso-ui/money": "^2.0.7",
-    "@enso-ui/select": "^3.0.17",
-    "accounting-js": "^1.1.1",
-    "autonumeric": "^4.6.0",
-    "rollup-plugin-vue": "^6.0.0",
-    "sass": "^1.49.9",
-    "scss": "^0.2.4",
-    "v-tooltip": "^4.0.0-beta.17",
-    "vue-autonumeric": "^1.2.6",
-    "vue-loading-overlay": "^5.0.3",
-    "vuex": "^4.0.2",
-    "yarn": "^1.22.17"
+    "vuex": "^4.0.2"
   }
 }
