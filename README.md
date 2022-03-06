@@ -37,7 +37,7 @@ Note that most sections have short demo clips.
 
 ### Thanks
 
-Built with Laravel Enso 4.x and Nuxt:
+Built with Laravel Enso UI 5.x and Nuxt:
 
 [Vue Router](https://router.vuejs.org/en), [Vuex](https://vuex.vuejs.org/en/), [Axios](https://github.com/axios/axios),
 [Font awesome 5](https://fontawesome.com), [Animate.css](https://daneden.github.io/animate.css/), 
