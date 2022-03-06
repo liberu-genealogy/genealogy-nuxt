@@ -1,4 +1,4 @@
-// import { Pie } from 'vue-chartjs'
+import { Pie } from 'vue-chartjs'
 import { onMounted } from 'vue'
 
 export default {

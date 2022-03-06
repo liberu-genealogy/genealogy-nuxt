@@ -3,7 +3,6 @@
         <!-- <v-app>
             <loading :active.sync="isLoading" :color="color" :background-color="backgroundColor">
             </loading>
-            
         </v-app> -->
         <div class="columns is-gapless is-multiline is-mobile">
             <div class="column is-12">
@@ -33,63 +32,29 @@
             <v-card-title>Search</v-card-title>
             <v-toolbar flat>
                 <v-row>
-                <v-col>
-                    <v-select
-                    v-model="apiSelected"
-                    :items="apiList"
-                    label="API"
-                    hide-details="true"
-                    ></v-select>
-                </v-col>
-                <v-col>
-                    <v-text-field
-                    label="First name"
-                    hide-details="true"
-                    v-model="filter.firstName"
-                    ></v-text-field>
-                </v-col>
-                <v-col>
-                    <v-text-field
-                    label="Last name"
-                    hide-details="true"
-                    v-model="filter.lastName"
-                    ></v-text-field>
-                </v-col>
-                <v-col>
-                    <v-menu
-                    v-model="dateMenu"
-                    :close-on-content-click="false"
-                    :nudge-right="40"
-                    transition="scale-transition"
-                    offset-y
-                    >
-                    <template v-slot:activator="{ on }">
-                        <v-text-field
-                        v-model="filter.date"
-                        label="Date"
-                        readonly
-                        v-on="on"
-                        ></v-text-field>
-                    </template>
-                    <v-date-picker
-                        v-model="filter.date"
-                        @input="dateMenu = false"
-                    ></v-date-picker>
-                    </v-menu>
-                </v-col>
-                <v-col>
-                    <v-btn @click="search" block>Search</v-btn>
-                </v-col>
+                    <v-col>
+                        <v-select v-model="apiSelected" :items="apiList" label="API" hide-details="true" ></v-select>
+                    </v-col>
+                    <v-col>
+                        <v-text-field label="First name" hide-details="true" v-model="filter.firstName" ></v-text-field>
+                    </v-col>
+                    <v-col>
+                        <v-text-field label="Last name" hide-details="true" v-model="filter.lastName" ></v-text-field>
+                    </v-col>
+                    <v-col>
+                        <v-menu v-model="dateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y >
+                            <template v-slot:activator="{ on }">
+                                <v-text-field v-model="filter.date" label="Date" readonly v-on="on" ></v-text-field>
+                            </template>
+                            <v-date-picker v-model="filter.date" @update:model-value="dateMenu = false"></v-date-picker>
+                        </v-menu>
+                    </v-col>
+                    <v-col>
+                        <v-btn @click="search" block>Search</v-btn>
+                    </v-col>
                 </v-row>
             </v-toolbar>
-            <v-data-table
-                :headers="headers"
-                :items="result || []"
-                :options.sync="options"
-                :server-items-length="totalCount"
-                :loading="loading"
-                class="elevation-1"
-            ></v-data-table>
+            <v-data-table :headers="headers" :items="result || []" :options.sync="options" :server-items-length="totalCount" :loading="loading" class="elevation-1" ></v-data-table>
         </v-card> -->
         <div class="columns is-variable is-3 is-desktop">
             <div class="column">
@@ -149,10 +114,12 @@
                 </div>
             </div>
         </div>
+
+
         <div class="columns is-variable">
             <div class="column is-4-desktop is-6-tablet is-flex">
                 chart-card
-                <!-- <chart-card class="is-rounded raises-on-hover has-background-white has-text-black has-margin-bottom-large" source="/api/dashboard/pie"/> -->
+                <chart-card class="is-rounded raises-on-hover has-background-white has-text-black has-margin-bottom-large" source="/api/dashboard/pie"/>
             </div>
             <div class="column is-4-desktop is-6-tablet is-flex">
                 <div class="card has-background-white has-text-black">
@@ -260,7 +227,7 @@
                                  loggedInUser.email 
                             </p>
                             <p class="is-size-7 mb-4 has-text-weight-medium">
-                                 loggedInUser.person.name 
+                                 loggedInUser.person.name
                             </p>
                             <p class="is-size-7 is-uppercase">Use Tree</p>
                         </div>
@@ -269,210 +236,206 @@
             </div>
         </div>
     </div>
-
 </template>
 
-
 <script>
- import Loading from 'vue-loading-overlay'
- import 'vue-loading-overlay/dist/vue-loading.css'
- import { mapGetters, mapActions } from 'vuex'
- import PieChart from '../components/charts/PieChart'
- import { EnsoChartCard as ChartCard } from '@enso-ui/charts/bulma';
- import { Chart, colors } from '@enso-ui/charts';
- import { ref, computed, watchEffect, watch, useStore } from 'vue';
+//  import Loading from 'vue-loading-overlay'
+//  import 'vue-loading-overlay/dist/vue-loading.css'
+ import PieChart from '../components/charts/PieChart'   
+//  import { VApp, VCard, VCardTitle, VRow, VCol, VSelect, VTextFiled, VBtn, VDataTable } from 'vuetify'
+//  import { Chart, colors } from '@enso-ui/charts';
+//  import { ref, computed, watchEffect, watch, useStore } from 'vue';
 
 export default {
-  layout: 'auth',
-  components: { Loading, PieChart, ChartCard },
-  meta: {
-    permission: { name: 'dashboard menu' },
-    title: 'Dashboard',
-  },
+//   layout: 'auth',
+//   components: { Loading, PieChart, VApp, VCard, VCardTitle, VRow, VCol, VSelect, VTextFiled, VBtn, VDataTable },
+//   meta: {
+//     permission: { name: 'dashboard menu' },
+//     title: 'Dashboard',
+//   },
   
 setup() {
-    const inject = ref(['errorHandler', 'route', 'toastr']);
-    
-    const loaded = ref(false);
-    const trees = ref([]);
-    const companies = ref([]);
-    const selected_company = ref(null);
-    const selected_tree = ref(null);
-    const isLoading = ref(true);
-    const fullPage = ref(true);
-    const color = ref('#4fcf8d');
-    const changedb = ref(null);
-    const backgroundColor = ref('#ffffff');
-    const trial = ref(null);
-    const familiesjoined = ref(0);
-    const peoplesattached = ref(0);
-    const pieChartData = ref(null);
-    const chartOptions = ref(null);
-    const apiList = ref(['Geneanum', 'Open arch', 'Family search', 'Wikitree']);
-    const apiSelected = ref('Geneaum');
-    const dateMenu = ref(false);
-    const firstName = ref('');
-    const lastName = ref('');
-    const date = ref('');
-    const totalCount = ref(0);
-    const result = ref(null);
-    const loading = ref(true);
-    const options = ref({});
-    return { inject, loaded, trees, companies, selected_company, selected_tree, isLoading, fullPage, color, changedb, backgroundColor, trial, familiesjoined, peoplesattached, pieChartData, chartOptions, apiList, apiSelected, dateMenu, firstName, lastName, date, totalCount, result, loading, options };
+//     const inject = ref(['errorHandler', 'route', 'toastr']);
+//     const loaded = ref(false);
+//     const trees = ref([]);
+//     const companies = ref([]);
+//     const selected_company = ref(null);
+//     const selected_tree = ref(null);
+//     const isLoading = ref(true);
+//     const fullPage = ref(true);
+//     const color = ref('#4fcf8d');
+//     const changedb = ref(null);
+//     const backgroundColor = ref('#ffffff');
+//     const trial = ref(null);
+//     const familiesjoined = ref(0);
+//     const peoplesattached = ref(0);
+//     const pieChartData = ref(null);
+//     const chartOptions = ref(null);
+//     const apiList = ref(['Geneanum', 'Open arch', 'Family search', 'Wikitree']);
+//     const apiSelected = ref('Geneaum');
+//     const dateMenu = ref(false);
+//     const firstName = ref('');
+//     const lastName = ref('');
+//     const date = ref('');
+//     const totalCount = ref(0);
+//     const result = ref(null);
+//     const loading = ref(true);
+//     const options = ref({});
+//     return { inject, loaded, trees, companies, selected_company, selected_tree, isLoading, fullPage, color, changedb, backgroundColor, trial, familiesjoined, peoplesattached, pieChartData, chartOptions, apiList, apiSelected, dateMenu, firstName, lastName, date, totalCount, result, loading, options };
 
-    // const store = useStore()
-    return {
-        one: computed(() => store.getters['${loggedInUser}'])
-    }
-    const headers = computed(() => {
-        if (this.apiSelected == 'Geneanum')
-        return [
-          { text: 'ID', value: 'identifier', sortable: false },
-          { text: 'PID', value: 'pid', sortable: false },
-          { text: 'Name', value: 'personname', sortable: false },
-          { text: 'Place', value: 'eventplace', sortable: false },
-          { text: 'Type', value: 'eventtype', sortable: false },
-          { text: 'Archive', value: 'archive', sortable: false },
-        ]
-      else if (this.apiSelected == 'Open arch')
-        return [
-          { text: 'ID', value: 'identifier', sortable: false },
-          { text: 'PID', value: 'pid', sortable: false },
-          { text: 'Name', value: 'personname', sortable: false },
-          { text: 'Place', value: 'eventplace', sortable: false },
-          { text: 'Type', value: 'eventtype', sortable: false },
-          { text: 'Archive', value: 'archive', sortable: false },
-        ]
-      else if (this.apiSelected == 'Family search')
-        return [
-          { text: 'ID', value: 'identifier', sortable: false },
-          { text: 'PID', value: 'pid', sortable: false },
-          { text: 'Name', value: 'personname', sortable: false },
-          { text: 'Place', value: 'eventplace', sortable: false },
-          { text: 'Type', value: 'eventtype', sortable: false },
-          { text: 'Archive', value: 'archive', sortable: false },
-        ]
-      else if (this.apiSelected == 'Wikitree')
-        return [
-          { text: 'ID', value: 'identifier', sortable: false },
-          { text: 'PID', value: 'pid', sortable: false },
-          { text: 'Name', value: 'personname', sortable: false },
-          { text: 'Place', value: 'eventplace', sortable: false },
-          { text: 'Type', value: 'eventtype', sortable: false },
-          { text: 'Archive', value: 'archive', sortable: false },
-        ]
-    })
-    return { headers };
-    const handler = ref('');
-    watchEffect(() => {
-      options(() => {
-        console.log(handler.loading, handler,options);
-        handler.search();
-      });
-      const deep = ref(false);
-    });
+//     // const store = useStore()
+//     return {
+//         one: computed(() => store.getters['${loggedInUser}'])
+//     }
+//     const headers = computed(() => {
+//         if (this.apiSelected == 'Geneanum')
+//         return [
+//           { text: 'ID', value: 'identifier', sortable: false },
+//           { text: 'PID', value: 'pid', sortable: false },
+//           { text: 'Name', value: 'personname', sortable: false },
+//           { text: 'Place', value: 'eventplace', sortable: false },
+//           { text: 'Type', value: 'eventtype', sortable: false },
+//           { text: 'Archive', value: 'archive', sortable: false },
+//         ]
+//       else if (this.apiSelected == 'Open arch')
+//         return [
+//           { text: 'ID', value: 'identifier', sortable: false },
+//           { text: 'PID', value: 'pid', sortable: false },
+//           { text: 'Name', value: 'personname', sortable: false },
+//           { text: 'Place', value: 'eventplace', sortable: false },
+//           { text: 'Type', value: 'eventtype', sortable: false },
+//           { text: 'Archive', value: 'archive', sortable: false },
+//         ]
+//       else if (this.apiSelected == 'Family search')
+//         return [
+//           { text: 'ID', value: 'identifier', sortable: false },
+//           { text: 'PID', value: 'pid', sortable: false },
+//           { text: 'Name', value: 'personname', sortable: false },
+//           { text: 'Place', value: 'eventplace', sortable: false },
+//           { text: 'Type', value: 'eventtype', sortable: false },
+//           { text: 'Archive', value: 'archive', sortable: false },
+//         ]
+//       else if (this.apiSelected == 'Wikitree')
+//         return [
+//           { text: 'ID', value: 'identifier', sortable: false },
+//           { text: 'PID', value: 'pid', sortable: false },
+//           { text: 'Name', value: 'personname', sortable: false },
+//           { text: 'Place', value: 'eventplace', sortable: false },
+//           { text: 'Type', value: 'eventtype', sortable: false },
+//           { text: 'Archive', value: 'archive', sortable: false },
+//         ]
+//     })
+//     return { headers };
+//     const handler = ref('');
+//     watchEffect(() => {
+//       options(() => {
+//         console.log(handler.loading, handler,options);
+//         handler.search();
+//       });
+//       const deep = ref(false);
+//     });
 
-    function setSelectedCompany(value) {
-      this.selected_tree = null;
-      this.getTree();
-    };
-    return { setSelectedCompany };
+//     function setSelectedCompany(value) {
+//       this.selected_tree = null;
+//       this.getTree();
+//     };
+//     return { setSelectedCompany };
 
-    async function setSelected(value) {
-    //   const response = await this.$axios.$post('/api/dashboard/changedb', {
-    //     company_id = ref(this.selected_company),
-    //     tree_id = ref(this.selected_tree)
-    //   });
-      this.loadChart()
-      this.changedb = response.changedb
-      this.familiesjoined = response.familiesjoined
-      this.peoplesattached = response.peoplesattached
-      console.log('changedb response', response)
-      console.log('familiesjoined', response.familiesjoined)
-      console.log('peoplesattached', response.peoplesattached)
-    };
-    return { setSelected };
+//     async function setSelected(value) {
+//     //   const response = await this.$axios.$post('/api/dashboard/changedb', {
+//     //     company_id = ref(this.selected_company),
+//     //     tree_id = ref(this.selected_tree)
+//     //   });
+//       this.loadChart()
+//       this.changedb = response.changedb
+//       this.familiesjoined = response.familiesjoined
+//       this.peoplesattached = response.peoplesattached
+//       console.log('changedb response', response)
+//       console.log('familiesjoined', response.familiesjoined)
+//       console.log('peoplesattached', response.peoplesattached)
+//     };
+//     return { setSelected };
 
-    // async function getCompanies() {
-    //   const response = await this.$axios.$get('/api/get_companies')
-    //   this.companies = response
-    //   this.companies.map((company) => {
-    //     if (company.is_tenant == 1) {
-    //         this.selected_company = company.id
-    //         this.getTree()
-    //     }
-    //   })
-    // };
+//     // async function getCompanies() {
+//     //   const response = await this.$axios.$get('/api/get_companies')
+//     //   this.companies = response
+//     //   this.companies.map((company) => {
+//     //     if (company.is_tenant == 1) {
+//     //         this.selected_company = company.id
+//     //         this.getTree()
+//     //     }
+//     //   })
+//     // };
 
-    async function getTree() {
-      this.selected_tree = null
-    //   const response = await this.$axios.$get('/api/trees/show', {
-    //     params: { start_id: this.selected_company, nest: 3 },
-    //   })
-      this.trees = Object.values(response.persons)
-      this.trees.map((tree) => {
-        if (tree.current_tenant == 1) {
-          this.selected_tree = tree.id
-        }
-      })      
-    };
+//     async function getTree() {
+//       this.selected_tree = null
+//     //   const response = await this.$axios.$get('/api/trees/show', {
+//     //     params: { start_id: this.selected_company, nest: 3 },
+//     //   })
+//       this.trees = Object.values(response.persons)
+//       this.trees.map((tree) => {
+//         if (tree.current_tenant == 1) {
+//           this.selected_tree = tree.id
+//         }
+//       })      
+//     };
 
-    async function loadChart() {
-      this.loaded = false
-    //   const chartResponse = await this.$axios.get('/api/dashboard/pie')
-      this.pieChartData = chartResponse.data;
-      this.chartOptions = chartResponse.options;
-      this.loaded = true
-      this.isLoading = false
-    };
+//     async function loadChart() {
+//       this.loaded = false
+//     //   const chartResponse = await this.$axios.get('/api/dashboard/pie')
+//       this.pieChartData = chartResponse.data;
+//       this.chartOptions = chartResponse.options;
+//       this.loaded = true
+//       this.isLoading = false
+//     };
 
-    function search() {
-      this.loading = true
-      let url = ''
-      params = {}
-      if (this.apiSelected == 'Geneanum') {
-        url = '/api/geneanum/search-person/malte/mariage'
-      } else if (this.apiSelected == 'Open arch') {
-          url = '/api/open-arch/search-person'
-          params = {
-            name: (this.filter.firstName || '') + ' ' + (this.filter.lastName || ''),
-            per_page: this.options ? itemsPerPage : 10,
-            page : this.options ? page : 1,
-          }
-      } else if (this.apiSelected == 'Family search') {
-        url = '/api/family-search/search'
-        params = {
-          givenName: this.filter.firstName || '',
-          surname: this.filter.lastName || '',
-          count: this.options?itemsPerPage : 10,
-          offset:
-            ((this.options?page : 1) - 1) *
-            (this.options?itemsPerPage : 10),
-        }
-      } else if (this.apiSelected == 'Wikitree') {
-        url = '/api/wikitree/search-person'
-        params = {
-          FirstName: this.filter.firstName || '',
-          LastName: this.filter.lastName || '',
-          per_page: this.options?itemsPerPage : 10,
-          page: this.options?page : 1,
-        }
-      }
-      this.$axios
-        .get(url, {
-          params: params,
-        })
-        .then(({ data }) => {
-          this.result = data.response.docs
-          this.totalCount = data.response.number_found
-          this.loading = false
-        })
-        .catch(this.errorHandler)
-    };
+//     function search() {
+//       this.loading = true
+//       let url = ''
+//       params = {}
+//       if (this.apiSelected == 'Geneanum') {
+//         url = '/api/geneanum/search-person/malte/mariage'
+//       } else if (this.apiSelected == 'Open arch') {
+//           url = '/api/open-arch/search-person'
+//           params = {
+//             name: (this.filter.firstName || '') + ' ' + (this.filter.lastName || ''),
+//             per_page: this.options ? itemsPerPage : 10,
+//             page : this.options ? page : 1,
+//           }
+//       } else if (this.apiSelected == 'Family search') {
+//         url = '/api/family-search/search'
+//         params = {
+//           givenName: this.filter.firstName || '',
+//           surname: this.filter.lastName || '',
+//           count: this.options?itemsPerPage : 10,
+//           offset:
+//             ((this.options?page : 1) - 1) *
+//             (this.options?itemsPerPage : 10),
+//         }
+//       } else if (this.apiSelected == 'Wikitree') {
+//         url = '/api/wikitree/search-person'
+//         params = {
+//           FirstName: this.filter.firstName || '',
+//           LastName: this.filter.lastName || '',
+//           per_page: this.options?itemsPerPage : 10,
+//           page: this.options?page : 1,
+//         }
+//       }
+//       this.$axios
+//         .get(url, {
+//           params: params,
+//         })
+//         .then(({ data }) => {
+//           this.result = data.response.docs
+//           this.totalCount = data.response.number_found
+//           this.loading = false
+//         })
+//         .catch(this.errorHandler)
+//     };
 
-    created(() => {
-      this.getCompanies();
-    });
+//     created(() => {
+//       this.getCompanies();
+//     });
    },
 }
 </script>

@@ -1,1 +1,0 @@
-function c({store:e,route:o,redirect:r,context:t}){e.dispatch("loadRole"),e.dispatch("loadPermission").then(s=>{const i=o.meta.map(n=>n.permission.name);if(!e.state.permission.includes(i[0]))return r("/error")}).catch(s=>{console.error("no")})}export{c as default};
