@@ -60,7 +60,11 @@
                             <NuxtLink to="/register" class="button theme-button theme-button-xl has-background-secondary has-text-weight-medium has-text-white mt-6" v-if="!isAuth">
                                 Create Your Own Tree
                             </NuxtLink>
-                            <div class="is-size-6 has-text-light mt-5" v-if="!isAuth"> <NuxtLink class="has-text-light" to="/login"> Already have an account? Sign in </NuxtLink></div>
+                            <div class="is-size-6 has-text-light mt-5" v-if="!isAuth">
+                                <NuxtLink class="has-text-light" to="/login">
+                                    Already have an account? Sign in
+                                </NuxtLink>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -259,7 +263,6 @@
 <script>
     import { mapState, mapMutations, mapActions } from 'vuex'
     import { ref, computed } from 'vue'
-
     export default {
         meta: {
             guestGuard: true,
@@ -269,15 +272,12 @@
             const isDark = ref('false');
             const isClear = ref('true');
             return { isDark, isClear };
-        
             // return {
             //     isAuth: computed(() => store.state[auth].isAuth,
             // )};
-
             created(() => {
                 window.addEventListener('scroll', this.handleScroll);
             });
-
             // async function logoutAccount() {
             //     return{
             //         ...mapActions('auth', ['logout'])
@@ -302,11 +302,9 @@
     @import '~/assets/css/bulma.css';
     @import '~/assets/css/fontawesome.min.css';
     @import '~/assets/css/svg.css';
-    
     @media screen and (max-width: 1006px) {
         .navbar.is-fixed-top  {
             display: inline !important;
         }
     }
 </style>
-    

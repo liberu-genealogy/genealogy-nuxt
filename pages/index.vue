@@ -8,8 +8,8 @@ import Home from '~/components/Home.vue'
 export default {
 	layout: 'index',
 	components: { Home },
-		meta: {
-			guestGuard: true,
-	    },
+    meta: {
+        guestGuard: true,
+    },
 }
 </script>
