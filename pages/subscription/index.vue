@@ -7,7 +7,7 @@
     <div class="currency-div">
       <span>Currency: </span>
       <div class="currency-inside-div">
-        <vue-select :options="currency_options" :placeholder="selected_currency" @input="selectCurrency" :clearable="false"/>
+        <!-- <vue-select :options="currency_options" :placeholder="selected_currency" @input="selectCurrency" :clearable="false"/> -->
       </div>
     </div>
     <div class="column is-12">
@@ -135,127 +135,127 @@
 <script>
 // import Loading from 'vue-loading-overlay'
 // import 'vue-loading-overlay/dist/vue-loading.css'
-// import { mapGetters, mapActions } from 'vuex'
-// import { ref, computed, useStore } from 'vue'
+import { mapGetters, mapActions } from 'vuex'
+import { ref, computed, useStore } from 'vue'
 export default {
-//   layout: 'default',
+  layout: 'default',
   head: { title: 'Subscription' },
-//   meta: { breadcrumb: 'subscription', title: 'Subsciption' },
+  meta: { breadcrumb: 'subscription', title: 'Subsciption' },
 //   components: { Loading },
   setup() {
-    // const error = ref(false)
-    // const message = ref('')
-    // const isLoading = ref(false)
-    // const fullPage = ref(true)
-    // const color = ref('#4fcf8d')
-    // const backgroundColor = ref('#ffffff')
-    // const response = ref(null)
-    // const has_payment_method = ref(false)
-    // const plans = ref([])
-    // const selectedPlanId = ref(null)
-    // const currency_options = ref(['USD', 'GBP', 'EUR', 'AUD'])
-    // const selected_currency = ref('GBP')
-    // const selected_currency_symbol = ref('£')
-    // const selected_currency_rate = ref(1)
-    // const isActive = ref(false)
-    // return { error, message, isLoading, fullPage, color, backgroundColor, response, has_payment_method, plans, selectedPlanId, currency_options, selected_currency, selected_currency_symbol, selected_currency_rate, isActive }
-    // // const store = useStore()
-    // return {
-    //   one: computed(() => store.getters['${loggedInUser}'])
-    // }
-    // function handleSelectedFiles(event) {
-    //   console.log(this.$refs.fileInput.files[0])
-    //   this.file = this.$refs.fileInput.files[0]
-    //   this.fileName = this.file.name
-    // }
-    // function submit() {
-    // }
-    // async function loadPlans() {
-    //   console.log('asdfhklasdflkasjdflasjdklfjasdlfjlasdfk')
-    //   const response = await this.$axios.$get('/api/stripe/plans')
-    //   console.log('response', response)
+    const error = ref(false)
+    const message = ref('')
+    const isLoading = ref(false)
+    const fullPage = ref(true)
+    const color = ref('#4fcf8d')
+    const backgroundColor = ref('#ffffff')
+    const response = ref(null)
+    const has_payment_method = ref(false)
+    const plans = ref([])
+    const selectedPlanId = ref(null)
+    const currency_options = ref(['USD', 'GBP', 'EUR', 'AUD'])
+    const selected_currency = ref('GBP')
+    const selected_currency_symbol = ref('£')
+    const selected_currency_rate = ref(1)
+    const isActive = ref(false)
+    return { error, message, isLoading, fullPage, color, backgroundColor, response, has_payment_method, plans, selectedPlanId, currency_options, selected_currency, selected_currency_symbol, selected_currency_rate, isActive }
+    // const store = useStore()
+    return {
+      one: computed(() => store.getters['${loggedInUser}'])
+    }
+    function handleSelectedFiles(event) {
+      console.log(this.$refs.fileInput.files[0])
+      this.file = this.$refs.fileInput.files[0]
+      this.fileName = this.file.name
+    }
+    function submit() {
+    }
+    async function loadPlans() {
+      console.log('asdfhklasdflkasjdflasjdklfjasdlfjlasdfk')
+      const response = await this.$axios.$get('/api/stripe/plans')
+      console.log('response', response)
 
-    //   this.getCurrentSubscription()
-    //   this.plans = response
-    //   this.isLoading = false
-    // }
-    // async function getCurrentSubscription() {
-    //   const response = await this.$axios.$get(
-    //     '/api/stripe/current-subscription'
-    //   )
-    //   this.isLoading = false
-    //   this.has_payment_method = response.has_payment_method
-    //   if (response.subscribed) {
-    //     this.plans.find((plan) => {
-    //       if (plan.id == response.plan_id) {
-    //         plan.subscribed = true
-    //       } else {
-    //         plan.subscribed = false
-    //       }
-    //     })
-    //   }
-    //   this.isLoading = false
-    // }
-    // function subscribe() {
-    //   this.isLoading = false
-    //   this.isActive = false
-    //   this.$axios.$post('/api/stripe/subscribe', {
-    //     plan_id: this.selectedPlanId,
-    //   })
+      this.getCurrentSubscription()
+      this.plans = response
+      this.isLoading = false
+    }
+    async function getCurrentSubscription() {
+      const response = await this.$axios.$get(
+        '/api/stripe/current-subscription'
+      )
+      this.isLoading = false
+      this.has_payment_method = response.has_payment_method
+      if (response.subscribed) {
+        this.plans.find((plan) => {
+          if (plan.id == response.plan_id) {
+            plan.subscribed = true
+          } else {
+            plan.subscribed = false
+          }
+        })
+      }
+      this.isLoading = false
+    }
+    function subscribe() {
+      this.isLoading = false
+      this.isActive = false
+      this.$axios.$post('/api/stripe/subscribe', {
+        plan_id: this.selectedPlanId,
+      })
 
-    //   this.getCurrentSubscription()
-    //   this.isLoading = false
-    // }
-    // function unsubscribe() {
-    //   this.isLoading = false
-    //   this.isActive = false
-    //   this.$axios.post('/api/stripe/unsubscribe')
+      this.getCurrentSubscription()
+      this.isLoading = false
+    }
+    function unsubscribe() {
+      this.isLoading = false
+      this.isActive = false
+      this.$axios.post('/api/stripe/unsubscribe')
 
-    //   this.getCurrentSubscription()
-    //   this.isLoading = false
-    // }
-    // async function selectCurrency(currency) {
-    //   const response = await this.$axios
-    //     .$get(
-    //       'https://api.currencyfreaks.com/latest?apikey=b864b83a27f5411c804e70762945b59a'
-    //     )
-    //     .then((res) => {
-    //       console.log(res.rates)
-    //       switch (currency) {
-    //         case 'GBP':
-    //           this.selected_currency_symbol = '£'
-    //           this.selected_currency_rate = 1
-    //           break
-    //         case 'USD':
-    //           this.selected_currency_symbol = '$'
-    //           this.selected_currency_rate = 1 / res.rates.GBP
-    //           break
-    //         case 'EUR':
-    //           this.selected_currency_symbol = '€'
-    //           this.selected_currency_rate = res.rates.EUR / res.rates.GBP
-    //           break
-    //         case 'AUD':
-    //           this.selected_currency_symbol = '$'
-    //           this.selected_currency_rate = res.rates.AUD / res.rates.GBP
-    //           break
-    //         default:
-    //           this.selected_currency_symbol = '£'
-    //           this.selected_currency_rate = 1
-    //           break
-    //       }
-    //     })
-    //     .catch(() => {})
-    // }
-    // function open(planId) {
-    //   this.isActive = true
-    //   this.selectedPlanId = planId
-    // }
-    // function close() {
-    //   this.isActive = false
-    // }
-    // created(() => {
-    //   this.loadPlans()
-    // })
+      this.getCurrentSubscription()
+      this.isLoading = false
+    }
+    async function selectCurrency(currency) {
+      const response = await this.$axios
+        .$get(
+          'https://api.currencyfreaks.com/latest?apikey=b864b83a27f5411c804e70762945b59a'
+        )
+        .then((res) => {
+          console.log(res.rates)
+          switch (currency) {
+            case 'GBP':
+              this.selected_currency_symbol = '£'
+              this.selected_currency_rate = 1
+              break
+            case 'USD':
+              this.selected_currency_symbol = '$'
+              this.selected_currency_rate = 1 / res.rates.GBP
+              break
+            case 'EUR':
+              this.selected_currency_symbol = '€'
+              this.selected_currency_rate = res.rates.EUR / res.rates.GBP
+              break
+            case 'AUD':
+              this.selected_currency_symbol = '$'
+              this.selected_currency_rate = res.rates.AUD / res.rates.GBP
+              break
+            default:
+              this.selected_currency_symbol = '£'
+              this.selected_currency_rate = 1
+              break
+          }
+        })
+        .catch(() => {})
+    }
+    function open(planId) {
+      this.isActive = true
+      this.selectedPlanId = planId
+    }
+    function close() {
+      this.isActive = false
+    }
+    created(() => {
+      this.loadPlans()
+    })
   }
 }
 </script>
