@@ -90,6 +90,7 @@ export default defineNuxtConfig({
     '~/plugins/date-fns/formatDistance.js',
     '~/plugins/vue-select.js',
     '~/plugins/vuelidate.js',
+    '~/plugins/vue-gtag.client.js',
     //'~/plugins/echo.js',
     "~/plugins/vue-fb-customer-chat.js",
     {src: '~/plugins/vue-stripe.js', ssr: false},
@@ -104,7 +105,6 @@ export default defineNuxtConfig({
     // "@nuxtjs/eslint-module",
     '@nuxtjs/fontawesome',
     '@nuxtjs/router-extras',
-    '@nuxtjs/google-analytics',
     '@nuxtjs/vuetify',
   ],
 
@@ -134,23 +134,16 @@ export default defineNuxtConfig({
     ],
   },
 
-  googleAnalytics: {
-    id: process.env.GOOGLE_ANALYTICS_ID, // Use as fallback if no runtime config is provided
-  },
-
   publicRuntimeConfig: {
     axios: {
       browserBaseURL: process.env.BASE_URL || 'http://localhost:3000',
     },
     appEnv: process.env.APP_ENV || 'production',
-    googleAnalytics: {
-      id: process.env.GOOGLE_ANALYTICS_ID,
     },
-  },
 
   env: {
     STRIPE_PK: process.env.STRIPE_KEY,
-    baseUrl: process.env.BASE_URL ||'http://localhost:3000'
+    baseUrl: process.env.BASE_URL ||'http://localhost:3000',
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
