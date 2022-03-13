@@ -1,0 +1,51 @@
+/* SVG export styles */
+#webtrees-pedigree-chart-container svg {
+    /* Native font stack: see https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/ */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    min-height: 600px;
+}
+
+#webtrees-pedigree-chart-container svg text {
+    font-weight: bold;
+}
+
+#webtrees-pedigree-chart-container svg rect.female {
+    stroke: rgb(255, 32, 128);
+    stroke-dasharray: none;
+    stroke-width: 3px;
+}
+
+#webtrees-pedigree-chart-container svg rect.male {
+    stroke: rgb(129, 169, 203);
+    stroke-dasharray: none;
+    stroke-width: 3px;
+}
+
+#webtrees-pedigree-chart-container svg rect.unknown {
+    stroke: rgb(175, 175, 175);
+    stroke-dasharray: 5;
+    stroke-width: 3px;
+}
+
+#webtrees-pedigree-chart-container svg rect.image {
+    stroke: rgb(175, 175, 175);
+}
+
+#webtrees-pedigree-chart-container svg path.link {
+    fill: none;
+    stroke: rgb(175, 175, 175);
+    stroke-width: 1.5px;
+}
+
+#webtrees-pedigree-chart-container svg g.name tspan.preferred {
+    text-decoration: underline;
+}
+
+#webtrees-pedigree-chart-container svg text.date {
+    fill: rgb(127, 127, 127);
+    font-weight: normal;
+    direction: ltr;
+    unicode-bidi: plaintext;
+    font-size: 13px;
+}

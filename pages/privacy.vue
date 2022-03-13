@@ -7,14 +7,9 @@
             <div class="content has-text-left">
               <nav class="breadcrumb mb-2" aria-label="breadcrumbs">
                 <ul class="ml-0">
-                  <li>
-                      <NuxtLink to="/">
-                        Home
-                      </NuxtLink></li>
+                  <li><NuxtLink to="/">Home</NuxtLink></li>
                   <li class="is-active">
-                    <a href="#" aria-current="page">
-                        Privacy Policy
-                    </a>
+                    <a href="#" aria-current="page">Privacy Policy</a>
                   </li>
                 </ul>
               </nav>
@@ -29,10 +24,7 @@
               </div>
               <div>
                 This privacy policy should be read alongside, and in addition to, our Terms and
-                Conditions, which can be found at:
-                <a href="/termsandconditions" target="_blank" class="has-text-link">
-                    www.familytree365.com/termsandconditions.
-                </a>
+                Conditions, which can be found at: <a href="/termsandconditions" target="_blank" class="has-text-link">www.familytree365.com/termsandconditions.</a>
               </div>
               <div class="is-size-6 has-text-black has-text-weight-medium my-5">
                 Please read this privacy policy carefully.
@@ -40,9 +32,7 @@
               <div class="is-size-6 has-text-black has-text-weight-medium my-5">
                 Definitions and interpretation
               </div>
-              <div>
-                  In this privacy policy, the following definitions are used: 
-              </div>
+              <div> In this privacy policy, the following definitions are used: </div>
               <div>
                 Data collectively all information that you submit to Genealogy Websites Ltd via the Website. This
                 definition incorporates, where applicable, the definitions provided in the Data Protection
@@ -520,6 +510,7 @@
                             support@familytree365.com</a>
                     </div>
                     <div class="is-flex mb-4">
+                        <!-- <img src="img/mobile.svg" alt="" class="ml-2 mr-2"> -->
                         <i class="fas fa-mobile-alt ml-2 mr-2 has-text-primary"></i>
                         <a href="tel:+44 20 8064 1187" class="is-size-7 has-text-link is-flex">
                           +44 20 8064 1187</a>
@@ -546,28 +537,29 @@
 </template>
 <script>
     import { mapGetters } from 'vuex'
-    import { ref, computed, useStore, watch } from 'vue'
+export default {
 
-    export default {
-      meta: {
-        guestGuard: true
-      },
-      setup() {
-        const isDark = ref(false);
-        const isClear = ref(true);
-        return { isDark, isClear };
-
-        // const store = useStore();
+    meta: {
+        guestGuard: true,
+    },
+    
+    data() {
         return {
-          one: computed(() => store.getters['${loggedInUser}'])
-        }
-        created(() => {
-          window.addEventListener('scroll', this.handleScroll);
-        })
-        async function logout() {
+            isDark: false,
+            isClear: true,
+        };
+    },
+    computed: {
+         ...mapGetters(['loggedInUser'])
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+    },
+    methods: {
+        async logout() {
           await this.$auth.logout();
-        }
-        function handleScroll () {
+        },
+        handleScroll() {
             if (window.scrollY >= 500) {
                 this.isClear = false;
                 this.isDark = true;
@@ -575,11 +567,15 @@
                 this.isClear = true;
                 this.isDark = false;
             }
-        }
-      }
-    }
-
+        },
+    },
+}
 </script>
-<style scoped>
+<router>
+{
+    name: 'privacy'
+}
+</router>
+ <style scoped>
     @import '~/assets/css/base.css';
 </style>

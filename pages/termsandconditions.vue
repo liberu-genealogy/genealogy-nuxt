@@ -353,39 +353,45 @@
 </template>
 <script>
     import { mapGetters } from 'vuex'
-    import { ref, computed, useStore, watch } from 'vue'
+export default {
 
-    export default {
-      meta: {
-        guestGuard: true
-      },
-      setup() {
-        const isDark = ref(false)
-        const isClear = ref(true)
-        return { isDark, isClear }
-        // const store = useStore()
-        return{
-          one: computed(() => store.getters['${loggedInUser}'])
-        }
-        created(() => {
-          window.addEventListener('scroll', this.handleScroll);
-        })
-        async function logout () {
+    meta: {
+        guestGuard: true,
+    },
+    
+    data() {
+        return {
+            isDark: false,
+            isClear: true,
+        };
+    },
+    computed: {
+         ...mapGetters(['loggedInUser'])
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+    },
+    methods: {
+        async logout() {
           await this.$auth.logout();
-        }
-        function handleScroll () {
-          if (window.scrollY >= 500) {
-              this.isClear = false;
-              this.isDark = true;
-          } else {
-              this.isClear = true;
-              this.isDark = false;
-          }
-        }
-      }
-    }
-
+        },
+        handleScroll() {
+            if (window.scrollY >= 500) {
+                this.isClear = false;
+                this.isDark = true;
+            } else {
+                this.isClear = true;
+                this.isDark = false;
+            }
+        },
+    },
+}
 </script>
+<router>
+{
+    name: 'termsandconditions'
+}
+</router>
  <style scoped>
     @import '~/assets/css/base.css';
 </style>
