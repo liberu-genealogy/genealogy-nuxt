@@ -137,6 +137,7 @@ export default defineNuxtConfig({
   publicRuntimeConfig: {
     axios: {
       browserBaseURL: process.env.BASE_URL || 'http://localhost:3000',
+      proxyHeaders: false,
     },
     appEnv: process.env.APP_ENV || 'production',
     },
@@ -148,6 +149,7 @@ export default defineNuxtConfig({
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
+    proxyHeaders: false,
     proxy: true,
     credentials: true,
   },
