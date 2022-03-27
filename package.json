@@ -91,9 +91,6 @@
     "webpack": "^4.46.0",
     "zxcvbn": "^4.4.2"
   },
-  "resolutions": {
-    "**/fsevents": "2.1.0"
-  },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
