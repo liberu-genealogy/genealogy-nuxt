@@ -103,17 +103,17 @@ export default defineNuxtConfig({
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     // "@nuxtjs/eslint-module",
-    '@nuxtjs/fontawesome',
-    '@nuxtjs/router-extras',
-    '@nuxtjs/vuetify',
+  //  '@nuxtjs/fontawesome',
+  //  '@nuxtjs/router-extras',
+  //  '@nuxtjs/vuetify',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    'nuxt-vuex-router-sync',
-    'nuxt-route-meta',
+   // 'nuxt-vuex-router-sync',
+   // 'nuxt-route-meta',
   ],
 
   fontawesome: {

@@ -336,14 +336,14 @@
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import { mapGetters, mapActions } from 'vuex'
-import PieChart from '../components/charts/PieChart'
+// import PieChart from '../components/charts/PieChart'
 import { EnsoChartCard as ChartCard } from '@enso-ui/charts/bulma';
 import { Chart, colors } from '@enso-ui/charts';
 export default {
   layout: 'auth',
   components: {
     Loading,
-    PieChart,
+  //  PieChart,
     ChartCard
   },
   inject: ['errorHandler', 'route', 'toastr'],

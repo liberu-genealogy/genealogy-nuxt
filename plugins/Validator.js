@@ -1,11 +1,11 @@
 import Vue from "vue";
-import { messages } from "vee-validate/dist/locale/en.json";
+// import { messages } from "vee-validate/dist/locale/en.json";
 import {
   ValidationProvider,
   ValidationObserver,
   extend,
   Rules,
-} from "vee-validate/dist/vee-validate.full.esm";
+} from "vee-validate/dist/vee-validate.esm";
 
 Vue.component("ValidationProvider", ValidationProvider);
 Vue.component("ValidationObserver", ValidationObserver);
