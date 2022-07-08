@@ -14,11 +14,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'administration.people.create',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'administration.people.create',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';

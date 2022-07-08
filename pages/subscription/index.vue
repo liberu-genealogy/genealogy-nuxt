@@ -186,11 +186,11 @@
     </div>
   </div>
 </template>
-<router>
-{
-    name: 'subscription.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'subscription.index'-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import Loading from 'vue-loading-overlay'

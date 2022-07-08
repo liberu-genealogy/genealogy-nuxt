@@ -1,11 +1,11 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'families.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'families.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
 layout: 'auth',

@@ -1,11 +1,11 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'sourcerefevents.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'sourcerefevents.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
     name: 'Show',

@@ -13,8 +13,8 @@ export default {
 
 }
 </script>
-<router>
-{
-	name: 'index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--	name: 'index'-->
+<!--}-->
+<!--</router>-->

@@ -89,8 +89,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import Vuelidate from 'vuelidate'
+import * as Vue from 'vue'
+import * as Vuelidate from 'vuelidate'
 import { required, minLength } from 'vuelidate/lib/validators'
 Vue.use(Vuelidate)
 
@@ -154,9 +154,9 @@ export default {
 
 </script>
 
-<router>
-{
-    name: 'subscription.stripe.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'subscription.stripe.index'-->
+<!--}-->
+<!--</router>-->
 

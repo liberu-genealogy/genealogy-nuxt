@@ -3,11 +3,11 @@
         id="person_events"/>
 </template>
 
-<router>
-{
-    name: 'personevent.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'personevent.index'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 

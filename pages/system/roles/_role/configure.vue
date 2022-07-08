@@ -45,11 +45,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'system.roles.configure',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'system.roles.configure',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { mapState } from 'vuex';

@@ -72,11 +72,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'core.notifications.index',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'core.notifications.index',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import debounce from 'lodash/debounce';

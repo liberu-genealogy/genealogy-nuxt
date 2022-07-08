@@ -1,11 +1,11 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'citations.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'citations.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
 

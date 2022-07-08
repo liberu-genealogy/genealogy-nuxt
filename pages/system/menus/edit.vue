@@ -38,11 +38,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'system.menus.edit',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'system.menus.edit',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';

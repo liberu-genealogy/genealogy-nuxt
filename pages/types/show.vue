@@ -1,11 +1,11 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'types.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'types.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
     name: 'Show',

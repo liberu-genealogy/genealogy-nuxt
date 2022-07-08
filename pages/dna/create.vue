@@ -63,11 +63,11 @@
         </form>
     </div>
 </template>
-<router>
-{
-    name: 'dna.create'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'dna.create'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { required } from 'vuelidate/lib/validators'
 import Loading from 'vue-loading-overlay';

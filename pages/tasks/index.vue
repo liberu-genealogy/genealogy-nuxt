@@ -116,11 +116,11 @@
             ref="filterState"/>
     </div>
 </template>
-<router>
-{
-    name: 'tasks.index',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'tasks.index',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { mapState } from 'vuex';

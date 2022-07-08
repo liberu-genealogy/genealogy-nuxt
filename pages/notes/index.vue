@@ -3,11 +3,11 @@
         id="notes"/>
 </template>
 
-<router>
-{
-    name: 'notes.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'notes.index'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 

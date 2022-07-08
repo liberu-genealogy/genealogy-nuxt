@@ -6,11 +6,11 @@
     </div>
 </template>
 
-<router>
-{
-    name: 'citations.create'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'citations.create'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 

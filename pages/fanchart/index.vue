@@ -1,10 +1,10 @@
 <template></template>
 
-<router>
-{
-    name: 'fanchart.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'fanchart.index'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
   layout: "auth",

@@ -6,11 +6,11 @@
     </div>
 </template>
 
-<router>
-{
-    name: 'personsubm.edit'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'personsubm.edit'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 

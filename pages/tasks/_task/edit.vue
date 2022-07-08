@@ -5,11 +5,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'tasks.edit',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'tasks.edit',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import BaseForm from '~/components/tasks/bulma/pages/tasks/BaseForm.vue';

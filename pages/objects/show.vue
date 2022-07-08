@@ -1,11 +1,11 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'objects.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'objects.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
 layout: 'auth',

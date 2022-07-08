@@ -1,4 +1,4 @@
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt'
 import getSiteMeta from './utils/getSiteMeta'
 import { cloneDeep } from 'lodash'
 

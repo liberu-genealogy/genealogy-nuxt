@@ -65,11 +65,11 @@
     </div>
   </div>
 </template>
-<router>
-{
-  name: 'gramps.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--  name: 'gramps.index'-->
+<!--}-->
+<!--</router>-->
 <script>
   import {required} from 'vuelidate/lib/validators'
   import Loading from 'vue-loading-overlay';

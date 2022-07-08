@@ -10,11 +10,11 @@
         </template>
     </enso-table>
 </template>
-<router>
-{
-    name: 'administration.companies.index',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'administration.companies.index',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';

@@ -9,11 +9,11 @@
         </template>
     </enso-table>
 </template>
-<router>
-{
-    name: 'system.permissions.index',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'system.permissions.index',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';

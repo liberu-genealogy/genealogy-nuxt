@@ -58,11 +58,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'administration.teams.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'administration.teams.index'-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';

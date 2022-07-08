@@ -43,11 +43,11 @@
         </card-content>
     </card>
 </template>
-<router>
-{
-    name: 'system.logs.show',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'system.logs.show',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';

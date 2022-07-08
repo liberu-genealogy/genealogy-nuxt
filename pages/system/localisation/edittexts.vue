@@ -141,11 +141,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'system.localisation.editTexts',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'system.localisation.editTexts',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { mapState } from 'vuex';

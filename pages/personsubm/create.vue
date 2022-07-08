@@ -5,11 +5,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'personsubm.create'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'personsubm.create'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 

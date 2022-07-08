@@ -5,11 +5,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'system.localisation.create',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'system.localisation.create',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';

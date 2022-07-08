@@ -2,11 +2,11 @@
     <div/>
 </template>
 
-<router>
-{
-    name: 'personevent.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'personevent.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
 layout: 'auth',

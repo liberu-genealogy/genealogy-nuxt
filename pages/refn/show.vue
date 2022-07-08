@@ -1,11 +1,11 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'refn.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'refn.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
     name: 'Show',

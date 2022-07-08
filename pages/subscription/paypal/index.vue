@@ -298,9 +298,9 @@ export default {
   },
 }
 </script>
-<router>
-{
-    name: 'subscription.paypal.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'subscription.paypal.index'-->
+<!--}-->
+<!--</router>-->
 

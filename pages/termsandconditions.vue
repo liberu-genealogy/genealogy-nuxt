@@ -387,11 +387,11 @@ export default {
     },
 }
 </script>
-<router>
-{
-    name: 'termsandconditions'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'termsandconditions'-->
+<!--}-->
+<!--</router>-->
  <style scoped>
     @import '~/assets/css/base.css';
 </style>

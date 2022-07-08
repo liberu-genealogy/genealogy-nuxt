@@ -5,11 +5,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'sourcedataevent.create'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'sourcedataevent.create'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 

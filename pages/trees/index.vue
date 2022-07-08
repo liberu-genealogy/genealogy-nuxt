@@ -2,11 +2,11 @@
   <enso-table class="box is-paddingless raises-on-hover" id="notes" />
 </template>
 
-<router>
-{
-    name: 'trees.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'trees.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { EnsoTable } from "@enso-ui/tables/bulma";
 

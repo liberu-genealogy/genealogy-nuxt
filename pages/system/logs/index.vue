@@ -65,11 +65,11 @@
         {{ i18n('No log files available') }}
     </p>
 </template>
-<router>
-{
-    name: 'system.logs.index',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'system.logs.index',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
