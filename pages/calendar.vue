@@ -19,11 +19,11 @@
             v-if="event"/>
     </div>
 </template>
-<router>
-{
-    name: 'core.calendar.index',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'core.calendar.index',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { mapMutations } from 'vuex';

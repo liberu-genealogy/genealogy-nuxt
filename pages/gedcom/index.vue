@@ -78,11 +78,11 @@
             </form>
     </div>
 </template>
-<router>
-{
-    name: 'gedcom.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'gedcom.index'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { mapGetters } from 'vuex'
 import Loading from 'vue-loading-overlay'

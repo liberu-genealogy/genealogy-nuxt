@@ -1,11 +1,11 @@
 <template>
   <div id="webtrees-fan-chart-container"></div>
 </template>
-<router>
-{
-    name: 'fanchart.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'fanchart.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { FanChart } from "/assets/js/fan-chart/modules/index";
 export default {

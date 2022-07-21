@@ -1,11 +1,11 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'sourcedata.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'sourcedata.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
     name: 'Show',

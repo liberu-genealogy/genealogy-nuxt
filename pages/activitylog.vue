@@ -11,11 +11,11 @@
             @reload="offset = 0; fetch()"/>
     </div>
 </template>
-<router>
-{
-    name: 'core.activityLogs.index',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'core.activityLogs.index',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import Timeline from '~/components/activity-log/bulma/pages/activityLog/components/Timeline.vue';

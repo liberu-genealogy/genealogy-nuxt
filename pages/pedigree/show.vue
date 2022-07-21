@@ -19,11 +19,11 @@
     <button id='saveButton'>Export my PNG</button>
   </div>
 </template>
-<router>
-{
-  name: 'trees.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--  name: 'trees.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 import * as d3Base from 'd3'
 import {coordQuad, dagConnect, dagStratify, decrossOpt, layeringSimplex, sugiyama} from 'd3-dag'

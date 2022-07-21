@@ -61,11 +61,11 @@
         </enso-table>
     </div>
 </template>
-<router>
-{
-    name: 'import.index',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'import.index',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { mapState } from 'vuex';

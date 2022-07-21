@@ -78,11 +78,11 @@
             </form>
     </div>
 </template>
-<router>
-{
-    name: 'gramps.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'gramps.index'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { mapGetters } from 'vuex'
 import Loading from 'vue-loading-overlay'

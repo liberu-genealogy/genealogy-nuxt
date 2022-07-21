@@ -1,11 +1,11 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'familyslugs.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'familyslugs.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
 

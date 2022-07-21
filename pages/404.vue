@@ -10,11 +10,11 @@
         </p>
     </div>
 </template>
-<router>
-{
-    name: 'notFound',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'notFound',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';

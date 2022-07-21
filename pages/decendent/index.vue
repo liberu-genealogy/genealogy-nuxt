@@ -1,10 +1,10 @@
 <template></template>
 
-<router>
-{
-    name: 'decendent.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'decendent.index'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
   layout: "auth",

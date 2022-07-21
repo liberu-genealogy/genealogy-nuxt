@@ -327,11 +327,11 @@
     </div>
   </v-app>
 </template>
-<router>
-{
-    name: 'dashboard.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'dashboard.index'-->
+<!--}-->
+<!--</router>-->
 <script>
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'

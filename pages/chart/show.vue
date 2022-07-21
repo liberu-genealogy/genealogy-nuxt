@@ -3,11 +3,11 @@
     <div id="tree"></div>
   </div>
 </template>
-<router>
-{
-  name: 'pedigree.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--  name: 'pedigree.show'-->
+<!--}-->
+<!--</router>-->
 
 
 <script>

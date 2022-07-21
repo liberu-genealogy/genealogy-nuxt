@@ -5,11 +5,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'system.permissions.create',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'system.permissions.create',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';

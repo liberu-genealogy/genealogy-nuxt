@@ -2,11 +2,11 @@
     <enso-table class="box is-paddingless raises-on-hover"
         id="places"/>
 </template>
-<router>
-{
-    name: 'places.create'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'places.create'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 

@@ -78,11 +78,11 @@
         </div>
     </enso-tabs>
 </template>
-<router>
-{
-    name: 'core.files.index',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'core.files.index',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { debounce } from 'lodash';

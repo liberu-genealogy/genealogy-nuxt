@@ -2,11 +2,11 @@
     <enso-table class="box is-paddingless raises-on-hover"
         id="subms"/>
 </template>
-<router>
-{
-    name: 'subm.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'subm.index'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 

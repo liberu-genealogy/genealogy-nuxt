@@ -2,11 +2,11 @@
     <div/>
 </template>
 
-<router>
-{
-    name: 'personsubm.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'personsubm.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
 

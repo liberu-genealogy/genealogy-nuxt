@@ -168,11 +168,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'howTo.videos.index',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'howTo.videos.index',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';

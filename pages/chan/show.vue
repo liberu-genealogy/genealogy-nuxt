@@ -1,11 +1,11 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'chan.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'chan.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
 layout: 'auth',

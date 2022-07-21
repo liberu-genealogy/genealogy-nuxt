@@ -20,11 +20,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'system.localisation.edit',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'system.localisation.edit',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';

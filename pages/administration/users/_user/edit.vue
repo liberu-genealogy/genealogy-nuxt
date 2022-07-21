@@ -112,11 +112,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'administration.users.edit'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'administration.users.edit'-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';

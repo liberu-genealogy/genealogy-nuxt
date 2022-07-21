@@ -1,11 +1,11 @@
 <template>
     <div/>
 </template>
-<router>
-{
-    name: 'gramps.show'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'gramps.show'-->
+<!--}-->
+<!--</router>-->
 <script>
 export default {
     name: 'Show',

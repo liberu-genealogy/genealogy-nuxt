@@ -5,11 +5,11 @@
         </div>
     </div>
 </template>
-<router>
-{
-    name: 'repositories.create'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'repositories.create'-->
+<!--}-->
+<!--</router>-->
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 

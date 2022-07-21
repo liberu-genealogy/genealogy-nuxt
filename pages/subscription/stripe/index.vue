@@ -49,8 +49,8 @@ export default {
   },
 };
 </script>
-<router>
-{
-    name: 'subscription.stripe.index'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'subscription.stripe.index'-->
+<!--}-->
+<!--</router>-->

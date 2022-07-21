@@ -12,11 +12,11 @@
         <email v-model="payload.email"/>
     </auth-form>
 </template>
-<router>
-{
-    name: 'password.email'
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'password.email'-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import AuthForm from '~/components/auth/AuthForm.vue';

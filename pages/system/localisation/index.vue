@@ -8,11 +8,11 @@
         </template>
     </enso-table>
 </template>
-<router>
-{
-    name: 'system.localisation.index',
-}
-</router>
+<!--<router>-->
+<!--{-->
+<!--    name: 'system.localisation.index',-->
+<!--}-->
+<!--</router>-->
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
