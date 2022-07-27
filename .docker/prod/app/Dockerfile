@@ -1,3 +1,10 @@
+# Build arguments
+ARG IMAGE_REGISTRY=familytree365
+ARG IMAGE_TAG=latest
+
+# Image
+#FROM ${IMAGE_REGISTRY}/nuxt:${IMAGE_TAG}
+
 # Image
 FROM node:16-alpine
 

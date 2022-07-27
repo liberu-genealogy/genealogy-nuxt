@@ -5,6 +5,9 @@ services:
     build:
       context: ./
       dockerfile: ./.docker/prod/app/Dockerfile
+      args:
+        IMAGE_REGISTRY: ${IMAGE_REGISTRY}
+        IMAGE_TAG: ${IMAGE_TAG}
     hostname: client
     networks:
       - client
