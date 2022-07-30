@@ -6,7 +6,7 @@ const meta = getSiteMeta()
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
 
-  ssr: true,
+  ssr: false,
 
   // server: {
   //   host: process.env.HOST || 'localhost' // default: localhost

@@ -1,0 +1,38 @@
+$colors: ("purple", #6807f9), ("yellow", #FFD700), ("red", #FF0000),
+    ("pink", #FF1493), ("orange", #FF4500), ("green", #2ECC40),
+    ("brown", #D2691E), ("gray", #C0C0C0), ("blue", #00BFFF);
+
+@each $color in $colors {
+    .calendar-#{nth($color,1)} {
+        background-color: nth($color,2);
+    }
+
+    .is-checkradio[type="checkbox"].calendar-#{nth($color,1)} {
+        +label::before{
+            border-color: nth($color,2) !important;
+        }
+        +label:before{
+            border-color: nth($color,2) !important;
+        }
+        &:checked{
+            +label::after{
+                border-color: nth($color,2) !important;
+            }
+            +label:after{
+                border-color: nth($color,2) !important;
+            }
+        }
+        &:hover:not([disabled]){
+            +label:before{
+                border-color: nth($color,2) !important;
+            }
+        }
+    }
+    .vuecal__event {
+        &.#{nth($color,1)} {
+            background-color: rgba(nth($color,2), 0.7);
+            border: 1px solid darken(nth($color,2), 10%);
+            color: #fff;
+        }
+    }
+}
