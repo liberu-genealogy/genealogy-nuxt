@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "postinstall": "opencollective-postinstall && patch-package"
   },
   "devDependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.1.1",
