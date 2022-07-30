@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import Notification from '~/components/notifications/bulma/components/navbar/Notifications.vue';
 import ToastPosition from '~/components/notifications/bulma/components/settings/ToastrPosition.vue';
 

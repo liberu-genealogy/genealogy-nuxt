@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import ProfileController from '~/components/users/bulma/components/navbar/ProfileControl.vue';
 
 Vue.component('navbar-profile-controller', ProfileController);

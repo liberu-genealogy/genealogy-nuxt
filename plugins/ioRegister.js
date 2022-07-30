@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import IO from '~/components/io/bulma/components/navbar/IO.vue';
 
 

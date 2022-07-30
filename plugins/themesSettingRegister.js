@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import ThemeSelector from '~/components/themes/bulma/components/settings/ThemeSelector.vue';
 
 Vue.component('setting-theme-selector', ThemeSelector);

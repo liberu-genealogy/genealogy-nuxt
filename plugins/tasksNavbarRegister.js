@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import Tasks from '~/components/tasks/bulma/components/navbar/Tasks.vue';
 
 Vue.component('navbar-tasks', Tasks);

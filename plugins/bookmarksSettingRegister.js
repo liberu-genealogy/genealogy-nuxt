@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import BookmarksState from '~/components/bookmarks/bulma/components/settings/BookmarksState.vue';
 
 Vue.component('setting-bookmarks-state', BookmarksState);

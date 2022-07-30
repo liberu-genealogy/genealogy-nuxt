@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import MissingKey from '~/components/localisation/bulma/components/navbar/MissingKeys.vue';
 import KeyCollector from '~/components/localisation/bulma/components/settings/KeyCollector.vue';
 import LanguageSelector from '~/components/localisation/bulma/components/settings/LanguageSelector.vue';

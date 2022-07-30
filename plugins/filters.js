@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 const SI = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
 export default ({ store }, inject) => {
     Vue.filter('numberFormat', (value, decimals = 3) => new Intl.NumberFormat(
