@@ -4,7 +4,7 @@
     "dev": "nuxi dev",
     "build": "nuxi build",
     "start": "node .output/server/index.mjs",
-    "postinstall": "opencollective-postinstall && patch-package"
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.1.1",
@@ -39,6 +39,7 @@
     "node-sass": "^7.0.1",
     "npm": "^8.13.1",
     "nuxt-route-meta": "^2.3.4",
+    "patch-package": "^6.4.7",
     "postcss": "^8.4.14",
     "resolve": "^1.22.1",
     "rollup": "^2.75.7",
