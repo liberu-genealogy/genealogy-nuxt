@@ -1,4 +1,3 @@
-import Vue from "vue";
 // import { messages } from "vee-validate/dist/locale/en.json";
 import {
   ValidationProvider,
