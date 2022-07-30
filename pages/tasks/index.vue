@@ -129,8 +129,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faClock, faInfoCircle, faCog } from '@fortawesome/free-solid-svg-icons';
 import { Dropdown } from 'v-tooltip';
 import { clickOutside } from '@enso-ui/directives';
-import Filters from '~/components/tasks/bulma/pages/tasks/Filters.vue';
-import Flags from '~/components/tasks/bulma/pages/tasks/Flags.vue';
+import Filters from '~/components/tasks/bulma/pages/tasks/components/Filters.vue';
+import Flags from '~/components/tasks/bulma/pages/tasks/components/Flags.vue';
 
 
 library.add(faClock, faInfoCircle, faCog);
