@@ -8,6 +8,7 @@ services:
       args:
         IMAGE_REGISTRY: ${IMAGE_REGISTRY}
         IMAGE_TAG: ${IMAGE_TAG}
+        IMAGE_NAME: nuxt
     hostname: client
     networks:
       - client
