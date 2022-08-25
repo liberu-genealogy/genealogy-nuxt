@@ -10,3 +10,4 @@ index fe4b4d3..4bf25a6 100644
  
  export default {
      name: 'Money',
+ }
