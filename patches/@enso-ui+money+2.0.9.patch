@@ -1,13 +1,12 @@
 diff --git a/node_modules/@enso-ui/money/src/Money.vue b/node_modules/@enso-ui/money/src/Money.vue
-index fe4b4d3..4bf25a6 100644
+index fe4b4d3..64ff26d 100644
 --- a/node_modules/@enso-ui/money/src/Money.vue
 +++ b/node_modules/@enso-ui/money/src/Money.vue
 @@ -15,7 +15,6 @@
- </template>
- 
- <script>
+</template>
+
+<script>
 -import accounting from 'accounting-js';
- 
- export default {
-     name: 'Money',
- }
+
+export default {
+    name: 'Money',
