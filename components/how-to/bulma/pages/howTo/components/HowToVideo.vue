@@ -103,6 +103,7 @@ import Confirmation from '@enso-ui/confirmation/bulma';
 import { EnsoUploader } from '@enso-ui/uploader';
 import VideoPlayer from './VideoPlayer.vue';
 import 'video.js/dist/video-js.css';
+// import VideoPlayer from '@/components/VideoPlayer.vue';
 
 library.add([faTrashAlt, faInfo, faTags, faEdit, faImage, faInfoCircle]);
 
