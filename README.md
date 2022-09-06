@@ -1,7 +1,7 @@
 ## Family Tree 365 - Open Source Family Tree Software - Nuxt Client
  ![Latest Stable Version](https://img.shields.io/github/release/familytree365/nuxt.svg) 
 [![StyleCI](https://github.styleci.io/repos/399057031/shield?branch=master)](https://github.styleci.io/repos/399057031)
-[![CircleCI](https://circleci.com/gh/delicata-ui/genealogy.svg?style=svg)](https://circleci.com/gh/delicata-ui/genealogy)
+[![CircleCI](https://circleci.com/gh/cgd-ui/genealogy.svg?style=svg)](https://circleci.com/gh/cgd-ui/genealogy)
 
 
 ## Description
@@ -9,7 +9,7 @@
 Browser based Genealogy software for interacting and processing data efficiently. Easily create your
 own family tree by importing your existing data or manual data entry. Storage of all data is securely on your own server and does
 not leave your environment without your permission. In the future there will be optional
-smart matching with other servers. This is the Nuxt 3 and Vue 3 client for the backend please see https://github.com/familytree365/genealogy
+smart matching with other servers. This is the Nuxt 3 and Vue 3 client for the backend please see https://github.com/cgdprojects/genealogy
 
 Data tables for comphrensive amount of CRUD information. Forms easy to modify. Gedcom import and export. DNA matching. Subscriptions using Stripe and PayPal. APIs for various online databases of genealogical records.
 
