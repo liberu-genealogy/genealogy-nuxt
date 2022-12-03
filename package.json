@@ -36,7 +36,7 @@
     "d3-tip": "^0.9.1",
     "d3-transition": "^3.0.1",
     "laravel-echo": "^1.12.0",
-    "node-sass": "^7.0.1",
+    "node-sass": "^8.0.0",
     "npm": "^8.13.1",
     "nuxt-route-meta": "^2.3.4",
     "patch-package": "^6.4.7",
