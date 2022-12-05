@@ -87,7 +87,7 @@
     "vue-video-player": "^5.0.2",
     "vuedraggable": "^2.24.3",
     "vuelidate": "^0.7.6",
-    "vuetify": "^2.5.8",
+    "vuetify": "^2.6.10",
     "webpack": "^4.46.0",
     "zxcvbn": "^4.4.2"
   },
