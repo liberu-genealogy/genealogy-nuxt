@@ -27,13 +27,15 @@ Note that most sections have short demo clips.
 
 ### Installation Steps
 
-1. Download the project with `git clone https://github.com/familytree365/nuxt.git --depth 1`
+1. Download the project with `git clone https://github.com/cgd-ui/genealogy.git --depth 1`
 
 2. Within the project folder run `yarn install`
 
-7. Run `yarn build`
+3. Copy .env.example to .env and edit details.
 
-9. For live reload / hot module replacement functionality run `yarn dev`
+4. Run `yarn build`
+
+5. For live reload / hot module replacement functionality run `yarn dev`
 
 ### Thanks
 
