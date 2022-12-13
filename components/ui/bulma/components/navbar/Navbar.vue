@@ -17,6 +17,18 @@
                         href="#">
                         <figure class="image is-flex" style="width: 230px">
                            <img src="~assets/images/main-logo.svg" alt="">
+		            <NuxtLink
+              to="/subscription"
+              class="
+                button
+                is-size-7 is-uppercase
+                has-text-weight-medium has-text-primary
+                is-light
+                mt-4
+              "
+              >Subscribe</NuxtLink
+            >
+          </div>		
                         </figure>
                     </a>
                    <!--  <div class="navbar-item"

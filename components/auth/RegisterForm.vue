@@ -25,10 +25,7 @@
                   mb-2
                 "
               >
-                <font-awesome-icon
-                  :icon="['fas', 'angle-left']"
-                  class="mt-1 mr-2"
-                />Back to Home</NuxtLink
+		Back to Home</NuxtLink
               >
               <h1 class="is-size-4 has-text-black has-text-weight-bold">
                 Create your account
