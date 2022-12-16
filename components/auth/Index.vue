@@ -93,6 +93,8 @@
 <style>
   @import "~/assets/css/bulma.css";
   @import "~/assets/css/fontawesome.min.css";
+  @import '@fortawesome/fontawesome-svg-core/styles.css';
+  
   .auth-form .cnt-g {
     width: 100%;
     border: 1px solid #e4e4e4;
