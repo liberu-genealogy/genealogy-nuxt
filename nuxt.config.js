@@ -62,6 +62,7 @@ export default {
     '~/assets/css/base.css',
     '~/assets/style/enso.scss',
     '~/assets/css/fontawesome.min.css',
+    '@fortawesome/fontawesome-svg-core/styles.css', 
   ],
 
   router: {

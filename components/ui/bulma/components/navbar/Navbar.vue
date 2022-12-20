@@ -28,7 +28,7 @@
               "
               >Subscribe</NuxtLink
             >
-          </div>		
+          		
                         </figure>
                     </a>
                    <!--  <div class="navbar-item"
