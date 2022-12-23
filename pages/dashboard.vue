@@ -1,16 +1,16 @@
 <template>
   <v-app>
     <loading
-      :active.sync="isLoading"
-      :color="color"
-      :background-color="backgroundColor"
+        :active.sync="isLoading"
+        :color="color"
+        :background-color="backgroundColor"
     >
     </loading>
     <div class="columns is-gapless is-multiline is-mobile">
       <div class="column is-12">
         <h1 class="is-size-4 has-text-black">
           <span class="has-text-weight-medium"
-            >Hi {{ loggedInUser.person.name }}</span
+          >Hi {{ loggedInUser.person.name }}</span
           >, <span class="has-text-weight-light"> Welcome Back!</span>
         </h1>
       </div>
@@ -19,9 +19,9 @@
           <ul>
             <li>
               <a
-                class="is-size-7 has-text-weight-medium has-text-link"
-                href="/dashboard"
-                >Home</a
+                  class="is-size-7 has-text-weight-medium has-text-link"
+                  href="/dashboard"
+              >Home</a
               >
             </li>
             <li class="is-size-7 has-text-weight-medium is-active">
@@ -37,45 +37,45 @@
         <v-row>
           <v-col>
             <v-select
-              v-model="apiSelected"
-              :items="apiList"
-              label="API"
-              hide-details="true"
+                v-model="apiSelected"
+                :items="apiList"
+                label="API"
+                hide-details="true"
             ></v-select>
           </v-col>
           <v-col>
             <v-text-field
-              label="First name"
-              hide-details="true"
-              v-model="filter.firstName"
+                label="First name"
+                hide-details="true"
+                v-model="filter.firstName"
             ></v-text-field>
           </v-col>
           <v-col>
             <v-text-field
-              label="Last name"
-              hide-details="true"
-              v-model="filter.lastName"
+                label="Last name"
+                hide-details="true"
+                v-model="filter.lastName"
             ></v-text-field>
           </v-col>
           <v-col>
             <v-menu
-              v-model="dateMenu"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              transition="scale-transition"
-              offset-y
+                v-model="dateMenu"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  v-model="filter.date"
-                  label="Date"
-                  readonly
-                  v-on="on"
+                    v-model="filter.date"
+                    label="Date"
+                    readonly
+                    v-on="on"
                 ></v-text-field>
               </template>
               <v-date-picker
-                v-model="filter.date"
-                @input="dateMenu = false"
+                  v-model="filter.date"
+                  @input="dateMenu = false"
               ></v-date-picker>
             </v-menu>
           </v-col>
@@ -85,12 +85,12 @@
         </v-row>
       </v-toolbar>
       <v-data-table
-        :headers="headers"
-        :items="result || []"
-        :options.sync="options"
-        :server-items-length="totalCount"
-        :loading="loading"
-        class="elevation-1"
+          :headers="headers"
+          :items="result || []"
+          :options.sync="options"
+          :server-items-length="totalCount"
+          :loading="loading"
+          class="elevation-1"
       ></v-data-table>
     </v-card>
     <div class="columns is-variable is-3 is-desktop">
@@ -103,17 +103,17 @@
                 {{ peoplesattached }}
               </p>
               <div class="is-size-7 has-text-black has-text-weight-medium mt-1">
-                        <NuxtLink
-              to="/gedcom"
-              class="
+                <NuxtLink
+                    to="/gedcom"
+                    class="
                 button
                 is-size-7 is-uppercase
                 has-text-weight-medium has-text-primary
                 is-light
                 mt-4
               "
-              >GEDCOM Import
-		</NuxtLink>
+                >GEDCOM Import
+                </NuxtLink>
               </div>
             </div>
           </div>
@@ -166,7 +166,7 @@
           </div>
         </div> -->
         <chart-card class="is-rounded raises-on-hover has-background-white has-text-black has-margin-bottom-large"
-    				source="/api/dashboard/pie"/>
+                    source="/api/dashboard/pie"/>
       </div>
       <div class="column is-4-desktop is-6-tablet is-flex">
         <div class="card has-background-white has-text-black">
@@ -181,7 +181,7 @@
               <div class="is-flex fd--c ml-3">
                 New Column added
                 <span
-                  class="is-size-7 has-text-dark has-text-weight-regular mt-1"
+                    class="is-size-7 has-text-dark has-text-weight-regular mt-1"
                 >
                   on 15th Sep, 2020 at 23:20 pm
                 </span>
@@ -194,7 +194,7 @@
               <div class="is-flex fd--c ml-3">
                 Password Changed
                 <span
-                  class="is-size-7 has-text-dark has-text-weight-regular mt-1"
+                    class="is-size-7 has-text-dark has-text-weight-regular mt-1"
                 >
                   on 15th Sep, 2020 at 23:20 pm
                 </span>
@@ -216,7 +216,7 @@
               <div class="is-flex fd--c ml-3">
                 File_22012020.xlsx
                 <span
-                  class="is-size-7 has-text-dark has-text-weight-regular mt-1"
+                    class="is-size-7 has-text-dark has-text-weight-regular mt-1"
                 >
                   on 15th Sep, 2020 at 23:20 pm
                 </span>
@@ -229,7 +229,7 @@
               <div class="is-flex fd--c ml-3">
                 Tree_Table_Report.xlsx
                 <span
-                  class="is-size-7 has-text-dark has-text-weight-regular mt-1"
+                    class="is-size-7 has-text-dark has-text-weight-regular mt-1"
                 >
                   on 15th Sep, 2020 at 23:20 pm
                 </span>
@@ -242,21 +242,21 @@
     <div class="columns is-variable is-flex-desktop-only ai--s">
       <div class="column is-4-desktop is-6-tablet is-flex">
         <div
-          v-if="loggedInUser.role.name == 'free'"
-          class="card has-background-primary has-text-centered"
+            v-if="loggedInUser.role.name == 'free'"
+            class="card has-background-primary has-text-centered"
         >
           <div class="card-content">
             <p class="is-size-7">Buy Plan</p>
             <NuxtLink
-              to="/subscription"
-              class="
+                to="/subscription"
+                class="
                 button
                 is-size-7 is-uppercase
                 has-text-weight-medium has-text-primary
                 is-light
                 mt-4
               "
-              >Subscribe</NuxtLink
+            >Subscribe</NuxtLink
             >
           </div>
         </div>
@@ -271,15 +271,15 @@
               registered.
             </p>
             <NuxtLink
-              to="subscription"
-              class="
+                to="subscription"
+                class="
                 button
                 is-size-7 is-uppercase
                 has-background-white has-text-weight-medium has-text-primary
                 is-light
                 mt-4
               "
-              >Upgrade Plan
+            >Upgrade Plan
             </NuxtLink>
           </div>
         </div>
@@ -295,24 +295,31 @@
             </div>
             <label>Select Company</label>
             <vue-select
-              label="name"
-              v-model="selected_company"
-              :reduce="(company) => company.id"
-              :options="companies"
-              @input="setSelectedCompany"
+                label="name"
+                v-model="selected_company"
+                :reduce="(company) => company.id"
+                :options="companies"
+                @input="setSelected"
             ></vue-select>
-            <label>Select Tree</label>
-            <vue-select
-              label="name"
-              v-model="selected_tree"
-              :reduce="(tree) => tree.id"
-              :options="trees"
-              @input="setSelected"
-            ></vue-select>
+            <!--            <vue-select-->
+            <!--                label="name"-->
+            <!--                v-model="selected_company"-->
+            <!--                :reduce="(company) => company.id"-->
+            <!--                :options="companies"-->
+            <!--                @input="setSelectedCompany"-->
+            <!--            ></vue-select>-->
+            <!--            <label>Select Tree</label>-->
+            <!--            <vue-select-->
+            <!--              label="name"-->
+            <!--              v-model="selected_tree"-->
+            <!--              :reduce="(tree) => tree.id"-->
+            <!--              :options="trees"-->
+            <!--              @input="setSelected"-->
+            <!--            ></vue-select>-->
             <font-awesome-icon
-              :icon="['fas', 'user-circle']"
-              class="has-text-primary mb-5"
-              style="font-size: 55px"
+                :icon="['fas', 'user-circle']"
+                class="has-text-primary mb-5"
+                style="font-size: 55px"
             />
             <p class="is-size-7 mb-2 has-text-weight-medium">
               {{ loggedInUser.email }}
@@ -329,7 +336,7 @@
 </template>
 <router>
 {
-    name: 'dashboard.index'
+name: 'dashboard.index'
 }
 </router>
 <script>
@@ -441,7 +448,7 @@ export default {
     async setSelected(value) {
       const response = await this.$axios.$post('/api/dashboard/changedb', {
         company_id: this.selected_company,
-        tree_id: this.selected_tree,
+        // tree_id: this.selected_tree,
       })
       this.loadChart()
       this.changedb = response.changedb
@@ -455,7 +462,8 @@ export default {
       const response = await this.$axios.$get('/api/get_companies')
       this.companies = response
       this.companies.map((company) => {
-        if (company.is_tenant == 1) {
+        // console.log('this.loggedInUser.id',this.start_id+' ==' +company.id);
+        if (company.is_tenant == 1&&company.email === this.loggedInUser.email) {
           this.selected_company = company.id
           this.getTree()
         }
@@ -476,10 +484,10 @@ export default {
     async loadChart() {
       this.loaded = false
       const chartResponse = await this.$axios.get('/api/dashboard/pie')
-     // const { data: trial } = await this.$axios.get('/api/dashboard/trial')
+      // const { data: trial } = await this.$axios.get('/api/dashboard/trial')
       this.pieChartData = chartResponse.data
       this.chartOptions = chartResponse.options
-     
+
       this.loaded = true
       this.isLoading = false
       //this.trial = trial
@@ -488,14 +496,22 @@ export default {
       //this.result = null
       this.loading = true
       let url = '',
-        params = {}
+          params = {}
       if (this.apiSelected == 'Geneanum') {
         url = '/api/geneanum/search-person/malta/burials'
+        params = {
+          FirstName: this.filter.firstName || '',
+          LastName: this.filter.lastName || '',
+          per_page: this.options?.itemsPerPage || 10,
+          page: this.options?.page || 1,
+          sidx: this.options?.sidx || 100,
+          row: this.options?.row || 100,
+        }
       } else if (this.apiSelected == 'Open arch') {
         url = '/api/open-arch/search-person'
         params = {
           name:
-            (this.filter.firstName || '') + ' ' + (this.filter.lastName || ''),
+              (this.filter.firstName || '') + ' ' + (this.filter.lastName || ''),
           per_page: this.options?.itemsPerPage || 10,
           page: this.options?.page || 1,
         }
@@ -506,8 +522,8 @@ export default {
           surname: this.filter.lastName || '',
           count: this.options?.itemsPerPage || 10,
           offset:
-            ((this.options?.page || 1) - 1) *
-            (this.options?.itemsPerPage || 10),
+              ((this.options?.page || 1) - 1) *
+              (this.options?.itemsPerPage || 10),
         }
       } else if (this.apiSelected == 'Wikitree') {
         url = '/api/wikitree/search-person'
@@ -519,15 +535,15 @@ export default {
         }
       }
       this.$axios
-        .get(url, {
-          params: params,
-        })
-        .then(({ data }) => {
-          this.result = data.response.docs
-          this.totalCount = data.response.number_found
-          this.loading = false
-        })
-        .catch(this.errorHandler)
+          .get(url, {
+            params: params,
+          })
+          .then(({ data }) => {
+            this.result = data.response.docs
+            this.totalCount = data.response.number_found
+            this.loading = false
+          })
+          .catch(this.errorHandler)
     },
   },
   created() {
