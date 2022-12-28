@@ -49,7 +49,17 @@ export default {
             // }, 500);
             setTimeout(() => {
                 // redirect({ name: 'verify' });
+              if(data.plan_id!=''){
+                this.$router.push({
+                  path: '/planDetail?name=price_1MHma5Hdo4UCTry3KigIkhrH',
+                  params: {
+                    name: 'price_1MHma5Hdo4UCTry3KigIkhrH',
+                  }
+                });
+              }else{
                 this.$router.push('/verify');
+              }
+
             // this.login();
             // this.home(true);
             }, 500);
