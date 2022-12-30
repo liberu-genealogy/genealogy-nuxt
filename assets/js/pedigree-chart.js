@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.WebtreesPedigreeChart = {}));
+      typeof define === 'function' && define.amd ? define(['exports'], factory) :
+          (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.WebtreesPedigreeChart = {}));
 })(this, (function (exports) { 'use strict';
 
   var xhtml = "http://www.w3.org/1999/xhtml";
@@ -319,8 +319,8 @@
   // don’t; we’d rather avoid a gratuitous copy.)
   function arraylike(data) {
     return typeof data === "object" && "length" in data
-      ? data // Array, TypedArray, NodeList, array-like
-      : Array.from(data); // Map, Set, iterable, string, or anything else
+        ? data // Array, TypedArray, NodeList, array-like
+        : Array.from(data); // Map, Set, iterable, string, or anything else
   }
 
   function selection_exit() {
@@ -494,8 +494,8 @@
 
     return this.each((value == null
         ? (fullname.local ? attrRemoveNS$1 : attrRemove$1) : (typeof value === "function"
-        ? (fullname.local ? attrFunctionNS$1 : attrFunction$1)
-        : (fullname.local ? attrConstantNS$1 : attrConstant$1)))(fullname, value));
+            ? (fullname.local ? attrFunctionNS$1 : attrFunction$1)
+            : (fullname.local ? attrConstantNS$1 : attrConstant$1)))(fullname, value));
   }
 
   function defaultView(node) {
@@ -527,9 +527,9 @@
   function selection_style(name, value, priority) {
     return arguments.length > 1
         ? this.each((value == null
-              ? styleRemove$1 : typeof value === "function"
-              ? styleFunction$1
-              : styleConstant$1)(name, value, priority == null ? "" : priority))
+            ? styleRemove$1 : typeof value === "function"
+                ? styleFunction$1
+                : styleConstant$1)(name, value, priority == null ? "" : priority))
         : styleValue(this.node(), name);
   }
 
@@ -562,8 +562,8 @@
     return arguments.length > 1
         ? this.each((value == null
             ? propertyRemove : typeof value === "function"
-            ? propertyFunction
-            : propertyConstant)(name, value))
+                ? propertyFunction
+                : propertyConstant)(name, value))
         : this.node()[name];
   }
 
@@ -639,8 +639,8 @@
 
     return this.each((typeof value === "function"
         ? classedFunction : value
-        ? classedTrue
-        : classedFalse)(names, value));
+            ? classedTrue
+            : classedFalse)(names, value));
   }
 
   function textRemove() {
@@ -664,8 +664,8 @@
     return arguments.length
         ? this.each(value == null
             ? textRemove : (typeof value === "function"
-            ? textFunction$1
-            : textConstant$1)(value))
+                ? textFunction$1
+                : textConstant$1)(value))
         : this.node().textContent;
   }
 
@@ -690,8 +690,8 @@
     return arguments.length
         ? this.each(value == null
             ? htmlRemove : (typeof value === "function"
-            ? htmlFunction
-            : htmlConstant)(value))
+                ? htmlFunction
+                : htmlConstant)(value))
         : this.node().innerHTML;
   }
 
@@ -1058,8 +1058,8 @@
 
   function Timer() {
     this._call =
-    this._time =
-    this._next = null;
+        this._time =
+            this._next = null;
   }
 
   Timer.prototype = timer.prototype = {
@@ -1551,18 +1551,18 @@
     format = (format + "").trim().toLowerCase();
     return (m = reHex.exec(format)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) // #ff0000
         : l === 3 ? new Rgb((m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), ((m & 0xf) << 4) | (m & 0xf), 1) // #f00
-        : l === 8 ? rgba(m >> 24 & 0xff, m >> 16 & 0xff, m >> 8 & 0xff, (m & 0xff) / 0xff) // #ff000000
-        : l === 4 ? rgba((m >> 12 & 0xf) | (m >> 8 & 0xf0), (m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), (((m & 0xf) << 4) | (m & 0xf)) / 0xff) // #f000
-        : null) // invalid hex
+            : l === 8 ? rgba(m >> 24 & 0xff, m >> 16 & 0xff, m >> 8 & 0xff, (m & 0xff) / 0xff) // #ff000000
+                : l === 4 ? rgba((m >> 12 & 0xf) | (m >> 8 & 0xf0), (m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), (((m & 0xf) << 4) | (m & 0xf)) / 0xff) // #f000
+                    : null) // invalid hex
         : (m = reRgbInteger.exec(format)) ? new Rgb(m[1], m[2], m[3], 1) // rgb(255, 0, 0)
-        : (m = reRgbPercent.exec(format)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) // rgb(100%, 0%, 0%)
-        : (m = reRgbaInteger.exec(format)) ? rgba(m[1], m[2], m[3], m[4]) // rgba(255, 0, 0, 1)
-        : (m = reRgbaPercent.exec(format)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) // rgb(100%, 0%, 0%, 1)
-        : (m = reHslPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) // hsl(120, 50%, 50%)
-        : (m = reHslaPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) // hsla(120, 50%, 50%, 1)
-        : named.hasOwnProperty(format) ? rgbn(named[format]) // eslint-disable-line no-prototype-builtins
-        : format === "transparent" ? new Rgb(NaN, NaN, NaN, 0)
-        : null;
+            : (m = reRgbPercent.exec(format)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) // rgb(100%, 0%, 0%)
+                : (m = reRgbaInteger.exec(format)) ? rgba(m[1], m[2], m[3], m[4]) // rgba(255, 0, 0, 1)
+                    : (m = reRgbaPercent.exec(format)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) // rgb(100%, 0%, 0%, 1)
+                        : (m = reHslPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) // hsl(120, 50%, 50%)
+                            : (m = reHslaPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) // hsla(120, 50%, 50%, 1)
+                                : named.hasOwnProperty(format) ? rgbn(named[format]) // eslint-disable-line no-prototype-builtins
+                                    : format === "transparent" ? new Rgb(NaN, NaN, NaN, 0)
+                                        : null;
   }
 
   function rgbn(n) {
@@ -1706,10 +1706,10 @@
           m2 = l + (l < 0.5 ? l : 1 - l) * s,
           m1 = 2 * l - m2;
       return new Rgb(
-        hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
-        hsl2rgb(h, m1, m2),
-        hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
-        this.opacity
+          hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
+          hsl2rgb(h, m1, m2),
+          hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
+          this.opacity
       );
     },
     clamp() {
@@ -1739,8 +1739,8 @@
   function hsl2rgb(h, m1, m2) {
     return (h < 60 ? m1 + (m2 - m1) * h / 60
         : h < 180 ? m2
-        : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60
-        : m1) * 255;
+            : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60
+                : m1) * 255;
   }
 
   var constant$1 = x => () => x;
@@ -1825,7 +1825,7 @@
 
     // Interpolate pairs of numbers in a & b.
     while ((am = reA.exec(a))
-        && (bm = reB.exec(b))) {
+    && (bm = reB.exec(b))) {
       if ((bs = bm.index) > bi) { // a string precedes the next number in b
         bs = b.slice(bi, bs);
         if (s[i]) s[i] += bs; // coalesce with previous string
@@ -1854,9 +1854,9 @@
         ? one(q[0].x)
         : zero(b))
         : (b = q.length, function(t) {
-            for (var i = 0, o; i < b; ++i) s[(o = q[i]).i] = o.x(t);
-            return s.join("");
-          });
+          for (var i = 0, o; i < b; ++i) s[(o = q[i]).i] = o.x(t);
+          return s.join("");
+        });
   }
 
   var degrees = 180 / Math.PI;
@@ -2120,8 +2120,8 @@
     var c;
     return (typeof b === "number" ? interpolateNumber
         : b instanceof color ? interpolateRgb
-        : (c = color(b)) ? (b = c, interpolateRgb)
-        : interpolateString)(a, b);
+            : (c = color(b)) ? (b = c, interpolateRgb)
+                : interpolateString)(a, b);
   }
 
   function attrRemove(name) {
@@ -2144,7 +2144,7 @@
       var string0 = this.getAttribute(name);
       return string0 === string1 ? null
           : string0 === string00 ? interpolate0
-          : interpolate0 = interpolate(string00 = string0, value1);
+              : interpolate0 = interpolate(string00 = string0, value1);
     };
   }
 
@@ -2156,7 +2156,7 @@
       var string0 = this.getAttributeNS(fullname.space, fullname.local);
       return string0 === string1 ? null
           : string0 === string00 ? interpolate0
-          : interpolate0 = interpolate(string00 = string0, value1);
+              : interpolate0 = interpolate(string00 = string0, value1);
     };
   }
 
@@ -2171,7 +2171,7 @@
       string1 = value1 + "";
       return string0 === string1 ? null
           : string0 === string00 && string1 === string10 ? interpolate0
-          : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+              : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
     };
   }
 
@@ -2186,7 +2186,7 @@
       string1 = value1 + "";
       return string0 === string1 ? null
           : string0 === string00 && string1 === string10 ? interpolate0
-          : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+              : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
     };
   }
 
@@ -2195,7 +2195,7 @@
     return this.attrTween(name, typeof value === "function"
         ? (fullname.local ? attrFunctionNS : attrFunction)(fullname, i, tweenValue(this, "attr." + name, value))
         : value == null ? (fullname.local ? attrRemoveNS : attrRemove)(fullname)
-        : (fullname.local ? attrConstantNS : attrConstant)(fullname, i, value));
+            : (fullname.local ? attrConstantNS : attrConstant)(fullname, i, value));
   }
 
   function attrInterpolate(name, i) {
@@ -2445,7 +2445,7 @@
           string1 = (this.style.removeProperty(name), styleValue(this, name));
       return string0 === string1 ? null
           : string0 === string00 && string1 === string10 ? interpolate0
-          : interpolate0 = interpolate(string00 = string0, string10 = string1);
+              : interpolate0 = interpolate(string00 = string0, string10 = string1);
     };
   }
 
@@ -2463,7 +2463,7 @@
       var string0 = styleValue(this, name);
       return string0 === string1 ? null
           : string0 === string00 ? interpolate0
-          : interpolate0 = interpolate(string00 = string0, value1);
+              : interpolate0 = interpolate(string00 = string0, value1);
     };
   }
 
@@ -2478,7 +2478,7 @@
       if (value1 == null) string1 = value1 = (this.style.removeProperty(name), styleValue(this, name));
       return string0 === string1 ? null
           : string0 === string00 && string1 === string10 ? interpolate0
-          : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+              : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
     };
   }
 
@@ -2501,14 +2501,14 @@
   function transition_style(name, value, priority) {
     var i = (name += "") === "transform" ? interpolateTransformCss : interpolate;
     return value == null ? this
-        .styleTween(name, styleNull(name, i))
-        .on("end.style." + name, styleRemove(name))
-      : typeof value === "function" ? this
-        .styleTween(name, styleFunction(name, i, tweenValue(this, "style." + name, value)))
-        .each(styleMaybeRemove(this._id, name))
-      : this
-        .styleTween(name, styleConstant(name, i, value), priority)
-        .on("end.style." + name, null);
+            .styleTween(name, styleNull(name, i))
+            .on("end.style." + name, styleRemove(name))
+        : typeof value === "function" ? this
+                .styleTween(name, styleFunction(name, i, tweenValue(this, "style." + name, value)))
+                .each(styleMaybeRemove(this._id, name))
+            : this
+                .styleTween(name, styleConstant(name, i, value), priority)
+                .on("end.style." + name, null);
   }
 
   function styleInterpolate(name, i, priority) {
@@ -2872,8 +2872,8 @@
         dy0 = transform.invertY(extent[0][1]) - translateExtent[0][1],
         dy1 = transform.invertY(extent[1][1]) - translateExtent[1][1];
     return transform.translate(
-      dx1 > dx0 ? (dx0 + dx1) / 2 : Math.min(0, dx0) || Math.max(0, dx1),
-      dy1 > dy0 ? (dy0 + dy1) / 2 : Math.min(0, dy0) || Math.max(0, dy1)
+        dx1 > dx0 ? (dx0 + dx1) / 2 : Math.min(0, dx0) || Math.max(0, dx1),
+        dy1 > dy0 ? (dy0 + dy1) / 2 : Math.min(0, dy0) || Math.max(0, dy1)
     );
   }
 
@@ -2902,7 +2902,7 @@
           .on("wheel.zoom", wheeled, {passive: false})
           .on("mousedown.zoom", mousedowned)
           .on("dblclick.zoom", dblclicked)
-        .filter(touchable)
+          .filter(touchable)
           .on("touchstart.zoom", touchstarted)
           .on("touchmove.zoom", touchmoved)
           .on("touchend.zoom touchcancel.zoom", touchended)
@@ -2917,10 +2917,10 @@
       } else {
         selection.interrupt().each(function() {
           gesture(this, arguments)
-            .event(event)
-            .start()
-            .zoom(null, typeof transform === "function" ? transform.apply(this, arguments) : transform)
-            .end();
+              .event(event)
+              .start()
+              .zoom(null, typeof transform === "function" ? transform.apply(this, arguments) : transform)
+              .end();
         });
       }
     };
@@ -2947,8 +2947,8 @@
     zoom.translateBy = function(selection, x, y, event) {
       zoom.transform(selection, function() {
         return constrain(this.__zoom.translate(
-          typeof x === "function" ? x.apply(this, arguments) : x,
-          typeof y === "function" ? y.apply(this, arguments) : y
+            typeof x === "function" ? x.apply(this, arguments) : x,
+            typeof y === "function" ? y.apply(this, arguments) : y
         ), extent.apply(this, arguments), translateExtent);
       }, null, event);
     };
@@ -2959,8 +2959,8 @@
             t = this.__zoom,
             p0 = p == null ? centroid(e) : typeof p === "function" ? p.apply(this, arguments) : p;
         return constrain(identity.translate(p0[0], p0[1]).scale(t.k).translate(
-          typeof x === "function" ? -x.apply(this, arguments) : -x,
-          typeof y === "function" ? -y.apply(this, arguments) : -y
+            typeof x === "function" ? -x.apply(this, arguments) : -x,
+            typeof y === "function" ? -y.apply(this, arguments) : -y
         ), e, translateExtent);
       }, p, event);
     };
@@ -3044,16 +3044,16 @@
       emit: function(type) {
         var d = select(this.that).datum();
         listeners.call(
-          type,
-          this.that,
-          new ZoomEvent(type, {
-            sourceEvent: this.sourceEvent,
-            target: zoom,
             type,
-            transform: this.that.__zoom,
-            dispatch: listeners
-          }),
-          d
+            this.that,
+            new ZoomEvent(type, {
+              sourceEvent: this.sourceEvent,
+              target: zoom,
+              type,
+              transform: this.that.__zoom,
+              dispatch: listeners
+            }),
+            d
         );
       }
     };
@@ -3116,7 +3116,7 @@
           g.moved = dx * dx + dy * dy > clickDistance2;
         }
         g.event(event)
-         .zoom("mouse", constrain(translate(g.that.__zoom, g.mouse[0] = pointer(event, currentTarget), g.mouse[1]), g.extent, translateExtent));
+            .zoom("mouse", constrain(translate(g.that.__zoom, g.mouse[0] = pointer(event, currentTarget), g.mouse[1]), g.extent, translateExtent));
       }
 
       function mouseupped(event) {
@@ -3484,7 +3484,7 @@
   function Node(data) {
     this.data = data;
     this.depth =
-    this.height = 0;
+        this.height = 0;
     this.parent = null;
   }
 
@@ -3619,7 +3619,7 @@
       // If a fixed node size is specified, scale x and y.
       if (nodeSize) root.eachBefore(sizeNode);
 
-      // If a fixed tree size is specified, scale x and y based on the extent.
+          // If a fixed tree size is specified, scale x and y based on the extent.
       // Compute the left-most, right-most, and depth-most nodes for extents.
       else {
         var left = root,
@@ -3788,60 +3788,60 @@
    */
   class Orientation
   {
-      /**
-       * Constructor.
-       *
-       * @param {Number} boxWidth  The width of a single individual box
-       * @param {Number} boxHeight The height of a single individual box
-       */
-      constructor(boxWidth, boxHeight)
-      {
-          this._boxWidth     = boxWidth;
-          this._boxHeight    = boxHeight;
-          this._imagePadding = 5;
-          this._imageRadius  = Math.min(40, (this._boxHeight / 2) - this._imagePadding);
-          this._cornerRadius = 20;
-      }
+    /**
+     * Constructor.
+     *
+     * @param {Number} boxWidth  The width of a single individual box
+     * @param {Number} boxHeight The height of a single individual box
+     */
+    constructor(boxWidth, boxHeight)
+    {
+      this._boxWidth     = boxWidth;
+      this._boxHeight    = boxHeight;
+      this._imagePadding = 5;
+      this._imageRadius  = Math.min(40, (this._boxHeight / 2) - this._imagePadding);
+      this._cornerRadius = 20;
+    }
 
-      /**
-       * Returns the width of the box.
-       *
-       * @returns {Number}
-       */
-      get boxWidth()
-      {
-          return this._boxWidth;
-      }
+    /**
+     * Returns the width of the box.
+     *
+     * @returns {Number}
+     */
+    get boxWidth()
+    {
+      return this._boxWidth;
+    }
 
-      /**
-       * Returns the height of the box.
-       *
-       * @returns {Number}
-       */
-      get boxHeight()
-      {
-          return this._boxHeight;
-      }
+    /**
+     * Returns the height of the box.
+     *
+     * @returns {Number}
+     */
+    get boxHeight()
+    {
+      return this._boxHeight;
+    }
 
-      /**
-       * Returns the corner radius.
-       *
-       * @returns {Number}
-       */
-      cornerRadius()
-      {
-          return this._cornerRadius;
-      }
+    /**
+     * Returns the corner radius.
+     *
+     * @returns {Number}
+     */
+    cornerRadius()
+    {
+      return this._cornerRadius;
+    }
 
-      /**
-       * Returns the radius of the image.
-       *
-       * @returns {Number}
-       */
-      imageRadius()
-      {
-          return this._imageRadius;
-      }
+    /**
+     * Returns the radius of the image.
+     *
+     * @returns {Number}
+     */
+    imageRadius()
+    {
+      return this._imageRadius;
+    }
   }
 
   /**
@@ -3856,16 +3856,16 @@
    */
   function elbowVertical(datum, orientation)
   {
-      // Left => Right, Right => Left
-      let sourceX = orientation.x(datum.source),
-          sourceY = orientation.y(datum.source) + (orientation.direction() * (orientation.boxHeight / 2)),
-          targetX = orientation.x(datum.target),
-          targetY = orientation.y(datum.target) - (orientation.direction() * (orientation.boxHeight / 2));
+    // Left => Right, Right => Left
+    let sourceX = orientation.x(datum.source),
+        sourceY = orientation.y(datum.source) + (orientation.direction() * (orientation.boxHeight / 2)),
+        targetX = orientation.x(datum.target),
+        targetY = orientation.y(datum.target) - (orientation.direction() * (orientation.boxHeight / 2));
 
-      return "M " + sourceX + " " + sourceY +
-          " V " + (sourceY + ((targetY - sourceY) / 2)) +
-          " H " + targetX +
-          " V " + targetY;
+    return "M " + sourceX + " " + sourceY +
+        " V " + (sourceY + ((targetY - sourceY) / 2)) +
+        " H " + targetX +
+        " V " + targetY;
   }
 
   /**
@@ -3881,103 +3881,103 @@
    */
   class OrientationTopBottom extends Orientation
   {
-      /**
-       * Constructor.
-       *
-       * @param {Number} boxWidth  The width of a single individual box
-       * @param {Number} boxHeight The height of a single individual box
-       */
-      constructor(boxWidth, boxHeight)
-      {
-          super(boxWidth, boxHeight);
+    /**
+     * Constructor.
+     *
+     * @param {Number} boxWidth  The width of a single individual box
+     * @param {Number} boxHeight The height of a single individual box
+     */
+    constructor(boxWidth, boxHeight)
+    {
+      super(boxWidth, boxHeight);
 
-          this._splittNames = true;
-      }
+      this._splittNames = true;
+    }
 
-      direction()
-      {
-          return 1;
-      }
+    direction()
+    {
+      return 1;
+    }
 
-      nodeWidth()
-      {
-          return (this._boxWidth * 2) + 30;
-      }
+    nodeWidth()
+    {
+      return (this._boxWidth * 2) + 30;
+    }
 
-      imageCornerRadius()
-      {
-          return this.cornerRadius() - this._imagePadding;
-      }
+    imageCornerRadius()
+    {
+      return this.cornerRadius() - this._imagePadding;
+    }
 
-      /**
-       * Returns the X coordinate of the image position.
-       *
-       * @returns {Number}
-       */
-      imageX()
-      {
-          return -(this._boxWidth / 2) + this._imagePadding;
-      }
+    /**
+     * Returns the X coordinate of the image position.
+     *
+     * @returns {Number}
+     */
+    imageX()
+    {
+      return -(this._boxWidth / 2) + this._imagePadding;
+    }
 
-      /**
-       * Returns the Y coordinate of the image position.
-       *
-       * @returns {Number}
-       */
-      imageY()
-      {
-          return -(this._boxHeight / 2) + this._imagePadding;
-      }
+    /**
+     * Returns the Y coordinate of the image position.
+     *
+     * @returns {Number}
+     */
+    imageY()
+    {
+      return -(this._boxHeight / 2) + this._imagePadding;
+    }
 
-      imageWidth()
-      {
-          return this._boxWidth - (this._imagePadding * 2);
-      }
+    imageWidth()
+    {
+      return this._boxWidth - (this._imagePadding * 2);
+    }
 
-      imageHeight()
-      {
-          return this.imageRadius() * 2;
-      }
+    imageHeight()
+    {
+      return this.imageRadius() * 2;
+    }
 
-      textX()
-      {
-          return -(this._boxWidth / 2) + (this.imageRadius() * 2) + 20 - this._imagePadding;
-      }
+    textX()
+    {
+      return -(this._boxWidth / 2) + (this.imageRadius() * 2) + 20 - this._imagePadding;
+    }
 
-      textY()
-      {
-          return this.imageY() + this.imageHeight() + 20;
-      }
+    textY()
+    {
+      return this.imageY() + this.imageHeight() + 20;
+    }
 
-      /**
-       * Calculate the available text width.
-       *
-       * @returns {Number}
-       */
-      textWidth()
-      {
-          return this.imageWidth();
-      }
+    /**
+     * Calculate the available text width.
+     *
+     * @returns {Number}
+     */
+    textWidth()
+    {
+      return this.imageWidth();
+    }
 
-      norm(d)
-      {
-          d.y = this.direction() * d.depth * (this._boxHeight + 30);
-      }
+    norm(d)
+    {
+      d.y = this.direction() * d.depth * (this._boxHeight + 30);
+    }
 
-      elbow(d)
-      {
-          return elbowVertical(d, this);
-      }
+    elbow(d)
+    {
+      return elbowVertical(d, this);
+    }
 
-      x(d)
-      {
-          return d.x;
-      }
+    x(d)
+    {
+      return d.x;
+    }
 
-      y(d)
-      {
-          return d.y;
-      }
+    y(d)
+    {
+      return d.y;
+    }
   }
 
   /**
@@ -3993,103 +3993,103 @@
    */
   class OrientationBottomTop extends Orientation
   {
-      /**
-       * Constructor.
-       *
-       * @param {Number} boxWidth  The width of a single individual box
-       * @param {Number} boxHeight The height of a single individual box
-       */
-      constructor(boxWidth, boxHeight)
-      {
-          super(boxWidth, boxHeight);
+    /**
+     * Constructor.
+     *
+     * @param {Number} boxWidth  The width of a single individual box
+     * @param {Number} boxHeight The height of a single individual box
+     */
+    constructor(boxWidth, boxHeight)
+    {
+      super(boxWidth, boxHeight);
 
-          this._splittNames = true;
-      }
+      this._splittNames = true;
+    }
 
-      direction()
-      {
-          return -1;
-      }
+    direction()
+    {
+      return -1;
+    }
 
-      nodeWidth()
-      {
-          return (this._boxWidth * 2) + 30;
-      }
+    nodeWidth()
+    {
+      return (this._boxWidth * 2) + 30;
+    }
 
-      imageCornerRadius()
-      {
-          return this.cornerRadius() - this._imagePadding;
-      }
+    imageCornerRadius()
+    {
+      return this.cornerRadius() - this._imagePadding;
+    }
 
-      /**
-       * Returns the X coordinate of the image position.
-       *
-       * @returns {Number}
-       */
-      imageX()
-      {
-          return -(this._boxWidth / 2) + this._imagePadding;
-      }
+    /**
+     * Returns the X coordinate of the image position.
+     *
+     * @returns {Number}
+     */
+    imageX()
+    {
+      return -(this._boxWidth / 2) + this._imagePadding;
+    }
 
-      /**
-       * Returns the Y coordinate of the image position.
-       *
-       * @returns {Number}
-       */
-      imageY()
-      {
-          return -(this._boxHeight / 2) + this._imagePadding;
-      }
+    /**
+     * Returns the Y coordinate of the image position.
+     *
+     * @returns {Number}
+     */
+    imageY()
+    {
+      return -(this._boxHeight / 2) + this._imagePadding;
+    }
 
-      imageWidth()
-      {
-          return this._boxWidth - (this._imagePadding * 2);
-      }
+    imageWidth()
+    {
+      return this._boxWidth - (this._imagePadding * 2);
+    }
 
-      imageHeight()
-      {
-          return this.imageRadius() * 2;
-      }
+    imageHeight()
+    {
+      return this.imageRadius() * 2;
+    }
 
-      textX()
-      {
-          return -(this._boxWidth / 2) + (this.imageRadius() * 2) + 20 - this._imagePadding;
-      }
+    textX()
+    {
+      return -(this._boxWidth / 2) + (this.imageRadius() * 2) + 20 - this._imagePadding;
+    }
 
-      textY()
-      {
-          return this.imageY() + this.imageHeight() + 20;
-      }
+    textY()
+    {
+      return this.imageY() + this.imageHeight() + 20;
+    }
 
-      /**
-       * Calculate the available text width.
-       *
-       * @returns {Number}
-       */
-      textWidth()
-      {
-          return this.imageWidth();
-      }
+    /**
+     * Calculate the available text width.
+     *
+     * @returns {Number}
+     */
+    textWidth()
+    {
+      return this.imageWidth();
+    }
 
-      norm(d)
-      {
-          d.y = this.direction() * d.depth * (this._boxHeight + 30);
-      }
+    norm(d)
+    {
+      d.y = this.direction() * d.depth * (this._boxHeight + 30);
+    }
 
-      elbow(d)
-      {
-          return elbowVertical(d, this);
-      }
+    elbow(d)
+    {
+      return elbowVertical(d, this);
+    }
 
-      x(d)
-      {
-          return d.x;
-      }
+    x(d)
+    {
+      return d.x;
+    }
 
-      y(d)
-      {
-          return d.y;
-      }
+    y(d)
+    {
+      return d.y;
+    }
   }
 
   /**
@@ -4104,16 +4104,16 @@
    */
   function elbowHorizontal(datum, orientation)
   {
-      // Left => Right, Right => Left
-      let sourceX = orientation.y(datum.source),
-          sourceY = orientation.x(datum.source) + (orientation.direction() * (orientation.boxWidth / 2)),
-          targetX = orientation.y(datum.target),
-          targetY = orientation.x(datum.target) - (orientation.direction() * (orientation.boxWidth / 2));
+    // Left => Right, Right => Left
+    let sourceX = orientation.y(datum.source),
+        sourceY = orientation.x(datum.source) + (orientation.direction() * (orientation.boxWidth / 2)),
+        targetX = orientation.y(datum.target),
+        targetY = orientation.x(datum.target) - (orientation.direction() * (orientation.boxWidth / 2));
 
-      return "M " + sourceY + " " + sourceX +
-          " H " + (sourceY + ((targetY - sourceY) / 2)) +
-          " V " + targetX +
-          " H " + targetY;
+    return "M " + sourceY + " " + sourceX +
+        " H " + (sourceY + ((targetY - sourceY) / 2)) +
+        " V " + targetX +
+        " H " + targetY;
   }
 
   /**
@@ -4129,93 +4129,93 @@
    */
   class OrientationLeftRight extends Orientation
   {
-      /**
-       * Constructor.
-       *
-       * @param {Number} boxWidth  The width of a single individual box
-       * @param {Number} boxHeight The height of a single individual box
-       */
-      constructor(boxWidth, boxHeight)
-      {
-          super(boxWidth, boxHeight);
+    /**
+     * Constructor.
+     *
+     * @param {Number} boxWidth  The width of a single individual box
+     * @param {Number} boxHeight The height of a single individual box
+     */
+    constructor(boxWidth, boxHeight)
+    {
+      super(boxWidth, boxHeight);
 
-          this._splittNames = false;
-      }
+      this._splittNames = false;
+    }
 
-      direction()
-      {
-          return 1;
-      }
+    direction()
+    {
+      return 1;
+    }
 
-      nodeWidth()
-      {
-          return (this._boxHeight * 2) + 30;
-      }
+    nodeWidth()
+    {
+      return (this._boxHeight * 2) + 30;
+    }
 
-      imageCornerRadius()
-      {
-          return this.cornerRadius() - this._imagePadding;
-      }
+    imageCornerRadius()
+    {
+      return this.cornerRadius() - this._imagePadding;
+    }
 
-      imageX()
-      {
-          return -(this._boxWidth / 2) + this._imagePadding;
-      }
+    imageX()
+    {
+      return -(this._boxWidth / 2) + this._imagePadding;
+    }
 
-      imageY()
-      {
-          return -this.imageRadius();
-      }
+    imageY()
+    {
+      return -this.imageRadius();
+    }
 
-      imageWidth()
-      {
-          return this.imageRadius() * 2;
-      }
+    imageWidth()
+    {
+      return this.imageRadius() * 2;
+    }
 
-      imageHeight()
-      {
-          return this.imageRadius() * 2;
-      }
+    imageHeight()
+    {
+      return this.imageRadius() * 2;
+    }
 
-      textX()
-      {
-          return -(this._boxWidth / 2) + (this.imageRadius() * 2) + 20 - this._imagePadding;
-      }
+    textX()
+    {
+      return -(this._boxWidth / 2) + (this.imageRadius() * 2) + 20 - this._imagePadding;
+    }
 
-      textY()
-      {
-          return -15;
-      }
+    textY()
+    {
+      return -15;
+    }
 
-      /**
-       * Calculate the available text width.
-       *
-       * @returns {Number}
-       */
-      textWidth()
-      {
-          return this._boxWidth - ((this.imageRadius() * 2) + 15 + this._imagePadding) - (15 * 2);
-      }
+    /**
+     * Calculate the available text width.
+     *
+     * @returns {Number}
+     */
+    textWidth()
+    {
+      return this._boxWidth - ((this.imageRadius() * 2) + 15 + this._imagePadding) - (15 * 2);
+    }
 
-      norm(d)
-      {
-          d.y = this.direction() * d.depth * (this._boxWidth + 30);
-      }
+    norm(d)
+    {
+      d.y = this.direction() * d.depth * (this._boxWidth + 30);
+    }
 
-      elbow(d)
-      {
-          return elbowHorizontal(d, this);
-      }
+    elbow(d)
+    {
+      return elbowHorizontal(d, this);
+    }
 
-      x(d)
-      {
-          return d.y;
-      }
+    x(d)
+    {
+      return d.y;
+    }
 
-      y(d)
-      {
-          return d.x;
-      }
+    y(d)
+    {
+      return d.x;
+    }
   }
 
   /**
@@ -4231,93 +4231,93 @@
    */
   class OrientationRightLeft extends Orientation
   {
-      /**
-       * Constructor.
-       *
-       * @param {Number} boxWidth  The width of a single individual box
-       * @param {Number} boxHeight The height of a single individual box
-       */
-      constructor(boxWidth, boxHeight)
-      {
-          super(boxWidth, boxHeight);
+    /**
+     * Constructor.
+     *
+     * @param {Number} boxWidth  The width of a single individual box
+     * @param {Number} boxHeight The height of a single individual box
+     */
+    constructor(boxWidth, boxHeight)
+    {
+      super(boxWidth, boxHeight);
 
-          this._splittNames = false;
-      }
+      this._splittNames = false;
+    }
 
-      direction()
-      {
-          return -1;
-      }
+    direction()
+    {
+      return -1;
+    }
 
-      nodeWidth()
-      {
-          return (this._boxHeight * 2) + 30;
-      }
+    nodeWidth()
+    {
+      return (this._boxHeight * 2) + 30;
+    }
 
-      imageCornerRadius()
-      {
-          return this.cornerRadius() - this._imagePadding;
-      }
+    imageCornerRadius()
+    {
+      return this.cornerRadius() - this._imagePadding;
+    }
 
-      imageX()
-      {
-          return -(this._boxWidth / 2) + this._imagePadding;
-      }
+    imageX()
+    {
+      return -(this._boxWidth / 2) + this._imagePadding;
+    }
 
-      imageY()
-      {
-          return -this.imageRadius();
-      }
+    imageY()
+    {
+      return -this.imageRadius();
+    }
 
-      imageWidth()
-      {
-          return this.imageRadius() * 2;
-      }
+    imageWidth()
+    {
+      return this.imageRadius() * 2;
+    }
 
-      imageHeight()
-      {
-          return this.imageRadius() * 2;
-      }
+    imageHeight()
+    {
+      return this.imageRadius() * 2;
+    }
 
-      textX()
-      {
-          return -(this._boxWidth / 2) + (this.imageRadius() * 2) + 20 - this._imagePadding;
-      }
+    textX()
+    {
+      return -(this._boxWidth / 2) + (this.imageRadius() * 2) + 20 - this._imagePadding;
+    }
 
-      textY()
-      {
-          return -15;
-      }
+    textY()
+    {
+      return -15;
+    }
 
-      /**
-       * Calculate the available text width.
-       *
-       * @returns {Number}
-       */
-      textWidth()
-      {
-          return this._boxWidth - ((this.imageRadius() * 2) + 15 + this._imagePadding) - (15 * 2);
-      }
+    /**
+     * Calculate the available text width.
+     *
+     * @returns {Number}
+     */
+    textWidth()
+    {
+      return this._boxWidth - ((this.imageRadius() * 2) + 15 + this._imagePadding) - (15 * 2);
+    }
 
-      norm(d)
-      {
-          d.y = this.direction() * d.depth * (this._boxWidth + 30);
-      }
+    norm(d)
+    {
+      d.y = this.direction() * d.depth * (this._boxWidth + 30);
+    }
 
-      elbow(d)
-      {
-          return elbowHorizontal(d, this);
-      }
+    elbow(d)
+    {
+      return elbowHorizontal(d, this);
+    }
 
-      x(d)
-      {
-          return d.y;
-      }
+    x(d)
+    {
+      return d.y;
+    }
 
-      y(d)
-      {
-          return d.x;
-      }
+    y(d)
+    {
+      return d.x;
+    }
   }
 
   /**
@@ -4333,28 +4333,28 @@
    */
   class OrientationCollection
   {
-      /**
-       * Constructor.
-       */
-      constructor()
-      {
-          this._orientations = {
-              [LAYOUT_TOPBOTTOM]: new OrientationTopBottom(150, 175),
-              [LAYOUT_BOTTOMTOP]: new OrientationBottomTop(150, 175),
-              [LAYOUT_LEFTRIGHT]: new OrientationLeftRight(300, 80),
-              [LAYOUT_RIGHTLEFT]: new OrientationRightLeft(300, 80)
-          };
-      }
+    /**
+     * Constructor.
+     */
+    constructor()
+    {
+      this._orientations = {
+        [LAYOUT_TOPBOTTOM]: new OrientationTopBottom(150, 175),
+        [LAYOUT_BOTTOMTOP]: new OrientationBottomTop(150, 175),
+        [LAYOUT_LEFTRIGHT]: new OrientationLeftRight(300, 80),
+        [LAYOUT_RIGHTLEFT]: new OrientationRightLeft(300, 80)
+      };
+    }
 
-      /**
-       * Returns the internal element.
-       *
-       * @returns {Array}
-       */
-      get()
-      {
-          return this._orientations;
-      }
+    /**
+     * Returns the internal element.
+     *
+     * @returns {Array}
+     */
+    get()
+    {
+      return this._orientations;
+    }
   }
 
   /**
@@ -4370,142 +4370,142 @@
    */
   class Configuration
   {
-      /**
-       * Constructor.
-       *
-       * @param {String[]} labels
-       * @param {Number}   generations
-       * @param {String}   defaultColor
-       * @param {String}   fontColor
-       * @param {Boolean}  showEmptyBoxes
-       * @param {String}   treeLayout
-       * @param {Boolean}  rtl
-       * @param {Number}   direction
-       */
-      constructor(
-          labels,
-          generations = 4,
-          defaultColor = "rgb(240, 240, 240)",
-          fontColor = "rgb(0, 0, 0)",
-          showEmptyBoxes = false,
-          treeLayout = LAYOUT_LEFTRIGHT,
-          rtl = false,
-          direction = 1
-      ) {
-          // The layout/orientation of the tree
-          this._treeLayout   = treeLayout;
-          this._orientations = new OrientationCollection();
+    /**
+     * Constructor.
+     *
+     * @param {String[]} labels
+     * @param {Number}   generations
+     * @param {String}   defaultColor
+     * @param {String}   fontColor
+     * @param {Boolean}  showEmptyBoxes
+     * @param {String}   treeLayout
+     * @param {Boolean}  rtl
+     * @param {Number}   direction
+     */
+    constructor(
+        labels,
+        generations = 4,
+        defaultColor = "rgb(240, 240, 240)",
+        fontColor = "rgb(0, 0, 0)",
+        showEmptyBoxes = false,
+        treeLayout = LAYOUT_LEFTRIGHT,
+        rtl = false,
+        direction = 1
+    ) {
+      // The layout/orientation of the tree
+      this._treeLayout   = treeLayout;
+      this._orientations = new OrientationCollection();
 
-          //
-          this.duration = 750;
+      //
+      this.duration = 750;
 
-          //
-          this.padding   = 15;
+      //
+      this.padding   = 15;
 
-          // Padding around the image circle
-          this.imagePadding = 5;
+      // Padding around the image circle
+      this.imagePadding = 5;
 
-          // The radius of the image
-          // this.imageRadius = (this.orientation.boxHeight / 2) - this.imagePadding;
+      // The radius of the image
+      // this.imageRadius = (this.orientation.boxHeight / 2) - this.imagePadding;
 
-          // The diameter of the image
-          // this.imageDiameter = this.imageRadius * 2;
+      // The diameter of the image
+      // this.imageDiameter = this.imageRadius * 2;
 
-          // Default number of generations to display
-          this._generations = generations;
+      // Default number of generations to display
+      this._generations = generations;
 
-          // Left/Right padding of text (used with truncation)
-          this.textPadding = 8;
+      // Left/Right padding of text (used with truncation)
+      this.textPadding = 8;
 
-          // Default background color of an arc
-          this.defaultColor = defaultColor;
+      // Default background color of an arc
+      this.defaultColor = defaultColor;
 
-          // // Default font size, color and scaling
-          this._fontSize  = 14;
-          // this._fontScale = fontScale;
-          this.fontColor = fontColor;
+      // // Default font size, color and scaling
+      this._fontSize  = 14;
+      // this._fontScale = fontScale;
+      this.fontColor = fontColor;
 
-          this._showEmptyBoxes  = showEmptyBoxes;
+      this._showEmptyBoxes  = showEmptyBoxes;
 
-          // Duration of update animation if clicked on a person
-          // this.updateDuration = 1250;
+      // Duration of update animation if clicked on a person
+      // this.updateDuration = 1250;
 
-          this.rtl    = rtl;
-          this.labels = labels;
+      this.rtl    = rtl;
+      this.labels = labels;
 
-          // direction` is either 1 (forward) or -1 (backward)
-          this.direction = direction;
-      }
+      // direction` is either 1 (forward) or -1 (backward)
+      this.direction = direction;
+    }
 
-      /**
-       * Returns the number of generations to display.
-       *
-       * @returns {Number}
-       */
-      get generations()
-      {
-          return this._generations;
-      }
+    /**
+     * Returns the number of generations to display.
+     *
+     * @returns {Number}
+     */
+    get generations()
+    {
+      return this._generations;
+    }
 
-      /**
-       * Sets the number of generations to display.
-       *
-       * @param {Number} value The number of generations to display
-       */
-      set generations(value)
-      {
-          this._generations = value;
-      }
+    /**
+     * Sets the number of generations to display.
+     *
+     * @param {Number} value The number of generations to display
+     */
+    set generations(value)
+    {
+      this._generations = value;
+    }
 
-      /**
-       * Returns whether to show or hide empty boxes.
-       *
-       * @returns {Boolean}
-       */
-      get showEmptyBoxes()
-      {
-          return this._showEmptyBoxes;
-      }
+    /**
+     * Returns whether to show or hide empty boxes.
+     *
+     * @returns {Boolean}
+     */
+    get showEmptyBoxes()
+    {
+      return this._showEmptyBoxes;
+    }
 
-      /**
-       * Sets whether to show or hide empty boxes.
-       *
-       * @param {Boolean} value Either true or false
-       */
-      set showEmptyBoxes(value)
-      {
-          this._showEmptyBoxes = value;
-      }
+    /**
+     * Sets whether to show or hide empty boxes.
+     *
+     * @param {Boolean} value Either true or false
+     */
+    set showEmptyBoxes(value)
+    {
+      this._showEmptyBoxes = value;
+    }
 
-      /**
-       * Returns the tree layout.
-       *
-       * @returns {String}
-       */
-      get treeLayout()
-      {
-          return this._treeLayout;
-      }
+    /**
+     * Returns the tree layout.
+     *
+     * @returns {String}
+     */
+    get treeLayout()
+    {
+      return this._treeLayout;
+    }
 
-      /**
-       * Sets the tree layout.
-       *
-       * @param {String} value Tree layout value
-       */
-      set treeLayout(value)
-      {
-          this._treeLayout = value;
-      }
+    /**
+     * Sets the tree layout.
+     *
+     * @param {String} value Tree layout value
+     */
+    set treeLayout(value)
+    {
+      this._treeLayout = value;
+    }
 
-      /**
-       * Returns the current orientation.
-       *
-       * @returns {Orientation}
-       */
-      get orientation()
-      {
-          return this._orientations.get()[this.treeLayout];
-      }
+    /**
+     * Returns the current orientation.
+     *
+     * @returns {Orientation}
+     */
+    get orientation()
+    {
+      return this._orientations.get()[this.treeLayout];
+    }
   }
 
   /**
@@ -4521,130 +4521,130 @@
    */
   class Hierarchy
   {
-      /**
-       * Constructor.
-       *
-       * @param {Configuration} configuration The application configuration
-       */
-      constructor(configuration)
-      {
-          this._configuration = configuration;
-          this._nodes         = null;
-          this._root          = null;
+    /**
+     * Constructor.
+     *
+     * @param {Configuration} configuration The application configuration
+     */
+    constructor(configuration)
+    {
+      this._configuration = configuration;
+      this._nodes         = null;
+      this._root          = null;
 
-          this.nodeWidth  = this._configuration.orientation.nodeWidth();
-          this.nodeHeight = 0;
-          this.separation = 0.5;
-      }
+      this.nodeWidth  = this._configuration.orientation.nodeWidth();
+      this.nodeHeight = 0;
+      this.separation = 0.5;
+    }
 
-      /**
-       * Initialize the hierarchical chart data.
-       *
-       * @param {Object} data The JSON encoded chart data
-       */
-      init(data)
-      {
-          // Get the greatest depth
-          const getDepth       = ({parents}) => 1 + (parents ? Math.max(...parents.map(getDepth)) : 0);
-          const maxGenerations = getDepth(data);
+    /**
+     * Initialize the hierarchical chart data.
+     *
+     * @param {Object} data The JSON encoded chart data
+     */
+    init(data)
+    {
+      // Get the greatest depth
+      const getDepth       = ({parents}) => 1 + (parents ? Math.max(...parents.map(getDepth)) : 0);
+      const maxGenerations = getDepth(data);
 
-          // Construct root node from the hierarchical data
-          let root = hierarchy(
-              data,
-              data => {
-                  if (!this._configuration.showEmptyBoxes) {
-                      return data.parents;
-                  }
+      // Construct root node from the hierarchical data
+      let root = hierarchy(
+          data,
+          data => {
+            if (!this._configuration.showEmptyBoxes) {
+              return data.parents;
+            }
 
-                  // Fill up the missing parents to the requested number of generations
-                  if (!data.parents && (data.generation < maxGenerations)) {
-                  // if (!data.parents && (data.generation < this._configuration.generations)) {
-                      data.parents = [
-                          this.createEmptyNode(data.generation + 1, SEX_MALE),
-                          this.createEmptyNode(data.generation + 1, SEX_FEMALE)
-                      ];
-                  }
+            // Fill up the missing parents to the requested number of generations
+            if (!data.parents && (data.generation < maxGenerations)) {
+              // if (!data.parents && (data.generation < this._configuration.generations)) {
+              data.parents = [
+                this.createEmptyNode(data.generation + 1, SEX_MALE),
+                this.createEmptyNode(data.generation + 1, SEX_FEMALE)
+              ];
+            }
 
-                  // Add missing parent record if we got only one
-                  if (data.parents && (data.parents.length < 2)) {
-                      if (data.parents[0].sex === SEX_MALE) {
-                          data.parents.push(
-                              this.createEmptyNode(data.generation + 1, SEX_FEMALE)
-                          );
-                      } else {
-                          data.parents.unshift(
-                              this.createEmptyNode(data.generation + 1, SEX_MALE)
-                          );
-                      }
-                  }
+            // Add missing parent record if we got only one
+            if (data.parents && (data.parents.length < 2)) {
+              if (data.parents[0].sex === SEX_MALE) {
+                data.parents.push(
+                    this.createEmptyNode(data.generation + 1, SEX_FEMALE)
+                );
+              } else {
+                data.parents.unshift(
+                    this.createEmptyNode(data.generation + 1, SEX_MALE)
+                );
+              }
+            }
 
-                  return data.parents;
-              });
+            return data.parents;
+          });
 
-          // Declares a tree layout and assigns the size
-          const treeLayout = tree()
-              .nodeSize([this.nodeWidth, this.nodeHeight])
-              .separation(d => this.separation);
+      // Declares a tree layout and assigns the size
+      const treeLayout = tree()
+          .nodeSize([this.nodeWidth, this.nodeHeight])
+          .separation(d => this.separation);
 
-          // Map the node data to the tree layout
-          this._root  = root;
-          this._nodes = treeLayout(root);
-      }
+      // Map the node data to the tree layout
+      this._root  = root;
+      this._nodes = treeLayout(root);
+    }
 
-      /**
-       * Returns the nodes.
-       *
-       * @returns {Array}
-       *
-       * @public
-       */
-      get nodes()
-      {
-          return this._nodes;
-      }
+    /**
+     * Returns the nodes.
+     *
+     * @returns {Array}
+     *
+     * @public
+     */
+    get nodes()
+    {
+      return this._nodes;
+    }
 
-      /**
-       * Returns the root note.
-       *
-       * @returns {Object}
-       *
-       * @public
-       */
-      get root()
-      {
-          return this._root;
-      }
+    /**
+     * Returns the root note.
+     *
+     * @returns {Object}
+     *
+     * @public
+     */
+    get root()
+    {
+      return this._root;
+    }
 
-      /**
-       * Create an empty child node object.
-       *
-       * @param {Number} generation Generation of the node
-       * @param {String} sex        The sex of the individual
-       *
-       * @returns {Object}
-       *
-       * @private
-       */
-      createEmptyNode(generation, sex)
-      {
-          return {
-              id               : 0,
-              xref             : "",
-              url              : "",
-              updateUrl        : "",
-              generation       : generation,
-              name             : "",
-              firstNames       : [],
-              lastNames        : [],
-              preferredName    : "",
-              alternativeNames : [],
-              isAltRtl         : false,
-              sex              : sex,
-              timespan         : "",
-              color            : this._configuration.defaultColor,
-              colors           : [[], []]
-          };
-      }
+    /**
+     * Create an empty child node object.
+     *
+     * @param {Number} generation Generation of the node
+     * @param {String} sex        The sex of the individual
+     *
+     * @returns {Object}
+     *
+     * @private
+     */
+    createEmptyNode(generation, sex)
+    {
+      return {
+        id               : 0,
+        xref             : "",
+        url              : "",
+        updateUrl        : "",
+        generation       : generation,
+        name             : "",
+        firstNames       : [],
+        lastNames        : [],
+        preferredName    : "",
+        alternativeNames : [],
+        isAltRtl         : false,
+        sex              : sex,
+        timespan         : "",
+        color            : this._configuration.defaultColor,
+        colors           : [[], []]
+      };
+    }
   }
 
   /**
@@ -4661,17 +4661,17 @@
    */
   function dataUrl(input, init)
   {
-      return fetch(input, init)
-          .then(response => response.blob())
-          .then(blob => new Promise(
-              (resolve, reject) => {
-                  const reader = new FileReader();
-                  reader.onloadend = () => resolve(reader.result);
-                  reader.onerror = reject;
-                  reader.readAsDataURL(blob);
-              }
-          )
-      );
+    return fetch(input, init)
+        .then(response => response.blob())
+        .then(blob => new Promise(
+            (resolve, reject) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result);
+              reader.onerror = reject;
+              reader.readAsDataURL(blob);
+            }
+            )
+        );
   }
 
   /**
@@ -4687,207 +4687,207 @@
    */
   class Tree
   {
-      /**
-       * Constructor.
-       *
-       * @param {Svg}           svg
-       * @param {Configuration} configuration The configuration
-       * @param {Hierarchy}     hierarchy     The hierarchiecal data
-       */
-      constructor(svg, configuration, hierarchy)
-      {
-          this._svg           = svg;
-          this._configuration = configuration;
-          this._hierarchy     = hierarchy;
+    /**
+     * Constructor.
+     *
+     * @param {Svg}           svg
+     * @param {Configuration} configuration The configuration
+     * @param {Hierarchy}     hierarchy     The hierarchiecal data
+     */
+    constructor(svg, configuration, hierarchy)
+    {
+      this._svg           = svg;
+      this._configuration = configuration;
+      this._hierarchy     = hierarchy;
 
-          this._hierarchy.root.x0 = 0;
-          this._hierarchy.root.y0 = 0;
+      this._hierarchy.root.x0 = 0;
+      this._hierarchy.root.y0 = 0;
 
-          this._orientation = this._configuration.orientation;
+      this._orientation = this._configuration.orientation;
 
-          this.draw(this._hierarchy.root);
-      }
+      this.draw(this._hierarchy.root);
+    }
 
-      /**
-       * Draw the tree.
-       *
-       * @public
-       */
-      draw(source)
-      {
-          let nodes = this._hierarchy.nodes.descendants();
-          let links = this._hierarchy.nodes.links();
+    /**
+     * Draw the tree.
+     *
+     * @public
+     */
+    draw(source)
+    {
+      let nodes = this._hierarchy.nodes.descendants();
+      let links = this._hierarchy.nodes.links();
 
-          // // Start with only the first few generations of ancestors showing
-          // nodes.forEach((person) => {
-          //     if (person.parents) {
-          //         person.parents.forEach((child) => this.collapse(child));
-          //     }
-          // });
+      // // Start with only the first few generations of ancestors showing
+      // nodes.forEach((person) => {
+      //     if (person.parents) {
+      //         person.parents.forEach((child) => this.collapse(child));
+      //     }
+      // });
 
-          // Normalize for fixed-depth.
-          nodes.forEach((person) => {
-              this._orientation.norm(person);
+      // Normalize for fixed-depth.
+      nodes.forEach((person) => {
+        this._orientation.norm(person);
+      });
+
+      this.drawLinks(links, source);
+      this.drawNodes(nodes, source);
+
+      // Stash the old positions for transition.
+      nodes.forEach((person) => {
+        person.x0 = person.x;
+        person.y0 = person.y;
+      });
+    }
+
+    // /**
+    //  * Draw the tree.
+    //  *
+    //  * @public
+    //  */
+    // update(source)
+    // {
+    //     let nodes = this._hierarchy.nodes.descendants();
+    //     let links = this._hierarchy.nodes.links();
+    //
+    //     // // Start with only the first few generations of ancestors showing
+    //     // nodes.forEach((person) => {
+    //     //     if (person.parents) {
+    //     //         person.parents.forEach((child) => this.collapse(child));
+    //     //     }
+    //     // });
+    //
+    //     this.drawLinks(links, source);
+    //     this.drawNodes(nodes, source);
+    //
+    //     // Stash the old positions for transition.
+    //     nodes.forEach((person) => {
+    //         person.x0 = person.x;
+    //         person.y0 = person.y;
+    //     });
+    // }
+
+    /**
+     * Draw the person boxes.
+     *
+     * @param {Array} nodes Array of descendant nodes
+     *
+     * @private
+     */
+    drawNodes(nodes, source)
+    {
+      let i = 0;
+      let that = this;
+
+      this._svg
+          .defs
+          .get()
+          .append('clipPath')
+          .attr('id', 'clip-rect')
+          .append("rect")
+          .attr("rx", that._orientation.imageCornerRadius())
+          .attr("ry", that._orientation.imageCornerRadius())
+          .attr("x", that._orientation.imageX())
+          .attr("y", that._orientation.imageY())
+          .attr("width", that._orientation.imageWidth())
+          .attr("height", that._orientation.imageHeight());
+
+      this._svg.visual
+          .transition()
+          .duration(this._configuration.duration);
+
+      let node = this._svg.visual
+          .selectAll("g.person")
+          .data(nodes, person => person.id || (person.id = ++i));
+
+      let nodeEnter = node
+          .enter()
+          .append("g")
+          .attr("class", "person")
+          // Add new nodes at the right side of their child's box.
+          // They will be transitioned into their proper position.
+          // .attr("transform", person => {
+          //     return "translate(" + (this._configuration.direction * (source.y0 + (this._orientation.boxWidth / 2))) + ',' + source.x0 + ")";
+          // })
+          // .attr("transform", person => {
+          //     return "translate(" + (this._configuration.direction * (source.y + (this._orientation.boxWidth / 2))) + ',' + source.x + ")";
+          // })
+          // .attr("transform", person => `translate(${source.y0}, ${source.x0})`)
+          .attr("transform", person => {
+            return "translate(" + this._orientation.x(person) + "," + this._orientation.y(person) + ")";
+          })
+      ;
+
+      // Draw the rectangle person boxes. Start new boxes with 0 size so that we can
+      // transition them to their proper size.
+      nodeEnter
+          .append("rect")
+          .attr("class", d => (d.data.sex === SEX_FEMALE) ? "female" : (d.data.sex === SEX_MALE) ? "male" : "unknown")
+          .attr("rx", this._orientation.cornerRadius())
+          .attr("ry", this._orientation.cornerRadius())
+          .attr("x", -(this._orientation.boxWidth / 2))
+          .attr("y", -(this._orientation.boxHeight / 2))
+          .attr("width", this._orientation.boxWidth)
+          .attr("height", this._orientation.boxHeight)
+          .attr("fill-opacity", 0.5)
+          .attr("fill", d => d.data.color);
+
+      // Names and Dates
+      nodeEnter
+          .filter(d => (d.data.xref !== ""))
+          .each(function (d) {
+            let element = select(this);
+
+            element
+                .append("title")
+                .text(d => d.data.name);
+
+            let group = element
+                .append("g")
+                .attr("class", "image");
+
+            // Background (only required if thumbnail has transparency (like the silhouettes))
+            group
+                .append("rect")
+                .attr("rx", that._orientation.imageCornerRadius())
+                .attr("ry", that._orientation.imageCornerRadius())
+                .attr("x", that._orientation.imageX())
+                .attr("y", that._orientation.imageY())
+                .attr("width", that._orientation.imageWidth())
+                .attr("height", that._orientation.imageHeight())
+                .attr("fill", "rgb(255, 255, 255)");
+
+            // The individual image
+            let image = group
+                .append("image")
+                .attr("x", that._orientation.imageX())
+                .attr("y", that._orientation.imageY())
+                .attr("width", that._orientation.imageWidth())
+                .attr("height", that._orientation.imageHeight())
+                .attr("clip-path", "url(#clip-rect)");
+
+            dataUrl(that.getImageToLoad(d))
+                .then(dataUrl => image.attr("xlink:href", dataUrl))
+                .catch((exception) => {
+                  console.error(exception);
+                });
+
+            // Border
+            group
+                .append("rect")
+                .attr("rx", that._orientation.imageCornerRadius())
+                .attr("ry", that._orientation.imageCornerRadius())
+                .attr("x", that._orientation.imageX())
+                .attr("y", that._orientation.imageY())
+                .attr("width", that._orientation.imageWidth())
+                .attr("height", that._orientation.imageHeight())
+                .attr("fill", "none")
+                .attr("stroke", "rgb(200, 200, 200)")
+                .attr("stroke-width", 1.5);
+
+            that.addNames(element, d);
+            that.addDates(element, d);
           });
-
-          this.drawLinks(links, source);
-          this.drawNodes(nodes, source);
-
-          // Stash the old positions for transition.
-          nodes.forEach((person) => {
-              person.x0 = person.x;
-              person.y0 = person.y;
-          });
-      }
-
-      // /**
-      //  * Draw the tree.
-      //  *
-      //  * @public
-      //  */
-      // update(source)
-      // {
-      //     let nodes = this._hierarchy.nodes.descendants();
-      //     let links = this._hierarchy.nodes.links();
-      //
-      //     // // Start with only the first few generations of ancestors showing
-      //     // nodes.forEach((person) => {
-      //     //     if (person.parents) {
-      //     //         person.parents.forEach((child) => this.collapse(child));
-      //     //     }
-      //     // });
-      //
-      //     this.drawLinks(links, source);
-      //     this.drawNodes(nodes, source);
-      //
-      //     // Stash the old positions for transition.
-      //     nodes.forEach((person) => {
-      //         person.x0 = person.x;
-      //         person.y0 = person.y;
-      //     });
-      // }
-
-      /**
-       * Draw the person boxes.
-       *
-       * @param {Array} nodes Array of descendant nodes
-       *
-       * @private
-       */
-      drawNodes(nodes, source)
-      {
-          let i = 0;
-          let that = this;
-
-          this._svg
-              .defs
-              .get()
-              .append('clipPath')
-              .attr('id', 'clip-rect')
-              .append("rect")
-              .attr("rx", that._orientation.imageCornerRadius())
-              .attr("ry", that._orientation.imageCornerRadius())
-              .attr("x", that._orientation.imageX())
-              .attr("y", that._orientation.imageY())
-              .attr("width", that._orientation.imageWidth())
-              .attr("height", that._orientation.imageHeight());
-
-          this._svg.visual
-              .transition()
-              .duration(this._configuration.duration);
-
-          let node = this._svg.visual
-              .selectAll("g.person")
-              .data(nodes, person => person.id || (person.id = ++i));
-
-          let nodeEnter = node
-              .enter()
-              .append("g")
-              .attr("class", "person")
-              // Add new nodes at the right side of their child's box.
-              // They will be transitioned into their proper position.
-              // .attr("transform", person => {
-              //     return "translate(" + (this._configuration.direction * (source.y0 + (this._orientation.boxWidth / 2))) + ',' + source.x0 + ")";
-              // })
-              // .attr("transform", person => {
-              //     return "translate(" + (this._configuration.direction * (source.y + (this._orientation.boxWidth / 2))) + ',' + source.x + ")";
-              // })
-              // .attr("transform", person => `translate(${source.y0}, ${source.x0})`)
-              .attr("transform", person => {
-                  return "translate(" + this._orientation.x(person) + "," + this._orientation.y(person) + ")";
-              })
-          ;
-
-          // Draw the rectangle person boxes. Start new boxes with 0 size so that we can
-          // transition them to their proper size.
-          nodeEnter
-              .append("rect")
-              .attr("class", d => (d.data.sex === SEX_FEMALE) ? "female" : (d.data.sex === SEX_MALE) ? "male" : "unknown")
-              .attr("rx", this._orientation.cornerRadius())
-              .attr("ry", this._orientation.cornerRadius())
-              .attr("x", -(this._orientation.boxWidth / 2))
-              .attr("y", -(this._orientation.boxHeight / 2))
-              .attr("width", this._orientation.boxWidth)
-              .attr("height", this._orientation.boxHeight)
-              .attr("fill-opacity", 0.5)
-              .attr("fill", d => d.data.color);
-
-          // Names and Dates
-          nodeEnter
-              .filter(d => (d.data.xref !== ""))
-              .each(function (d) {
-                  let element = select(this);
-
-                  element
-                      .append("title")
-                      .text(d => d.data.name);
-
-                  let group = element
-                      .append("g")
-                      .attr("class", "image");
-
-                  // Background (only required if thumbnail has transparency (like the silhouettes))
-                  group
-                      .append("rect")
-                      .attr("rx", that._orientation.imageCornerRadius())
-                      .attr("ry", that._orientation.imageCornerRadius())
-                      .attr("x", that._orientation.imageX())
-                      .attr("y", that._orientation.imageY())
-                      .attr("width", that._orientation.imageWidth())
-                      .attr("height", that._orientation.imageHeight())
-                      .attr("fill", "rgb(255, 255, 255)");
-
-                  // The individual image
-                  let image = group
-                      .append("image")
-                      .attr("x", that._orientation.imageX())
-                      .attr("y", that._orientation.imageY())
-                      .attr("width", that._orientation.imageWidth())
-                      .attr("height", that._orientation.imageHeight())
-                      .attr("clip-path", "url(#clip-rect)");
-
-                  dataUrl(that.getImageToLoad(d))
-                      .then(dataUrl => image.attr("xlink:href", dataUrl))
-                      .catch((exception) => {
-                          console.error(exception);
-                      });
-
-                  // Border
-                  group
-                      .append("rect")
-                      .attr("rx", that._orientation.imageCornerRadius())
-                      .attr("ry", that._orientation.imageCornerRadius())
-                      .attr("x", that._orientation.imageX())
-                      .attr("y", that._orientation.imageY())
-                      .attr("width", that._orientation.imageWidth())
-                      .attr("height", that._orientation.imageHeight())
-                      .attr("fill", "none")
-                      .attr("stroke", "rgb(200, 200, 200)")
-                      .attr("stroke-width", 1.5);
-
-                  that.addNames(element, d);
-                  that.addDates(element, d);
-              });
 
       //     // Merge the update and the enter selections
       //     let nodeUpdate = nodeEnter.merge(node);
@@ -4950,553 +4950,553 @@
       //         // })
       //     ;
 
-          // Fade out the text as we remove it
-          // nodeExit.select('text')
-          //     .style('fill-opacity', 0)
-          //     .attr('dx', 0);
+      // Fade out the text as we remove it
+      // nodeExit.select('text')
+      //     .style('fill-opacity', 0)
+      //     .attr('dx', 0);
 
 
-          // nodeEnter
-          //     .filter(d => (d.data.xref !== ""))
-          //     .append("title")
-          //     .text(d => d.data.name);
+      // nodeEnter
+      //     .filter(d => (d.data.xref !== ""))
+      //     .append("title")
+      //     .text(d => d.data.name);
 
-          // this.addImages(nodeEnter);
+      // this.addImages(nodeEnter);
 
-          // // Names and Dates
-          // nodeEnter
-          //     .filter(d => (d.data.xref !== ""))
-          //     .each(function (d) {
-          //         let parent = d3.select(this);
-          //
-          //         // Names
-          //         let text1 = parent
-          //             .append("text")
-          //             .attr("dx", -(that.boxWidth / 2) + 80)
-          //             .attr("dy", "-12px")
-          //             .attr("text-anchor", "start")
-          //             .attr("class", "name");
-          //
-          //         that.addNames(text1, d);
-          //
-          //         // Time span
-          //         let text2 = parent
-          //             .append("text")
-          //             .attr("dx", -(that.boxWidth / 2) + 80)
-          //             .attr("dy", "10px")
-          //             .attr("text-anchor", "start")
-          //             .attr("class", "date");
-          //
-          //         that.addTimeSpan(text2, d);
-          //     });
+      // // Names and Dates
+      // nodeEnter
+      //     .filter(d => (d.data.xref !== ""))
+      //     .each(function (d) {
+      //         let parent = d3.select(this);
+      //
+      //         // Names
+      //         let text1 = parent
+      //             .append("text")
+      //             .attr("dx", -(that.boxWidth / 2) + 80)
+      //             .attr("dy", "-12px")
+      //             .attr("text-anchor", "start")
+      //             .attr("class", "name");
+      //
+      //         that.addNames(text1, d);
+      //
+      //         // Time span
+      //         let text2 = parent
+      //             .append("text")
+      //             .attr("dx", -(that.boxWidth / 2) + 80)
+      //             .attr("dy", "10px")
+      //             .attr("text-anchor", "start")
+      //             .attr("class", "date");
+      //
+      //         that.addTimeSpan(text2, d);
+      //     });
 
 
-          // node.join(
-          //     enter => {
-          //         let nodeEnter = enter
-          //             .append("g")
-          //             .attr("class", "person")
-          //             // .attr("transform", person => `translate(${person.y}, ${person.x})`)
-          //             .attr("transform", person => {
-          //                 return "translate(" + (this._configuration.direction * (source.y0 + (this._orientation.boxWidth / 2))) + ',' + source.x0 + ")";
-          //             })
-          //             .on("click", this.togglePerson.bind(this));
-          //
-          //         nodeEnter
-          //             .append("rect")
-          //             // .attr("x", -(this._orientation.boxWidth / 2))
-          //             // .attr("y", -(this._orientation.boxHeight / 2))
-          //             // .attr("width", this._orientation.boxWidth)
-          //             // .attr("height", this._orientation.boxHeight);
-          //             .attr("x", 0)
-          //             .attr("y", 0)
-          //             .attr("width", 0)
-          //             .attr("height", 0);
-          //
-          //         return nodeEnter;
-          //     },
-          //
-          //     update => {
-          //         let nodeUpdate = update
-          //             .call(update => update
-          //                 .transition(t)
-          //                 .attr("transform", person => {
-          //                     return "translate(" + (this._configuration.direction * person.y) + "," + person.x + ")";
-          //                 })
-          //             );
-          //
-          //         nodeUpdate
-          //             .select('rect')
-          //             .attr("x", -(this._orientation.boxWidth / 2))
-          //             .attr("y", -(this._orientation.boxHeight / 2))
-          //             .attr("width", this._orientation.boxWidth)
-          //             .attr("height", this._orientation.boxHeight);
-          //
-          //         return nodeUpdate;
-          //     },
-          //
-          //     exit => {
-          //         let nodeExit = exit
-          //             .call(exit => exit
-          //                 .transition(t)
-          //                 .attr("transform", person => {
-          //                     return "translate(" + (this._configuration.direction * (source.y + (this._orientation.boxWidth / 2))) + ',' + source.x + ")";
-          //                 })
-          //             )
-          //             .remove();
-          //
-          //         nodeExit
-          //             .select('rect')
-          //             .attr("x", 0)
-          //             .attr("y", 0)
-          //             .attr("width", 0)
-          //             .attr("height", 0);
-          //
-          //         return nodeExit;
-          //     }
-          // )
-          //     // .selectAll('rect')
-          //     // .attr("x", -(this._orientation.boxWidth / 2))
-          //     // .attr("y", -(this._orientation.boxHeight / 2))
-          //     // .attr("width", this._orientation.boxWidth)
-          //     // .attr("height", this._orientation.boxHeight);
-          // ;
-          //
-          // return;
+      // node.join(
+      //     enter => {
+      //         let nodeEnter = enter
+      //             .append("g")
+      //             .attr("class", "person")
+      //             // .attr("transform", person => `translate(${person.y}, ${person.x})`)
+      //             .attr("transform", person => {
+      //                 return "translate(" + (this._configuration.direction * (source.y0 + (this._orientation.boxWidth / 2))) + ',' + source.x0 + ")";
+      //             })
+      //             .on("click", this.togglePerson.bind(this));
+      //
+      //         nodeEnter
+      //             .append("rect")
+      //             // .attr("x", -(this._orientation.boxWidth / 2))
+      //             // .attr("y", -(this._orientation.boxHeight / 2))
+      //             // .attr("width", this._orientation.boxWidth)
+      //             // .attr("height", this._orientation.boxHeight);
+      //             .attr("x", 0)
+      //             .attr("y", 0)
+      //             .attr("width", 0)
+      //             .attr("height", 0);
+      //
+      //         return nodeEnter;
+      //     },
+      //
+      //     update => {
+      //         let nodeUpdate = update
+      //             .call(update => update
+      //                 .transition(t)
+      //                 .attr("transform", person => {
+      //                     return "translate(" + (this._configuration.direction * person.y) + "," + person.x + ")";
+      //                 })
+      //             );
+      //
+      //         nodeUpdate
+      //             .select('rect')
+      //             .attr("x", -(this._orientation.boxWidth / 2))
+      //             .attr("y", -(this._orientation.boxHeight / 2))
+      //             .attr("width", this._orientation.boxWidth)
+      //             .attr("height", this._orientation.boxHeight);
+      //
+      //         return nodeUpdate;
+      //     },
+      //
+      //     exit => {
+      //         let nodeExit = exit
+      //             .call(exit => exit
+      //                 .transition(t)
+      //                 .attr("transform", person => {
+      //                     return "translate(" + (this._configuration.direction * (source.y + (this._orientation.boxWidth / 2))) + ',' + source.x + ")";
+      //                 })
+      //             )
+      //             .remove();
+      //
+      //         nodeExit
+      //             .select('rect')
+      //             .attr("x", 0)
+      //             .attr("y", 0)
+      //             .attr("width", 0)
+      //             .attr("height", 0);
+      //
+      //         return nodeExit;
+      //     }
+      // )
+      //     // .selectAll('rect')
+      //     // .attr("x", -(this._orientation.boxWidth / 2))
+      //     // .attr("y", -(this._orientation.boxHeight / 2))
+      //     // .attr("width", this._orientation.boxWidth)
+      //     // .attr("height", this._orientation.boxHeight);
+      // ;
+      //
+      // return;
 
+    }
+
+    /**
+     * Update a person's state when they are clicked.
+     */
+    togglePerson(event, person)
+    {
+      if (person.parents) {
+        person._parents = person.parents;
+        person.parents = null;
+      } else {
+        person.parents = person._parents;
+        person._parents = null;
       }
 
-      /**
-       * Update a person's state when they are clicked.
-       */
-      togglePerson(event, person)
-      {
-          if (person.parents) {
-              person._parents = person.parents;
-              person.parents = null;
-          } else {
-              person.parents = person._parents;
-              person._parents = null;
-          }
+      this.draw(person);
 
-          this.draw(person);
-
-          // if (person.collapsed) {
-          //     person.collapsed = false;
-          // } else {
-          //     this.collapse(person);
-          // }
-          //
-          // this.draw(person);
-      }
-
-      /**
-       * Collapse person (hide their ancestors). We recursively
-       * collapse the ancestors so that when the person is
-       * expanded it will only reveal one generation. If we don't
-       * recursively collapse the ancestors then when
-       * the person is clicked on again to expand, all ancestors
-       * that were previously showing will be shown again.
-       * If you want that behavior then just remove the recursion
-       * by removing the if block.
-       */
-      collapse(person)
-      {
-          if (person.parents) {
-              person._parents = person.parents;
-              person._parents.forEach((child) => this.collapse(child));
-              // person._parents.forEach(this.collapse);
-              person.parents = null;
-          }
-
-          // person.collapsed = true;
-          //
-          // if (person.parents) {
-          //     person.parents.forEach((child) => this.collapse(child));
-          //     person.parents.forEach(this.collapse);
-          // }
-      }
-
-      /**
-       * Creates a single <tspan> element for each single given name and append it to the
-       * parent element. The "tspan" element containing the preferred name gets an
-       * additional underline style in order to highlight this one.
-       *
-       * @param {Selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
-       * @param {Object}    datum  The D3 data object containing the individual data
-       */
-      addFirstNames(parent, datum)
-      {
-          let i = 0;
-
-          for (let firstName of datum.data.firstNames) {
-              // Create a <tspan> element for each given name
-              let tspan = parent.append("tspan")
-                  .text(firstName);
-
-              // The preferred name
-              if (firstName === datum.data.preferredName) {
-                  tspan.attr("class", "preferred");
-              }
-
-              // Add some spacing between the elements
-              if (i !== 0) {
-                  tspan.attr("dx", "0.25em");
-              }
-
-              ++i;
-          }
-      }
-
-      /**
-       * Creates a single <tspan> element for each last name and append it to the parent element.
-       *
-       * @param {Selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
-       * @param {Object}    datum  The D3 data object containing the individual data
-       * @param {Number}    dx     Additional space offset to add between names
-       */
-      addLastNames(parent, datum, dx = 0)
-      {
-          let i = 0;
-
-          for (let lastName of datum.data.lastNames) {
-              // Create a <tspan> element for the last name
-              let tspan = parent.append("tspan")
-                  .attr("class", "lastName")
-                  .text(lastName);
-
-              // Add some spacing between the elements
-              if (i !== 0) {
-                  tspan.attr("dx", "0.25em");
-              }
-
-              if (dx !== 0) {
-                  tspan.attr("dx", dx + "em");
-              }
-
-              ++i;
-          }
-      }
-
-      /**
-       * Loops over the <tspan> elements and truncates the contained texts.
-       *
-       * @param {Selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are attached
-       * @param {Boolean}   hide   Whether to show or hide the label if the text takes to much space to be displayed
-       */
-      truncateNames(parent, hide = false)
-      {
-          let availableWidth = this._orientation.textWidth();
-
-          // Select all not preferred and not last names
-          this.truncateListOfNames(
-              parent.selectAll("tspan:not(.preferred):not(.lastName)"),
-              parent,
-              availableWidth,
-              hide
-          );
-
-          // Afterwards the preferred ones if text takes still to much space
-          parent.selectAll("tspan.preferred")
-              .each(this.truncateText(parent, availableWidth, hide));
-
-          // Truncate lastnames
-          parent.selectAll("tspan.lastName")
-              .each(this.truncateText(parent, availableWidth, hide));
-      }
-
-      /**
-       *
-       * @param {Selection} names          A selection of name elements
-       * @param {Selection} parent         The parent (<text> or <textPath>) element to which the <tspan> elements are attached
-       * @param {Number}    availableWidth The total available width the text could take
-       * @param {Boolean}   hide           Whether to show or hide the label if the text takes to much space to be displayed
-       */
-      truncateListOfNames(names, parent, availableWidth, hide)
-      {
-          if (names.size()) {
-              // Start truncating from last element to the first one
-              names.nodes()
-                  .reverse()
-                  .forEach(element => {
-                      select(element)
-                          .each(this.truncateText(parent, availableWidth, hide));
-                  });
-          }
-      }
-
-      /**
-       * Truncates the textual content of the actual element.
-       *
-       * @param {Selection} parent         The parent (<text> or <textPath>) element containing the <tspan> child elements
-       * @param {Number}    availableWidth The total available width the text could take
-       * @param {Boolean}   hide           Whether to show or hide the label if the text takes to much space to be displayed
-       */
-      truncateText(parent, availableWidth, hide = false)
-      {
-          let that = this;
-
-          return function () {
-              let textLength = that.getTextLength(parent);
-              let tspan      = select(this);
-              let text       = tspan.text();
-
-              if (textLength > availableWidth) {
-                  if (hide) {
-                      tspan.text("");
-                  } else {
-                      if (text.length > 1) {
-                          // Keep only the first letter
-                          tspan.text(text.slice(0, 1) + ".");
-                      }
-                  }
-              }
-          };
-      }
-
-      /**
-       * Returns a float representing the computed length of all <tspan> elements within the element.
-       *
-       * @param {Selection} parent The parent (<text> or <textPath>) element containing the <tspan> child elements
-       *
-       * @returns {Number}
-       */
-      getTextLength(parent)
-      {
-          let totalWidth = 0;
-
-          // Calculate the total used width of all <tspan> elements
-          parent.selectAll("tspan").each(function () {
-              totalWidth += this.getComputedTextLength();
-          });
-
-          return totalWidth;
-      }
-
-      /**
-       * Add the individual names to the given parent element.
-       *
-       * @param {Selection} parent The parent element to which the elements are to be attached
-       * @param {Object}    datum  The D3 data object
-       */
-      addNames(parent, datum)
-      {
-          let name = parent
-              .append("g")
-              .attr("class", "name");
-
-          // Top/Bottom and Bottom/Top
-          if (this._orientation._splittNames) {
-              let text1 = name.append("text")
-                  .attr("text-anchor", "middle")
-                  .attr("alignment-baseline", "central")
-                  .attr("dy", this._orientation.textY());
-
-              let text2 = name.append("text")
-                  .attr("text-anchor", "middle")
-                  .attr("alignment-baseline", "central")
-                  .attr("dy", this._orientation.textY() + 20);
-
-              this.addFirstNames(text1, datum);
-              this.addLastNames(text2, datum);
-
-              this.truncateNames(text1);
-              this.truncateNames(text2);
-
-          // Left/Right and Right/Left
-          } else {
-              let text1 = name.append("text")
-                  .attr("text-anchor", "start")
-                  .attr("dx", this._orientation.textX())
-                  .attr("dy", this._orientation.textY());
-
-              this.addFirstNames(text1, datum);
-              this.addLastNames(text1, datum, 0.25);
-              this.truncateNames(text1);
-          }
-      }
-
-      /**
-       * Add the individual dates to the given parent element.
-       *
-       * @param {Selection} parent The parent element to which the elements are to be attached
-       * @param {Object}    datum  The D3 data object
-       */
-      addDates(parent, datum)
-      {
-          let table = parent
-              .append("g")
-              .attr("class", "table");
-
-          // Top/Bottom and Bottom/Top
-          if (this._orientation._splittNames) {
-              let text1 = table.append("text")
-                  .attr("class", "date")
-                  .attr("text-anchor", "middle")
-                  .attr("alignment-baseline", "central")
-                  .attr("dy", this._orientation.textY() + 50);
-
-              text1.append("tspan")
-                  .text(datum.data.timespan);
-
-              return;
-          }
-
-          // A text element for the asterix and dagger
-          let col1 = table
-              .append("text")
-              .attr("class", "date")
-              .attr("text-anchor", "middle")
-              .attr("dominant-baseline", "middle")
-              .attr("x", this._orientation.textX())
-              .attr("y", this._orientation.textY() + 15);
-
-          // The asterix
-          if (datum.data.birth) {
-              col1.append("tspan")
-                  .text("\u2605")
-                  .attr("x", this._orientation.textX() + 5)
-                  .attr("dy", this._orientation.textY() + 20);
-          }
-
-          // The dagger
-          if (datum.data.death) {
-              let death = col1
-                  .append("tspan")
-                  .text("\u2020");
-
-              // Are both dates present?
-              if (datum.data.birth) {
-                  death.attr("x", this._orientation.textX() + 5)
-                      .attr("dy", this._orientation.textY() + 35);
-              } else {
-                  // Only death date
-                  death.attr("x", this._orientation.textX() + 5)
-                      .attr("dy", this._orientation.textY() + 20);
-              }
-          }
-
-          // A text element for the dates
-          let col2 = table.append("text")
-              .attr("class", "date")
-              .attr("text-anchor", "start")
-              .attr("dominant-baseline", "middle")
-              .attr("x", this._orientation.textX())
-              .attr("y", this._orientation.textY() + 20);
-
-          if (datum.data.birth) {
-              col2.append("tspan")
-                  .text(datum.data.birth)
-                  .attr("x", this._orientation.textX() + 15)
-                  .attr("dy", this._orientation.textY() + 15);
-          }
-
-          if (datum.data.death) {
-              let death = col2.append("tspan")
-                  .text(datum.data.death);
-
-              if (datum.data.birth) {
-                  death.attr("x", this._orientation.textX() + 15)
-                      .attr("dy", this._orientation.textY() + 35);
-              } else {
-                  death.attr("x", this._orientation.textX() + 15)
-                      .attr("dy", this._orientation.textY() + 15);
-              }
-          }
-      }
-
-      /**
-       * Return the image file or the placeholder.
-       *
-       * @param {Object} data The D3 data object
-       *
-       * @returns {String}
-       */
-      getImageToLoad(datum)
-      {
-          if (datum.data.thumbnail) {
-              return datum.data.thumbnail;
-          }
-
-          return "";
-      }
-
-      /**
-       * Draw the connecting lines.
-       *
-       * @param {Array} links Array of links
-       *
-       * @private
-       */
-      drawLinks(links, source)
-      {
-
-          let link = this._svg.visual
-              .selectAll("path.link")
-              .data(links, person => person.target.id);
-
-          // Add new links. Transition new links from the source's old position to
-          // the links final position.
-          link
-              .enter()
-              .append("path")
-              .classed("link", true)
-              .attr("d", person => this._orientation.elbow(person));
-
-          // // Add new links. Transition new links from the source's old position to
-          // // the links final position.
-          // let linkEnter = link.enter()
-          //     .append("path")
-          //     .classed("link", true)
-          //     .attr("d", person => {
-          //         const o = {
-          //             x: source.x0,
-          //             y: this._configuration.direction * (source.y0 + (this._orientation.boxWidth / 2))
-          //         };
-          //
-          //         return this.transitionElbow({ source: o, target: o });
-          //     });
-          //
-          // var linkUpdate = linkEnter.merge(link);
-          //
-          // // Update the old links positions
-          // linkUpdate.transition()
-          //     .duration(this._configuration.duration)
-          //     .attr("d", person => this.elbow(person));
-          //
-          // // Remove any links we don't need anymore if part of the tree was collapsed. Transition exit
-          // // links from their current position to the source's new position.
-          // link.exit()
-          //     .transition()
-          //     .duration(this._configuration.duration)
-          //     .attr("d", person => {
-          //         const o = {
-          //             x: source.x,
-          //             y: this._configuration.direction * (source.y + this._orientation.boxWidth / 2)
-          //         };
-          //
-          //         return this.transitionElbow({ source: o, target: o });
-          //     })
-          //     .remove();
-      }
-
-      // /**
-      //  * Use a different elbow function for enter
-      //  * and exit nodes. This is necessary because
-      //  * the function above assumes that the nodes
-      //  * are stationary along the x axis.
-      //  *
-      //  * @param {Object} datum D3 data object
-      //  *
-      //  * @private
-      //  */
-      // transitionElbow(datum)
-      // {
-      //     return "M" + datum.source.y + "," + datum.source.x
-      //         + "H" + datum.source.y
-      //         + "V" + datum.source.x
-      //         + "H" + datum.source.y;
+      // if (person.collapsed) {
+      //     person.collapsed = false;
+      // } else {
+      //     this.collapse(person);
       // }
+      //
+      // this.draw(person);
+    }
+
+    /**
+     * Collapse person (hide their ancestors). We recursively
+     * collapse the ancestors so that when the person is
+     * expanded it will only reveal one generation. If we don't
+     * recursively collapse the ancestors then when
+     * the person is clicked on again to expand, all ancestors
+     * that were previously showing will be shown again.
+     * If you want that behavior then just remove the recursion
+     * by removing the if block.
+     */
+    collapse(person)
+    {
+      if (person.parents) {
+        person._parents = person.parents;
+        person._parents.forEach((child) => this.collapse(child));
+        // person._parents.forEach(this.collapse);
+        person.parents = null;
+      }
+
+      // person.collapsed = true;
+      //
+      // if (person.parents) {
+      //     person.parents.forEach((child) => this.collapse(child));
+      //     person.parents.forEach(this.collapse);
+      // }
+    }
+
+    /**
+     * Creates a single <tspan> element for each single given name and append it to the
+     * parent element. The "tspan" element containing the preferred name gets an
+     * additional underline style in order to highlight this one.
+     *
+     * @param {Selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
+     * @param {Object}    datum  The D3 data object containing the individual data
+     */
+    addFirstNames(parent, datum)
+    {
+      let i = 0;
+
+      for (let firstName of datum.data.firstNames) {
+        // Create a <tspan> element for each given name
+        let tspan = parent.append("tspan")
+            .text(firstName);
+
+        // The preferred name
+        if (firstName === datum.data.preferredName) {
+          tspan.attr("class", "preferred");
+        }
+
+        // Add some spacing between the elements
+        if (i !== 0) {
+          tspan.attr("dx", "0.25em");
+        }
+
+        ++i;
+      }
+    }
+
+    /**
+     * Creates a single <tspan> element for each last name and append it to the parent element.
+     *
+     * @param {Selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
+     * @param {Object}    datum  The D3 data object containing the individual data
+     * @param {Number}    dx     Additional space offset to add between names
+     */
+    addLastNames(parent, datum, dx = 0)
+    {
+      let i = 0;
+
+      for (let lastName of datum.data.lastNames) {
+        // Create a <tspan> element for the last name
+        let tspan = parent.append("tspan")
+            .attr("class", "lastName")
+            .text(lastName);
+
+        // Add some spacing between the elements
+        if (i !== 0) {
+          tspan.attr("dx", "0.25em");
+        }
+
+        if (dx !== 0) {
+          tspan.attr("dx", dx + "em");
+        }
+
+        ++i;
+      }
+    }
+
+    /**
+     * Loops over the <tspan> elements and truncates the contained texts.
+     *
+     * @param {Selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are attached
+     * @param {Boolean}   hide   Whether to show or hide the label if the text takes to much space to be displayed
+     */
+    truncateNames(parent, hide = false)
+    {
+      let availableWidth = this._orientation.textWidth();
+
+      // Select all not preferred and not last names
+      this.truncateListOfNames(
+          parent.selectAll("tspan:not(.preferred):not(.lastName)"),
+          parent,
+          availableWidth,
+          hide
+      );
+
+      // Afterwards the preferred ones if text takes still to much space
+      parent.selectAll("tspan.preferred")
+          .each(this.truncateText(parent, availableWidth, hide));
+
+      // Truncate lastnames
+      parent.selectAll("tspan.lastName")
+          .each(this.truncateText(parent, availableWidth, hide));
+    }
+
+    /**
+     *
+     * @param {Selection} names          A selection of name elements
+     * @param {Selection} parent         The parent (<text> or <textPath>) element to which the <tspan> elements are attached
+     * @param {Number}    availableWidth The total available width the text could take
+     * @param {Boolean}   hide           Whether to show or hide the label if the text takes to much space to be displayed
+     */
+    truncateListOfNames(names, parent, availableWidth, hide)
+    {
+      if (names.size()) {
+        // Start truncating from last element to the first one
+        names.nodes()
+            .reverse()
+            .forEach(element => {
+              select(element)
+                  .each(this.truncateText(parent, availableWidth, hide));
+            });
+      }
+    }
+
+    /**
+     * Truncates the textual content of the actual element.
+     *
+     * @param {Selection} parent         The parent (<text> or <textPath>) element containing the <tspan> child elements
+     * @param {Number}    availableWidth The total available width the text could take
+     * @param {Boolean}   hide           Whether to show or hide the label if the text takes to much space to be displayed
+     */
+    truncateText(parent, availableWidth, hide = false)
+    {
+      let that = this;
+
+      return function () {
+        let textLength = that.getTextLength(parent);
+        let tspan      = select(this);
+        let text       = tspan.text();
+
+        if (textLength > availableWidth) {
+          if (hide) {
+            tspan.text("");
+          } else {
+            if (text.length > 1) {
+              // Keep only the first letter
+              tspan.text(text.slice(0, 1) + ".");
+            }
+          }
+        }
+      };
+    }
+
+    /**
+     * Returns a float representing the computed length of all <tspan> elements within the element.
+     *
+     * @param {Selection} parent The parent (<text> or <textPath>) element containing the <tspan> child elements
+     *
+     * @returns {Number}
+     */
+    getTextLength(parent)
+    {
+      let totalWidth = 0;
+
+      // Calculate the total used width of all <tspan> elements
+      parent.selectAll("tspan").each(function () {
+        totalWidth += this.getComputedTextLength();
+      });
+
+      return totalWidth;
+    }
+
+    /**
+     * Add the individual names to the given parent element.
+     *
+     * @param {Selection} parent The parent element to which the elements are to be attached
+     * @param {Object}    datum  The D3 data object
+     */
+    addNames(parent, datum)
+    {
+      let name = parent
+          .append("g")
+          .attr("class", "name");
+
+      // Top/Bottom and Bottom/Top
+      if (this._orientation._splittNames) {
+        let text1 = name.append("text")
+            .attr("text-anchor", "middle")
+            .attr("alignment-baseline", "central")
+            .attr("dy", this._orientation.textY());
+
+        let text2 = name.append("text")
+            .attr("text-anchor", "middle")
+            .attr("alignment-baseline", "central")
+            .attr("dy", this._orientation.textY() + 20);
+
+        this.addFirstNames(text1, datum);
+        this.addLastNames(text2, datum);
+
+        this.truncateNames(text1);
+        this.truncateNames(text2);
+
+        // Left/Right and Right/Left
+      } else {
+        let text1 = name.append("text")
+            .attr("text-anchor", "start")
+            .attr("dx", this._orientation.textX())
+            .attr("dy", this._orientation.textY());
+
+        this.addFirstNames(text1, datum);
+        this.addLastNames(text1, datum, 0.25);
+        this.truncateNames(text1);
+      }
+    }
+
+    /**
+     * Add the individual dates to the given parent element.
+     *
+     * @param {Selection} parent The parent element to which the elements are to be attached
+     * @param {Object}    datum  The D3 data object
+     */
+    addDates(parent, datum)
+    {
+      let table = parent
+          .append("g")
+          .attr("class", "table");
+
+      // Top/Bottom and Bottom/Top
+      if (this._orientation._splittNames) {
+        let text1 = table.append("text")
+            .attr("class", "date")
+            .attr("text-anchor", "middle")
+            .attr("alignment-baseline", "central")
+            .attr("dy", this._orientation.textY() + 50);
+
+        text1.append("tspan")
+            .text(datum.data.timespan);
+
+        return;
+      }
+
+      // A text element for the asterix and dagger
+      let col1 = table
+          .append("text")
+          .attr("class", "date")
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "middle")
+          .attr("x", this._orientation.textX())
+          .attr("y", this._orientation.textY() + 15);
+
+      // The asterix
+      if (datum.data.birth) {
+        col1.append("tspan")
+            .text("\u2605")
+            .attr("x", this._orientation.textX() + 5)
+            .attr("dy", this._orientation.textY() + 20);
+      }
+
+      // The dagger
+      if (datum.data.death) {
+        let death = col1
+            .append("tspan")
+            .text("\u2020");
+
+        // Are both dates present?
+        if (datum.data.birth) {
+          death.attr("x", this._orientation.textX() + 5)
+              .attr("dy", this._orientation.textY() + 35);
+        } else {
+          // Only death date
+          death.attr("x", this._orientation.textX() + 5)
+              .attr("dy", this._orientation.textY() + 20);
+        }
+      }
+
+      // A text element for the dates
+      let col2 = table.append("text")
+          .attr("class", "date")
+          .attr("text-anchor", "start")
+          .attr("dominant-baseline", "middle")
+          .attr("x", this._orientation.textX())
+          .attr("y", this._orientation.textY() + 20);
+
+      if (datum.data.birth) {
+        col2.append("tspan")
+            .text(datum.data.birth)
+            .attr("x", this._orientation.textX() + 15)
+            .attr("dy", this._orientation.textY() + 15);
+      }
+
+      if (datum.data.death) {
+        let death = col2.append("tspan")
+            .text(datum.data.death);
+
+        if (datum.data.birth) {
+          death.attr("x", this._orientation.textX() + 15)
+              .attr("dy", this._orientation.textY() + 35);
+        } else {
+          death.attr("x", this._orientation.textX() + 15)
+              .attr("dy", this._orientation.textY() + 15);
+        }
+      }
+    }
+
+    /**
+     * Return the image file or the placeholder.
+     *
+     * @param {Object} data The D3 data object
+     *
+     * @returns {String}
+     */
+    getImageToLoad(datum)
+    {
+      if (datum.data.thumbnail) {
+        return datum.data.thumbnail;
+      }
+
+      return "";
+    }
+
+    /**
+     * Draw the connecting lines.
+     *
+     * @param {Array} links Array of links
+     *
+     * @private
+     */
+    drawLinks(links, source)
+    {
+
+      let link = this._svg.visual
+          .selectAll("path.link")
+          .data(links, person => person.target.id);
+
+      // Add new links. Transition new links from the source's old position to
+      // the links final position.
+      link
+          .enter()
+          .append("path")
+          .classed("link", true)
+          .attr("d", person => this._orientation.elbow(person));
+
+      // // Add new links. Transition new links from the source's old position to
+      // // the links final position.
+      // let linkEnter = link.enter()
+      //     .append("path")
+      //     .classed("link", true)
+      //     .attr("d", person => {
+      //         const o = {
+      //             x: source.x0,
+      //             y: this._configuration.direction * (source.y0 + (this._orientation.boxWidth / 2))
+      //         };
+      //
+      //         return this.transitionElbow({ source: o, target: o });
+      //     });
+      //
+      // var linkUpdate = linkEnter.merge(link);
+      //
+      // // Update the old links positions
+      // linkUpdate.transition()
+      //     .duration(this._configuration.duration)
+      //     .attr("d", person => this.elbow(person));
+      //
+      // // Remove any links we don't need anymore if part of the tree was collapsed. Transition exit
+      // // links from their current position to the source's new position.
+      // link.exit()
+      //     .transition()
+      //     .duration(this._configuration.duration)
+      //     .attr("d", person => {
+      //         const o = {
+      //             x: source.x,
+      //             y: this._configuration.direction * (source.y + this._orientation.boxWidth / 2)
+      //         };
+      //
+      //         return this.transitionElbow({ source: o, target: o });
+      //     })
+      //     .remove();
+    }
+
+    // /**
+    //  * Use a different elbow function for enter
+    //  * and exit nodes. This is necessary because
+    //  * the function above assumes that the nodes
+    //  * are stationary along the x axis.
+    //  *
+    //  * @param {Object} datum D3 data object
+    //  *
+    //  * @private
+    //  */
+    // transitionElbow(datum)
+    // {
+    //     return "M" + datum.source.y + "," + datum.source.x
+    //         + "H" + datum.source.y
+    //         + "V" + datum.source.x
+    //         + "H" + datum.source.y;
+    // }
   }
 
   /**
@@ -5512,74 +5512,74 @@
    */
   class Overlay
   {
-      /**
-       * Constructor.
-       *
-       * @param {Selection} parent The selected D3 parent element container
-       */
-      constructor(parent)
-      {
-          // Create the tooltip overlay container
-          this._element = parent
-              .append("div")
-              .attr("class", "overlay")
-              .style("opacity", 1e-6);
-      }
+    /**
+     * Constructor.
+     *
+     * @param {Selection} parent The selected D3 parent element container
+     */
+    constructor(parent)
+    {
+      // Create the tooltip overlay container
+      this._element = parent
+          .append("div")
+          .attr("class", "overlay")
+          .style("opacity", 1e-6);
+    }
 
-      /**
-       * Stop any pending transition and hide overlay immediately.
-       *
-       * @param {String}   text     Text to display in overlay
-       * @param {Number}   duration Duration of transition in msec
-       * @param {Function} callback Callback method to execute on end of transition
-       */
-      show(text, duration = 0, callback = null)
-      {
-          // Remove any previously added <p> element
-          this._element
-              .select("p")
-              .remove();
+    /**
+     * Stop any pending transition and hide overlay immediately.
+     *
+     * @param {String}   text     Text to display in overlay
+     * @param {Number}   duration Duration of transition in msec
+     * @param {Function} callback Callback method to execute on end of transition
+     */
+    show(text, duration = 0, callback = null)
+    {
+      // Remove any previously added <p> element
+      this._element
+          .select("p")
+          .remove();
 
-          this._element
-              .append("p")
-              .attr("class", "tooltip")
-              .text(text);
+      this._element
+          .append("p")
+          .attr("class", "tooltip")
+          .text(text);
 
-          this._element
-              .transition()
-              .duration(duration)
-              .style("opacity", 1)
-              .on("end", () => {
-                  if (typeof callback === "function") {
-                      callback();
-                  }
-              });
-      }
+      this._element
+          .transition()
+          .duration(duration)
+          .style("opacity", 1)
+          .on("end", () => {
+            if (typeof callback === "function") {
+              callback();
+            }
+          });
+    }
 
-      /**
-       * Stop any pending transition and hide overlay immediately.
-       *
-       * @param {Number} delay    Delay in milliseconds to wait before transition should start
-       * @param {Number} duration Duration of transition in milliseconds
-       */
-      hide(delay = 0, duration = 0)
-      {
-          this._element
-              .transition()
-              .delay(delay)
-              .duration(duration)
-              .style("opacity", 1e-6);
-      }
+    /**
+     * Stop any pending transition and hide overlay immediately.
+     *
+     * @param {Number} delay    Delay in milliseconds to wait before transition should start
+     * @param {Number} duration Duration of transition in milliseconds
+     */
+    hide(delay = 0, duration = 0)
+    {
+      this._element
+          .transition()
+          .delay(delay)
+          .duration(duration)
+          .style("opacity", 1e-6);
+    }
 
-      /**
-       * Returns the internal element.
-       *
-       * @returns {Selection}
-       */
-      get()
-      {
-          return this._element;
-      }
+    /**
+     * Returns the internal element.
+     *
+     * @returns {Selection}
+     */
+    get()
+    {
+      return this._element;
+    }
   }
 
   /**
@@ -5595,26 +5595,26 @@
    */
   class Defs
   {
-      /**
-       * Constructor.
-       *
-       * @param {Selection} svg The selected D3 parent element container
-       */
-      constructor(svg)
-      {
-          // Create the <svg:defs> element
-          this._element = svg.append("defs");
-      }
+    /**
+     * Constructor.
+     *
+     * @param {Selection} svg The selected D3 parent element container
+     */
+    constructor(svg)
+    {
+      // Create the <svg:defs> element
+      this._element = svg.append("defs");
+    }
 
-      /**
-       * Returns the internal element.
-       *
-       * @returns {Selection}
-       */
-      get()
-      {
-          return this._element;
-      }
+    /**
+     * Returns the internal element.
+     *
+     * @returns {Selection}
+     */
+    get()
+    {
+      return this._element;
+    }
   }
 
   /**
@@ -5638,96 +5638,96 @@
    */
   class Zoom
   {
-      /**
-       * Constructor.
-       *
-       * @param {Selection} parent The selected D3 parent element container
-       */
-      constructor(parent)
-      {
-          this._zoom   = null;
-          this._parent = parent;
+    /**
+     * Constructor.
+     *
+     * @param {Selection} parent The selected D3 parent element container
+     */
+    constructor(parent)
+    {
+      this._zoom   = null;
+      this._parent = parent;
 
-          this.init();
-      }
+      this.init();
+    }
 
-      /**
-       * Initializes a new D3 zoom behavior.
-       *
-       * @private
-       */
-      init()
-      {
-          // Setup zoom and pan
-          this._zoom = zoom();
+    /**
+     * Initializes a new D3 zoom behavior.
+     *
+     * @private
+     */
+    init()
+    {
+      // Setup zoom and pan
+      this._zoom = zoom();
 
-          this._zoom
-              .scaleExtent([MIN_ZOOM, MAX_ZOOM])
-              .on("zoom", (event) => {
-                  // Abort any action if only one finger is used on "touchmove" events
-                  if (event.sourceEvent
-                      && (event.sourceEvent.type === "touchmove")
-                      && (event.sourceEvent.touches.length < 2)
-                  ) {
-                      return;
-                  }
+      this._zoom
+          .scaleExtent([MIN_ZOOM, MAX_ZOOM])
+          .on("zoom", (event) => {
+            // Abort any action if only one finger is used on "touchmove" events
+            if (event.sourceEvent
+                && (event.sourceEvent.type === "touchmove")
+                && (event.sourceEvent.touches.length < 2)
+            ) {
+              return;
+            }
 
-                  this._parent.attr("transform", event.transform);
-              });
-
-          // Adjust the wheel delta (see defaultWheelDelta() in zoom.js, which adds
-          // a 10-times offset if ctrlKey is pressed)
-          this._zoom.wheelDelta((event) => {
-              return -event.deltaY * (event.deltaMode === 1 ? 0.05 : event.deltaMode ? 1 : 0.002);
+            this._parent.attr("transform", event.transform);
           });
 
-          // Add zoom filter
-          this._zoom.filter((event) => {
-              // Allow "wheel" event only while control key is pressed
-              if (event.type === "wheel") {
-                  if (!event.ctrlKey) {
-                      return false;
-                  }
+      // Adjust the wheel delta (see defaultWheelDelta() in zoom.js, which adds
+      // a 10-times offset if ctrlKey is pressed)
+      this._zoom.wheelDelta((event) => {
+        return -event.deltaY * (event.deltaMode === 1 ? 0.05 : event.deltaMode ? 1 : 0.002);
+      });
 
-                  var transform$1 = transform(this);
+      // Add zoom filter
+      this._zoom.filter((event) => {
+        // Allow "wheel" event only while control key is pressed
+        if (event.type === "wheel") {
+          if (!event.ctrlKey) {
+            return false;
+          }
 
-                  if (transform$1.k) {
-                      // Prevent zooming below lowest level
-                      if ((transform$1.k <= MIN_ZOOM) && (event.deltaY > 0)) {
-                          // Prevent browsers page zoom while holding down the control key
-                          event.preventDefault();
-                          return false;
-                      }
+          var transform$1 = transform(this);
 
-                      // Prevent zooming above highest level
-                      if ((transform$1.k >= MAX_ZOOM) && (event.deltaY < 0)) {
-                          // Prevent browsers page zoom while holding down the control key
-                          event.preventDefault();
-                          return false;
-                      }
-                  }
+          if (transform$1.k) {
+            // Prevent zooming below lowest level
+            if ((transform$1.k <= MIN_ZOOM) && (event.deltaY > 0)) {
+              // Prevent browsers page zoom while holding down the control key
+              event.preventDefault();
+              return false;
+            }
 
-                  return true;
-              }
+            // Prevent zooming above highest level
+            if ((transform$1.k >= MAX_ZOOM) && (event.deltaY < 0)) {
+              // Prevent browsers page zoom while holding down the control key
+              event.preventDefault();
+              return false;
+            }
+          }
 
-              // Allow "touchmove" event only with two fingers
-              if (!event.button && (event.type === "touchmove")) {
-                  return event.touches.length === 2;
-              }
+          return true;
+        }
 
-              return (!event.ctrlKey || event.type === 'wheel') && !event.button;
-          });
-      }
+        // Allow "touchmove" event only with two fingers
+        if (!event.button && (event.type === "touchmove")) {
+          return event.touches.length === 2;
+        }
 
-      /**
-       * Returns the internal d3 zoom behaviour.
-       *
-       * @returns {zoom}
-       */
-      get()
-      {
-          return this._zoom;
-      }
+        return (!event.ctrlKey || event.type === 'wheel') && !event.button;
+      });
+    }
+
+    /**
+     * Returns the internal d3 zoom behaviour.
+     *
+     * @returns {zoom}
+     */
+    get()
+    {
+      return this._zoom;
+    }
   }
 
   /**
@@ -5743,26 +5743,26 @@
    */
   class Export
   {
-      /**
-       * Triggers the download by creating a new anchor element an simulate a mouse click on it.
-       *
-       * @param {String} imgURI   The image URI data stream
-       * @param {String} fileName The file name to use in the download dialog
-       */
-      triggerDownload(imgURI, fileName)
-      {
-          let event = new MouseEvent("click", {
-              view: window,
-              bubbles: false,
-              cancelable: true
-          });
+    /**
+     * Triggers the download by creating a new anchor element an simulate a mouse click on it.
+     *
+     * @param {String} imgURI   The image URI data stream
+     * @param {String} fileName The file name to use in the download dialog
+     */
+    triggerDownload(imgURI, fileName)
+    {
+      let event = new MouseEvent("click", {
+        view: window,
+        bubbles: false,
+        cancelable: true
+      });
 
-          let a = document.createElement("a");
-          a.setAttribute("download", fileName);
-          a.setAttribute("href", imgURI);
-          a.setAttribute("target", "_blank");
-          a.dispatchEvent(event);
-      }
+      let a = document.createElement("a");
+      a.setAttribute("download", fileName);
+      a.setAttribute("href", imgURI);
+      a.setAttribute("target", "_blank");
+      a.dispatchEvent(event);
+    }
   }
 
   /**
@@ -5778,171 +5778,171 @@
    */
   class PngExport extends Export
   {
-      /**
-       * Copies recursively all the styles from the list of container elements from the source
-       * to the destination node.
-       *
-       * @param {SVGGraphicsElement} sourceNode
-       * @param {SVGGraphicsElement} destinationNode
-       */
-      copyStylesInline(sourceNode, destinationNode)
-      {
-          return new Promise(resolve => {
-              let containerElements = ["svg", "g", "text", "textPath"];
+    /**
+     * Copies recursively all the styles from the list of container elements from the source
+     * to the destination node.
+     *
+     * @param {SVGGraphicsElement} sourceNode
+     * @param {SVGGraphicsElement} destinationNode
+     */
+    copyStylesInline(sourceNode, destinationNode)
+    {
+      return new Promise(resolve => {
+        let containerElements = ["svg", "g", "text", "textPath"];
 
-              for (let i = 0; i < destinationNode.childNodes.length; ++i) {
-                  let child = destinationNode.childNodes[i];
+        for (let i = 0; i < destinationNode.childNodes.length; ++i) {
+          let child = destinationNode.childNodes[i];
 
-                  if (containerElements.indexOf(child.tagName) !== -1) {
-                      this.copyStylesInline(sourceNode.childNodes[i], child);
-                      continue;
-                  }
+          if (containerElements.indexOf(child.tagName) !== -1) {
+            this.copyStylesInline(sourceNode.childNodes[i], child);
+            continue;
+          }
 
-                  let computedStyle = window.getComputedStyle(sourceNode.childNodes[i]);
+          let computedStyle = window.getComputedStyle(sourceNode.childNodes[i]);
 
-                  if (computedStyle === null) {
-                      continue;
-                  }
+          if (computedStyle === null) {
+            continue;
+          }
 
-                  for (let j = 0; j < computedStyle.length; ++j) {
-                      child.style.setProperty(computedStyle[j], computedStyle.getPropertyValue(computedStyle[j]));
-                  }
-              }
+          for (let j = 0; j < computedStyle.length; ++j) {
+            child.style.setProperty(computedStyle[j], computedStyle.getPropertyValue(computedStyle[j]));
+          }
+        }
 
-              resolve(destinationNode);
-          })
-      }
+        resolve(destinationNode);
+      })
+    }
 
-      /**
-       * Returns the viewbox of the SVG. Mainly used to apply a padding around the chart.
-       *
-       * @param {SVGGraphicsElement} svg The SVG element
-       *
-       * @returns {Number[]}
-       */
-      calculateViewBox(svg)
-      {
-          // Get bounding box
-          const boundingBox = svg.getBBox();
-          const padding     = 50;   // Padding on each side
+    /**
+     * Returns the viewbox of the SVG. Mainly used to apply a padding around the chart.
+     *
+     * @param {SVGGraphicsElement} svg The SVG element
+     *
+     * @returns {Number[]}
+     */
+    calculateViewBox(svg)
+    {
+      // Get bounding box
+      const boundingBox = svg.getBBox();
+      const padding     = 50;   // Padding on each side
 
-          // Return calculated view box
-          return [
-              boundingBox.x - padding,
-              boundingBox.y - padding,
-              boundingBox.width + (padding * 2),
-              boundingBox.height + (padding * 2)
-          ];
-      }
+      // Return calculated view box
+      return [
+        boundingBox.x - padding,
+        boundingBox.y - padding,
+        boundingBox.width + (padding * 2),
+        boundingBox.height + (padding * 2)
+      ];
+    }
 
-      /**
-       *
-       * @param {Number} width
-       * @param {Number} height
-       *
-       * @returns {HTMLCanvasElement}
-       */
-      createCanvas(width, height)
-      {
-          let canvas    = document.createElement("canvas");
-          canvas.width  = width;
-          canvas.height = height;
+    /**
+     *
+     * @param {Number} width
+     * @param {Number} height
+     *
+     * @returns {HTMLCanvasElement}
+     */
+    createCanvas(width, height)
+    {
+      let canvas    = document.createElement("canvas");
+      canvas.width  = width;
+      canvas.height = height;
 
-          return canvas;
-      }
+      return canvas;
+    }
 
-      /**
-       * Converts the given SVG into a PNG image. Resolves to the PNG data URL.
-       *
-       * @param {SVGGraphicsElement} svg    The SVG element
-       * @param {Number}             width  The width of the image
-       * @param {Number}             height The height of the image
-       *
-       * @returns {Promise<String>}
-       */
-      convertToDataUrl(svg, width, height)
-      {
-          return new Promise(resolve => {
-              let data    = (new XMLSerializer()).serializeToString(svg);
-              let DOMURL  = window.URL || window.webkitURL || window;
-              let svgBlob = new Blob([ data ], { type: "image/svg+xml;charset=utf-8" });
-              let url     = DOMURL.createObjectURL(svgBlob);
-              let img     = new Image();
+    /**
+     * Converts the given SVG into a PNG image. Resolves to the PNG data URL.
+     *
+     * @param {SVGGraphicsElement} svg    The SVG element
+     * @param {Number}             width  The width of the image
+     * @param {Number}             height The height of the image
+     *
+     * @returns {Promise<String>}
+     */
+    convertToDataUrl(svg, width, height)
+    {
+      return new Promise(resolve => {
+        let data    = (new XMLSerializer()).serializeToString(svg);
+        let DOMURL  = window.URL || window.webkitURL || window;
+        let svgBlob = new Blob([ data ], { type: "image/svg+xml;charset=utf-8" });
+        let url     = DOMURL.createObjectURL(svgBlob);
+        let img     = new Image();
 
-              img.onload = () => {
-                  let canvas = this.createCanvas(width, height);
-                  let ctx    = canvas.getContext("2d");
+        img.onload = () => {
+          let canvas = this.createCanvas(width, height);
+          let ctx    = canvas.getContext("2d");
 
-                  ctx.fillStyle = "rgb(255,255,255)";
-                  ctx.fillRect(0, 0, canvas.width, canvas.height);
-                  ctx.drawImage(img, 0, 0);
+          ctx.fillStyle = "rgb(255,255,255)";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
 
-                  DOMURL.revokeObjectURL(url);
+          DOMURL.revokeObjectURL(url);
 
-                  let imgURI = canvas
-                      .toDataURL("image/png")
-                      .replace("image/png", "image/octet-stream");
+          let imgURI = canvas
+              .toDataURL("image/png")
+              .replace("image/png", "image/octet-stream");
 
-                  resolve(imgURI);
-              };
+          resolve(imgURI);
+        };
 
-              img.src = url;
+        img.src = url;
+      });
+    }
+
+    /**
+     * Clones the SVG element.
+     *
+     * @param {SVGGraphicsElement} svg
+     *
+     * @returns {Promise<SVGGraphicsElement>}
+     */
+    cloneSvg(svg)
+    {
+      return new Promise(resolve => {
+        let newSvg = svg.cloneNode(true);
+
+        resolve(newSvg);
+      })
+    }
+
+    /**
+     * Saves the given SVG as PNG image file.
+     *
+     * @param {Svg}    svg      The source SVG object
+     * @param {String} fileName The file name
+     */
+    svgToImage(svg, fileName)
+    {
+      // 300 DPI (good quality for printing) / 96 DPI (common browser)
+      //let scale = 300 / dpi();
+
+      // Paper sizes (width, height) in pixel at 300 DPI/PPI
+      // const paperSize = {
+      //     'A3': [4960, 3508],
+      //     'A4': [3508, 2480],
+      //     'A5': [2480, 1748]
+      // };
+
+      this.cloneSvg(svg.get().node())
+          .then(newSvg => {
+            this.copyStylesInline(svg.get().node(), newSvg);
+
+            const viewBox = this.calculateViewBox(svg.get().node());
+            const width = viewBox[2];
+            const height = viewBox[3];
+
+            newSvg.setAttribute("width", width);
+            newSvg.setAttribute("height", height);
+            newSvg.setAttribute("viewBox", viewBox);
+
+            this.convertToDataUrl(newSvg, width, height)
+                .then(imgURI => this.triggerDownload(imgURI, fileName))
+                .catch(() => {
+                  console.log("Failed to save chart as PNG image");
+                });
           });
-      }
-
-      /**
-       * Clones the SVG element.
-       *
-       * @param {SVGGraphicsElement} svg
-       *
-       * @returns {Promise<SVGGraphicsElement>}
-       */
-      cloneSvg(svg)
-      {
-          return new Promise(resolve => {
-              let newSvg = svg.cloneNode(true);
-
-              resolve(newSvg);
-          })
-      }
-
-      /**
-       * Saves the given SVG as PNG image file.
-       *
-       * @param {Svg}    svg      The source SVG object
-       * @param {String} fileName The file name
-       */
-      svgToImage(svg, fileName)
-      {
-          // 300 DPI (good quality for printing) / 96 DPI (common browser)
-          //let scale = 300 / dpi();
-
-          // Paper sizes (width, height) in pixel at 300 DPI/PPI
-          // const paperSize = {
-          //     'A3': [4960, 3508],
-          //     'A4': [3508, 2480],
-          //     'A5': [2480, 1748]
-          // };
-
-          this.cloneSvg(svg.get().node())
-              .then(newSvg => {
-                  this.copyStylesInline(svg.get().node(), newSvg);
-
-                  const viewBox = this.calculateViewBox(svg.get().node());
-                  const width = viewBox[2];
-                  const height = viewBox[3];
-
-                  newSvg.setAttribute("width", width);
-                  newSvg.setAttribute("height", height);
-                  newSvg.setAttribute("viewBox", viewBox);
-
-                  this.convertToDataUrl(newSvg, width, height)
-                      .then(imgURI => this.triggerDownload(imgURI, fileName))
-                      .catch(() => {
-                          console.log("Failed to save chart as PNG image");
-                      });
-              });
-      }
+    }
   }
 
   /**
@@ -5958,90 +5958,90 @@
    */
   class SvgExport extends Export
   {
-      /**
-       * Copies recursively all the styles from the list of container elements from the source
-       * to the destination node.
-       *
-       * @param {String}             cssFile
-       * @param {SVGGraphicsElement} destinationNode
-       *
-       * @returns {Promise<SVGGraphicsElement>}
-       */
-      copyStylesInline(cssFile, destinationNode)
-      {
-          return new Promise(resolve => {
-              text(cssFile)
-                  .then((data) => {
-                      // Remove parent container selector as the CSS is included directly into the SVG element
-                      data = data.replace(/#webtrees-pedigree-chart-container /g, "");
+    /**
+     * Copies recursively all the styles from the list of container elements from the source
+     * to the destination node.
+     *
+     * @param {String}             cssFile
+     * @param {SVGGraphicsElement} destinationNode
+     *
+     * @returns {Promise<SVGGraphicsElement>}
+     */
+    copyStylesInline(cssFile, destinationNode)
+    {
+      return new Promise(resolve => {
+        text(cssFile)
+            .then((data) => {
+              // Remove parent container selector as the CSS is included directly into the SVG element
+              data = data.replace(/#webtrees-pedigree-chart-container /g, "");
 
-                      let style = document.createElementNS("http://www.w3.org/2000/svg", "style");
-                      style.appendChild(document.createTextNode(data));
+              let style = document.createElementNS("http://www.w3.org/2000/svg", "style");
+              style.appendChild(document.createTextNode(data));
 
-                      destinationNode.prepend(style);
+              destinationNode.prepend(style);
 
-                      resolve(destinationNode);
-                  });
-          })
-      }
+              resolve(destinationNode);
+            });
+      })
+    }
 
-      /**
-       * Converts the given SVG into an object URL. Resolves to the object URL.
-       *
-       * @param {SVGGraphicsElement} svg The SVG element
-       *
-       * @returns {Promise<String>}
-       */
-      convertToObjectUrl(svg)
-      {
-          return new Promise(resolve => {
-              let data    = (new XMLSerializer()).serializeToString(svg);
-              let DOMURL  = window.URL || window.webkitURL || window;
-              let svgBlob = new Blob([ data ], { type: "image/svg+xml;charset=utf-8" });
-              let url     = DOMURL.createObjectURL(svgBlob);
-              let img     = new Image();
+    /**
+     * Converts the given SVG into an object URL. Resolves to the object URL.
+     *
+     * @param {SVGGraphicsElement} svg The SVG element
+     *
+     * @returns {Promise<String>}
+     */
+    convertToObjectUrl(svg)
+    {
+      return new Promise(resolve => {
+        let data    = (new XMLSerializer()).serializeToString(svg);
+        let DOMURL  = window.URL || window.webkitURL || window;
+        let svgBlob = new Blob([ data ], { type: "image/svg+xml;charset=utf-8" });
+        let url     = DOMURL.createObjectURL(svgBlob);
+        let img     = new Image();
 
-              img.onload = () => {
-                  resolve(url);
-              };
+        img.onload = () => {
+          resolve(url);
+        };
 
-              img.src = url;
+        img.src = url;
+      });
+    }
+
+    /**
+     * Clones the SVG element.
+     *
+     * @param {SVGGraphicsElement} svg
+     *
+     * @returns {Promise<SVGGraphicsElement>}
+     */
+    cloneSvg(svg)
+    {
+      return new Promise(resolve => {
+        let newSvg = svg.cloneNode(true);
+
+        resolve(newSvg);
+      })
+    }
+
+    /**
+     * Saves the given SVG as SVG image file.
+     *
+     * @param {Svg}    svg      The source SVG object
+     * @param {String} cssFile  The CSS file used together with the SVG
+     * @param {String} fileName The file name
+     */
+    svgToImage(svg, cssFile, fileName)
+    {
+      this.cloneSvg(svg.get().node())
+          .then(newSvg => this.copyStylesInline(cssFile, newSvg))
+          .then(newSvg => this.convertToObjectUrl(newSvg))
+          .then(objectUrl => this.triggerDownload(objectUrl, fileName))
+          .catch(() => {
+            console.log("Failed to save chart as SVG image");
           });
-      }
-
-      /**
-       * Clones the SVG element.
-       *
-       * @param {SVGGraphicsElement} svg
-       *
-       * @returns {Promise<SVGGraphicsElement>}
-       */
-      cloneSvg(svg)
-      {
-          return new Promise(resolve => {
-              let newSvg = svg.cloneNode(true);
-
-              resolve(newSvg);
-          })
-      }
-
-      /**
-       * Saves the given SVG as SVG image file.
-       *
-       * @param {Svg}    svg      The source SVG object
-       * @param {String} cssFile  The CSS file used together with the SVG
-       * @param {String} fileName The file name
-       */
-      svgToImage(svg, cssFile, fileName)
-      {
-          this.cloneSvg(svg.get().node())
-              .then(newSvg => this.copyStylesInline(cssFile, newSvg))
-              .then(newSvg => this.convertToObjectUrl(newSvg))
-              .then(objectUrl => this.triggerDownload(objectUrl, fileName))
-              .catch(() => {
-                  console.log("Failed to save chart as SVG image");
-              });
-      }
+    }
   }
 
   /**
@@ -6057,34 +6057,34 @@
    */
   class ExportFactory
   {
-      constructor()
-      {
-          this._exportClass = null;
+    constructor()
+    {
+      this._exportClass = null;
+    }
+
+    setExportClass(type)
+    {
+      switch (type) {
+        case 'png':
+          this._exportClass = PngExport;
+          break;
+        case 'svg':
+          this._exportClass = SvgExport;
+          break;
       }
+    };
 
-      setExportClass(type)
-      {
-          switch (type) {
-              case 'png':
-                  this._exportClass = PngExport;
-                  break;
-              case 'svg':
-                  this._exportClass = SvgExport;
-                  break;
-          }
-      };
+    createExport(type)
+    {
+      this.setExportClass(type);
 
-      createExport(type)
-      {
-          this.setExportClass(type);
-
-          switch (type) {
-              case 'png':
-                  return new this._exportClass();
-              case 'svg':
-                  return new this._exportClass();
-          }
-      };
+      switch (type) {
+        case 'png':
+          return new this._exportClass();
+        case 'svg':
+          return new this._exportClass();
+      }
+    };
   }
 
   /**
@@ -6100,172 +6100,172 @@
    */
   class Svg
   {
-      /**
-       * Constructor.
-       *
-       * @param {Selection}     parent        The selected D3 parent element container
-       * @param {Configuration} configuration The application configuration
-       */
-      constructor(parent, configuration)
-      {
-          // Create the <svg> element
-          this._element       = parent.append("svg");
-          this._defs          = new Defs(this._element);
+    /**
+     * Constructor.
+     *
+     * @param {Selection}     parent        The selected D3 parent element container
+     * @param {Configuration} configuration The application configuration
+     */
+    constructor(parent, configuration)
+    {
+      // Create the <svg> element
+      this._element       = parent.append("svg");
+      this._defs          = new Defs(this._element);
 
-          this._visual        = null;
-          this._zoom          = null;
-          this._configuration = configuration;
+      this._visual        = null;
+      this._zoom          = null;
+      this._configuration = configuration;
 
-          this.init();
-      }
+      this.init();
+    }
 
-      /**
-       * Initialize the <svg> element.
-       *
-       * @private
-       */
-      init()
-      {
-          // Add SVG element
-          this._element
-              .attr("width", "100%")
-              .attr("height", "100%")
-              .attr("text-rendering", "geometricPrecision")
-              .attr("text-anchor", "middle")
-              .attr("xmlns:xlink", "https://www.w3.org/1999/xlink");
+    /**
+     * Initialize the <svg> element.
+     *
+     * @private
+     */
+    init()
+    {
+      // Add SVG element
+      this._element
+          .attr("width", "100%")
+          .attr("height", "100%")
+          .attr("text-rendering", "geometricPrecision")
+          .attr("text-anchor", "middle")
+          .attr("xmlns:xlink", "https://www.w3.org/1999/xlink");
 
-          // new Filter(this._defs.get());
-      }
+      // new Filter(this._defs.get());
+    }
 
-      /**
-       * Initialiaze the <svg> element events.
-       *
-       * @param {Overlay} overlay
-       */
-      initEvents(overlay)
-      {
-          this._element
-              .on("contextmenu", (event) => event.preventDefault())
-              .on("wheel", (event) => {
-                  if (!event.ctrlKey) {
-                      overlay.show(
-                          this._configuration.labels.zoom,
-                          300,
-                          () => {
-                              overlay.hide(700, 800);
-                          }
-                      );
+    /**
+     * Initialiaze the <svg> element events.
+     *
+     * @param {Overlay} overlay
+     */
+    initEvents(overlay)
+    {
+      this._element
+          .on("contextmenu", (event) => event.preventDefault())
+          .on("wheel", (event) => {
+            if (!event.ctrlKey) {
+              overlay.show(
+                  this._configuration.labels.zoom,
+                  300,
+                  () => {
+                    overlay.hide(700, 800);
                   }
-              })
-              .on("touchend", (event) => {
-                  if (event.touches.length < 2) {
-                      overlay.hide(0, 800);
-                  }
-              })
-              .on("touchmove", (event) => {
-                  if (event.touches.length >= 2) {
-                      // Hide tooltip on more than 2 fingers
-                      overlay.hide();
-                  } else {
-                      // Show tooltip if less than 2 fingers are used
-                      overlay.show(this._configuration.labels.move);
-                  }
-              })
-              .on("click", (event) => this.doStopPropagation(event), true);
+              );
+            }
+          })
+          .on("touchend", (event) => {
+            if (event.touches.length < 2) {
+              overlay.hide(0, 800);
+            }
+          })
+          .on("touchmove", (event) => {
+            if (event.touches.length >= 2) {
+              // Hide tooltip on more than 2 fingers
+              overlay.hide();
+            } else {
+              // Show tooltip if less than 2 fingers are used
+              overlay.show(this._configuration.labels.move);
+            }
+          })
+          .on("click", (event) => this.doStopPropagation(event), true);
 
-          if (this._configuration.rtl) {
-              this._element.classed("rtl", true);
-          }
-
-          // Add group
-          this._visual = this._element.append("g");
-
-          // this._visual
-          //     .append("g")
-          //     .attr("class", "personGroup");
-
-          this._zoom = new Zoom(this._visual);
-          this._element.call(this._zoom.get());
-
-          // // For Top/Bottom and Bottom/Top layout set the initial zoom level to the number
-          // // of displayed generations
-          // if ((this._configuration.generations > 4)
-          //     && ((this._configuration.treeLayout === LAYOUT_TOPBOTTOM)
-          //     || (this._configuration.treeLayout === LAYOUT_BOTTOMTOP))
-          // ) {
-          //     // this._element
-          //     //     .attr("transform", "translate(200, 200)")
-          //     //
-          //     // this._zoom.get().scaleTo(this._element, this._configuration.generations);
-          // }
+      if (this._configuration.rtl) {
+        this._element.classed("rtl", true);
       }
 
-      /**
-       * Prevent default click and stop propagation.
-       *
-       * @param {Event} event
-       *
-       * @private
-       */
-      doStopPropagation(event)
-      {
-          if (event.defaultPrevented) {
-              event.stopPropagation();
-          }
-      }
+      // Add group
+      this._visual = this._element.append("g");
 
-      /**
-       * Exports the chart as PNG image and triggers a download.
-       *
-       * @param {String} type The export file type (either "png" or "svg")
-       *
-       * @returns {PngExport|SvgExport}
-       */
-      export(type )
-      {
-          const factory = new ExportFactory();
-          return factory.createExport(type);
-      }
+      // this._visual
+      //     .append("g")
+      //     .attr("class", "personGroup");
 
-      /**
-       * Returns the SVG definition instance.
-       *
-       * @returns {Defs}
-       */
-      get defs()
-      {
-          return this._defs;
-      }
+      this._zoom = new Zoom(this._visual);
+      this._element.call(this._zoom.get());
 
-      /**
-       * Returns the SVG definition instance.
-       *
-       * @returns {Zoom}
-       */
-      get zoom()
-      {
-          return this._zoom;
-      }
+      // // For Top/Bottom and Bottom/Top layout set the initial zoom level to the number
+      // // of displayed generations
+      // if ((this._configuration.generations > 4)
+      //     && ((this._configuration.treeLayout === LAYOUT_TOPBOTTOM)
+      //     || (this._configuration.treeLayout === LAYOUT_BOTTOMTOP))
+      // ) {
+      //     // this._element
+      //     //     .attr("transform", "translate(200, 200)")
+      //     //
+      //     // this._zoom.get().scaleTo(this._element, this._configuration.generations);
+      // }
+    }
 
-      /**
-       *
-       *
-       * @returns {Selection}
-       */
-      get visual()
-      {
-          return this._visual;
+    /**
+     * Prevent default click and stop propagation.
+     *
+     * @param {Event} event
+     *
+     * @private
+     */
+    doStopPropagation(event)
+    {
+      if (event.defaultPrevented) {
+        event.stopPropagation();
       }
+    }
 
-      /**
-       * Returns the internal element.
-       *
-       * @returns {Selection}
-       */
-      get()
-      {
-          return this._element;
-      }
+    /**
+     * Exports the chart as PNG image and triggers a download.
+     *
+     * @param {String} type The export file type (either "png" or "svg")
+     *
+     * @returns {PngExport|SvgExport}
+     */
+    export(type )
+    {
+      const factory = new ExportFactory();
+      return factory.createExport(type);
+    }
+
+    /**
+     * Returns the SVG definition instance.
+     *
+     * @returns {Defs}
+     */
+    get defs()
+    {
+      return this._defs;
+    }
+
+    /**
+     * Returns the SVG definition instance.
+     *
+     * @returns {Zoom}
+     */
+    get zoom()
+    {
+      return this._zoom;
+    }
+
+    /**
+     *
+     *
+     * @returns {Selection}
+     */
+    get visual()
+    {
+      return this._visual;
+    }
+
+    /**
+     * Returns the internal element.
+     *
+     * @returns {Selection}
+     */
+    get()
+    {
+      return this._element;
+    }
   }
 
   /**
@@ -6284,221 +6284,221 @@
    */
   class Chart
   {
-      /**
-       * Constructor.
-       *
-       * @param {Selection}     parent        The selected D3 parent element container
-       * @param {Configuration} configuration The application configuration
-       */
-      constructor(parent, configuration)
-      {
-          this._configuration = configuration;
-          this._parent        = parent;
-          this._hierarchy     = new Hierarchy(this._configuration);
-          this._data          = {};
-      }
+    /**
+     * Constructor.
+     *
+     * @param {Selection}     parent        The selected D3 parent element container
+     * @param {Configuration} configuration The application configuration
+     */
+    constructor(parent, configuration)
+    {
+      this._configuration = configuration;
+      this._parent        = parent;
+      this._hierarchy     = new Hierarchy(this._configuration);
+      this._data          = {};
+    }
 
-      /**
-       * Returns the SVG instance.
-       *
-       * @returns {Svg}
-       */
-      get svg()
-      {
-          return this._svg;
-      }
+    /**
+     * Returns the SVG instance.
+     *
+     * @returns {Svg}
+     */
+    get svg()
+    {
+      return this._svg;
+    }
 
-      /**
-       * Update/Calculate the viewBox attribute of the SVG element.
-       *
-       * @private
-       */
-      updateViewBox()
-      {
-          // Get bounding boxes
-          let svgBoundingBox    = this._svg.visual.node().getBBox();
-          let clientBoundingBox = this._parent.node().getBoundingClientRect();
+    /**
+     * Update/Calculate the viewBox attribute of the SVG element.
+     *
+     * @private
+     */
+    updateViewBox()
+    {
+      // Get bounding boxes
+      let svgBoundingBox    = this._svg.visual.node().getBBox();
+      let clientBoundingBox = this._parent.node().getBoundingClientRect();
 
-          // View box should have at least the same width/height as the parent element
-          let viewBoxWidth  = Math.max(clientBoundingBox.width, svgBoundingBox.width);
-          let viewBoxHeight = Math.max(clientBoundingBox.height, svgBoundingBox.height, MIN_HEIGHT);
+      // View box should have at least the same width/height as the parent element
+      let viewBoxWidth  = Math.max(clientBoundingBox.width, svgBoundingBox.width);
+      let viewBoxHeight = Math.max(clientBoundingBox.height, svgBoundingBox.height, MIN_HEIGHT);
 
-          // Calculate offset to center chart inside svg
-          let offsetX = (viewBoxWidth - svgBoundingBox.width) / 2;
-          let offsetY = (viewBoxHeight - svgBoundingBox.height) / 2;
+      // Calculate offset to center chart inside svg
+      let offsetX = (viewBoxWidth - svgBoundingBox.width) / 2;
+      let offsetY = (viewBoxHeight - svgBoundingBox.height) / 2;
 
-          // Adjust view box dimensions by padding and offset
-          let viewBoxLeft = Math.ceil(svgBoundingBox.x - offsetX - MIN_PADDING);
-          let viewBoxTop  = Math.ceil(svgBoundingBox.y - offsetY - MIN_PADDING);
+      // Adjust view box dimensions by padding and offset
+      let viewBoxLeft = Math.ceil(svgBoundingBox.x - offsetX - MIN_PADDING);
+      let viewBoxTop  = Math.ceil(svgBoundingBox.y - offsetY - MIN_PADDING);
 
-          // Final width/height of view box
-          viewBoxWidth  = Math.ceil(viewBoxWidth + (MIN_PADDING * 2));
-          viewBoxHeight = Math.ceil(viewBoxHeight + (MIN_PADDING * 2));
+      // Final width/height of view box
+      viewBoxWidth  = Math.ceil(viewBoxWidth + (MIN_PADDING * 2));
+      viewBoxHeight = Math.ceil(viewBoxHeight + (MIN_PADDING * 2));
 
-          // this._svg.visual
-          //     .attr("transform", "translate(" + (-viewBoxLeft) + ", " + (-viewBoxTop) + ")");
-          //
-          // this._svg.get()
-          //     .attr("width", viewBoxWidth)
-          //     .attr("height", viewBoxHeight);
-
-          // Set view box attribute
-          this._svg.get()
-              .attr("viewBox", [
-                  viewBoxLeft,
-                  viewBoxTop,
-                  viewBoxWidth,
-                  viewBoxHeight
-              ]);
-      }
-
-      /**
-       * Returns the chart data.
-       *
-       * @returns {Object}
-       */
-      get data()
-      {
-          return this._data;
-      }
-
-      /**
-       * Sets the chart data.
-       *
-       * @param {Object} value The chart data
-       */
-      set data(value)
-      {
-          this._data = value;
-
-          // Create the hierarchical data structure
-          this._hierarchy.init(this._data);
-      }
-
-      /**
-       * This method draws the chart.
-       */
-      draw()
-      {
-          // Remove previously created content
-          this._parent.html("");
-
-          // Create the <svg> element
-          this._svg = new Svg(this._parent, this._configuration);
-
-          // Overlay must be placed after the <svg> element
-          this._overlay = new Overlay(this._parent);
-
-          // Init the <svg> events
-          this._svg.initEvents(this._overlay);
-
-          new Tree(this._svg, this._configuration, this._hierarchy);
-
-          // let personGroup = this._svg.get().select("g.personGroup");
-          // let gradient    = new Gradient(this._svg, this._configuration);
-          // let that        = this;
-          //
-          // personGroup
-          //     .selectAll("g.person")
-          //     .data(this._hierarchy.nodes, (d) => d.data.id)
-          //     .enter()
-          //     .append("g")
-          //     .attr("class", "person")
-          //     .attr("id", (d) => "person-" + d.data.id);
-          //
-          // // Create a new selection in order to leave the previous enter() selection
-          // personGroup
-          //     .selectAll("g.person")
-          //     .each(function (d) {
-          //         let person = d3.select(this);
-          //
-          //         if (that._configuration.showColorGradients) {
-          //             gradient.init(d);
-          //         }
-          //
-          //         new Person(that._svg, that._configuration, person, d);
-          //     });
-
-          this.bindClickEventListener();
-          this.updateViewBox();
-      }
-
-      /**
-       * This method bind the "click" event listeners to a "person" element.
-       */
-      bindClickEventListener()
-      {
-          var that = this;
-          this._svg.visual
-              .selectAll("g.person")
-              .filter((d) => d.data.xref !== "")
-              .each(function (d) {
-                  select(this).on("click", function() { that.personClick(d.data); });
-              });
-      }
-
-      /**
-       * Method triggers either the "update" or "individual" method on the click on an person.
-       *
-       * @param {Object} data The D3 data object
-       *
-       * @private
-       */
-      personClick(data)
-      {
-          // Trigger either "update" or "redirectToIndividual" method on click depending on person in chart
-          (data.generation === 1) ? this.redirectToIndividual(data.url) : this.update(data.updateUrl);
-      }
-
-      /**
-       * Redirects to the individual page.
-       *
-       * @param {String} url The individual URL
-       *
-       * @private
-       */
-      redirectToIndividual(url)
-      {
-          window.location = url;
-      }
-
-      /**
-       * Updates the chart with the data of the selected individual.
-       *
-       * @param {String} url The update URL
-       */
-      update(url)
-      {
-          window.location = url;
-      }
-
-      // /**
-      //  * Changes root individual
-      //  *
-      //  * @param {String} url The update url
-      //  *
-      //  * @private
-      //  */
-      // update(url)
-      // {
-      //     var that = this;
+      // this._svg.visual
+      //     .attr("transform", "translate(" + (-viewBoxLeft) + ", " + (-viewBoxTop) + ")");
       //
-      //     $.getJSON(url, function(data) {
-      //         that.data = data;
-      //         that.draw();
+      // this._svg.get()
+      //     .attr("width", viewBoxWidth)
+      //     .attr("height", viewBoxHeight);
+
+      // Set view box attribute
+      this._svg.get()
+          .attr("viewBox", [
+            viewBoxLeft,
+            viewBoxTop,
+            viewBoxWidth,
+            viewBoxHeight
+          ]);
+    }
+
+    /**
+     * Returns the chart data.
+     *
+     * @returns {Object}
+     */
+    get data()
+    {
+      return this._data;
+    }
+
+    /**
+     * Sets the chart data.
+     *
+     * @param {Object} value The chart data
+     */
+    set data(value)
+    {
+      this._data = value;
+
+      // Create the hierarchical data structure
+      this._hierarchy.init(this._data);
+    }
+
+    /**
+     * This method draws the chart.
+     */
+    draw()
+    {
+      // Remove previously created content
+      this._parent.html("");
+
+      // Create the <svg> element
+      this._svg = new Svg(this._parent, this._configuration);
+
+      // Overlay must be placed after the <svg> element
+      this._overlay = new Overlay(this._parent);
+
+      // Init the <svg> events
+      this._svg.initEvents(this._overlay);
+
+      new Tree(this._svg, this._configuration, this._hierarchy);
+
+      // let personGroup = this._svg.get().select("g.personGroup");
+      // let gradient    = new Gradient(this._svg, this._configuration);
+      // let that        = this;
       //
-      //         var indSelector = $(document.getElementById('xref'));
-      //         $.ajax({
-      //             type: 'POST',
-      //             url: indSelector.attr("data-ajax--url"),
-      //             data: { q : data.xref }
-      //         }).then(function (data) {
-      //             // create the option and append to Select2
-      //             var option = new Option(data.results[0].text, data.results[0].id, true, true);
-      //             indSelector.append(option).trigger('change');
-      //         });
+      // personGroup
+      //     .selectAll("g.person")
+      //     .data(this._hierarchy.nodes, (d) => d.data.id)
+      //     .enter()
+      //     .append("g")
+      //     .attr("class", "person")
+      //     .attr("id", (d) => "person-" + d.data.id);
+      //
+      // // Create a new selection in order to leave the previous enter() selection
+      // personGroup
+      //     .selectAll("g.person")
+      //     .each(function (d) {
+      //         let person = d3.select(this);
+      //
+      //         if (that._configuration.showColorGradients) {
+      //             gradient.init(d);
+      //         }
+      //
+      //         new Person(that._svg, that._configuration, person, d);
       //     });
-      // }
+
+      this.bindClickEventListener();
+      this.updateViewBox();
+    }
+
+    /**
+     * This method bind the "click" event listeners to a "person" element.
+     */
+    bindClickEventListener()
+    {
+      var that = this;
+      this._svg.visual
+          .selectAll("g.person")
+          .filter((d) => d.data.xref !== "")
+          .each(function (d) {
+            select(this).on("click", function() { that.personClick(d.data); });
+          });
+    }
+
+    /**
+     * Method triggers either the "update" or "individual" method on the click on an person.
+     *
+     * @param {Object} data The D3 data object
+     *
+     * @private
+     */
+    personClick(data)
+    {
+      // Trigger either "update" or "redirectToIndividual" method on click depending on person in chart
+      (data.generation === 1) ? this.redirectToIndividual(data.url) : this.update(data.updateUrl);
+    }
+
+    /**
+     * Redirects to the individual page.
+     *
+     * @param {String} url The individual URL
+     *
+     * @private
+     */
+    redirectToIndividual(url)
+    {
+      window.location = url;
+    }
+
+    /**
+     * Updates the chart with the data of the selected individual.
+     *
+     * @param {String} url The update URL
+     */
+    update(url)
+    {
+      window.location = url;
+    }
+
+    // /**
+    //  * Changes root individual
+    //  *
+    //  * @param {String} url The update url
+    //  *
+    //  * @private
+    //  */
+    // update(url)
+    // {
+    //     var that = this;
+    //
+    //     $.getJSON(url, function(data) {
+    //         that.data = data;
+    //         that.draw();
+    //
+    //         var indSelector = $(document.getElementById('xref'));
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: indSelector.attr("data-ajax--url"),
+    //             data: { q : data.xref }
+    //         }).then(function (data) {
+    //             // create the option and append to Select2
+    //             var option = new Option(data.results[0].text, data.results[0].id, true, true);
+    //             indSelector.append(option).trigger('change');
+    //         });
+    //     });
+    // }
   }
 
   /**
@@ -6514,140 +6514,138 @@
    */
   class PedigreeChart
   {
-      /**
-       * Constructor.
-       *
-       * @param {String} selector The CSS selector of the HTML element used to assign the chart too
-       * @param {Object} options  A list of options passed from outside to the application
-       *
-       * @param {String[]} options.labels
-       * @param {Number}   options.generations
-       * @param {String}   options.defaultColor
-       * @param {String}   options.fontColor
-       * @param {Boolean}  options.showEmptyBoxes
-       * @param {String}   options.treeLayout
-       * @param {Boolean}  options.rtl
-       */
-      constructor(selector, options)
-      {
-          this._selector = selector;
-          this._parent   = select(this._selector);
+    /**
+     * Constructor.
+     *
+     * @param {String} selector The CSS selector of the HTML element used to assign the chart too
+     * @param {Object} options  A list of options passed from outside to the application
+     *
+     * @param {String[]} options.labels
+     * @param {Number}   options.generations
+     * @param {String}   options.defaultColor
+     * @param {String}   options.fontColor
+     * @param {Boolean}  options.showEmptyBoxes
+     * @param {String}   options.treeLayout
+     * @param {Boolean}  options.rtl
+     */
+    constructor(selector, options)
+    {
+      this._selector = selector;
+      this._parent   = select(this._selector);
 
-          // Set up configuration
-          this._configuration = new Configuration(
-              options.labels,
-              options.generations,
-              options.defaultColor,
-              options.fontColor,
-              options.showEmptyBoxes,
-              options.treeLayout,
-              options.rtl
-          );
+      // Set up configuration
+      this._configuration = new Configuration(
+          options.labels,
+          options.generations,
+          options.defaultColor,
+          options.fontColor,
+          options.showEmptyBoxes,
+          options.treeLayout,
+          options.rtl
+      );
 
-          // Set up chart instance
-          this._chart = new Chart(this._parent, this._configuration);
+      // Set up chart instance
+      this._chart = new Chart(this._parent, this._configuration);
 
-          this.init();
-      }
+      this.init();
+    }
 
-      /**
-       * @private
-       */
-      init()
-      {
-          // Bind click event on center button
-          select("#centerButton")
-              .on("click", () => this.center());
+    /**
+     * @private
+     */
+    init()
+    {
+      // Bind click event on center button
+      select("#centerButton")
+          .on("click", () => this.center());
 
-          // Bind click event on export as PNG button
-          select("#exportPNG")
-              .on("click", () => this.exportPNG());
+      // Bind click event on export as PNG button
+      select("#exportPNG")
+          .on("click", () => this.exportPNG());
 
-          // Bind click event on export as SVG button
-          select("#exportSVG")
-              .on("click", () => this.exportSVG());
-      }
+      // Bind click event on export as SVG button
+      select("#exportSVG")
+          .on("click", () => this.exportSVG());
+    }
 
-      /**
-       * Resets the chart to initial zoom level and position.
-       *
-       * @private
-       */
-      center()
-      {
-          this._chart
-              .svg.get()
-              .transition()
-              .duration(750)
-              .call(this._chart.svg.zoom.get().transform, identity);
-      }
+    /**
+     * Resets the chart to initial zoom level and position.
+     *
+     * @private
+     */
+    center()
+    {
+      this._chart
+          .svg.get()
+          .transition()
+          .duration(750)
+          .call(this._chart.svg.zoom.get().transform, identity);
+    }
 
-      /**
-       * Returns the configuration object.
-       *
-       * @returns {Configuration}
-       */
-      get configuration()
-      {
-          return this._configuration;
-      }
+    /**
+     * Returns the configuration object.
+     *
+     * @returns {Configuration}
+     */
+    get configuration()
+    {
+      return this._configuration;
+    }
 
-      /**
-       * Sets the URL to the CSS file used in SVG export.
-       *
-       * @param {String} cssFile
-       */
-      set cssFile(cssFile)
-      {
-          this._cssFile = cssFile;
-      }
+    /**
+     * Sets the URL to the CSS file used in SVG export.
+     *
+     * @param {String} cssFile
+     */
+    set cssFile(cssFile)
+    {
+      this._cssFile = cssFile;
+    }
 
-      /**
-       * Updates the chart.
-       *
-       * @param {Object} url The update url
-       */
-      update(url) { this._chart.update(url); }
+    /**
+     * Updates the chart.
+     *
+     * @param {Object} url The update url
+     */
+    update(url) { this._chart.update(url); }
 
-      /**
-       * Draws the chart.
-       *
-       * @param {Object} data The JSON encoded chart data
-       */
-      draw(data)
-      {
-          this._chart.data = data;
-          this._chart.draw();
-      }
+    /**
+     * Draws the chart.
+     *
+     * @param {Object} data The JSON encoded chart data
+     */
+    draw(data)
+    {
+      this._chart.data = data;
+      this._chart.draw();
+    }
 
-      /**
-       * Exports the chart as PNG image and triggers a download.
-       *
-       * @private
-       */
-      exportPNG()
-      {
-          this._chart.svg
-              .export('png')
-              .svgToImage(this._chart.svg, "pedigree-chart.png");
+    /**
+     * Exports the chart as PNG image and triggers a download.
+     *
+     * @private
+     */
+    exportPNG()
+    {
+      this._chart.svg
+          .export('png')
+          .svgToImage(this._chart.svg, "pedigree-chart.png");
 
-      }
+    }
 
-      /**
-       * Exports the chart as SVG image and triggers a download.
-       *
-       * @private
-       */
-      exportSVG()
-      {
-          this._chart.svg
-              .export('svg')
-              .svgToImage(this._chart.svg, this._cssFile, "pedigree-chart.svg");
-      }
+    /**
+     * Exports the chart as SVG image and triggers a download.
+     *
+     * @private
+     */
+    exportSVG()
+    {
+      this._chart.svg
+          .export('svg')
+          .svgToImage(this._chart.svg, this._cssFile, "pedigree-chart.svg");
+    }
   }
 
   exports.PedigreeChart = PedigreeChart;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
