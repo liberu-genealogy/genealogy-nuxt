@@ -157,7 +157,7 @@ export default {
 
         try {
           const response = await this.$axios
-            .$post("/api/gramps/store", formData, {
+            .$post("/api/gramps-import", formData, {
                 headers: {
                   'content-type': 'multipart/form-data',
                   'Access-Control-Allow-Origin': '*'
