@@ -96,6 +96,7 @@ export default defineNuxtConfig(
         "~/plugins/date-fns/format.js",
         "~/plugins/date-fns/formatDistance.js",
         "~/plugins/vue-select.js",
+        "~/plugins/vuex-router-sync.js",
         "~/plugins/vuelidate.js",
         //'~/plugins/echo.js',
         "~/plugins/vue-fb-customer-chat.js",
@@ -120,7 +121,7 @@ export default defineNuxtConfig(
       // Modules: https://go.nuxtjs.dev/config-modules
       modules: [
         // https://go.nuxtjs.dev/axios
-        "@nuxtjs/axios",
+        // "@nuxtjs/axios",
         "nuxt-vuex-router-sync",
         "nuxt-route-meta",
         // https://go.nuxtjs.dev/eslint
@@ -167,9 +168,9 @@ export default defineNuxtConfig(
 
       runtimeConfig: {
         public: {
-          axios: {
-            browserBaseURL: process.env.BASE_URL || "http://localhost:3000",
-          },
+          // axios: {
+          //   browserBaseURL: process.env.BASE_URL || "http://localhost:3000",
+          // },
         },
         appEnv: process.env.APP_ENV || "production",
         googleAnalytics: {
@@ -183,11 +184,11 @@ export default defineNuxtConfig(
       },
 
       // Axios module configuration: https://go.nuxtjs.dev/config-axios
-      axios: {
-        proxy: true,
-        prefix: "/api",
-        credentials: true,
-      },
+      // axios: {
+      //   proxy: true,
+      //   prefix: "/api",
+      //   credentials: true,
+      // },
       proxy: {
         "/api/": process.env.BASE_URL || "http://localhost:8000",
         "/broadcasting/": process.env.BASE_URL || "http://localhost:8000",
