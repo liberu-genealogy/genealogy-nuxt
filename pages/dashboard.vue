@@ -511,7 +511,7 @@ export default {
         url = '/api/open-arch/search-person'
         params = {
           name:
-              (this.filter.firstName || '') + ' ' + (this.filter.lastName || ''),
+              (this.filter.firstName || '') + ' ' + (this.filter.lastName || '')+ ' ' + (this.filter.date || ''),
           per_page: this.options?.itemsPerPage || 10,
           page: this.options?.page || 1,
         }
