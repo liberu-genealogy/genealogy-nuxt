@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.WebtreesFanChart = {}));
+      typeof define === 'function' && define.amd ? define(['exports'], factory) :
+          (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.WebtreesFanChart = {}));
 })(this, (function (exports) { 'use strict';
 
   var xhtml = "http://www.w3.org/1999/xhtml";
@@ -319,8 +319,8 @@
   // don’t; we’d rather avoid a gratuitous copy.)
   function arraylike(data) {
     return typeof data === "object" && "length" in data
-      ? data // Array, TypedArray, NodeList, array-like
-      : Array.from(data); // Map, Set, iterable, string, or anything else
+        ? data // Array, TypedArray, NodeList, array-like
+        : Array.from(data); // Map, Set, iterable, string, or anything else
   }
 
   function selection_exit() {
@@ -494,8 +494,8 @@
 
     return this.each((value == null
         ? (fullname.local ? attrRemoveNS$1 : attrRemove$1) : (typeof value === "function"
-        ? (fullname.local ? attrFunctionNS$1 : attrFunction$1)
-        : (fullname.local ? attrConstantNS$1 : attrConstant$1)))(fullname, value));
+            ? (fullname.local ? attrFunctionNS$1 : attrFunction$1)
+            : (fullname.local ? attrConstantNS$1 : attrConstant$1)))(fullname, value));
   }
 
   function defaultView(node) {
@@ -527,9 +527,9 @@
   function selection_style(name, value, priority) {
     return arguments.length > 1
         ? this.each((value == null
-              ? styleRemove$1 : typeof value === "function"
-              ? styleFunction$1
-              : styleConstant$1)(name, value, priority == null ? "" : priority))
+            ? styleRemove$1 : typeof value === "function"
+                ? styleFunction$1
+                : styleConstant$1)(name, value, priority == null ? "" : priority))
         : styleValue(this.node(), name);
   }
 
@@ -562,8 +562,8 @@
     return arguments.length > 1
         ? this.each((value == null
             ? propertyRemove : typeof value === "function"
-            ? propertyFunction
-            : propertyConstant)(name, value))
+                ? propertyFunction
+                : propertyConstant)(name, value))
         : this.node()[name];
   }
 
@@ -639,8 +639,8 @@
 
     return this.each((typeof value === "function"
         ? classedFunction : value
-        ? classedTrue
-        : classedFalse)(names, value));
+            ? classedTrue
+            : classedFalse)(names, value));
   }
 
   function textRemove() {
@@ -664,8 +664,8 @@
     return arguments.length
         ? this.each(value == null
             ? textRemove : (typeof value === "function"
-            ? textFunction$1
-            : textConstant$1)(value))
+                ? textFunction$1
+                : textConstant$1)(value))
         : this.node().textContent;
   }
 
@@ -690,8 +690,8 @@
     return arguments.length
         ? this.each(value == null
             ? htmlRemove : (typeof value === "function"
-            ? htmlFunction
-            : htmlConstant)(value))
+                ? htmlFunction
+                : htmlConstant)(value))
         : this.node().innerHTML;
   }
 
@@ -1058,8 +1058,8 @@
 
   function Timer() {
     this._call =
-    this._time =
-    this._next = null;
+        this._time =
+            this._next = null;
   }
 
   Timer.prototype = timer.prototype = {
@@ -1551,18 +1551,18 @@
     format = (format + "").trim().toLowerCase();
     return (m = reHex.exec(format)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) // #ff0000
         : l === 3 ? new Rgb((m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), ((m & 0xf) << 4) | (m & 0xf), 1) // #f00
-        : l === 8 ? rgba(m >> 24 & 0xff, m >> 16 & 0xff, m >> 8 & 0xff, (m & 0xff) / 0xff) // #ff000000
-        : l === 4 ? rgba((m >> 12 & 0xf) | (m >> 8 & 0xf0), (m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), (((m & 0xf) << 4) | (m & 0xf)) / 0xff) // #f000
-        : null) // invalid hex
+            : l === 8 ? rgba(m >> 24 & 0xff, m >> 16 & 0xff, m >> 8 & 0xff, (m & 0xff) / 0xff) // #ff000000
+                : l === 4 ? rgba((m >> 12 & 0xf) | (m >> 8 & 0xf0), (m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), (((m & 0xf) << 4) | (m & 0xf)) / 0xff) // #f000
+                    : null) // invalid hex
         : (m = reRgbInteger.exec(format)) ? new Rgb(m[1], m[2], m[3], 1) // rgb(255, 0, 0)
-        : (m = reRgbPercent.exec(format)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) // rgb(100%, 0%, 0%)
-        : (m = reRgbaInteger.exec(format)) ? rgba(m[1], m[2], m[3], m[4]) // rgba(255, 0, 0, 1)
-        : (m = reRgbaPercent.exec(format)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) // rgb(100%, 0%, 0%, 1)
-        : (m = reHslPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) // hsl(120, 50%, 50%)
-        : (m = reHslaPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) // hsla(120, 50%, 50%, 1)
-        : named.hasOwnProperty(format) ? rgbn(named[format]) // eslint-disable-line no-prototype-builtins
-        : format === "transparent" ? new Rgb(NaN, NaN, NaN, 0)
-        : null;
+            : (m = reRgbPercent.exec(format)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) // rgb(100%, 0%, 0%)
+                : (m = reRgbaInteger.exec(format)) ? rgba(m[1], m[2], m[3], m[4]) // rgba(255, 0, 0, 1)
+                    : (m = reRgbaPercent.exec(format)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) // rgb(100%, 0%, 0%, 1)
+                        : (m = reHslPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) // hsl(120, 50%, 50%)
+                            : (m = reHslaPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) // hsla(120, 50%, 50%, 1)
+                                : named.hasOwnProperty(format) ? rgbn(named[format]) // eslint-disable-line no-prototype-builtins
+                                    : format === "transparent" ? new Rgb(NaN, NaN, NaN, 0)
+                                        : null;
   }
 
   function rgbn(n) {
@@ -1706,10 +1706,10 @@
           m2 = l + (l < 0.5 ? l : 1 - l) * s,
           m1 = 2 * l - m2;
       return new Rgb(
-        hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
-        hsl2rgb(h, m1, m2),
-        hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
-        this.opacity
+          hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
+          hsl2rgb(h, m1, m2),
+          hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
+          this.opacity
       );
     },
     clamp() {
@@ -1739,8 +1739,8 @@
   function hsl2rgb(h, m1, m2) {
     return (h < 60 ? m1 + (m2 - m1) * h / 60
         : h < 180 ? m2
-        : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60
-        : m1) * 255;
+            : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60
+                : m1) * 255;
   }
 
   var constant$2 = x => () => x;
@@ -1859,7 +1859,7 @@
   var reA = /[-+]?(?:\d+\.?\d*|\.?\d+)(?:[eE][-+]?\d+)?/g,
       reB = new RegExp(reA.source, "g");
 
-  function zero(b) {
+  function zero$1(b) {
     return function() {
       return b;
     };
@@ -1885,7 +1885,7 @@
 
     // Interpolate pairs of numbers in a & b.
     while ((am = reA.exec(a))
-        && (bm = reB.exec(b))) {
+    && (bm = reB.exec(b))) {
       if ((bs = bm.index) > bi) { // a string precedes the next number in b
         bs = b.slice(bi, bs);
         if (s[i]) s[i] += bs; // coalesce with previous string
@@ -1912,24 +1912,24 @@
     // Otherwise, interpolate each of the numbers and rejoin the string.
     return s.length < 2 ? (q[0]
         ? one(q[0].x)
-        : zero(b))
+        : zero$1(b))
         : (b = q.length, function(t) {
-            for (var i = 0, o; i < b; ++i) s[(o = q[i]).i] = o.x(t);
-            return s.join("");
-          });
+          for (var i = 0, o; i < b; ++i) s[(o = q[i]).i] = o.x(t);
+          return s.join("");
+        });
   }
 
   function interpolate$1(a, b) {
     var t = typeof b, c;
     return b == null || t === "boolean" ? constant$2(b)
         : (t === "number" ? interpolateNumber
-        : t === "string" ? ((c = color(b)) ? (b = c, interpolateRgb) : interpolateString)
-        : b instanceof color ? interpolateRgb
-        : b instanceof Date ? date
-        : isNumberArray(b) ? numberArray
-        : Array.isArray(b) ? genericArray
-        : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? object
-        : interpolateNumber)(a, b);
+            : t === "string" ? ((c = color(b)) ? (b = c, interpolateRgb) : interpolateString)
+                : b instanceof color ? interpolateRgb
+                    : b instanceof Date ? date
+                        : isNumberArray(b) ? numberArray
+                            : Array.isArray(b) ? genericArray
+                                : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? object
+                                    : interpolateNumber)(a, b);
   }
 
   function interpolateRound(a, b) {
@@ -2199,8 +2199,8 @@
     var c;
     return (typeof b === "number" ? interpolateNumber
         : b instanceof color ? interpolateRgb
-        : (c = color(b)) ? (b = c, interpolateRgb)
-        : interpolateString)(a, b);
+            : (c = color(b)) ? (b = c, interpolateRgb)
+                : interpolateString)(a, b);
   }
 
   function attrRemove(name) {
@@ -2223,7 +2223,7 @@
       var string0 = this.getAttribute(name);
       return string0 === string1 ? null
           : string0 === string00 ? interpolate0
-          : interpolate0 = interpolate(string00 = string0, value1);
+              : interpolate0 = interpolate(string00 = string0, value1);
     };
   }
 
@@ -2235,7 +2235,7 @@
       var string0 = this.getAttributeNS(fullname.space, fullname.local);
       return string0 === string1 ? null
           : string0 === string00 ? interpolate0
-          : interpolate0 = interpolate(string00 = string0, value1);
+              : interpolate0 = interpolate(string00 = string0, value1);
     };
   }
 
@@ -2250,7 +2250,7 @@
       string1 = value1 + "";
       return string0 === string1 ? null
           : string0 === string00 && string1 === string10 ? interpolate0
-          : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+              : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
     };
   }
 
@@ -2265,7 +2265,7 @@
       string1 = value1 + "";
       return string0 === string1 ? null
           : string0 === string00 && string1 === string10 ? interpolate0
-          : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+              : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
     };
   }
 
@@ -2274,7 +2274,7 @@
     return this.attrTween(name, typeof value === "function"
         ? (fullname.local ? attrFunctionNS : attrFunction)(fullname, i, tweenValue(this, "attr." + name, value))
         : value == null ? (fullname.local ? attrRemoveNS : attrRemove)(fullname)
-        : (fullname.local ? attrConstantNS : attrConstant)(fullname, i, value));
+            : (fullname.local ? attrConstantNS : attrConstant)(fullname, i, value));
   }
 
   function attrInterpolate(name, i) {
@@ -2524,7 +2524,7 @@
           string1 = (this.style.removeProperty(name), styleValue(this, name));
       return string0 === string1 ? null
           : string0 === string00 && string1 === string10 ? interpolate0
-          : interpolate0 = interpolate(string00 = string0, string10 = string1);
+              : interpolate0 = interpolate(string00 = string0, string10 = string1);
     };
   }
 
@@ -2542,7 +2542,7 @@
       var string0 = styleValue(this, name);
       return string0 === string1 ? null
           : string0 === string00 ? interpolate0
-          : interpolate0 = interpolate(string00 = string0, value1);
+              : interpolate0 = interpolate(string00 = string0, value1);
     };
   }
 
@@ -2557,7 +2557,7 @@
       if (value1 == null) string1 = value1 = (this.style.removeProperty(name), styleValue(this, name));
       return string0 === string1 ? null
           : string0 === string00 && string1 === string10 ? interpolate0
-          : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+              : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
     };
   }
 
@@ -2580,14 +2580,14 @@
   function transition_style(name, value, priority) {
     var i = (name += "") === "transform" ? interpolateTransformCss : interpolate;
     return value == null ? this
-        .styleTween(name, styleNull(name, i))
-        .on("end.style." + name, styleRemove(name))
-      : typeof value === "function" ? this
-        .styleTween(name, styleFunction(name, i, tweenValue(this, "style." + name, value)))
-        .each(styleMaybeRemove(this._id, name))
-      : this
-        .styleTween(name, styleConstant(name, i, value), priority)
-        .on("end.style." + name, null);
+            .styleTween(name, styleNull(name, i))
+            .on("end.style." + name, styleRemove(name))
+        : typeof value === "function" ? this
+                .styleTween(name, styleFunction(name, i, tweenValue(this, "style." + name, value)))
+                .each(styleMaybeRemove(this._id, name))
+            : this
+                .styleTween(name, styleConstant(name, i, value), priority)
+                .on("end.style." + name, null);
   }
 
   function styleInterpolate(name, i, priority) {
@@ -2810,15 +2810,30 @@
     return a == null || b == null ? NaN : a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
   }
 
-  function bisector(f) {
-    let delta = f;
-    let compare1 = f;
-    let compare2 = f;
+  function descending(a, b) {
+    return a == null || b == null ? NaN
+        : b < a ? -1
+            : b > a ? 1
+                : b >= a ? 0
+                    : NaN;
+  }
 
+  function bisector(f) {
+    let compare1, compare2, delta;
+
+    // If an accessor is specified, promote it to a comparator. In this case we
+    // can test whether the search value is (self-) comparable. We can’t do this
+    // for a comparator (except for specific, known comparators) because we can’t
+    // tell if the comparator is symmetric, and an asymmetric comparator can’t be
+    // used to test whether a single value is comparable.
     if (f.length !== 2) {
-      delta = (d, x) => f(d) - x;
       compare1 = ascending;
       compare2 = (d, x) => ascending(f(d), x);
+      delta = (d, x) => f(d) - x;
+    } else {
+      compare1 = f === ascending || f === descending ? f : zero;
+      compare2 = f;
+      delta = f;
     }
 
     function left(a, x, lo = 0, hi = a.length) {
@@ -2851,6 +2866,10 @@
     }
 
     return {left, center, right};
+  }
+
+  function zero() {
+    return 0;
   }
 
   function number$1(x) {
@@ -3180,8 +3199,8 @@
         n = coefficient.length;
     return i === n ? coefficient
         : i > n ? coefficient + new Array(i - n + 1).join("0")
-        : i > 0 ? coefficient.slice(0, i) + "." + coefficient.slice(i)
-        : "0." + new Array(1 - i).join("0") + formatDecimalParts(x, Math.max(0, p + i - 1))[0]; // less than 1y!
+            : i > 0 ? coefficient.slice(0, i) + "." + coefficient.slice(i)
+                : "0." + new Array(1 - i).join("0") + formatDecimalParts(x, Math.max(0, p + i - 1))[0]; // less than 1y!
   }
 
   function formatRounded(x, p) {
@@ -3191,7 +3210,7 @@
         exponent = d[1];
     return exponent < 0 ? "0." + new Array(-exponent).join("0") + coefficient
         : coefficient.length > exponent + 1 ? coefficient.slice(0, exponent + 1) + "." + coefficient.slice(exponent + 1)
-        : coefficient + new Array(exponent - coefficient.length + 2).join("0");
+            : coefficient + new Array(exponent - coefficient.length + 2).join("0");
   }
 
   var formatTypes = {
@@ -3267,7 +3286,7 @@
       // For fixed precision, it must be in [0, 20].
       precision = precision === undefined ? 6
           : /[gprs]/.test(type) ? Math.max(1, Math.min(21, precision))
-          : Math.max(0, Math.min(20, precision));
+              : Math.max(0, Math.min(20, precision));
 
       function format(value) {
         var valuePrefix = prefix,
@@ -3440,7 +3459,7 @@
         step = start, start = stop, stop = step;
         step = i0, i0 = i1, i1 = step;
       }
-      
+
       while (maxIter-- > 0) {
         step = tickIncrement(start, stop, count);
         if (step === prestep) {
@@ -3626,8 +3645,8 @@
         dy0 = transform.invertY(extent[0][1]) - translateExtent[0][1],
         dy1 = transform.invertY(extent[1][1]) - translateExtent[1][1];
     return transform.translate(
-      dx1 > dx0 ? (dx0 + dx1) / 2 : Math.min(0, dx0) || Math.max(0, dx1),
-      dy1 > dy0 ? (dy0 + dy1) / 2 : Math.min(0, dy0) || Math.max(0, dy1)
+        dx1 > dx0 ? (dx0 + dx1) / 2 : Math.min(0, dx0) || Math.max(0, dx1),
+        dy1 > dy0 ? (dy0 + dy1) / 2 : Math.min(0, dy0) || Math.max(0, dy1)
     );
   }
 
@@ -3656,7 +3675,7 @@
           .on("wheel.zoom", wheeled, {passive: false})
           .on("mousedown.zoom", mousedowned)
           .on("dblclick.zoom", dblclicked)
-        .filter(touchable)
+          .filter(touchable)
           .on("touchstart.zoom", touchstarted)
           .on("touchmove.zoom", touchmoved)
           .on("touchend.zoom touchcancel.zoom", touchended)
@@ -3671,10 +3690,10 @@
       } else {
         selection.interrupt().each(function() {
           gesture(this, arguments)
-            .event(event)
-            .start()
-            .zoom(null, typeof transform === "function" ? transform.apply(this, arguments) : transform)
-            .end();
+              .event(event)
+              .start()
+              .zoom(null, typeof transform === "function" ? transform.apply(this, arguments) : transform)
+              .end();
         });
       }
     };
@@ -3701,8 +3720,8 @@
     zoom.translateBy = function(selection, x, y, event) {
       zoom.transform(selection, function() {
         return constrain(this.__zoom.translate(
-          typeof x === "function" ? x.apply(this, arguments) : x,
-          typeof y === "function" ? y.apply(this, arguments) : y
+            typeof x === "function" ? x.apply(this, arguments) : x,
+            typeof y === "function" ? y.apply(this, arguments) : y
         ), extent.apply(this, arguments), translateExtent);
       }, null, event);
     };
@@ -3713,8 +3732,8 @@
             t = this.__zoom,
             p0 = p == null ? centroid(e) : typeof p === "function" ? p.apply(this, arguments) : p;
         return constrain(identity.translate(p0[0], p0[1]).scale(t.k).translate(
-          typeof x === "function" ? -x.apply(this, arguments) : -x,
-          typeof y === "function" ? -y.apply(this, arguments) : -y
+            typeof x === "function" ? -x.apply(this, arguments) : -x,
+            typeof y === "function" ? -y.apply(this, arguments) : -y
         ), e, translateExtent);
       }, p, event);
     };
@@ -3798,16 +3817,16 @@
       emit: function(type) {
         var d = select(this.that).datum();
         listeners.call(
-          type,
-          this.that,
-          new ZoomEvent(type, {
-            sourceEvent: this.sourceEvent,
-            target: zoom,
             type,
-            transform: this.that.__zoom,
-            dispatch: listeners
-          }),
-          d
+            this.that,
+            new ZoomEvent(type, {
+              sourceEvent: this.sourceEvent,
+              target: zoom,
+              type,
+              transform: this.that.__zoom,
+              dispatch: listeners
+            }),
+            d
         );
       }
     };
@@ -3870,7 +3889,7 @@
           g.moved = dx * dx + dy * dy > clickDistance2;
         }
         g.event(event)
-         .zoom("mouse", constrain(translate(g.that.__zoom, g.mouse[0] = pointer(event, currentTarget), g.mouse[1]), g.extent, translateExtent));
+            .zoom("mouse", constrain(translate(g.that.__zoom, g.mouse[0] = pointer(event, currentTarget), g.mouse[1]), g.extent, translateExtent));
       }
 
       function mouseupped(event) {
@@ -4238,7 +4257,7 @@
   function Node(data) {
     this.data = data;
     this.depth =
-    this.height = 0;
+        this.height = 0;
     this.parent = null;
   }
 
@@ -4289,7 +4308,7 @@
     function partition(root) {
       var n = root.height + 1;
       root.x0 =
-      root.y0 = padding;
+          root.y0 = padding;
       root.x1 = dx;
       root.y1 = dy / n;
       root.eachBefore(positionNode(dy, n));
@@ -4330,135 +4349,6 @@
     return partition;
   }
 
-  const pi$1 = Math.PI,
-      tau$1 = 2 * pi$1,
-      epsilon$1 = 1e-6,
-      tauEpsilon = tau$1 - epsilon$1;
-
-  function Path() {
-    this._x0 = this._y0 = // start of current subpath
-    this._x1 = this._y1 = null; // end of current subpath
-    this._ = "";
-  }
-
-  function path() {
-    return new Path;
-  }
-
-  Path.prototype = path.prototype = {
-    constructor: Path,
-    moveTo: function(x, y) {
-      this._ += "M" + (this._x0 = this._x1 = +x) + "," + (this._y0 = this._y1 = +y);
-    },
-    closePath: function() {
-      if (this._x1 !== null) {
-        this._x1 = this._x0, this._y1 = this._y0;
-        this._ += "Z";
-      }
-    },
-    lineTo: function(x, y) {
-      this._ += "L" + (this._x1 = +x) + "," + (this._y1 = +y);
-    },
-    quadraticCurveTo: function(x1, y1, x, y) {
-      this._ += "Q" + (+x1) + "," + (+y1) + "," + (this._x1 = +x) + "," + (this._y1 = +y);
-    },
-    bezierCurveTo: function(x1, y1, x2, y2, x, y) {
-      this._ += "C" + (+x1) + "," + (+y1) + "," + (+x2) + "," + (+y2) + "," + (this._x1 = +x) + "," + (this._y1 = +y);
-    },
-    arcTo: function(x1, y1, x2, y2, r) {
-      x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r = +r;
-      var x0 = this._x1,
-          y0 = this._y1,
-          x21 = x2 - x1,
-          y21 = y2 - y1,
-          x01 = x0 - x1,
-          y01 = y0 - y1,
-          l01_2 = x01 * x01 + y01 * y01;
-
-      // Is the radius negative? Error.
-      if (r < 0) throw new Error("negative radius: " + r);
-
-      // Is this path empty? Move to (x1,y1).
-      if (this._x1 === null) {
-        this._ += "M" + (this._x1 = x1) + "," + (this._y1 = y1);
-      }
-
-      // Or, is (x1,y1) coincident with (x0,y0)? Do nothing.
-      else if (!(l01_2 > epsilon$1));
-
-      // Or, are (x0,y0), (x1,y1) and (x2,y2) collinear?
-      // Equivalently, is (x1,y1) coincident with (x2,y2)?
-      // Or, is the radius zero? Line to (x1,y1).
-      else if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon$1) || !r) {
-        this._ += "L" + (this._x1 = x1) + "," + (this._y1 = y1);
-      }
-
-      // Otherwise, draw an arc!
-      else {
-        var x20 = x2 - x0,
-            y20 = y2 - y0,
-            l21_2 = x21 * x21 + y21 * y21,
-            l20_2 = x20 * x20 + y20 * y20,
-            l21 = Math.sqrt(l21_2),
-            l01 = Math.sqrt(l01_2),
-            l = r * Math.tan((pi$1 - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2),
-            t01 = l / l01,
-            t21 = l / l21;
-
-        // If the start tangent is not coincident with (x0,y0), line to.
-        if (Math.abs(t01 - 1) > epsilon$1) {
-          this._ += "L" + (x1 + t01 * x01) + "," + (y1 + t01 * y01);
-        }
-
-        this._ += "A" + r + "," + r + ",0,0," + (+(y01 * x20 > x01 * y20)) + "," + (this._x1 = x1 + t21 * x21) + "," + (this._y1 = y1 + t21 * y21);
-      }
-    },
-    arc: function(x, y, r, a0, a1, ccw) {
-      x = +x, y = +y, r = +r, ccw = !!ccw;
-      var dx = r * Math.cos(a0),
-          dy = r * Math.sin(a0),
-          x0 = x + dx,
-          y0 = y + dy,
-          cw = 1 ^ ccw,
-          da = ccw ? a0 - a1 : a1 - a0;
-
-      // Is the radius negative? Error.
-      if (r < 0) throw new Error("negative radius: " + r);
-
-      // Is this path empty? Move to (x0,y0).
-      if (this._x1 === null) {
-        this._ += "M" + x0 + "," + y0;
-      }
-
-      // Or, is (x0,y0) not coincident with the previous point? Line to (x0,y0).
-      else if (Math.abs(this._x1 - x0) > epsilon$1 || Math.abs(this._y1 - y0) > epsilon$1) {
-        this._ += "L" + x0 + "," + y0;
-      }
-
-      // Is this arc empty? We’re done.
-      if (!r) return;
-
-      // Does the angle go the wrong way? Flip the direction.
-      if (da < 0) da = da % tau$1 + tau$1;
-
-      // Is this a complete circle? Draw two arcs to complete the circle.
-      if (da > tauEpsilon) {
-        this._ += "A" + r + "," + r + ",0,1," + cw + "," + (x - dx) + "," + (y - dy) + "A" + r + "," + r + ",0,1," + cw + "," + (this._x1 = x0) + "," + (this._y1 = y0);
-      }
-
-      // Is this arc non-empty? Draw an arc!
-      else if (da > epsilon$1) {
-        this._ += "A" + r + "," + r + ",0," + (+(da >= pi$1)) + "," + cw + "," + (this._x1 = x + r * Math.cos(a1)) + "," + (this._y1 = y + r * Math.sin(a1));
-      }
-    },
-    rect: function(x, y, w, h) {
-      this._ += "M" + (this._x0 = this._x1 = +x) + "," + (this._y0 = this._y1 = +y) + "h" + (+w) + "v" + (+h) + "h" + (-w) + "Z";
-    },
-    toString: function() {
-      return this._;
-    }
-  };
-
   function constant(x) {
     return function constant() {
       return x;
@@ -4473,17 +4363,181 @@
   const sin = Math.sin;
   const sqrt = Math.sqrt;
 
-  const epsilon = 1e-12;
-  const pi = Math.PI;
-  const halfPi = pi / 2;
-  const tau = 2 * pi;
+  const epsilon$1 = 1e-12;
+  const pi$1 = Math.PI;
+  const halfPi = pi$1 / 2;
+  const tau$1 = 2 * pi$1;
 
   function acos(x) {
-    return x > 1 ? 0 : x < -1 ? pi : Math.acos(x);
+    return x > 1 ? 0 : x < -1 ? pi$1 : Math.acos(x);
   }
 
   function asin(x) {
     return x >= 1 ? halfPi : x <= -1 ? -halfPi : Math.asin(x);
+  }
+
+  const pi = Math.PI,
+      tau = 2 * pi,
+      epsilon = 1e-6,
+      tauEpsilon = tau - epsilon;
+
+  function append(strings) {
+    this._ += strings[0];
+    for (let i = 1, n = strings.length; i < n; ++i) {
+      this._ += arguments[i] + strings[i];
+    }
+  }
+
+  function appendRound(digits) {
+    let d = Math.floor(digits);
+    if (!(d >= 0)) throw new Error(`invalid digits: ${digits}`);
+    if (d > 15) return append;
+    const k = 10 ** d;
+    return function(strings) {
+      this._ += strings[0];
+      for (let i = 1, n = strings.length; i < n; ++i) {
+        this._ += Math.round(arguments[i] * k) / k + strings[i];
+      }
+    };
+  }
+
+  class Path {
+    constructor(digits) {
+      this._x0 = this._y0 = // start of current subpath
+          this._x1 = this._y1 = null; // end of current subpath
+      this._ = "";
+      this._append = digits == null ? append : appendRound(digits);
+    }
+    moveTo(x, y) {
+      this._append`M${this._x0 = this._x1 = +x},${this._y0 = this._y1 = +y}`;
+    }
+    closePath() {
+      if (this._x1 !== null) {
+        this._x1 = this._x0, this._y1 = this._y0;
+        this._append`Z`;
+      }
+    }
+    lineTo(x, y) {
+      this._append`L${this._x1 = +x},${this._y1 = +y}`;
+    }
+    quadraticCurveTo(x1, y1, x, y) {
+      this._append`Q${+x1},${+y1},${this._x1 = +x},${this._y1 = +y}`;
+    }
+    bezierCurveTo(x1, y1, x2, y2, x, y) {
+      this._append`C${+x1},${+y1},${+x2},${+y2},${this._x1 = +x},${this._y1 = +y}`;
+    }
+    arcTo(x1, y1, x2, y2, r) {
+      x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r = +r;
+
+      // Is the radius negative? Error.
+      if (r < 0) throw new Error(`negative radius: ${r}`);
+
+      let x0 = this._x1,
+          y0 = this._y1,
+          x21 = x2 - x1,
+          y21 = y2 - y1,
+          x01 = x0 - x1,
+          y01 = y0 - y1,
+          l01_2 = x01 * x01 + y01 * y01;
+
+      // Is this path empty? Move to (x1,y1).
+      if (this._x1 === null) {
+        this._append`M${this._x1 = x1},${this._y1 = y1}`;
+      }
+
+      // Or, is (x1,y1) coincident with (x0,y0)? Do nothing.
+      else if (!(l01_2 > epsilon));
+
+          // Or, are (x0,y0), (x1,y1) and (x2,y2) collinear?
+          // Equivalently, is (x1,y1) coincident with (x2,y2)?
+      // Or, is the radius zero? Line to (x1,y1).
+      else if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon) || !r) {
+        this._append`L${this._x1 = x1},${this._y1 = y1}`;
+      }
+
+      // Otherwise, draw an arc!
+      else {
+        let x20 = x2 - x0,
+            y20 = y2 - y0,
+            l21_2 = x21 * x21 + y21 * y21,
+            l20_2 = x20 * x20 + y20 * y20,
+            l21 = Math.sqrt(l21_2),
+            l01 = Math.sqrt(l01_2),
+            l = r * Math.tan((pi - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2),
+            t01 = l / l01,
+            t21 = l / l21;
+
+        // If the start tangent is not coincident with (x0,y0), line to.
+        if (Math.abs(t01 - 1) > epsilon) {
+          this._append`L${x1 + t01 * x01},${y1 + t01 * y01}`;
+        }
+
+        this._append`A${r},${r},0,0,${+(y01 * x20 > x01 * y20)},${this._x1 = x1 + t21 * x21},${this._y1 = y1 + t21 * y21}`;
+      }
+    }
+    arc(x, y, r, a0, a1, ccw) {
+      x = +x, y = +y, r = +r, ccw = !!ccw;
+
+      // Is the radius negative? Error.
+      if (r < 0) throw new Error(`negative radius: ${r}`);
+
+      let dx = r * Math.cos(a0),
+          dy = r * Math.sin(a0),
+          x0 = x + dx,
+          y0 = y + dy,
+          cw = 1 ^ ccw,
+          da = ccw ? a0 - a1 : a1 - a0;
+
+      // Is this path empty? Move to (x0,y0).
+      if (this._x1 === null) {
+        this._append`M${x0},${y0}`;
+      }
+
+      // Or, is (x0,y0) not coincident with the previous point? Line to (x0,y0).
+      else if (Math.abs(this._x1 - x0) > epsilon || Math.abs(this._y1 - y0) > epsilon) {
+        this._append`L${x0},${y0}`;
+      }
+
+      // Is this arc empty? We’re done.
+      if (!r) return;
+
+      // Does the angle go the wrong way? Flip the direction.
+      if (da < 0) da = da % tau + tau;
+
+      // Is this a complete circle? Draw two arcs to complete the circle.
+      if (da > tauEpsilon) {
+        this._append`A${r},${r},0,1,${cw},${x - dx},${y - dy}A${r},${r},0,1,${cw},${this._x1 = x0},${this._y1 = y0}`;
+      }
+
+      // Is this arc non-empty? Draw an arc!
+      else if (da > epsilon) {
+        this._append`A${r},${r},0,${+(da >= pi)},${cw},${this._x1 = x + r * Math.cos(a1)},${this._y1 = y + r * Math.sin(a1)}`;
+      }
+    }
+    rect(x, y, w, h) {
+      this._append`M${this._x0 = this._x1 = +x},${this._y0 = this._y1 = +y}h${w = +w}v${+h}h${-w}Z`;
+    }
+    toString() {
+      return this._;
+    }
+  }
+
+  function withPath(shape) {
+    let digits = 3;
+
+    shape.digits = function(_) {
+      if (!arguments.length) return digits;
+      if (_ == null) {
+        digits = null;
+      } else {
+        const d = Math.floor(_);
+        if (!(d >= 0)) throw new RangeError(`invalid digits: ${_}`);
+        digits = d;
+      }
+      return shape;
+    };
+
+    return () => new Path(digits);
   }
 
   function arcInnerRadius(d) {
@@ -4510,7 +4564,7 @@
     var x10 = x1 - x0, y10 = y1 - y0,
         x32 = x3 - x2, y32 = y3 - y2,
         t = y32 * x10 - x32 * y10;
-    if (t * t < epsilon) return;
+    if (t * t < epsilon$1) return;
     t = (x32 * (y0 - y2) - y32 * (x0 - x2)) / t;
     return [x0 + t * x10, y0 + t * y10];
   }
@@ -4566,7 +4620,8 @@
         startAngle = arcStartAngle,
         endAngle = arcEndAngle,
         padAngle = arcPadAngle,
-        context = null;
+        context = null,
+        path = withPath(arc);
 
     function arc() {
       var buffer,
@@ -4584,13 +4639,13 @@
       if (r1 < r0) r = r1, r1 = r0, r0 = r;
 
       // Is it a point?
-      if (!(r1 > epsilon)) context.moveTo(0, 0);
+      if (!(r1 > epsilon$1)) context.moveTo(0, 0);
 
       // Or is it a circle or annulus?
-      else if (da > tau - epsilon) {
+      else if (da > tau$1 - epsilon$1) {
         context.moveTo(r1 * cos(a0), r1 * sin(a0));
         context.arc(0, 0, r1, a0, a1, !cw);
-        if (r0 > epsilon) {
+        if (r0 > epsilon$1) {
           context.moveTo(r0 * cos(a1), r0 * sin(a1));
           context.arc(0, 0, r0, a1, a0, cw);
         }
@@ -4605,7 +4660,7 @@
             da0 = da,
             da1 = da,
             ap = padAngle.apply(this, arguments) / 2,
-            rp = (ap > epsilon) && (padRadius ? +padRadius.apply(this, arguments) : sqrt(r0 * r0 + r1 * r1)),
+            rp = (ap > epsilon$1) && (padRadius ? +padRadius.apply(this, arguments) : sqrt(r0 * r0 + r1 * r1)),
             rc = min(abs(r1 - r0) / 2, +cornerRadius.apply(this, arguments)),
             rc0 = rc,
             rc1 = rc,
@@ -4613,12 +4668,12 @@
             t1;
 
         // Apply padding? Note that since r1 ≥ r0, da1 ≥ da0.
-        if (rp > epsilon) {
+        if (rp > epsilon$1) {
           var p0 = asin(rp / r0 * sin(ap)),
               p1 = asin(rp / r1 * sin(ap));
-          if ((da0 -= p0 * 2) > epsilon) p0 *= (cw ? 1 : -1), a00 += p0, a10 -= p0;
+          if ((da0 -= p0 * 2) > epsilon$1) p0 *= (cw ? 1 : -1), a00 += p0, a10 -= p0;
           else da0 = 0, a00 = a10 = (a0 + a1) / 2;
-          if ((da1 -= p1 * 2) > epsilon) p1 *= (cw ? 1 : -1), a01 += p1, a11 -= p1;
+          if ((da1 -= p1 * 2) > epsilon$1) p1 *= (cw ? 1 : -1), a01 += p1, a11 -= p1;
           else da1 = 0, a01 = a11 = (a0 + a1) / 2;
         }
 
@@ -4628,31 +4683,37 @@
             y10 = r0 * sin(a10);
 
         // Apply rounded corners?
-        if (rc > epsilon) {
+        if (rc > epsilon$1) {
           var x11 = r1 * cos(a11),
               y11 = r1 * sin(a11),
               x00 = r0 * cos(a00),
               y00 = r0 * sin(a00),
               oc;
 
-          // Restrict the corner radius according to the sector angle.
-          if (da < pi && (oc = intersect(x01, y01, x00, y00, x11, y11, x10, y10))) {
-            var ax = x01 - oc[0],
-                ay = y01 - oc[1],
-                bx = x11 - oc[0],
-                by = y11 - oc[1],
-                kc = 1 / sin(acos((ax * bx + ay * by) / (sqrt(ax * ax + ay * ay) * sqrt(bx * bx + by * by))) / 2),
-                lc = sqrt(oc[0] * oc[0] + oc[1] * oc[1]);
-            rc0 = min(rc, (r0 - lc) / (kc - 1));
-            rc1 = min(rc, (r1 - lc) / (kc + 1));
+          // Restrict the corner radius according to the sector angle. If this
+          // intersection fails, it’s probably because the arc is too small, so
+          // disable the corner radius entirely.
+          if (da < pi$1) {
+            if (oc = intersect(x01, y01, x00, y00, x11, y11, x10, y10)) {
+              var ax = x01 - oc[0],
+                  ay = y01 - oc[1],
+                  bx = x11 - oc[0],
+                  by = y11 - oc[1],
+                  kc = 1 / sin(acos((ax * bx + ay * by) / (sqrt(ax * ax + ay * ay) * sqrt(bx * bx + by * by))) / 2),
+                  lc = sqrt(oc[0] * oc[0] + oc[1] * oc[1]);
+              rc0 = min(rc, (r0 - lc) / (kc - 1));
+              rc1 = min(rc, (r1 - lc) / (kc + 1));
+            } else {
+              rc0 = rc1 = 0;
+            }
           }
         }
 
         // Is the sector collapsed to a line?
-        if (!(da1 > epsilon)) context.moveTo(x01, y01);
+        if (!(da1 > epsilon$1)) context.moveTo(x01, y01);
 
         // Does the sector’s outer ring have rounded corners?
-        else if (rc1 > epsilon) {
+        else if (rc1 > epsilon$1) {
           t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw);
           t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
 
@@ -4674,10 +4735,10 @@
 
         // Is there no inner ring, and it’s a circular sector?
         // Or perhaps it’s an annular sector collapsed due to padding?
-        if (!(r0 > epsilon) || !(da0 > epsilon)) context.lineTo(x10, y10);
+        if (!(r0 > epsilon$1) || !(da0 > epsilon$1)) context.lineTo(x10, y10);
 
         // Does the sector’s inner ring (or point) have rounded corners?
-        else if (rc0 > epsilon) {
+        else if (rc0 > epsilon$1) {
           t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw);
           t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
 
@@ -4705,7 +4766,7 @@
 
     arc.centroid = function() {
       var r = (+innerRadius.apply(this, arguments) + +outerRadius.apply(this, arguments)) / 2,
-          a = (+startAngle.apply(this, arguments) + +endAngle.apply(this, arguments)) / 2 - pi / 2;
+          a = (+startAngle.apply(this, arguments) + +endAngle.apply(this, arguments)) / 2 - pi$1 / 2;
       return [cos(a) * r, sin(a) * r];
     };
 
@@ -4776,256 +4837,256 @@
    */
   class Configuration
   {
-      /**
-       * Constructor.
-       *
-       * @param {String[]}  labels
-       * @param {Number}    generations
-       * @param {Number}    fanDegree
-       * @param {String}    defaultColor
-       * @param {Number}    fontScale
-       * @param {String}    fontColor
-       * @param {Boolean}   hideEmptySegments
-       * @param {Boolean}   showColorGradients
-       * @param {Boolean}   showParentMarriageDates
-       * @param {Boolean}   rtl
-       * @param {Number}    innerArcs
-       */
-      constructor(
-          labels,
-          generations = 6,
-          fanDegree = 210,
-          defaultColor = "rgb(238, 238, 238)",
-          fontScale = 100,
-          fontColor = "rgb(0, 0, 0)",
-          hideEmptySegments = false,
-          showColorGradients = false,
-          showParentMarriageDates = false,
-          rtl = false,
-          innerArcs = 4
-      ) {
-          // Default number of generations to display
-          this._generations = generations;
+    /**
+     * Constructor.
+     *
+     * @param {String[]}  labels
+     * @param {Number}    generations
+     * @param {Number}    fanDegree
+     * @param {String}    defaultColor
+     * @param {Number}    fontScale
+     * @param {String}    fontColor
+     * @param {Boolean}   hideEmptySegments
+     * @param {Boolean}   showColorGradients
+     * @param {Boolean}   showParentMarriageDates
+     * @param {Boolean}   rtl
+     * @param {Number}    innerArcs
+     */
+    constructor(
+        labels,
+        generations = 6,
+        fanDegree = 210,
+        defaultColor = "rgb(238, 238, 238)",
+        fontScale = 100,
+        fontColor = "rgb(0, 0, 0)",
+        hideEmptySegments = false,
+        showColorGradients = false,
+        showParentMarriageDates = false,
+        rtl = false,
+        innerArcs = 4
+    ) {
+      // Default number of generations to display
+      this._generations = generations;
 
-          // Padding in pixel between each generation circle
-          this.circlePadding = 0;
+      // Padding in pixel between each generation circle
+      this.circlePadding = 0;
 
-          if (showParentMarriageDates) {
-              this.circlePadding = 40;
+      if (showParentMarriageDates) {
+        this.circlePadding = 40;
+      }
+
+      this.padAngle = 0.03;
+      this.padRadius = this.circlePadding * 10;
+      this.padDistance = this.padAngle * this.padRadius;
+      this.cornerRadius = 0;
+
+      // Number of circles, large enough to print text along arc path
+      this._numberOfInnerCircles = innerArcs;
+
+      // Radius of the innermost circle
+      this.centerCircleRadius = 85;
+
+      // Height of each inner circle arc
+      this.innerArcHeight = 85;
+
+      // Height of each outer circle arc
+      this.outerArcHeight = 110;
+
+      if (showParentMarriageDates) {
+        this.innerArcHeight = this.circlePadding + 110;
+        this.outerArcHeight = this.circlePadding + 110;
+      }
+
+      // Width of the colored arc above each single person arc
+      this.colorArcWidth = 5;
+
+      // Left/Right padding of text (used with truncation)
+      this.textPadding = 8;
+
+      // Default background color of an arc
+      this.defaultColor = defaultColor;
+
+      // Default font size, color and scaling
+      this._fontSize  = 15;
+      this._fontScale = fontScale;
+      this.fontColor = fontColor;
+
+      this._hideEmptySegments  = hideEmptySegments;
+      this._showColorGradients = showColorGradients;
+      this._showParentMarriageDates = showParentMarriageDates;
+
+      // Duration of update animation if clicked on a person
+      this.updateDuration = 1250;
+
+      // Default degrees of the fan chart
+      this._fanDegree = fanDegree;
+
+      this.rtl    = rtl;
+      this.labels = labels;
+
+      // Helper method to create a ongoing id
+      this.id = (() => {
+        let i = 1;
+
+        return function (reset = false) {
+          if (reset) {
+            i = 0;
           }
 
-          this.padAngle = 0.03;
-          this.padRadius = this.circlePadding * 10;
-          this.padDistance = this.padAngle * this.padRadius;
-          this.cornerRadius = 0;
+          return i++;
+        };
+      })();
+    }
 
-          // Number of circles, large enough to print text along arc path
-          this._numberOfInnerCircles = innerArcs;
+    /**
+     * Returns the number of generations to display.
+     *
+     * @return {Number}
+     */
+    get generations()
+    {
+      return this._generations;
+    }
 
-          // Radius of the innermost circle
-          this.centerCircleRadius = 85;
+    /**
+     * Sets the number of generations to display.
+     *
+     * @param {Number} value The number of generations to display
+     */
+    set generations(value)
+    {
+      this._generations = value;
+    }
 
-          // Height of each inner circle arc
-          this.innerArcHeight = 85;
+    /**
+     * Returns the degrees of the fan chart.
+     *
+     * @return {Number}
+     */
+    get fanDegree()
+    {
+      return this._fanDegree;
+    }
 
-          // Height of each outer circle arc
-          this.outerArcHeight = 110;
+    /**
+     * Sets the degrees of the fan chart.
+     *
+     * @param {Number} value The degrees of the fan chart
+     */
+    set fanDegree(value)
+    {
+      this._fanDegree = value;
+    }
 
-          if (showParentMarriageDates) {
-              this.innerArcHeight = this.circlePadding + 110;
-              this.outerArcHeight = this.circlePadding + 110;
-          }
+    /**
+     * Returns the font scaling.
+     *
+     * @return {Number}
+     */
+    get fontScale()
+    {
+      return this._fontScale;
+    }
 
-          // Width of the colored arc above each single person arc
-          this.colorArcWidth = 5;
+    /**
+     * Sets the font scaling.
+     *
+     * @param {Number} value The font scaling
+     */
+    set fontScale(value)
+    {
+      this._fontScale = value;
+    }
 
-          // Left/Right padding of text (used with truncation)
-          this.textPadding = 8;
+    /**
+     * Returns whether to show or hide empty chart segments.
+     *
+     * @return {Boolean}
+     */
+    get hideEmptySegments()
+    {
+      return this._hideEmptySegments;
+    }
 
-          // Default background color of an arc
-          this.defaultColor = defaultColor;
+    /**
+     * Sets whether to show or hide empty chart segments.
+     *
+     * @param {Boolean} value Either true or false
+     */
+    set hideEmptySegments(value)
+    {
+      this._hideEmptySegments = value;
+    }
 
-          // Default font size, color and scaling
-          this._fontSize  = 15;
-          this._fontScale = fontScale;
-          this.fontColor = fontColor;
+    /**
+     * Returns whether to show or hide a color gradient above each arc or display male/female colors instead.
+     *
+     * @return {Boolean}
+     */
+    get showColorGradients()
+    {
+      return this._showColorGradients;
+    }
 
-          this._hideEmptySegments  = hideEmptySegments;
-          this._showColorGradients = showColorGradients;
-          this._showParentMarriageDates = showParentMarriageDates;
+    /**
+     * Sets whether to show or hide a color gradient above each arc or display male/female colors instead.
+     *
+     * @param {Boolean} value Either true or false
+     */
+    set showColorGradients(value)
+    {
+      this._showColorGradients = value;
+    }
 
-          // Duration of update animation if clicked on a person
-          this.updateDuration = 1250;
+    /**
+     * Returns whether to show or hide the parent marriage dates.
+     *
+     * @return {Boolean}
+     */
+    get showParentMarriageDates()
+    {
+      return this._showParentMarriageDates;
+    }
 
-          // Default degrees of the fan chart
-          this._fanDegree = fanDegree;
+    /**
+     * Sets whether to show or hide the parent marriage dates.
+     *
+     * @param {Boolean} value Either true or false
+     */
+    set showParentMarriageDates(value)
+    {
+      this._showParentMarriageDates = value;
+    }
 
-          this.rtl    = rtl;
-          this.labels = labels;
+    /**
+     * Returns the number of inner arcs to display.
+     *
+     * @return {Number}
+     */
+    get numberOfInnerCircles()
+    {
+      return this._numberOfInnerCircles;
+    }
 
-          // Helper method to create a ongoing id
-          this.id = (() => {
-              let i = 1;
+    /**
+     * Sets the number of inner arcs to display.
+     *
+     * @param {Number} value The number of inner arcs
+     */
+    set numberOfInnerCircles(value)
+    {
+      this._numberOfInnerCircles = value;
+    }
 
-              return function (reset = false) {
-                  if (reset) {
-                      i = 0;
-                  }
-
-                  return i++;
-              };
-          })();
-      }
-
-      /**
-       * Returns the number of generations to display.
-       *
-       * @return {Number}
-       */
-      get generations()
-      {
-          return this._generations;
-      }
-
-      /**
-       * Sets the number of generations to display.
-       *
-       * @param {Number} value The number of generations to display
-       */
-      set generations(value)
-      {
-          this._generations = value;
-      }
-
-      /**
-       * Returns the degrees of the fan chart.
-       *
-       * @return {Number}
-       */
-      get fanDegree()
-      {
-          return this._fanDegree;
-      }
-
-      /**
-       * Sets the degrees of the fan chart.
-       *
-       * @param {Number} value The degrees of the fan chart
-       */
-      set fanDegree(value)
-      {
-          this._fanDegree = value;
-      }
-
-      /**
-       * Returns the font scaling.
-       *
-       * @return {Number}
-       */
-      get fontScale()
-      {
-          return this._fontScale;
-      }
-
-      /**
-       * Sets the font scaling.
-       *
-       * @param {Number} value The font scaling
-       */
-      set fontScale(value)
-      {
-          this._fontScale = value;
-      }
-
-      /**
-       * Returns whether to show or hide empty chart segments.
-       *
-       * @return {Boolean}
-       */
-      get hideEmptySegments()
-      {
-          return this._hideEmptySegments;
-      }
-
-      /**
-       * Sets whether to show or hide empty chart segments.
-       *
-       * @param {Boolean} value Either true or false
-       */
-      set hideEmptySegments(value)
-      {
-          this._hideEmptySegments = value;
-      }
-
-      /**
-       * Returns whether to show or hide a color gradient above each arc or display male/female colors instead.
-       *
-       * @return {Boolean}
-       */
-      get showColorGradients()
-      {
-          return this._showColorGradients;
-      }
-
-      /**
-       * Sets whether to show or hide a color gradient above each arc or display male/female colors instead.
-       *
-       * @param {Boolean} value Either true or false
-       */
-      set showColorGradients(value)
-      {
-          this._showColorGradients = value;
-      }
-
-      /**
-       * Returns whether to show or hide the parent marriage dates.
-       *
-       * @return {Boolean}
-       */
-      get showParentMarriageDates()
-      {
-          return this._showParentMarriageDates;
-      }
-
-      /**
-       * Sets whether to show or hide the parent marriage dates.
-       *
-       * @param {Boolean} value Either true or false
-       */
-      set showParentMarriageDates(value)
-      {
-          this._showParentMarriageDates = value;
-      }
-
-      /**
-       * Returns the number of inner arcs to display.
-       *
-       * @return {Number}
-       */
-      get numberOfInnerCircles()
-      {
-          return this._numberOfInnerCircles;
-      }
-
-      /**
-       * Sets the number of inner arcs to display.
-       *
-       * @param {Number} value The number of inner arcs
-       */
-      set numberOfInnerCircles(value)
-      {
-          this._numberOfInnerCircles = value;
-      }
-
-      /**
-       * Returns the font size in pixel.
-       *
-       * @return {Number}
-       */
-      get fontSize()
-      {
-          return this._fontSize;
-      }
+    /**
+     * Returns the font size in pixel.
+     *
+     * @return {Number}
+     */
+    get fontSize()
+    {
+      return this._fontSize;
+    }
   }
 
   /**
@@ -5044,113 +5105,113 @@
    */
   class Hierarchy
   {
-      /**
-       * Constructor.
-       *
-       * @param {Configuration} configuration The application configuration
-       */
-      constructor(configuration)
-      {
-          this._configuration = configuration;
-          this._nodes         = null;
-      }
+    /**
+     * Constructor.
+     *
+     * @param {Configuration} configuration The application configuration
+     */
+    constructor(configuration)
+    {
+      this._configuration = configuration;
+      this._nodes         = null;
+    }
 
-      /**
-       * Initialize the hierarchical chart data.
-       *
-       * @param {Object} data The JSON encoded chart data
-       */
-      init(data)
-      {
-          // Get the greatest depth
-          // const getDepth       = ({children}) => 1 + (children ? Math.max(...children.map(getDepth)) : 0);
-          // const maxGenerations = getDepth(data);
+    /**
+     * Initialize the hierarchical chart data.
+     *
+     * @param {Object} data The JSON encoded chart data
+     */
+    init(data)
+    {
+      // Get the greatest depth
+      // const getDepth       = ({children}) => 1 + (children ? Math.max(...children.map(getDepth)) : 0);
+      // const maxGenerations = getDepth(data);
 
-          // Construct root node from the hierarchical data
-          let root = hierarchy(
-              data,
-              data => {
-                  // Fill up the missing children to the requested number of generations
-                  // if (!data.children && (data.generation < maxGenerations)) {
-                  if (!data.children && (data.generation < this._configuration.generations)) {
-                      data.children = [
-                          this.createEmptyNode(data.generation + 1, SEX_MALE),
-                          this.createEmptyNode(data.generation + 1, SEX_FEMALE)
-                      ];
-                  }
+      // Construct root node from the hierarchical data
+      let root = hierarchy(
+          data,
+          data => {
+            // Fill up the missing children to the requested number of generations
+            // if (!data.children && (data.generation < maxGenerations)) {
+            if (!data.children && (data.generation < this._configuration.generations)) {
+              data.children = [
+                this.createEmptyNode(data.generation + 1, SEX_MALE),
+                this.createEmptyNode(data.generation + 1, SEX_FEMALE)
+              ];
+            }
 
-                  // Add missing parent record if we got only one
-                  if (data.children && (data.children.length < 2)) {
-                      if (data.children[0].sex === SEX_MALE) {
-                          data.children.push(
-                              this.createEmptyNode(data.generation + 1, SEX_FEMALE)
-                          );
-                      } else {
-                          data.children.unshift(
-                              this.createEmptyNode(data.generation + 1, SEX_MALE)
-                          );
-                      }
-                  }
+            // Add missing parent record if we got only one
+            if (data.children && (data.children.length < 2)) {
+              if (data.children[0].sex === SEX_MALE) {
+                data.children.push(
+                    this.createEmptyNode(data.generation + 1, SEX_FEMALE)
+                );
+              } else {
+                data.children.unshift(
+                    this.createEmptyNode(data.generation + 1, SEX_MALE)
+                );
+              }
+            }
 
-                  return data.children;
-              })
-              // Calculate number of leaves
-              .count();
+            return data.children;
+          })
+          // Calculate number of leaves
+          .count();
 
-          // Create partition layout
-          let partitionLayout = partition();
+      // Create partition layout
+      let partitionLayout = partition();
 
-          // Map the node data to the partition layout
-          this._nodes = partitionLayout(root).descendants();
+      // Map the node data to the partition layout
+      this._nodes = partitionLayout(root).descendants();
 
-          // Create unique ids for each element
-          this._nodes.forEach(entry => {
-              entry.data.id = this._configuration.id();
-          });
+      // Create unique ids for each element
+      this._nodes.forEach(entry => {
+        entry.data.id = this._configuration.id();
+      });
 
-          this._configuration.id(true);
-      }
+      this._configuration.id(true);
+    }
 
-      /**
-       * Returns the nodes.
-       *
-       * @return {Array}
-       */
-      get nodes()
-      {
-          return this._nodes;
-      }
+    /**
+     * Returns the nodes.
+     *
+     * @return {Array}
+     */
+    get nodes()
+    {
+      return this._nodes;
+    }
 
-      /**
-       * Create an empty child node object.
-       *
-       * @param {Number} generation Generation of the node
-       * @param {String} sex        The sex of the individual
-       *
-       * @return {Object}
-       *
-       * @private
-       */
-      createEmptyNode(generation, sex)
-      {
-          return {
-              id               : 0,
-              xref             : "",
-              url              : "",
-              updateUrl        : "",
-              generation       : generation,
-              name             : "",
-              firstNames       : [],
-              lastNames        : [],
-              preferredName    : "",
-              alternativeNames : [],
-              isAltRtl         : false,
-              sex              : sex,
-              timespan         : "",
-              color            : this._configuration.defaultColor,
-              colors           : [[], []]
-          };
-      }
+    /**
+     * Create an empty child node object.
+     *
+     * @param {Number} generation Generation of the node
+     * @param {String} sex        The sex of the individual
+     *
+     * @return {Object}
+     *
+     * @private
+     */
+    createEmptyNode(generation, sex)
+    {
+      return {
+        id               : 0,
+        xref             : "",
+        url              : "",
+        updateUrl        : "",
+        generation       : generation,
+        name             : "",
+        firstNames       : [],
+        lastNames        : [],
+        preferredName    : "",
+        alternativeNames : [],
+        isAltRtl         : false,
+        sex              : sex,
+        timespan         : "",
+        color            : this._configuration.defaultColor,
+        colors           : [[], []]
+      };
+    }
   }
 
   /**
@@ -5166,74 +5227,74 @@
    */
   class Overlay
   {
-      /**
-       * Constructor.
-       *
-       * @param {selection} parent The selected D3 parent element container
-       */
-      constructor(parent)
-      {
-          // Create the tooltip overlay container
-          this._element = parent
-              .append("div")
-              .attr("class", "overlay")
-              .style("opacity", 1e-6);
-      }
+    /**
+     * Constructor.
+     *
+     * @param {selection} parent The selected D3 parent element container
+     */
+    constructor(parent)
+    {
+      // Create the tooltip overlay container
+      this._element = parent
+          .append("div")
+          .attr("class", "overlay")
+          .style("opacity", 1e-6);
+    }
 
-      /**
-       * Stop any pending transition and hide overlay immediately.
-       *
-       * @param {String}   text     Text to display in overlay
-       * @param {Number}   duration Duration of transition in msec
-       * @param {Function} callback Callback method to execute on end of transition
-       */
-      show(text, duration = 0, callback = null)
-      {
-          // Remove any previously added <p> element
-          this._element
-              .select("p")
-              .remove();
+    /**
+     * Stop any pending transition and hide overlay immediately.
+     *
+     * @param {String}   text     Text to display in overlay
+     * @param {Number}   duration Duration of transition in msec
+     * @param {Function} callback Callback method to execute on end of transition
+     */
+    show(text, duration = 0, callback = null)
+    {
+      // Remove any previously added <p> element
+      this._element
+          .select("p")
+          .remove();
 
-          this._element
-              .append("p")
-              .attr("class", "tooltip")
-              .text(text);
+      this._element
+          .append("p")
+          .attr("class", "tooltip")
+          .text(text);
 
-          this._element
-              .transition()
-              .duration(duration)
-              .style("opacity", 1)
-              .on("end", () => {
-                  if (typeof callback === "function") {
-                      callback();
-                  }
-              });
-      }
+      this._element
+          .transition()
+          .duration(duration)
+          .style("opacity", 1)
+          .on("end", () => {
+            if (typeof callback === "function") {
+              callback();
+            }
+          });
+    }
 
-      /**
-       * Stop any pending transition and hide overlay immediately.
-       *
-       * @param {Number} delay    Delay in milliseconds to wait before transition should start
-       * @param {Number} duration Duration of transition in milliseconds
-       */
-      hide(delay = 0, duration = 0)
-      {
-          this._element
-              .transition()
-              .delay(delay)
-              .duration(duration)
-              .style("opacity", 1e-6);
-      }
+    /**
+     * Stop any pending transition and hide overlay immediately.
+     *
+     * @param {Number} delay    Delay in milliseconds to wait before transition should start
+     * @param {Number} duration Duration of transition in milliseconds
+     */
+    hide(delay = 0, duration = 0)
+    {
+      this._element
+          .transition()
+          .delay(delay)
+          .duration(duration)
+          .style("opacity", 1e-6);
+    }
 
-      /**
-       * Returns the internal element.
-       *
-       * @return {selection}
-       */
-      get()
-      {
-          return this._element;
-      }
+    /**
+     * Returns the internal element.
+     *
+     * @return {selection}
+     */
+    get()
+    {
+      return this._element;
+    }
   }
 
   /**
@@ -5249,26 +5310,26 @@
    */
   class Defs
   {
-      /**
-       * Constructor.
-       *
-       * @param {selection} svg The selected D3 parent element container
-       */
-      constructor(svg)
-      {
-          // Create the <svg:defs> element
-          this._element = svg.append("defs");
-      }
+    /**
+     * Constructor.
+     *
+     * @param {selection} svg The selected D3 parent element container
+     */
+    constructor(svg)
+    {
+      // Create the <svg:defs> element
+      this._element = svg.append("defs");
+    }
 
-      /**
-       * Returns the internal element.
-       *
-       * @return {selection}
-       */
-      get()
-      {
-          return this._element;
-      }
+    /**
+     * Returns the internal element.
+     *
+     * @return {selection}
+     */
+    get()
+    {
+      return this._element;
+    }
   }
 
   /**
@@ -5292,96 +5353,96 @@
    */
   class Zoom
   {
-      /**
-       * Constructor.
-       *
-       * @param {selection} parent The selected D3 parent element container
-       */
-      constructor(parent)
-      {
-          this._zoom   = null;
-          this._parent = parent;
+    /**
+     * Constructor.
+     *
+     * @param {selection} parent The selected D3 parent element container
+     */
+    constructor(parent)
+    {
+      this._zoom   = null;
+      this._parent = parent;
 
-          this.init();
-      }
+      this.init();
+    }
 
-      /**
-       * Initializes a new D3 zoom behavior.
-       *
-       * @private
-       */
-      init()
-      {
-          // Setup zoom and pan
-          this._zoom = zoom();
+    /**
+     * Initializes a new D3 zoom behavior.
+     *
+     * @private
+     */
+    init()
+    {
+      // Setup zoom and pan
+      this._zoom = zoom();
 
-          this._zoom
-              .scaleExtent([MIN_ZOOM, MAX_ZOOM])
-              .on("zoom", (event) => {
-                  // Abort any action if only one finger is used on "touchmove" events
-                  if (event.sourceEvent
-                      && (event.sourceEvent.type === "touchmove")
-                      && (event.sourceEvent.touches.length < 2)
-                  ) {
-                      return;
-                  }
+      this._zoom
+          .scaleExtent([MIN_ZOOM, MAX_ZOOM])
+          .on("zoom", (event) => {
+            // Abort any action if only one finger is used on "touchmove" events
+            if (event.sourceEvent
+                && (event.sourceEvent.type === "touchmove")
+                && (event.sourceEvent.touches.length < 2)
+            ) {
+              return;
+            }
 
-                  this._parent.attr("transform", event.transform);
-              });
-
-          // Adjust the wheel delta (see defaultWheelDelta() in zoom.js, which adds
-          // a 10-times offset if ctrlKey is pressed)
-          this._zoom.wheelDelta((event) => {
-              return -event.deltaY * (event.deltaMode === 1 ? 0.05 : event.deltaMode ? 1 : 0.002);
+            this._parent.attr("transform", event.transform);
           });
 
-          // Add zoom filter
-          this._zoom.filter((event) => {
-              // Allow "wheel" event only while control key is pressed
-              if (event.type === "wheel") {
-                  if (!event.ctrlKey) {
-                      return false;
-                  }
+      // Adjust the wheel delta (see defaultWheelDelta() in zoom.js, which adds
+      // a 10-times offset if ctrlKey is pressed)
+      this._zoom.wheelDelta((event) => {
+        return -event.deltaY * (event.deltaMode === 1 ? 0.05 : event.deltaMode ? 1 : 0.002);
+      });
 
-                  var transform$1 = transform(this);
+      // Add zoom filter
+      this._zoom.filter((event) => {
+        // Allow "wheel" event only while control key is pressed
+        if (event.type === "wheel") {
+          if (!event.ctrlKey) {
+            return false;
+          }
 
-                  if (transform$1.k) {
-                      // Prevent zooming below lowest level
-                      if ((transform$1.k <= MIN_ZOOM) && (event.deltaY > 0)) {
-                          // Prevent browsers page zoom while holding down the control key
-                          event.preventDefault();
-                          return false;
-                      }
+          var transform$1 = transform(this);
 
-                      // Prevent zooming above highest level
-                      if ((transform$1.k >= MAX_ZOOM) && (event.deltaY < 0)) {
-                          // Prevent browsers page zoom while holding down the control key
-                          event.preventDefault();
-                          return false;
-                      }
-                  }
+          if (transform$1.k) {
+            // Prevent zooming below lowest level
+            if ((transform$1.k <= MIN_ZOOM) && (event.deltaY > 0)) {
+              // Prevent browsers page zoom while holding down the control key
+              event.preventDefault();
+              return false;
+            }
 
-                  return true;
-              }
+            // Prevent zooming above highest level
+            if ((transform$1.k >= MAX_ZOOM) && (event.deltaY < 0)) {
+              // Prevent browsers page zoom while holding down the control key
+              event.preventDefault();
+              return false;
+            }
+          }
 
-              // Allow "touchmove" event only with two fingers
-              if (!event.button && (event.type === "touchmove")) {
-                  return event.touches.length === 2;
-              }
+          return true;
+        }
 
-              return (!event.ctrlKey || event.type === 'wheel') && !event.button;
-          });
-      }
+        // Allow "touchmove" event only with two fingers
+        if (!event.button && (event.type === "touchmove")) {
+          return event.touches.length === 2;
+        }
 
-      /**
-       * Returns the internal d3 zoom behaviour.
-       *
-       * @return {zoom}
-       */
-      get()
-      {
-          return this._zoom;
-      }
+        return (!event.ctrlKey || event.type === 'wheel') && !event.button;
+      });
+    }
+
+    /**
+     * Returns the internal d3 zoom behaviour.
+     *
+     * @return {zoom}
+     */
+    get()
+    {
+      return this._zoom;
+    }
   }
 
   /**
@@ -5397,41 +5458,41 @@
    */
   class Filter
   {
-      /**
-       * Constructor.
-       *
-       * @param {selection} defs The selected D3 parent element container
-       */
-      constructor(defs)
-      {
-          // Create the <svg:defs> element
-          this._element = defs;
+    /**
+     * Constructor.
+     *
+     * @param {selection} defs The selected D3 parent element container
+     */
+    constructor(defs)
+    {
+      // Create the <svg:defs> element
+      this._element = defs;
 
-          // Filter is set in CSS via "filter: url(#drop-shadow);"
+      // Filter is set in CSS via "filter: url(#drop-shadow);"
 
-          // Chrome still does not support filtering SVG elements using CSS other than the root
-          // https://bugs.chromium.org/p/chromium/issues/detail?id=109224
-          let filter = this._element
-              .append("filter")
-              .attr("id", "drop-shadow");
+      // Chrome still does not support filtering SVG elements using CSS other than the root
+      // https://bugs.chromium.org/p/chromium/issues/detail?id=109224
+      let filter = this._element
+          .append("filter")
+          .attr("id", "drop-shadow");
 
-          filter.append("feDropShadow")
-              .attr("stdDeviation", "7 7")
-              .attr("dx", "0")
-              .attr("dy", "0")
-              .attr("flood-opacity", "0.3")
-              .attr("flood-color", "rgb(0,0,0)");
-      }
+      filter.append("feDropShadow")
+          .attr("stdDeviation", "7 7")
+          .attr("dx", "0")
+          .attr("dy", "0")
+          .attr("flood-opacity", "0.3")
+          .attr("flood-color", "rgb(0,0,0)");
+    }
 
-      /**
-       * Returns the internal element.
-       *
-       * @return {selection}
-       */
-      get()
-      {
-          return this._element;
-      }
+    /**
+     * Returns the internal element.
+     *
+     * @return {selection}
+     */
+    get()
+    {
+      return this._element;
+    }
   }
 
   /**
@@ -5447,26 +5508,26 @@
    */
   class Export
   {
-      /**
-       * Triggers the download by creating a new anchor element an simulate a mouse click on it.
-       *
-       * @param {String} imgURI   The image URI data stream
-       * @param {String} fileName The file name to use in the download dialog
-       */
-      triggerDownload(imgURI, fileName)
-      {
-          let event = new MouseEvent("click", {
-              view: window,
-              bubbles: false,
-              cancelable: true
-          });
+    /**
+     * Triggers the download by creating a new anchor element an simulate a mouse click on it.
+     *
+     * @param {String} imgURI   The image URI data stream
+     * @param {String} fileName The file name to use in the download dialog
+     */
+    triggerDownload(imgURI, fileName)
+    {
+      let event = new MouseEvent("click", {
+        view: window,
+        bubbles: false,
+        cancelable: true
+      });
 
-          let a = document.createElement("a");
-          a.setAttribute("download", fileName);
-          a.setAttribute("href", imgURI);
-          a.setAttribute("target", "_blank");
-          a.dispatchEvent(event);
-      }
+      let a = document.createElement("a");
+      a.setAttribute("download", fileName);
+      a.setAttribute("href", imgURI);
+      a.setAttribute("target", "_blank");
+      a.dispatchEvent(event);
+    }
   }
 
   /**
@@ -5482,164 +5543,164 @@
    */
   class PngExport extends Export
   {
-      /**
-       * Copies recursively all the styles from the list of container elements from the source
-       * to the destination node.
-       *
-       * @param {SVGGraphicsElement} sourceNode
-       * @param {SVGGraphicsElement} destinationNode
-       */
-      copyStylesInline(sourceNode, destinationNode)
-      {
-          let containerElements = ["svg", "g", "text", "textPath"];
+    /**
+     * Copies recursively all the styles from the list of container elements from the source
+     * to the destination node.
+     *
+     * @param {SVGGraphicsElement} sourceNode
+     * @param {SVGGraphicsElement} destinationNode
+     */
+    copyStylesInline(sourceNode, destinationNode)
+    {
+      let containerElements = ["svg", "g", "text", "textPath"];
 
-          for (let i = 0; i < destinationNode.childNodes.length; ++i) {
-              let child = destinationNode.childNodes[i];
+      for (let i = 0; i < destinationNode.childNodes.length; ++i) {
+        let child = destinationNode.childNodes[i];
 
-              if (containerElements.indexOf(child.tagName) !== -1) {
-                  this.copyStylesInline(sourceNode.childNodes[i], child);
-                  continue;
-              }
+        if (containerElements.indexOf(child.tagName) !== -1) {
+          this.copyStylesInline(sourceNode.childNodes[i], child);
+          continue;
+        }
 
-              let computedStyle = window.getComputedStyle(sourceNode.childNodes[i]);
+        let computedStyle = window.getComputedStyle(sourceNode.childNodes[i]);
 
-              if (computedStyle === null) {
-                  continue;
-              }
+        if (computedStyle === null) {
+          continue;
+        }
 
-              for (let j = 0; j < computedStyle.length; ++j) {
-                  child.style.setProperty(computedStyle[j], computedStyle.getPropertyValue(computedStyle[j]));
-              }
-          }
+        for (let j = 0; j < computedStyle.length; ++j) {
+          child.style.setProperty(computedStyle[j], computedStyle.getPropertyValue(computedStyle[j]));
+        }
       }
+    }
 
-      /**
-       * Returns the viewbox of the SVG. Mainly used to apply a padding around the chart.
-       *
-       * @param {SVGGraphicsElement} svg The SVG element
-       *
-       * @returns {Number[]}
-       */
-      calculateViewBox(svg)
-      {
-          // Get bounding box
-          const boundingBox = svg.getBBox();
-          const padding     = 50;   // Padding on each side
+    /**
+     * Returns the viewbox of the SVG. Mainly used to apply a padding around the chart.
+     *
+     * @param {SVGGraphicsElement} svg The SVG element
+     *
+     * @returns {Number[]}
+     */
+    calculateViewBox(svg)
+    {
+      // Get bounding box
+      const boundingBox = svg.getBBox();
+      const padding     = 50;   // Padding on each side
 
-          // Return calculated view box
-          return [
-              boundingBox.x - padding,
-              boundingBox.y - padding,
-              boundingBox.width + (padding * 2),
-              boundingBox.height + (padding * 2)
-          ];
-      }
+      // Return calculated view box
+      return [
+        boundingBox.x - padding,
+        boundingBox.y - padding,
+        boundingBox.width + (padding * 2),
+        boundingBox.height + (padding * 2)
+      ];
+    }
 
-      /**
-       *
-       * @param {Number} width
-       * @param {Number} height
-       *
-       * @returns {HTMLCanvasElement}
-       */
-      createCanvas(width, height)
-      {
-          let canvas    = document.createElement("canvas");
-          canvas.width  = width;
-          canvas.height = height;
+    /**
+     *
+     * @param {Number} width
+     * @param {Number} height
+     *
+     * @returns {HTMLCanvasElement}
+     */
+    createCanvas(width, height)
+    {
+      let canvas    = document.createElement("canvas");
+      canvas.width  = width;
+      canvas.height = height;
 
-          return canvas;
-      }
+      return canvas;
+    }
 
-      /**
-       * Converts the given SVG into a PNG image. Resolves to the PNG data URL.
-       *
-       * @param {SVGGraphicsElement} svg    The SVG element
-       * @param {Number}             width  The width of the image
-       * @param {Number}             height The height of the image
-       *
-       * @returns {Promise<String>}
-       */
-      convertToDataUrl(svg, width, height)
-      {
-          return new Promise(resolve => {
-              let data    = (new XMLSerializer()).serializeToString(svg);
-              let DOMURL  = window.URL || window.webkitURL || window;
-              let svgBlob = new Blob([ data ], { type: "image/svg+xml;charset=utf-8" });
-              let url     = DOMURL.createObjectURL(svgBlob);
-              let img     = new Image();
+    /**
+     * Converts the given SVG into a PNG image. Resolves to the PNG data URL.
+     *
+     * @param {SVGGraphicsElement} svg    The SVG element
+     * @param {Number}             width  The width of the image
+     * @param {Number}             height The height of the image
+     *
+     * @returns {Promise<String>}
+     */
+    convertToDataUrl(svg, width, height)
+    {
+      return new Promise(resolve => {
+        let data    = (new XMLSerializer()).serializeToString(svg);
+        let DOMURL  = window.URL || window.webkitURL || window;
+        let svgBlob = new Blob([ data ], { type: "image/svg+xml;charset=utf-8" });
+        let url     = DOMURL.createObjectURL(svgBlob);
+        let img     = new Image();
 
-              img.onload = () => {
-                  let canvas = this.createCanvas(width, height);
-                  let ctx    = canvas.getContext("2d");
+        img.onload = () => {
+          let canvas = this.createCanvas(width, height);
+          let ctx    = canvas.getContext("2d");
 
-                  ctx.fillStyle = "rgb(255,255,255)";
-                  ctx.fillRect(0, 0, canvas.width, canvas.height);
-                  ctx.drawImage(img, 0, 0);
+          ctx.fillStyle = "rgb(255,255,255)";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
 
-                  DOMURL.revokeObjectURL(url);
+          DOMURL.revokeObjectURL(url);
 
-                  let imgURI = canvas
-                      .toDataURL("image/png")
-                      .replace("image/png", "image/octet-stream");
+          let imgURI = canvas
+              .toDataURL("image/png")
+              .replace("image/png", "image/octet-stream");
 
-                  resolve(imgURI);
-              };
+          resolve(imgURI);
+        };
 
-              img.src = url;
+        img.src = url;
+      });
+    }
+
+    /**
+     * Clones the SVG element.
+     *
+     * @param {SVGGraphicsElement} svg
+     *
+     * @returns {Promise<SVGGraphicsElement>}
+     */
+    cloneSvg(svg)
+    {
+      return new Promise(resolve => {
+        let newSvg = svg.cloneNode(true);
+
+        resolve(newSvg);
+      })
+    }
+
+    /**
+     * Saves the given SVG as PNG image file.
+     *
+     * @param {Svg}    svg      The source SVG object
+     * @param {String} fileName The file name
+     */
+    svgToImage(svg, fileName)
+    {
+      // Paper sizes (width, height) in pixel at 300 DPI/PPI
+      const paperSize = {
+        'A3': [4960, 3508],
+        'A4': [3508, 2480],
+        'A5': [2480, 1748]
+      };
+
+      this.cloneSvg(svg.get().node())
+          .then(newSvg => {
+            this.copyStylesInline(svg.get().node(), newSvg);
+
+            const viewBox = this.calculateViewBox(svg.get().node());
+            const width   = Math.max(paperSize['A4'][0], viewBox[2]);
+            const height  = Math.max(paperSize['A4'][1], viewBox[3]);
+
+            newSvg.setAttribute("width", width);
+            newSvg.setAttribute("height", height);
+            newSvg.setAttribute("viewBox", viewBox);
+
+            this.convertToDataUrl(newSvg, width, height)
+                .then(imgURI => this.triggerDownload(imgURI, fileName))
+                .catch(() => {
+                  console.log("Failed to save chart as PNG image");
+                });
           });
-      }
-
-      /**
-       * Clones the SVG element.
-       *
-       * @param {SVGGraphicsElement} svg
-       *
-       * @returns {Promise<SVGGraphicsElement>}
-       */
-      cloneSvg(svg)
-      {
-          return new Promise(resolve => {
-              let newSvg = svg.cloneNode(true);
-
-              resolve(newSvg);
-          })
-      }
-
-      /**
-       * Saves the given SVG as PNG image file.
-       *
-       * @param {Svg}    svg      The source SVG object
-       * @param {String} fileName The file name
-       */
-      svgToImage(svg, fileName)
-      {
-          // Paper sizes (width, height) in pixel at 300 DPI/PPI
-          const paperSize = {
-              'A3': [4960, 3508],
-              'A4': [3508, 2480],
-              'A5': [2480, 1748]
-          };
-
-          this.cloneSvg(svg.get().node())
-              .then(newSvg => {
-                  this.copyStylesInline(svg.get().node(), newSvg);
-
-                  const viewBox = this.calculateViewBox(svg.get().node());
-                  const width   = Math.max(paperSize['A4'][0], viewBox[2]);
-                  const height  = Math.max(paperSize['A4'][1], viewBox[3]);
-
-                  newSvg.setAttribute("width", width);
-                  newSvg.setAttribute("height", height);
-                  newSvg.setAttribute("viewBox", viewBox);
-
-                  this.convertToDataUrl(newSvg, width, height)
-                      .then(imgURI => this.triggerDownload(imgURI, fileName))
-                      .catch(() => {
-                          console.log("Failed to save chart as PNG image");
-                      });
-              });
-      }
+    }
   }
 
   /**
@@ -5655,90 +5716,90 @@
    */
   class SvgExport extends Export
   {
-      /**
-       * Copies recursively all the styles from the list of container elements from the source
-       * to the destination node.
-       *
-       * @param {String}             cssFile
-       * @param {SVGGraphicsElement} destinationNode
-       *
-       * @returns {Promise<SVGGraphicsElement>}
-       */
-      copyStylesInline(cssFile, destinationNode)
-      {
-          return new Promise(resolve => {
-              text(cssFile)
-                  .then((data) => {
-                      // Remove parent container selector as the CSS is included directly into the SVG element
-                      data = data.replace(/#webtrees-fan-chart-container /g, "");
+    /**
+     * Copies recursively all the styles from the list of container elements from the source
+     * to the destination node.
+     *
+     * @param {String}             cssFile
+     * @param {SVGGraphicsElement} destinationNode
+     *
+     * @returns {Promise<SVGGraphicsElement>}
+     */
+    copyStylesInline(cssFile, destinationNode)
+    {
+      return new Promise(resolve => {
+        text(cssFile)
+            .then((data) => {
+              // Remove parent container selector as the CSS is included directly into the SVG element
+              data = data.replace(/#webtrees-fan-chart-container /g, "");
 
-                      let style = document.createElementNS("http://www.w3.org/2000/svg", "style");
-                      style.appendChild(document.createTextNode(data));
+              let style = document.createElementNS("http://www.w3.org/2000/svg", "style");
+              style.appendChild(document.createTextNode(data));
 
-                      destinationNode.prepend(style);
+              destinationNode.prepend(style);
 
-                      resolve(destinationNode);
-                  });
-          })
-      }
+              resolve(destinationNode);
+            });
+      })
+    }
 
-      /**
-       * Converts the given SVG into an object URL. Resolves to the object URL.
-       *
-       * @param {SVGGraphicsElement} svg The SVG element
-       *
-       * @returns {Promise<String>}
-       */
-      convertToObjectUrl(svg)
-      {
-          return new Promise(resolve => {
-              let data    = (new XMLSerializer()).serializeToString(svg);
-              let DOMURL  = window.URL || window.webkitURL || window;
-              let svgBlob = new Blob([ data ], { type: "image/svg+xml;charset=utf-8" });
-              let url     = DOMURL.createObjectURL(svgBlob);
-              let img     = new Image();
+    /**
+     * Converts the given SVG into an object URL. Resolves to the object URL.
+     *
+     * @param {SVGGraphicsElement} svg The SVG element
+     *
+     * @returns {Promise<String>}
+     */
+    convertToObjectUrl(svg)
+    {
+      return new Promise(resolve => {
+        let data    = (new XMLSerializer()).serializeToString(svg);
+        let DOMURL  = window.URL || window.webkitURL || window;
+        let svgBlob = new Blob([ data ], { type: "image/svg+xml;charset=utf-8" });
+        let url     = DOMURL.createObjectURL(svgBlob);
+        let img     = new Image();
 
-              img.onload = () => {
-                  resolve(url);
-              };
+        img.onload = () => {
+          resolve(url);
+        };
 
-              img.src = url;
+        img.src = url;
+      });
+    }
+
+    /**
+     * Clones the SVG element.
+     *
+     * @param {SVGGraphicsElement} svg
+     *
+     * @returns {Promise<SVGGraphicsElement>}
+     */
+    cloneSvg(svg)
+    {
+      return new Promise(resolve => {
+        let newSvg = svg.cloneNode(true);
+
+        resolve(newSvg);
+      })
+    }
+
+    /**
+     * Saves the given SVG as SVG image file.
+     *
+     * @param {Svg}    svg      The source SVG object
+     * @param {String} cssFile  The CSS file used together with the SVG
+     * @param {String} fileName The file name
+     */
+    svgToImage(svg, cssFile, fileName)
+    {
+      this.cloneSvg(svg.get().node())
+          .then(newSvg => this.copyStylesInline(cssFile, newSvg))
+          .then(newSvg => this.convertToObjectUrl(newSvg))
+          .then(objectUrl => this.triggerDownload(objectUrl, fileName))
+          .catch(() => {
+            console.log("Failed to save chart as SVG image");
           });
-      }
-
-      /**
-       * Clones the SVG element.
-       *
-       * @param {SVGGraphicsElement} svg
-       *
-       * @returns {Promise<SVGGraphicsElement>}
-       */
-      cloneSvg(svg)
-      {
-          return new Promise(resolve => {
-              let newSvg = svg.cloneNode(true);
-
-              resolve(newSvg);
-          })
-      }
-
-      /**
-       * Saves the given SVG as SVG image file.
-       *
-       * @param {Svg}    svg      The source SVG object
-       * @param {String} cssFile  The CSS file used together with the SVG
-       * @param {String} fileName The file name
-       */
-      svgToImage(svg, cssFile, fileName)
-      {
-          this.cloneSvg(svg.get().node())
-              .then(newSvg => this.copyStylesInline(cssFile, newSvg))
-              .then(newSvg => this.convertToObjectUrl(newSvg))
-              .then(objectUrl => this.triggerDownload(objectUrl, fileName))
-              .catch(() => {
-                  console.log("Failed to save chart as SVG image");
-              });
-      }
+    }
   }
 
   /**
@@ -5754,34 +5815,34 @@
    */
   class ExportFactory
   {
-      constructor()
-      {
-          this._exportClass = null;
+    constructor()
+    {
+      this._exportClass = null;
+    }
+
+    setExportClass(type)
+    {
+      switch (type) {
+        case 'png':
+          this._exportClass = PngExport;
+          break;
+        case 'svg':
+          this._exportClass = SvgExport;
+          break;
       }
+    };
 
-      setExportClass(type)
-      {
-          switch (type) {
-              case 'png':
-                  this._exportClass = PngExport;
-                  break;
-              case 'svg':
-                  this._exportClass = SvgExport;
-                  break;
-          }
-      };
+    createExport(type)
+    {
+      this.setExportClass(type);
 
-      createExport(type)
-      {
-          this.setExportClass(type);
-
-          switch (type) {
-              case 'png':
-                  return new this._exportClass();
-              case 'svg':
-                  return new this._exportClass();
-          }
-      };
+      switch (type) {
+        case 'png':
+          return new this._exportClass();
+        case 'svg':
+          return new this._exportClass();
+      }
+    };
   }
 
   /**
@@ -5797,184 +5858,184 @@
    */
   class Svg
   {
-      /**
-       * Constructor.
-       *
-       * @param {selection}     parent        The selected D3 parent element container
-       * @param {Configuration} configuration The application configuration
-       */
-      constructor(parent, configuration)
-      {
-          // Create the <svg> element
-          this._element       = parent.append("svg");
-          this._defs          = new Defs(this._element);
+    /**
+     * Constructor.
+     *
+     * @param {selection}     parent        The selected D3 parent element container
+     * @param {Configuration} configuration The application configuration
+     */
+    constructor(parent, configuration)
+    {
+      // Create the <svg> element
+      this._element       = parent.append("svg");
+      this._defs          = new Defs(this._element);
 
-          this._visual        = null;
-          this._zoom          = null;
-          this._div           = null;
-          this._configuration = configuration;
+      this._visual        = null;
+      this._zoom          = null;
+      this._div           = null;
+      this._configuration = configuration;
 
-          this.init();
-      }
+      this.init();
+    }
 
-      /**
-       * Initialize the <svg> element.
-       *
-       * @private
-       */
-      init()
-      {
-          // Add SVG element
-          this._element
-              .attr("width", "100%")
-              .attr("height", "100%")
-              .attr("text-rendering", "geometricPrecision")
-              .attr("text-anchor", "middle")
-              .attr("xmlns:xlink", "https://www.w3.org/1999/xlink");
+    /**
+     * Initialize the <svg> element.
+     *
+     * @private
+     */
+    init()
+    {
+      // Add SVG element
+      this._element
+          .attr("width", "100%")
+          .attr("height", "100%")
+          .attr("text-rendering", "geometricPrecision")
+          .attr("text-anchor", "middle")
+          .attr("xmlns:xlink", "https://www.w3.org/1999/xlink");
 
-          new Filter(this._defs.get());
-      }
+      new Filter(this._defs.get());
+    }
 
-      /**
-       * Initialiaze the <svg> element events.
-       *
-       * @param {Overlay} overlay
-       */
-      initEvents(overlay)
-      {
-          this._element
-              .on("contextmenu", (event) => event.preventDefault())
-              .on("wheel", (event) => {
-                  if (!event.ctrlKey) {
-                      overlay.show(
-                          this._configuration.labels.zoom,
-                          300,
-                          () => {
-                              overlay.hide(700, 800);
-                          }
-                      );
+    /**
+     * Initialiaze the <svg> element events.
+     *
+     * @param {Overlay} overlay
+     */
+    initEvents(overlay)
+    {
+      this._element
+          .on("contextmenu", (event) => event.preventDefault())
+          .on("wheel", (event) => {
+            if (!event.ctrlKey) {
+              overlay.show(
+                  this._configuration.labels.zoom,
+                  300,
+                  () => {
+                    overlay.hide(700, 800);
                   }
-              })
-              .on("touchend", (event) => {
-                  if (event.touches.length < 2) {
-                      overlay.hide(0, 800);
-                  }
-              })
-              .on("touchmove", (event) => {
-                  if (event.touches.length >= 2) {
-                      // Hide tooltip on more than 2 fingers
-                      overlay.hide();
-                  } else {
-                      // Show tooltip if less than 2 fingers are used
-                      overlay.show(this._configuration.labels.move);
-                  }
-              })
-              .on("click", (event) => this.doStopPropagation(event), true);
+              );
+            }
+          })
+          .on("touchend", (event) => {
+            if (event.touches.length < 2) {
+              overlay.hide(0, 800);
+            }
+          })
+          .on("touchmove", (event) => {
+            if (event.touches.length >= 2) {
+              // Hide tooltip on more than 2 fingers
+              overlay.hide();
+            } else {
+              // Show tooltip if less than 2 fingers are used
+              overlay.show(this._configuration.labels.move);
+            }
+          })
+          .on("click", (event) => this.doStopPropagation(event), true);
 
-          if (this._configuration.rtl) {
-              this._element.classed("rtl", true);
-          }
-
-          /** @var {selection} tooltip */
-          const tooltip = select("div.tooltip");
-
-          if (tooltip.empty()) {
-              this._div = select("body")
-                  .append("div")
-                  .attr("class", "tooltip")
-                  .style("opacity", 0);
-          } else {
-              this._div = tooltip
-                  .style("opacity", 0);
-          }
-
-          // Add group
-          this._visual = this._element.append("g");
-
-          this._visual
-              .append("g")
-              .attr("class", "personGroup");
-
-          this._zoom = new Zoom(this._visual);
-          this._element.call(this._zoom.get());
+      if (this._configuration.rtl) {
+        this._element.classed("rtl", true);
       }
 
-      /**
-       * Prevent default click and stop propagation.
-       *
-       * @param {Event} event
-       *
-       * @private
-       */
-      doStopPropagation(event)
-      {
-          if (event.defaultPrevented) {
-              event.stopPropagation();
-          }
+      /** @var {selection} tooltip */
+      const tooltip = select("div.tooltip");
+
+      if (tooltip.empty()) {
+        this._div = select("body")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+      } else {
+        this._div = tooltip
+            .style("opacity", 0);
       }
 
-      /**
-       * Exports the chart as PNG image and triggers a download.
-       *
-       * @param {String} type The export file type (either "png" or "svg")
-       *
-       * @return {PngExport|SvgExport}
-       */
-      export(type )
-      {
-          const factory = new ExportFactory();
-          return factory.createExport(type);
-      }
+      // Add group
+      this._visual = this._element.append("g");
 
-      /**
-       * Returns the SVG definition instance.
-       *
-       * @return {Defs}
-       */
-      get defs()
-      {
-          return this._defs;
-      }
+      this._visual
+          .append("g")
+          .attr("class", "personGroup");
 
-      /**
-       * Returns the SVG definition instance.
-       *
-       * @return {Zoom}
-       */
-      get zoom()
-      {
-          return this._zoom;
-      }
+      this._zoom = new Zoom(this._visual);
+      this._element.call(this._zoom.get());
+    }
 
-      /**
-       *
-       *
-       * @return {selection}
-       */
-      get visual()
-      {
-          return this._visual;
+    /**
+     * Prevent default click and stop propagation.
+     *
+     * @param {Event} event
+     *
+     * @private
+     */
+    doStopPropagation(event)
+    {
+      if (event.defaultPrevented) {
+        event.stopPropagation();
       }
+    }
 
-      /**
-       * Returns the internal element.
-       *
-       * @return {selection}
-       */
-      get()
-      {
-          return this._element;
-      }
+    /**
+     * Exports the chart as PNG image and triggers a download.
+     *
+     * @param {String} type The export file type (either "png" or "svg")
+     *
+     * @return {PngExport|SvgExport}
+     */
+    export(type )
+    {
+      const factory = new ExportFactory();
+      return factory.createExport(type);
+    }
 
-      /**
-       * Returns the <div> container for the overlay tooltip.
-       *
-       * @return {selection}
-       */
-      get div()
-      {
-          return this._div;
-      }
+    /**
+     * Returns the SVG definition instance.
+     *
+     * @return {Defs}
+     */
+    get defs()
+    {
+      return this._defs;
+    }
+
+    /**
+     * Returns the SVG definition instance.
+     *
+     * @return {Zoom}
+     */
+    get zoom()
+    {
+      return this._zoom;
+    }
+
+    /**
+     *
+     *
+     * @return {selection}
+     */
+    get visual()
+    {
+      return this._visual;
+    }
+
+    /**
+     * Returns the internal element.
+     *
+     * @return {selection}
+     */
+    get()
+    {
+      return this._element;
+    }
+
+    /**
+     * Returns the <div> container for the overlay tooltip.
+     *
+     * @return {selection}
+     */
+    get div()
+    {
+      return this._div;
+    }
   }
 
   /**
@@ -5995,187 +6056,187 @@
    */
   class Geometry
   {
-      /**
-       * Constructor.
-       *
-       * @param {Configuration} configuration The application configuration
-       */
-      constructor(configuration)
-      {
-          this._configuration = configuration;
+    /**
+     * Constructor.
+     *
+     * @param {Configuration} configuration The application configuration
+     */
+    constructor(configuration)
+    {
+      this._configuration = configuration;
+    }
+
+    /**
+     * @return {Number}
+     *
+     * @private
+     */
+    get startPi()
+    {
+      if (this._configuration.fanDegree === 90) {
+        return 0;
       }
 
-      /**
-       * @return {Number}
-       *
-       * @private
-       */
-      get startPi()
-      {
-          if (this._configuration.fanDegree === 90) {
-              return 0;
-          }
+      return -(this._configuration.fanDegree / 2 * MATH_DEG2RAD);
+    }
 
-          return -(this._configuration.fanDegree / 2 * MATH_DEG2RAD);
+    /**
+     * @return {Number}
+     *
+     * @private
+     */
+    get endPi()
+    {
+      if (this._configuration.fanDegree === 90) {
+        return (this._configuration.fanDegree * MATH_DEG2RAD);
       }
 
-      /**
-       * @return {Number}
-       *
-       * @private
-       */
-      get endPi()
-      {
-          if (this._configuration.fanDegree === 90) {
-              return (this._configuration.fanDegree * MATH_DEG2RAD);
-          }
+      return (this._configuration.fanDegree / 2 * MATH_DEG2RAD);
+    }
 
-          return (this._configuration.fanDegree / 2 * MATH_DEG2RAD);
+    /**
+     * Scale the angles linear across the circle.
+     *
+     * @return {Number}
+     */
+    get scale()
+    {
+      return linear().range([this.startPi, this.endPi]);
+    }
+
+    /**
+     * Get the inner radius depending on the depth of an element.
+     *
+     * @param {Number} depth The depth of the element inside the chart
+     *
+     * @return {Number}
+     */
+    innerRadius(depth)
+    {
+      if (depth === 0) {
+        return 0;
       }
 
-      /**
-       * Scale the angles linear across the circle.
-       *
-       * @return {Number}
-       */
-      get scale()
-      {
-          return linear().range([this.startPi, this.endPi]);
+      if (depth <= this._configuration.numberOfInnerCircles) {
+        return ((depth - 1) * (this._configuration.innerArcHeight))
+            + this._configuration.centerCircleRadius
+            + this._configuration.circlePadding;
       }
 
-      /**
-       * Get the inner radius depending on the depth of an element.
-       *
-       * @param {Number} depth The depth of the element inside the chart
-       *
-       * @return {Number}
-       */
-      innerRadius(depth)
-      {
-          if (depth === 0) {
-              return 0;
-          }
+      return (this._configuration.numberOfInnerCircles * this._configuration.innerArcHeight)
+          + ((depth - this._configuration.numberOfInnerCircles - 1) * this._configuration.outerArcHeight)
+          + this._configuration.centerCircleRadius
+          + this._configuration.circlePadding;
+    }
 
-          if (depth <= this._configuration.numberOfInnerCircles) {
-              return ((depth - 1) * (this._configuration.innerArcHeight))
-                  + this._configuration.centerCircleRadius
-                  + this._configuration.circlePadding;
-          }
-
-          return (this._configuration.numberOfInnerCircles * this._configuration.innerArcHeight)
-              + ((depth - this._configuration.numberOfInnerCircles - 1) * this._configuration.outerArcHeight)
-              + this._configuration.centerCircleRadius
-              + this._configuration.circlePadding;
+    /**
+     * Get the outer radius depending on the depth of an element.
+     *
+     * @param {Number} depth The depth of the element inside the chart
+     *
+     * @return {Number}
+     */
+    outerRadius(depth)
+    {
+      if (depth === 0) {
+        return this._configuration.centerCircleRadius;
       }
 
-      /**
-       * Get the outer radius depending on the depth of an element.
-       *
-       * @param {Number} depth The depth of the element inside the chart
-       *
-       * @return {Number}
-       */
-      outerRadius(depth)
-      {
-          if (depth === 0) {
-              return this._configuration.centerCircleRadius;
-          }
-
-          if (depth <= this._configuration.numberOfInnerCircles) {
-              return ((depth - 1) * (this._configuration.innerArcHeight))
-                  + this._configuration.centerCircleRadius
-                  + this._configuration.innerArcHeight;
-          }
-
-          return (this._configuration.numberOfInnerCircles * this._configuration.innerArcHeight)
-              + ((depth - this._configuration.numberOfInnerCircles - 1) * this._configuration.outerArcHeight)
-              + this._configuration.centerCircleRadius
-              + this._configuration.outerArcHeight;
+      if (depth <= this._configuration.numberOfInnerCircles) {
+        return ((depth - 1) * (this._configuration.innerArcHeight))
+            + this._configuration.centerCircleRadius
+            + this._configuration.innerArcHeight;
       }
 
-      /**
-       * Get the center radius.
-       *
-       * @param {Number} depth The depth of the element inside the chart
-       *
-       * @return {Number}
-       */
-      centerRadius(depth)
-      {
-          return (this.innerRadius(depth) + this.outerRadius(depth)) / 2;
-      }
+      return (this._configuration.numberOfInnerCircles * this._configuration.innerArcHeight)
+          + ((depth - this._configuration.numberOfInnerCircles - 1) * this._configuration.outerArcHeight)
+          + this._configuration.centerCircleRadius
+          + this._configuration.outerArcHeight;
+    }
 
-      /**
-       * Get an radius relative to the outer radius adjusted by the given
-       * position in percent.
-       *
-       * @param {Number} depth    The depth of the element inside the chart
-       * @param {Number} position Percent offset (0 = inner radius, 100 = outer radius)
-       *
-       * @return {Number}
-       */
-      relativeRadius(depth, position)
-      {
-          const outer = this.outerRadius(depth);
-          return outer - ((100 - position) * (outer - this.innerRadius(depth)) / 100);
-      }
+    /**
+     * Get the center radius.
+     *
+     * @param {Number} depth The depth of the element inside the chart
+     *
+     * @return {Number}
+     */
+    centerRadius(depth)
+    {
+      return (this.innerRadius(depth) + this.outerRadius(depth)) / 2;
+    }
 
-      /**
-       * Calculates the angle in radians.
-       *
-       * @param {Number} value The starting point of the rectangle
-       *
-       * @return {Number}
-       *
-       * @private
-       */
-      calcAngle(value)
-      {
-          return Math.max(this.startPi, Math.min(this.endPi, this.scale(value)));
-      }
+    /**
+     * Get an radius relative to the outer radius adjusted by the given
+     * position in percent.
+     *
+     * @param {Number} depth    The depth of the element inside the chart
+     * @param {Number} position Percent offset (0 = inner radius, 100 = outer radius)
+     *
+     * @return {Number}
+     */
+    relativeRadius(depth, position)
+    {
+      const outer = this.outerRadius(depth);
+      return outer - ((100 - position) * (outer - this.innerRadius(depth)) / 100);
+    }
 
-      /**
-       * Gets the start angle in radians.
-       *
-       * @param {Number} depth The depth of the element inside the chart
-       * @param {Number} x0    The left edge (x0) of the rectangle
-       *
-       * @return {Number}
-       */
-      startAngle(depth, x0)
-      {
-          // Starting from the left edge (x0) of the rectangle
-          return (depth === 0) ? 0 : this.calcAngle(x0);
-      }
+    /**
+     * Calculates the angle in radians.
+     *
+     * @param {Number} value The starting point of the rectangle
+     *
+     * @return {Number}
+     *
+     * @private
+     */
+    calcAngle(value)
+    {
+      return Math.max(this.startPi, Math.min(this.endPi, this.scale(value)));
+    }
 
-      /**
-       * Gets the end angle in radians.
-       *
-       * @param {Number} depth The depth of the element inside the chart
-       * @param {Number} x1    The right edge (x1) of the rectangle
-       *
-       * @return {Number}
-       */
-      endAngle(depth, x1)
-      {
-          // Starting from the right edge (x1) of the rectangle
-          return (depth === 0) ? MATH_PI2 : this.calcAngle(x1);
-      }
+    /**
+     * Gets the start angle in radians.
+     *
+     * @param {Number} depth The depth of the element inside the chart
+     * @param {Number} x0    The left edge (x0) of the rectangle
+     *
+     * @return {Number}
+     */
+    startAngle(depth, x0)
+    {
+      // Starting from the left edge (x0) of the rectangle
+      return (depth === 0) ? 0 : this.calcAngle(x0);
+    }
 
-      /**
-       * Get an radius relative to the outer radius adjusted by the given
-       * position in percent.
-       *
-       * @param {Object} data     The D3 data object
-       * @param {Number} position The percent offset (0 = inner radius, 100 = outer radius)
-       *
-       * @return {Number}
-       */
-      arcLength(data, position)
-      {
-          return (this.endAngle(data.depth, data.x1) - this.startAngle(data.depth, data.x0))
-              * this.relativeRadius(data.depth, position);
-      }
+    /**
+     * Gets the end angle in radians.
+     *
+     * @param {Number} depth The depth of the element inside the chart
+     * @param {Number} x1    The right edge (x1) of the rectangle
+     *
+     * @return {Number}
+     */
+    endAngle(depth, x1)
+    {
+      // Starting from the right edge (x1) of the rectangle
+      return (depth === 0) ? MATH_PI2 : this.calcAngle(x1);
+    }
+
+    /**
+     * Get an radius relative to the outer radius adjusted by the given
+     * position in percent.
+     *
+     * @param {Object} data     The D3 data object
+     * @param {Number} position The percent offset (0 = inner radius, 100 = outer radius)
+     *
+     * @return {Number}
+     */
+    arcLength(data, position)
+    {
+      return (this.endAngle(data.depth, data.x1) - this.startAngle(data.depth, data.x0))
+          * this.relativeRadius(data.depth, position);
+    }
   }
 
   /**
@@ -6191,555 +6252,555 @@
    */
   class Text
   {
-      /**
-       * Constructor.
-       *
-       * @param {Svg}           svg
-       * @param {Configuration} configuration The application configuration
-       */
-      constructor(svg, configuration)
-      {
-          this._svg           = svg;
-          this._configuration = configuration;
-          this._geometry      = new Geometry(this._configuration);
+    /**
+     * Constructor.
+     *
+     * @param {Svg}           svg
+     * @param {Configuration} configuration The application configuration
+     */
+    constructor(svg, configuration)
+    {
+      this._svg           = svg;
+      this._configuration = configuration;
+      this._geometry      = new Geometry(this._configuration);
+    }
+
+    /**
+     * Creates all the labels and all dependent elements for a single person.
+     *
+     * @param {selection} parent The parent element to which the elements are to be attached
+     * @param {Object}    data   The D3 data object
+     */
+    createLabels(parent, data)
+    {
+      // Inner labels
+      if (this.isInnerLabel(data)) {
+        let text     = this.createTextElement(parent, data);
+        let parentId = select(parent.node().parentNode).attr("id");
+
+        // First names
+        let pathId1   = this.createPathDefinition(parentId, 0, data);
+        let textPath1 = this.createTextPath(text, pathId1);
+        this.addFirstNames(textPath1, data);
+        this.truncateNames(textPath1, data, 0);
+
+        // Last names
+        let pathId2   = this.createPathDefinition(parentId, 1, data);
+        let textPath2 = this.createTextPath(text, pathId2);
+        this.addLastNames(textPath2, data);
+        this.truncateNames(textPath2, data, 1);
+
+        // Alternative names
+        if (data.data.alternativeNames.length > 0) {
+          let pathId3   = this.createPathDefinition(parentId, 2, data);
+          let textPath3 = this.createTextPath(text, pathId3)
+              .attr("class", "alternativeName")
+              .classed("rtl", data.data.isAltRtl);
+
+          this.addAlternativeNames(textPath3, data);
+          this.truncateNames(textPath3, data, 2);
+        }
+
+        // Birth and death date
+        let pathId4   = this.createPathDefinition(parentId, 3, data);
+        let textPath4 = this.createTextPath(text, pathId4)
+            .attr("class", "date");
+
+        this.addTimeSpan(textPath4, data);
+
+        // Outer labels
+      } else {
+        // The outer most circles show the complete name and do
+        // not distinguish between first name, last name and dates
+        if (data.depth >= 7) {
+          let text1 = this.createTextElement(parent, data)
+              .attr("dy", "2px");
+
+          this.addFirstNames(text1, data);
+          this.addLastNames(text1, data, 0.25);
+          this.truncateNames(text1, data, 0);
+        }
+
+        if (data.depth < 7) {
+          // First names
+          let text2 = this.createTextElement(parent, data)
+              .attr("dy", "2px");
+
+          this.addFirstNames(text2, data);
+          this.truncateNames(text2, data, 0);
+
+          // Last names
+          let text3 = this.createTextElement(parent, data)
+              .attr("dy", "2px");
+
+          this.addLastNames(text3, data);
+          this.truncateNames(text3, data, 1);
+
+          // Birth and death date
+          if (data.depth < 6) {
+            // Birth and death date
+            let text4 = this.createTextElement(parent, data)
+                .attr("class", "date")
+                .attr("dy", "2px");
+
+            this.addTimeSpan(text4, data);
+          }
+        }
+
+        // Rotate outer labels in right position
+        this.transformOuterText(parent, data);
       }
 
-      /**
-       * Creates all the labels and all dependent elements for a single person.
-       *
-       * @param {selection} parent The parent element to which the elements are to be attached
-       * @param {Object}    data   The D3 data object
-       */
-      createLabels(parent, data)
-      {
-          // Inner labels
-          if (this.isInnerLabel(data)) {
-              let text     = this.createTextElement(parent, data);
-              let parentId = select(parent.node().parentNode).attr("id");
+      // Marriage date
+      if (this._configuration.showParentMarriageDates && data.children && (data.depth < 5)) {
+        let text5     = this.createTextElement(parent, data);
+        let parentId5 = select(parent.node().parentNode).attr("id");
+        let pathId5   = this.createPathDefinition(parentId5, 4, data);
+        let textPath5 = this.createTextPath(text5, pathId5)
+            .attr("class", "marriage-date");
 
-              // First names
-              let pathId1   = this.createPathDefinition(parentId, 0, data);
-              let textPath1 = this.createTextPath(text, pathId1);
-              this.addFirstNames(textPath1, data);
-              this.truncateNames(textPath1, data, 0);
+        this.addMarriageDate(textPath5, data);
+      }
+    }
 
-              // Last names
-              let pathId2   = this.createPathDefinition(parentId, 1, data);
-              let textPath2 = this.createTextPath(text, pathId2);
-              this.addLastNames(textPath2, data);
-              this.truncateNames(textPath2, data, 1);
+    /**
+     * Creates a single <tspan> element for each single given name and append it to the
+     * parent element. The "tspan" element containing the preferred name gets an
+     * additional underline style in order to highlight this one.
+     *
+     * @param {selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
+     * @param {Object}    data   The D3 data object containing the individual data
+     */
+    addFirstNames(parent, data)
+    {
+      let i = 0;
 
-              // Alternative names
-              if (data.data.alternativeNames.length > 0) {
-                  let pathId3   = this.createPathDefinition(parentId, 2, data);
-                  let textPath3 = this.createTextPath(text, pathId3)
-                      .attr("class", "alternativeName")
-                      .classed("rtl", data.data.isAltRtl);
+      for (let firstName of data.data.firstNames) {
+        // Create a <tspan> element for each given name
+        let tspan = parent.append("tspan")
+            .text(firstName);
 
-                  this.addAlternativeNames(textPath3, data);
-                  this.truncateNames(textPath3, data, 2);
-              }
+        // The preferred name
+        if (firstName === data.data.preferredName) {
+          tspan.attr("class", "preferred");
+        }
 
-              // Birth and death date
-              let pathId4   = this.createPathDefinition(parentId, 3, data);
-              let textPath4 = this.createTextPath(text, pathId4)
-                  .attr("class", "date");
+        // Add some spacing between the elements
+        if (i !== 0) {
+          tspan.attr("dx", "0.25em");
+        }
 
-              this.addTimeSpan(textPath4, data);
+        ++i;
+      }
+    }
 
-          // Outer labels
+    /**
+     * Creates a single <tspan> element for each last name and append it to the parent element.
+     *
+     * @param {selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
+     * @param {Object}    data   The D3 data object containing the individual data
+     * @param {Number}    dx     Additional space offset to add between names
+     */
+    addLastNames(parent, data, dx = 0)
+    {
+      let i = 0;
+
+      for (let lastName of data.data.lastNames) {
+        // Create a <tspan> element for each last name
+        let tspan = parent.append("tspan")
+            .attr("class", "lastName")
+            .text(lastName);
+
+        // Add some spacing between the elements
+        if (i !== 0) {
+          tspan.attr("dx", "0.25em");
+        }
+
+        if (dx !== 0) {
+          tspan.attr("dx", dx + "em");
+        }
+
+        ++i;
+      }
+    }
+
+    /**
+     * Creates a single <tspan> element for each alternative name and append it to the parent element.
+     *
+     * @param {selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
+     * @param {Object}    data   The D3 data object containing the individual data
+     * @param {Number}    dx     Delta X offset used to create a small spacing between multiple words
+     */
+    addAlternativeNames(parent, data, dx = 0)
+    {
+      let i = 0;
+
+      for (let alternativeName of data.data.alternativeNames) {
+        // Create a <tspan> element for each alternative name
+        let tspan = parent.append("tspan")
+            .text(alternativeName);
+
+        // Add some spacing between the elements
+        if (i !== 0) {
+          tspan.attr("dx", (data.data.isAltRtl ? -0.25 : 0.25) + "em");
+        }
+
+        ++i;
+      }
+    }
+
+    /**
+     * Creates a single <tspan> element for the time span append it to the parent element.
+     *
+     * @param {selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
+     * @param {Object}    data   The D3 data object containing the individual data
+     */
+    addTimeSpan(parent, data)
+    {
+      // Create a <tspan> element for the time span
+      parent.append("tspan")
+          .text(data.data.timespan);
+    }
+
+    /**
+     * Creates a single <tspan> element for the marriage date and append it to the parent element.
+     *
+     * @param {selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
+     * @param {Object}    data   The D3 data object containing the individual data
+     */
+    addMarriageDate(parent, data)
+    {
+      // Create a <tspan> element for the parent marriage date
+      if (data.data.parentMarriage) {
+        parent.append("tspan")
+            .text("\u26AD " + data.data.parentMarriage);
+      }
+    }
+
+    /**
+     * Loops over the <tspan> elements and truncates the contained texts.
+     *
+     * @param {selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are attached
+     * @param {Object}    data   The D3 data object containing the individual data
+     * @param {Number}    index  The index position of the element in parent container.
+     * @param {Boolean}   hide   Whether to show or hide the label if the text takes to much space to be displayed
+     */
+    truncateNames(parent, data, index, hide = false)
+    {
+      let availableWidth = this.getAvailableWidth(data, index);
+
+      // Select all not preferred names and not last names
+      let names = parent.selectAll("tspan:not(.preferred):not(.lastName)");
+
+      if (names.size()) {
+        // Start truncating from last element to the first one
+        names.nodes()
+            .reverse()
+            .forEach(element => {
+              select(element)
+                  .each(this.truncateText(parent, availableWidth, hide));
+            });
+      }
+
+      // Afterwards the preferred ones if text takes still to much space
+      parent.selectAll("tspan.preferred")
+          .each(this.truncateText(parent, availableWidth, hide));
+
+      // Truncate last names as last ones
+      parent.selectAll("tspan.lastName")
+          .each(this.truncateText(parent, availableWidth, hide));
+    }
+
+    /**
+     * Returns a float representing the computed length of all <tspan> elements within the element.
+     *
+     * @param {selection} parent The parent (<text> or <textPath>) element containing the <tspan> child elements
+     *
+     * @returns {Number}
+     */
+    getTextLength(parent)
+    {
+      let totalWidth = 0;
+
+      // Calculate the total used width of all <tspan> elements
+      parent.selectAll("tspan").each(function () {
+        totalWidth += this.getComputedTextLength();
+      });
+
+      return totalWidth;
+    }
+
+    /**
+     * Truncates the textual content of the actual element.
+     *
+     * @param {selection} parent         The parent (<text> or <textPath>) element containing the <tspan> child elements
+     * @param {Number}    availableWidth The total available width the text could take
+     * @param {Boolean}   hide           Whether to show or hide the label if the text takes to much space to be displayed
+     */
+    truncateText(parent, availableWidth, hide = false)
+    {
+      let that = this;
+
+      return function () {
+        let textLength = that.getTextLength(parent);
+        let tspan      = select(this);
+        let text       = tspan.text();
+
+        if (textLength > availableWidth) {
+          if (hide) {
+            tspan.text("");
           } else {
-              // The outer most circles show the complete name and do
-              // not distinguish between first name, last name and dates
-              if (data.depth >= 7) {
-                  let text1 = this.createTextElement(parent, data)
-                      .attr("dy", "2px");
-
-                  this.addFirstNames(text1, data);
-                  this.addLastNames(text1, data, 0.25);
-                  this.truncateNames(text1, data, 0);
-              }
-
-              if (data.depth < 7) {
-                  // First names
-                  let text2 = this.createTextElement(parent, data)
-                      .attr("dy", "2px");
-
-                  this.addFirstNames(text2, data);
-                  this.truncateNames(text2, data, 0);
-
-                  // Last names
-                  let text3 = this.createTextElement(parent, data)
-                      .attr("dy", "2px");
-
-                  this.addLastNames(text3, data);
-                  this.truncateNames(text3, data, 1);
-
-                  // Birth and death date
-                  if (data.depth < 6) {
-                      // Birth and death date
-                      let text4 = this.createTextElement(parent, data)
-                          .attr("class", "date")
-                          .attr("dy", "2px");
-
-                      this.addTimeSpan(text4, data);
-                  }
-              }
-
-              // Rotate outer labels in right position
-              this.transformOuterText(parent, data);
+            if (text.length > 1) {
+              // Keep only the first letter
+              tspan.text(text.slice(0, 1) + ".");
+            }
           }
+        }
+      };
 
-          // Marriage date
-          if (this._configuration.showParentMarriageDates && data.children && (data.depth < 5)) {
-              let text5     = this.createTextElement(parent, data);
-              let parentId5 = select(parent.node().parentNode).attr("id");
-              let pathId5   = this.createPathDefinition(parentId5, 4, data);
-              let textPath5 = this.createTextPath(text5, pathId5)
-                  .attr("class", "marriage-date");
+      // Truncate text letter by letter
 
-              this.addMarriageDate(textPath5, data);
-          }
+      // while ((textLength > availableWidth) && (text.length > 1)) {
+      //     // Remove last char
+      //     text = text.slice(0, -1);
+      //
+      //     if (text.length > 1) {
+      //         self.text(text + "...");
+      //     } else {
+      //         self.text(text + ".");
+      //     }
+      //
+      //     // Recalculate the text width
+      //     textLength = this.getTextLength(parent);
+      // }
+    }
+
+    /**
+     * Returns TRUE if the depth of the element is in the inner range. So labels should
+     * be rendered along an arc path. Otherwise returns FALSE to indicate the element
+     * is either the center one or an outer arc.
+     *
+     * @param {Object} data The D3 data object
+     *
+     * @return {Boolean}
+     */
+    isInnerLabel(data)
+    {
+      // Note: The center element does not belong to the inner labels!
+      return ((data.depth > 0) && (data.depth <= this._configuration.numberOfInnerCircles));
+    }
+
+    /**
+     * Creates a <text> element and append it to the parent element.
+     *
+     * @param {selection} parent The parent element to which the <text> element is to be attached
+     * @param {Object}    data   The D3 data object
+     *
+     * @return {selection} Newly created <text> element
+     */
+    createTextElement(parent, data)
+    {
+      return parent.append("text");
+    }
+
+    /**
+     * Creates a <textPath> element and append it to the parent element.
+     *
+     * @param {selection} parent The parent element to which the <textPath> element is to be attached
+     * @param {String}    refId  The id of the reference element
+     *
+     * @return {selection} Newly created <textPath> element
+     */
+    createTextPath(parent, refId)
+    {
+      return parent
+          .append("textPath")
+          .attr("xlink:href", "#" + refId)
+          .attr("startOffset", "25%");
+    }
+
+    /**
+     * Creates a new <path> definition and append it to the global definition list.
+     *
+     * @param {String} parentId The parent element id
+     * @param {Number} index    Index position of element in parent container. Required to create a unique path id.
+     * @param {Object} data     The D3 data object
+     *
+     * @return {String} The id of the newly created path element
+     */
+    createPathDefinition(parentId, index, data)
+    {
+      let pathId = "path-" + parentId + "-" + index;
+
+      // If definition already exists return the existing path id
+      if (this._svg.defs.get().select("path#" + pathId).node()) {
+        return pathId;
       }
 
-      /**
-       * Creates a single <tspan> element for each single given name and append it to the
-       * parent element. The "tspan" element containing the preferred name gets an
-       * additional underline style in order to highlight this one.
-       *
-       * @param {selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
-       * @param {Object}    data   The D3 data object containing the individual data
-       */
-      addFirstNames(parent, data)
-      {
-          let i = 0;
+      let positionFlipped = this.isPositionFlipped(data.depth, data.x0, data.x1);
+      let startAngle      = this._geometry.startAngle(data.depth, data.x0);
+      let endAngle        = this._geometry.endAngle(data.depth, data.x1);
+      let relativeRadius  = this._geometry.relativeRadius(data.depth, this.getTextOffset(positionFlipped, index));
 
-          for (let firstName of data.data.firstNames) {
-              // Create a <tspan> element for each given name
-              let tspan = parent.append("tspan")
-                  .text(firstName);
-
-              // The preferred name
-              if (firstName === data.data.preferredName) {
-                  tspan.attr("class", "preferred");
-              }
-
-              // Add some spacing between the elements
-              if (i !== 0) {
-                  tspan.attr("dx", "0.25em");
-              }
-
-              ++i;
-          }
+      // Special treatment for center marriage date position
+      if (this._configuration.showParentMarriageDates && (index === 4) && (data.depth < 1)) {
+        startAngle = this._geometry.calcAngle(data.x0);
+        endAngle   = this._geometry.calcAngle(data.x1);
       }
 
-      /**
-       * Creates a single <tspan> element for each last name and append it to the parent element.
-       *
-       * @param {selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
-       * @param {Object}    data   The D3 data object containing the individual data
-       * @param {Number}    dx     Additional space offset to add between names
-       */
-      addLastNames(parent, data, dx = 0)
-      {
-          let i = 0;
+      // Create an arc generator for path segments
+      let arcGenerator = arc()
+          .startAngle(positionFlipped ? endAngle : startAngle)
+          .endAngle(positionFlipped ? startAngle : endAngle)
+          .innerRadius(relativeRadius)
+          .outerRadius(relativeRadius);
 
-          for (let lastName of data.data.lastNames) {
-              // Create a <tspan> element for each last name
-              let tspan = parent.append("tspan")
-                  .attr("class", "lastName")
-                  .text(lastName);
+      arcGenerator
+          .padAngle(this._configuration.padAngle)
+          .padRadius(this._configuration.padRadius)
+          .cornerRadius(this._configuration.cornerRadius);
 
-              // Add some spacing between the elements
-              if (i !== 0) {
-                  tspan.attr("dx", "0.25em");
-              }
+      // Store the <path> inside the definition list so we could
+      // access it later on by its id
+      this._svg.defs.get()
+          .append("path")
+          .attr("id", pathId)
+          .attr("d", arcGenerator);
 
-              if (dx !== 0) {
-                  tspan.attr("dx", dx + "em");
-              }
+      return pathId;
+    }
 
-              ++i;
-          }
+    /**
+     * Check for the 360 degree chart if the current arc labels should be flipped for easier reading.
+     *
+     * @param {Number} depth The depth of the element inside the chart
+     * @param {Number} x0    The left edge (x0) of the rectangle
+     * @param {Number} x1    The right edge (x1) of the rectangle
+     *
+     * @return {Boolean}
+     */
+    isPositionFlipped(depth, x0, x1)
+    {
+      if ((this._configuration.fanDegree !== 360) || (depth <= 1)) {
+        return false;
       }
 
-      /**
-       * Creates a single <tspan> element for each alternative name and append it to the parent element.
-       *
-       * @param {selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
-       * @param {Object}    data   The D3 data object containing the individual data
-       * @param {Number}    dx     Delta X offset used to create a small spacing between multiple words
-       */
-      addAlternativeNames(parent, data, dx = 0)
-      {
-          let i = 0;
+      const startAngle = this._geometry.startAngle(depth, x0);
+      const endAngle   = this._geometry.endAngle(depth, x1);
 
-          for (let alternativeName of data.data.alternativeNames) {
-              // Create a <tspan> element for each alternative name
-              let tspan = parent.append("tspan")
-                  .text(alternativeName);
+      // Flip names for better readability depending on position in chart
+      return ((startAngle >= (90 * MATH_DEG2RAD)) && (endAngle <= (180 * MATH_DEG2RAD)))
+          || ((startAngle >= (-180 * MATH_DEG2RAD)) && (endAngle <= (-90 * MATH_DEG2RAD)));
+    }
 
-              // Add some spacing between the elements
-              if (i !== 0) {
-                  tspan.attr("dx", (data.data.isAltRtl ? -0.25 : 0.25) + "em");
-              }
+    /**
+     * Get the relative position offsets in percent for different text lines (firstName, lastName, dates).
+     *   => (0 = inner radius, 100 = outer radius)
+     *
+     * @param {Boolean} positionFlipped TRUE if the labels should be flipped for easier reading
+     * @param {Number}  index           The index position of element in parent container. Required to create a unique path id.
+     *
+     * @return {Number}
+     */
+    getTextOffset(positionFlipped, index)
+    {
+      // First names, Last name, Alternate name, Date, Parent marriage date
+      return positionFlipped
+          ? [23, 42, 61, 84, 125][index]
+          : [73, 54, 35, 12, 120][index];
+    }
 
-              ++i;
-          }
+    /**
+     * Calculate the available text width. Depending on the depth of an entry in
+     * the chart the available width differs.
+     *
+     * @param {Object} data  The D3 data object
+     * @param {Number} index The index position of element in parent container.
+     *
+     * @returns {Number} Calculated available width
+     *
+     * @private
+     */
+    getAvailableWidth(data, index)
+    {
+      // Outer arcs
+      if (data.depth > this._configuration.numberOfInnerCircles) {
+        return this._configuration.outerArcHeight
+            - (this._configuration.textPadding * 2)
+            - this._configuration.circlePadding;
       }
 
-      /**
-       * Creates a single <tspan> element for the time span append it to the parent element.
-       *
-       * @param {selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
-       * @param {Object}    data   The D3 data object containing the individual data
-       */
-      addTimeSpan(parent, data)
-      {
-          // Create a <tspan> element for the time span
-          parent.append("tspan")
-              .text(data.data.timespan);
+      // Innermost circle (Reducing the width slightly, avoiding the text is sticking too close to the edge)
+      let availableWidth = (this._configuration.centerCircleRadius * 2) - (this._configuration.centerCircleRadius * 0.15);
+
+      if (data.depth >= 1) {
+        let positionFlipped = this.isPositionFlipped(data.depth, data.x0, data.x1);
+
+        // Calculate length of the arc
+        availableWidth = this._geometry.arcLength(data, this.getTextOffset(positionFlipped, index));
       }
 
-      /**
-       * Creates a single <tspan> element for the marriage date and append it to the parent element.
-       *
-       * @param {selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are to be attached
-       * @param {Object}    data   The D3 data object containing the individual data
-       */
-      addMarriageDate(parent, data)
-      {
-          // Create a <tspan> element for the parent marriage date
-          if (data.data.parentMarriage) {
-              parent.append("tspan")
-                  .text("\u26AD " + data.data.parentMarriage);
-          }
+      return availableWidth - (this._configuration.textPadding * 2)
+          - (this._configuration.padDistance / 2);
+    }
+
+    /**
+     * Transform the D3 <text> elements in the group. Rotate each <text> element depending on its offset,
+     * so that they are equally positioned inside the arc.
+     *
+     * @param {selection} parent The D3 parent group object
+     * @param {Object}    data   The The D3 data object
+     *
+     * @public
+     */
+    transformOuterText(parent, data)
+    {
+      let that          = this;
+      let textElements  = parent.selectAll("text");
+      let countElements = textElements.size();
+      let offset        = 1.0;
+
+      // Special offsets for shifting the text around depending on the depth
+      switch (data.depth) {
+        case 0: offset = 1.5; break;
+        case 1: offset = 6.5; break;
+        case 2: offset = 3.5; break;
+        case 3: offset = 2.2; break;
+        case 4: offset = 1.9; break;
+        case 5: offset = 1.5; break;
+        case 6: offset = 0.5; break;
       }
 
-      /**
-       * Loops over the <tspan> elements and truncates the contained texts.
-       *
-       * @param {selection} parent The parent (<text> or <textPath>) element to which the <tspan> elements are attached
-       * @param {Object}    data   The D3 data object containing the individual data
-       * @param {Number}    index  The index position of the element in parent container.
-       * @param {Boolean}   hide   Whether to show or hide the label if the text takes to much space to be displayed
-       */
-      truncateNames(parent, data, index, hide = false)
-      {
-          let availableWidth = this.getAvailableWidth(data, index);
+      let mapIndexToOffset = linear()
+          .domain([0, countElements - 1])
+          .range([-offset, offset]);
 
-          // Select all not preferred names and not last names
-          let names = parent.selectAll("tspan:not(.preferred):not(.lastName)");
+      textElements.each(function (ignore, i) {
+        const offsetRotate = mapIndexToOffset(i) * that._configuration.fontScale / 100.0;
 
-          if (names.size()) {
-              // Start truncating from last element to the first one
-              names.nodes()
-                  .reverse()
-                  .forEach(element => {
-                      select(element)
-                          .each(this.truncateText(parent, availableWidth, hide));
-                  });
-          }
+        // Name of center person should not be rotated in any way
+        if (data.depth === 0) {
+          // TODO Depends on font-size
+          select(this).attr("dy", (offsetRotate * 14) + (14 / 2) + "px");
+        } else {
+          select(this).attr("transform", function () {
+            let dx        = data.x1 - data.x0;
+            let angle     = that._geometry.scale(data.x0 + (dx / 2)) * MATH_RAD2DEG;
+            let rotate    = angle - (offsetRotate * (angle > 0 ? -1 : 1));
+            let translate = (that._geometry.centerRadius(data.depth) - (that._configuration.colorArcWidth / 2.0));
 
-          // Afterwards the preferred ones if text takes still to much space
-          parent.selectAll("tspan.preferred")
-              .each(this.truncateText(parent, availableWidth, hide));
+            if (angle > 0) {
+              rotate -= 90;
+            } else {
+              translate = -translate;
+              rotate += 90;
+            }
 
-          // Truncate last names as last ones
-          parent.selectAll("tspan.lastName")
-              .each(this.truncateText(parent, availableWidth, hide));
-      }
-
-      /**
-       * Returns a float representing the computed length of all <tspan> elements within the element.
-       *
-       * @param {selection} parent The parent (<text> or <textPath>) element containing the <tspan> child elements
-       *
-       * @returns {Number}
-       */
-      getTextLength(parent)
-      {
-          let totalWidth = 0;
-
-          // Calculate the total used width of all <tspan> elements
-          parent.selectAll("tspan").each(function () {
-              totalWidth += this.getComputedTextLength();
+            return "rotate(" + rotate + ") translate(" + translate + ")";
           });
-
-          return totalWidth;
-      }
-
-      /**
-       * Truncates the textual content of the actual element.
-       *
-       * @param {selection} parent         The parent (<text> or <textPath>) element containing the <tspan> child elements
-       * @param {Number}    availableWidth The total available width the text could take
-       * @param {Boolean}   hide           Whether to show or hide the label if the text takes to much space to be displayed
-       */
-      truncateText(parent, availableWidth, hide = false)
-      {
-          let that = this;
-
-          return function () {
-              let textLength = that.getTextLength(parent);
-              let tspan      = select(this);
-              let text       = tspan.text();
-
-              if (textLength > availableWidth) {
-                  if (hide) {
-                      tspan.text("");
-                  } else {
-                      if (text.length > 1) {
-                          // Keep only the first letter
-                          tspan.text(text.slice(0, 1) + ".");
-                      }
-                  }
-              }
-          };
-
-          // Truncate text letter by letter
-
-          // while ((textLength > availableWidth) && (text.length > 1)) {
-          //     // Remove last char
-          //     text = text.slice(0, -1);
-          //
-          //     if (text.length > 1) {
-          //         self.text(text + "...");
-          //     } else {
-          //         self.text(text + ".");
-          //     }
-          //
-          //     // Recalculate the text width
-          //     textLength = this.getTextLength(parent);
-          // }
-      }
-
-      /**
-       * Returns TRUE if the depth of the element is in the inner range. So labels should
-       * be rendered along an arc path. Otherwise returns FALSE to indicate the element
-       * is either the center one or an outer arc.
-       *
-       * @param {Object} data The D3 data object
-       *
-       * @return {Boolean}
-       */
-      isInnerLabel(data)
-      {
-          // Note: The center element does not belong to the inner labels!
-          return ((data.depth > 0) && (data.depth <= this._configuration.numberOfInnerCircles));
-      }
-
-      /**
-       * Creates a <text> element and append it to the parent element.
-       *
-       * @param {selection} parent The parent element to which the <text> element is to be attached
-       * @param {Object}    data   The D3 data object
-       *
-       * @return {selection} Newly created <text> element
-       */
-      createTextElement(parent, data)
-      {
-          return parent.append("text");
-      }
-
-      /**
-       * Creates a <textPath> element and append it to the parent element.
-       *
-       * @param {selection} parent The parent element to which the <textPath> element is to be attached
-       * @param {String}    refId  The id of the reference element
-       *
-       * @return {selection} Newly created <textPath> element
-       */
-      createTextPath(parent, refId)
-      {
-          return parent
-              .append("textPath")
-              .attr("xlink:href", "#" + refId)
-              .attr("startOffset", "25%");
-      }
-
-      /**
-       * Creates a new <path> definition and append it to the global definition list.
-       *
-       * @param {String} parentId The parent element id
-       * @param {Number} index    Index position of element in parent container. Required to create a unique path id.
-       * @param {Object} data     The D3 data object
-       *
-       * @return {String} The id of the newly created path element
-       */
-      createPathDefinition(parentId, index, data)
-      {
-          let pathId = "path-" + parentId + "-" + index;
-
-          // If definition already exists return the existing path id
-          if (this._svg.defs.get().select("path#" + pathId).node()) {
-              return pathId;
-          }
-
-          let positionFlipped = this.isPositionFlipped(data.depth, data.x0, data.x1);
-          let startAngle      = this._geometry.startAngle(data.depth, data.x0);
-          let endAngle        = this._geometry.endAngle(data.depth, data.x1);
-          let relativeRadius  = this._geometry.relativeRadius(data.depth, this.getTextOffset(positionFlipped, index));
-
-          // Special treatment for center marriage date position
-          if (this._configuration.showParentMarriageDates && (index === 4) && (data.depth < 1)) {
-              startAngle = this._geometry.calcAngle(data.x0);
-              endAngle   = this._geometry.calcAngle(data.x1);
-          }
-
-          // Create an arc generator for path segments
-          let arcGenerator = arc()
-              .startAngle(positionFlipped ? endAngle : startAngle)
-              .endAngle(positionFlipped ? startAngle : endAngle)
-              .innerRadius(relativeRadius)
-              .outerRadius(relativeRadius);
-
-          arcGenerator
-              .padAngle(this._configuration.padAngle)
-              .padRadius(this._configuration.padRadius)
-              .cornerRadius(this._configuration.cornerRadius);
-
-          // Store the <path> inside the definition list so we could
-          // access it later on by its id
-          this._svg.defs.get()
-              .append("path")
-              .attr("id", pathId)
-              .attr("d", arcGenerator);
-
-          return pathId;
-      }
-
-      /**
-       * Check for the 360 degree chart if the current arc labels should be flipped for easier reading.
-       *
-       * @param {Number} depth The depth of the element inside the chart
-       * @param {Number} x0    The left edge (x0) of the rectangle
-       * @param {Number} x1    The right edge (x1) of the rectangle
-       *
-       * @return {Boolean}
-       */
-      isPositionFlipped(depth, x0, x1)
-      {
-          if ((this._configuration.fanDegree !== 360) || (depth <= 1)) {
-              return false;
-          }
-
-          const startAngle = this._geometry.startAngle(depth, x0);
-          const endAngle   = this._geometry.endAngle(depth, x1);
-
-          // Flip names for better readability depending on position in chart
-          return ((startAngle >= (90 * MATH_DEG2RAD)) && (endAngle <= (180 * MATH_DEG2RAD)))
-              || ((startAngle >= (-180 * MATH_DEG2RAD)) && (endAngle <= (-90 * MATH_DEG2RAD)));
-      }
-
-      /**
-       * Get the relative position offsets in percent for different text lines (firstName, lastName, dates).
-       *   => (0 = inner radius, 100 = outer radius)
-       *
-       * @param {Boolean} positionFlipped TRUE if the labels should be flipped for easier reading
-       * @param {Number}  index           The index position of element in parent container. Required to create a unique path id.
-       *
-       * @return {Number}
-       */
-      getTextOffset(positionFlipped, index)
-      {
-          // First names, Last name, Alternate name, Date, Parent marriage date
-          return positionFlipped
-              ? [23, 42, 61, 84, 125][index]
-              : [73, 54, 35, 12, 120][index];
-      }
-
-      /**
-       * Calculate the available text width. Depending on the depth of an entry in
-       * the chart the available width differs.
-       *
-       * @param {Object} data  The D3 data object
-       * @param {Number} index The index position of element in parent container.
-       *
-       * @returns {Number} Calculated available width
-       *
-       * @private
-       */
-      getAvailableWidth(data, index)
-      {
-          // Outer arcs
-          if (data.depth > this._configuration.numberOfInnerCircles) {
-              return this._configuration.outerArcHeight
-                  - (this._configuration.textPadding * 2)
-                  - this._configuration.circlePadding;
-          }
-
-          // Innermost circle (Reducing the width slightly, avoiding the text is sticking too close to the edge)
-          let availableWidth = (this._configuration.centerCircleRadius * 2) - (this._configuration.centerCircleRadius * 0.15);
-
-          if (data.depth >= 1) {
-              let positionFlipped = this.isPositionFlipped(data.depth, data.x0, data.x1);
-
-              // Calculate length of the arc
-              availableWidth = this._geometry.arcLength(data, this.getTextOffset(positionFlipped, index));
-          }
-
-          return availableWidth - (this._configuration.textPadding * 2)
-              - (this._configuration.padDistance / 2);
-      }
-
-      /**
-       * Transform the D3 <text> elements in the group. Rotate each <text> element depending on its offset,
-       * so that they are equally positioned inside the arc.
-       *
-       * @param {selection} parent The D3 parent group object
-       * @param {Object}    data   The The D3 data object
-       *
-       * @public
-       */
-      transformOuterText(parent, data)
-      {
-          let that          = this;
-          let textElements  = parent.selectAll("text");
-          let countElements = textElements.size();
-          let offset        = 1.0;
-
-          // Special offsets for shifting the text around depending on the depth
-          switch (data.depth) {
-              case 0: offset = 1.5; break;
-              case 1: offset = 6.5; break;
-              case 2: offset = 3.5; break;
-              case 3: offset = 2.2; break;
-              case 4: offset = 1.9; break;
-              case 5: offset = 1.5; break;
-              case 6: offset = 0.5; break;
-          }
-
-          let mapIndexToOffset = linear()
-              .domain([0, countElements - 1])
-              .range([-offset, offset]);
-
-          textElements.each(function (ignore, i) {
-              const offsetRotate = mapIndexToOffset(i) * that._configuration.fontScale / 100.0;
-
-              // Name of center person should not be rotated in any way
-              if (data.depth === 0) {
-                  // TODO Depends on font-size
-                  select(this).attr("dy", (offsetRotate * 14) + (14 / 2) + "px");
-              } else {
-                  select(this).attr("transform", function () {
-                      let dx        = data.x1 - data.x0;
-                      let angle     = that._geometry.scale(data.x0 + (dx / 2)) * MATH_RAD2DEG;
-                      let rotate    = angle - (offsetRotate * (angle > 0 ? -1 : 1));
-                      let translate = (that._geometry.centerRadius(data.depth) - (that._configuration.colorArcWidth / 2.0));
-
-                      if (angle > 0) {
-                          rotate -= 90;
-                      } else {
-                          translate = -translate;
-                          rotate += 90;
-                      }
-
-                      return "rotate(" + rotate + ") translate(" + translate + ")";
-                  });
-              }
-          });
-      }
+        }
+      });
+    }
   }
 
   /**
@@ -6755,290 +6816,290 @@
    */
   class Person
   {
-      /**
-       * Constructor.
-       *
-       * @param {Svg}           svg
-       * @param {Configuration} configuration The application configuration
-       * @param {selection}     person
-       * @param {Object}        data
-       */
-      constructor(svg, configuration, person, data)
-      {
-          this._svg           = svg;
-          this._configuration = configuration;
-          this._geometry      = new Geometry(this._configuration);
+    /**
+     * Constructor.
+     *
+     * @param {Svg}           svg
+     * @param {Configuration} configuration The application configuration
+     * @param {selection}     person
+     * @param {Object}        data
+     */
+    constructor(svg, configuration, person, data)
+    {
+      this._svg           = svg;
+      this._configuration = configuration;
+      this._geometry      = new Geometry(this._configuration);
 
-          this.init(person, data);
+      this.init(person, data);
+    }
+
+    /**
+     * Initialize the required elements.
+     *
+     * @param {selection} person
+     * @param {Object}    data
+     */
+    init(person, data)
+    {
+      if (person.classed("new") && this._configuration.hideEmptySegments) {
+        this.addArcToPerson(person, data);
+      } else {
+        if (!person.classed("new")
+            && !person.classed("update")
+            && !person.classed("remove")
+            && ((data.data.xref !== "") || !this._configuration.hideEmptySegments)
+        ) {
+          this.addArcToPerson(person, data);
+        }
       }
 
-      /**
-       * Initialize the required elements.
-       *
-       * @param {selection} person
-       * @param {Object}    data
-       */
-      init(person, data)
-      {
-          if (person.classed("new") && this._configuration.hideEmptySegments) {
-              this.addArcToPerson(person, data);
-          } else {
-              if (!person.classed("new")
-                  && !person.classed("update")
-                  && !person.classed("remove")
-                  && ((data.data.xref !== "") || !this._configuration.hideEmptySegments)
-              ) {
-                  this.addArcToPerson(person, data);
+      if (data.data.xref !== "") {
+        this.addTitleToPerson(person, data.data.name);
+
+        // Append labels (initial hidden)
+        let text  = new Text(this._svg, this._configuration);
+        let label = this.addLabelToPerson(person, data);
+
+        text.createLabels(label, data);
+        this.addColorGroup(person, data);
+
+        // Hovering
+        person
+            .on("contextmenu", (event, datum) => {
+              if (this._svg.div.property("active")) {
+                this._svg.div
+                    .transition()
+                    .duration(200)
+                    .style("opacity", 0);
+
+                this._svg.div.property("active", false);
+                event.preventDefault();
+              } else {
+                this._svg.div.property("active", true);
+                this.setTooltipHtml(datum);
+
+                event.preventDefault();
               }
-          }
+            })
+            // Handles the event when a pointing device initially enters an element.
+            .on("mouseenter", (event, datum) => {
+              if (datum.data.xref === "") {
+                this._svg.div
+                    .style("opacity", 0);
+              }
 
-          if (data.data.xref !== "") {
-              this.addTitleToPerson(person, data.data.name);
-
-              // Append labels (initial hidden)
-              let text  = new Text(this._svg, this._configuration);
-              let label = this.addLabelToPerson(person, data);
-
-              text.createLabels(label, data);
-              this.addColorGroup(person, data);
-
-              // Hovering
-              person
-                  .on("contextmenu", (event, datum) => {
-                      if (this._svg.div.property("active")) {
-                          this._svg.div
-                              .transition()
-                              .duration(200)
-                              .style("opacity", 0);
-
-                          this._svg.div.property("active", false);
-                          event.preventDefault();
-                      } else {
-                          this._svg.div.property("active", true);
-                          this.setTooltipHtml(datum);
-
-                          event.preventDefault();
-                      }
-                  })
-                  // Handles the event when a pointing device initially enters an element.
-                  .on("mouseenter", (event, datum) => {
-                      if (datum.data.xref === "") {
-                          this._svg.div
-                              .style("opacity", 0);
-                      }
-
-                      this.setTooltipHtml(datum);
-                  })
-                  // Handles the event when a pointing device leaves an element.
-                  .on("mouseleave", (event, datum) => {
-                      if (datum.data.xref === "") {
-                          this._svg.div
-                              .style("opacity", 0);
-                      }
-                  })
-                  // Handles the event when a pointing device is moved around an element.
-                  .on("mousemove", (event, datum) => {
-                      this._svg.div
-                          .style("left", (event.pageX) + "px")
-                          .style("top", (event.pageY - 30) + "px");
-                  })
-                  // Handles the event when a pointing device is moved onto an element.
-                  .on("mouseover", function (event, datum) {
-                      const elements = person.nodes();
-                      const index    = elements.indexOf(this);
-
-                      // Use raise() to move element to the top, as in SVG the last element is always the
-                      // one drawn on top of the others.
-                      select(elements[index])
-                          .classed("hover", true)
-                          .raise();
-                  })
-                  // Handles the event when a pointing device is moved off an element.
-                  .on("mouseout", function (event, datum) {
-                      const elements = person.nodes();
-                      const index    = elements.indexOf(this);
-
-                      select(elements[index])
-                          .classed("hover", false);
-                  });
-          }
-      }
-
-      /**
-       *
-       * @param {Object} datum The D3 data object
-       */
-      setTooltipHtml(datum)
-      {
-          // Ignore empty elements
-          if (datum.data.xref === "") {
-              return;
-          }
-
-          const image = (datum.data.thumbnail
-              ? "<img src=\"" + datum.data.thumbnail + "\" alt=\"\" />"
-              : "<i class=\"icon-silhouette-" + datum.data.sex + "\" ></i>");
-
-          const dates = datum.data.birth || datum.data.marriage || datum.data.death;
-
-          this._svg.div
-              .html(
-                  "<div class=\"image\">" + image + "</div>"
-                  + "<div class=\"name\">" + datum.data.name + "</div>"
-                  + (dates
-                      ? "<table>"
-                          + (datum.data.birth
-                          ? ("<tr class=\"date\"><th>\u2605</th><td>" + datum.data.birth + "</td></tr>")
-                          : "")
-                          + (datum.data.marriage
-                          ? ("<tr class=\"date\"><th>\u26AD</th><td>" + datum.data.marriage + "</td></tr>")
-                          : "")
-                          + (datum.data.death
-                          ? ("<tr class=\"date\"><th>\u2020</th><td>" + datum.data.death + "</td></tr>")
-                          : "")
-                      + "</table>"
-                      : "")
-              )
-              .style("left", (event.pageX) + "px")
-              .style("top", (event.pageY - 30) + "px");
-
-          if (this._svg.div.property("active")) {
+              this.setTooltipHtml(datum);
+            })
+            // Handles the event when a pointing device leaves an element.
+            .on("mouseleave", (event, datum) => {
+              if (datum.data.xref === "") {
+                this._svg.div
+                    .style("opacity", 0);
+              }
+            })
+            // Handles the event when a pointing device is moved around an element.
+            .on("mousemove", (event, datum) => {
               this._svg.div
-                  .transition()
-                  .duration(200)
-                  .style("opacity", 1);
-          }
+                  .style("left", (event.pageX) + "px")
+                  .style("top", (event.pageY - 30) + "px");
+            })
+            // Handles the event when a pointing device is moved onto an element.
+            .on("mouseover", function (event, datum) {
+              const elements = person.nodes();
+              const index    = elements.indexOf(this);
+
+              // Use raise() to move element to the top, as in SVG the last element is always the
+              // one drawn on top of the others.
+              select(elements[index])
+                  .classed("hover", true)
+                  .raise();
+            })
+            // Handles the event when a pointing device is moved off an element.
+            .on("mouseout", function (event, datum) {
+              const elements = person.nodes();
+              const index    = elements.indexOf(this);
+
+              select(elements[index])
+                  .classed("hover", false);
+            });
+      }
+    }
+
+    /**
+     *
+     * @param {Object} datum The D3 data object
+     */
+    setTooltipHtml(datum)
+    {
+      // Ignore empty elements
+      if (datum.data.xref === "") {
+        return;
       }
 
-      /**
-       * Adds an color overlay for each arc.
-       *
-       * @param {selection} person
-       * @param {Object}    data   The D3 data object
-       */
-      addColorGroup(person, data)
-      {
-          // Arc generator
-          let arcGenerator = arc()
-              .startAngle(this._geometry.startAngle(data.depth, data.x0))
-              .endAngle(this._geometry.endAngle(data.depth, data.x1))
-              .innerRadius(this._geometry.outerRadius(data.depth) - this._configuration.colorArcWidth)
-              .outerRadius(this._geometry.outerRadius(data.depth) + 1);
-          // .innerRadius((data) => this._geometry.outerRadius(data.depth) - this._configuration.colorArcWidth - 2)
-          // .outerRadius((data) => this._geometry.outerRadius(data.depth) - 1);
+      const image = (datum.data.thumbnail
+          ? "<img src=\"" + datum.data.thumbnail + "\" alt=\"\" />"
+          : "<i class=\"icon-silhouette-" + datum.data.sex + "\" ></i>");
 
-          arcGenerator.padAngle(this._configuration.padAngle)
-              .padRadius(this._configuration.padRadius)
-          //     .cornerRadius(this._configuration.cornerRadius - 2)
-              ;
+      const dates = datum.data.birth || datum.data.marriage || datum.data.death;
 
-          let color = person
-              .append("g")
-              .attr("class", "color");
+      this._svg.div
+          .html(
+              "<div class=\"image\">" + image + "</div>"
+              + "<div class=\"name\">" + datum.data.name + "</div>"
+              + (dates
+              ? "<table>"
+              + (datum.data.birth
+                  ? ("<tr class=\"date\"><th>\u2605</th><td>" + datum.data.birth + "</td></tr>")
+                  : "")
+              + (datum.data.marriage
+                  ? ("<tr class=\"date\"><th>\u26AD</th><td>" + datum.data.marriage + "</td></tr>")
+                  : "")
+              + (datum.data.death
+                  ? ("<tr class=\"date\"><th>\u2020</th><td>" + datum.data.death + "</td></tr>")
+                  : "")
+              + "</table>"
+              : "")
+          )
+          .style("left", (event.pageX) + "px")
+          .style("top", (event.pageY - 30) + "px");
 
-          color.append("path")
-              .attr("fill", () => {
-                  if (this._configuration.showColorGradients) {
-                      // Innermost circle (first generation)
-                      if (!data.depth) {
-                          return "rgb(225, 225, 225)";
-                      }
+      if (this._svg.div.property("active")) {
+        this._svg.div
+            .transition()
+            .duration(200)
+            .style("opacity", 1);
+      }
+    }
 
-                      return "url(#grad-" + data.data.id + ")";
-                  }
+    /**
+     * Adds an color overlay for each arc.
+     *
+     * @param {selection} person
+     * @param {Object}    data   The D3 data object
+     */
+    addColorGroup(person, data)
+    {
+      // Arc generator
+      let arcGenerator = arc()
+          .startAngle(this._geometry.startAngle(data.depth, data.x0))
+          .endAngle(this._geometry.endAngle(data.depth, data.x1))
+          .innerRadius(this._geometry.outerRadius(data.depth) - this._configuration.colorArcWidth)
+          .outerRadius(this._geometry.outerRadius(data.depth) + 1);
+      // .innerRadius((data) => this._geometry.outerRadius(data.depth) - this._configuration.colorArcWidth - 2)
+      // .outerRadius((data) => this._geometry.outerRadius(data.depth) - 1);
 
-                  return data.data.color;
-              })
-              .attr("d", arcGenerator);
+      arcGenerator.padAngle(this._configuration.padAngle)
+          .padRadius(this._configuration.padRadius)
+      //     .cornerRadius(this._configuration.cornerRadius - 2)
+      ;
+
+      let color = person
+          .append("g")
+          .attr("class", "color");
+
+      color.append("path")
+          .attr("fill", () => {
+            if (this._configuration.showColorGradients) {
+              // Innermost circle (first generation)
+              if (!data.depth) {
+                return "rgb(225, 225, 225)";
+              }
+
+              return "url(#grad-" + data.data.id + ")";
+            }
+
+            return data.data.color;
+          })
+          .attr("d", arcGenerator);
+    }
+
+    /**
+     * Appends the arc element to the person element.
+     *
+     * @param {selection} person The parent element used to append the arc too
+     * @param {Object}    data   The D3 data object
+     *
+     * @private
+     */
+    addArcToPerson(person, data)
+    {
+      // Create arc generator
+      let arcGenerator = arc()
+          .startAngle(this._geometry.startAngle(data.depth, data.x0))
+          .endAngle(this._geometry.endAngle(data.depth, data.x1))
+          .innerRadius(this._geometry.innerRadius(data.depth))
+          .outerRadius(this._geometry.outerRadius(data.depth));
+
+      arcGenerator.padAngle(this._configuration.padAngle)
+          .padRadius(this._configuration.padRadius)
+          .cornerRadius(this._configuration.cornerRadius);
+
+      // Append arc
+      let arcGroup = person
+          .append("g")
+          .attr("class", "arc");
+
+      let path = arcGroup
+          .append("path")
+          .attr("d", arcGenerator);
+
+      // Hide arc initially if its new during chart update
+      if (person.classed("new")) {
+        path.style("opacity", 1e-6);
+      }
+    }
+
+    /**
+     * Add title element to the person element containing the full name of the individual.
+     *
+     * @param {selection} person The parent element used to append the title too
+     * @param {String}    value  The value to assign to the title
+     *
+     * @private
+     */
+    addTitleToPerson(person, value)
+    {
+      person
+          .insert("title", ":first-child")
+          .text(value);
+    }
+
+    /**
+     * Append labels (initial hidden).
+     *
+     * @param {selection} parent The parent element used to append the label element too
+     * @param {Object}    data   The D3 data object
+     *
+     * @return {selection} Newly added label element
+     *
+     * @private
+     */
+    addLabelToPerson(parent, data)
+    {
+      return parent
+          .append("g")
+          .attr("class", "name")
+          .style("font-size", this.getFontSize(data) + "px")
+          .style("fill", this._configuration.fontColor);
+    }
+
+    /**
+     * Get the scaled font size.
+     *
+     * @param {Object} data The The D3 data object
+     *
+     * @return {Number}
+     */
+    getFontSize(data)
+    {
+      let fontSize = this._configuration.fontSize;
+
+      if (data.depth >= (this._configuration.numberOfInnerCircles + 1)) {
+        fontSize += 1;
       }
 
-      /**
-       * Appends the arc element to the person element.
-       *
-       * @param {selection} person The parent element used to append the arc too
-       * @param {Object}    data   The D3 data object
-       *
-       * @private
-       */
-      addArcToPerson(person, data)
-      {
-          // Create arc generator
-          let arcGenerator = arc()
-              .startAngle(this._geometry.startAngle(data.depth, data.x0))
-              .endAngle(this._geometry.endAngle(data.depth, data.x1))
-              .innerRadius(this._geometry.innerRadius(data.depth))
-              .outerRadius(this._geometry.outerRadius(data.depth));
-
-          arcGenerator.padAngle(this._configuration.padAngle)
-              .padRadius(this._configuration.padRadius)
-              .cornerRadius(this._configuration.cornerRadius);
-
-          // Append arc
-          let arcGroup = person
-              .append("g")
-              .attr("class", "arc");
-
-          let path = arcGroup
-              .append("path")
-              .attr("d", arcGenerator);
-
-          // Hide arc initially if its new during chart update
-          if (person.classed("new")) {
-              path.style("opacity", 1e-6);
-          }
-      }
-
-      /**
-       * Add title element to the person element containing the full name of the individual.
-       *
-       * @param {selection} person The parent element used to append the title too
-       * @param {String}    value  The value to assign to the title
-       *
-       * @private
-       */
-      addTitleToPerson(person, value)
-      {
-          person
-              .insert("title", ":first-child")
-              .text(value);
-      }
-
-      /**
-       * Append labels (initial hidden).
-       *
-       * @param {selection} parent The parent element used to append the label element too
-       * @param {Object}    data   The D3 data object
-       *
-       * @return {selection} Newly added label element
-       *
-       * @private
-       */
-      addLabelToPerson(parent, data)
-      {
-          return parent
-              .append("g")
-              .attr("class", "name")
-              .style("font-size", this.getFontSize(data) + "px")
-              .style("fill", this._configuration.fontColor);
-      }
-
-      /**
-       * Get the scaled font size.
-       *
-       * @param {Object} data The The D3 data object
-       *
-       * @return {Number}
-       */
-      getFontSize(data)
-      {
-          let fontSize = this._configuration.fontSize;
-
-          if (data.depth >= (this._configuration.numberOfInnerCircles + 1)) {
-              fontSize += 1;
-          }
-
-          return ((fontSize - data.depth) * this._configuration.fontScale / 100.0);
-      }
+      return ((fontSize - data.depth) * this._configuration.fontScale / 100.0);
+    }
   }
 
   /**
@@ -7054,76 +7115,76 @@
    */
   class Gradient
   {
-      /**
-       * Constructor.
-       *
-       * @param {Svg}           svg
-       * @param {Configuration} configuration The application configuration
-       */
-      constructor(svg, configuration)
-      {
-          this._svg           = svg;
-          this._configuration = configuration;
-          this._geometry      = new Geometry(this._configuration);
+    /**
+     * Constructor.
+     *
+     * @param {Svg}           svg
+     * @param {Configuration} configuration The application configuration
+     */
+    constructor(svg, configuration)
+    {
+      this._svg           = svg;
+      this._configuration = configuration;
+      this._geometry      = new Geometry(this._configuration);
+    }
+
+    /**
+     * Initializes the gradient fill.
+     *
+     * @param {Object} data D3 data object
+     *
+     * @return {void}
+     */
+    init(data)
+    {
+      if (data.depth < 1) {
+        return;
       }
 
-      /**
-       * Initializes the gradient fill.
-       *
-       * @param {Object} data D3 data object
-       *
-       * @return {void}
-       */
-      init(data)
-      {
-          if (data.depth < 1) {
-              return;
-          }
+      if (data.depth === 1) {
+        // Define initial gradient colors starting with second generation
+        let color1 = [64, 143, 222];
+        let color2 = [161, 219, 117];
 
-          if (data.depth === 1) {
-              // Define initial gradient colors starting with second generation
-              let color1 = [64, 143, 222];
-              let color2 = [161, 219, 117];
+        if (data.data.sex === SEX_FEMALE) {
+          color1 = [218, 102, 13];
+          color2 = [235, 201, 33];
+        }
 
-              if (data.data.sex === SEX_FEMALE) {
-                  color1 = [218, 102, 13];
-                  color2 = [235, 201, 33];
-              }
+        data.data.colors = [color1, color2];
+      } else {
+        // Calculate subsequent gradient colors
+        let c = [
+          Math.ceil((data.parent.data.colors[0][0] + data.parent.data.colors[1][0]) / 2.0),
+          Math.ceil((data.parent.data.colors[0][1] + data.parent.data.colors[1][1]) / 2.0),
+          Math.ceil((data.parent.data.colors[0][2] + data.parent.data.colors[1][2]) / 2.0),
+        ];
 
-              data.data.colors = [color1, color2];
-          } else {
-              // Calculate subsequent gradient colors
-              let c = [
-                  Math.ceil((data.parent.data.colors[0][0] + data.parent.data.colors[1][0]) / 2.0),
-                  Math.ceil((data.parent.data.colors[0][1] + data.parent.data.colors[1][1]) / 2.0),
-                  Math.ceil((data.parent.data.colors[0][2] + data.parent.data.colors[1][2]) / 2.0),
-              ];
+        if (data.data.sex === SEX_MALE) {
+          data.data.colors[0] = data.parent.data.colors[0];
+          data.data.colors[1] = c;
+        }
 
-              if (data.data.sex === SEX_MALE) {
-                  data.data.colors[0] = data.parent.data.colors[0];
-                  data.data.colors[1] = c;
-              }
-
-              if (data.data.sex === SEX_FEMALE) {
-                  data.data.colors[0] = c;
-                  data.data.colors[1] = data.parent.data.colors[1];
-              }
-          }
-
-          // Add a new radial gradient
-          let newGrad = this._svg.defs.get()
-              .append("svg:linearGradient")
-              .attr("id", "grad-" + data.data.id);
-
-          // Define start and stop colors of gradient
-          newGrad.append("svg:stop")
-              .attr("offset", "0%")
-              .attr("stop-color", "rgb(" + data.data.colors[0].join(",") + ")");
-
-          newGrad.append("svg:stop")
-              .attr("offset", "100%")
-              .attr("stop-color", "rgb(" + data.data.colors[1].join(",") + ")");
+        if (data.data.sex === SEX_FEMALE) {
+          data.data.colors[0] = c;
+          data.data.colors[1] = data.parent.data.colors[1];
+        }
       }
+
+      // Add a new radial gradient
+      let newGrad = this._svg.defs.get()
+          .append("svg:linearGradient")
+          .attr("id", "grad-" + data.data.id);
+
+      // Define start and stop colors of gradient
+      newGrad.append("svg:stop")
+          .attr("offset", "0%")
+          .attr("stop-color", "rgb(" + data.data.colors[0].join(",") + ")");
+
+      newGrad.append("svg:stop")
+          .attr("offset", "100%")
+          .attr("stop-color", "rgb(" + data.data.colors[1].join(",") + ")");
+    }
   }
 
   /**
@@ -7139,173 +7200,173 @@
    */
   class Update
   {
-      /**
-       * Constructor.
-       *
-       * @param {Svg}           svg
-       * @param {Configuration} configuration The application configuration
-       * @param {Hierarchy}     hierarchy
-       */
-      constructor(svg, configuration, hierarchy)
-      {
-          this._svg           = svg;
-          this._configuration = configuration;
-          this._hierarchy     = hierarchy;
+    /**
+     * Constructor.
+     *
+     * @param {Svg}           svg
+     * @param {Configuration} configuration The application configuration
+     * @param {Hierarchy}     hierarchy
+     */
+    constructor(svg, configuration, hierarchy)
+    {
+      this._svg           = svg;
+      this._configuration = configuration;
+      this._hierarchy     = hierarchy;
+    }
+
+    /**
+     * Update the chart with data loaded from AJAX.
+     *
+     * @param {String}   url      The update URL
+     * @param {Function} callback The callback method to execute after the update
+     *
+     * @public
+     */
+    update(url, callback)
+    {
+      let that = this;
+
+      this._svg.get()
+          .selectAll("g.person")
+          .classed("hover", false)
+          .on("click", null)
+          .on("mouseover", null)
+          .on("mouseout", null);
+
+      json(
+          url
+      ).then((data) => {
+        // Initialize the new loaded data
+        this._hierarchy.init(data);
+
+        // Flag all elements which are subject to change
+        this._svg.get()
+            .selectAll("g.person")
+            .data(this._hierarchy.nodes, (d) => d.data.id)
+            .each(function (d) {
+              let empty  = d.data.xref === "";
+              let person = select(this);
+
+              person.classed("remove", empty)
+                  .classed("update", !empty && person.classed("available"))
+                  .classed("new", !empty && !person.classed("available"));
+
+              if (!person.classed("new")) {
+                person.selectAll("g.name, g.color, title")
+                    .classed("old", true);
+              }
+
+              new Person(that._svg, that._configuration, person, d);
+            });
+
+        // Hide all new labels of not removed elements
+        this._svg.get()
+            .selectAll("g.person:not(.remove)")
+            .selectAll("g.name:not(.old), g.color:not(.old)")
+            .style("opacity", 1e-6);
+
+        // Create transition instance
+        let t = transition()
+            .duration(this._configuration.updateDuration)
+            .call(this.endAll, () => this.updateDone(callback));
+
+        // Fade out old arc
+        this._svg.get()
+            .selectAll("g.person.remove g.arc path")
+            .transition(t)
+            .style("fill", () => this._configuration.hideEmptySegments ? null : "rgb(235, 235, 235)")
+            .style("opacity", () => this._configuration.hideEmptySegments ? 1e-6 : null);
+
+        // Fade in new arcs
+        this._svg.get()
+            .selectAll("g.person.new g.arc path")
+            .transition(t)
+            .style("fill", "rgb(250, 250, 250)")
+            .style("opacity", () => this._configuration.hideEmptySegments ? 1 : null);
+
+        // Fade out all old labels and color group
+        this._svg.get()
+            .selectAll("g.person.update, g.person.remove")
+            .selectAll("g.name.old, g.color.old")
+            .transition(t)
+            .style("opacity", 1e-6);
+
+        // Fade in all new labels and color group
+        this._svg.get()
+            .selectAll("g.person:not(.remove)")
+            .selectAll("g.name:not(.old), g.color:not(.old)")
+            .transition(t)
+            .style("opacity", 1);
+      });
+    }
+
+    /**
+     * Function is executed as callback after all transitions are done in update method.
+     *
+     * @param {Function} callback The callback method to execute after the update
+     *
+     * @private
+     */
+    updateDone(callback)
+    {
+      // Remove arc if segments should be hidden
+      if (this._configuration.hideEmptySegments) {
+        this._svg.get()
+            .selectAll("g.person.remove")
+            .selectAll("g.arc")
+            .remove();
       }
 
-      /**
-       * Update the chart with data loaded from AJAX.
-       *
-       * @param {String}   url      The update URL
-       * @param {Function} callback The callback method to execute after the update
-       *
-       * @public
-       */
-      update(url, callback)
-      {
-          let that = this;
+      // Remove styles so CSS classes may work correct, Uses a small timer as animation seems not
+      // to be done already if the point is reached
+      let t = timer(() => {
+        this._svg.get()
+            .selectAll("g.person g.arc path")
+            .attr("style", null);
 
-          this._svg.get()
-              .selectAll("g.person")
-              .classed("hover", false)
-              .on("click", null)
-              .on("mouseover", null)
-              .on("mouseout", null);
+        this._svg.get()
+            .selectAll("g.person g.name, g.person g.color")
+            .style("opacity", null);
 
-          json(
-              url
-          ).then((data) => {
-              // Initialize the new loaded data
-              this._hierarchy.init(data);
+        t.stop();
+      }, 10);
 
-              // Flag all elements which are subject to change
-              this._svg.get()
-                  .selectAll("g.person")
-                  .data(this._hierarchy.nodes, (d) => d.data.id)
-                  .each(function (d) {
-                      let empty  = d.data.xref === "";
-                      let person = select(this);
+      this._svg.get()
+          .selectAll("g.person.new, g.person.update, g.person.remove")
+          .classed("new", false)
+          .classed("update", false)
+          .classed("remove", false)
+          .selectAll("g.name.old, g.color.old, title.old")
+          .remove();
 
-                      person.classed("remove", empty)
-                          .classed("update", !empty && person.classed("available"))
-                          .classed("new", !empty && !person.classed("available"));
+      this._svg.get()
+          .selectAll("g.person.available")
+          .classed("available", false);
 
-                      if (!person.classed("new")) {
-                          person.selectAll("g.name, g.color, title")
-                              .classed("old", true);
-                      }
+      // Execute callback function after everything is done
+      callback();
+    }
 
-                      new Person(that._svg, that._configuration, person, d);
-                  });
+    /**
+     * Helper method to execute callback method after all transitions are done of a selection.
+     *
+     * @param {Transition} transition D3 transition object
+     * @param {Function}   callback   Callback method
+     *
+     * @private
+     */
+    endAll(transition, callback)
+    {
+      let n = 0;
 
-              // Hide all new labels of not removed elements
-              this._svg.get()
-                  .selectAll("g.person:not(.remove)")
-                  .selectAll("g.name:not(.old), g.color:not(.old)")
-                  .style("opacity", 1e-6);
-
-              // Create transition instance
-              let t = transition()
-                  .duration(this._configuration.updateDuration)
-                  .call(this.endAll, () => this.updateDone(callback));
-
-              // Fade out old arc
-              this._svg.get()
-                  .selectAll("g.person.remove g.arc path")
-                  .transition(t)
-                  .style("fill", () => this._configuration.hideEmptySegments ? null : "rgb(235, 235, 235)")
-                  .style("opacity", () => this._configuration.hideEmptySegments ? 1e-6 : null);
-
-              // Fade in new arcs
-              this._svg.get()
-                  .selectAll("g.person.new g.arc path")
-                  .transition(t)
-                  .style("fill", "rgb(250, 250, 250)")
-                  .style("opacity", () => this._configuration.hideEmptySegments ? 1 : null);
-
-              // Fade out all old labels and color group
-              this._svg.get()
-                  .selectAll("g.person.update, g.person.remove")
-                  .selectAll("g.name.old, g.color.old")
-                  .transition(t)
-                  .style("opacity", 1e-6);
-
-              // Fade in all new labels and color group
-              this._svg.get()
-                  .selectAll("g.person:not(.remove)")
-                  .selectAll("g.name:not(.old), g.color:not(.old)")
-                  .transition(t)
-                  .style("opacity", 1);
+      transition
+          .on("start", () => ++n)
+          .on("end", () => {
+            if (!--n) {
+              callback.apply(transition);
+            }
           });
-      }
-
-      /**
-       * Function is executed as callback after all transitions are done in update method.
-       *
-       * @param {Function} callback The callback method to execute after the update
-       *
-       * @private
-       */
-      updateDone(callback)
-      {
-          // Remove arc if segments should be hidden
-          if (this._configuration.hideEmptySegments) {
-              this._svg.get()
-                  .selectAll("g.person.remove")
-                  .selectAll("g.arc")
-                  .remove();
-          }
-
-          // Remove styles so CSS classes may work correct, Uses a small timer as animation seems not
-          // to be done already if the point is reached
-          let t = timer(() => {
-              this._svg.get()
-                  .selectAll("g.person g.arc path")
-                  .attr("style", null);
-
-              this._svg.get()
-                  .selectAll("g.person g.name, g.person g.color")
-                  .style("opacity", null);
-
-              t.stop();
-          }, 10);
-
-          this._svg.get()
-              .selectAll("g.person.new, g.person.update, g.person.remove")
-              .classed("new", false)
-              .classed("update", false)
-              .classed("remove", false)
-              .selectAll("g.name.old, g.color.old, title.old")
-              .remove();
-
-          this._svg.get()
-              .selectAll("g.person.available")
-              .classed("available", false);
-
-          // Execute callback function after everything is done
-          callback();
-      }
-
-      /**
-       * Helper method to execute callback method after all transitions are done of a selection.
-       *
-       * @param {Transition} transition D3 transition object
-       * @param {Function}   callback   Callback method
-       *
-       * @private
-       */
-      endAll(transition, callback)
-      {
-          let n = 0;
-
-          transition
-              .on("start", () => ++n)
-              .on("end", () => {
-                  if (!--n) {
-                      callback.apply(transition);
-                  }
-              });
-      }
+    }
   }
 
   /**
@@ -7324,203 +7385,203 @@
    */
   class Chart
   {
-      /**
-       * Constructor.
-       *
-       * @param {selection}     parent        The selected D3 parent element container
-       * @param {Configuration} configuration The application configuration
-       */
-      constructor(parent, configuration)
-      {
-          this._configuration = configuration;
-          this._parent        = parent;
-          this._hierarchy     = new Hierarchy(this._configuration);
-          this._data          = {};
-      }
+    /**
+     * Constructor.
+     *
+     * @param {selection}     parent        The selected D3 parent element container
+     * @param {Configuration} configuration The application configuration
+     */
+    constructor(parent, configuration)
+    {
+      this._configuration = configuration;
+      this._parent        = parent;
+      this._hierarchy     = new Hierarchy(this._configuration);
+      this._data          = {};
+    }
 
-      /**
-       * Returns the SVG instance.
-       *
-       * @return {Svg}
-       */
-      get svg()
-      {
-          return this._svg;
-      }
+    /**
+     * Returns the SVG instance.
+     *
+     * @return {Svg}
+     */
+    get svg()
+    {
+      return this._svg;
+    }
 
-      /**
-       * Update/Calculate the viewBox attribute of the SVG element.
-       *
-       * @private
-       */
-      updateViewBox()
-      {
-          // Get bounding boxes
-          let svgBoundingBox    = this._svg.visual.node().getBBox();
-          let clientBoundingBox = this._parent.node().getBoundingClientRect();
+    /**
+     * Update/Calculate the viewBox attribute of the SVG element.
+     *
+     * @private
+     */
+    updateViewBox()
+    {
+      // Get bounding boxes
+      let svgBoundingBox    = this._svg.visual.node().getBBox();
+      let clientBoundingBox = this._parent.node().getBoundingClientRect();
 
-          // View box should have at least the same width/height as the parent element
-          let viewBoxWidth  = Math.max(clientBoundingBox.width, svgBoundingBox.width);
-          let viewBoxHeight = Math.max(clientBoundingBox.height, svgBoundingBox.height, MIN_HEIGHT);
+      // View box should have at least the same width/height as the parent element
+      let viewBoxWidth  = Math.max(clientBoundingBox.width, svgBoundingBox.width);
+      let viewBoxHeight = Math.max(clientBoundingBox.height, svgBoundingBox.height, MIN_HEIGHT);
 
-          // Calculate offset to center chart inside svg
-          let offsetX = (viewBoxWidth - svgBoundingBox.width) / 2;
-          let offsetY = (viewBoxHeight - svgBoundingBox.height) / 2;
+      // Calculate offset to center chart inside svg
+      let offsetX = (viewBoxWidth - svgBoundingBox.width) / 2;
+      let offsetY = (viewBoxHeight - svgBoundingBox.height) / 2;
 
-          // Adjust view box dimensions by padding and offset
-          let viewBoxLeft = Math.ceil(svgBoundingBox.x - offsetX - MIN_PADDING);
-          let viewBoxTop  = Math.ceil(svgBoundingBox.y - offsetY - MIN_PADDING);
+      // Adjust view box dimensions by padding and offset
+      let viewBoxLeft = Math.ceil(svgBoundingBox.x - offsetX - MIN_PADDING);
+      let viewBoxTop  = Math.ceil(svgBoundingBox.y - offsetY - MIN_PADDING);
 
-          // Final width/height of view box
-          viewBoxWidth  = Math.ceil(viewBoxWidth + (MIN_PADDING * 2));
-          viewBoxHeight = Math.ceil(viewBoxHeight + (MIN_PADDING * 2));
+      // Final width/height of view box
+      viewBoxWidth  = Math.ceil(viewBoxWidth + (MIN_PADDING * 2));
+      viewBoxHeight = Math.ceil(viewBoxHeight + (MIN_PADDING * 2));
 
-          // Set view box attribute
-          this._svg.get()
-              .attr("viewBox", [
-                  viewBoxLeft,
-                  viewBoxTop,
-                  viewBoxWidth,
-                  viewBoxHeight
-              ]);
+      // Set view box attribute
+      this._svg.get()
+          .attr("viewBox", [
+            viewBoxLeft,
+            viewBoxTop,
+            viewBoxWidth,
+            viewBoxHeight
+          ]);
 
-          // Add rectangle element
-          // this._svg
-          //     .insert("rect", ":first-child")
-          //     .attr("class", "background")
-          //     .attr("width", "100%")
-          //     .attr("height", "100%")
-          //     .style("fill", "none")
-          //     .style("pointer-events", "all");
-          //
-          // // Adjust rectangle position
-          // this._svg
-          //     .select("rect")
-          //     .attr("x", viewBoxLeft)
-          //     .attr("y", viewBoxTop);
-      }
+      // Add rectangle element
+      // this._svg
+      //     .insert("rect", ":first-child")
+      //     .attr("class", "background")
+      //     .attr("width", "100%")
+      //     .attr("height", "100%")
+      //     .style("fill", "none")
+      //     .style("pointer-events", "all");
+      //
+      // // Adjust rectangle position
+      // this._svg
+      //     .select("rect")
+      //     .attr("x", viewBoxLeft)
+      //     .attr("y", viewBoxTop);
+    }
 
-      /**
-       * Returns the chart data.
-       *
-       * @return {Object}
-       */
-      get data()
-      {
-          return this._data;
-      }
+    /**
+     * Returns the chart data.
+     *
+     * @return {Object}
+     */
+    get data()
+    {
+      return this._data;
+    }
 
-      /**
-       * Sets the chart data.
-       *
-       * @param {Object} value The chart data
-       */
-      set data(value)
-      {
-          this._data = value;
+    /**
+     * Sets the chart data.
+     *
+     * @param {Object} value The chart data
+     */
+    set data(value)
+    {
+      this._data = value;
 
-          // Create the hierarchical data structure
-          this._hierarchy.init(this._data);
-      }
+      // Create the hierarchical data structure
+      this._hierarchy.init(this._data);
+    }
 
-      /**
-       * This method draws the chart.
-       */
-      draw()
-      {
-          // Remove previously created content
-          this._parent.html("");
+    /**
+     * This method draws the chart.
+     */
+    draw()
+    {
+      // Remove previously created content
+      this._parent.html("");
 
-          // Create the <svg> element
-          this._svg = new Svg(this._parent, this._configuration);
+      // Create the <svg> element
+      this._svg = new Svg(this._parent, this._configuration);
 
-          // Overlay must be placed after the <svg> element
-          this._overlay = new Overlay(this._parent);
+      // Overlay must be placed after the <svg> element
+      this._overlay = new Overlay(this._parent);
 
-          // Init the <svg> events
-          this._svg.initEvents(this._overlay);
+      // Init the <svg> events
+      this._svg.initEvents(this._overlay);
 
-          let personGroup = this._svg.get().select("g.personGroup");
-          let gradient    = new Gradient(this._svg, this._configuration);
-          let that        = this;
+      let personGroup = this._svg.get().select("g.personGroup");
+      let gradient    = new Gradient(this._svg, this._configuration);
+      let that        = this;
 
-           personGroup
-              .selectAll("g.person")
-              .data(this._hierarchy.nodes, (d) => d.data.id)
-              .enter()
-              .append("g")
-              .attr("class", "person")
-              .attr("id", (d) => "person-" + d.data.id);
+      personGroup
+          .selectAll("g.person")
+          .data(this._hierarchy.nodes, (d) => d.data.id)
+          .enter()
+          .append("g")
+          .attr("class", "person")
+          .attr("id", (d) => "person-" + d.data.id);
 
-          // Create a new selection in order to leave the previous enter() selection
-          personGroup
-              .selectAll("g.person")
-              .each(function (d) {
-                  let person = select(this);
+      // Create a new selection in order to leave the previous enter() selection
+      personGroup
+          .selectAll("g.person")
+          .each(function (d) {
+            let person = select(this);
 
-                  if (that._configuration.showColorGradients) {
-                      gradient.init(d);
-                  }
+            if (that._configuration.showColorGradients) {
+              gradient.init(d);
+            }
 
-                  new Person(that._svg, that._configuration, person, d);
-              });
+            new Person(that._svg, that._configuration, person, d);
+          });
 
-          this.bindClickEventListener();
-          this.updateViewBox();
-      }
+      this.bindClickEventListener();
+      this.updateViewBox();
+    }
 
-      /**
-       * This method bind the "click" event listeners to a "person" element.
-       */
-      bindClickEventListener()
-      {
-          let persons = this._svg.get()
-              .select("g.personGroup")
-              .selectAll("g.person")
-              .filter((d) => d.data.xref !== "")
-              .classed("available", true);
+    /**
+     * This method bind the "click" event listeners to a "person" element.
+     */
+    bindClickEventListener()
+    {
+      let persons = this._svg.get()
+          .select("g.personGroup")
+          .selectAll("g.person")
+          .filter((d) => d.data.xref !== "")
+          .classed("available", true);
 
-          // Trigger method on click
-          persons.on("click", this.personClick.bind(this));
-      }
+      // Trigger method on click
+      persons.on("click", this.personClick.bind(this));
+    }
 
-      /**
-       * Method triggers either the "update" or "individual" method on the click on an person.
-       *
-       * @param {Event}  event The current event
-       * @param {Object} data  The D3 data object
-       *
-       * @private
-       */
-      personClick(event, data)
-      {
-          // Trigger either "update" or "redirectToIndividual" method on click depending on person in chart
-          (data.depth === 0) ? this.redirectToIndividual(data.data.url) : this.update(data.data.updateUrl);
-      }
+    /**
+     * Method triggers either the "update" or "individual" method on the click on an person.
+     *
+     * @param {Event}  event The current event
+     * @param {Object} data  The D3 data object
+     *
+     * @private
+     */
+    personClick(event, data)
+    {
+      // Trigger either "update" or "redirectToIndividual" method on click depending on person in chart
+      (data.depth === 0) ? this.redirectToIndividual(data.data.url) : this.update(data.data.updateUrl);
+    }
 
-      /**
-       * Redirects to the individual page.
-       *
-       * @param {String} url The individual URL
-       *
-       * @private
-       */
-      redirectToIndividual(url)
-      {
-          window.location = url;
-      }
+    /**
+     * Redirects to the individual page.
+     *
+     * @param {String} url The individual URL
+     *
+     * @private
+     */
+    redirectToIndividual(url)
+    {
+      window.location = url;
+    }
 
-      /**
-       * Updates the chart with the data of the selected individual.
-       *
-       * @param {String} url The update URL
-       */
-      update(url)
-      {
-          let update = new Update(this._svg, this._configuration, this._hierarchy);
+    /**
+     * Updates the chart with the data of the selected individual.
+     *
+     * @param {String} url The update URL
+     */
+    update(url)
+    {
+      let update = new Update(this._svg, this._configuration, this._hierarchy);
 
-          update.update(url, () => this.bindClickEventListener());
-      }
+      update.update(url, () => this.bindClickEventListener());
+    }
   }
 
   /**
@@ -7536,81 +7597,81 @@
    */
   class Storage
   {
-      /**
-       * Constructor.
-       *
-       * @param {String} name The name of the storage
-       */
-      constructor(name)
-      {
-          this._name    = name;
-          this._storage = JSON.parse(localStorage.getItem(this._name)) || {};
+    /**
+     * Constructor.
+     *
+     * @param {String} name The name of the storage
+     */
+    constructor(name)
+    {
+      this._name    = name;
+      this._storage = JSON.parse(localStorage.getItem(this._name)) || {};
+    }
+
+    /**
+     * Register a HTML element.
+     *
+     * @param {String} name The id or name of a HTML element
+     */
+    register(name)
+    {
+      let input       = document.getElementById(name);
+      let storedValue = this.read(name);
+
+      if (storedValue) {
+        if (input.type && (input.type === "checkbox")) {
+          input.checked = storedValue;
+        } else {
+          input.value = storedValue;
+        }
+      } else {
+        this.onInput(input);
       }
 
-      /**
-       * Register a HTML element.
-       *
-       * @param {String} name The id or name of a HTML element
-       */
-      register(name)
-      {
-          let input       = document.getElementById(name);
-          let storedValue = this.read(name);
+      // Add event listener
+      input.addEventListener("input", (event) => {
+        this.onInput(event.target);
+      });
+    }
 
-          if (storedValue) {
-              if (input.type && (input.type === "checkbox")) {
-                  input.checked = storedValue;
-              } else {
-                  input.value = storedValue;
-              }
-          } else {
-              this.onInput(input);
-          }
-
-          // Add event listener
-          input.addEventListener("input", (event) => {
-              this.onInput(event.target);
-          });
+    /**
+     * This methods stores the value of an input element depending on its type.
+     *
+     * @param {EventTarget|HTMLInputElement} element The HTML input element
+     */
+    onInput(element)
+    {
+      if (element.type && (element.type === "checkbox")) {
+        this.write(element.name, element.checked);
+      } else {
+        this.write(element.name, element.value);
       }
+    }
 
-      /**
-       * This methods stores the value of an input element depending on its type.
-       *
-       * @param {EventTarget|HTMLInputElement} element The HTML input element
-       */
-      onInput(element)
-      {
-          if (element.type && (element.type === "checkbox")) {
-              this.write(element.name, element.checked);
-          } else {
-              this.write(element.name, element.value);
-          }
-      }
+    /**
+     * Returns the stored value belonging to the HTML element id.
+     *
+     * @param {String} name The id or name of a HTML element
+     *
+     * @return {String|Boolean|Number}
+     */
+    read(name)
+    {
+      return this._storage[name];
+    }
 
-      /**
-       * Returns the stored value belonging to the HTML element id.
-       *
-       * @param {String} name The id or name of a HTML element
-       *
-       * @return {String|Boolean|Number}
-       */
-      read(name)
-      {
-          return this._storage[name];
-      }
+    /**
+     * Stores a value to the given HTML element id.
+     *
+     * @param {String}                name  The id or name of a HTML element
+     * @param {String|Boolean|Number} value The value to store
+     */
+    write(name, value)
+    {
+      this._storage[name] = value;
 
-      /**
-       * Stores a value to the given HTML element id.
-       *
-       * @param {String}                name  The id or name of a HTML element
-       * @param {String|Boolean|Number} value The value to store
-       */
-      write(name, value)
-      {
-          this._storage[name] = value;
-
-          localStorage.setItem(this._name, JSON.stringify(this._storage));
-      }
+      localStorage.setItem(this._name, JSON.stringify(this._storage));
+    }
   }
 
   /**
@@ -7626,141 +7687,139 @@
    */
   class FanChart
   {
-      /**
-       * Constructor.
-       *
-       * @param {String} selector The CSS selector of the HTML element used to assign the chart too
-       * @param {Object} options  A list of options passed from outside to the application
-       *
-       * @param {String[]}  options.labels
-       * @param {Number}    options.generations
-       * @param {Number}    options.fanDegree
-       * @param {String}    options.defaultColor
-       * @param {Number}    options.fontScale
-       * @param {String}    options.fontColor
-       * @param {Boolean}   options.hideEmptySegments
-       * @param {Boolean}   options.showColorGradients
-       * @param {Boolean}   options.rtl
-       * @param {Number}    options.innerArcs
-       */
-      constructor(selector, options)
-      {
-          this._selector = selector;
-          this._parent   = select(this._selector);
+    /**
+     * Constructor.
+     *
+     * @param {String} selector The CSS selector of the HTML element used to assign the chart too
+     * @param {Object} options  A list of options passed from outside to the application
+     *
+     * @param {String[]}  options.labels
+     * @param {Number}    options.generations
+     * @param {Number}    options.fanDegree
+     * @param {String}    options.defaultColor
+     * @param {Number}    options.fontScale
+     * @param {String}    options.fontColor
+     * @param {Boolean}   options.hideEmptySegments
+     * @param {Boolean}   options.showColorGradients
+     * @param {Boolean}   options.rtl
+     * @param {Number}    options.innerArcs
+     */
+    constructor(selector, options)
+    {
+      this._selector = selector;
+      this._parent   = select(this._selector);
 
-          // Set up configuration
-          this._configuration = new Configuration(
-              options.labels,
-              options.generations,
-              options.fanDegree,
-              options.defaultColor,
-              options.fontScale,
-              options.fontColor,
-              options.hideEmptySegments,
-              options.showColorGradients,
-              options.showParentMarriageDates,
-              options.rtl,
-              options.innerArcs
-          );
+      // Set up configuration
+      this._configuration = new Configuration(
+          options.labels,
+          options.generations,
+          options.fanDegree,
+          options.defaultColor,
+          options.fontScale,
+          options.fontColor,
+          options.hideEmptySegments,
+          options.showColorGradients,
+          options.showParentMarriageDates,
+          options.rtl,
+          options.innerArcs
+      );
 
-          // Set up chart instance
-          this._chart = new Chart(this._parent, this._configuration);
+      // Set up chart instance
+      this._chart = new Chart(this._parent, this._configuration);
 
-          this.init();
-      }
+      this.init();
+    }
 
-      /**
-       * @private
-       */
-      init()
-      {
-          // Bind click event on center button
-          select("#centerButton")
-              .on("click", () => this.center());
+    /**
+     * @private
+     */
+    init()
+    {
+      // Bind click event on center button
+      select("#centerButton")
+          .on("click", () => this.center());
 
-          // Bind click event on export as PNG button
-          select("#exportPNG")
-              .on("click", () => this.exportPNG());
+      // Bind click event on export as PNG button
+      select("#exportPNG")
+          .on("click", () => this.exportPNG());
 
-          // Bind click event on export as SVG button
-          select("#exportSVG")
-              .on("click", () => this.exportSVG());
-      }
+      // Bind click event on export as SVG button
+      select("#exportSVG")
+          .on("click", () => this.exportSVG());
+    }
 
-      /**
-       * Resets the chart to initial zoom level and position.
-       *
-       * @private
-       */
-      center()
-      {
-          this._chart
-              .svg.get()
-              .transition()
-              .duration(750)
-              .call(this._chart.svg.zoom.get().transform, identity);
-      }
+    /**
+     * Resets the chart to initial zoom level and position.
+     *
+     * @private
+     */
+    center()
+    {
+      this._chart
+          .svg.get()
+          .transition()
+          .duration(750)
+          .call(this._chart.svg.zoom.get().transform, identity);
+    }
 
-      /**
-       * Returns the configuration object.
-       *
-       * @return {Configuration}
-       */
-      get configuration()
-      {
-          return this._configuration;
-      }
+    /**
+     * Returns the configuration object.
+     *
+     * @return {Configuration}
+     */
+    get configuration()
+    {
+      return this._configuration;
+    }
 
-      /**
-       * Sets the URL to the CSS file used in SVG export.
-       *
-       * @param {String} cssFile
-       */
-      set cssFile(cssFile)
-      {
-          this._cssFile = cssFile;
-      }
+    /**
+     * Sets the URL to the CSS file used in SVG export.
+     *
+     * @param {String} cssFile
+     */
+    set cssFile(cssFile)
+    {
+      this._cssFile = cssFile;
+    }
 
-      /**
-       * Draws the chart.
-       *
-       * @param {Object} data The JSON encoded chart data
-       */
-      draw(data)
-      {
-          this._chart.data = data;
-          this._chart.draw();
-      }
+    /**
+     * Draws the chart.
+     *
+     * @param {Object} data The JSON encoded chart data
+     */
+    draw(data)
+    {
+      this._chart.data = data;
+      this._chart.draw();
+    }
 
-      /**
-       * Exports the chart as PNG image and triggers a download.
-       *
-       * @private
-       */
-      exportPNG()
-      {
-          const product = this._chart.svg.export('png');
+    /**
+     * Exports the chart as PNG image and triggers a download.
+     *
+     * @private
+     */
+    exportPNG()
+    {
+      const product = this._chart.svg.export('png');
 
-          product.svgToImage(this._chart.svg, "fan-chart.png");
+      product.svgToImage(this._chart.svg, "fan-chart.png");
 
-      }
+    }
 
-      /**
-       * Exports the chart as SVG image and triggers a download.
-       *
-       * @private
-       */
-      exportSVG()
-      {
-          const product = this._chart.svg.export('svg');
+    /**
+     * Exports the chart as SVG image and triggers a download.
+     *
+     * @private
+     */
+    exportSVG()
+    {
+      const product = this._chart.svg.export('svg');
 
-          product.svgToImage(this._chart.svg, this._cssFile, "fan-chart.svg");
-      }
+      product.svgToImage(this._chart.svg, this._cssFile, "fan-chart.svg");
+    }
   }
 
   exports.FanChart = FanChart;
   exports.Storage = Storage;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
