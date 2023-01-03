@@ -3,7 +3,7 @@ version: 2.1
 executors:
   linux:
     docker:
-      - image: cimg/base:2020.01
+      - image: cimg/node:19.3.0
 orbs:
   node: circleci/node@4.0.0
 
@@ -43,4 +43,4 @@ workflows:
           matrix:
             parameters:
               os: [linux]
-              node-version: ["18.12.1"]
+              node-version: ["19.3.0"]
