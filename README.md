@@ -1,4 +1,4 @@
-## Family Tree 365 - Open Source Family Tree Software - Nuxt Client
+## Genealogy - Open Source Family Tree Software - Nuxt 3 Client
  ![Latest Stable Version](https://img.shields.io/github/release/familytree365/nuxt.svg) 
 [![StyleCI](https://github.styleci.io/repos/399057031/shield?branch=master)](https://github.styleci.io/repos/399057031)
 [![CircleCI](https://circleci.com/gh/cgd-ui/genealogy.svg?style=svg)](https://circleci.com/gh/cgd-ui/genealogy)
@@ -25,7 +25,7 @@ Note that most sections have short demo clips.
 
 ### Installation Steps
 
-1. Download the project with `git clone https://github.com/familytree365/nuxt.git --depth 1`
+1. Download the project with `git clone https://github.com/cgd-ui/genealogy.git --depth 1`
 
 2. Within the project folder run `yarn install`
 
@@ -35,7 +35,7 @@ Note that most sections have short demo clips.
 
 ### Thanks
 
-Built with Laravel Enso 4.x and Nuxt:
+Built with Laravel Enso 5.x and Nuxt 3:
 
 [Vue Router](https://router.vuejs.org/en), [Vuex](https://vuex.vuejs.org/en/), [Axios](https://github.com/axios/axios),
 [Font awesome 5](https://fontawesome.com), [Animate.css](https://daneden.github.io/animate.css/), 
