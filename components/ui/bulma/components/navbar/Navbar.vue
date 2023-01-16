@@ -28,8 +28,8 @@
               "
               >Subscribe</NuxtLink
             >
-          		
                         </figure>
+<adsbygoogle />
                     </a>
                    <!--  <div class="navbar-item"
                         v-if="meta.env !== 'production'">
