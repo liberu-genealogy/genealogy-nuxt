@@ -116,7 +116,12 @@ export default {
     '@nuxtjs/axios',
     'nuxt-vuex-router-sync',
     'nuxt-route-meta',
+    '@nuxtjs/google-adsense',
   ],
+
+  'google-adsense': {
+      id: 'ca-pub-2152604506748832'
+    },
 
   fontawesome: {
     icons: {
