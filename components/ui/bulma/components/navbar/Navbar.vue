@@ -29,7 +29,7 @@
               >Subscribe</NuxtLink
             >
                         </figure>
-<adsbygoogle />
+<adsbygoogle ad-slot="6947200076" />
                     </a>
                    <!--  <div class="navbar-item"
                         v-if="meta.env !== 'production'">
