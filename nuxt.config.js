@@ -4,6 +4,7 @@ import { cloneDeep } from 'lodash'
 const meta = getSiteMeta()
 
 export default {
+  target: 'static',
   ssr: false,
 
   // server: {
@@ -12,7 +13,7 @@ export default {
 
   sitemap: [
     {
-      hostname: process.env.BASE_URL || 'http://localhost:3000',
+      hostname: process.env.BASE_URL || 'http://localhost:8000',
       path: '/sitemap.xml',
       gzip: true,
     },
@@ -96,9 +97,6 @@ export default {
     "~/plugins/vue-fb-customer-chat.js",
     {src: '~/plugins/vue-stripe.js', ssr: false},
   ],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  // components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [

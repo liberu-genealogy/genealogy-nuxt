@@ -1,23 +1,12 @@
 <template>
     <div class="discussions-wrapper">
-        <inputor class="raises-on-hover animated fadeIn"
-            :message="discussion"
-            placeholder="Share your idea..."
-            title
-            type="discussion"
-            @store="store()"
-            @update="update()"
-            @cancel="
-                inputor = false;
-                discussion = discussion.id ? discussion : null
-            "
-            v-if="inputor"/>
-        <discussion class="animated fadeIn"
-            :discussion="discussion"
-            @edit="inputor = true"
-            @back="discussion = null; fetch()"
-            @delete="destroy()"
-            v-else-if="discussion"/>
+        <inputor class="raises-on-hover animated fadeIn" :message="discussion" placeholder="Share your idea..." title
+            type="discussion" @store="store()" @update="update()" @cancel="
+    inputor = false;
+discussion = discussion.id ? discussion : null
+            " v-if="inputor" />
+        <discussion class="animated fadeIn" :discussion="discussion" @edit="inputor = true"
+            @back="discussion = null; fetch()" @delete="destroy()" v-else-if="discussion" />
         <template v-else>
             <div class="field is-grouped">
                 <p class="control">
@@ -27,44 +16,36 @@
                             {{ i18n('New Topic') }}
                         </span>
                         <span class="icon">
-                            <fa icon="plus"/>
+                            <fa icon="plus" />
                         </span>
                     </a>
                 </p>
                 <p class="control has-icons-left has-icons-right is-expanded">
-                    <input v-model="query"
-                        class="input is-rounded is-small is-expanded"
-                        type="text"
+                    <input v-model="query" class="input is-rounded is-small is-expanded" type="text"
                         :placeholder="i18n('Filter')">
                     <span class="icon is-small is-left">
-                        <fa icon="search"/>
+                        <fa icon="search" />
                     </span>
-                    <span v-if="query"
-                        class="icon is-small is-right clear-button"
-                        @click="query = ''">
-                        <a class="delete is-small"/>
+                    <span v-if="query" class="icon is-small is-right clear-button" @click="query = ''">
+                        <a class="delete is-small" />
                     </span>
                 </p>
                 <p class="control">
-                    <a class="button is-rounded is-small is-bold ml-2"
-                        @click="fetch()">
+                    <a class="button is-rounded is-small is-bold ml-2" @click="fetch()">
                         <span>
                             {{ i18n('Reload') }}
                         </span>
                         <span class="icon">
-                            <fa icon="sync"/>
+                            <fa icon="sync" />
                         </span>
                     </a>
                 </p>
             </div>
             <div class="discussions p-1">
-                <div class="box has-background-light raises-on-hover"
-                    v-for="(topic, index) in filteredDiscussions"
+                <div class="box has-background-light raises-on-hover" v-for="(topic, index) in filteredDiscussions"
                     :key="index">
-                    <discussion-preview class="is-clickable"
-                        :discussion="topic"
-                        :last="index === discussions.length - 1"
-                        @click.native="discussion = topic"/>
+                    <discussion-preview class="is-clickable" :discussion="topic"
+                        :last="index === discussions.length - 1" @click.native="discussion = topic" />
                 </div>
             </div>
         </template>
@@ -183,22 +164,22 @@ export default {
 </script>
 
 <style lang="scss">
-    .discussions-wrapper {
-        .header {
-            border-bottom: 2px solid black;
-            margin-bottom: 2rem;
-            padding-top: 0.5em;
-            padding-bottom: 0.5em;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-        }
-
-        .discussions {
-            max-height: 500px;
-            overflow-y: auto;
-        }
+.discussions-wrapper {
+    .header {
+        border-bottom: 2px solid black;
+        margin-bottom: 2rem;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
     }
+
+    .controls {
+        display: flex;
+        justify-content: center;
+    }
+
+    .discussions {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+}
 </style>

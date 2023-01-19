@@ -1,25 +1,14 @@
 <template>
     <div class="wrapper">
-        <calendar-form :calendar="calendar"
-            @submit="updateCalendar"
-            @close="calendar = null"
-            @destroy="destroy"
-            v-if="calendar"/>
+        <calendar-form :calendar="calendar" @submit="updateCalendar" @close="calendar = null" @destroy="destroy"
+            v-if="calendar" />
         <div class="box p-1 raises-on-hover">
-            <vue-cal class="small-calendar is-paddingless"
-                xsmall
-                today-button
-                :locale="lang"
-                :time="false"
-                hide-view-selector
-                default-view="month"
-                :disable-views="['years', 'year', 'week', 'day']"
+            <vue-cal class="small-calendar is-paddingless" xsmall today-button :locale="lang" :time="false"
+                hide-view-selector default-view="month" :disable-views="['years', 'year', 'week', 'day']"
                 @cell-focus="$emit('change-date', $event)">
                 <template v-slot:today-button>
-                    <span class="icon is-small is-clickable is-naked"
-                        @click="$emit('change-date', new Date())">
-                        <fa icon="crosshairs"
-                            size="xs"/>
+                    <span class="icon is-small is-clickable is-naked" @click="$emit('change-date', new Date())">
+                        <fa icon="crosshairs" size="xs" />
                     </span>
                 </template>
             </vue-cal>
@@ -35,48 +24,37 @@
             <div class="level-right">
                 <div class="level-item">
                     <a class="button is-naked">
-                        <span class="icon"
-                            @click="calendar = {}">
-                            <fa icon="plus"/>
+                        <span class="icon" @click="calendar = {}">
+                            <fa icon="plus" />
                         </span>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="level is-marginless calendar-item"
-            v-for="calendar in calendars"
-            :key="calendar.id">
+        <div class="level is-marginless calendar-item" v-for="calendar in calendars" :key="calendar.id">
             <div class="level-left">
                 <div class="level-item">
                     <label class="checkbox">
-                        <input class="is-hidden"
-                            v-model="selected"
-                            type="checkbox"
-                            :value="calendar.id"
+                        <input class="is-hidden" v-model="selected" type="checkbox" :value="calendar.id"
                             @change="updateSelection">
                         <span class="calendar-color"
-                            :class="`calendar-${selected.includes(calendar.id) ? calendar.color : 'gray'}`"/>
-                            {{ i18n(calendar.name) }}
+                            :class="`calendar-${selected.includes(calendar.id) ? calendar.color : 'gray'}`" />
+                        {{ i18n(calendar.name) }}
                     </label>
                 </div>
             </div>
             <div class="level-right">
                 <div class="level-item">
                     <a class="button is-naked">
-                        <span class="icon"
-                            @click="setCalendar(calendar)"
-                            v-if="!calendar.readonly">
-                            <fa icon="pencil-alt"/>
+                        <span class="icon" @click="setCalendar(calendar)" v-if="!calendar.readonly">
+                            <fa icon="pencil-alt" />
                         </span>
                     </a>
                 </div>
             </div>
         </div>
-        <filter-state :api-version="apiVersion"
-            name="calendarFilters"
-            :filters="filtered"
-            @ready="load"
-            ref="filterState"/>
+        <filter-state :api-version="apiVersion" name="calendarFilters" :filters="filtered" @ready="load"
+            ref="filterState" />
     </div>
 </template>
 
@@ -165,12 +143,12 @@ export default {
 </script>
 
 <style lang="scss">
-    .small-calendar {
-        height: 290px;
-    }
+.small-calendar {
+    height: 290px;
+}
 
-    .calendar-item .level-left {
-        flex-shrink: 1;
-        overflow: hidden;
-    }
+.calendar-item .level-left {
+    flex-shrink: 1;
+    overflow: hidden;
+}
 </style>

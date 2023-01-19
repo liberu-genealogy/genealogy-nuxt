@@ -1,8 +1,5 @@
 <template>
-    <datepicker v-model="param.value"
-        alt-input
-        :placeholder="i18n(param.placeholder)"
-        :alt-format="dateFormat"/>
+    <datepicker v-model="param.value" alt-input :placeholder="i18n(param.placeholder)" :alt-format="dateFormat" />
 </template>
 
 <script>

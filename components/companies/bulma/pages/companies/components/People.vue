@@ -1,69 +1,48 @@
 <template>
     <div class="people-wrapper">
         <div class="field is-grouped">
-            <slot name="controls"
-                :create="create"
-                :internal-query="internalQuery"
-                :fetch="fetch">
+            <slot name="controls" :create="create" :internal-query="internalQuery" :fetch="fetch">
                 <p class="control">
-                    <a class="button is-rounded is-small is-bold is-info"
-                        @click="create()"
+                    <a class="button is-rounded is-small is-bold is-info" @click="create()"
                         v-if="canAccess('administration.companies.people.create')">
                         <span>
                             {{ i18n('Assign') }}
                         </span>
                         <span class="icon">
-                            <fa icon="plus"/>
+                            <fa icon="plus" />
                         </span>
                     </a>
                 </p>
                 <p class="control has-icons-left has-icons-right is-expanded">
-                    <input v-model="internalQuery"
-                        class="input is-rounded is-small is-expanded"
-                        type="text"
+                    <input v-model="internalQuery" class="input is-rounded is-small is-expanded" type="text"
                         :placeholder="i18n('Filter')">
                     <span class="icon is-small is-left">
-                        <fa icon="search"/>
+                        <fa icon="search" />
                     </span>
-                    <span v-if="internalQuery"
-                        class="icon is-small is-right clear-button"
-                        @click="internalQuery = ''">
-                        <a class="delete is-small"/>
+                    <span v-if="internalQuery" class="icon is-small is-right clear-button" @click="internalQuery = ''">
+                        <a class="delete is-small" />
                     </span>
                 </p>
                 <p class="control">
-                    <a class="button is-rounded is-small is-bold ml-2"
-                        @click="fetch()">
+                    <a class="button is-rounded is-small is-bold ml-2" @click="fetch()">
                         <span>
                             {{ i18n('Reload') }}
                         </span>
                         <span class="icon">
-                            <fa icon="sync"/>
+                            <fa icon="sync" />
                         </span>
                     </a>
                 </p>
             </slot>
         </div>
         <div class="columns is-multiline mt-3">
-            <div class="column is-half-tablet"
-                v-for="(person, index) in filteredPeople"
-                :key="person.id">
-                <person :id="id"
-                    :person="person"
-                    @edit="edit(person)"
-                    @delete="removedPerson = person"/>
+            <div class="column is-half-tablet" v-for="(person, index) in filteredPeople" :key="person.id">
+                <person :id="id" :person="person" @edit="edit(person)" @delete="removedPerson = person" />
             </div>
         </div>
-        <person-form :path="path"
-            :company-id="id"
-            @close="path = null"
-            @edit-person="navigateToPerson"
-            @submit="fetch(); path = null"
-            ref="form"
-            v-if="path"/>
-        <modal @close="removedPerson = null"
-            class="remove-person"
-            v-if="!!removedPerson">
+        <person-form :path="path" :company-id="id" @close="path = null" @edit-person="navigateToPerson"
+            @submit="fetch(); path = null" ref="form" v-if="path" />
+        <modal @close="removedPerson = null" class="remove-person" v-if="!!removedPerson">
             <div class="box">
                 <h5 class="subtitle is-5">
                     {{ i18n("What would you like to do?") }}
@@ -72,8 +51,7 @@
                 <div class="level">
                     <div class="level-left">
                         <div class="level-item">
-                            <button class="button is-outlined"
-                                @click="removedPerson = null">
+                            <button class="button is-outlined" @click="removedPerson = null">
                                 {{ i18n('Cancel') }}
                             </button>
                         </div>
@@ -86,8 +64,7 @@
                             </button>
                         </div>
                         <div class="level-item">
-                            <button class="button is-danger ml-1"
-                                @click="destroy().then(destroyPerson)">
+                            <button class="button is-danger ml-1" @click="destroy().then(destroyPerson)">
                                 {{ i18n('Delete person from application') }}
                             </button>
                         </div>

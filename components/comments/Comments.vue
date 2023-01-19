@@ -1,64 +1,44 @@
 <template>
     <div class="comments-wrapper">
         <div class="field is-grouped">
-            <slot name="controls"
-                :create="create"
-                :internal-query="internalQuery"
-                :fetch="fetch">
+            <slot name="controls" :create="create" :internal-query="internalQuery" :fetch="fetch">
                 <p class="control">
-                    <a class="button is-rounded is-small is-bold is-info"
-                        @click="create()">
+                    <a class="button is-rounded is-small is-bold is-info" @click="create()">
                         <span v-if="!compact">
                             {{ i18n('Add') }}
                         </span>
                         <span class="icon">
-                            <fa icon="plus"/>
+                            <fa icon="plus" />
                         </span>
                     </a>
                 </p>
                 <p class="control has-icons-left has-icons-right is-expanded">
-                    <input v-model="internalQuery"
-                        class="input is-rounded is-small is-expanded"
-                        type="text"
+                    <input v-model="internalQuery" class="input is-rounded is-small is-expanded" type="text"
                         :placeholder="i18n('Filter')">
                     <span class="icon is-small is-left">
-                        <fa icon="search"/>
+                        <fa icon="search" />
                     </span>
-                    <span v-if="internalQuery"
-                        class="icon is-small is-right clear-button"
-                        @click="internalQuery = ''">
-                        <a class="delete is-small"/>
+                    <span v-if="internalQuery" class="icon is-small is-right clear-button" @click="internalQuery = ''">
+                        <a class="delete is-small" />
                     </span>
                 </p>
                 <p class="control">
-                    <a class="button is-rounded is-small is-bold ml-2"
-                        @click="fetch()">
+                    <a class="button is-rounded is-small is-bold ml-2" @click="fetch()">
                         <span v-if="!compact">
                             {{ i18n('Reload') }}
                         </span>
                         <span class="icon">
-                            <fa icon="sync"/>
+                            <fa icon="sync" />
                         </span>
                     </a>
                 </p>
             </slot>
         </div>
         <div class="comments p-1">
-            <comment v-if="comment"
-                :id="id"
-                is-new
-                :type="type"
-                :comment="comment"
-                :index="-1"
-                @cancel-add="comment = null"
-                @save="add()"/>
-            <comment v-for="(comment, index) in filteredComments"
-                :key="comment.id"
-                :comment="comment"
-                :index="index"
-                :human-readable-dates="humanReadableDates"
-                @save="update(comment)"
-                @delete="destroy(index)"/>
+            <comment v-if="comment" :id="id" is-new :type="type" :comment="comment" :index="-1"
+                @cancel-add="comment = null" @save="add()" />
+            <comment v-for="(comment, index) in filteredComments" :key="comment.id" :comment="comment" :index="index"
+                :human-readable-dates="humanReadableDates" @save="update(comment)" @delete="destroy(index)" />
         </div>
     </div>
 </template>
@@ -226,8 +206,8 @@ export default {
 </script>
 
 <style lang="scss">
-    .comments-wrapper .comments {
-        max-height: 500px;
-        overflow-y: auto;
-    }
+.comments-wrapper .comments {
+    max-height: 500px;
+    overflow-y: auto;
+}
 </style>

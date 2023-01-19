@@ -1,10 +1,8 @@
 <template>
-    <button class="button is-primary is-fullwidth"
-        :class="{ 'is-loading': loading }"
-        type="submit"
+    <button class="button is-primary is-fullwidth" :class="{ 'is-loading': loading }" type="submit"
         @click.prevent="submit">
         <span class="icon is-small">
-            <fa :icon="icon"/>
+            <fa :icon="icon" />
         </span>
         <span>{{ i18n(action) }}</span>
     </button>
@@ -68,14 +66,14 @@ export default {
                     const { status, data } = error.response;
 
                     switch (status) {
-                    case 422:
-                        this.errors.set(data.errors);
-                        break;
-                    case 429:
-                        this.toastr.error(data.message);
-                        break;
-                    default:
-                        throw error;
+                        case 422:
+                            this.errors.set(data.errors);
+                            break;
+                        case 429:
+                            this.toastr.error(data.message);
+                            break;
+                        default:
+                            throw error;
                     }
                 }).finally(() => (this.loading = false));
         },

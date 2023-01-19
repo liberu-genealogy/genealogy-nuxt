@@ -1,5 +1,5 @@
 <template>
-	<Home/>
+	<Home />
 </template>
 <script>
 import Home from '~/components/Home.vue'
@@ -7,8 +7,8 @@ import Home from '~/components/Home.vue'
 export default {
 	layout: 'index',
 	components: { Home },
-		meta: {
-			guestGuard: true,
+	meta: {
+		guestGuard: true,
 	},
 
 }

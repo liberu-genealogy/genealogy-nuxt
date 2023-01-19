@@ -1,6 +1,5 @@
 <template>
-    <vue-switch class="is-medium"
-        v-model="param.value"/>
+    <vue-switch class="is-medium" v-model="param.value" />
 </template>
 
 <script>

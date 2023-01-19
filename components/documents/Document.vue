@@ -3,9 +3,8 @@
         <div class="level">
             <div class="level-left">
                 <div class="level-item">
-                    <span class="icon is-small m-1"
-                        v-tooltip="file.name">
-                        <fa :icon="icon"/>
+                    <span class="icon is-small m-1" v-tooltip="file.name">
+                        <fa :icon="icon" />
                     </span>
                     <span class="filename">{{ file.name }}</span>
                 </div>
@@ -13,62 +12,51 @@
             <div class="level-right">
                 <fade>
                     <div class="level-item">
-                        <a class="is-naked ml-2"
-                            v-if="file.isShareable && canAccess('core.files.link')"
-                            @click="link">
+                        <a class="is-naked ml-2" v-if="file.isShareable && canAccess('core.files.link')" @click="link">
                             <span class="icon is-small">
-                                <fa icon="link"
-                                    size="sm"/>
+                                <fa icon="link" size="sm" />
                             </span>
                         </a>
-                        <a class="is-naked ml-2"
-                            @click="show"
-                            v-if="file.isViewable && canAccess('core.files.show')">
+                        <a class="is-naked ml-2" @click="show" v-if="file.isViewable && canAccess('core.files.show')">
                             <span class="icon is-small">
-                                <fa icon="eye"
-                                    size="sm"/>
+                                <fa icon="eye" size="sm" />
                             </span>
                         </a>
-                        <a class="is-naked ml-2"
-                            :href="downloadLink"
+                        <a class="is-naked ml-2" :href="downloadLink"
                             v-if="file.isViewable && canAccess('core.files.download')">
                             <span class="icon is-small">
-                                <fa icon="cloud-download-alt"
-                                    size="sm"/>
+                                <fa icon="cloud-download-alt" size="sm" />
                             </span>
                         </a>
                         <confirmation @confirm="$emit('delete')"
                             v-if="file.isDestroyable && canAccess('core.documents.destroy')">
                             <a class="is-naked ml-2">
                                 <span class="icon is-small">
-                                    <fa icon="trash-alt"
-                                        size="sm"/>
+                                    <fa icon="trash-alt" size="sm" />
                                 </span>
                             </a>
                         </confirmation>
-                        <v-popover trigger="hover"
-                            placement="top">
+                        <v-popover trigger="hover" placement="top">
                             <span class="icon is-small is-naked ml-2">
-                                <fa icon="info-circle"
-                                    size="sm"/>
+                                <fa icon="info-circle" size="sm" />
                             </span>
                             <template v-slot:popover>
                                 <div class="info">
                                     <p>
                                         <span class="icon is-small">
-                                            <fa icon="user"/>
+                                            <fa icon="user" />
                                         </span>
                                         {{ file.owner.name }}
                                     </p>
                                     <p>
                                         <span class="icon is-small">
-                                            <fa icon="calendar-alt"/>
+                                            <fa icon="calendar-alt" />
                                         </span>
                                         {{ timeFromNow(file.createdAt) }}
                                     </p>
                                     <p>
                                         <span class="icon is-small">
-                                            <fa icon="database"/>
+                                            <fa icon="database" />
                                         </span>
                                         {{ size }} Kb
                                     </p>
@@ -77,9 +65,7 @@
                         </v-popover>
                     </div>
                 </fade>
-                <url :show="temporaryLink !== ''"
-                    :link="temporaryLink"
-                    @close="temporaryLink = ''"/>
+                <url :show="temporaryLink !== ''" :link="temporaryLink" @close="temporaryLink = ''" />
             </div>
         </div>
     </div>
@@ -156,22 +142,22 @@ export default {
 </script>
 
 <style lang="scss">
-    .box.document {
-        .level-left {
+.box.document {
+    .level-left {
+        flex: 1;
+        min-width: 0;
+
+        .level-item {
             flex: 1;
             min-width: 0;
+            justify-content: flex-start;
 
-            .level-item {
-                flex: 1;
-                min-width: 0;
-                justify-content: flex-start;
-
-                .filename {
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
+            .filename {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }
+}
 </style>

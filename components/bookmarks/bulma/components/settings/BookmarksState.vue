@@ -9,9 +9,7 @@
                 </div>
                 <div class="level-right">
                     <div class="level-item">
-                        <vue-switch class="is-medium"
-                            v-bind="bindings"
-                            v-on="events"/>
+                        <vue-switch class="is-medium" v-bind="bindings" v-on="events" />
                     </div>
                 </div>
             </div>

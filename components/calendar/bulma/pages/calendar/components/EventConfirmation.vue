@@ -8,25 +8,21 @@
             <div class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <button class="button"
-                            @click="$emit('cancel')">
+                        <button class="button" @click="$emit('cancel')">
                             {{ i18n('Cancel') }}
                         </button>
                     </div>
                 </div>
                 <div class="level-right">
                     <div class="level-item">
-                        <button class="button is-success"
-                            @click="$emit('confirm', update.OnlyThis)">
+                        <button class="button is-success" @click="$emit('confirm', update.OnlyThis)">
                             {{ i18n(update._get(update.OnlyThis)) }}
                         </button>
-                        <button class="button is-warning ml-2"
-                            @click="$emit('confirm', update.ThisAndFuture)"
+                        <button class="button is-warning ml-2" @click="$emit('confirm', update.ThisAndFuture)"
                             v-if="!event.isLast && !dateChanged">
                             {{ i18n(update._get(update.ThisAndFuture)) }}
                         </button>
-                        <button class="button is-danger ml-2"
-                            @click="$emit('confirm', update.All)"
+                        <button class="button is-danger ml-2" @click="$emit('confirm', update.All)"
                             v-if="event.parentId && !dateChanged">
                             {{ i18n(update._get(update.All)) }}
                         </button>

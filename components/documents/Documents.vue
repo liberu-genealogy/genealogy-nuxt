@@ -1,59 +1,39 @@
 <template>
     <div class="documents-wrapper">
-        <slot :id="id"
-            name="controls"
-            :type="type"
-            :uploadLink="uploadLink"
-            :fetch="fetch"
-            :internal-query="internalQuery"
-            v-if="!disableControls">
+        <slot :id="id" name="controls" :type="type" :uploadLink="uploadLink" :fetch="fetch"
+            :internal-query="internalQuery" v-if="!disableControls">
             <div class="field is-grouped">
                 <p class="control">
-                    <enso-uploader is-small
-                        is-rounded
-                        :compact="compact"
-                        :params="params"
-                        :url="uploadLink"
-                        :file-size-limit="fileSizeLimit"
-                        multiple
-                        v-if="!disableUpload && uploadLink"
-                        @upload-successful="fetch();"/>
+                    <enso-uploader is-small is-rounded :compact="compact" :params="params" :url="uploadLink"
+                        :file-size-limit="fileSizeLimit" multiple v-if="!disableUpload && uploadLink"
+                        @upload-successful="fetch();" />
                 </p>
                 <p class="control has-icons-left has-icons-right is-expanded">
-                    <input v-model="internalQuery"
-                        class="input is-small is-rounded"
-                        type="text"
+                    <input v-model="internalQuery" class="input is-small is-rounded" type="text"
                         :placeholder="i18n('Filter')">
                     <span class="icon is-small is-left">
-                        <fa icon="search"/>
+                        <fa icon="search" />
                     </span>
-                    <span v-if="internalQuery"
-                        class="icon is-small is-right clear-button"
-                        @click="internalQuery = ''">
-                        <a class="delete is-small"/>
+                    <span v-if="internalQuery" class="icon is-small is-right clear-button" @click="internalQuery = ''">
+                        <a class="delete is-small" />
                     </span>
                 </p>
                 <p class="control">
-                    <a class="button is-small is-rounded"
-                        @click="fetch()">
+                    <a class="button is-small is-rounded" @click="fetch()">
                         <span v-if="!compact">
                             {{ i18n('Reload') }}
                         </span>
                         <span class="icon">
-                            <fa icon="sync"/>
+                            <fa icon="sync" />
                         </span>
                     </a>
                 </p>
             </div>
         </slot>
-        <div class="mt-3"
-            :class="{'columns is-mobile is-multiline': !compact}">
-            <div v-for="(doc, index) in documents"
-                :key="doc.id"
+        <div class="mt-3" :class="{ 'columns is-mobile is-multiline': !compact }">
+            <div v-for="(doc, index) in documents" :key="doc.id"
                 :class="{ 'column is-half-touch is-half-desktop is-one-third-widescreen': !compact }">
-                <component :is="component"
-                    :file="doc.file"
-                    @delete="destroy(index)"/>
+                <component :is="component" :file="doc.file" @delete="destroy(index)" />
             </div>
         </div>
     </div>
@@ -179,8 +159,8 @@ export default {
 </script>
 
 <style lang="scss">
-    .documents-wrapper .controls {
-        display: flex;
-        justify-content: center;
-    }
+.documents-wrapper .controls {
+    display: flex;
+    justify-content: center;
+}
 </style>

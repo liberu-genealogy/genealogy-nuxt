@@ -1,13 +1,9 @@
 <template>
     <div class="is-flex">
-        <span class="clap-emoji is-clickable mr-3"
-            @click="react"/>
-        <figure class="image is-32x32 ml-1"
-            v-for="reaction in reactable.reactions"
-            :key="reaction.id"
+        <span class="clap-emoji is-clickable mr-3" @click="react" />
+        <figure class="image is-32x32 ml-1" v-for="reaction in reactable.reactions" :key="reaction.id"
             v-tooltip="reaction.owner.name">
-            <img class="is-rounded"
-                :src="avatar(reaction.owner.avatar.id)">
+            <img class="is-rounded" :src="avatar(reaction.owner.avatar.id)">
         </figure>
     </div>
 </template>
@@ -57,8 +53,8 @@ export default {
 </script>
 
 <style lang="scss">
-    .clap-emoji:before {
-        content: "�";
-        font-size: 24px;
-    }
+.clap-emoji:before {
+    content: "�";
+    font-size: 24px;
+}
 </style>

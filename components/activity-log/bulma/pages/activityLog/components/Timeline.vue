@@ -1,37 +1,28 @@
 <template>
     <div class="activity-log">
-        <h4 class="title is-4 has-text-centered"
-            v-if="!feed.length">
+        <h4 class="title is-4 has-text-centered" v-if="!feed.length">
             {{ i18n('No activity found') }}
         </h4>
-        <div :class="['timeline animated fadeIn', {'is-centered':!isTouch}]"
-            v-for="(day, index) in feed"
-            :key="`${day}-${index}`"
-            v-else>
+        <div :class="['timeline animated fadeIn', { 'is-centered': !isTouch }]" v-for="(day, index) in feed"
+            :key="`${day}-${index}`" v-else>
             <header class="timeline-header">
                 <span class="tag is-medium is-bold is-primary">
                     {{ formatDate(day.date) }}
                 </span>
             </header>
-            <div class="timeline-item"
-                v-for="event in day.entries"
-                :key="event.id">
-                <div class="timeline-marker is-icon"
-                    :class="event.meta.iconClass">
+            <div class="timeline-item" v-for="event in day.entries" :key="event.id">
+                <div class="timeline-marker is-icon" :class="event.meta.iconClass">
                     <span class="icon is-small has-text-white">
-                        <fa :icon="event.meta.icon"
-                            size="xs"/>
+                        <fa :icon="event.meta.icon" size="xs" />
                     </span>
                 </div>
                 <div class="timeline-content">
-                    <event :event="event"/>
+                    <event :event="event" />
                 </div>
             </div>
         </div>
-        <div class="has-text-centered"
-            v-if="feed.length">
-            <button :class="['button', {'is-loading': loading}]"
-                @click="$emit('load-more')">
+        <div class="has-text-centered" v-if="feed.length">
+            <button :class="['button', { 'is-loading': loading }]" @click="$emit('load-more')">
                 {{ i18n('Load more') }}
             </button>
         </div>
@@ -77,10 +68,11 @@ export default {
 </script>
 
 <style lang="scss">
-    .activity-log .timeline .timeline-content {
+.activity-log .timeline .timeline-content {
+    width: 100%;
+
+    .box {
         width: 100%;
-        .box {
-            width:100%;
-        }
     }
+}
 </style>

@@ -1,28 +1,19 @@
 <template>
-    <div class="animated fadeIn atwho-wrapper"
-        @keyup="filter"
-        @keydown.up="onUp"
-        @keydown.down="onDown"
+    <div class="animated fadeIn atwho-wrapper" @keyup="filter" @keydown.up="onUp" @keydown.down="onDown"
         @keydown.enter="onEnter">
-        <div v-show="items.length"
-            v-click-outside="hide"
-            class="atwho dropdown-menu">
+        <div v-show="items.length" v-click-outside="hide" class="atwho dropdown-menu">
             <div class="dropdown-content">
-                <a v-for="(item, index) in items"
-                    :key="index"
-                    :class="['dropdown-item', { 'is-active': index === position}]"
-                    @mousemove="position = index"
+                <a v-for="(item, index) in items" :key="index"
+                    :class="['dropdown-item', { 'is-active': index === position }]" @mousemove="position = index"
                     @click="selectItem">
                     <article class="media">
                         <div class="media-left">
                             <figure class="image is-24x24">
-                                <img class="is-rounded"
-                                    :src="'/api/core/avatars/' + item.avatar.id">
+                                <img class="is-rounded" :src="'/api/core/avatars/' + item.avatar.id">
                             </figure>
                         </div>
                         <div class="media-content">
-                            <div class="content"
-                                v-html="highlight(item.person.name)"/>
+                            <div class="content" v-html="highlight(item.person.name)" />
                         </div>
                     </article>
                 </a>
@@ -30,11 +21,8 @@
         </div>
         <div class="field">
             <p class="control">
-                <textarea v-model="comment.body"
-                    v-focus
-                    class="textarea vue-comment"
-                    :placeholder="i18n('Type a new comment')"
-                    @keyup.shift.enter="$emit('save')"/>
+                <textarea v-model="comment.body" v-focus class="textarea vue-comment"
+                    :placeholder="i18n('Type a new comment')" @keyup.shift.enter="$emit('save')" />
             </p>
         </div>
     </div>
@@ -195,42 +183,42 @@ export default {
 </script>
 
 <style lang="scss">
-    .atwho-wrapper {
-        position: relative;
+.atwho-wrapper {
+    position: relative;
 
-        .dropdown-menu {
-            display: unset;
-            top: unset;
-            left: unset;
-            min-width: unset;
-            padding-top: unset;
+    .dropdown-menu {
+        display: unset;
+        top: unset;
+        left: unset;
+        min-width: unset;
+        padding-top: unset;
 
-            .dropdown-content {
-                width: fit-content;
-                padding: 0.25rem 0;
+        .dropdown-content {
+            width: fit-content;
+            padding: 0.25rem 0;
 
-                a.dropdown-item {
-                    padding: .1rem 0.5rem;
-                }
-
-                .media {
-                    border-top: none;
-                    padding-top: 0;
-
-                    .media-left {
-                        margin-right: 0.5rem;
-                    }
-                }
+            a.dropdown-item {
+                padding: .1rem 0.5rem;
             }
-        }
 
-        textarea.vue-comment {
-            resize: none;
-            word-wrap: break-word;
+            .media {
+                border-top: none;
+                padding-top: 0;
 
-            &:not([rows]) {
-                min-height: 90px;
+                .media-left {
+                    margin-right: 0.5rem;
+                }
             }
         }
     }
+
+    textarea.vue-comment {
+        resize: none;
+        word-wrap: break-word;
+
+        &:not([rows]) {
+            min-height: 90px;
+        }
+    }
+}
 </style>

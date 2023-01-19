@@ -1,16 +1,8 @@
 <template>
-    <modal class="calendar-modal"
-        v-on="$listeners">
-        <enso-form class="box has-background-light"
-            :path="path"
-            v-on="$listeners"
-            ref="form"
-            disable-state>
-            <template v-slot:color="{field,errors}">
-                <color-select
-                    :field="field"
-                    :errors="errors"
-                    color-field="id"/>
+    <modal class="calendar-modal" v-on="$listeners">
+        <enso-form class="box has-background-light" :path="path" v-on="$listeners" ref="form" disable-state>
+            <template v-slot:color="{ field, errors }">
+                <color-select :field="field" :errors="errors" color-field="id" />
             </template>
         </enso-form>
     </modal>
@@ -52,8 +44,8 @@ export default {
 </script>
 
 <style lang="scss">
-    .modal.calendar-modal .modal-content {
-        overflow: visible;
-        width: 400px;
-    }
+.modal.calendar-modal .modal-content {
+    overflow: visible;
+    width: 400px;
+}
 </style>

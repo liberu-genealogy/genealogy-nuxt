@@ -1,28 +1,20 @@
 <template>
     <div class="field">
         <div class="control has-icons-left has-icons-right">
-            <input :value="value"
-                v-focus
-                class="input"
-                type="email"
-                :class="{ 'is-danger': errors.has('email'), 'is-success': successful }"
-                :placeholder="i18n('Email')"
-                autocomplete="email"
-                @input="$emit('input', $event.target.value); errors.clear('email')">
+            <input :value="value" v-focus class="input" type="email"
+                :class="{ 'is-danger': errors.has('email'), 'is-success': successful }" :placeholder="i18n('Email')"
+                autocomplete="email" @input="$emit('input', $event.target.value); errors.clear('email')">
             <span class="icon is-small is-left">
-                <fa icon="envelope"/>
+                <fa icon="envelope" />
             </span>
-            <span v-if="successful"
-                class="icon is-small is-right has-text-success">
-                <fa icon="check"/>
+            <span v-if="successful" class="icon is-small is-right has-text-success">
+                <fa icon="check" />
             </span>
-            <span v-if="errors.has('email')"
-                class="icon is-small is-right has-text-danger">
-                <fa icon="exclamation-triangle"/>
+            <span v-if="errors.has('email')" class="icon is-small is-right has-text-danger">
+                <fa icon="exclamation-triangle" />
             </span>
         </div>
-        <p class="has-text-danger is-size-7"
-            v-if="errors.has('email')">
+        <p class="has-text-danger is-size-7" v-if="errors.has('email')">
             {{ errors.get('email') }}
         </p>
     </div>

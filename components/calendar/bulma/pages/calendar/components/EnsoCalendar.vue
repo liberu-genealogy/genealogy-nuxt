@@ -1,35 +1,19 @@
 <template>
     <div class="calendar-wrapper box is-paddingless raises-on-hover">
-        <vue-cal v-bind="$attrs"
-            :time-from="7 * 60"
-            :locale="lang"
-            :selected-date="date"
-            :events="events"
-            show-all-day-events
-            today-button
-            watch-real-time
-            events-count-on-year-view
-            @ready="updateInterval"
-            @view-change="updateInterval"
-            @event-mouse-enter="hovering = $event.id"
-            @event-mouse-leave="hovering = null"
+        <vue-cal v-bind="$attrs" :time-from="7 * 60" :locale="lang" :selected-date="date" :events="events"
+            show-all-day-events today-button watch-real-time events-count-on-year-view @ready="updateInterval"
+            @view-change="updateInterval" @event-mouse-enter="hovering = $event.id" @event-mouse-leave="hovering = null"
             @event-delete="dragedEvent === null && destroy($event)"
-            @event-duration-change="vuecalEvent = $event; update()"
-            @event-drop="vuecalEvent = $event; update()"
-            :on-event-dblclick="selectEvent"
-            :on-event-create="setDragedEvent"
-            @event-drag-create="eventDragCreated"
-            editable-events
-            :drag-to-create-threshold="0"
-            v-on="$listeners">
+            @event-duration-change="vuecalEvent = $event; update()" @event-drop="vuecalEvent = $event; update()"
+            :on-event-dblclick="selectEvent" :on-event-create="setDragedEvent" @event-drag-create="eventDragCreated"
+            editable-events :drag-to-create-threshold="0" v-on="$listeners">
             <template v-slot:today-button>
                 <a class="button is-small">
                     <span class="is-bold">
                         {{ i18n('Today') }}
                     </span>
                     <span class="icon is-small">
-                        <fa icon="crosshairs"
-                            size="xs"/>
+                        <fa icon="crosshairs" size="xs" />
                     </span>
                 </a>
             </template>
@@ -38,26 +22,20 @@
                     <b class="has-text-centered">
                         {{ event.title }}
                     </b>
-                    <p class="event-body mb-1"
-                        v-if="event.body"
-                        v-html="event.body"/>
+                    <p class="event-body mb-1" v-if="event.body" v-html="event.body" />
                     <div v-if="!event.allDay">
-                        <p class="has-text-centered"
-                            v-if="hovering === event.id">
-                                {{ dateTimeFormat(event.daysCount,event.start) }}
-                                <fa icon="arrows-alt-h"/>
-                                {{ dateTimeFormat(event.daysCount,event.end) }}
+                        <p class="has-text-centered" v-if="hovering === event.id">
+                            {{ dateTimeFormat(event.daysCount, event.start) }}
+                            <fa icon="arrows-alt-h" />
+                            {{ dateTimeFormat(event.daysCount, event.end) }}
                         </p>
                     </div>
                 </div>
             </template>
         </vue-cal>
-        <event-confirmation v-if="confirm"
-            :event="event"
-            :date-changed="dateChanged"
-            @confirm="confirm($event); confirm = null; vuecalEvent = null"
-            @cancel="cancelUpdate"
-            @close="cancelUpdate"/>
+        <event-confirmation v-if="confirm" :event="event" :date-changed="dateChanged"
+            @confirm="confirm($event); confirm = null; vuecalEvent = null" @cancel="cancelUpdate"
+            @close="cancelUpdate" />
     </div>
 </template>
 
@@ -266,55 +244,66 @@ export default {
 </script>
 
 <style lang="scss">
-    .calendar-wrapper {
-        height: 100%;
-        .vuecal {
-            border-radius: inherit;
-            .vuecal__body {
-                overflow: auto;
-                .vuecal__bg {
-                    overflow: visible;
-                }
-            }
-            .vuecal__cell:hover {
-                cursor: pointer;
-            }
-        }
-        .vuecal__event {
-            .event-body {
-                white-space: pre;
+.calendar-wrapper {
+    height: 100%;
+
+    .vuecal {
+        border-radius: inherit;
+
+        .vuecal__body {
+            overflow: auto;
+
+            .vuecal__bg {
+                overflow: visible;
             }
         }
-        .vuecal__event-resize-handle {
-                &:after {
-                    top: 5px;
-                    left: calc(50% - 10px);
-                }
-                &:before {
-                    top: 10px;
-                    left: calc(50% - 10px);
-                }
-                &:after, &:before {
-                    display: block;
-                    content: "";
-                    position: absolute;
-                    width: 20px;
-                    height: 2px;
-                    transition-timing-function: ease;
-                    transition-duration: .15s;
-                    transition-property: transform;
-                    border-radius: 4px;
-                    background-color: #fff;
-                }
-            }
-        .vuecal__time-column {
-            height: auto;
-            .vuecal__time-cell .label {
-                color: inherit;
-                display: inherit;
-                font-size: inherit;
-                font-weight: inherit;
-            }
+
+        .vuecal__cell:hover {
+            cursor: pointer;
         }
     }
+
+    .vuecal__event {
+        .event-body {
+            white-space: pre;
+        }
+    }
+
+    .vuecal__event-resize-handle {
+        &:after {
+            top: 5px;
+            left: calc(50% - 10px);
+        }
+
+        &:before {
+            top: 10px;
+            left: calc(50% - 10px);
+        }
+
+        &:after,
+        &:before {
+            display: block;
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            transition-timing-function: ease;
+            transition-duration: .15s;
+            transition-property: transform;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+    }
+
+    .vuecal__time-column {
+        height: auto;
+
+        .vuecal__time-cell .label {
+            color: inherit;
+            display: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+        }
+    }
+}
 </style>

@@ -1,15 +1,13 @@
 <template>
     <div class="field is-horizontal">
-        <div class="field-label is-normal"
-            v-if="param.label">
+        <div class="field-label is-normal" v-if="param.label">
             <label class="label">
                 {{ i18n(param.label) }}
             </label>
         </div>
         <div class="field-body">
             <div class="field">
-                <component :is="component"
-                    :param="param"/>
+                <component :is="component" :param="param" />
             </div>
         </div>
     </div>
@@ -41,7 +39,7 @@ export default {
             required: true,
         },
     },
-    
+
     computed: {
         component() {
             return ucfirst(this.param.type);

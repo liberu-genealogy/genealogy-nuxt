@@ -2,15 +2,14 @@
     <article class="media clickable">
         <figure class="media-left">
             <p class="image is-48x48">
-                <img class="is-rounded"
-                    :src="avatar">
+                <img class="is-rounded" :src="avatar">
             </p>
         </figure>
         <div class="media-content">
             <div class="content">
                 <span class="has-text-weight-semibold">
-                        {{ discussion.title }}
-                    </span>
+                    {{ discussion.title }}
+                </span>
                 <p class="preview">
                     <span class="has-text-info is-bold">
                         {{ discussion.owner.name }}
@@ -72,9 +71,9 @@ export default {
 </script>
 
 <style lang="scss">
-    .media .preview {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-height: 3rem;
-    }
+.media .preview {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3rem;
+}
 </style>

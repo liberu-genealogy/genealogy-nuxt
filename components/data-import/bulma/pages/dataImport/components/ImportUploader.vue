@@ -1,37 +1,25 @@
 <template>
     <div class="is-flex">
-        <a class="button is-info mr-2"
-            :href="templateLink">
+        <a class="button is-info mr-2" :href="templateLink">
             <span>{{ i18n('Template') }}</span>
             <span class="icon is-small">
-                <fa icon="download"/>
+                <fa icon="download" />
             </span>
         </a>
-        <uploader :url="path"
-            :params="params"
-            :file-size-limit="fileSizeLimit"
-            file-key="import"
-            v-on="$listeners"
-            @upload-start="loading = true"
-            @upload-error="loading = false"
-            @upload-successful="uploaded"
-            ref="uploader">
-            <template v-slot:control="{ controlEvents }"
-                v-if="!hasErrors">
-                <a :class="['button is-success', { 'is-loading': loading }]"
-                    v-on="controlEvents">
+        <uploader :url="path" :params="params" :file-size-limit="fileSizeLimit" file-key="import" v-on="$listeners"
+            @upload-start="loading = true" @upload-error="loading = false" @upload-successful="uploaded" ref="uploader">
+            <template v-slot:control="{ controlEvents }" v-if="!hasErrors">
+                <a :class="['button is-success', { 'is-loading': loading }]" v-on="controlEvents">
                     <slot>
                         <span>{{ i18n('Import') }}</span>
                         <span class="icon is-small">
-                            <fa icon="upload"/>
+                            <fa icon="upload" />
                         </span>
                     </slot>
                 </a>
             </template>
         </uploader>
-        <Summary :summary="summary"
-            @close="summary = null"
-            v-if="hasErrors"/>
+        <Summary :summary="summary" @close="summary = null" v-if="hasErrors" />
     </div>
 </template>
 

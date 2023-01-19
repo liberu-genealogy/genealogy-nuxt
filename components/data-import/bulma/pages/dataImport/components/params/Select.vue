@@ -1,10 +1,6 @@
 <template>
-    <enso-select v-model="param.value"
-         :source="param.route"
-         :label="param.selectLabel"
-         :placeholder="placeholder"
-         :multiple="param.multiple"
-         :params="param.params"/>
+    <enso-select v-model="param.value" :source="param.route" :label="param.selectLabel" :placeholder="placeholder"
+        :multiple="param.multiple" :params="param.params" />
 </template>
 
 <script>

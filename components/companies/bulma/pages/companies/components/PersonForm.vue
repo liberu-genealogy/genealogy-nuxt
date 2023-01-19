@@ -1,22 +1,15 @@
 <template>
-    <modal portal="person-form"
-        v-on="$listeners">
-        <enso-form class="box has-background-light"
-            v-bind="$attrs"
-            disable-state
-            v-on="$listeners"
-            @ready="init">
-            <template v-slot:actions-left
-                v-if="id">
-                <a class="button is-warning"
-                    @click="$emit('edit-person', id)">
+    <modal portal="person-form" v-on="$listeners">
+        <enso-form class="box has-background-light" v-bind="$attrs" disable-state v-on="$listeners" @ready="init">
+            <template v-slot:actions-left v-if="id">
+                <a class="button is-warning" @click="$emit('edit-person', id)">
                     <span class="is-hidden-mobile">
                         {{ i18n('Edit Person') }}
                     </span>
                     <span class="icon">
-                        <fa icon="user-tie"/>
+                        <fa icon="user-tie" />
                     </span>
-                    <span class="is-hidden-mobile"/>
+                    <span class="is-hidden-mobile" />
                 </a>
             </template>
         </enso-form>
@@ -55,13 +48,13 @@ export default {
 </script>
 
 <style lang="scss">
-    .person-form .modal-content {
-        overflow: unset;
-    }
+.person-form .modal-content {
+    overflow: unset;
+}
 
-    @media screen and (max-width: 1023px) {
-        .person-form .modal-content {
-            width: 95%;
-        }
+@media screen and (max-width: 1023px) {
+    .person-form .modal-content {
+        width: 95%;
     }
+}
 </style>

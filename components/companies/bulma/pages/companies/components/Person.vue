@@ -1,21 +1,17 @@
 <template>
-    <div class="box has-background-light raises-on-hover p-3"
-        @mouseover="controls = true"
+    <div class="box has-background-light raises-on-hover p-3" @mouseover="controls = true"
         @mouseleave="controls = false">
         <p class="title is-5">
             {{ person.name }}
-            <span class="is-pulled-right is-flex"
-                v-if="controls">
-                <a class="button is-naked is-small"
-                    @click="$emit('edit')">
+            <span class="is-pulled-right is-flex" v-if="controls">
+                <a class="button is-naked is-small" @click="$emit('edit')">
                     <span class="icon">
-                        <fa icon="pencil-alt"/>
+                        <fa icon="pencil-alt" />
                     </span>
                 </a>
-                <a class="button is-naked is-small"
-                    @click="$emit('delete')">
+                <a class="button is-naked is-small" @click="$emit('delete')">
                     <span class="icon">
-                        <fa icon="trash-alt"/>
+                        <fa icon="trash-alt" />
                     </span>
                 </a>
             </span>

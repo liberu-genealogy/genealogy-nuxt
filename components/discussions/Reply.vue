@@ -1,23 +1,15 @@
 <template>
-    <article class="media media-reply"
-        :class="{'box has-background-light raises-on-hover': !edit && reply.id}"
-        @mouseover="controls = true"
-        @mouseleave="controls = !confirmation ? false : controls">
+    <article class="media media-reply" :class="{ 'box has-background-light raises-on-hover': !edit && reply.id }"
+        @mouseover="controls = true" @mouseleave="controls = !confirmation ? false : controls">
         <figure class="media-left">
             <p class="image is-48x48">
-                <img class="is-rounded"
-                    :src="avatar">
+                <img class="is-rounded" :src="avatar">
             </p>
         </figure>
         <div class="media-content">
-            <inputor class="raises-on-hover animated fadeIn"
-                :message="reply"
-                placeholder="Share your opinion..."
-                type="reply"
-                @update="$emit('update'); edit = false;"
-                @store="$emit('store')"
-                @cancel="$emit('cancel'); edit = false;"
-                v-if="edit || !reply.id"/>
+            <inputor class="raises-on-hover animated fadeIn" :message="reply" placeholder="Share your opinion..."
+                type="reply" @update="$emit('update'); edit = false;" @store="$emit('store')"
+                @cancel="$emit('cancel'); edit = false;" v-if="edit || !reply.id" />
             <div class="content" v-else>
                 <span class="has-text-info is-bold">
                     {{ reply.owner.name }}
@@ -33,25 +25,21 @@
                     </small>
                 </span>
                 <br>
-                <span v-html="format(reply.body)"/>
+                <span v-html="format(reply.body)" />
             </div>
         </div>
         <div class="media-right">
-            <div class="is-flex is-pulled-right"
-                v-if="controls && reply.isEditable && !edit">
-                <a class="button is-naked is-small mr-1"
-                    @click="edit = true">
+            <div class="is-flex is-pulled-right" v-if="controls && reply.isEditable && !edit">
+                <a class="button is-naked is-small mr-1" @click="edit = true">
                     <span class="icon is-small">
-                        <fa icon="pencil-alt"/>
+                        <fa icon="pencil-alt" />
                     </span>
                 </a>
-                <confirmation placement="bottom-end"
-                    @show="confirmation = true"
-                    @hide="confirmation = controls = false"
+                <confirmation placement="bottom-end" @show="confirmation = true" @hide="confirmation = controls = false"
                     @confirm="$emit('delete')">
                     <a class="button is-naked is-small">
                         <span class="icon is-small">
-                            <fa icon="trash-alt"/>
+                            <fa icon="trash-alt" />
                         </span>
                     </a>
                 </confirmation>
@@ -111,18 +99,17 @@ export default {
 </script>
 
 <style lang="scss">
+.media-reply {
+    padding: 1rem;
 
-    .media-reply {
-        padding: 1rem;
-
-        .mention {
-            img {
-                width: 1.4rem;
-                height: 1.4rem;
-                margin-bottom: -0.3rem;
-                border-radius: 290486px;
-            }
+    .mention {
+        img {
+            width: 1.4rem;
+            height: 1.4rem;
+            margin-bottom: -0.3rem;
+            border-radius: 290486px;
         }
-
     }
+
+}
 </style>

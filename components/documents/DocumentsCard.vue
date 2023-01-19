@@ -1,27 +1,21 @@
 <template>
-    <card collapsible
-        :collapsed="collapsed">
+    <card collapsible :collapsed="collapsed">
         <card-header class="has-background-light">
             <template v-slot:title>
                 <span class="icon is-small mr-1">
-                    <fa :icon="icon"/>
+                    <fa :icon="icon" />
                 </span>
                 {{ displayTitle }}
             </template>
             <template v-slot:controls>
-                <card-refresh @refresh="fetch"/>
-                <card-badge :label="count"/>
-                <card-collapse/>
+                <card-refresh @refresh="fetch" />
+                <card-badge :label="count" />
+                <card-collapse />
             </template>
         </card-header>
         <card-content class="is-paddingless">
-            <documents v-bind="$attrs"
-                :id="id"
-                :type="type"
-                :query="query"
-                @update="count = $refs.documents.count; $refs.card.resize()"
-                v-on="$listeners"
-                ref="documents"/>
+            <documents v-bind="$attrs" :id="id" :type="type" :query="query"
+                @update="count = $refs.documents.count; $refs.card.resize()" v-on="$listeners" ref="documents" />
         </card-content>
     </card>
 </template>

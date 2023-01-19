@@ -2,10 +2,7 @@
     <div class="field">
         <div class="control">
             <label class="checkbox">
-            <input :value="value"
-                @change="$emit('input', !value)"
-                :checked="value"
-                type="checkbox">
+                <input :value="value" @change="$emit('input', !value)" :checked="value" type="checkbox">
                 {{ i18n('Remember me') }}
             </label>
         </div>

@@ -1,13 +1,11 @@
 <template>
     <div class="discussion-wrapper">
-        <div class="box has-background-light raises-on-hover p-3"
-            @mouseover="controls = true"
+        <div class="box has-background-light raises-on-hover p-3" @mouseover="controls = true"
             @mouseleave="controls = !confirmation ? false : controls">
             <article class="media">
                 <figure class="media-left">
                     <p class="image is-48x48">
-                        <img class="is-rounded"
-                            :src="avatar">
+                        <img class="is-rounded" :src="avatar">
                     </p>
                 </figure>
                 <div class="media-content">
@@ -32,45 +30,37 @@
                 </div>
                 <div class="media-right">
                     <div>
-                        <a class="button is-small is-rounded"
-                            @click="$emit('back')">
+                        <a class="button is-small is-rounded" @click="$emit('back')">
                             <span>
                                 {{ i18n('Back') }}
                             </span>
                             <span class="icon is-small">
-                                <fa icon="arrow-left"/>
+                                <fa icon="arrow-left" />
                             </span>
                         </a>
                     </div>
                 </div>
             </article>
-            <div class="discussion-body p-2"
-                v-html="discussion.body"/>
+            <div class="discussion-body p-2" v-html="discussion.body" />
             <div class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <reactions class="mt-2"
-                            :reactable="discussion"
-                            type="discussion"/>
+                        <reactions class="mt-2" :reactable="discussion" type="discussion" />
                     </div>
                 </div>
                 <div class="level-left">
                     <div class="level-item">
-                        <div class="is-flex controls is-right"
-                            v-if="controls && discussion.isEditable">
-                            <a class="button is-naked is-small"
-                                @click="$emit('edit')">
+                        <div class="is-flex controls is-right" v-if="controls && discussion.isEditable">
+                            <a class="button is-naked is-small" @click="$emit('edit')">
                                 <span class="icon">
-                                    <fa icon="pencil-alt"/>
+                                    <fa icon="pencil-alt" />
                                 </span>
                             </a>
-                            <confirmation placement="top"
-                                @show="confirmation = true"
-                                @hide="confirmation = controls = false"
-                                @confirm="$emit('delete')">
+                            <confirmation placement="top" @show="confirmation = true"
+                                @hide="confirmation = controls = false" @confirm="$emit('delete')">
                                 <a class="button is-naked is-small">
                                     <span class="icon">
-                                        <fa icon="trash-alt"/>
+                                        <fa icon="trash-alt" />
                                     </span>
                                 </a>
                             </confirmation>
@@ -87,23 +77,15 @@
                 {{ i18n('Replies') }}
             </span>
         </h5>
-        <reply v-for="(re, index) in discussion.replies"
-            :key="index"
-            :reply="re"
-            @delete="destroy(re, index)"
-            @update="update(re, index)"/>
-        <reply :reply="reply"
-            @store="store()"
-            @cancel="reply = null;"
-            v-if="reply"/>
-        <button class="button is-small is-rounded is-info"
-            @click="reply = replyFactory()"
-            v-else>
+        <reply v-for="(re, index) in discussion.replies" :key="index" :reply="re" @delete="destroy(re, index)"
+            @update="update(re, index)" />
+        <reply :reply="reply" @store="store()" @cancel="reply = null;" v-if="reply" />
+        <button class="button is-small is-rounded is-info" @click="reply = replyFactory()" v-else>
             <span>
                 {{ i18n('Reply') }}
             </span>
             <span class="icon is-small">
-                <fa icon="plus"/>
+                <fa icon="plus" />
             </span>
         </button>
     </div>
@@ -191,35 +173,35 @@ export default {
 </script>
 
 <style lang="scss">
+.discussion-wrapper {
+    .controls.is-right {
+        justify-content: flex-end;
+    }
 
-    .discussion-wrapper {
-        .controls.is-right {
-            justify-content: flex-end;
+    .discussion-body {
+        h1 {
+            font-size: 2em;
         }
 
-        .discussion-body {
-            h1 {
-                font-size: 2em;
-            }
+        h2 {
+            font-size: 1.5em;
+        }
 
-            h2 {
-                font-size: 1.5em;
-            }
+        .ql-align-center {
+            text-align: center;
+        }
 
-            .ql-align-center {
-                text-align: center;
-            }
+        ol,
+        ul {
+            padding-left: 3em;
+        }
 
-            ol, ul {
-                padding-left: 3em;
-            }
-
-            img {
-                width: 1.4rem;
-                height: 1.4rem;
-                margin-bottom: -0.3rem;
-                border-radius: 290486px;
-            }
+        img {
+            width: 1.4rem;
+            height: 1.4rem;
+            margin-bottom: -0.3rem;
+            border-radius: 290486px;
         }
     }
+}
 </style>

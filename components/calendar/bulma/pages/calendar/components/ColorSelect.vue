@@ -3,23 +3,18 @@
         <label class="label">
             {{ i18n(field.label) }}
         </label>
-        <vue-select v-bind="field.meta"
-            v-model="field.value"
-            :has-error="errors.has(field.name)"
-            @fetch="field.meta.options = $event"
-            @input="errors.clear(field.name); $emit('changed')"
-            v-on="$listeners">
+        <vue-select v-bind="field.meta" v-model="field.value" :has-error="errors.has(field.name)"
+            @fetch="field.meta.options = $event" @input="errors.clear(field.name); $emit('changed')" v-on="$listeners">
             <template v-slot:selection="{ selection, selectionBindings, selectionEvents }"
-                :selection-bindings="selectionBindings"
-                :selection-events="selectionEvents">
+                :selection-bindings="selectionBindings" :selection-events="selectionEvents">
                 <div v-if="selection">
-                    <span :class="`calendar-color calendar-${selection[colorField]}`"/>
+                    <span :class="`calendar-color calendar-${selection[colorField]}`" />
                     <span>{{ selection.name }}</span>
                 </div>
             </template>
-            <template v-slot:option="{option}">
+            <template v-slot:option="{ option }">
                 <div>
-                    <span :class="`calendar-color calendar-${option[colorField]}`"/>
+                    <span :class="`calendar-color calendar-${option[colorField]}`" />
                     <span>{{ option.name }}</span>
                 </div>
             </template>
@@ -55,11 +50,11 @@ export default {
 </script>
 
 <style lang="scss">
-    .calendar-color {
-        width: 10px;
-        height: 10px;
-        border-radius: 10px;
-        display: inline-block;
-        margin-right: 5px;
-    }
+.calendar-color {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-right: 5px;
+}
 </style>

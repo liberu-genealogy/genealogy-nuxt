@@ -1,32 +1,20 @@
 <template>
     <div class="box has-background-light">
-        <input class="input control is-large message-title"
-            v-model="message.title"
-            :placeholder="i18n('Title...')"
+        <input class="input control is-large message-title" v-model="message.title" :placeholder="i18n('Title...')"
             v-if="title">
-        <quill-editor :options="options"
-            ref="quillEditor"
-            v-model="message.body"/>
-        <form ref="inputForm"
-            @submit.prevent>
-            <input id="file-upload"
-                class="is-invisible"
-                type="file"
-                ref="fileInput"
-                @change="upload($event)"
+        <quill-editor :options="options" ref="quillEditor" v-model="message.body" />
+        <form ref="inputForm" @submit.prevent>
+            <input id="file-upload" class="is-invisible" type="file" ref="fileInput" @change="upload($event)"
                 v-if="attachments">
         </form>
         <div class="has-text-right">
-            <a class="button is-small is-rounded"
-                @click="$emit('cancel')">
+            <a class="button is-small is-rounded" @click="$emit('cancel')">
                 <span>{{ i18n('Cancel') }}</span>
                 <span class="icon is-small">
-                    <fa icon="ban"/>
+                    <fa icon="ban" />
                 </span>
             </a>
-            <a class="button is-success is-small is-rounded"
-                @click="save"
-                v-if="filled">
+            <a class="button is-success is-small is-rounded" @click="save" v-if="filled">
                 <span v-if="message.id">
                     {{ i18n('Update') }}
                 </span>
@@ -34,7 +22,7 @@
                     {{ i18n('Post') }}
                 </span>
                 <span class="icon is-small">
-                    <fa icon="check"/>
+                    <fa icon="check" />
                 </span>
             </a>
         </div>
@@ -114,7 +102,7 @@ export default {
         filled() {
             return (this.title
                 ? this.message.title
-                    && this.message.title.trim().length > 3
+                && this.message.title.trim().length > 3
                 : true)
                 && this.message.body
                 && this.message.body.trim().length > 10;
@@ -169,43 +157,43 @@ export default {
 </script>
 
 <style lang="scss">
-    .message-title {
-        border: unset;
+.message-title {
+    border: unset;
+    box-shadow: unset;
+    font-weight: bold;
+
+    &:focus {
         box-shadow: unset;
-        font-weight: bold;
+    }
+}
 
-        &:focus {
-            box-shadow: unset;
-        }
+.quill-editor {
+    .ql-toolbar.ql-snow {
+        border-left: unset;
+        border-right: unset;
+        padding: 1rem;
     }
 
-    .quill-editor {
-        .ql-toolbar.ql-snow {
-            border-left: unset;
-            border-right: unset;
-            padding: 1rem;
-        }
+    .ql-container.ql-snow {
+        height: unset;
+        border: unset;
+        min-height: 200px;
+        font-size: unset;
 
-        .ql-container.ql-snow {
+        .ql-editor {
             height: unset;
-            border: unset;
-            min-height: 200px;
-            font-size: unset;
 
-            .ql-editor {
-                height: unset;
-
-                img {
-            width: 1.4rem;
-            height: 1.4rem;
-            margin-bottom: -0.3rem;
-            border-radius: 290486px;
+            img {
+                width: 1.4rem;
+                height: 1.4rem;
+                margin-bottom: -0.3rem;
+                border-radius: 290486px;
+            }
         }
-            }
 
-            .ql-editor.ql-blank {
-                height: unset;
-            }
+        .ql-editor.ql-blank {
+            height: unset;
         }
     }
+}
 </style>
