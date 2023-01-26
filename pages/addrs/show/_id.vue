@@ -3,7 +3,7 @@
 </template>
 <router>
 {
-    name: 'addresses.show'
+    name: 'addrs.show'
 }
 </router>
 <script>
