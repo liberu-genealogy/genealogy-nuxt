@@ -24,6 +24,22 @@ body::-webkit-scrollbar-thumb {
   background: rgb(79 207 141 / 100%) !important;
 }
 
+.menu-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.menu-container::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.menu-container::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: transparent !important;
+}
+
+.menu-container:hover.menu-container::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,0.45) !important;
+}
 /* Theming */
 
 .has-background-secondary {

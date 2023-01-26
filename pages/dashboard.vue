@@ -407,9 +407,15 @@ export default {
           { text: 'ID', value: 'identifier', sortable: false },
           { text: 'PID', value: 'pid', sortable: false },
           { text: 'Name', value: 'personname', sortable: false },
-          { text: 'Place', value: 'eventplace', sortable: false },
-          { text: 'Type', value: 'eventtype', sortable: false },
+          { text: 'Event Place', value: 'eventplace', sortable: false },
+          { text: 'Event Type', value: 'eventtype', sortable: false },
+          { text: 'Date', value: 'eventdate.year', sortable: false },
+          { text: 'Relation Type', value: 'relationtype', sortable: false },
+          { text: 'Source Type', value: 'sourcetype', sortable: false },
           { text: 'Archive', value: 'archive', sortable: false },
+          { text: 'Code', value: 'archive_code', sortable: false },
+          { text: 'Org', value: 'archive_org', sortable: false },
+          
         ]
       else if (this.apiSelected == 'Family search')
         return [

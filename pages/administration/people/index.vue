@@ -1,6 +1,6 @@
 <template>
     <enso-table class="box is-paddingless raises-on-hover"
-        id="people"/>
+        id="people" ref="table"/>
 </template>
 <router>
 {
@@ -18,5 +18,7 @@ export default {
     },
 
     components: { EnsoTable },
+    
+    inject: ['canAccess', 'i18n'],
 };
 </script>
