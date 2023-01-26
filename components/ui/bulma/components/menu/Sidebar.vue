@@ -1,7 +1,8 @@
 <template>
     <core-sidebar>
         <template v-slot:default="{ menus }">
-            <vue-aside class="sidebar no-scrollbars menu-container has-background-primary">
+            <!-- <vue-aside class="sidebar no-scrollbars menu-container has-background-primary"> -->
+            <vue-aside class="sidebar menu-container has-background-primary">
                 <menus class="enso-menu"
                     :menus="menus"/>
             </vue-aside>
