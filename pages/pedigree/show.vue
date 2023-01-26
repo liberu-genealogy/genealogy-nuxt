@@ -188,6 +188,7 @@ export default {
         y_sep = 50;
       // declare a dag layout
       try {
+        console.log(coordQuad())
         this.tree = sugiyama()
           .nodeSize(() => [y_sep, x_sep])
           .layering(layeringSimplex())
@@ -441,7 +442,7 @@ export default {
       if (node.data.isUnion) return [];
       let unions = [];
       node.data.own_unions.forEach(
-        u_id => unions.push(this.all_nodes.find(n => n.data.id === u_id))
+        u_id => unions.push(this.all_nodes.find(n => n.data?.id === u_id))
       );
       return unions.filter(u => u !== undefined)
     },

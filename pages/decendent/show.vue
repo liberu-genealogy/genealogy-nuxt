@@ -1,5 +1,5 @@
 <template>
-  <div id="webtrees-fan-chart-container"></div>
+  <div id="webtrees-decedent-chart-container"></div>
 </template>
 <router>
 {
@@ -22,7 +22,7 @@ export default {
         // .then((response) => response.json())
         .then((res) => {
           // console.log(res.data);
-          const pedigreeChart = new FanChart("webtrees-fan-chart-container", {
+          const pedigreeChart = new FanChart("#webtrees-decedent-chart-container", {
             labels: {
               zoom: "Use Ctrl + scroll to zoom in the view",
               move: "Move the view with two fingers",
@@ -35,7 +35,7 @@ export default {
             rtl: "rtl",
           });
 
-          pedigreeChart.cssFile = "assets/css/fanchart/svg.css";
+          pedigreeChart.cssFile = "assets/css/fan-chart/svg.css";
           // Draw chart
           console.log(res);
           pedigreeChart.draw(res);

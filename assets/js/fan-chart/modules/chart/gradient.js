@@ -61,13 +61,11 @@ export default class Gradient
             ];
 
             if (data.data.sex === SEX_MALE) {
-                data.data.colors[0] = data.parent.data.colors[0];
-                data.data.colors[1] = c;
+                data.data.colors = [data.parent.data.colors[0], c];
             }
 
             if (data.data.sex === SEX_FEMALE) {
-                data.data.colors[0] = c;
-                data.data.colors[1] = data.parent.data.colors[1];
+                data.data.colors = [c, data.parent.data.colors[1]];
             }
         }
 
