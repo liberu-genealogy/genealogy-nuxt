@@ -1,10 +1,10 @@
 <template>
     <enso-table class="box is-paddingless raises-on-hover"
-        id="addresses" ref="table"/>
+        id="addrs" ref="table"/>
 </template>
 <router>
 {
-    name: 'addresses.index'
+    name: 'addrs.index'
 }
 </router>
 <script>
