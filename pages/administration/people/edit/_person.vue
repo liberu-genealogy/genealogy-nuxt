@@ -3,7 +3,9 @@
         <div class="column is-three-quarters-desktop is-full-touch">
             <enso-form class="box form-box has-background-light raises-on-hover"
                 @ready="companies = $refs.form.field('companies').value"
-                ref="form">
+                ref="form"
+                :path="`api${this.$route.path}`"
+            >
                 <template v-slot:companies="props">
                     <form-field v-bind="props"
                         @input="companies = $event"/>

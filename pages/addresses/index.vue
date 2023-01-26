@@ -1,6 +1,6 @@
 <template>
     <enso-table class="box is-paddingless raises-on-hover"
-        id="addrs"/>
+        id="addresses" ref="table"/>
 </template>
 <router>
 {

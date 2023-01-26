@@ -1,28 +1,31 @@
 <template>
     <div class="columns is-centered">
-        <div class="column is-half-desktop is-full-touch">
-            <enso-form class="box has-background-light raises-on-hover"
+        <div class="column is-three-quarters-desktop is-full-touch">
+            <enso-form class="box form-box has-background-light raises-on-hover"
                 :path="`api${this.$route.path}`"
             />
         </div>
     </div>
 </template>
+
 <router>
 {
-    name: 'administration.userGroups.edit'
+    name: 'families.edit'
 }
 </router>
-
 <script>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
-    // path: ':userGroup/edit',
+layout: 'auth',
     meta: {
-        breadcrumb: 'edit',
-        title: 'Edit User Group',
+        permission: { name: 'families menu' },
+        title: 'Families - Edit'
     },
 
     components: { EnsoForm },
 };
 </script>
+
+<style lang="scss">
+</style>

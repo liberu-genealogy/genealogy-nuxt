@@ -3,6 +3,7 @@
         <div class="column is-four-fifths-desktop is-full-touch">
             <enso-form class="box has-background-light raises-on-hover"
                 ref="form"
+                :path="`api${this.$route.path}`"
                 @ready="
                     ready = true;
                     pivotParams.userGroups.id = $refs.form.field('group_id').value;

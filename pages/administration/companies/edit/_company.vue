@@ -2,7 +2,9 @@
     <div class="columns is-centered">
         <div class="column is-three-quarters is-full-touch">
             <enso-form class="box has-background-light raises-on-hover"
-                ref="form">
+                ref="form"
+                :path="`api${this.$route.path}`"
+            >
                 <template v-slot:mandatary="props">
                     <form-field v-bind="props"
                         :pivot-params="pivotParams"/>
