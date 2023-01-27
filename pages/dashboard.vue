@@ -376,7 +376,7 @@ export default {
       peoplesattached: 0,
       pieChartData: null,
       chartOptions: null,
-      apiList: ['Geneanum', 'Open arch', 'Family search', 'Wikitree'],
+      apiList: ['Geneanum', 'Open arch', 'Family search', 'Wikitree', 'Member tree'],
       apiSelected: 'Geneanum',
       dateMenu: false,
       filter: {
@@ -425,6 +425,11 @@ export default {
           { text: 'Place', value: 'eventplace', sortable: false },
           { text: 'Type', value: 'eventtype', sortable: false },
           { text: 'Archive', value: 'archive', sortable: false },
+        ]
+      else if (this.apiSelected == 'Member tree')
+        return [
+          { text: 'ID', value: 'id', sortable: false },
+          { text: 'Name', value: 'name', sortable: false },
         ]
       else if (this.apiSelected == 'Wikitree')
         return [
@@ -521,6 +526,14 @@ export default {
           per_page: this.options?.itemsPerPage || 10,
           page: this.options?.page || 1,
         }
+      } else if (this.apiSelected == 'Member tree') {
+        url = '/api/member-tree/search-person'
+        params = {
+          name:
+              (this.filter.firstName || '') + ' ' + (this.filter.lastName || '')+ ' ' + (this.filter.date || ''),
+          // per_page: this.options?.itemsPerPage || 10,
+          // page: this.options?.page || 1,
+        }
       } else if (this.apiSelected == 'Family search') {
         url = '/api/family-search/search'
         params = {
@@ -545,8 +558,14 @@ export default {
             params: params,
           })
           .then(({ data }) => {
-            this.result = data.response.docs
-            this.totalCount = data.response.number_found
+            if (this.apiSelected == "Member tree"){
+              this.result = data
+              this.totalCount = data.length
+            }
+            else {
+              this.result = data.response.docs
+              this.totalCount = data.response.number_found
+            }
             this.loading = false
           })
           .catch(this.errorHandler)
