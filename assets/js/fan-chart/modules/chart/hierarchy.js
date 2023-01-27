@@ -40,7 +40,6 @@ export default class Hierarchy
         // const getDepth       = ({children}) => 1 + (children ? Math.max(...children.map(getDepth)) : 0);
         // const maxGenerations = getDepth(data);
 
-        console.log(data,'GDGDGDGDGDGDGDDGGD')
         // Construct root node from the hierarchical data
         let root = d3.hierarchy(
             data,
