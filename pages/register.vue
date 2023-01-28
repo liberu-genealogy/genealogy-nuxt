@@ -42,26 +42,19 @@ export default {
             if (data.csrfToken) {
                 this.setCsrfToken({token: data.csrfToken, $axios: this.$axios});
             }
-
-            // setTimeout(() => {
-            //     this.login();
-            //     this.home(true);
-            // }, 500);
             setTimeout(() => {
-                // redirect({ name: 'verify' });
-              if(data.plan_id!=''){
+              if(data.plan_id != ''){
                 this.$router.push({
-                  path: '/planDetail?name=price_1MHma5Hdo4UCTry3KigIkhrH',
+                  path: '/planDetail?price=' + data.plan_id + '&id=' + data.id,
                   params: {
-                    name: 'price_1MHma5Hdo4UCTry3KigIkhrH',
+                    price: data.plan_id,
+                    id: data.id
                   }
                 });
               }else{
                 this.$router.push('/verify');
               }
 
-            // this.login();
-            // this.home(true);
             }, 500);
         },
     },
