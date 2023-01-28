@@ -188,13 +188,20 @@
             <div class="mb-5">
               <div class="field">
                 <p class="control has-icons-left has-icons-right">
-                  <vue-select
+                  <!-- <vue-select
                       label="title"
+                      class="is-large"
                       v-model="selected_plan"
                       :reduce="(plan) => plan.id"
                       :options="plans"
-                  ></vue-select>
-
+                      placeholder="Select a Plan"
+                  >
+                  </vue-select> -->
+                  <plan-select 
+                    :options="plans"
+                    class="select"
+                    @input="selected_plan = $event"
+                  />
                 </p>
               </div>
             </div>
@@ -301,6 +308,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { focus } from "@enso-ui/directives";
+import PlanSelect from "~/components/auth/PlanSelect.vue";
 import Errors from "@enso-ui/laravel-validation";
 import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
 
@@ -308,7 +316,7 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
 export default {
   name: "RegisterForm",
-  components: { AuthIndex },
+  components: { AuthIndex, PlanSelect },
   directives: { focus },
   // inject: {
   //   i18n: { from: "i18n" },
@@ -324,31 +332,30 @@ export default {
       type: String,
     },
   },
-
   data: () => ({
-    // for plans
-    plans: [],
-    selected_plan: null,
-    // for plans
-    first_name: "",
-    last_name: "",
-    email: "",
-    // errors: new Errors(),
-    errorInput: "",
-    message: "",
-    isSuccessful: false,
-    loading: false,
-    password: "",
-    passwordMeta: {
-      content: "password",
-    },
-    password_confirmation: null,
-    confirmationMeta: {
-      content: "password",
-    },
-    terms: "",
-    device_name: 'mac',
-  }),
+        // for plans
+        plans: [],
+      selected_plan: null,
+      // for plans
+      first_name: "",
+      last_name: "",
+      email: "",
+      // errors: new Errors(),
+      errorInput: "",
+      message: "",
+      isSuccessful: false,
+      loading: false,
+      password: "",
+      passwordMeta: {
+        content: "password",
+      },
+      password_confirmation: null,
+      confirmationMeta: {
+        content: "password",
+      },
+      terms: "",
+      device_name: 'mac',
+    }),
 
   computed: {
     ...mapState(["meta"]),
@@ -376,7 +383,7 @@ export default {
         password,
         first_name,
         last_name,
-        selected_plan,
+        selected_plan: selected_plan.id,
         password_confirmation,
       };
     },
@@ -396,16 +403,13 @@ export default {
     //   });
     // },
     async getplans() {
-
-
       const response = await this.$axios.$get('/api/get-subscription-plan/')
-      this.plans = response
-      this.plans.map((plan) => {
+      this.plans = response.map((plan) => {
         // console.log('this.loggedInUser.id',this.start_id+' ==' +company.id);
         if (plan.nickname == 'free') {
-          this.selected_plan = plan.id
-
+          this.selected_plan = plan
         }
+        return plan;
       })
     },
     loginSocial(provider) {
@@ -425,9 +429,6 @@ export default {
             .then(({ data }) => {
               this.loading = false;
               this.isSuccessful = true;
-              // if(data.plan_id!=''){
-              //   this.stripe();
-              // }
               this.$emit("success", data);
             })
             .catch((error) => {

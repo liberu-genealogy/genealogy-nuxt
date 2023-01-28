@@ -159,6 +159,7 @@ export default {
 
   env: {
     STRIPE_PK: process.env.STRIPE_KEY,
+    HOSTNAME: process.env.HOSTNAME,
     baseUrl: process.env.BASE_URL ||'http://localhost:8000'
   },
 
