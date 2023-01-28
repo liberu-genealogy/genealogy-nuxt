@@ -12,7 +12,7 @@ export default {
 
   sitemap: [
     {
-      hostname: process.env.BASE_URL || 'http://localhost:3000',
+      hostname: process.env.BASE_URL || 'http://localhost:8000',
       path: '/sitemap.xml',
       gzip: true,
     },
@@ -62,7 +62,9 @@ export default {
     '~/assets/css/base.css',
     '~/assets/style/enso.scss',
     '~/assets/css/fontawesome.min.css',
-    '@fortawesome/fontawesome-svg-core/styles.css', 
+    '@fortawesome/fontawesome-svg-core/styles.css',
+    '~/assets/css/fan-chart/svg.css',
+    '~/assets/css/fan-chart/fan-chart.css',
   ],
 
   router: {
@@ -147,7 +149,7 @@ export default {
 
   publicRuntimeConfig: {
     axios: {
-      browserBaseURL: process.env.BASE_URL || 'http://localhost:3000',
+      browserBaseURL: process.env.BASE_URL || 'http://localhost:8000',
     },
     appEnv: process.env.APP_ENV || 'production',
     googleAnalytics: {
@@ -158,7 +160,7 @@ export default {
   env: {
     STRIPE_PK: process.env.STRIPE_KEY,
     HOSTNAME: process.env.HOSTNAME,
-    baseUrl: process.env.BASE_URL ||'http://localhost:3000'
+    baseUrl: process.env.BASE_URL ||'http://localhost:8000'
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

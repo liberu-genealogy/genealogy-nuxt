@@ -24,6 +24,7 @@ export default class Hierarchy
      */
     constructor(configuration)
     {
+        console.log(configuration,'configuration')
         this._configuration = configuration;
         this._nodes         = null;
     }

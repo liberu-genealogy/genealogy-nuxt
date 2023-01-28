@@ -1,6 +1,10 @@
 <template>
-    <enso-table class="box is-paddingless raises-on-hover"
-        id="dnamatching"/>
+  <enso-table class="box is-paddingless raises-on-hover"
+              id="dnamatching" ref="table" >
+    <template v-slot:image="{ row }">
+      <img :src="row.image" alt="" class="dna-image">
+    </template>
+  </enso-table>
 </template>
 
 <router>
@@ -17,8 +21,14 @@ layout: 'auth',
         title: 'DNA Matching - Index'
     },
     components: { EnsoTable },
+  inject: ['canAccess', 'i18n'],
 };
 </script>
 
 <style lang="scss">
+.dna-image {
+  max-width: 100px;
+  max-height: 60px;
+  object-fit: contain;
+}
 </style>
