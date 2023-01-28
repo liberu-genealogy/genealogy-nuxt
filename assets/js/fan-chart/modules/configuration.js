@@ -37,7 +37,7 @@ export default class Configuration
         showColorGradients = false,
         showParentMarriageDates = false,
         rtl = false,
-        innerArcs = 4
+        innerArcs = 6
     ) {
         // Default number of generations to display
         this._generations = generations;

@@ -54,7 +54,7 @@ export default class Text
             this.truncateNames(textPath2, data, 1);
 
             // Alternative names
-            if (data.data.alternativeNames.length > 0) {
+            if (data.data.alternativeNames?.length > 0) {
                 let pathId3   = this.createPathDefinition(parentId, 2, data);
                 let textPath3 = this.createTextPath(text, pathId3)
                     .attr("class", "alternativeName")
