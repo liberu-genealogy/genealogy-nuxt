@@ -64,7 +64,7 @@ export default {
       this.$refs.checkoutRef.redirectToCheckout();
     },
     async getplans() {
-      const response = await this.$axios.$get('/api/get-subscription-plan/')
+      const response = await this.$axios.$get('/api/get-subscription-plan')
       this.plans = response.map((plan) => {
         // console.log('this.loggedInUser.id',this.start_id+' ==' +company.id);
         if (plan.nickname == 'free') {
@@ -74,7 +74,7 @@ export default {
       })
     },
     async confirmCheckout(price, id) {
-      const response = await this.$axios.$post('/api/confirm_checkout/', { price, id })
+      const response = await this.$axios.$post('/api/confirm_checkout', { price, id })
     },
   },
   created() {
