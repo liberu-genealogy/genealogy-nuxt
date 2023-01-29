@@ -393,7 +393,7 @@ export default {
   },
 
   methods: {
-    // stripe(){
+    // #stripe(){
     //   // window.location.href='https://www.google.com/';
     //   this.$router.push({
     //     path: '/planDetail?name=price_1MHma5Hdo4UCTry3KigIkhrH',
@@ -403,7 +403,7 @@ export default {
     //   });
     // },
     async getplans() {
-      const response = await this.$axios.$get('/api/get-subscription-plan/')
+      const response = await this.$axios.$get('/api/get-subscription-plan')
       this.plans = response.map((plan) => {
         // console.log('this.loggedInUser.id',this.start_id+' ==' +company.id);
         if (plan.nickname == 'free') {

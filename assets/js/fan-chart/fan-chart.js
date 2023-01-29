@@ -4802,7 +4802,7 @@
           showColorGradients = false,
           showParentMarriageDates = false,
           rtl = false,
-          innerArcs = 4
+          innerArcs = 6
       ) {
           // Default number of generations to display
           this._generations = generations;
@@ -5051,6 +5051,7 @@
        */
       constructor(configuration)
       {
+          console.log(configuration,'configuration');
           this._configuration = configuration;
           this._nodes         = null;
       }
@@ -5066,6 +5067,7 @@
           // const getDepth       = ({children}) => 1 + (children ? Math.max(...children.map(getDepth)) : 0);
           // const maxGenerations = getDepth(data);
 
+          console.log(data,'GDGDGDGDGDGDGDDGGD');
           // Construct root node from the hierarchical data
           let root = hierarchy(
               data,
@@ -6230,7 +6232,7 @@
               this.truncateNames(textPath2, data, 1);
 
               // Alternative names
-              if (data.data.alternativeNames.length > 0) {
+              if (data.data.alternativeNames?.length > 0) {
                   let pathId3   = this.createPathDefinition(parentId, 2, data);
                   let textPath3 = this.createTextPath(text, pathId3)
                       .attr("class", "alternativeName")
@@ -7100,13 +7102,11 @@
               ];
 
               if (data.data.sex === SEX_MALE) {
-                  data.data.colors[0] = data.parent.data.colors[0];
-                  data.data.colors[1] = c;
+                  data.data.colors = [data.parent.data.colors[0], c];
               }
 
               if (data.data.sex === SEX_FEMALE) {
-                  data.data.colors[0] = c;
-                  data.data.colors[1] = data.parent.data.colors[1];
+                  data.data.colors = [c, data.parent.data.colors[1]];
               }
           }
 

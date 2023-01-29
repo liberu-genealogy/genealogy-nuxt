@@ -35,7 +35,7 @@ export default {
   },
 
   data () {
-    this.pk = process.env.STRIPE_PK;
+    this.pk = process.env.STRIPE_KEY;
     const urlParams = new URLSearchParams(window.location.search);
 
     const price = urlParams.get("price");
