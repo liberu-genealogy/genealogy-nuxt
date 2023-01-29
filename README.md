@@ -29,9 +29,11 @@ Note that most sections have short demo clips.
 
 2. Within the project folder run `yarn install`
 
-7. Run `yarn build`
+3. Copy .env.example to .env and configure to your environment.
 
-9. For live reload / hot module replacement functionality run `yarn dev`
+4. Run `yarn build`
+
+5. For live reload / hot module replacement functionality run `yarn dev`
 
 ### Thanks
 
