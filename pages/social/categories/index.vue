@@ -2,11 +2,11 @@
   <v-app>
     <div class="columns is-gapless is-multiline is-mobile">
       <div class="column is-12">
-<h1><a href="https://www.facebook.com/groups/familytree365" target="_blank">
+<h1><a href="https://www.facebook.com/groups/familytree365" target="_blank" class="button">
 Family Tree 365 Support</a></h1>
-<h1><a href="https://www.facebook.com/groups/genealogychat" target="_blank">
+<h1><a href="https://www.facebook.com/groups/genealogychat" target="_blank" class="button">
 Genealogy Discussion</a></h1>
-<h1><a href="https://www.facebook.com/groups/dna365" target="_blank">
+<h1><a href="https://www.facebook.com/groups/dna365" target="_blank" class="button">
 DNA & Genetics Discussion</a></h1>
 
       </div>
