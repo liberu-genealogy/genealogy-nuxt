@@ -8,7 +8,7 @@ Family Tree 365 Support</a></h1><br />
 Genealogy Discussion</a></h1><br />
 <h1><a href="https://www.facebook.com/groups/dna365" target="_blank" class="button is-success">
 DNA & Genetics Discussion</a></h1>
-
+      </div>
       </div>
       </div>
   </v-app>

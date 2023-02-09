@@ -52,41 +52,47 @@
           <div class="column is-6" v-for="plan in plans" :key="plan.id">
             <div class="card has-background-white has-text-black">
               <div class="card-content">
-                {{selected_currency_symbol + (plan.amount * selected_currency_rate / 100).toFixed(2) }}
-                <div class="is-size-6 has-text-black is-uppercase has-text-weight-bold">{{ plan.nickname }}</div>
-                <div class="is-size-7 has-text-black has-text-weight-regular">{{ plan.title }}</div>
                 {{
                   selected_currency_symbol +
                   ((plan.amount * selected_currency_rate) / 100).toFixed(2)
                 }}
                 <div
-                  class="
-                    is-size-6
-                    has-text-black
-                    is-uppercase
-                    has-text-weight-bold
-                  "
+                  class="is-size-6 has-text-black is-uppercase has-text-weight-bold"
                 >
                   {{ plan.nickname }}
                 </div>
                 <div class="is-size-7 has-text-black has-text-weight-regular">
                   {{ plan.title }}
                 </div>
-                <NuxtLink  v-if="has_payment_method == false" :to="'/subscription/stripe?name=' + plan.id" class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4">Subscribe by card</NuxtLink>
-                <NuxtLink  v-if="has_payment_method == false" :to="'/subscription/paypal?name=' + plan.id" class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4">Subscribe by PayPal</NuxtLink>
+                {{
+                  selected_currency_symbol +
+                  ((plan.amount * selected_currency_rate) / 100).toFixed(2)
+                }}
+                <div
+                  class="is-size-6 has-text-black is-uppercase has-text-weight-bold"
+                >
+                  {{ plan.nickname }}
+                </div>
+                <div class="is-size-7 has-text-black has-text-weight-regular">
+                  {{ plan.title }}
+                </div>
+                <NuxtLink
+                  v-if="has_payment_method == false"
+                  :to="'/subscription/stripe?name=' + plan.id"
+                  class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4"
+                  >Subscribe by card</NuxtLink
+                >
+                <NuxtLink
+                  v-if="has_payment_method == false"
+                  :to="'/subscription/paypal?name=' + plan.id"
+                  class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4"
+                  >Subscribe by PayPal</NuxtLink
+                >
 
                 <div v-if="has_payment_method && plan.subscribed === false">
                   <button
                     @click="open(plan.id)"
-                    class="
-                      button
-                      is-size-7 is-uppercase
-                      has-text-white
-                      has-background-primary
-                      has-text-weight-medium
-                      is-light
-                      mt-4
-                    "
+                    class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4"
                   >
                     Subscribe
                   </button>
@@ -94,13 +100,7 @@
                 <div v-if="plan.subscribed">
                   <button
                     @click="open(null)"
-                    class="
-                      button
-                      is-size-7 is-uppercase is-danger
-                      has-text-weight-medium
-                      is-light
-                      mt-4
-                    "
+                    class="button is-size-7 is-uppercase is-danger has-text-weight-medium is-light mt-4"
                     :class="{ 'is-success': plan.subscribed }"
                   >
                     Unsubscribe
@@ -119,12 +119,7 @@
             <img src="~assets/images/plan_info_img.svg" alt="" />
             <div class="card-content">
               <div
-                class="
-                  has-text-black has-text-weight-medium
-                  is-flex
-                  plans_info
-                  mb-5
-                "
+                class="has-text-black has-text-weight-medium is-flex plans_info mb-5"
               >
                 <i class="fas fa-check mr-2 mt-1"></i>
                 <p class="is-size-7">
@@ -133,12 +128,7 @@
                 </p>
               </div>
               <div
-                class="
-                  has-text-black has-text-weight-medium
-                  is-flex
-                  plans_info
-                  mb-5
-                "
+                class="has-text-black has-text-weight-medium is-flex plans_info mb-5"
               >
                 <i class="fas fa-check mr-2 mt-1"></i>
                 <p class="is-size-7">
@@ -200,14 +190,14 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   layout: 'default',
   head: {
-    title: 'Subscription',
+    title: 'Subscription'
   },
   meta: {
     breadcrumb: 'subscription',
-    title: 'Subscription',
+    title: 'Subscription'
   },
   components: {
-    Loading,
+    Loading
   },
   data() {
     return {
@@ -225,23 +215,20 @@ export default {
       selected_currency: 'GBP',
       selected_currency_symbol: '£',
       selected_currency_rate: 1,
-      isActive: false,
+      isActive: false
     }
   },
   computed: {
-    ...mapGetters(['loggedInUser']),
+    ...mapGetters(['loggedInUser'])
   },
   methods: {
     handleSelectedFiles(event) {
-      console.log(this.$refs.fileInput.files[0])
       this.file = this.$refs.fileInput.files[0]
       this.fileName = this.file.name
     },
     submit() {},
     async loadPlans() {
-      console.log('asdfhklasdflkasjdflasjdklfjasdlfjlasdfk')
       const response = await this.$axios.$get('/api/stripe/plans')
-      console.log('response', response)
 
       this.getCurrentSubscription()
       this.plans = response
@@ -261,7 +248,7 @@ export default {
         // this.plans
         //     .find(plan => plan.id !== response.plan_id)
         //     .subscribed = false;
-        this.plans.find((plan) => {
+        this.plans.find(plan => {
           if (plan.id == response.plan_id) {
             plan.subscribed = true
           } else {
@@ -275,7 +262,7 @@ export default {
       this.isLoading = false
       this.isActive = false
       this.$axios.$post('/api/stripe/subscribe', {
-        plan_id: this.selectedPlanId,
+        plan_id: this.selectedPlanId
       })
 
       this.getCurrentSubscription()
@@ -290,12 +277,12 @@ export default {
       this.isLoading = false
     },
     async selectCurrency(currency) {
-      const response = await this.$axios
-        .$get(
-          'https://api.currencyfreaks.com/latest?apikey=b864b83a27f5411c804e70762945b59a'
-        )
-        .then((res) => {
-          console.log(res.rates)
+      await fetch(
+        'https://api.freecurrencyapi.com/v1/latest?apikey=9WkmXwTgkCNODiQbpgzXrgt1SZkSBsIA1B3xZyMe'
+      )
+        .then(response => response.json())
+        .then(({ data }) => {
+          console.log('new cur', data)
           switch (currency) {
             case 'GBP':
               this.selected_currency_symbol = '£'
@@ -303,15 +290,15 @@ export default {
               break
             case 'USD':
               this.selected_currency_symbol = '$'
-              this.selected_currency_rate = 1 / res.rates.GBP
+              this.selected_currency_rate = 1 / data.GBP
               break
             case 'EUR':
               this.selected_currency_symbol = '€'
-              this.selected_currency_rate = res.rates.EUR / res.rates.GBP
+              this.selected_currency_rate = data.EUR / data.GBP
               break
             case 'AUD':
               this.selected_currency_symbol = '$'
-              this.selected_currency_rate = res.rates.AUD / res.rates.GBP
+              this.selected_currency_rate = data.AUD / data.GBP
               break
             default:
               this.selected_currency_symbol = '£'
@@ -327,10 +314,10 @@ export default {
     },
     close() {
       this.isActive = false
-    },
+    }
   },
   created() {
     this.loadPlans()
-  },
+  }
 }
 </script>
