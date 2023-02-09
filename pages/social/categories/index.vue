@@ -11,6 +11,7 @@ DNA & Genetics Discussion</a></h1>
       </div>
       </div>
       </div>
+    </div>
   </v-app>
 </template>
 <router>

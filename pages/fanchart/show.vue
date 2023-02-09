@@ -53,6 +53,32 @@ export default {
     generation: { label: 1, value: 1 },
   }),
   methods: {
+    async fetchData() {
+      if(!this.selected_person.value) return
+      let params = {start_id: this.selected_person.value, generation: this.generation.value }
+      this.$axios
+        .$get("/api/trees/show", { params: params })
+        .then((res) => {
+          this.data = res;
+          this.familyData = this.checkFamilyData();
+          const fanChart = new FanChart("#webtrees-fan-chart-container", {
+            labels: {
+              zoom: "Use Ctrl + scroll to zoom in the view",
+              move: "Move the view with two fingers",
+            },
+            defaultColor: "#0000FF",
+            fanDegree: 360,
+            fontColor: "#000",
+            generations: 1,
+            rtl: "rtl",
+            showColorGradients: true,
+            showEmptyBoxes: true,
+            treeLayout: "right",
+          });
+          fanChart.draw(this.familyData);
+        });
+    },
+
     checkBirthDeathDate(birth, death) {
       if(death) {
         if(!birth) return ""
@@ -61,6 +87,16 @@ export default {
         if(!birth) return ""
         return `Born ${birth.toString().slice(0, 4)}`
       }
+    },
+
+    getPersons() {
+      this.isLoading = true;
+      this.$axios
+        .$get("/api/persons")
+        .then((response) => {
+          this.persons = response;
+          this.isLoading = false;
+        });
     },
 
     checkChildren(id) {
@@ -74,8 +110,7 @@ export default {
           })
         }
       })
-      console.log(childIds.length)
-      if(!childIds.length) return
+      if(!childIds.length) return;
       this.data.persons[id].own_unions?.forEach((union) => {
         this.data.unions[union]?.children.forEach((childId) => {
           let person = this.data.persons[childId]
@@ -95,7 +130,7 @@ export default {
           })
         })
       })
-      return children
+      return children;
     },
 
     checkFamilyData(id = null) {
@@ -114,42 +149,6 @@ export default {
         timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
         children: this.checkChildren(this.data.start)
       }
-    },
-
-    async fetchData() {
-      if(!this.selected_person.value) return
-      let params = {start_id: this.selected_person.value, generation: this.generation.value }
-      this.$axios
-        .$get("/api/trees/show", { params: params })
-        .then((res) => {
-          this.data = res;
-          this.familyData = this.checkFamilyData();
-          const fanChart = new FanChart("#webtrees-fan-chart-container", {
-            labels: {
-              zoom: "Use Ctrl + scroll to zoom in the view",
-              move: "Move the view with two fingers",
-            },
-            generations: 1,
-            defaultColor: "#0000FF",
-            fontColor: "#000",
-            showColorGradients: true,
-            showEmptyBoxes: true,
-            treeLayout: "right",
-            rtl: "rtl",
-            fanDegree: 360
-          });
-          fanChart.draw(this.familyData);
-        });
-    },
-
-    getPersons() {
-      this.isLoading = true
-      this.$axios
-        .$get("/api/persons")
-        .then((res) => {
-          this.persons = res
-          this.isLoading = false
-        });
     },
   },
 
