@@ -3,7 +3,7 @@ const url = "https://www.familytree365.com";
 const title = "Family Tree 365 - Start your family tree today - free! Your first tree is 100% free. Sign-up to begin your genealogy journey today!";
 const description =
   "Our user-friendly yet powerful platform lets you create your own family tree the quick and easy way. No technical knowledge is required. Start your family tree today - free!";
-const mainImage = "https://www.familytree365.com/images/thumbnail.png";
+const mainImage = "https://api.familytree365.com/storage/images/thumbnail.jpg";
 
 export default (meta) => {
   return [

@@ -2,7 +2,7 @@
   <enso-table class="box is-paddingless raises-on-hover"
               id="dnamatching" ref="table" >
     <template v-slot:image="{ row }">
-      <img :src="row.image" alt="" class="dna-image">
+      <a :href="row.image" target="blank"><img :src="row.image" alt="" class="dna-image"></a>
     </template>
   </enso-table>
 </template>

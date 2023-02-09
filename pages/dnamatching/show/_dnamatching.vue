@@ -15,9 +15,11 @@ name: 'dnamatching.show'
 <script>
 
 export default {
+layout: 'auth',
   meta: {
     breadcrumb: 'show',
-    title: 'DNA Matching - Show'
+    title: 'DNA Matching - Show',
+    permission: { name: 'dnamatching menu' }
   },
 
   inject: ['route', 'routerErrorHandler'],
