@@ -59,7 +59,6 @@
                               It is designed to have extensive functionality while being simple to use, secure, and accessible.
                               You can easily import and export GEDCOM files, view and manipulate data, and unlock extra features. Sign-up to start your free family tree today!
                             </h2>
-<adsbygoogle ad-slot="6947200076" />          
                   <NuxtLink to="/register"
                                 class="button theme-button theme-button-xl has-background-secondary has-text-weight-medium has-text-white mt-6" v-if="!isAuth">
                                 Create Your Own Tree
