@@ -10,6 +10,7 @@ Genealogy Discussion</a></h1><br />
 DNA & Genetics Discussion</a></h1>
 
       </div>
+      </div>
   </v-app>
 </template>
 <router>
