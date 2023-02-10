@@ -51,6 +51,8 @@ export default {
     color: '#4fcf8d',
     backgroundColor: '#ffffff',
     generation: { label: 1, value: 1 },
+    thumbnail_man: "/images/thumbnail-man.svg",
+    thumbnail_woman: "/images/thumbnail-woman.svg",
   }),
   methods: {
     async fetchData() {

@@ -31,9 +31,10 @@
 
 <script>
 import { EnsoTable } from "@enso-ui/tables/bulma";
-import { PedigreeChart } from "/assets/js/modules/index";
+import { PedigreeChart } from "/assets/js/pedigree-chart/modules/index";
 import Loading from 'vue-loading-overlay'
 import vSelect from 'vue-select'
+import style from '/assets/css/svg.css'
 export default {
   layout: "auth",
   meta: {
@@ -51,6 +52,7 @@ export default {
     generation: { label: 1, value: 1 },
     thumbnail_man: "/images/thumbnail-man.svg",
     thumbnail_woman: "/images/thumbnail-woman.svg",
+    thumbnail_middle: "/images/thumbnail-unknown.svg"
   }),
   components: { 
     EnsoTable,
@@ -79,7 +81,6 @@ export default {
           })
         }
       })
-      if(!childIds.length) return
       this.data.persons[id].own_unions?.forEach((union) => {
         this.data.unions[union]?.children.forEach((childId) => {
           let person = this.data.persons[childId];
@@ -95,12 +96,12 @@ export default {
             birth: person.birthday ? person.birthday : person.birth_year,
             death: person.deathday ? person.deathday : person.death_year,
             timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
-            thumbnail : person.sex ? this.thumbnail_woman : this.thumbnail_man,
+            thumbnail : person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : thumbnail_middle,
             parents: this.checkChildren(childId)
           })
         })
       })
-      return parents
+      return parents.length == 0 ? null : parents
     },
 
     checkFamilyData(id = null) {
@@ -117,7 +118,7 @@ export default {
         birth: person.birthday ? person.birthday : person.birth_year,
         death: person.deathday ? person.deathday : person.death_year,
         timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
-        thumbnail : person.sex ? this.thumbnail_woman : this.thumbnail_man,
+        thumbnail : person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : this.thumbnail_man,
         parents: this.checkChildren(this.data.start)
       }
     },
@@ -129,7 +130,6 @@ export default {
         .then((res) => {
           this.data = res;
           this.familyData = this.checkFamilyData();
-          console.log(this.familyData);
           const pedigreeChart = new PedigreeChart(
             "#webtrees-pedigree-chart-container",
             {
@@ -145,7 +145,6 @@ export default {
               rtl: "rtl",
             }
           );
-          pedigreeChart.cssFile = "assets/css/svg.css";
           pedigreeChart.draw(this.familyData);
       });
     },
@@ -163,6 +162,11 @@ export default {
   mounted() {
     this.getPersons();
   },
+  computed: {
+    style() {
+      return style
+    }
+  }
 };
 </script>
 

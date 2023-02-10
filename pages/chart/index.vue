@@ -10,7 +10,7 @@
 </router>
 <script>
 import { EnsoTable } from "@enso-ui/tables/bulma";
-import { PedigreeChart } from "/assets/js/modules/index";
+import { PedigreeChart } from "/assets/js/pedigree-chart/modules/index";
 export default {
   layout: "auth",
   meta: {
