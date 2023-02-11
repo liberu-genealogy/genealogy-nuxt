@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./.docker/prod/app/Dockerfile
+      args:
+        IMAGE_REGISTRY: ${IMAGE_REGISTRY}
+        IMAGE_TAG: ${IMAGE_TAG}
+        IMAGE_NAME: nuxt
+    hostname: client
+    networks:
+      - client
+      - gateway
+    restart: unless-stopped
+
+networks:
+  client:
+    name: client
+
+  gateway:
+    name: gateway
+    external: true
