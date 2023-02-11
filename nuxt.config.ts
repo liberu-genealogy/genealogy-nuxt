@@ -34,4 +34,9 @@ export default defineNuxtConfig({
 			],
 		},
 	},
+	css: [
+		"~/assets/css/bulma.css",
+		"~/assets/css/base.css",
+	]
+   
 });
