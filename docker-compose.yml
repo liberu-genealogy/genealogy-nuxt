@@ -12,13 +12,8 @@ services:
     hostname: client
     networks:
       - client
-      - gateway
     restart: unless-stopped
 
 networks:
   client:
     name: client
-
-  gateway:
-    name: gateway
-    external: true
