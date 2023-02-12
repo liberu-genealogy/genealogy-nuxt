@@ -22,9 +22,9 @@ jobs:
       - run: cp .env.example .env
       - run: npm install
       - run:
-         name: npm build
+         name: npm run build
          working_directory: ./
-         command: "npm build || exit 1"
+         command: "npm run build || exit 1"
 
 workflows:
   all-tests:
