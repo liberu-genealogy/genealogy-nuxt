@@ -5,7 +5,7 @@ executors:
     docker:
       - image: cimg/base:2023.02
 orbs:
-  node: circleci/node@4.0.0
+  node: circleci/node@5.1.0
 
 jobs:
   test:
