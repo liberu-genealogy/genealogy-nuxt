@@ -3,7 +3,7 @@ version: 2.1
 executors:
   linux:
     docker:
-      - image: cimg/base:2020.01
+      - image: cimg/base:2023.02
 orbs:
   node: circleci/node@4.0.0
 
