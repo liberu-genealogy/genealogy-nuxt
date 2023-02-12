@@ -118,7 +118,7 @@ a.navbar-item.is-active,
 }
 
 .main-hero {
-  background: url('~assets/images/main-hero.webp') #4fcf8d no-repeat;
+  background: url('~/assets/images/main-hero.webp') #4fcf8d no-repeat;
   background-size: cover;
   min-height: 768px;
 }
@@ -155,7 +155,7 @@ a.navbar-item.is-active,
 /* Footer */
 
 .footer {
-  background: url(~assets/images/footer-bg.webp) #011109 bottom left no-repeat;
+  background: url(~/assets/images/footer-bg.webp) #011109 bottom left no-repeat;
   background-size: contain;
   padding: 3rem 1.5rem 3rem;
 }
