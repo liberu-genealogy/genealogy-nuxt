@@ -110,7 +110,11 @@ export default {
     '@nuxtjs/router-extras',
     '@nuxtjs/google-analytics',
     '@nuxtjs/vuetify',
+    '@nuxtjs/laravel-echo',
   ],
+  echo: {
+    plugins: ['~/plugins/echo.js']
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

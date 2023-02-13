@@ -76,7 +76,7 @@
     "pusher-js": "^7.0.3",
     "rollup": "^2.56",
     "rollup-plugin-terser": "^7.0",
-    "socket.io-client": "^4.2.0",
+    "socket.io-client": "^2.4.0",
     "vee-validate": "^3.4.12",
     "video.js": "^7.14.3",
     "vue-cal": "^3.10.1",
