@@ -109,11 +109,11 @@ export default [
 
     // descendants-chart.js
     {
-        input: "resources/js/descendants-chart/modules/index.js",
+        input: "assets/js/descendants-chart/modules/index.js",
         output: [
             {
                 name: "WebtreesDescendantsChart",
-                file: "resources/js/descendants-chart/descendants-chart.js",
+                file: "assets/js/descendants-chart/descendants-chart.js",
                 format: "umd"
             }
         ],
@@ -122,11 +122,11 @@ export default [
         ]
     },
     {
-        input: "resources/js/descendants-chart/modules/index.js",
+        input: "assets/js/descendants-chart/modules/index.js",
         output: [
             {
                 name: "WebtreesDescendantsChart",
-                file: "resources/js/descendants-chart/descendants-chart.min.js",
+                file: "assets/js/descendants-chart/descendants-chart.min.js",
                 format: "umd"
             }
         ],
@@ -145,11 +145,11 @@ export default [
 
     // descendants-chart-storage.js
     {
-        input: "resources/js/descendants-chart/modules/storage.js",
+        input: "assets/js/descendants-chart/modules/storage.js",
         output: [
             {
                 name: "WebtreesDescendantsChart",
-                file: "resources/js/descendants-chart/descendants-chart-storage.js",
+                file: "assets/js/descendants-chart/descendants-chart-storage.js",
                 format: "umd"
             }
         ],
@@ -158,11 +158,11 @@ export default [
         ]
     },
     {
-        input: "resources/js/descendants-chart/modules/storage.js",
+        input: "assets/js/descendants-chart/modules/storage.js",
         output: [
             {
                 name: "WebtreesDescendantsChart",
-                file: "resources/js/descendants-chart/descendants-chart-storage.min.js",
+                file: "assets/js/descendants-chart/descendants-chart-storage.min.js",
                 format: "umd"
             }
         ],
