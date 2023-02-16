@@ -1,4 +1,4 @@
-<template>
+w<template>
     <div>
      <section class="hero main-hero" id="home">
         <div class="hero-body is-flex ai--c">
@@ -28,6 +28,9 @@
                         <a data-scroll class="navbar-item" href="#overview">
                             Overview
                         </a>
+                        <NuxtLink to="/blog" class="navbar-item">
+                          Blog
+                        </NuxtLink>
                         <NuxtLink to="/dashboard" class="navbar-item" v-if="isAuth">
                           Dashboard
                         </NuxtLink>
@@ -78,37 +81,37 @@
             </h1>
             <div class="columns is-variable is-8 is-multiline">
                 <div class="column is-4 mb-5">
-                    <img src="~assets/images/secured.svg" alt="" class="mb-4">
+                    <a href="/blog/security"><img src="~assets/images/secured.svg" alt="" class="mb-4"></a>
                     <div class="is-size-4 has-text-black has-text-weight-bold"> Easy to use &amp; secure.</div>
                     <div class="is-size-6 has-text-black has-text-weight-regular mt-2">With an intuitive interface, you can get up and running quickly.
                       There’s no steep learning curve. In-built security features keep your family tree private and secure.</div>
                 </div>
                 <div class="column is-4 mb-5">
-                    <img src="~assets/images/import.svg" alt="" class="mb-4">
+                    <a href="/blog/import-export"><img src="~assets/images/import.svg" alt="" class="mb-4"></a>
                     <div class="is-size-4 has-text-black has-text-weight-bold"> Easily Import &amp; Export</div>
                     <div class="is-size-6 has-text-black has-text-weight-regular mt-2">Our user-friendly import/export tool makes uploading and downloading
                       existing family trees a breeze. Compatible with GEDCOM (family tree standard data format). </div>
                 </div>
                 <div class="column is-4 mb-5">
-                    <img src="~assets/images/record.svg" alt="" class="mb-4">
+                    <a href="/blog/chart-types"><img src="~assets/images/record.svg" alt="" class="mb-4"></a>
                     <div class="is-size-4 has-text-black has-text-weight-bold"> Record your Family </div>
                     <div class="is-size-6 has-text-black has-text-weight-regular mt-2">Create your family tree(s) and view in different formats using our tree viewer.
                       Even if you’re new to genealogy, you can quickly get to grips with our platform. </div>
                 </div>
                 <div class="column is-4 mb-5">
-                    <img src="~assets/images/ntree.svg" alt="" class="mb-4">
+                    <a href="/blog/no-family-tree-limit"><img src="~assets/images/ntree.svg" alt="" class="mb-4"></a>
                     <div class="is-size-4 has-text-black has-text-weight-bold"> No limit for Family Tree </div>
                     <div class="is-size-6 has-text-black has-text-weight-regular mt-2">We impose no limits on the size of your family tree so you are free to expand as you wish.
                       The platform can easily support hundreds of thousands of records.</div>
                 </div>
                 <div class="column is-4 mb-5">
-                    <img src="~assets/images/upload.svg" alt="" class="mb-4">
+                    <a href="/blog/upload"><img src="~assets/images/upload.svg" alt="" class="mb-4"></a>
                     <div class="is-size-4 has-text-black has-text-weight-bold"> Upload your Files </div>
                     <div class="is-size-6 has-text-black has-text-weight-regular mt-2">Upload a range of media formats to support your family tree,
                       including source documents, photographs, and other files related to your genealogy search. </div>
                 </div>
                 <div class="column is-4 mb-5">
-                    <img src="~assets/images/gimport.svg" alt="" class="mb-4">
+                    <a href="/blog/import-export"><img src="~assets/images/gimport.svg" alt="" class="mb-4"></a>
                     <div class="is-size-4 has-text-black has-text-weight-bold"> GEDCOM Import </div>
                     <div class="is-size-6 has-text-black has-text-weight-regular mt-2">We support GEDCOM, the de facto standard file format for genealogy data.
                       You can import and export GEDCOM family tree data at the click of a button. </div>
