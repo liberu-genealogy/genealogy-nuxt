@@ -198,8 +198,9 @@ w<template>
                 <div class="column is-4">
                     <img src="~assets/images/footer-logo.svg" width="180px" class="mb-5">
                     <div class="is-size-7 has-text-light has-text-weight-regular" style="line-height: 1.4rem;">
-                        Copyright &copy; Genealogy Websites Ltd.<br>Registered Address: Kemp House, 160 City Road, London, United Kingdom, EC1V 2NX
-			<br>Company Number: 13641244
+                         Copyright &copy; Family Tree 365 Ltd,<br>
+                         Kemp House, 82 James Carter Road, Mildenhall, Suffolk, IP28 7DE<br>
+                         Company number: 14652026
                     </div>
                     <p class="mt-2">
                         <a href="https://www.facebook.com/familytree365" target="_blank" class="is-size-7 has-text-link is-flex">
