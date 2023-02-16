@@ -3,7 +3,7 @@
         :class="{ 'is-loading': loading }"
         type="submit"
         @click.prevent="submit">
-        <span class="icon is-small">
+        <span class="icon is-small mr-2">
             <fa :icon="icon"/>
         </span>
         <span>{{ i18n(action) }}</span>
