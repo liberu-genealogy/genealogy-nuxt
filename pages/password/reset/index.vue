@@ -1,16 +1,21 @@
 <template>
-    <auth-form action="Send a reset password link"
-        endpoint="password.email"
-        icon="user"
-        :payload="payload"
-        @success="status = $event.status"
-        @submitting="status = null">
-        <p class="has-text-success is-size-7"
-            v-if="status">
-            {{ status }}
-        </p>
-        <email v-model="payload.email"/>
-    </auth-form>
+	<AuthIndex>
+		<template #form>
+			<auth-form action="Reset password" endpoint="password.email" icon="paper-plane" :payload="payload" @success="status = $event.status" @submitting="status = null">
+				<div class="mb-5 mt-4 pt-4">
+					<div class="field">
+						<p class="has-text-success is-size-7" v-if="status">
+							{{ status }}
+						</p>
+						<email v-model="payload.email" />
+					</div>
+				</div>
+			</auth-form>
+		</template>
+		<template #footerImageForm>
+			<img class="auth-img" src="~assets/images/mockup01@2x.webp" alt="" />
+		</template>
+	</AuthIndex>
 </template>
 <router>
 {
@@ -19,21 +24,22 @@
 </router>
 
 <script>
-import AuthForm from '~/components/auth/AuthForm.vue';
-import Email from '~/components/auth/fields/Email.vue';
+import AuthIndex from "~/components/auth/Index.vue";
+import AuthForm from "~/components/auth/AuthForm.vue";
+import Email from "~/components/auth/fields/Email.vue";
 
 export default {
-    meta: {
-        guestGuard: true,
-        title: 'Email Reset Link',
-    },
-    components: { AuthForm, Email },
+	meta: {
+		guestGuard: true,
+		title: "Email Reset Link",
+	},
+	components: { AuthForm, Email, AuthIndex },
 
-    data: () => ({
-        payload: {
-            email: '',
-        },
-        status: null,
-    }),
+	data: () => ({
+		payload: {
+			email: "",
+		},
+		status: null,
+	}),
 };
 </script>

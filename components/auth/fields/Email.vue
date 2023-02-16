@@ -9,7 +9,7 @@
                 :placeholder="i18n('Email')"
                 autocomplete="email"
                 @input="$emit('input', $event.target.value); errors.clear('email')">
-            <span class="icon is-small is-left">
+            <span class="icon is-large is-left" style="height: 100%;">
                 <fa icon="envelope"/>
             </span>
             <span v-if="successful"

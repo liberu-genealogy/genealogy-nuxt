@@ -1,5 +1,5 @@
 <template>
-    <button class="button is-primary is-fullwidth"
+    <button class="button is-primary theme-button has-background-primary is-uppercase has-text-weight-medium has-text-white is-fullwidth"
         :class="{ 'is-loading': loading }"
         type="submit"
         @click.prevent="submit">
