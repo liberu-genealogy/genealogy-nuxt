@@ -7,18 +7,18 @@
                 :class="{ 'is-danger': errors.has('password'), 'is-success': successful }"
                 :placeholder="i18n('Repeat Password')"
                 @input="$emit('input', $event.target.value); errors.clear('password')">
-            <span class="icon is-small is-left">
+            <span class="icon is-small is-left h-100">
                 <fa icon="lock"/>
             </span>
             <reveal-password :meta="meta"
                 :class="{ 'mr-5': match || successful || errors.has('password')}"
                 v-if="value && !successful"/>
             <span v-if="errors.has('password')"
-                class="icon is-small is-right has-text-danger">
+                class="icon is-small is-right has-text-danger h-100">
                 <fa icon="exclamation-triangle"/>
             </span>
             <span v-if="match && !errors.has('password') || successful"
-                class="icon is-small is-right has-text-success">
+                class="icon is-small is-right has-text-success h-100">
                 <fa icon="check"/>
             </span>
         </div>

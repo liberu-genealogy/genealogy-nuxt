@@ -18,7 +18,7 @@
 				<confirmation v-model="payload.password_confirmation" :match="match" />
 			</auth-form>
 		</template>
-        <template #footerImageForm>
+      <template #footerImageForm>
 			<img class="auth-img" src="~assets/images/mockup01@2x.webp" alt="" />
 		</template>
 	</AuthIndex>
