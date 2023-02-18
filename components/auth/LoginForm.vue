@@ -49,7 +49,7 @@
 										</label>
 									</div>
 									<div class="column has-text-right">
-										<NuxtLink to="/password/reset" class="has-text-link has-text-weight-medium"> Forgot password? </NuxtLink>
+										<NuxtLink to="/forgot-password" class="has-text-link has-text-weight-medium"> Forgot password? </NuxtLink>
 									</div>
 								</div>
 							</div>

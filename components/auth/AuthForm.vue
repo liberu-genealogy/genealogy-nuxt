@@ -3,9 +3,7 @@
 		<div class="auth-form is-gapless is-justify-content-flex-start">
 			<div>
 				<div class="mb-5">
-					<NuxtLink to="/login" class="is-size-6 is-flex has-text-link has-text-weight-medium mb-2"> Back to Login </NuxtLink>
-					<h1 class="is-size-4 has-text-black has-text-weight-bold">Reset password</h1>
-					<p class="my-3">Enter the email associated with your account and we'll send an email with instructions to reset your password</p>
+					<slot name="header"></slot>
 				</div>
 				<slot />
 
@@ -14,7 +12,7 @@
 				</div>
 			</div>
 		</div>
-		<slot name="footer" />
+		<slot name="footer"></slot>
 	</form>
 </template>
 

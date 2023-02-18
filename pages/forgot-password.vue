@@ -2,6 +2,11 @@
 	<AuthIndex>
 		<template #form>
 			<auth-form action="Reset password" endpoint="password.email" icon="paper-plane" :payload="payload" @success="status = $event.status" @submitting="status = null">
+				<template #header>
+					<NuxtLink to="/login" class="is-size-6 is-flex has-text-link has-text-weight-medium mb-2"> Back to Login </NuxtLink>
+					<h1 class="is-size-4 has-text-black has-text-weight-bold">Forgot password?</h1>
+					<p class="my-3">Enter the email associated with your account and we'll send an email with instructions to reset your password</p>
+				</template>
 				<div class="mb-5 mt-4 pt-4">
 					<div class="field">
 						<p class="has-text-success is-size-7" v-if="status">
