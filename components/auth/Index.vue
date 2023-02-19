@@ -1,5 +1,5 @@
 <template>
-  <div class="container auth is-fluid px-0">
+  <div class="container auth is-fluid px-0 pt-0">
     <div class="columns is-multiline is-gapless">
       <div class="column is-6-tablet is-5-desktop is-5-fullhd">
         <div class="auth has-background-primary">

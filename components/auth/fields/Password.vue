@@ -8,18 +8,18 @@
                 :placeholder="i18n('Password')"
                 :autocomplete="autocomplete"
                 @input="$emit('input', $event.target.value); errors.clear('password')">
-            <span class="icon is-small is-left">
+            <span class="icon is-small is-left h-100">
                 <fa icon="lock"/>
             </span>
             <reveal-password :meta="meta"
                 :class="{ 'is-spaced': successful || errors.has('password') }"
                 v-if="value && !successful"/>
             <span v-if="successful"
-                class="icon is-small is-right has-text-success">
+                class="icon is-small is-right has-text-success h-100">
                 <fa icon="check"/>
             </span>
             <span v-if="errors.has('password')"
-                class="icon is-small is-right has-text-danger">
+                class="icon is-small is-right has-text-danger h-100">
                 <fa icon="exclamation-triangle"/>
             </span>
             <slot name="password-strength"

@@ -9,11 +9,11 @@
                 :placeholder="i18n('Email')"
                 autocomplete="email"
                 @input="$emit('input', $event.target.value); errors.clear('email')">
-            <span class="icon is-small is-left">
+            <span class="icon is-large is-left ml-2" style="height: 100%;">
                 <fa icon="envelope"/>
             </span>
             <span v-if="successful"
-                class="icon is-small is-right has-text-success">
+                class="icon is-small is-right has-text-success pr-2" style="height: 100%;">
                 <fa icon="check"/>
             </span>
             <span v-if="errors.has('email')"
