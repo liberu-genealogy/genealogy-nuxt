@@ -51,10 +51,10 @@ export default {
 
 	data: (v) => ({
 		payload: {
-			email: v.$route.query.email || "",
+			email: "",
 			password: "",
 			password_confirmation: "",
-			token: v.$route.params.token || v.$route.query.token,
+			token: v.$route.params.token,
 		},
 		status: null,
 	}),
@@ -65,6 +65,11 @@ export default {
 
 			return password.length > 0 && password === password_confirmation;
 		},
+	},
+
+	mounted() {
+		if (!!this.$route.query.email)
+			this.payload.email = this.$route.query.email;
 	},
 
 	methods: {
