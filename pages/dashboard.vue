@@ -318,7 +318,39 @@
             <!--            ></vue-select>-->
             <font-awesome-icon
                 :icon="['fas', 'user-circle']"
-                class="has-text-primary mb-5"
+                class="has-text-primary mb-5 mt-2"
+                style="font-size: 55px"
+            />
+            <p class="is-size-7 mb-2 has-text-weight-medium">
+              {{ loggedInUser.email }}
+            </p>
+            <p class="is-size-7 mb-4 has-text-weight-medium">
+              {{ loggedInUser.person.name }}
+            </p>
+            <p class="is-size-7 is-uppercase">Use Tree</p>
+          </div>
+        </div>
+      </div>
+      <div class="column is-4-desktop is-6-tablet is-flex">
+        <div class="card has-background-white has-text-black">
+          <div class="card-content has-text-centered py-5">
+            <div v-if="changedb == true" class="notification is-success">
+              Changed Tree successfully!
+            </div>
+            <div v-if="changedb == false" class="notification is-danger">
+              Somthing Wrong!
+            </div>
+            <label>Invited Company</label>
+            <vue-select
+                label="name"
+                v-model="invited_company"
+                :reduce="(company) => company.id"
+                :options="invited_companies"
+                @input="setSelected"
+            ></vue-select>           
+            <font-awesome-icon
+                :icon="['fas', 'user-circle']"
+                class="has-text-primary mb-5 mt-2"
                 style="font-size: 55px"
             />
             <p class="is-size-7 mb-2 has-text-weight-medium">
@@ -364,7 +396,9 @@ export default {
       loaded: false,
       trees: [],
       companies: [],
+      invited_companies: [],
       selected_company: null,
+      invited_company: null,
       selected_tree: null,
       isLoading: false,
       fullPage: true,
@@ -458,7 +492,7 @@ export default {
     },
     async setSelected(value) {
       const response = await this.$axios.$post('/api/dashboard/changedb', {
-        company_id: this.selected_company,
+        company_id: value,
         // tree_id: this.selected_tree,
       })
       this.loadChart()
@@ -471,7 +505,8 @@ export default {
     },
     async getCompanies() {
       const response = await this.$axios.$get('/api/get_companies')
-      this.companies = response
+      this.companies = response.my_comps;
+      this.invited_companies = response.invited_comps;
       this.companies.map((company) => {
         // console.log('this.loggedInUser.id',this.start_id+' ==' +company.id);
         if (company.is_tenant == 1&&company.email === this.loggedInUser.email) {

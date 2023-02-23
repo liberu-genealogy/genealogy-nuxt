@@ -144,7 +144,9 @@ a.navbar-item.is-active,
 }
 
 /* Content Area */
-
+.v-select ul {
+  padding-left: 0;
+}
 .features img {
   height: 80px;
   width: auto;
