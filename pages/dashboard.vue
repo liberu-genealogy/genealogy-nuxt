@@ -471,7 +471,7 @@ export default {
     },
     async getCompanies() {
       const response = await this.$axios.$get('/api/get_companies')
-      this.companies = response
+      this.companies = response.my_comps
       this.companies.map((company) => {
         // console.log('this.loggedInUser.id',this.start_id+' ==' +company.id);
         if (company.is_tenant == 1&&company.email === this.loggedInUser.email) {
