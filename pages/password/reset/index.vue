@@ -54,7 +54,7 @@ export default {
 			email: v.$route.query.email || "",
 			password: "",
 			password_confirmation: "",
-			token: v.$route.params.token || v.$route.query.token,
+			token: v.$route.query.token || v.$route.params.token,
 		},
 		status: null,
 	}),
