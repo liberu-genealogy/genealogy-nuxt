@@ -10,13 +10,15 @@
 								<h1 class="is-size-4 has-text-black has-text-weight-bold">Sign in to your account</h1>
 							</div>
 
-							<!-- <div
-                v-for="(error, index) in errors"
-                :key="index"
-                class="notification is-danger"
-                >
-                {{ error[0] }}
-                </div> -->
+							<template v-if="hasError">
+								<div
+									v-for="(error, index) in errors"
+									:key="index"
+									class="notification is-danger"
+								>
+									{{ error[0] }}
+								</div>
+							</template>
 
 							<div class="mb-5">
 								<div class="field">
@@ -118,6 +120,7 @@ export default {
 
 	data: () => ({
 		errors: new Errors(),
+		hasError: false,
 		provider: null,
 		email: "",
 		password: "",
@@ -153,7 +156,6 @@ export default {
 			return this.isWebview ? { headers: { isWebview: true } } : {};
 		},
 	},
-
 	methods: {
 		validate() {
 			this.$refs.email.validate().then((res) => {
@@ -169,9 +171,9 @@ export default {
 		submit() {
 			this.loading = true;
 			this.isSuccessful = false;
+			this.hasError = false;
 			this.oldLogin();
-		},
-
+		},		
 		oldLogin() {
 			this.$axios.get("/sanctum/csrf-cookie").then(() => {
 				this.$axios
@@ -189,11 +191,13 @@ export default {
 						this.$emit("success", data);
 					})
 					.catch((error) => {
+						console.log("err", error)
 						this.loading = false;
 						const { status, data } = error.response;
 						switch (status) {
 							case 422:
-								this.errorInput = data.errors;
+								this.errors = data.errors;
+								this.hasError = true;
 								break;
 							case 429:
 								// this.$toastr.error(data.message); // error Toastr can't displayed
