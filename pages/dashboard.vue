@@ -411,7 +411,7 @@ export default {
       pieChartData: null,
       chartOptions: null,
       apiList: ['Geneanum', 'Open arch', 'Family search', 'Wikitree', 'Member tree'],
-      apiSelected: 'Geneanum',
+      apiSelected: 'Open arch',
       dateMenu: false,
       filter: {
         firstName: '',
