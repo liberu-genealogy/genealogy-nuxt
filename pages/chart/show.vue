@@ -9,7 +9,7 @@
         <v-select
             style="width: 100%"
             v-model="selected_person"
-            :options="persons.map(item => item = {label: item.name, value: item.id})"
+            :options="persons.map(item => item = {label: item.displayname, value: item.id})"
             @input="fetchData"
         />
         <v-select
@@ -154,7 +154,10 @@ export default {
       this.$axios
         .$get("/api/persons")
         .then((res) => {
-          this.persons = res;
+          this.persons = res.map(person => ({
+              ...person,
+              displayname:  `${person.name} (${person.birth_year})`,            
+          }));
           this.isLoading = false;
         });
     },
