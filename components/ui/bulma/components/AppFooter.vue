@@ -49,7 +49,7 @@ export default {
 
     .footer {
         &.isAuthenticated {
-            background: #4FCF8D !important;
+            background: #2FAF6D !important;
             padding: 1rem 1.5rem 0.8rem !important;
         }
         [dir='ltr'] & {
