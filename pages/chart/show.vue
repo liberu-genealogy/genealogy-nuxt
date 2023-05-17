@@ -1,24 +1,12 @@
 <template>
   <div>
-    <loading
-        :active="isLoading"
-        :color="color"
-        :background-color="backgroundColor"
-    />
-      <div class="select-box">
-        <v-select
-            style="width: 100%"
-            v-model="selected_person"
-            :options="persons.map(item => item = {label: item.displayname, value: item.id})"
-            @input="fetchData"
-        />
-        <v-select
-            style="width: 100px"
-            v-model="generation"
-            :options="Array.from(Array(10).keys()).map(item => item = {label: item, value: item})"
-            @input="fetchData"
-        />
-      </div>
+    <loading :active="isLoading" :color="color" :background-color="backgroundColor" />
+    <div class="select-box">
+      <v-select style="width: 100%" v-model="selected_person"
+        :options="persons.map(item => item = { label: item.displayname, value: item.id })" @input="fetchData" />
+      <v-select style="width: 100px" v-model="generation"
+        :options="Array.from(Array(10).keys()).map(item => item = { label: item, value: item })" @input="fetchData" />
+    </div>
     <div style="height: 700px" id="webtrees-pedigree-chart-container"></div>
   </div>
 </template>
@@ -54,77 +42,89 @@ export default {
     thumbnail_woman: "/images/thumbnail-woman.svg",
     thumbnail_middle: "/images/thumbnail-unknown.svg"
   }),
-  components: { 
+  components: {
     EnsoTable,
     Loading,
     vSelect
   },
   methods: {
-  checkBirthDeathDate(birth, death) {
-      if(death) {
-        if(!birth) return ""
+    checkBirthDeathDate(birth, death) {
+      if (death) {
+        if (!birth) return ""
         return `${birth.toString().slice(0, 4)}-${death.toString().slice(0, 4)}`
-      }else {
-        if(!birth) return ""
+      } else {
+        if (!birth) return ""
         return `Born ${birth.toString().slice(0, 4)}`
       }
     },
 
-    checkChildren(id) {
-      let parents = [];
-      let childIds = [];
+    checkParents(id) {
+      const parents = [];
+      const person = this.data.persons[id]
 
-      this.data.persons[id].own_unions?.forEach((union) => {
-        if(this.data.unions[union]) {
-          this.data.unions[union].children.forEach((childId) => {
-            childIds.push(childId)
-          })
-        }
-      })
-      this.data.persons[id].own_unions?.forEach((union) => {
-        this.data.unions[union]?.children.forEach((childId) => {
-          let person = this.data.persons[childId];
+      console.log("data: ", this.data);
+
+      const unionsArr = Object.values(this.data.unions);
+      const families = unionsArr.filter(union => {
+        const children = union.children;
+        let isChild = false;
+        children.forEach(child => {
+          if (child == id) isChild = true;
+        })
+        return isChild;
+      });
+
+      console.log("families: ", families, this.data.unions, id);
+      families.forEach(family => {
+        console.log("family: ", family);
+        family.partner?.forEach(parentId => {
+          const person = this.data.persons[parentId];
           parents.push({
             id: person.id,
             name: person.name,
             title: person.titl,
-            firstNames:[person.name],
-            lastNames:[''],
+            firstNames: [person.name],
+            lastNames: [''],
             generation: person.generation,
             sex: person.sex ? person.sex : "M",
-            xref : 1,
+            xref: 1,
             birth: person.birthday ? person.birthday : person.birth_year,
             death: person.deathday ? person.deathday : person.death_year,
             timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
-            thumbnail : person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : thumbnail_middle,
-            parents: this.checkChildren(childId)
+            thumbnail: person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : thumbnail_middle,
+            parents: this.checkParents(parentId),
           })
         })
       })
+
+      console.log("parents: ", parents);
       return parents.length == 0 ? null : parents
     },
 
-    checkFamilyData(id = null) {
+    checkFamilyData(id = null) {     
       const person = id ? this.data.persons[id] : this.data.persons[this.data.start]
-      return {
+      const data = {
         id: person.id,
         name: person.name,
         title: person.titl,
-        firstNames:[person.name],
-        lastNames:[''],
+        firstNames: [person.name],
+        lastNames: [''],
         generation: person.generation,
         sex: person.sex ? person.sex : "M",
-        xref : 1,
+        xref: 1,
         birth: person.birthday ? person.birthday : person.birth_year,
         death: person.deathday ? person.deathday : person.death_year,
         timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
-        thumbnail : person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : this.thumbnail_man,
-        parents: this.checkChildren(this.data.start)
+        thumbnail: person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : this.thumbnail_man,
+        parents: [...this.checkParents(this.data.start)],
       }
+
+      console.log("xxxdata: ", data);
+      return data;
     },
     async fetchData() {
-      if(!this.selected_person.value) return;
-      let params = {start_id: this.selected_person.value, generation: this.generation.value }
+      if (!this.selected_person.value) return;
+      let params = { start_id: this.selected_person.value, generation: this.generation.value }
       this.$axios
         .$get("/api/trees/show", { params: params })
         .then((res) => {
@@ -146,7 +146,7 @@ export default {
             }
           );
           pedigreeChart.draw(this.familyData);
-      });
+        });
     },
 
     getPersons() {
@@ -154,10 +154,17 @@ export default {
       this.$axios
         .$get("/api/persons")
         .then((res) => {
-          this.persons = res.map(person => ({
+          this.persons = res.map(person => {
+            const displayname = !!person.birth_year
+              ? `${person.name} (${person.birth_year})`
+              : !!person.birthday
+              ? `${person.name} (${(new Date(person.birthday)).getFullYear()})`              
+              : person.name;
+            return {
               ...person,
-              displayname:  `${person.name} (${person.birth_year})`,            
-          }));
+              displayname,
+            }
+          });
           this.isLoading = false;
         });
     },
