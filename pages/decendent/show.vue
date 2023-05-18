@@ -9,7 +9,7 @@
         <v-select
             style="width: 100%"
             v-model="selected_person"
-            :options="persons.map(item => item = {label: item.name, value: item.id})"
+            :options="persons.map(item => item = {label: item.displayname, value: item.id})"
             @input="fetchData"
         />
         <v-select
@@ -62,7 +62,17 @@ export default {
       this.$axios
         .$get("/api/getPersons")
         .then((response) => {
-          this.persons = response;
+          this.persons = response.map(person => {
+            const displayname = !!person.birth_year
+              ? `${person.name} (${person.birth_year})`
+              : !!person.birthday
+              ? `${person.name} (${(new Date(person.birthday)).getFullYear()})`              
+              : person.name;
+            return {
+              ...person,
+              displayname,
+            }
+          });
           this.isLoading = false;
         });
     },
@@ -73,6 +83,8 @@ export default {
         .$get("/api/decendent/show", { params: params })
         .then((res) => {
           this.data = res
+          // console.log(res)
+          // return;
           this.familyData = this.checkFamilyData()
           const descendantsChart = new DescendantsChart("#webtrees-descendants-chart-container", {
             labels: {
@@ -109,8 +121,12 @@ export default {
         }
       })
 
+      console.log("person", this.data.persons[id])
+      console.log("ChildIds", childIds, id)
+
       if(!childIds.length) return;
-      this.data.persons[id].own_unions?.forEach((union) => {
+      this.data.persons[id].own_unions?.forEach((union, idx) => {
+        if (idx > 3) return children;
         this.data.unions[union]?.children.forEach((childId) => {
           let person = this.data.persons[childId]
           children.push({

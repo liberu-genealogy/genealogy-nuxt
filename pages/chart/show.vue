@@ -116,7 +116,7 @@ export default {
         death: person.deathday ? person.deathday : person.death_year,
         timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
         thumbnail: person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : this.thumbnail_man,
-        parents: [...this.checkParents(this.data.start)],
+        parents: this.checkParents(this.data.start),
       }
 
       console.log("xxxdata: ", data);
