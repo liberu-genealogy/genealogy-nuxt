@@ -33,6 +33,7 @@ import vSelect from 'vue-select'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import style from '/assets/css/svg.css'
+import createDisplayName from '/utils/displayName';
 export default {
   layout: "auth",
   meta: {
@@ -133,7 +134,7 @@ export default {
             id: person.id,
             name: person.name,
             title: person.titl,
-            firstNames:[person.name],
+            firstNames:[createDisplayName(person)],
             lastNames:[''],
             generation: person.generation,
             sex: person.sex ? person.sex : "M",
@@ -155,7 +156,7 @@ export default {
         id: person.id,
         name: person.name,
         title: person.titl,
-        firstNames:[person.name],
+        firstNames:[createDisplayName(person)],
         lastNames:[''],
         generation: person.generation,
         sex: person.sex ? person.sex : "M",

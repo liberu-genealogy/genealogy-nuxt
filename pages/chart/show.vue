@@ -18,11 +18,14 @@
 
 
 <script>
+
+
 import { EnsoTable } from "@enso-ui/tables/bulma";
 import { PedigreeChart } from "/assets/js/pedigree-chart/modules/index";
 import Loading from 'vue-loading-overlay'
 import vSelect from 'vue-select'
 import style from '/assets/css/svg.css'
+import createDisplayName from '/utils/displayName';
 export default {
   layout: "auth",
   meta: {
@@ -74,16 +77,16 @@ export default {
         return isChild;
       });
 
-      console.log("families: ", families, this.data.unions, id);
+      // console.log("families: ", families, this.data.unions, id);
       families.forEach(family => {
-        console.log("family: ", family);
+        // console.log("family: ", family);
         family.partner?.forEach(parentId => {
           const person = this.data.persons[parentId];
           parents.push({
             id: person.id,
             name: person.name,
             title: person.titl,
-            firstNames: [person.name],
+            firstNames: [createDisplayName(person)],
             lastNames: [''],
             generation: person.generation,
             sex: person.sex ? person.sex : "M",
@@ -107,7 +110,7 @@ export default {
         id: person.id,
         name: person.name,
         title: person.titl,
-        firstNames: [person.name],
+        firstNames: [createDisplayName(person)],
         lastNames: [''],
         generation: person.generation,
         sex: person.sex ? person.sex : "M",
