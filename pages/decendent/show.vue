@@ -162,7 +162,7 @@ export default {
         sex: person.sex ? person.sex : "M",
         xref : 1,
         birth: getBirthYear(person),
-        death: getDeathYear(per),
+        death: getDeathYear(person),
         timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
         thumbnail : person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : thumbnail_middle,
         children: this.checkChildren(this.data.start)
