@@ -33,7 +33,7 @@ import vSelect from 'vue-select'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import style from '/assets/css/svg.css'
-import createDisplayName from '/utils/displayName';
+import {createDisplayName, getBirthYear, getDeathYear } from '/utils/personHelper';
 export default {
   layout: "auth",
   meta: {
@@ -122,8 +122,8 @@ export default {
         }
       })
 
-      console.log("person", this.data.persons[id])
-      console.log("ChildIds", childIds, id)
+      // console.log("person", this.data.persons[id])
+      // console.log("ChildIds", childIds, id)
 
       if(!childIds.length) return;
       this.data.persons[id].own_unions?.forEach((union, idx) => {
@@ -139,8 +139,8 @@ export default {
             generation: person.generation,
             sex: person.sex ? person.sex : "M",
             xref : 1,
-            birth: person.birthday ? person.birthday : person.birth_year,
-            death: person.deathday ? person.deathday : person.death_year,
+            birth: getBirthYear(person),
+            death: getDeathYear(person),
             timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
             thumbnail : person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : thumbnail_middle,
             children: this.checkChildren(childId)
@@ -161,8 +161,8 @@ export default {
         generation: person.generation,
         sex: person.sex ? person.sex : "M",
         xref : 1,
-        birth: person.birthday ? person.birthday : person.birth_year,
-        death: person.deathday ? person.deathday : person.death_year,
+        birth: getBirthYear(person),
+        death: getDeathYear(per),
         timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
         thumbnail : person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : thumbnail_middle,
         children: this.checkChildren(this.data.start)
