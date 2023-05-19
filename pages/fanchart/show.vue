@@ -9,7 +9,7 @@
         <v-select
             style="width: 100%"
             v-model="selected_person"
-            :options="persons.map(item => item = {label: item.name, value: item.id})"
+            :options="persons.map(item => item = {label: item.displayname, value: item.id})"
             @input="fetchData"
         />
         <v-select
@@ -32,6 +32,7 @@ import { FanChart } from "/assets/js/fan-chart/modules/index";
 import vSelect from 'vue-select'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
+import {createDisplayName, getBirthYear, getDeathYear } from '/utils/personHelper';
 
 export default {
   layout: "auth",
@@ -71,7 +72,7 @@ export default {
             defaultColor: "#0000FF",
             fanDegree: 360,
             fontColor: "#000",
-            generations: 1,
+            generations: this.generation.value,
             rtl: "rtl",
             showColorGradients: true,
             showEmptyBoxes: true,
@@ -96,7 +97,17 @@ export default {
       this.$axios
         .$get("/api/persons")
         .then((response) => {
-          this.persons = response;
+          this.persons = response.map(person => {
+            const displayname = !!person.birth_year
+              ? `${person.name} (${person.birth_year})`
+              : !!person.birthday
+              ? `${person.name} (${(new Date(person.birthday)).getFullYear()})`              
+              : person.name;
+            return {
+              ...person,
+              displayname,
+            }
+          });
           this.isLoading = false;
         });
     },
@@ -135,13 +146,56 @@ export default {
       return children;
     },
 
+    checkParents(id) {
+      const parents = [];
+      const person = this.data.persons[id]
+
+      console.log("data: ", this.data);
+
+      const unionsArr = Object.values(this.data.unions);
+      const families = unionsArr.filter(union => {
+        const children = union.children;
+        let isChild = false;
+        children.forEach(child => {
+          if (child == id) isChild = true;
+        })
+        return isChild;
+      });
+
+      // console.log("families: ", families, this.data.unions, id);
+      families.forEach(family => {
+        // console.log("family: ", family);
+        family.partner?.forEach(parentId => {
+          const person = this.data.persons[parentId];
+          parents.push({
+            id: person.id,
+            name: person.name,
+            title: person.titl,
+            firstNames: [createDisplayName(person)],
+            lastNames: [''],
+            generation: person.generation,
+            sex: person.sex ? person.sex : "M",
+            xref: 1,
+            birth: getBirthYear(person),
+            death: getDeathYear(person),
+            timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
+            thumbnail: person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : thumbnail_middle,
+            children: this.checkParents(parentId),
+          })
+        })
+      })
+
+      // console.log("parents: ", parents);
+      return parents.length == 0 ? null : parents
+    },
+
     checkFamilyData(id = null) {
       const person = id ? this.data.persons[id] : this.data.persons[this.data.start]
       return {
         id: person.id,
         name: person.name,
         title: person.titl,
-        firstNames:[person.name],
+        firstNames:[createDisplayName(person)],
         lastNames:[''],
         generation: person.generation,
         sex: person.sex ? person.sex : "M",
@@ -149,7 +203,7 @@ export default {
         birth: person.birthday ? person.birthday : person.birth_year,
         death: person.deathday ? person.deathday : person.death_year,
         timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
-        children: this.checkChildren(this.data.start)
+        children: this.checkParents(this.data.start)
       }
     },
   },
