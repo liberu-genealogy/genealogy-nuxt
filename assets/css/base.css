@@ -24,6 +24,15 @@ body::-webkit-scrollbar-thumb {
   background: rgb(79 207 141 / 100%) !important;
 }
 
+.w-100 {
+  width: 100%;
+}
+
+.dash-icon {
+  width: 63px;
+  height: 63px;
+}
+
 .menu-container::-webkit-scrollbar {
   width: 8px;
 }

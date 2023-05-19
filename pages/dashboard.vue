@@ -93,11 +93,11 @@
           class="elevation-1"
       ></v-data-table>
     </v-card>
-    <div class="columns is-variable is-3 is-desktop">
+    <div class="columns mt-3 is-variable is-3 is-desktop">
       <div class="column">
         <div class="card has-background-white has-text-black">
           <div class="card-content is-flex jc--sb">
-            <img src="~assets/images/gedcom.svg" alt="" />
+            <img src="~assets/images/gedcom.svg" alt="" class="dash-icon" />
             <div class="has-text-right">
               <p class="is-size-4 has-text-weight-semibold">
                 {{ peoplesattached }}
@@ -122,7 +122,7 @@
       <div class="column">
         <div class="card has-background-white has-text-black">
           <div class="card-content is-flex jc--sb">
-            <img src="~assets/images/families.svg" alt="" />
+            <img src="~assets/images/families.svg" alt="" class="dash-icon" />
             <div class="has-text-right">
               <p class="is-size-4 has-text-weight-semibold">
                 {{ familiesjoined }}
@@ -137,7 +137,7 @@
       <div class="column">
         <div class="card has-background-white has-text-black">
           <div class="card-content is-flex jc--sb">
-            <img src="~assets/images/peoples.svg" alt="" />
+            <img src="~assets/images/peoples.svg" alt="" class="dash-icon" />
             <div class="has-text-right">
               <p class="is-size-4 has-text-weight-semibold">
                 {{ peoplesattached }}
@@ -165,11 +165,11 @@
             />
           </div>
         </div> -->
-        <chart-card class="is-rounded raises-on-hover has-background-white has-text-black has-margin-bottom-large"
+        <chart-card class="is-rounded w-100 raises-on-hover has-background-white has-text-black has-margin-bottom-large"
                     source="/api/dashboard/pie"/>
       </div>
       <div class="column is-4-desktop is-6-tablet is-flex">
-        <div class="card has-background-white has-text-black">
+        <div class="card w-100 has-background-white has-text-black">
           <div class="card-header">
             <div class="card-header-title has-text-black">Activity</div>
           </div>
@@ -204,7 +204,7 @@
         </div>
       </div>
       <div class="column is-4-desktop is-6-tablet is-flex">
-        <div class="card has-background-white has-text-black">
+        <div class="card w-100 has-background-white has-text-black">
           <div class="card-header">
             <div class="card-header-title has-text-black">Files</div>
           </div>
@@ -285,7 +285,7 @@
         </div>
       </div>
       <div class="column is-4-desktop is-6-tablet is-flex">
-        <div class="card has-background-white has-text-black">
+        <div class="card w-100 has-background-white has-text-black">
           <div class="card-content has-text-centered py-5">
             <div v-if="changedb == true" class="notification is-success">
               Changed Tree successfully!
@@ -332,7 +332,7 @@
         </div>
       </div>
       <div class="column is-4-desktop is-6-tablet is-flex">
-        <div class="card has-background-white has-text-black">
+        <div class="card w-100 has-background-white has-text-black">
           <div class="card-content has-text-centered py-5">
             <div v-if="changedb == true" class="notification is-success">
               Changed Tree successfully!
