@@ -410,8 +410,8 @@ export default {
       peoplesattached: 0,
       pieChartData: null,
       chartOptions: null,
-      apiList: ['Geneanum', 'Open arch', 'Family search', 'Wikitree', 'Member tree'],
-      apiSelected: 'Geneanum',
+      apiList: ['Open arch', 'Family search', 'Wikitree', 'Member tree'],
+      apiSelected: 'Wikitree',
       dateMenu: false,
       filter: {
         firstName: '',
