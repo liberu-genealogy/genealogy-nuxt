@@ -411,7 +411,7 @@ export default {
       pieChartData: null,
       chartOptions: null,
       apiList: ['Open arch', 'Family search', 'Wikitree', 'Member tree'],
-      apiSelected: 'Wikitree',
+      apiSelected: 'Open arch',
       dateMenu: false,
       filter: {
         firstName: '',
