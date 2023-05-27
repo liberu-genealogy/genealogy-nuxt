@@ -25,7 +25,7 @@ Note that most sections have short demo clips.
 
 ### Installation Steps
 
-1. Download the project with `git clone https://github.com/cgd-ui/genealogy.git --depth 1`
+1. Download the project with `git clone https://github.com/liberu-ui/genealogy.git --depth 1`
 
 2. Within the project folder run `yarn install`
 
