@@ -8,6 +8,8 @@ COPY package.json package.json
 
 COPY yarn.lock yarn.lock
 
+COPY rollup.config.js rollup.config.js
+
 RUN yarn  install
 
 COPY . /app
