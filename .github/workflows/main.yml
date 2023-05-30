@@ -35,7 +35,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: "{{defaultContext}}:.docker/prod/app/"
+        #  context: "{{defaultContext}}:.docker/prod/app/"
           file: Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
