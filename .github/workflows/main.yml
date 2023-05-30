@@ -24,6 +24,9 @@ jobs:
           images: liberu/genealogy-frontend
      
       -
+       name: Clone repository
+       uses: actions/checkout@v3
+      -
         # Setting up Docker Buildx with docker-container driver is required
         # at the moment to be able to use a subdirectory with Git context
         name: Set up Docker Buildx
