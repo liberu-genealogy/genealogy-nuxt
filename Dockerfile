@@ -4,15 +4,9 @@ FROM node:14-alpine AS build
 
 WORKDIR /app
 
-COPY package.json package.json
-
-COPY yarn.lock yarn.lock
-
-COPY rollup.config.js rollup.config.js
+COPY . /app
 
 RUN yarn  install
-
-COPY . /app
 
 RUN yarn build
 
