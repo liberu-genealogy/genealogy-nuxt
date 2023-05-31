@@ -1,6 +1,6 @@
 {
-  "name": "nuxt",
-  "version": "9.0.0",
+  "name": "genealogy",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -35,16 +35,13 @@
     "@enso-ui/uploader": "^1.0.24",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@nuxt/babel-preset-app": "^2.15.8",
-    "@nuxtjs/axios": "^5.13.6",
+    "@nuxt/kit": "^3.5.2",
     "@nuxtjs/google-adsense": "2.0.0",
-    "@nuxtjs/laravel-echo": "^1.1.0",
-    "@nuxtjs/proxy": "^2.1.0",
-    "@nuxtjs/vuetify": "^1.12.1",
     "@rollup/plugin-node-resolve": "^13.0",
     "@sentry/browser": "^6.12.0",
     "@sentry/integrations": "^6.12.0",
     "@vue-stripe/vue-stripe": "^4.2.5",
+    "@vue/server-renderer": "^3.3.4",
     "animate.css": "^4.1.1",
     "bulma-extensions": "^6.2.7",
     "chart.js": "2.9.4",
@@ -66,10 +63,11 @@
     "flag-icon-css": "^3.5.0",
     "flatpickr": "^4.6.9",
     "laravel-echo": "^1.11.2",
-    "nuxt-edge": "^2.16.0-27358576.777a4b7f",
+    "nuxt": "^3.5.2",
     "nuxt-fontawesome": "^0.4.0",
     "nuxt-route-meta": "^2.3.2",
     "nuxt-vuex-router-sync": "^0.0.3",
+    "nuxt3": "^3.5.3-28090804.c9adf700",
     "opencollective": "^1.0.3",
     "opencollective-postinstall": "^2.0.3",
     "patch-package": "^6.4.7",
@@ -80,6 +78,7 @@
     "socket.io-client": "^2.4.0",
     "vee-validate": "^3.4.12",
     "video.js": "^7.14.3",
+    "vue": "3.3.4",
     "vue-cal": "^3.10.1",
     "vue-chartjs": "^3.5.1",
     "vue-fb-customer-chat": "^0.2.0",
@@ -98,7 +97,6 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@nuxt/bridge": "npm:@nuxt/bridge-edge",
     "@nuxtjs/eslint-config": "^6.0.1",
-    "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/fontawesome": "^1.1.2",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/router-extras": "^1.1.1",
@@ -111,5 +109,25 @@
     "sass": "^1.43.4",
     "sass-loader": "^10.1.1",
     "style-loader": "^3.3.1"
-  }
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
 }

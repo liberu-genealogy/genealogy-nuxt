@@ -94,7 +94,7 @@ export default {
     '~/plugins/date-fns/formatDistance.js',
     '~/plugins/vue-select.js',
     '~/plugins/vuelidate.js',
-    //'~/plugins/echo.js',
+    // '~/plugins/echo.js',
     "~/plugins/vue-fb-customer-chat.js",
     {src: '~/plugins/vue-stripe.js', ssr: false},
   ],
@@ -109,8 +109,8 @@ export default {
     '@nuxtjs/fontawesome',
     '@nuxtjs/router-extras',
     '@nuxtjs/google-analytics',
-    '@nuxtjs/vuetify',
-    '@nuxtjs/laravel-echo',
+    // '@nuxtjs/vuetify',
+    // '@nuxtjs/laravel-echo',
   ],
   echo: {
     plugins: ['~/plugins/echo.js']
@@ -119,7 +119,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
+    // '@nuxtjs/axios',
     'nuxt-vuex-router-sync',
     'nuxt-route-meta',
     '@nuxtjs/google-adsense',

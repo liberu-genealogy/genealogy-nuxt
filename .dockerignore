@@ -1,6 +1,7 @@
 /.idea
 /.vscode
 /.git
+/.docker
 /node_modules
 /tests
 .dockerignore

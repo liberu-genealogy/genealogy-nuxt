@@ -1,0 +1,1 @@
+export { default } from "file:///E:/vue%20js/genealogy/node_modules/nuxt3/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
