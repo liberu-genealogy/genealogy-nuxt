@@ -164,6 +164,8 @@ export default {
   env: {
     STRIPE_PK: process.env.STRIPE_KEY,
     HOSTNAME: process.env.HOSTNAME,
+    PUSHER_APP_KEY: process.env.PUSHER_APP_KEY,
+    PUSHER_APP_CLUSTER: process.env.PUSHER_APP_CLUSTER,
     baseUrl: process.env.BASE_URL ||'http://localhost:8000'
   },
 
