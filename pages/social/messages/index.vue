@@ -1,10 +1,30 @@
 <template>
-  <div>
-    <chat-list @select-chat="selectChat" @chat-added="addChat"></chat-list>
-    <chat-messages :selected-chat="selectedChat"></chat-messages>
-    <new-chat-modal @chat-added="addChat"></new-chat-modal>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          <chat-list :chats="chats" @selectChat="selectChat" @chat-added="addChat"></chat-list>
+        </v-sheet>
+      </v-col>
+      <v-col>
+        <v-sheet>
+          <chat-messages v-if="selectedChat" :messages="selectedChat.message" @message-sent="sendMessage" />
+        </v-sheet>
+      </v-col>
+      <v-responsive width="100%"></v-responsive>
+      <v-col>
+        <v-sheet>
+          <new-chat-modal :users="users" @chat-added="addChat"></new-chat-modal>
+        </v-sheet>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
+<router>
+  {
+    name: 'social.messages.index'
+  }
+</router>
 
 <script>
 import ChatList from '../../../components/messages/ChatList.vue';
@@ -19,17 +39,79 @@ export default {
   },
   data() {
     return {
-      selectedChat: null,
       chats: [],
+      users: [],
+      selectedChat: null,
     };
   },
+  mounted() {
+    this.fetchChats();
+    this.fetchUsers();
+  },
   methods: {
+    fetchChats() {
+      // Fetch the list of chats for the logged-in user
+      // Populate the `chats` array with the response data
+      this.$axios.get('/api/chats')
+        .then(response => {
+          this.chats = response.data;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    fetchUsers() {
+      // Fetch the list of users
+      // Populate the `users` array with the response data
+      this.$axios.get('/api/administration/people/options')
+        .then(response => {
+          this.users = response.data.filter(user => { return user.id !== this.$store.state.user.id })
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
     selectChat(chat) {
       this.selectedChat = chat;
     },
-    addChat(chat) {
-      this.chats.push(chat);
-      this.selectedChat = chat;
+    addChat(user) {
+      // Create a new chat with the selected user
+      // Add the newly created chat to the `chats` array
+      // Select the newly created chat as the `selectedChat`
+      this.$axios.post('/api/chats', {
+        user_two: user,
+      })
+        .then(response => {
+          this.selectedChat = response.data;
+          this.chats.push(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    // fetchMessages() {
+    //   if (this.selectedChat) {
+    //     this.$axios.get(`/api/chats/${this.selectedChat.id}/messages`)
+    //       .then(response => {
+    //         this.messages = response.data;
+    //       })
+    //       .catch(error => {
+    //         console.error(error);
+    //       });
+    //   }
+    // },
+    sendMessage(messageContent) {
+      // Send the message to the selected chat
+      // Add the newly sent message to the `selectedChat.messages` array
+      this.$axios.post(`/api/chats/${this.chat.id}`, {
+        content: this.newMessage,
+      })
+        .then(response => {
+          this.fetchMessages();
+        })
+        .catch(error => {
+          console.error(error);
+        });
     },
   },
 };

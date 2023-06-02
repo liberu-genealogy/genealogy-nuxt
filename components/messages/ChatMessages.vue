@@ -1,7 +1,8 @@
 <template>
   <div>
     <div v-for="message in messages" :key="message.id">
-      <p>{{ message.content }}</p>
+      <span>{{ message.user_id }}</span>
+      <p>{{ message.message }}</p>
     </div>
     <v-text-field v-model="newMessage" label="Message" />
     <v-btn @click="sendMessage" :disabled="!newMessage">Send</v-btn>
@@ -10,46 +11,17 @@
 
 <script>
 export default {
+  props: ['messages'],
   data() {
     return {
-      newMessage: '',
-      messages: [],
+      newMessage: ''
     };
   },
-  mounted() {
-    this.fetchMessages();
-  },
   methods: {
-    fetchMessages() {
-      if (this.selectedChat) {
-        this.$axios.get(`/api/chats/${this.selectedChat.id}/messages`)
-          .then(response => {
-            this.messages = response.data;
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-    },
     sendMessage() {
-      if (this.selectedChat) {
-        this.$axios.post(`/api/chats/${this.selectedChat.id}/messages`, {
-          content: this.newMessage,
-        })
-          .then(response => {
-            this.newMessage = '';
-            this.fetchMessages();
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-    },
-  },
-  watch: {
-    selectedChat() {
-      this.fetchMessages();
-    },
+      this.$emit('message-sent', this.newMessage);
+      this.newMessage = '';
+    }
   },
 };
 </script>

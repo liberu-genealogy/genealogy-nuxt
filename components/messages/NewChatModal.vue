@@ -23,11 +23,11 @@
 
 <script>
 export default {
+  props: ['users'],
   data() {
     return {
       dialog: false,
       selectedUser: null,
-      users: [],
     };
   },
   methods: {
@@ -36,33 +36,14 @@ export default {
       this.fetchUsers();
       this.dialog = true;
     },
-    fetchUsers() {
-      this.$axios.get('/api/administration/people/options')
-        .then(response => {
-          this.users = response.data.filter(user => {return user.id !== this.$store.state.user.id})
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
     closeModal() {
       this.dialog = false;
       this.selectedUser = null;
     },
     startChat() {
       if (this.selectedUser) {
-        this.$axios.post('/api/chats', {
-          user_two: this.selectedUser,
-        })
-          .then(response => {
-            console.log(response.data);
-            this.dialog = false;
-            this.selectedUser = null;
-            this.$emit('chat-added', response.data);
-          })
-          .catch(error => {
-            console.error(error);
-          });
+        this.$emit('chat-created', this.selectedUser);
+        this.dialog = false;
       }
     },
   },
