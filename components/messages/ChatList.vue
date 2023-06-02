@@ -1,13 +1,12 @@
 <template>
   <div>
     <v-list>
-      <v-list-item v-for="chat in chats" :key="chat.id">
+      <v-list-item v-for="chat in chats" :key="chat.id" @click="selectChat(chat)">
         <v-list-item-avatar>
           <v-icon>mdi-account</v-icon>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title>{{ chat.title }}</v-list-item-title>
-          <v-list-item-subtitle>{{ chat.lastMessage }}</v-list-item-subtitle>
+          <v-list-item-title>{{ chat.user_one.name }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -19,6 +18,7 @@ export default {
   data() {
     return {
       chats: [],
+      selectedChat: null,
     };
   },
   mounted() {
@@ -26,13 +26,17 @@ export default {
   },
   methods: {
     fetchChats() {
-      axios.get('/api/chats')
+      this.$axios.get('/api/chats')
         .then(response => {
+          console.log(response.data);
           this.chats = response.data;
         })
         .catch(error => {
           console.error(error);
         });
+    },
+    selectChat(chat) {
+      this.selectedChat = chat;
     },
   },
 };

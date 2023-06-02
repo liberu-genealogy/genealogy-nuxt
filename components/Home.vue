@@ -1,4 +1,4 @@
-w<template>
+<template>
     <div>
      <section class="hero main-hero" id="home">
         <div class="hero-body is-flex ai--c">
