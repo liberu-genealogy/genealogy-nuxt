@@ -75,19 +75,21 @@ export default {
       this.selectedChat = chat;
     },
     addChat(user) {
-      // Create a new chat with the selected user
-      // Add the newly created chat to the `chats` array
-      // Select the newly created chat as the `selectedChat`
-      this.$axios.post('/api/chats', {
-        user_two: user,
-      })
-        .then(response => {
-          this.selectedChat = response.data;
-          this.chats.push(response.data);
+      if ('s') {
+        // Create a new chat with the selected user
+        // Add the newly created chat to the `chats` array
+        // Select the newly created chat as the `selectedChat`
+        this.$axios.post('/api/chats', {
+          user_two: user,
         })
-        .catch(error => {
-          console.error(error);
-        });
+          .then(response => {
+            this.selectedChat = response.data;
+            this.chats.push(response.data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
     },
     // fetchMessages() {
     //   if (this.selectedChat) {
@@ -104,10 +106,10 @@ export default {
       // Send the message to the selected chat
       // Add the newly sent message to the `selectedChat.messages` array
       this.$axios.post(`/api/chats/${this.chat.id}`, {
-        content: this.newMessage,
+        message: messageContent,
       })
         .then(response => {
-          this.fetchMessages();
+          selectedChat.messages.push(response.data)
         })
         .catch(error => {
           console.error(error);

@@ -33,7 +33,7 @@ export default {
   methods: {
     openModal() {
       // Fetch the list of users
-      this.fetchUsers();
+      this.selectedUser = null;
       this.dialog = true;
     },
     closeModal() {
@@ -42,7 +42,7 @@ export default {
     },
     startChat() {
       if (this.selectedUser) {
-        this.$emit('chat-created', this.selectedUser);
+        this.$emit('chat-added', this.selectedUser);
         this.dialog = false;
       }
     },
