@@ -75,21 +75,23 @@ export default {
       this.selectedChat = chat;
     },
     addChat(user) {
-      if ('s') {
-        // Create a new chat with the selected user
-        // Add the newly created chat to the `chats` array
-        // Select the newly created chat as the `selectedChat`
-        this.$axios.post('/api/chats', {
-          user_two: user,
-        })
-          .then(response => {
-            this.selectedChat = response.data;
-            this.chats.push(response.data);
-          })
-          .catch(error => {
-            console.error(error);
-          });
+      if (this.chats.some(chat => chat.user_one.id === user || chat.user_two.id === user)) {
+        alert('already exists!'); return;
       }
+
+      // Create a new chat with the selected user
+      // Add the newly created chat to the `chats` array
+      // Select the newly created chat as the `selectedChat`
+      this.$axios.post('/api/chats', {
+        user_two: user,
+      })
+        .then(response => {
+          this.selectedChat = response.data;
+          this.fetchChats();
+        })
+        .catch(error => {
+          console.error(error);
+        });
     },
     // fetchMessages() {
     //   if (this.selectedChat) {
@@ -105,11 +107,11 @@ export default {
     sendMessage(messageContent) {
       // Send the message to the selected chat
       // Add the newly sent message to the `selectedChat.messages` array
-      this.$axios.post(`/api/chats/${this.chat.id}`, {
+      this.$axios.post(`/api/chats/${this.selectedChat.id}`, {
         message: messageContent,
       })
         .then(response => {
-          selectedChat.messages.push(response.data)
+          this.selectedChat.message.push(response.data)
         })
         .catch(error => {
           console.error(error);
