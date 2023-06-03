@@ -65,7 +65,7 @@ export default {
       // Populate the `users` array with the response data
       this.$axios.get('/api/administration/people/options')
         .then(response => {
-          this.users = response.data.filter(user => { return user.id !== this.$store.state.user.id })
+          this.users = response.data
         })
         .catch(error => {
           console.error(error);

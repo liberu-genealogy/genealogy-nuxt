@@ -9,8 +9,9 @@
           <span class="headline">Select User</span>
         </v-card-title>
         <v-card-text>
-          <v-autocomplete v-model="selectedUser" :items="users" item-text="name" item-value="id" label="Select User"
-            clearable outlined></v-autocomplete>
+          <v-autocomplete v-model="selectedUser"
+            :items="users.filter(user => { return user.id !== this.$store.state.user.id })" item-text="name"
+            item-value="id" label="Select User" clearable outlined></v-autocomplete>
         </v-card-text>
         <v-card-actions>
           <v-btn @click="startChat" :disabled="!selectedUser">Start Chat</v-btn>
