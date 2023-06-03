@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <v-sheet class="pa-2 ma-2">
-          <chat-list :chats="chats" @selectChat="selectChat" @chat-added="addChat"></chat-list>
+          <chat-list :chats="chats" :users="users" @selectChat="selectChat" @chat-added="addChat"></chat-list>
         </v-sheet>
       </v-col>
       <v-col>
