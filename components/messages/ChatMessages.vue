@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  props: ['messages'],
+  props: ['messages', 'users'],
   data() {
     return {
       newMessage: ''

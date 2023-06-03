@@ -8,7 +8,7 @@
       </v-col>
       <v-col>
         <v-sheet>
-          <chat-messages v-if="selectedChat" :messages="selectedChat.message" @message-sent="sendMessage" />
+          <chat-messages v-if="selectedChat" :users="users" :messages="selectedChat.message" @message-sent="sendMessage" />
         </v-sheet>
       </v-col>
       <v-responsive width="100%"></v-responsive>
@@ -93,17 +93,6 @@ export default {
           console.error(error);
         });
     },
-    // fetchMessages() {
-    //   if (this.selectedChat) {
-    //     this.$axios.get(`/api/chats/${this.selectedChat.id}/messages`)
-    //       .then(response => {
-    //         this.messages = response.data;
-    //       })
-    //       .catch(error => {
-    //         console.error(error);
-    //       });
-    //   }
-    // },
     sendMessage(messageContent) {
       // Send the message to the selected chat
       // Add the newly sent message to the `selectedChat.messages` array
