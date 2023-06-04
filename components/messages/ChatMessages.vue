@@ -1,8 +1,8 @@
 <template>
   <div>
     <div v-for="message in messages" :key="message.id">
-      <span>{{ message.user_id }}</span>
-      <p>{{ message.message }}</p>
+      <span>{{ users.find(user => user.id === message.user_id).name }}</span>
+      <p>{{ message.message }}</p><br>
     </div>
     <v-text-field v-model="newMessage" label="Message" />
     <v-btn @click="sendMessage" :disabled="!newMessage">Send</v-btn>

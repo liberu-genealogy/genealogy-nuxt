@@ -6,7 +6,7 @@
           <v-icon>mdi-account</v-icon>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title>{{ chat.user_two.email }}</v-list-item-title>
+          <v-list-item-title>{{ users.find(user => user.email === chat.user_two.email).name }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -15,6 +15,6 @@
 
 <script>
 export default {
-  props: ['chats'],
+  props: ['chats', 'users'],
 };
 </script>
