@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="message in messages" :key="message.id">
-      <span>{{ users.find(user => user.id === message.user_id).name }}</span>
+      <span>{{ users.find(user => user.id === message.user_id) ? users.find(user => user.id === message.user_id).name : message.user_id }}</span>
       <p>{{ message.message }}</p><br>
     </div>
     <v-text-field v-model="newMessage" label="Message" />
