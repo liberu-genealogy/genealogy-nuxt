@@ -50,9 +50,6 @@
       "public": [
         "public"
       ],
-      "public/*": [
-        "public/*"
-      ],
       "#app": [
         "node_modules/nuxt/dist/app"
       ],
@@ -61,6 +58,21 @@
       ],
       "vue-demi": [
         "node_modules/nuxt/dist/app/compat/vue-demi"
+      ],
+      "@intlify/shared": [
+        "node_modules/@intlify/shared/dist/shared.esm-bundler"
+      ],
+      "@intlify/core-base": [
+        "node_modules/@intlify/core-base/dist/core-base.esm-bundler"
+      ],
+      "@intlify/devtools-if": [
+        "node_modules/@intlify/devtools-if/dist/devtools-if.esm-bundler"
+      ],
+      "vue-i18n": [
+        "node_modules/vue-i18n/dist/vue-i18n.runtime.esm-bundler"
+      ],
+      "pinia": [
+        "node_modules/pinia/dist/pinia"
       ],
       "#vue-router": [
         ".nuxt/vue-router"

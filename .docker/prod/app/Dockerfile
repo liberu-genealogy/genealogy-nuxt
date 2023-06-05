@@ -1,23 +1,21 @@
-# STAGE 1
+# Build arguments
+ARG IMAGE_REGISTRY=familytree365
+ARG IMAGE_TAG=latest
 
-FROM node:14-alpine AS build
+# Image
+#FROM ${IMAGE_REGISTRY}/nuxt:${IMAGE_TAG}
 
-WORKDIR /app
+# Image
+FROM node:16-alpine
 
-COPY package.json /app
+# Set up the working directory
+WORKDIR /var/www/html
 
-RUN yarn  install
+# Specify the host variable
+ENV HOST 0.0.0.0
 
-COPY . /app
+# Expose the Nuxt port
+EXPOSE 3000
 
-RUN yarn build
-
-# STAGE 2
-
-FROM nginx:stable-alpine
-
-COPY --from=build /app/dist /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+# Run the Nuxt service
+CMD ["yarn", "dev"]

@@ -6,11 +6,39 @@ type Decorate<T extends Record<string, any>> = { [K in keyof T as K extends stri
 type InjectionType<A extends Plugin> = A extends Plugin<infer T> ? Decorate<T> : unknown
 
 type NuxtAppInjections = 
+  InjectionType<typeof import("../../node_modules/@pinia/nuxt/dist/runtime/plugin.vue3").default> &
   InjectionType<typeof import("../../node_modules/nuxt/dist/app/plugins/revive-payload.server").default> &
   InjectionType<typeof import("../../node_modules/nuxt/dist/app/plugins/revive-payload.client").default> &
   InjectionType<typeof import("../../node_modules/nuxt/dist/head/runtime/plugins/unhead").default> &
-  InjectionType<typeof import("../../node_modules/nuxt/dist/app/plugins/router").default> &
-  InjectionType<typeof import("../../node_modules/nuxt/dist/app/plugins/chunk-reload.client").default>
+  InjectionType<typeof import("../../node_modules/nuxt/dist/pages/runtime/plugins/router").default> &
+  InjectionType<typeof import("../../node_modules/nuxt/dist/pages/runtime/plugins/prefetch.client").default> &
+  InjectionType<typeof import("../../node_modules/@nuxt/content/dist/runtime/plugins/documentDriven").default> &
+  InjectionType<typeof import("../../node_modules/nuxt/dist/app/plugins/chunk-reload.client").default> &
+  InjectionType<typeof import("../../node_modules/nuxt/dist/app/plugins/payload.client").default> &
+  InjectionType<typeof import("../../node_modules/@vueuse/nuxt/ssr-plugin").default> &
+  InjectionType<typeof import("../../plugins/Validator").default> &
+  InjectionType<typeof import("../../plugins/bookmarksSettingRegister").default> &
+  InjectionType<typeof import("../../plugins/bootEnums").default> &
+  InjectionType<typeof import("../../plugins/echo").default> &
+  InjectionType<typeof import("../../plugins/filters").default> &
+  InjectionType<typeof import("../../plugins/fontawesome").default> &
+  InjectionType<typeof import("../../plugins/i18n").default> &
+  InjectionType<typeof import("../../plugins/ioRegister").default> &
+  InjectionType<typeof import("../../plugins/localisationRegister").default> &
+  InjectionType<typeof import("../../plugins/notificationsRegister").default> &
+  InjectionType<typeof import("../../plugins/numberFormat").default> &
+  InjectionType<typeof import("../../plugins/pRoute").default> &
+  InjectionType<typeof import("../../plugins/shortNumber").default> &
+  InjectionType<typeof import("../../plugins/tasksNavbarRegister").default> &
+  InjectionType<typeof import("../../plugins/themesSettingRegister").default> &
+  InjectionType<typeof import("../../plugins/toastr").default> &
+  InjectionType<typeof import("../../plugins/tutorialSettingRegister").default> &
+  InjectionType<typeof import("../../plugins/usersRegister").default> &
+  InjectionType<typeof import("../../plugins/vue-fb-customer-chat").default> &
+  InjectionType<typeof import("../../plugins/vue-select").default> &
+  InjectionType<typeof import("../../plugins/vue-stripe").default> &
+  InjectionType<typeof import("../../plugins/vuelidate").default> &
+  InjectionType<typeof import("../../plugins/vuetify").default>
 
 declare module '#app' {
   interface NuxtApp extends NuxtAppInjections { }
