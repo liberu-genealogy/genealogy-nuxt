@@ -1,28 +1,19 @@
 <template>
   <v-app>
-    <loading
-        :active.sync="isLoading"
-        :color="color"
-        :background-color="backgroundColor"
-    >
+    <loading :active.sync="isLoading" :color="color" :background-color="backgroundColor">
     </loading>
     <div class="columns is-gapless is-multiline is-mobile">
       <div class="column is-12">
         <h1 class="is-size-4 has-text-black">
-          <span class="has-text-weight-medium"
-          >Hi {{ loggedInUser.person.name }}</span
-          >, <span class="has-text-weight-light"> Welcome Back!</span>
+          <span class="has-text-weight-medium">Hi {{ loggedInUser.person.name }}</span>, <span
+            class="has-text-weight-light"> Welcome Back!</span>
         </h1>
       </div>
       <div class="column is-12">
         <nav class="breadcrumb mt-1 mb-0" aria-label="breadcrumbs">
           <ul>
             <li>
-              <a
-                  class="is-size-7 has-text-weight-medium has-text-link"
-                  href="/dashboard"
-              >Home</a
-              >
+              <a class="is-size-7 has-text-weight-medium has-text-link" href="/dashboard">Home</a>
             </li>
             <li class="is-size-7 has-text-weight-medium is-active">
               <a href="/dashboard" aria-current="page">Dashboard</a>
@@ -36,47 +27,21 @@
       <v-toolbar flat>
         <v-row>
           <v-col>
-            <v-select
-                v-model="apiSelected"
-                :items="apiList"
-                label="API"
-                hide-details="true"
-            ></v-select>
+            <v-select v-model="apiSelected" :items="apiList" label="API" hide-details="true"></v-select>
           </v-col>
           <v-col>
-            <v-text-field
-                label="First name"
-                hide-details="true"
-                v-model="filter.firstName"
-            ></v-text-field>
+            <v-text-field label="First name" hide-details="true" v-model="filter.firstName"></v-text-field>
           </v-col>
           <v-col>
-            <v-text-field
-                label="Last name"
-                hide-details="true"
-                v-model="filter.lastName"
-            ></v-text-field>
+            <v-text-field label="Last name" hide-details="true" v-model="filter.lastName"></v-text-field>
           </v-col>
           <v-col>
-            <v-menu
-                v-model="dateMenu"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-            >
+            <v-menu v-model="dateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition"
+              offset-y>
               <template v-slot:activator="{ on }">
-                <v-text-field
-                    v-model="filter.date"
-                    label="Date"
-                    readonly
-                    v-on="on"
-                ></v-text-field>
+                <v-text-field v-model="filter.date" label="Date" readonly v-on="on"></v-text-field>
               </template>
-              <v-date-picker
-                  v-model="filter.date"
-                  @input="dateMenu = false"
-              ></v-date-picker>
+              <v-date-picker v-model="filter.date" @input="dateMenu = false"></v-date-picker>
             </v-menu>
           </v-col>
           <v-col>
@@ -84,14 +49,8 @@
           </v-col>
         </v-row>
       </v-toolbar>
-      <v-data-table
-          :headers="headers"
-          :items="result || []"
-          :options.sync="options"
-          :server-items-length="totalCount"
-          :loading="loading"
-          class="elevation-1"
-      ></v-data-table>
+      <v-data-table :headers="headers" :items="result || []" :options.sync="options" :server-items-length="totalCount"
+        :loading="loading" class="elevation-1"></v-data-table>
     </v-card>
     <div class="columns mt-3 is-variable is-3 is-desktop">
       <div class="column">
@@ -103,16 +62,13 @@
                 {{ peoplesattached }}
               </p>
               <div class="is-size-7 has-text-black has-text-weight-medium mt-1">
-                <NuxtLink
-                    to="/gedcom"
-                    class="
-                button
-                is-size-7 is-uppercase
-                has-text-weight-medium has-text-primary
-                is-light
-                mt-4
-              "
-                >GEDCOM Import
+                <NuxtLink to="/gedcom" class="
+                    button
+                    is-size-7 is-uppercase
+                    has-text-weight-medium has-text-primary
+                    is-light
+                    mt-4
+                  ">GEDCOM Import
                 </NuxtLink>
               </div>
             </div>
@@ -166,7 +122,7 @@
           </div>
         </div> -->
         <chart-card class="is-rounded w-100 raises-on-hover has-background-white has-text-black has-margin-bottom-large"
-                    source="/api/dashboard/pie"/>
+          source="/api/dashboard/pie" />
       </div>
       <div class="column is-4-desktop is-6-tablet is-flex">
         <div class="card w-100 has-background-white has-text-black">
@@ -180,9 +136,7 @@
               </div>
               <div class="is-flex fd--c ml-3">
                 New Column added
-                <span
-                    class="is-size-7 has-text-dark has-text-weight-regular mt-1"
-                >
+                <span class="is-size-7 has-text-dark has-text-weight-regular mt-1">
                   on 15th Sep, 2020 at 23:20 pm
                 </span>
               </div>
@@ -193,9 +147,7 @@
               </div>
               <div class="is-flex fd--c ml-3">
                 Password Changed
-                <span
-                    class="is-size-7 has-text-dark has-text-weight-regular mt-1"
-                >
+                <span class="is-size-7 has-text-dark has-text-weight-regular mt-1">
                   on 15th Sep, 2020 at 23:20 pm
                 </span>
               </div>
@@ -215,9 +167,7 @@
               </div>
               <div class="is-flex fd--c ml-3">
                 File_22012020.xlsx
-                <span
-                    class="is-size-7 has-text-dark has-text-weight-regular mt-1"
-                >
+                <span class="is-size-7 has-text-dark has-text-weight-regular mt-1">
                   on 15th Sep, 2020 at 23:20 pm
                 </span>
               </div>
@@ -228,9 +178,7 @@
               </div>
               <div class="is-flex fd--c ml-3">
                 Tree_Table_Report.xlsx
-                <span
-                    class="is-size-7 has-text-dark has-text-weight-regular mt-1"
-                >
+                <span class="is-size-7 has-text-dark has-text-weight-regular mt-1">
                   on 15th Sep, 2020 at 23:20 pm
                 </span>
               </div>
@@ -241,23 +189,16 @@
     </div>
     <div class="columns is-variable is-flex-desktop-only ai--s">
       <div class="column is-4-desktop is-6-tablet is-flex">
-        <div
-            v-if="loggedInUser.role.name == 'free'"
-            class="card has-background-primary has-text-centered"
-        >
+        <div v-if="loggedInUser.role.name == 'free'" class="card has-background-primary has-text-centered">
           <div class="card-content">
             <p class="is-size-7">Buy Plan</p>
-            <NuxtLink
-                to="/subscription"
-                class="
-                button
-                is-size-7 is-uppercase
-                has-text-weight-medium has-text-primary
-                is-light
-                mt-4
-              "
-            >Subscribe</NuxtLink
-            >
+            <NuxtLink to="/subscription" class="
+                    button
+                    is-size-7 is-uppercase
+                    has-text-weight-medium has-text-primary
+                    is-light
+                    mt-4
+                  ">Subscribe</NuxtLink>
           </div>
         </div>
         <div v-else class="card has-background-primary has-text-white">
@@ -270,16 +211,13 @@
               Upgrade your plan &amp; join nearly 100 people who have already
               registered.
             </p>
-            <NuxtLink
-                to="subscription"
-                class="
-                button
-                is-size-7 is-uppercase
-                has-background-white has-text-weight-medium has-text-primary
-                is-light
-                mt-4
-              "
-            >Upgrade Plan
+            <NuxtLink to="subscription" class="
+                    button
+                    is-size-7 is-uppercase
+                    has-background-white has-text-weight-medium has-text-primary
+                    is-light
+                    mt-4
+                  ">Upgrade Plan
             </NuxtLink>
           </div>
         </div>
@@ -294,13 +232,8 @@
               Somthing Wrong!
             </div>
             <label>Select Company</label>
-            <vue-select
-                label="name"
-                v-model="selected_company"
-                :reduce="(company) => company.id"
-                :options="companies"
-                @input="setSelected"
-            ></vue-select>
+            <vue-select label="name" v-model="selected_company" :reduce="(company) => company.id" :options="companies"
+              @input="setSelected"></vue-select>
             <!--            <vue-select-->
             <!--                label="name"-->
             <!--                v-model="selected_company"-->
@@ -316,11 +249,8 @@
             <!--              :options="trees"-->
             <!--              @input="setSelected"-->
             <!--            ></vue-select>-->
-            <font-awesome-icon
-                :icon="['fas', 'user-circle']"
-                class="has-text-primary mb-5 mt-2"
-                style="font-size: 55px"
-            />
+            <font-awesome-icon :icon="['fas', 'user-circle']" class="has-text-primary mb-5 mt-2"
+              style="font-size: 55px" />
             <p class="is-size-7 mb-2 has-text-weight-medium">
               {{ loggedInUser.email }}
             </p>
@@ -341,18 +271,10 @@
               Somthing Wrong!
             </div>
             <label>Invited Company</label>
-            <vue-select
-                label="name"
-                v-model="invited_company"
-                :reduce="(company) => company.id"
-                :options="invited_companies"
-                @input="setSelected"
-            ></vue-select>           
-            <font-awesome-icon
-                :icon="['fas', 'user-circle']"
-                class="has-text-primary mb-5 mt-2"
-                style="font-size: 55px"
-            />
+            <vue-select label="name" v-model="invited_company" :reduce="(company) => company.id"
+              :options="invited_companies" @input="setSelected"></vue-select>
+            <font-awesome-icon :icon="['fas', 'user-circle']" class="has-text-primary mb-5 mt-2"
+              style="font-size: 55px" />
             <p class="is-size-7 mb-2 has-text-weight-medium">
               {{ loggedInUser.email }}
             </p>
@@ -410,7 +332,7 @@ export default {
       peoplesattached: 0,
       pieChartData: null,
       chartOptions: null,
-      apiList: ['Open arch', 'Family search', 'Wikitree', 'Member tree'],
+      apiList: ['Open arch', 'Family search', 'Wikitree', 'Member tree', 'UK national arc', 'Genealogy cloud'],
       apiSelected: 'Open arch',
       dateMenu: false,
       filter: {
@@ -449,7 +371,7 @@ export default {
           { text: 'Archive', value: 'archive', sortable: false },
           { text: 'Code', value: 'archive_code', sortable: false },
           { text: 'Org', value: 'archive_org', sortable: false },
-          
+
         ]
       else if (this.apiSelected == 'Family search')
         return [
@@ -473,6 +395,36 @@ export default {
           { text: 'Place', value: 'eventplace', sortable: false },
           { text: 'Type', value: 'eventtype', sortable: false },
           { text: 'Archive', value: 'archive', sortable: false },
+        ]
+      else if (this.apiSelected == 'UK national arc')
+        return [
+          { text: 'ID', value: 'identifier', sortable: false },
+          { text: 'PID', value: 'pid', sortable: false },
+          { text: 'Name', value: 'personname', sortable: false },
+          { text: 'Event Place', value: 'eventplace', sortable: false },
+          { text: 'Event Type', value: 'eventtype', sortable: false },
+          { text: 'Date', value: 'eventdate.year', sortable: false },
+          { text: 'Relation Type', value: 'relationtype', sortable: false },
+          { text: 'Source Type', value: 'sourcetype', sortable: false },
+          { text: 'Archive', value: 'archive', sortable: false },
+          { text: 'Code', value: 'archive_code', sortable: false },
+          { text: 'Org', value: 'archive_org', sortable: false },
+
+        ]
+      else if (this.apiSelected == 'Genealogy cloud')
+        return [
+          { text: 'ID', value: 'identifier', sortable: false },
+          { text: 'PID', value: 'pid', sortable: false },
+          { text: 'Name', value: 'personname', sortable: false },
+          { text: 'Event Place', value: 'eventplace', sortable: false },
+          { text: 'Event Type', value: 'eventtype', sortable: false },
+          { text: 'Date', value: 'eventdate.year', sortable: false },
+          { text: 'Relation Type', value: 'relationtype', sortable: false },
+          { text: 'Source Type', value: 'sourcetype', sortable: false },
+          { text: 'Archive', value: 'archive', sortable: false },
+          { text: 'Code', value: 'archive_code', sortable: false },
+          { text: 'Org', value: 'archive_org', sortable: false },
+
         ]
     },
   },
@@ -509,7 +461,7 @@ export default {
       this.invited_companies = response.invited_comps;
       this.companies.map((company) => {
         // console.log('this.loggedInUser.id',this.start_id+' ==' +company.id);
-        if (company.is_tenant == 1&&company.email === this.loggedInUser.email) {
+        if (company.is_tenant == 1 && company.email === this.loggedInUser.email) {
           this.selected_company = company.id
           this.getTree()
         }
@@ -542,7 +494,7 @@ export default {
       //this.result = null
       this.loading = true
       let url = '',
-          params = {}
+        params = {}
       if (this.apiSelected == 'Geneanum') {
         url = '/api/geneanum/search-person/malta/burials'
         params = {
@@ -557,7 +509,7 @@ export default {
         url = '/api/open-arch/search-person'
         params = {
           name:
-              (this.filter.firstName || '') + ' ' + (this.filter.lastName || '')+ ' ' + (this.filter.date || ''),
+            (this.filter.firstName || '') + ' ' + (this.filter.lastName || '') + ' ' + (this.filter.date || ''),
           per_page: this.options?.itemsPerPage || 10,
           page: this.options?.page || 1,
         }
@@ -565,7 +517,7 @@ export default {
         url = '/api/member-tree/search-person'
         params = {
           name:
-              (this.filter.firstName || '') + ' ' + (this.filter.lastName || '')+ ' ' + (this.filter.date || ''),
+            (this.filter.firstName || '') + ' ' + (this.filter.lastName || '') + ' ' + (this.filter.date || ''),
           // per_page: this.options?.itemsPerPage || 10,
           // page: this.options?.page || 1,
         }
@@ -576,8 +528,8 @@ export default {
           surname: this.filter.lastName || '',
           count: this.options?.itemsPerPage || 10,
           offset:
-              ((this.options?.page || 1) - 1) *
-              (this.options?.itemsPerPage || 10),
+            ((this.options?.page || 1) - 1) *
+            (this.options?.itemsPerPage || 10),
         }
       } else if (this.apiSelected == 'Wikitree') {
         url = '/api/wikitree/search-person'
@@ -587,23 +539,40 @@ export default {
           per_page: this.options?.itemsPerPage || 10,
           page: this.options?.page || 1,
         }
+      } else if (this.apiSelected == 'UK national arc') {
+        url = '/api/uk-national-arc/search-person'
+        params = {
+          name:
+            (this.filter.firstName || '') + ' ' + (this.filter.lastName || '') + ' ' + (this.filter.date || ''),
+          per_page: this.options?.itemsPerPage || 10,
+          page: this.options?.page || 1,
+        }
+      } else if (this.apiSelected == 'Genealogy cloud') {
+        url = '/api/genealogy-cloud/search-person'
+        params = {
+          name:
+            (this.filter.firstName || '') + ' ' + (this.filter.lastName || '') + ' ' + (this.filter.date || ''),
+          per_page: this.options?.itemsPerPage || 10,
+          page: this.options?.page || 1,
+        }
       }
+
       this.$axios
-          .get(url, {
-            params: params,
-          })
-          .then(({ data }) => {
-            if (this.apiSelected == "Member tree"){
-              this.result = data
-              this.totalCount = data.length
-            }
-            else {
-              this.result = data.response.docs
-              this.totalCount = data.response.number_found
-            }
-            this.loading = false
-          })
-          .catch(this.errorHandler)
+        .get(url, {
+          params: params,
+        })
+        .then(({ data }) => {
+          if (this.apiSelected == "Member tree") {
+            this.result = data
+            this.totalCount = data.length
+          }
+          else {
+            this.result = data.response.docs
+            this.totalCount = data.response.number_found
+          }
+          this.loading = false
+        })
+        .catch(this.errorHandler)
     },
   },
   created() {
