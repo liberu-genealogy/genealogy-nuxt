@@ -6,7 +6,7 @@
           <v-icon>mdi-account</v-icon>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title>{{ users.find(user => user.email === chat.user_two.email)? users.find(user => user.email === chat.user_two.email).name : chat.user_two.email }}</v-list-item-title>
+          <v-list-item-title>{{ getOtherUserName(chat) }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -16,5 +16,14 @@
 <script>
 export default {
   props: ['chats', 'users'],
+  methods: {
+    getOtherUserName(chat) {
+      console.log(chat, this.$store.state.user)
+      const userEmail = chat.user_one.email === this.$store.state.user.email ? chat.user_two.email : chat.user_one.email;
+      const opponentUser = this.users.find(user => user.email === userEmail);
+      const opponentUserName = opponentUser ? opponentUser.name : userEmail;
+      return opponentUserName;
+    }
+  }
 };
 </script>

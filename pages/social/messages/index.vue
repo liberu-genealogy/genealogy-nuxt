@@ -52,7 +52,7 @@ export default {
     fetchChats() {
       // Fetch the list of chats for the logged-in user
       // Populate the `chats` array with the response data
-      this.$axios.get('/api/chats')
+      this.$axios.get('/api/social/chats')
         .then(response => {
           this.chats = response.data;
         })
@@ -63,7 +63,7 @@ export default {
     fetchUsers() {
       // Fetch the list of users
       // Populate the `users` array with the response data
-      this.$axios.get('/api/administration/people/options')
+      this.$axios.get('/api/social/chats/options')
         .then(response => {
           this.users = response.data
         })
@@ -82,7 +82,7 @@ export default {
       // Create a new chat with the selected user
       // Add the newly created chat to the `chats` array
       // Select the newly created chat as the `selectedChat`
-      this.$axios.post('/api/chats', {
+      this.$axios.post('/api/social/chats', {
         user_two: user,
       })
         .then(response => {
@@ -96,7 +96,7 @@ export default {
     sendMessage(messageContent) {
       // Send the message to the selected chat
       // Add the newly sent message to the `selectedChat.messages` array
-      this.$axios.post(`/api/chats/${this.selectedChat.id}`, {
+      this.$axios.post(`/api/social/chats/${this.selectedChat.id}`, {
         message: messageContent,
       })
         .then(response => {
