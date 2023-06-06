@@ -410,7 +410,7 @@ export default {
       peoplesattached: 0,
       pieChartData: null,
       chartOptions: null,
-      apiList: ['Open arch', 'Family search', 'Wikitree', 'Member tree'],
+      apiList: ['Member tree', 'Open arch', 'Wikitree', 'Family search'],
       apiSelected: 'Member tree',
       dateMenu: false,
       filter: {
