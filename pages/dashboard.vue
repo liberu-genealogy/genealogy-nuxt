@@ -541,14 +541,14 @@ export default {
         params = {
           firstName: this.filter.firstName || '',
           lastName: this.filter.lastName || '',
+          // dateOfBirthFrom: this.filter.date || ''
         }
       } else if (this.apiSelected == 'Genealogy cloud') {
         url = '/api/genealogy-cloud/search-person'
         params = {
-          name:
-            (this.filter.firstName || '') + ' ' + (this.filter.lastName || '') + ' ' + (this.filter.date || ''),
-          per_page: this.options?.itemsPerPage || 10,
-          page: this.options?.page || 1,
+          GivenNames: this.filter.firstName || '',
+          Surname: this.filter.lastName || '',
+          // dateOfBirthFrom: this.filter.date || ''
         }
       }
 
