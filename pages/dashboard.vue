@@ -63,12 +63,12 @@
               </p>
               <div class="is-size-7 has-text-black has-text-weight-medium mt-1">
                 <NuxtLink to="/gedcom" class="
-                    button
-                    is-size-7 is-uppercase
-                    has-text-weight-medium has-text-primary
-                    is-light
-                    mt-4
-                  ">GEDCOM Import
+                      button
+                      is-size-7 is-uppercase
+                      has-text-weight-medium has-text-primary
+                      is-light
+                      mt-4
+                    ">GEDCOM Import
                 </NuxtLink>
               </div>
             </div>
@@ -193,12 +193,12 @@
           <div class="card-content">
             <p class="is-size-7">Buy Plan</p>
             <NuxtLink to="/subscription" class="
-                    button
-                    is-size-7 is-uppercase
-                    has-text-weight-medium has-text-primary
-                    is-light
-                    mt-4
-                  ">Subscribe</NuxtLink>
+                      button
+                      is-size-7 is-uppercase
+                      has-text-weight-medium has-text-primary
+                      is-light
+                      mt-4
+                    ">Subscribe</NuxtLink>
           </div>
         </div>
         <div v-else class="card has-background-primary has-text-white">
@@ -212,12 +212,12 @@
               registered.
             </p>
             <NuxtLink to="subscription" class="
-                    button
-                    is-size-7 is-uppercase
-                    has-background-white has-text-weight-medium has-text-primary
-                    is-light
-                    mt-4
-                  ">Upgrade Plan
+                      button
+                      is-size-7 is-uppercase
+                      has-background-white has-text-weight-medium has-text-primary
+                      is-light
+                      mt-4
+                    ">Upgrade Plan
             </NuxtLink>
           </div>
         </div>
@@ -332,7 +332,7 @@ export default {
       peoplesattached: 0,
       pieChartData: null,
       chartOptions: null,
-      apiList: ['Open arch', 'Family search', 'Wikitree', 'Member tree', 'UK national arc', 'Genealogy cloud'],
+      apiList: ['Open arch', 'Family search', 'Wikitree', 'Member tree', 'UK national arch', 'Genealogy cloud'],
       apiSelected: 'Open arch',
       dateMenu: false,
       filter: {
@@ -396,20 +396,17 @@ export default {
           { text: 'Type', value: 'eventtype', sortable: false },
           { text: 'Archive', value: 'archive', sortable: false },
         ]
-      else if (this.apiSelected == 'UK national arc')
+      else if (this.apiSelected == 'UK national arch')
         return [
-          { text: 'ID', value: 'identifier', sortable: false },
-          { text: 'PID', value: 'pid', sortable: false },
-          { text: 'Name', value: 'personname', sortable: false },
-          { text: 'Event Place', value: 'eventplace', sortable: false },
-          { text: 'Event Type', value: 'eventtype', sortable: false },
-          { text: 'Date', value: 'eventdate.year', sortable: false },
-          { text: 'Relation Type', value: 'relationtype', sortable: false },
-          { text: 'Source Type', value: 'sourcetype', sortable: false },
-          { text: 'Archive', value: 'archive', sortable: false },
-          { text: 'Code', value: 'archive_code', sortable: false },
-          { text: 'Org', value: 'archive_org', sortable: false },
-
+          { text: 'ID', value: 'id', sortable: false },
+          { text: 'Title', value: 'title', sortable: false },
+          { text: 'Context', value: 'context', sortable: false },
+          { text: 'Covering Dates', value: 'coveringDates', sortable: false },
+          { text: 'Department', value: 'department', sortable: false },
+          { text: 'Description', value: 'description', sortable: false },
+          { text: 'startDate', value: 'startDate', sortable: false },
+          { text: 'End Date', value: 'endDate', sortable: false },
+          { text: 'Reference', value: 'reference', sortable: false }
         ]
       else if (this.apiSelected == 'Genealogy cloud')
         return [
@@ -539,13 +536,11 @@ export default {
           per_page: this.options?.itemsPerPage || 10,
           page: this.options?.page || 1,
         }
-      } else if (this.apiSelected == 'UK national arc') {
-        url = '/api/uk-national-arc/search-person'
+      } else if (this.apiSelected == 'UK national arch') {
+        url = '/api/uk-national-arch/search-person'
         params = {
-          name:
-            (this.filter.firstName || '') + ' ' + (this.filter.lastName || '') + ' ' + (this.filter.date || ''),
-          per_page: this.options?.itemsPerPage || 10,
-          page: this.options?.page || 1,
+          firstName: this.filter.firstName || '',
+          lastName: this.filter.lastName || '',
         }
       } else if (this.apiSelected == 'Genealogy cloud') {
         url = '/api/genealogy-cloud/search-person'
@@ -562,9 +557,14 @@ export default {
           params: params,
         })
         .then(({ data }) => {
+          console.log(data);
           if (this.apiSelected == "Member tree") {
             this.result = data
             this.totalCount = data.length
+          }
+          else if (this.apiSelected == "UK national arch") {
+            this.result = data.records;
+            this.totalCount = data.records.length
           }
           else {
             this.result = data.response.docs
