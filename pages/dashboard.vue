@@ -63,12 +63,12 @@
               </p>
               <div class="is-size-7 has-text-black has-text-weight-medium mt-1">
                 <NuxtLink to="/gedcom" class="
-                      button
-                      is-size-7 is-uppercase
-                      has-text-weight-medium has-text-primary
-                      is-light
-                      mt-4
-                    ">GEDCOM Import
+                          button
+                          is-size-7 is-uppercase
+                          has-text-weight-medium has-text-primary
+                          is-light
+                          mt-4
+                        ">GEDCOM Import
                 </NuxtLink>
               </div>
             </div>
@@ -193,12 +193,12 @@
           <div class="card-content">
             <p class="is-size-7">Buy Plan</p>
             <NuxtLink to="/subscription" class="
-                      button
-                      is-size-7 is-uppercase
-                      has-text-weight-medium has-text-primary
-                      is-light
-                      mt-4
-                    ">Subscribe</NuxtLink>
+                          button
+                          is-size-7 is-uppercase
+                          has-text-weight-medium has-text-primary
+                          is-light
+                          mt-4
+                        ">Subscribe</NuxtLink>
           </div>
         </div>
         <div v-else class="card has-background-primary has-text-white">
@@ -212,12 +212,12 @@
               registered.
             </p>
             <NuxtLink to="subscription" class="
-                      button
-                      is-size-7 is-uppercase
-                      has-background-white has-text-weight-medium has-text-primary
-                      is-light
-                      mt-4
-                    ">Upgrade Plan
+                          button
+                          is-size-7 is-uppercase
+                          has-background-white has-text-weight-medium has-text-primary
+                          is-light
+                          mt-4
+                        ">Upgrade Plan
             </NuxtLink>
           </div>
         </div>
@@ -332,8 +332,8 @@ export default {
       peoplesattached: 0,
       pieChartData: null,
       chartOptions: null,
-      apiList: ['Open arch', 'Family search', 'Wikitree', 'Member tree', 'UK national arch', 'Genealogy cloud'],
-      apiSelected: 'Open arch',
+      apiList: ['Member tree', 'Open arch', 'Wikitree', 'Family search', 'UK national arch', 'Genealogy cloud'],
+      apiSelected: 'Member tree',
       dateMenu: false,
       filter: {
         firstName: '',
@@ -386,6 +386,7 @@ export default {
         return [
           { text: 'ID', value: 'id', sortable: false },
           { text: 'Name', value: 'name', sortable: false },
+          { text: 'User', value: 'user_name', sortable: false },
         ]
       else if (this.apiSelected == 'Wikitree')
         return [
@@ -514,6 +515,10 @@ export default {
         url = '/api/member-tree/search-person'
         params = {
           name:
+            (this.filter.firstName || '') + ' ' + (this.filter.lastName || '') + ' ' + (this.filter.date || ''),
+          per_page: this.options?.itemsPerPage || 10,
+          page: this.options?.page || 1,
+          rand: Math.random()
             (this.filter.firstName || '') + ' ' + (this.filter.lastName || '') + ' ' + (this.filter.date || ''),
           // per_page: this.options?.itemsPerPage || 10,
           // page: this.options?.page || 1,
