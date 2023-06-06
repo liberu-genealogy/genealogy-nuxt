@@ -32,7 +32,32 @@ export default defineNuxtConfig({
     '~/assets/css/fan-chart/fan-chart.css',
   ],
   // plugins
-  plugins: ['~/plugins/navbar.ts'],
+  plugins: [
+    '~/plugins/bootEnums.js',
+    '~/plugins/i18n.js',
+    '~/plugins/pRoute.js',
+    '~/plugins/filters.js',
+    '~/plugins/numberFormat.js',
+    '~/plugins/shortNumber.js',
+    '~/plugins/toastr.js',
+    '~/plugins/fontawesome.js',
+    '~/plugins/themesSettingRegister.js',
+    '~/plugins/bookmarksSettingRegister.js',
+    '~/plugins/tutorialSettingRegister.js',
+    '~/plugins/notificationsRegister.js',
+    '~/plugins/localisationRegister.js',
+    '~/plugins/ioRegister.js',
+    '~/plugins/tasksNavbarRegister.js',
+    '~/plugins/usersRegister.js',
+    '~/plugins/Validator.js',
+    '~/plugins/date-fns/format.js',
+    '~/plugins/date-fns/formatDistance.js',
+    '~/plugins/vue-select.js',
+    '~/plugins/vuelidate.js',
+    //'~/plugins/echo.js',
+    "~/plugins/vue-fb-customer-chat.js",
+    {src: '~/plugins/vue-stripe.js', ssr: false},
+  ],
 
   // build
   build: {
@@ -40,17 +65,8 @@ export default defineNuxtConfig({
   },
 
   // modules
-  modules: [
-    'unplugin-icons/nuxt',
-    '@intlify/nuxt3',
-    '@pinia/nuxt',
-    '@nuxt/content',
-    '@vueuse/nuxt',
-    'nuxt-windicss',
-    'nuxt-vuex-router-sync',
-    'nuxt-route-meta',
-    '@nuxtjs/google-adsense',
-  ],
+ 
+  
   'google-adsense': {
     id: 'ca-pub-2152604506748832'
   },
