@@ -411,7 +411,7 @@ export default {
       pieChartData: null,
       chartOptions: null,
       apiList: ['Open arch', 'Family search', 'Wikitree', 'Member tree'],
-      apiSelected: 'Open arch',
+      apiSelected: 'Member tree',
       dateMenu: false,
       filter: {
         firstName: '',
@@ -464,6 +464,7 @@ export default {
         return [
           { text: 'ID', value: 'id', sortable: false },
           { text: 'Name', value: 'name', sortable: false },
+          { text: 'User', value: 'user_name', sortable: false },
         ]
       else if (this.apiSelected == 'Wikitree')
         return [
@@ -566,8 +567,9 @@ export default {
         params = {
           name:
               (this.filter.firstName || '') + ' ' + (this.filter.lastName || '')+ ' ' + (this.filter.date || ''),
-          // per_page: this.options?.itemsPerPage || 10,
-          // page: this.options?.page || 1,
+          per_page: this.options?.itemsPerPage || 10,
+          page: this.options?.page || 1,
+          rand: Math.random()
         }
       } else if (this.apiSelected == 'Family search') {
         url = '/api/family-search/search'
@@ -588,19 +590,15 @@ export default {
           page: this.options?.page || 1,
         }
       }
+
       this.$axios
           .get(url, {
             params: params,
           })
           .then(({ data }) => {
-            if (this.apiSelected == "Member tree"){
-              this.result = data
-              this.totalCount = data.length
-            }
-            else {
-              this.result = data.response.docs
-              this.totalCount = data.response.number_found
-            }
+            this.result = data.response.docs
+            this.totalCount = data.response.number_found
+
             this.loading = false
           })
           .catch(this.errorHandler)
