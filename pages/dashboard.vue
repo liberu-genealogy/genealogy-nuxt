@@ -30,10 +30,20 @@
             <v-select v-model="apiSelected" :items="apiList" label="API" hide-details="true"></v-select>
           </v-col>
           <v-col>
-            <v-text-field label="First name" hide-details="true" v-model="filter.firstName"></v-text-field>
+            <v-text-field
+                label="First name"
+                hide-details="true"
+                v-model="filter.firstName"
+                @keydown="searchInputKeydown"
+            ></v-text-field>
           </v-col>
           <v-col>
-            <v-text-field label="Last name" hide-details="true" v-model="filter.lastName"></v-text-field>
+            <v-text-field
+                label="Last name"
+                hide-details="true"
+                v-model="filter.lastName"
+                @keydown="searchInputKeydown"
+            ></v-text-field>
           </v-col>
           <v-col>
             <v-menu v-model="dateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition"
@@ -436,6 +446,12 @@ export default {
     },
   },
   methods: {
+    searchInputKeydown(event) {
+        this.options.page = 1;
+        if (event.keyCode == 13) {
+            this.search();
+        }
+    },
     setSelectedCompany(value) {
       this.selected_tree = null
       this.getTree()
@@ -518,10 +534,6 @@ export default {
             (this.filter.firstName || '') + ' ' + (this.filter.lastName || '') + ' ' + (this.filter.date || ''),
           per_page: this.options?.itemsPerPage || 10,
           page: this.options?.page || 1,
-          rand: Math.random()
-            (this.filter.firstName || '') + ' ' + (this.filter.lastName || '') + ' ' + (this.filter.date || ''),
-          // per_page: this.options?.itemsPerPage || 10,
-          // page: this.options?.page || 1,
         }
       } else if (this.apiSelected == 'Family search') {
         url = '/api/family-search/search'
@@ -562,12 +574,7 @@ export default {
           params: params,
         })
         .then(({ data }) => {
-          console.log(data);
-          if (this.apiSelected == "Member tree") {
-            this.result = data
-            this.totalCount = data.length
-          }
-          else if (this.apiSelected == "UK national arch") {
+          if (this.apiSelected == "UK national arch") {
             this.result = data.records;
             this.totalCount = data.records.length
           }
