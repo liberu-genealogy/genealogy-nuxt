@@ -6,6 +6,7 @@ export default {
     },
     build: {
       rollupOptions: {
+        external: ['vuex',"vee-validate"],
         plugins: [
           {
             name: 'replace-d3-dsv',

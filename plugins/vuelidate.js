@@ -1,3 +1,7 @@
-import Vue from 'vue'
-import Vuelidate from 'vuelidate'
-Vue.use(Vuelidate)
+import { createApp } from 'vue';
+import Vuelidate from 'vuelidate';
+
+const app = createApp({});
+app.use(Vuelidate);
+
+export default app;

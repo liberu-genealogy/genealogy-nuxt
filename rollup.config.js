@@ -1,7 +1,17 @@
 import resolve from '@rollup/plugin-node-resolve';
 import { terser } from "rollup-plugin-terser";
 
+
 export default [
+    {
+        plugins: [
+            resolve({
+              // Add specific options for resolving vee-validate imports
+              // For example:
+              extensions: ['.js', '.json'], // Add .json extension
+            }),
+          ],
+    },
 
     {
         input: "assets/js/pedigree-chart/modules/index.js",

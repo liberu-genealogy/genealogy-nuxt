@@ -1,4 +1,8 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import toastr from '@enso-ui/toastr';
 
-Vue.prototype.$toastr = toastr;
+const app = createApp({});
+
+app.config.globalProperties.$toastr = toastr;
+
+export default app;

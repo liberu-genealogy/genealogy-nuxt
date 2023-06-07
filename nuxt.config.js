@@ -80,17 +80,34 @@ export default defineNuxtConfig({
   components: true,
 
   // vite plugins
+  buildModules: ['@nuxtjs/vite'],
   vite: {
-    plugins: [
-      UnpluginComponentsVite({
-        dts: true,
-        resolvers: [
-          IconsResolver({
-            prefix: 'Icon',
-          }),
-        ],
-      }),
-    ],
+    optimizeDeps: {
+      exclude: ['d3-dsv']
+    },
+    build: {
+      rollupOptions: {
+        external: ['vuex', 'vee-validate'],
+        plugins: [
+          {
+            name: 'replace-d3-dsv',
+            resolveId(source) {
+              if (source === 'd3-dsv') {
+                return require.resolve('d3-dsv');
+              }
+            }
+          },
+          {
+            name: 'resolve-vee-validate-locale',
+            resolveId(source) {
+              if (source === 'vee-validate') {
+                return require.resolve('node_modules/vee-validate');
+              }
+            }
+          }
+        ]
+      }
+    }
   },
 
   // app config

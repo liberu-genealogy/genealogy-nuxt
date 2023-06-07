@@ -1,14 +1,14 @@
-import Vue from "vue";
-import { messages } from "vee-validate/dist/locale/en.json";
+import {createApp} from "vue";
+import { messages } from "vee-validate";
 import {
   ValidationProvider,
   ValidationObserver,
   extend,
   Rules,
-} from "vee-validate/dist/vee-validate.full.esm";
+} from "vee-validate";
 
-Vue.component("ValidationProvider", ValidationProvider);
-Vue.component("ValidationObserver", ValidationObserver);
+createApp.component("ValidationProvider", ValidationProvider);
+createApp.component("ValidationObserver", ValidationObserver);
 
 export default ({ app }, inject) => {
   // Inject $hello(msg) in Vue, context and store.

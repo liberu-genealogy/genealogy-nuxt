@@ -1,9 +1,9 @@
-import Vue from 'vue';
+import {createApp} from 'vue';
 import Notification from '~/components/notifications/bulma/components/navbar/Notifications.vue';
 import ToastPosition from '~/components/notifications/bulma/components/settings/ToastrPosition.vue';
 
-Vue.component('navbar-notification', Notification);
-Vue.component('setting-toaster-position', ToastPosition);
+createApp.component('navbar-notification', Notification);
+createApp.component('setting-toaster-position', ToastPosition);
 
 export default ({ store }, inject) => {
     store.commit('layout/settings/registerItem', { component: 'setting-toaster-position', order: 300 })
