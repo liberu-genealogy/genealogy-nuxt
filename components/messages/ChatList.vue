@@ -18,7 +18,7 @@ export default {
   props: ['chats', 'users'],
   methods: {
     getOtherUserName(chat) {
-      console.log(chat, this.$store.state.user)
+      console.log(chat.user_one, this.$store.state.user)
       const userEmail = chat.user_one.email === this.$store.state.user.email ? chat.user_two.email : chat.user_one.email;
       const opponentUser = this.users.find(user => user.email === userEmail);
       const opponentUserName = opponentUser ? opponentUser.name : userEmail;
