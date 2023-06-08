@@ -10,11 +10,11 @@
     <div style="height: 700px; padding: 20px 8px;" id="webtrees-pedigree-chart-container">
     <div v-for="data in reportLevels">
       <div :style="`margin: 8px 6px 8px ${data.level * 42}px; display: flex`">
-        <span :style="`width: ${(data.level * 4) + 20}px;`">{{data.label}}</span> 
+        <span :style="`width: ${(data.level * 5) + 20}px;`">{{data.label}}</span> 
         <span>{{ data.person.firstNames }}</span>
       </div>
       <div v-if="data.person.spouse && data.person.children" :style="`margin: 8px 0px 16px ${(data.level * 42)}px; display: flex`">
-        <span :style="`padding: 0 8px 0px ${(data.level * 4) + 20}px`">sp</span> 
+        <span :style="`padding: 0 8px 0px ${(data.level * 5) + 20}px`">sp</span> 
         <span>{{ data.person.spouse.firstNames }}</span>
       </div>
     </div>
