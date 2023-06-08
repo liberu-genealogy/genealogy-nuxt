@@ -1,7 +1,7 @@
 ## Family Tree 365 - Open Source Family Tree Software - Nuxt Client
  ![Latest Stable Version](https://img.shields.io/github/release/familytree365/nuxt.svg) 
 [![StyleCI](https://github.styleci.io/repos/399057031/shield?branch=master)](https://github.styleci.io/repos/399057031)
-[![CircleCI](https://circleci.com/gh/cgd-ui/genealogy.svg?style=svg)](https://circleci.com/gh/cgd-ui/genealogy)
+[![CircleCI](https://circleci.com/gh/liberu-ui/genealogy.svg?style=svg)](https://circleci.com/gh/liberu-ui/genealogy)
 
 
 ## Description
@@ -9,7 +9,7 @@
 Browser based Genealogy software for interacting and processing data efficiently. Easily create your
 own family tree by importing your existing data or manual data entry. Storage of all data is securely on your own server and does
 not leave your environment without your permission. In the future there will be optional
-smart matching with other servers. This is the Nuxt client for the backend please see https://github.com/familytree365/genealogy
+smart matching with other servers. This is the Nuxt client for the backend please see https://github.com/laravel-liberu/genealogy
 
 ## Demo
 
@@ -25,7 +25,7 @@ Note that most sections have short demo clips.
 
 ### Installation Steps
 
-1. Download the project with `git clone https://github.com/cgd-ui/genealogy.git --depth 1`
+1. Download the project with `git clone https://github.com/liberu-ui/genealogy.git --depth 1`
 
 2. Within the project folder run `yarn install`
 
@@ -51,24 +51,6 @@ Special thanks to [Taylor Otwell](https://laravel.com/), [Jeffrey Way](https://l
 
 are welcome. Pull requests are great, but issues are good too.
 
-## Contributors
-
-This project exists thanks to all the people who contribute. 
-<a href="graphs/contributors"><img src="https://opencollective.com/genealogy/contributors.svg?width=890&button=false" /></a>
-
-
-## Backers
-
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/genealogy#backer)]
-
-<a href="https://opencollective.com/genealogy#backers" target="_blank"><img src="https://opencollective.com/genealogy/backers.svg?width=890"></a>
-
-
-## Sponsors
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/genealogy#sponsor)]
-
-<a href="https://opencollective.com/genealogy#sponsors" target="_blank"><img src="https://opencollective.com/genealogy/sponsors.svg?width=890"></a>
 ### License
 
 This package is released under the MIT license.

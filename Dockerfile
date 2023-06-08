@@ -4,11 +4,9 @@ FROM node:14-alpine AS build
 
 WORKDIR /app
 
-COPY package.json /app
+COPY . /app
 
 RUN yarn  install
-
-COPY . /app
 
 RUN yarn build
 
