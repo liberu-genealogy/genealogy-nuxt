@@ -7,7 +7,7 @@
       <v-select style="width: 100px" v-model="generation"
         :options="Array.from(Array(10).keys()).map(item => item = { label: item, value: item })" @input="fetchData" />
     </div>
-    <div style="height: 700px; padding: 20px 8px;" id="webtrees-pedigree-chart-container">
+    <div style="min-height: 700px; padding: 20px 8px;" id="webtrees-pedigree-chart-container">
     <div v-for="data in reportLevels">
       <div :style="`margin: 8px 6px 8px ${data.level * 42}px; display: flex`">
         <span :style="`width: ${(data.level * 5) + 20}px;`">{{data.label}}</span> 
