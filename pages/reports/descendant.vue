@@ -41,7 +41,7 @@ export default {
   layout: "auth",
   meta: {
     permission: { name: "reports menu" },
-    title: "Reports - Descendant",
+    title: "Reports - d'Aboville",
   },
   data: () => ({
     familyData: {},
