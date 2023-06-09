@@ -237,14 +237,14 @@
                     <div class="is-flex mb-4">
                         <!-- <img src="img/mobile.svg" alt="" class="ml-2 mr-2"> -->
                         <i class="fas fa-mobile-alt ml-2 mr-2 has-text-primary"></i>
-                        <a href="tel:+44 20 8064 1187" class="is-size-7 has-text-link is-flex">
-                          +44 20 8064 1187</a>
+                        <a href="tel:+44 20 8058 4401" class="is-size-7 has-text-link is-flex">
+                          +44 20 8058 4401</a>
                     </div>
                     <div class="is-flex ml-1 mb-5">
                         <i class="fab fa-whatsapp mr-2 has-text-primary"></i>
-                        <a href="https://api.whatsapp.com/send?phone=+44 20 8064 1187"
+                        <a href="https://api.whatsapp.com/send?phone=+44 20 8058 4401"
                             class="is-size-7 has-text-link is-flex">
-                            +44 20 8064 1187</a>
+                            +44 20 8058 4401</a>
                     </div>
                 </div>
             </div>
@@ -252,7 +252,7 @@
             <div class="content has-text-centered pt-6">
                 <div class="columns is-gapless">
                     <div class="column has-text-centered is-flex-desktop-only">
-                        <p class="is-size-7 has-text-light has-text-weight-regular">Copyright &copy; {{ new Date().getFullYear() }} Genealogy Websites Ltd</p>
+                        <p class="is-size-7 has-text-light has-text-weight-regular">Copyright &copy; {{ new Date().getFullYear() }} Family Tree 365 Ltd</p>
                     </div>
                 </div>
             </div>

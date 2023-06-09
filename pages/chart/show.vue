@@ -81,7 +81,11 @@ export default {
       families.forEach(family => {
         // console.log("family: ", family);
         family.partner?.forEach(parentId => {
+          if (!parentId) return;
           const person = this.data.persons[parentId];
+          if (!person) return;
+          console.log("person: ", person, person.id);
+          const parent = this.checkParents(parentId);
           parents.push({
             id: person.id,
             name: person.name,
@@ -95,12 +99,12 @@ export default {
             death: getDeathYear(person),
             timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
             thumbnail: person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : thumbnail_middle,
-            parents: this.checkParents(parentId),
+            parents: !!parent ? parent : null ,
           })
         })
       })
 
-      // console.log("parents: ", parents);
+      console.log("parents: ", parents);
       return parents.length == 0 ? null : parents
     },
 
@@ -109,6 +113,7 @@ export default {
       const data = {
         id: person.id,
         name: person.name,
+        // url: "125",
         title: person.titl,
         firstNames: [createDisplayName(person)],
         lastNames: [''],
@@ -133,6 +138,7 @@ export default {
         .then((res) => {
           this.data = res;
           this.familyData = this.checkFamilyData();
+          console.log("familyData: ", this.familyData);
           const pedigreeChart = new PedigreeChart(
             "#webtrees-pedigree-chart-container",
             {

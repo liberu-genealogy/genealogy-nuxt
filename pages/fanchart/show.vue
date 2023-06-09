@@ -72,7 +72,7 @@ export default {
             defaultColor: "#0000FF",
             fanDegree: 360,
             fontColor: "#000",
-            generations: this.generation.value,
+            generations: 1,
             rtl: "rtl",
             showColorGradients: true,
             showEmptyBoxes: true,

@@ -110,8 +110,8 @@ export const actions = {
     this.$axios
       .get('/api/core/home')
       .then(({ data }) => {
-       
-        data.forEach(({ mutation, state }) => {
+       console.log("data", data)
+        data?.forEach(({ mutation, state }) => {
           if (mutation === 'setEnums') {
             const enums = bootEnums(state, _i18n)
             commit(mutation, enums)
