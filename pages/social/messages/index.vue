@@ -46,6 +46,10 @@ export default {
     ChatMessages,
     NewChatModal,
   },
+  meta: {
+    permission: { name: 'dashboard menu' },
+    title: 'Messages',
+  },
   inject: ['toastr'],
   data() {
     return {
