@@ -64,18 +64,6 @@
                 <div class="is-size-7 has-text-black has-text-weight-regular">
                   {{ plan.title }}
                 </div>
-                {{
-                  selected_currency_symbol +
-                  ((plan.amount * selected_currency_rate) / 100).toFixed(2)
-                }}
-                <div
-                  class="is-size-6 has-text-black is-uppercase has-text-weight-bold"
-                >
-                  {{ plan.nickname }}
-                </div>
-                <div class="is-size-7 has-text-black has-text-weight-regular">
-                  {{ plan.title }}
-                </div>
                 <NuxtLink
                   v-if="has_payment_method == false"
                   :to="'/subscription/stripe?name=' + plan.id"
@@ -83,7 +71,7 @@
                   >Subscribe by card</NuxtLink
                 >
                 <NuxtLink
-                  v-if="has_payment_method == false"
+                  v-if="false &&  has_payment_method == false"
                   :to="'/subscription/paypal?name=' + plan.id"
                   class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4"
                   >Subscribe by PayPal</NuxtLink
@@ -165,10 +153,10 @@
             @click="subscribe()"
             v-if="selectedPlanId != null"
           >
-            Yes
+            Subscribe
           </button>
           <button class="button is-success" @click="unsubscribe()" v-else>
-            Yes
+            Unsubscribe
           </button>
           <button class="button" @click="close()">No</button>
         </footer>
@@ -255,6 +243,10 @@ export default {
             plan.subscribed = false
           }
         })
+      } else {
+          this.plans.map(plan => {
+              plan.subscribed = false
+          })
       }
       this.isLoading = false
     },
@@ -263,18 +255,19 @@ export default {
       this.isActive = false
       this.$axios.$post('/api/stripe/subscribe', {
         plan_id: this.selectedPlanId
+      }).then(() => {
+          this.getCurrentSubscription()
+          this.isLoading = false
       })
-
-      this.getCurrentSubscription()
-      this.isLoading = false
     },
     unsubscribe() {
       this.isLoading = false
       this.isActive = false
-      this.$axios.post('/api/stripe/unsubscribe')
-
-      this.getCurrentSubscription()
-      this.isLoading = false
+      this.$axios.post('/api/stripe/unsubscribe', {})
+          .then(() => {
+              this.getCurrentSubscription()
+              this.isLoading = false
+          })
     },
     async selectCurrency(currency) {
       await fetch(

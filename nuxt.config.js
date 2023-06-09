@@ -19,8 +19,6 @@ export default {
   ],
 
 
-
-
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     htmlAttrs: {
@@ -28,6 +26,9 @@ export default {
     },
     title:
       'Family Tree 365 - Start your family tree today - free! Your first tree is 100% free. Sign-up to begin your genealogy journey today!',
+    script: [
+        { src: 'https://js.stripe.com/v3' },
+    ],
     meta: [
       ...meta,
       { charset: 'utf-8' },
