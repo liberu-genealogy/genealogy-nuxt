@@ -61,7 +61,11 @@ export default {
             }
 
             setTimeout(() => {
-                this.$router.push('/dashboard');
+                if (data.role_id == 4) {
+                    this.$router.push('/subscription');
+                } else {
+                    this.$router.push('/dashboard');
+                }
                 this.login();
                 this.home(true);
             }, 500);
