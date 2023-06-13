@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./.docker/prod/app/Dockerfile.lukasz
+      args:
+        IMAGE_REGISTRY: ${IMAGE_REGISTRY}
+        IMAGE_TAG: ${IMAGE_TAG}
+        IMAGE_NAME: nuxt
+#    hostname: client
+#      - gateway
+    ports:
+      # The Nuxt app port
+      - "3000:3000"
+      # The Vite port for WebSocket
+      - "24678:24678"
+    #entrypoint: ["sleep", "infinity"]
+    entrypoint: ["sh", "-c", "yarn install && yarn dev"]
+    volumes:
+      - ./:/var/www/html
+    labels:
+      - "traefik.http.routers.treeFrontend.rule=Host(`tree.localhost`) && !PathPrefix(`/api`)"

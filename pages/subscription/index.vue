@@ -48,68 +48,100 @@
     </div>
     <div class="columns is-variable is-3 is-desktop">
       <div class="column is-9">
-        <div class="columns is-multiline is-variable is-3">
-          <div class="column is-6" v-for="plan in plans" :key="plan.id">
-            <div class="card has-background-white has-text-black">
-              <div class="card-content">
-                {{
-                  selected_currency_symbol +
-                  ((plan.amount * selected_currency_rate) / 100).toFixed(2)
-                }}
-                <div
-                  class="is-size-6 has-text-black is-uppercase has-text-weight-bold"
-                >
-                  {{ plan.nickname }}
-                </div>
-                <div class="is-size-7 has-text-black has-text-weight-regular">
-                  {{ plan.title }}
-                </div>
-                {{
-                  selected_currency_symbol +
-                  ((plan.amount * selected_currency_rate) / 100).toFixed(2)
-                }}
-                <div
-                  class="is-size-6 has-text-black is-uppercase has-text-weight-bold"
-                >
-                  {{ plan.nickname }}
-                </div>
-                <div class="is-size-7 has-text-black has-text-weight-regular">
-                  {{ plan.title }}
-                </div>
-                <NuxtLink
-                  v-if="has_payment_method == false"
-                  :to="'/subscription/stripe?name=' + plan.id"
-                  class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4"
-                  >Subscribe by card</NuxtLink
-                >
-                <NuxtLink
-                  v-if="has_payment_method == false"
-                  :to="'/subscription/paypal?name=' + plan.id"
-                  class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4"
-                  >Subscribe by PayPal</NuxtLink
-                >
 
-                <div v-if="has_payment_method && plan.subscribed === false">
-                  <button
-                    @click="open(plan.id)"
-                    class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-                <div v-if="plan.subscribed">
-                  <button
-                    @click="open(null)"
-                    class="button is-size-7 is-uppercase is-danger has-text-weight-medium is-light mt-4"
-                    :class="{ 'is-success': plan.subscribed }"
-                  >
-                    Unsubscribe
-                  </button>
-                </div>
-              </div>
+		<section class="section">
+            <div>
+                <strong>Payment interval:</strong>
             </div>
-          </div>
-        </div>
+
+            <button v-for="interval in intervals" class="button is-primary mr-2 mb-4 capitalize" @click="selectInterval(interval)">
+                {{interval}}
+            </button>
+
+			<div class="container">
+				<div class="columns">
+					<div class="column has-text-centered " v-for="plan in plans" :class="{best_selling: plan.metadata.featured, 'has-background-white': !plan.metadata.featured}" v-if="plan.interval == selectedInterval">
+                        <h2 class="title is-3 plan_title has-text-weight-bold" :class="{'has-text-white ': plan.metadata.featured}" :title="plan.id">{{ plan.title }}</h2>
+						<p class="has-text-weight-light plan_subtitle">{{ plan.metadata.description }}</p>
+
+						<div v-if="plan.subscribed && plan.discount_amount">
+							<div class="price">
+								<h2 class="title is-2 has-text-weight-bold">
+
+
+                                    {{
+                                      selected_currency_symbol +
+                                      ((plan.final_price * selected_currency_rate) / 100).toFixed(2)
+                                    }}
+
+								<span class="has-text-weight-light">/{{ plan.interval }}</span></h2>
+							</div>
+                            <p class="has-text-white">
+                                Original price: 
+                                <strike>
+                                {{
+                                  selected_currency_symbol +
+                                  ((plan.amount * selected_currency_rate) / 100).toFixed(2)
+                                }}
+                                </strike>
+                            </p>
+
+						</div>
+						<div v-else>
+                            <div class="price">
+                                <h2 class="title is-2 has-text-weight-bold">
+
+                                    {{
+                                      selected_currency_symbol +
+                                      ((plan.amount * selected_currency_rate) / 100).toFixed(2)
+                                    }}
+
+                                <span class="has-text-weight-light">/{{ plan.interval }}</span></h2>
+                            </div>
+                        </div>
+			
+						<div class="features" :class="{'has-text-white': plan.metadata.featured}">
+							<p v-for="feature in plan.features">{{ feature }}</p>
+							<p class="unavailable" v-for="feature in plan.features_missing">{{ feature }}</p>
+						</div>
+						<div class="spacer"></div>
+
+						<NuxtLink
+						  v-if="has_payment_method == false"
+						  :to="'/subscription/stripe?name=' + plan.id"
+						  class="button is-primary"
+						  :class="{'best_selling_btn': plan.metadata.featured}"
+						  >Subscribe by card</NuxtLink
+						>
+
+						<div v-if="has_payment_method && plan.subscribed === false">
+						  <button
+							@click="open(plan.id)"
+							:class="{ 'is-success': plan.subscribed, 'best_selling_btn': plan.metadata.featured}"
+						  	class="button is-primary"
+						  >
+							Subscribe
+						  </button>
+						</div>
+
+						<div v-if="plan.subscribed">
+						  <button
+							@click="open(null)"
+							class="button is-danger "
+							:class="{ 'is-success': plan.subscribed }"
+						  >
+							Unsubscribe
+						  </button>
+						</div>
+
+                        <p v-if="plan.trial_end" class='mt-2'>
+                        Trial end date: <strong>{{ plan.trial_end }}</strong>
+                        </p>
+
+					</div>
+				</div>
+			</div>
+		</section>
       </div>
       <div class="column is-3">
         <div class="columns is-gapless is-multiline">
@@ -165,10 +197,10 @@
             @click="subscribe()"
             v-if="selectedPlanId != null"
           >
-            Yes
+            Subscribe
           </button>
           <button class="button is-success" @click="unsubscribe()" v-else>
-            Yes
+            Unsubscribe
           </button>
           <button class="button" @click="close()">No</button>
         </footer>
@@ -215,13 +247,18 @@ export default {
       selected_currency: 'GBP',
       selected_currency_symbol: '£',
       selected_currency_rate: 1,
-      isActive: false
+      isActive: false,
+      intervals: [],
+      selectedInterval: null,
     }
   },
   computed: {
     ...mapGetters(['loggedInUser'])
   },
   methods: {
+    selectInterval(interval) {
+        this.selectedInterval = interval;
+    },
     handleSelectedFiles(event) {
       this.file = this.$refs.fileInput.files[0]
       this.fileName = this.file.name
@@ -232,6 +269,10 @@ export default {
 
       this.getCurrentSubscription()
       this.plans = response
+
+      this.intervals = [... new Set(this.plans.map( plan => plan.interval))];
+      this.selectedInterval = this.intervals.length > 0 ? this.intervals[0] : null;
+
       this.isLoading = false
     },
     async getCurrentSubscription() {
@@ -242,19 +283,23 @@ export default {
       this.isLoading = false
       this.has_payment_method = response.has_payment_method
       if (response.subscribed) {
-        // this.plans
-        //     .find(plan => plan.id === response.plan_id)
-        //     .subscribed = true;
-        // this.plans
-        //     .find(plan => plan.id !== response.plan_id)
-        //     .subscribed = false;
+
         this.plans.find(plan => {
           if (plan.id == response.plan_id) {
             plan.subscribed = true
+            plan.final_price = response.final_price;
+            plan.discount_amount = response.discount_amount;
+            plan.trial_end = response.trial_end;
+            this.selectedInterval = plan.interval;
+
           } else {
             plan.subscribed = false
           }
         })
+      } else {
+          this.plans.map(plan => {
+              plan.subscribed = false
+          })
       }
       this.isLoading = false
     },
@@ -263,18 +308,19 @@ export default {
       this.isActive = false
       this.$axios.$post('/api/stripe/subscribe', {
         plan_id: this.selectedPlanId
+      }).then(() => {
+          this.getCurrentSubscription()
+          this.isLoading = false
       })
-
-      this.getCurrentSubscription()
-      this.isLoading = false
     },
     unsubscribe() {
       this.isLoading = false
       this.isActive = false
-      this.$axios.post('/api/stripe/unsubscribe')
-
-      this.getCurrentSubscription()
-      this.isLoading = false
+      this.$axios.post('/api/stripe/unsubscribe', {})
+          .then(() => {
+              this.getCurrentSubscription()
+              this.isLoading = false
+          })
     },
     async selectCurrency(currency) {
       await fetch(
@@ -321,3 +367,43 @@ export default {
   }
 }
 </script>
+<style>
+
+        .capitalize {
+            text-transform: capitalize;
+        }
+		.is-one-third{
+			padding: 4rem 5rem;
+		}
+		.spacer{
+			height: 40px;
+		}
+		.plan_title{
+			margin-bottom: 0 !important;
+		}
+		.plan_subtitle{
+			color: #90A4AE;
+		}
+		.price{
+			margin-top: 40px;
+		}
+		.price h2{
+			color: #00C4A7;
+		}
+		.price span{
+			font-size: 20px; 
+		}
+		.unavailable{
+			text-decoration:line-through;
+			color: #90A4AE;
+		}
+		.best_selling{
+			background: #003049;
+		}
+		.best_selling h2{
+			color: #F77F00;
+		}
+		.best_selling_btn{
+			background: #f77f00 !important;
+		}
+</style>

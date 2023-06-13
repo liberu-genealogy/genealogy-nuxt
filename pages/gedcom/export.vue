@@ -103,7 +103,7 @@
     },
     methods: {
       handleExportFiles() {
-        this.$axios.$get('/api/gedcom-export', {
+        this.$axios.$get('/api/gedcom/export', {
           headers: {
             'content-type': 'multipart/form-data'
           }
