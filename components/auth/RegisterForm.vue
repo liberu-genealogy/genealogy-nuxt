@@ -184,6 +184,28 @@
                 </ValidationProvider>
               </div>
             </div>
+            <!--            Subscription plan-->
+            <div class="mb-5">
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <!-- <vue-select
+                      label="title"
+                      class="is-large"
+                      v-model="selected_plan"
+                      :reduce="(plan) => plan.id"
+                      :options="plans"
+                      placeholder="Select a Plan"
+                  >
+                  </vue-select> -->
+                  <!-- <plan-select 
+                    :options="plans"
+                    class="select"
+                    @input="selected_plan = $event"
+                  /> -->
+                </p>
+              </div>
+            </div>
+            <!--            Subscription plan end-->
             <div class="mb-5 px-1">
               <div class="columns is-mobile is-gapless">
                 <div class="column">
@@ -313,7 +335,7 @@ export default {
   data: () => ({
         // for plans
         plans: [],
-      selected_plan: null,
+      selected_plan: 4,
       // for plans
       first_name: "",
       last_name: "",
@@ -355,13 +377,12 @@ export default {
         selected_plan,
         password_confirmation,
       } = this;
-
       return {
         email,
         password,
         first_name,
         last_name,
-        selected_plan: selected_plan.id,
+        selected_plan: 4,
         password_confirmation,
       };
     },
