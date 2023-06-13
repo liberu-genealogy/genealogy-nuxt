@@ -18,9 +18,41 @@
       </div>
     </div>
     <div class="columns is-variable is-3">
-      <div class="column is-3">
-        <div class="card has-background-white has-text-black">
+      <div class="column is-3 mg">
+        <div class="card has-background-white has-text-black mb-2">
           <div class="card-content payment_block" v-if="clientSecret">
+
+            <div v-if="coupon">
+                <div class='mb-2'>
+                    <p>Your coupon code "{{coupon.name}}" has been applied successfully.</p>
+
+                    <span v-if="coupon.amount_off" class="tag is-info">
+                        Amount off: {{coupon.amount_off}} {{coupon.currency.toUpperCase()}}
+                    </span>
+                    <span v-else class="tag is-info">
+                        {{coupon.percent_off}}% OFF 
+                    </span>
+                </div>
+
+                <button @click="cancelCoupon" class="button is-size-7 is-uppercase has-text-white has-background-warning has-text-weight-medium is-light mt-4">
+                    Cancel Coupon
+                </button>
+            </div>
+            <div v-else>
+                <label>Coupon code</label>
+                <div class='mb-2'>
+                    <input id="coupon-code" v-model="couponCode" type="text" placeholder="eg. Jon Doe" class="input">
+                </div>
+
+                <button id="card-button-coupon" @click="verifyCoupon" class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4 disabled">
+                    Apply
+                </button>
+            </div>
+
+          </div>
+        </div>
+        <div class="card has-background-white has-text-black">
+          <div class="card-content payment_block">
             <label> Card holder name</label>
             <div class='mb-2'>
                 <input id="card-holder-name" type="text" placeholder="eg. Jon Doe" class="input">
@@ -31,7 +63,7 @@
                 <div id="card-element"></div>
             </div>
              
-            <button id="card-button" :dataSecret="clientSecret" @click="createPaymentMethod" class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4">
+            <button id="card-button" v-if="!subscriptionProcessing" @click="createPaymentMethod" class="button is-size-7 is-uppercase has-text-white has-background-primary has-text-weight-medium is-light mt-4">
                 Process
             </button>
           </div>
@@ -84,7 +116,10 @@ export default {
   },
   data () {
     return {
-      clientSecret: "wtfffffff",
+      clientSecret: "",
+      couponCode: "",
+      coupon: null,
+      subscriptionProcessing: false,
     };
   },
   mounted () {
@@ -100,14 +135,33 @@ export default {
 
 
            }).catch(error => {
-          console.log(error)
+              console.log(error)
         });
   },
   beforeDestroy () {
 
   },
   methods: {
+    cancelCoupon() {
+        this.coupon = null;
+    },
+    verifyCoupon() {
+        this.$axios
+            .$post("/api/stripe/verify-coupon", {
+                coupon_code: this.couponCode,
+            }).then((data) => {
+                if (data.success == false)
+                    return alert(data.message);
+
+                this.coupon = data.coupon
+            })
+            .catch(error => {
+                alert("Sorry there was an error with coupon code verification");
+            });
+    },
     async createPaymentMethod() {
+      
+        this.subscriptionProcessing = true;
         const cardHolderName = document.getElementById('card-holder-name');
         const cardButton = document.getElementById('card-button');
 
@@ -119,21 +173,28 @@ export default {
                 }
             }
         );
-        if (error)
+        if (error) {
+            this.subscriptionProcessing = false;
             return alert("Sorry there was an error creating your subscription intent");
+        }
 
 
         if (!error) {
             this.$axios
                 .$post("/api/stripe/subscribe", {
                     payment_method: setupIntent.payment_method,
-                    plan_id: new URLSearchParams(window.location.href.split('?')[1]).get('name')
+                    plan_id: new URLSearchParams(window.location.href.split('?')[1]).get('name'),
+                    coupon_id: this.coupon?.id ?? null
                 }).then(() => {
                     this.$router.push('/subscription');
                 })
                 .catch(error => {
                     alert("Sorry there was an error creating your subscription");
+                })
+                .finally(() => {
+                    this.subscriptionProcessing = false;
                 });
+
         }
     }
   }
