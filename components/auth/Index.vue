@@ -39,7 +39,8 @@
                   alt=""
                   class="bullet mt-1 mr-3"
                 />
-                It has a tree viewer and DNA support more features are planned
+                It has many charts, reports, public member trees searching
+		and DNA support more features are planned
                 such as the inclusion of archive databases and collections
               </div>
               <div
@@ -50,9 +51,9 @@
                   alt=""
                   class="bullet mt-1 mr-3"
                 />
-                Set up your first family tree free of charge. We offer different
-                pricing levels with optional subscriptions if you need to create
-                extra trees.
+                Set up your first family tree with a 14 day trial. We offer different
+                pricing levels depending on how many trees and DNA uploads you require.
+		Starting from a low price to a competitive price for unlimited access.
               </div>
             </div>
 

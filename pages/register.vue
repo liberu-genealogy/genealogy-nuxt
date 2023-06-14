@@ -52,7 +52,7 @@ export default {
                   }
                 });
               }else{
-                this.$router.push('/verify');
+                this.$router.push('/login');
               }
 
             }, 500);

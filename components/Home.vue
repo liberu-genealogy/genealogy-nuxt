@@ -60,7 +60,7 @@
                             </h1>
                             <h2 class="is-size-5 has-text-light mt-6">
                               It is designed to have extensive functionality while being simple to use, secure, and accessible.
-                              You can easily import and export GEDCOM files, view and manipulate data, and unlock extra features. Sign-up to start your free family tree today!
+                              You can easily import and export GEDCOM files, view and manipulate data, and unlock extra features. Sign-up to start your family tree today!
                             </h2>
                   <NuxtLink to="/register"
                                 class="button theme-button theme-button-xl has-background-secondary has-text-weight-medium has-text-white mt-6" v-if="!isAuth">
@@ -141,7 +141,7 @@
                           as the inclusion of archive databases and collections.</div>
                         <div class="is-size-6 has-text-black has-text-weight-regular is-flex ai--fs">
                             <img src="~assets/images/Checkmark.svg" alt="" class="bullet mt-2 mr-3">
-                      Set up your first family tree free of charge. We offer different pricing levels with optional subscriptions
+                      Set up your first family tree with a 14 day trial. We offer different pricing levels with optional subscriptions
                       if you need to create extra trees</div>
                         <NuxtLink to="/register" v-if="!isAuth"
                             class="button theme-button theme-button-xl has-background-primary has-text-weight-medium has-text-white mt-5">
