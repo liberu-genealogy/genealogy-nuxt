@@ -62,7 +62,7 @@
 				<div class="columns">
 					<div class="column has-text-centered " v-for="plan in plans" :class="{best_selling: plan.metadata.featured, 'has-background-white': !plan.metadata.featured}" v-if="plan.interval == selectedInterval">
                         <h2 class="title is-3 plan_title has-text-weight-bold" :class="{'has-text-white ': plan.metadata.featured}" :title="plan.id">{{ plan.title }}</h2>
-						<p class="has-text-weight-light plan_subtitle">{{ plan.metadata.description }}</p>
+						<p class="has-text-weight-light plan_subtitle"></p>
 
 						<div v-if="plan.subscribed && plan.discount_amount">
 							<div class="price">
@@ -164,8 +164,9 @@
               >
                 <i class="fas fa-check mr-2 mt-1"></i>
                 <p class="is-size-7">
-                  It has a tree viewer and DNA support more features are planned
-                  such as the inclusion of archive databases & collections
+                  It has many charts, text reports, public member tree searching
+		  and DNA matching support with more features planned
+                  such as the inclusion of more archive databases & collections
                 </p>
               </div>
               <div
@@ -173,8 +174,8 @@
               >
                 <i class="fas fa-check mr-2 mt-1"></i>
                 <p class="is-size-7">
-                  It is aimed to be affordable with a 7 day no obligation trial
-                  with different pricing levels depending on how many trees you
+                  It is aimed to be affordable with a 14 day no obligation trial
+                  with different pricing levels depending on how many trees and DNA kits you
                   require.
                 </p>
               </div>
