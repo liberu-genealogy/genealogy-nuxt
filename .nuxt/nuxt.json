@@ -1,9 +1,9 @@
 {
-  "_hash": "7gUTNe2rVN",
+  "_hash": "kiY9Y0UHfJ",
   "project": {
-    "rootDir": "E:/vue js/genealogy"
+    "rootDir": "E:/vuejs/genealogy-mas"
   },
   "versions": {
-    "nuxt": "3.5.2"
+    "nuxt": "3.5.3"
   }
 }

@@ -1,0 +1,1 @@
+import{a as t,o as e,b as o}from"./entry.92cc3846.js";const a={layout:"auth",meta:{permission:{name:"authors menu"},title:"Authors - Show"}};function s(r,n,c,i,p,u){return e(),o("div")}const m=t(a,[["render",s]]);export{m as default};

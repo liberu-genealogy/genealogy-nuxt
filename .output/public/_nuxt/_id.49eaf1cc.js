@@ -1,0 +1,1 @@
+import{a as e,o,b as t}from"./entry.92cc3846.js";const n={layout:"auth",meta:{permission:{name:"personanci menu"},title:"Person Anci - Show"}};function a(s,r,c,i,p,_){return o(),t("div")}const u=e(n,[["render",a]]);export{u as default};

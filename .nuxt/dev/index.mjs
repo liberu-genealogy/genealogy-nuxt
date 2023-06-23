@@ -1,26 +1,109 @@
-globalThis._importMeta_={url:import.meta.url,env:process.env};import 'file://E:/vue%20js/genealogy/node_modules/node-fetch-native/dist/polyfill.mjs';
+globalThis._importMeta_={url:import.meta.url,env:process.env};import 'file://E:/vuejs/genealogy-mas/node_modules/node-fetch-native/dist/polyfill.mjs';
 import { Server } from 'node:http';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join as join$1 } from 'node:path';
 import { mkdirSync } from 'node:fs';
 import { parentPort, threadId } from 'node:worker_threads';
-import { provider, isWindows } from 'file://E:/vue%20js/genealogy/node_modules/std-env/dist/index.mjs';
-import { defineEventHandler, handleCacheHeaders, createEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, setResponseStatus, getRequestHeader, setResponseHeader, getRequestHeaders, createApp, createRouter as createRouter$1, toNodeListener, fetchWithEvent, lazyEventHandler, getQuery as getQuery$1, createError } from 'file://E:/vue%20js/genealogy/node_modules/h3/dist/index.mjs';
-import { createRenderer } from 'file://E:/vue%20js/genealogy/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import { stringify, uneval } from 'file://E:/vue%20js/genealogy/node_modules/devalue/index.js';
-import { renderToString } from 'file://E:/vue%20js/genealogy/node_modules/vue/server-renderer/index.mjs';
-import { createFetch as createFetch$1, Headers } from 'file://E:/vue%20js/genealogy/node_modules/ofetch/dist/node.mjs';
-import destr from 'file://E:/vue%20js/genealogy/node_modules/destr/dist/index.mjs';
-import { createCall, createFetch } from 'file://E:/vue%20js/genealogy/node_modules/unenv/runtime/fetch/index.mjs';
-import { createHooks } from 'file://E:/vue%20js/genealogy/node_modules/hookable/dist/index.mjs';
-import { snakeCase } from 'file://E:/vue%20js/genealogy/node_modules/scule/dist/index.mjs';
-import { klona } from 'file://E:/vue%20js/genealogy/node_modules/klona/dist/index.mjs';
-import defu, { defuFn } from 'file://E:/vue%20js/genealogy/node_modules/defu/dist/defu.mjs';
-import { hash } from 'file://E:/vue%20js/genealogy/node_modules/ohash/dist/index.mjs';
-import { parseURL, withoutBase, joinURL, getQuery, withQuery } from 'file://E:/vue%20js/genealogy/node_modules/ufo/dist/index.mjs';
-import { createStorage, prefixStorage } from 'file://E:/vue%20js/genealogy/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file://E:/vue%20js/genealogy/node_modules/unstorage/drivers/fs.mjs';
-import { toRouteMatcher, createRouter } from 'file://E:/vue%20js/genealogy/node_modules/radix3/dist/index.mjs';
+import { defineEventHandler, handleCacheHeaders, createEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, setResponseStatus, getRequestHeader, setResponseHeader, getRequestHeaders, readBody, createError, createApp, createRouter as createRouter$1, toNodeListener, fetchWithEvent, lazyEventHandler, getQuery as getQuery$1 } from 'file://E:/vuejs/genealogy-mas/node_modules/h3/dist/index.mjs';
+import { createRenderer } from 'file://E:/vuejs/genealogy-mas/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { stringify, uneval } from 'file://E:/vuejs/genealogy-mas/node_modules/devalue/index.js';
+import { createFetch as createFetch$1, Headers } from 'file://E:/vuejs/genealogy-mas/node_modules/ofetch/dist/node.mjs';
+import destr from 'file://E:/vuejs/genealogy-mas/node_modules/destr/dist/index.mjs';
+import { createCall, createFetch } from 'file://E:/vuejs/genealogy-mas/node_modules/unenv/runtime/fetch/index.mjs';
+import { createHooks } from 'file://E:/vuejs/genealogy-mas/node_modules/hookable/dist/index.mjs';
+import { snakeCase } from 'file://E:/vuejs/genealogy-mas/node_modules/scule/dist/index.mjs';
+import { klona } from 'file://E:/vuejs/genealogy-mas/node_modules/klona/dist/index.mjs';
+import defu, { defuFn } from 'file://E:/vuejs/genealogy-mas/node_modules/nitropack/node_modules/defu/dist/defu.mjs';
+import { hash } from 'file://E:/vuejs/genealogy-mas/node_modules/ohash/dist/index.mjs';
+import { parseURL, withoutBase, joinURL, getQuery, withQuery } from 'file://E:/vuejs/genealogy-mas/node_modules/ufo/dist/index.mjs';
+import { createStorage, prefixStorage } from 'file://E:/vuejs/genealogy-mas/node_modules/unstorage/dist/index.mjs';
+import unstorage_47drivers_47fs from 'file://E:/vuejs/genealogy-mas/node_modules/unstorage/drivers/fs.mjs';
+import { toRouteMatcher, createRouter } from 'file://E:/vuejs/genealogy-mas/node_modules/radix3/dist/index.mjs';
+import { generateJSON } from 'file://E:/vuejs/genealogy-mas/node_modules/@intlify/bundle-utils/index.mjs';
+import { relative, join } from 'file://E:/vuejs/genealogy-mas/node_modules/pathe/dist/index.mjs';
+
+const providers = [
+  ["APPVEYOR"],
+  ["AZURE_PIPELINES", "SYSTEM_TEAMFOUNDATIONCOLLECTIONURI"],
+  ["AZURE_STATIC", "INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN"],
+  ["APPCIRCLE", "AC_APPCIRCLE"],
+  ["BAMBOO", "bamboo_planKey"],
+  ["BITBUCKET", "BITBUCKET_COMMIT"],
+  ["BITRISE", "BITRISE_IO"],
+  ["BUDDY", "BUDDY_WORKSPACE_ID"],
+  ["BUILDKITE"],
+  ["CIRCLE", "CIRCLECI"],
+  ["CIRRUS", "CIRRUS_CI"],
+  ["CLOUDFLARE_PAGES", "CF_PAGES", { ci: true }],
+  ["CODEBUILD", "CODEBUILD_BUILD_ARN"],
+  ["CODEFRESH", "CF_BUILD_ID"],
+  ["DRONE"],
+  ["DRONE", "DRONE_BUILD_EVENT"],
+  ["DSARI"],
+  ["GITHUB_ACTIONS"],
+  ["GITLAB", "GITLAB_CI"],
+  ["GITLAB", "CI_MERGE_REQUEST_ID"],
+  ["GOCD", "GO_PIPELINE_LABEL"],
+  ["LAYERCI"],
+  ["HUDSON", "HUDSON_URL"],
+  ["JENKINS", "JENKINS_URL"],
+  ["MAGNUM"],
+  ["NETLIFY"],
+  ["NETLIFY", "NETLIFY_LOCAL", { ci: false }],
+  ["NEVERCODE"],
+  ["RENDER"],
+  ["SAIL", "SAILCI"],
+  ["SEMAPHORE"],
+  ["SCREWDRIVER"],
+  ["SHIPPABLE"],
+  ["SOLANO", "TDDIUM"],
+  ["STRIDER"],
+  ["TEAMCITY", "TEAMCITY_VERSION"],
+  ["TRAVIS"],
+  ["VERCEL", "NOW_BUILDER"],
+  ["APPCENTER", "APPCENTER_BUILD_ID"],
+  ["CODESANDBOX", "CODESANDBOX_SSE", { ci: false }],
+  ["STACKBLITZ"],
+  ["STORMKIT"],
+  ["CLEAVR"]
+];
+function detectProvider(env) {
+  for (const provider of providers) {
+    const envName = provider[1] || provider[0];
+    if (env[envName]) {
+      return {
+        name: provider[0].toLowerCase(),
+        ...provider[2]
+      };
+    }
+  }
+  if (env.SHELL && env.SHELL === "/bin/jsh") {
+    return {
+      name: "stackblitz",
+      ci: false
+    };
+  }
+  return {
+    name: "",
+    ci: false
+  };
+}
+
+const processShim = typeof process !== "undefined" ? process : {};
+const envShim = processShim.env || {};
+const providerInfo = detectProvider(envShim);
+const nodeENV = typeof process !== "undefined" && process.env && "development" || "";
+const platform = processShim.platform;
+const provider = providerInfo.name;
+const isCI = toBoolean(envShim.CI) || providerInfo.ci !== false;
+const hasTTY = toBoolean(processShim.stdout && processShim.stdout.isTTY);
+toBoolean(envShim.DEBUG);
+const isTest = nodeENV === "test" || toBoolean(envShim.TEST);
+toBoolean(envShim.MINIMAL) || isCI || isTest || !hasTTY;
+const isWindows = /^win/i.test(platform);
+function toBoolean(val) {
+  return val ? val !== "false" : false;
+}
 
 const inlineAppConfig = {};
 
@@ -42,7 +125,20 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {}
+  "public": {
+    "i18n": {
+      "experimental": {
+        "jsTsFormatResource": false
+      },
+      "baseUrl": ""
+    }
+  },
+  "i18n": {
+    "precompile": {
+      "strictMessage": true,
+      "escapeHtml": false
+    }
+  }
 };
 const ENV_PREFIX = "NITRO_";
 const ENV_PREFIX_ALT = _inlineRuntimeConfig.nitro.envPrefix ?? process.env.NITRO_ENV_PREFIX ?? "_";
@@ -109,7 +205,7 @@ new Proxy(/* @__PURE__ */ Object.create(null), {
   }
 });
 
-const serverAssets = [{"baseName":"server","dir":"E:/vue js/genealogy/server/assets"}];
+const serverAssets = [{"baseName":"server","dir":"E:/vuejs/genealogy-mas/server/assets"}];
 
 const assets = createStorage();
 
@@ -121,10 +217,11 @@ const storage = createStorage({});
 
 storage.mount('/assets', assets);
 
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"E:\\vue js\\genealogy","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"E:\\vue js\\genealogy\\server","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"E:\\vue js\\genealogy\\.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"E:\\vue js\\genealogy\\.nuxt\\cache","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('i18n', unstorage_47drivers_47fs({"driver":"fs","base":"E:\\vuejs\\genealogy-mas\\.nuxt\\i18n","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"E:\\vuejs\\genealogy-mas","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"E:\\vuejs\\genealogy-mas\\server","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"E:\\vuejs\\genealogy-mas\\.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"E:\\vuejs\\genealogy-mas\\.nuxt\\cache","ignore":["**/node_modules/**","**/.git/**"]}));
 
 function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
@@ -243,6 +340,10 @@ function defineCachedEventHandler(handler, opts = defaultCacheOptions) {
       let _resSendBody;
       const resProxy = cloneWithProxy(incomingEvent.node.res, {
         statusCode: 200,
+        writableEnded: false,
+        writableFinished: false,
+        headersSent: false,
+        closed: false,
         getHeader(name) {
           return resHeaders[name];
         },
@@ -429,15 +530,17 @@ const plugins = [
 function defineRenderHandler(handler) {
   return eventHandler(async (event) => {
     if (event.node.req.url.endsWith("/favicon.ico")) {
-      event.node.res.setHeader("Content-Type", "image/x-icon");
-      event.node.res.end(
-        "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-      );
+      if (!event.handled) {
+        event.node.res.setHeader("Content-Type", "image/x-icon");
+        event.node.res.end(
+          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        );
+      }
       return;
     }
     const response = await handler(event);
     if (!response) {
-      if (!event.node.res.writableEnded) {
+      if (!event.handled) {
         event.node.res.statusCode = event.node.res.statusCode === 200 ? 500 : event.node.res.statusCode;
         event.node.res.end(
           "No response returned from render handler: " + event.node.req.url
@@ -482,6 +585,18 @@ function normalizeError(error) {
     statusMessage,
     message
   };
+}
+function trapUnhandledNodeErrors() {
+  {
+    process.on(
+      "unhandledRejection",
+      (err) => console.error("[nitro] [unhandledRejection]", err)
+    );
+    process.on(
+      "uncaughtException",
+      (err) => console.error("[nitro] [uncaughtException]", err)
+    );
+  }
 }
 
 const errorHandler = (async function errorhandler(error, event) {
@@ -531,11 +646,220 @@ const errorHandler = (async function errorhandler(error, event) {
   event.node.res.end(await res.text());
 });
 
-const _lazy_uu8qud = () => Promise.resolve().then(function () { return renderer$1; });
+function buildAssetsURL(...path) {
+  return joinURL(publicAssetsURL(), useRuntimeConfig().app.buildAssetsDir, ...path);
+}
+function publicAssetsURL(...path) {
+  const publicBase = useRuntimeConfig().app.cdnURL || useRuntimeConfig().app.baseURL;
+  return path.length ? joinURL(publicBase, ...path) : publicBase;
+}
+
+const BASE_KEY = "i18n";
+const CONFIG_KEY = "config";
+const configStorage = prefixStorage(useStorage(), BASE_KEY);
+const PRECOMPILED_LOCALE_KEY = "i18n:locales";
+const localeStorage = prefixStorage(useStorage(), PRECOMPILED_LOCALE_KEY);
+const resolveKey = (key) => `${key}.js`;
+const localeKey = (locale, hash) => `${locale}-${hash}`;
+const configKey = (hash) => `${CONFIG_KEY}-${hash}`;
+const _5PrzzH = defineEventHandler(async (event) => {
+  const body = await readBody(event);
+  validate(body);
+  const cacheCode = await getCacheCode(body);
+  if (cacheCode) {
+    await setResponseHeader(event, "content-type", "text/javascript");
+    return cacheCode.toString();
+  }
+  const [code, errors] = generateCode(body);
+  if (errors.length > 0) {
+    throw createError({ statusMessage: errors.join("|"), statusCode: 400 });
+  }
+  await setCacheCode(code, body);
+  await setResponseHeader(event, "content-type", "text/javascript");
+  return code;
+});
+function validate(body) {
+  if (!body.type) {
+    throw createError({ statusMessage: `require the 'type'`, statusCode: 400 });
+  }
+  if (body.type === "locale") {
+    if (!body.locale) {
+      throw createError({ statusMessage: `require the 'locale'`, statusCode: 400 });
+    }
+  }
+  if (!body.hash) {
+    throw createError({ statusMessage: `require the 'hash'`, statusCode: 400 });
+  }
+  if (!body.resource) {
+    throw createError({ statusMessage: `require the 'resource'`, statusCode: 400 });
+  }
+}
+async function getCacheCode({ type, locale, hash }) {
+  if (type === "locale") {
+    return await localeStorage.getItem(resolveKey(localeKey(locale, hash)));
+  } else if (type === "config") {
+    return await configStorage.getItem(resolveKey(configKey(hash)));
+  } else {
+    return null;
+  }
+}
+function generateCode(body) {
+  const errors = [];
+  const {
+    i18n: {
+      precompile: { strictMessage, escapeHtml }
+    }
+  } = useRuntimeConfig();
+  const env = "development" ;
+  let gen = "";
+  if (body.type === "locale") {
+    const { code } = generateJSON(JSON.stringify(body.resource), {
+      env,
+      strictMessage,
+      escapeHtml,
+      onError: (error) => {
+        errors.push(error);
+      }
+    });
+    gen = code;
+  } else if (body.type === "config") {
+    gen += `export default {
+`;
+    const codes = [];
+    Object.keys(body.resource).reduce((codes2, key) => {
+      const { code } = generateJSON(JSON.stringify(body.resource[key]), {
+        type: "bare",
+        env,
+        strictMessage,
+        escapeHtml,
+        onError: (error) => {
+          errors.push(error);
+        }
+      });
+      codes2.push(`  ${JSON.stringify(key)}: ${code},
+`);
+      return codes2;
+    }, codes);
+    gen += codes.join("");
+    gen += `}
+`;
+  }
+  return [gen, errors];
+}
+async function setCacheCode(code, { type, locale, hash }) {
+  if (type === "locale") {
+    await localeStorage.setItem(resolveKey(localeKey(locale, hash)), code);
+  } else if (type === "config") {
+    await configStorage.setItem(resolveKey(configKey(hash)), code);
+  }
+}
+
+/*!
+  * shared v9.3.0-beta.17
+  * (c) 2023 kazuya kawaguchi
+  * Released under the MIT License.
+  */
+/**
+ * Original Utilities
+ * written by kazuya kawaguchi
+ */
+const isFunction = (val) => typeof val === 'function';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isObject = (val) => val !== null && typeof val === 'object';
+
+const _8Vr90O = defineEventHandler(async (event) => {
+  const hash = event.context.params?.hash;
+  if (hash == null) {
+    throw createError({ statusMessage: `require the 'hash'`, statusCode: 400 });
+  }
+  const i18nMeta = await getI18nMeta();
+  const [filename] = hash.split(".");
+  const target = i18nMeta[filename];
+  const loadPath = await resolveModule(target.path);
+  const loader = await import(loadPath).then((m) => m.default || m);
+  if (target.type === "locale") {
+    if (target.locale == null) {
+      throw createError({ statusMessage: `not found locale`, statusCode: 500 });
+    }
+    const resource = await loader(target.locale);
+    const code = await precompileLocale(target.locale, filename, resource);
+    await setResponseHeader(event, "content-type", "text/javascript");
+    return code;
+  } else if (target.type === "config") {
+    const config = isFunction(loader) ? await loader() : isObject(loader) ? loader : {};
+    const messages = config.messages || {};
+    const code = await precompileConfig(filename, messages);
+    await setResponseHeader(event, "content-type", "text/javascript");
+    return code;
+  } else {
+    throw new Error("Invalid type");
+  }
+});
+async function getI18nMeta() {
+  return await useStorage().getItem("build:dist:server:i18n-meta.json");
+}
+async function resolveModule(path) {
+  const storage = await useStorage();
+  const rootMount = await storage.getMount("root");
+  const root = rootMount.driver.options.base;
+  const rootRelative = relative(new URL(globalThis._importMeta_.url).pathname, root);
+  return join(rootRelative, "dist/server", path);
+}
+async function precompileLocale(locale, filename, messages) {
+  return await $fetch("/__i18n__/precompile", {
+    method: "POST",
+    body: {
+      locale,
+      type: "locale",
+      hash: filename,
+      resource: messages
+    }
+  });
+}
+async function precompileConfig(filename, messages) {
+  return await $fetch("/__i18n__/precompile", {
+    method: "POST",
+    body: {
+      type: "config",
+      hash: filename,
+      resource: getNeedPrecompileMessages(messages)
+    }
+  });
+}
+function deepCopy(src, des, predicate) {
+  for (const key in src) {
+    if (isObject(src[key])) {
+      if (!isObject(des[key]))
+        des[key] = {};
+      deepCopy(src[key], des[key], predicate);
+    } else {
+      if (predicate) {
+        if (predicate(src[key], des[key])) {
+          des[key] = src[key];
+        }
+      } else {
+        des[key] = src[key];
+      }
+    }
+  }
+}
+function getNeedPrecompileMessages(messages) {
+  const needPrecompileMessages = {};
+  const predicate = (src) => !isFunction(src);
+  for (const [locale, message] of Object.entries(messages)) {
+    const dest = needPrecompileMessages[locale] = {};
+    deepCopy(message, dest, predicate);
+  }
+  return needPrecompileMessages;
+}
+
+const _lazy_KQxtl6 = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '/__nuxt_error', handler: _lazy_uu8qud, lazy: true, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_uu8qud, lazy: true, middleware: false, method: undefined }
+  { route: '/__nuxt_error', handler: _lazy_KQxtl6, lazy: true, middleware: false, method: undefined },
+  { route: '/__i18n__/precompile', handler: _5PrzzH, lazy: false, middleware: false, method: "post" },
+  { route: '/__i18n__/prerender/:hash', handler: _8Vr90O, lazy: false, middleware: false, method: "get" },
+  { route: '/**', handler: _lazy_KQxtl6, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {
@@ -587,7 +911,7 @@ function createNitroApp() {
       router.use(h.route, handler, h.method);
     }
   }
-  h3App.use(config.app.baseURL, router);
+  h3App.use(config.app.baseURL, router.handler);
   const app = {
     hooks,
     h3App,
@@ -610,11 +934,11 @@ function getAddress() {
   }
   const socketName = `worker-${process.pid}-${threadId}.sock`;
   if (isWindows) {
-    return join("\\\\.\\pipe\\nitro", socketName);
+    return join$1("\\\\.\\pipe\\nitro", socketName);
   } else {
-    const socketDir = join(tmpdir(), "nitro");
+    const socketDir = join$1(tmpdir(), "nitro");
     mkdirSync(socketDir, { recursive: true });
-    return join(socketDir, socketName);
+    return join$1(socketDir, socketName);
   }
 }
 const listenAddress = getAddress();
@@ -625,16 +949,16 @@ server.listen(listenAddress, () => {
     address: typeof _address === "string" ? { socketPath: _address } : { host: "localhost", port: _address.port }
   });
 });
-{
-  process.on(
-    "unhandledRejection",
-    (err) => console.error("[nitro] [dev] [unhandledRejection]", err)
-  );
-  process.on(
-    "uncaughtException",
-    (err) => console.error("[nitro] [dev] [uncaughtException]", err)
-  );
+trapUnhandledNodeErrors();
+async function onShutdown(signal) {
+  await nitroApp.hooks.callHook("close");
 }
+parentPort.on("message", async (msg) => {
+  if (msg && msg.event === "shutdown") {
+    await onShutdown();
+    parentPort.postMessage({ event: "exit" });
+  }
+});
 
 const _messages = {"appName":"Nuxt","version":"","statusCode":500,"statusMessage":"Server error","description":"An error occurred in the application and the page could not be served. If you are the application owner, check your server logs for details.","stack":""};
 const _render = function({ messages }) {
@@ -645,7 +969,7 @@ __p += '<!DOCTYPE html><html><head><title>' +
 ((__t = ( messages.statusMessage )) == null ? '' : __t) +
 ' | ' +
 ((__t = ( messages.appName )) == null ? '' : __t) +
-'</title><meta charset="utf-8"><meta content="width=device-width,initial-scale=1,minimum-scale=1" name="viewport"><style>.spotlight{background:linear-gradient(45deg, #00DC82 0%, #36E4DA 50%, #0047E1 100%);opacity:0.8;filter:blur(30vh);height:60vh;bottom:-40vh}*,:before,:after{-webkit-box-sizing:border-box;box-sizing:border-box;border-width:0;border-style:solid;border-color:#e0e0e0}*{--tw-ring-inset:var(--tw-empty, );--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(14, 165, 233, .5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000}:root{-moz-tab-size:4;-o-tab-size:4;tab-size:4}body{margin:0;font-family:inherit;line-height:inherit}html{-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";line-height:1.5}h1,p,pre{margin:0}h1{font-size:inherit;font-weight:inherit}pre{font-size:1em;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}.bg-white{--tw-bg-opacity:1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}.bg-black\\/5{--tw-bg-opacity:.05;background-color:rgba(0,0,0,var(--tw-bg-opacity))}.rounded-t-md{border-top-left-radius:.375rem;border-top-right-radius:.375rem}.flex{display:-webkit-box;display:-ms-flexbox;display:-webkit-flex;display:flex}.flex-col{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;-webkit-flex-direction:column;flex-direction:column}.flex-1{-webkit-box-flex:1;-ms-flex:1 1 0%;-webkit-flex:1 1 0%;flex:1 1 0%}.font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji"}.font-medium{font-weight:500}.font-light{font-weight:300}.h-auto{height:auto}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-6xl{font-size:3.75rem;line-height:1}.leading-tight{line-height:1.25}.mb-8{margin-bottom:2rem}.mb-6{margin-bottom:1.5rem}.min-h-screen{min-height:100vh}.overflow-y-auto{overflow-y:auto}.p-8{padding:2rem}.px-10{padding-left:2.5rem;padding-right:2.5rem}.pt-14{padding-top:3.5rem}.fixed{position:fixed}.left-0{left:0px}.right-0{right:0px}.text-black{--tw-text-opacity:1;color:rgba(0,0,0,var(--tw-text-opacity))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.z-10{z-index:10}@media (min-width: 640px){.sm\\:text-8xl{font-size:6rem;line-height:1}.sm\\:text-2xl{font-size:1.5rem;line-height:2rem}}@media (prefers-color-scheme: dark){.dark\\:bg-black{--tw-bg-opacity:1;background-color:rgba(0,0,0,var(--tw-bg-opacity))}.dark\\:bg-white\\/10{--tw-bg-opacity:.1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}.dark\\:text-white{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}}</style><script>(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll(\'link[rel="modulepreload"]\'))n(e);new MutationObserver(e=>{for(const r of e)if(r.type==="childList")for(const o of r.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&n(o)}).observe(document,{childList:!0,subtree:!0});function i(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerpolicy&&(r.referrerPolicy=e.referrerpolicy),e.crossorigin==="use-credentials"?r.credentials="include":e.crossorigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function n(e){if(e.ep)return;e.ep=!0;const r=i(e);fetch(e.href,r)}})();</script></head><body class="font-sans antialiased bg-white px-10 pt-14 dark:bg-black text-black dark:text-white min-h-screen flex flex-col"><div class="fixed left-0 right-0 spotlight"></div><h1 class="text-6xl sm:text-8xl font-medium mb-6">' +
+'</title><meta charset="utf-8"><meta content="width=device-width,initial-scale=1,minimum-scale=1" name="viewport"><style>.spotlight{background:linear-gradient(45deg, #00DC82 0%, #36E4DA 50%, #0047E1 100%);opacity:0.8;filter:blur(30vh);height:60vh;bottom:-40vh}*,:before,:after{-webkit-box-sizing:border-box;box-sizing:border-box;border-width:0;border-style:solid;border-color:#e0e0e0}*{--tw-ring-inset:var(--tw-empty, );--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(14, 165, 233, .5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000}:root{-moz-tab-size:4;-o-tab-size:4;tab-size:4}body{margin:0;font-family:inherit;line-height:inherit}html{-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";line-height:1.5}h1,p,pre{margin:0}h1{font-size:inherit;font-weight:inherit}pre{font-size:1em;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}.bg-white{--tw-bg-opacity:1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}.bg-black\\/5{--tw-bg-opacity:.05;background-color:rgba(0,0,0,var(--tw-bg-opacity))}.rounded-t-md{border-top-left-radius:.375rem;border-top-right-radius:.375rem}.flex{display:-webkit-box;display:-ms-flexbox;display:-webkit-flex;display:flex}.flex-col{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;-webkit-flex-direction:column;flex-direction:column}.flex-1{-webkit-box-flex:1;-ms-flex:1 1 0%;-webkit-flex:1 1 0%;flex:1 1 0%}.font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji"}.font-medium{font-weight:500}.font-light{font-weight:300}.h-auto{height:auto}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-6xl{font-size:3.75rem;line-height:1}.leading-tight{line-height:1.25}.mb-8{margin-bottom:2rem}.mb-6{margin-bottom:1.5rem}.min-h-screen{min-height:100vh}.overflow-y-auto{overflow-y:auto}.p-8{padding:2rem}.px-10{padding-left:2.5rem;padding-right:2.5rem}.pt-14{padding-top:3.5rem}.fixed{position:fixed}.left-0{left:0px}.right-0{right:0px}.text-black{--tw-text-opacity:1;color:rgba(0,0,0,var(--tw-text-opacity))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.z-10{z-index:10}@media (min-width: 640px){.sm\\:text-8xl{font-size:6rem;line-height:1}.sm\\:text-2xl{font-size:1.5rem;line-height:2rem}}@media (prefers-color-scheme: dark){.dark\\:bg-black{--tw-bg-opacity:1;background-color:rgba(0,0,0,var(--tw-bg-opacity))}.dark\\:bg-white\\/10{--tw-bg-opacity:.1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}.dark\\:text-white{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}}</style><script>(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll(\'link[rel="modulepreload"]\'))i(e);new MutationObserver(e=>{for(const r of e)if(r.type==="childList")for(const o of r.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&i(o)}).observe(document,{childList:!0,subtree:!0});function s(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?r.credentials="include":e.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function i(e){if(e.ep)return;e.ep=!0;const r=s(e);fetch(e.href,r)}})();</script></head><body class="font-sans antialiased bg-white px-10 pt-14 dark:bg-black text-black dark:text-white min-h-screen flex flex-col"><div class="fixed left-0 right-0 spotlight"></div><h1 class="text-6xl sm:text-8xl font-medium mb-6">' +
 ((__t = ( messages.statusCode )) == null ? '' : __t) +
 '</h1><p class="text-xl sm:text-2xl font-light mb-8 leading-tight">' +
 ((__t = ( messages.description )) == null ? '' : __t) +
@@ -658,52 +982,19 @@ const _template = (messages) => _render({ messages: { ..._messages, ...messages 
 const template = _template;
 
 const errorDev = /*#__PURE__*/Object.freeze({
-      __proto__: null,
-      template: template
+  __proto__: null,
+  template: template
 });
 
 const appRootId = "__nuxt";
 
 const appRootTag = "div";
 
-function buildAssetsURL(...path) {
-  return joinURL(publicAssetsURL(), useRuntimeConfig().app.buildAssetsDir, ...path);
-}
-function publicAssetsURL(...path) {
-  const publicBase = useRuntimeConfig().app.cdnURL || useRuntimeConfig().app.baseURL;
-  return path.length ? joinURL(publicBase, ...path) : publicBase;
-}
-
 globalThis.__buildAssetsURL = buildAssetsURL;
 globalThis.__publicAssetsURL = publicAssetsURL;
-const getClientManifest = () => import('file://E:/vue%20js/genealogy/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
+const getClientManifest = () => import('file://E:/vuejs/genealogy-mas/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
 const getStaticRenderedHead = () => Promise.resolve().then(function () { return _virtual__headStatic$1; }).then((r) => r.default || r);
-const getServerEntry = () => import('file://E:/vue%20js/genealogy/.nuxt/dist/server/server.mjs').then((r) => r.default || r);
 const getSSRStyles = lazyCachedFunction(() => Promise.resolve().then(function () { return styles$1; }).then((r) => r.default || r));
-const getSSRRenderer = lazyCachedFunction(async () => {
-  const manifest = await getClientManifest();
-  if (!manifest) {
-    throw new Error("client.manifest is not available");
-  }
-  const createSSRApp = await getServerEntry();
-  if (!createSSRApp) {
-    throw new Error("Server bundle is not available");
-  }
-  const options = {
-    manifest,
-    renderToString: renderToString$1,
-    buildAssetsURL
-  };
-  const renderer = createRenderer(createSSRApp, options);
-  async function renderToString$1(input, context) {
-    const html = await renderToString(input, context);
-    if (process.env.NUXT_VITE_NODE_OPTIONS) {
-      renderer.rendererContext.updateManifest(await getClientManifest());
-    }
-    return `<${appRootTag} id="${appRootId}">${html}</${appRootTag}>`;
-  }
-  return renderer;
-});
 const getSPARenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();
   const options = {
@@ -759,7 +1050,7 @@ const renderer = defineRenderHandler(async (event) => {
     url,
     event,
     runtimeConfig: useRuntimeConfig(),
-    noSSR: event.context.nuxt?.noSSR || routeOptions.ssr === false || (false),
+    noSSR: !!true   ,
     error: !!ssrError,
     nuxt: void 0,
     /* NuxtApp */
@@ -767,7 +1058,7 @@ const renderer = defineRenderHandler(async (event) => {
     _payloadReducers: {},
     islandContext
   };
-  const renderer = ssrContext.noSSR ? await getSPARenderer() : await getSSRRenderer();
+  const renderer = await getSPARenderer() ;
   const _rendered = await renderer.renderToString(ssrContext).catch(async (error) => {
     const _err = !ssrError && ssrContext.payload?.error || error;
     await ssrContext.nuxt?.hooks.callHook("app:error", _err);
@@ -881,7 +1172,7 @@ function renderPayloadJsonScript(opts) {
   const attrs = [
     'type="application/json"',
     `id="${opts.id}"`,
-    `data-ssr="${!(opts.ssrContext.noSSR)}"`,
+    `data-ssr="${!(true )}"`,
     opts.src ? `data-src="${opts.src}"` : ""
   ].filter(Boolean);
   const contents = opts.data ? stringify(opts.data, opts.ssrContext._payloadReducers) : "";
@@ -896,21 +1187,21 @@ function splitPayload(ssrContext) {
 }
 
 const renderer$1 = /*#__PURE__*/Object.freeze({
-      __proto__: null,
-      default: renderer
+  __proto__: null,
+  default: renderer
 });
 
-const _virtual__headStatic = {"headTags":"<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">","bodyTags":"","bodyTagsOpen":"","htmlAttrs":"","bodyAttrs":""};
+const _virtual__headStatic = {"headTags":"<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css\">","bodyTags":"","bodyTagsOpen":"","htmlAttrs":"","bodyAttrs":""};
 
 const _virtual__headStatic$1 = /*#__PURE__*/Object.freeze({
-      __proto__: null,
-      default: _virtual__headStatic
+  __proto__: null,
+  default: _virtual__headStatic
 });
 
 const styles = {};
 
 const styles$1 = /*#__PURE__*/Object.freeze({
-      __proto__: null,
-      default: styles
+  __proto__: null,
+  default: styles
 });
 //# sourceMappingURL=index.mjs.map

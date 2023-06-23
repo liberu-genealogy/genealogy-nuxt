@@ -7,7 +7,14 @@
     "moduleResolution": "Node",
     "allowJs": true,
     "resolveJsonModule": true,
-    "paths": {}
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "paths": {
+      "#imports": [
+        "E:/vuejs/genealogy-mas/.nuxt/types/nitro-imports"
+      ]
+    }
   },
   "include": [
     "./types/nitro.d.ts",

@@ -9,4 +9,6 @@ export { default as getSiteMeta } from '../utils/getSiteMeta';
 export { hasActiveChild, organize } from '../utils/menuOrganizer';
 export { default as permission } from '../utils/permission';
 export { createDisplayName, getBirthYear, getDeathYear } from '../utils/personHelper';
+export { useI18n } from '../node_modules/vue-i18n/dist/vue-i18n';
+export { useRouteBaseName, useLocalePath, useLocaleRoute, useSwitchLocalePath, useLocaleHead, useBrowserLocale, useCookieLocale, defineI18nRoute, defineI18nLocale, defineI18nConfig } from '../node_modules/@nuxtjs/i18n/dist/runtime/composables';
 export { definePageMeta } from '../node_modules/nuxt/dist/pages/runtime/composables';

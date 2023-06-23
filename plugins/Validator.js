@@ -1,32 +1,29 @@
-import {createApp} from "vue";
-import { messages } from "vee-validate";
-import {
-  ValidationProvider,
-  ValidationObserver,
-  extend,
-  Rules,
-} from "vee-validate";
+import { createApp } from 'vue';
+import { defineRule, ErrorMessage } from 'vee-validate';
+import * as rules from '@vee-validate/rules';
+import { configure } from 'vee-validate';
 
-createApp.component("ValidationProvider", ValidationProvider);
-createApp.component("ValidationObserver", ValidationObserver);
+// Install all VeeValidate rules
+Object.keys(rules).forEach((rule) => {
+  // defineRule(rule, rules[rule]);
+});
 
-export default ({ app }, inject) => {
-  // Inject $hello(msg) in Vue, context and store.
-  inject("validate", () => {
-    extend("password", {
-      // Add validation for password confirm
-      params: ["target"],
-      validate(value, { target }) {
-        return value === target;
-      },
-      message: "Password confirmation does not match",
-    });
+// Set up VeeValidate configuration
+configure({
+  generateMessage: ({ field, rule }) => {
+    const messages = {
+      required: `${field} is required.`,
+      // Add other rule messages as needed
+    };
+    return messages[rule];
+  },
+});
 
-    Object.keys(Rules).forEach((rule) => {
-      extend(rule, {
-        ...Rules[rule],
-        message: messages[rule],
-      });
-    });
-  });
-};
+const app = createApp({});
+
+// Register VeeValidate components globally
+app.component('ErrorMessage', ErrorMessage);
+
+// Mount the app
+app.mount('#app');
+export default app;

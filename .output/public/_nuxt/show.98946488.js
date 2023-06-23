@@ -1,0 +1,1 @@
+import{a as e,o,b as s}from"./entry.92cc3846.js";const t={name:"Show",meta:{permission:{name:"gramps menu"},title:"Gramps - Show"}};function a(n,r,c,m,p,i){return o(),s("div")}const f=e(t,[["render",a]]);export{f as default};

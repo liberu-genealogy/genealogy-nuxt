@@ -1,0 +1,1 @@
+import{a as e,o,b as t}from"./entry.92cc3846.js";const a={layout:"auth",meta:{permission:{name:"personalias menu"},title:"Person Alias - Show"}};function s(n,r,c,i,p,_){return o(),t("div")}const m=e(a,[["render",s]]);export{m as default};

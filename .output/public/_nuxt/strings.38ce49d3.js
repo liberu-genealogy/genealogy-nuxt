@@ -1,0 +1,1 @@
+const l=new RegExp(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g),a=e=>e!==null&&typeof e<"u"&&e!=="",p=e=>{var o;return a(e)?(o=e.match(l))==null?void 0:o.map(c=>c.toLowerCase()).join(" "):""},s=e=>a(e)?e.charAt(0).toUpperCase()+e.slice(1):"";export{p as l,s as u};

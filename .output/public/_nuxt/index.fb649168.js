@@ -1,0 +1,1 @@
+import{a as e}from"./entry.92cc3846.js";const n={layout:"auth",meta:{permission:{name:"decendent menu"},title:"Decendent - Index"}};function t(a,o,r,s,c,d){return null}const p=e(n,[["render",t]]);export{p as default};

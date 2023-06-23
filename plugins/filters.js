@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
-
+const app = createApp({});
 const SI = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
 export default ({ store }, inject) => {
-    createApp.filter('numberFormat', (value, decimals = 3) => new Intl.NumberFormat(
+    app.filter('numberFormat', (value, decimals = 3) => new Intl.NumberFormat(
         store.state.preferences.global.lang, {
             style: 'decimal',
             minimumFractionDigits: decimals,
@@ -10,7 +10,7 @@ export default ({ store }, inject) => {
         },
     ).format(value));
 
-    createApp.filter('shortNumber', (number, precision = 2) => {
+    app.filter('shortNumber', (number, precision = 2) => {
         number = Number.parseFloat(number);
 
         if (number < 1) {
@@ -31,3 +31,4 @@ export default ({ store }, inject) => {
         return formatted;
     });
 }
+app.mount('#app');

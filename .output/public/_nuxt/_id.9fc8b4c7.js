@@ -1,0 +1,1 @@
+import{a as e,o as t,b as o}from"./entry.92cc3846.js";const n={name:"Show",layout:"auth",meta:{permission:{name:"refn menu"},title:"Refn - Show"}};function a(r,s,c,i,m,p){return t(),o("div")}const f=e(n,[["render",a]]);export{f as default};

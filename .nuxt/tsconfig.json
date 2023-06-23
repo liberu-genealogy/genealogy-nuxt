@@ -59,6 +59,24 @@
       "vue-demi": [
         "node_modules/nuxt/dist/app/compat/vue-demi"
       ],
+      "vue-i18n": [
+        "node_modules/vue-i18n/dist/vue-i18n"
+      ],
+      "@intlify/shared": [
+        "node_modules/@intlify/shared/dist/shared"
+      ],
+      "@intlify/vue-router-bridge": [
+        "node_modules/@intlify/vue-router-bridge/lib/index"
+      ],
+      "@intlify/vue-i18n-bridge": [
+        "node_modules/@intlify/vue-i18n-bridge/lib/index"
+      ],
+      "vue-i18n-routing": [
+        "node_modules/vue-i18n-routing/dist/vue-i18n-routing"
+      ],
+      "#i18n": [
+        "node_modules/@nuxtjs/i18n/dist/runtime/composables"
+      ],
       "#vue-router": [
         ".nuxt/vue-router"
       ],

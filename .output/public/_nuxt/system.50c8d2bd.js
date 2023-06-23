@@ -1,0 +1,1 @@
+import{a as o,r as s,o as r,c as a}from"./entry.92cc3846.js";const c={meta:{breadcrumb:"system"}};function n(e,p,m,_,u,d){const t=s("NuxtChild");return r(),a(t,{key:e.$route.path})}const i=o(c,[["render",n]]);export{i as default};

@@ -1,0 +1,1 @@
+import{a as e,r as a,o as s,c as n}from"./entry.92cc3846.js";const c={meta:{breadcrumb:"localisation",route:"system.localisation.index"}};function r(o,i,l,p,u,_){const t=a("NuxtChild");return s(),n(t,{key:o.$route.path})}const m=e(c,[["render",r]]);export{m as default};

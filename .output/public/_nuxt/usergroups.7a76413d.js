@@ -1,0 +1,1 @@
+import{a as r,r as t,o as s,c as n}from"./entry.92cc3846.js";const a={meta:{breadcrumb:"user groups",route:"administration.userGroups.index"}};function c(e,u,p,i,d,_){const o=t("NuxtChild");return s(),n(o,{key:e.$route.path})}const f=r(a,[["render",c]]);export{f as default};

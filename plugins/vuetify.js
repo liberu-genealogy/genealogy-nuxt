@@ -1,11 +1,16 @@
 // src/plugins/vuetify.js
+import { createApp } from 'vue';
+import { createVuetify } from 'vuetify';
 
-import {createApp} from 'vue'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+import 'vuetify/dist/vuetify.min.css';
 
-createApp.use(Vuetify)
+const app = createApp();
 
-const opts = {}
+const vuetify = createVuetify();
 
-export default new Vuetify(opts)
+app.use(vuetify);
+
+app.mount('#app');
+
+export default vuetify;
+

@@ -1,0 +1,1 @@
+const a=(e,{type:r})=>{switch(r){case e.Read:return"is-success";case e.Write:return"is-warning";case e.Delete:return"is-danger";case e.Link:return"is-info";case e.Menu:return"is-primary";default:return""}};export{a as c};

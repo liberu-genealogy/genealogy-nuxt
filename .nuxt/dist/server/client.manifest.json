@@ -6,10 +6,10 @@
     "module": true,
     "resourceType": "script"
   },
-  "E:/vue js/genealogy/node_modules/nuxt/dist/app/entry.js": {
+  "E:/vuejs/genealogy-mas/node_modules/nuxt/dist/app/entry.js": {
     "resourceType": "script",
     "module": true,
     "isEntry": true,
-    "file": "E:/vue js/genealogy/node_modules/nuxt/dist/app/entry.js"
+    "file": "E:/vuejs/genealogy-mas/node_modules/nuxt/dist/app/entry.js"
   }
 }

@@ -1,0 +1,1 @@
+import{a as e,o as s,b as t}from"./entry.92cc3846.js";const o={layout:"auth",meta:{permission:{name:"addresses menu"},title:"Address - Show"}};function a(r,n,c,d,i,p){return s(),t("div")}const m=e(o,[["render",a]]);export{m as default};

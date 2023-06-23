@@ -1,0 +1,5 @@
+/**
+  * vue-cal v4.8.1
+  * (c) 2022 Antoni Andre <antoniandre.web@gmail.com>
+  * @license MIT
+  */const u=["Δευτέρα","Τρίτη","Τετάρτη","Πέμπτη","Παρασκευή","Σάββατο","Κυριακή"],B=["Ιανουάριος","Φεβρουάριος","Μάρτιος","Απρίλιος","Μάιος","Ιούνιος","Ιούλιος","Αύγουστος","Σεπτέμβριος","Οκτώβριος","Νοέμβριος","Δεκέμβριος"],C=["Ιανουαρίου","Φεβρουαρίου","Μαρτίου","Απριλίου","Μαΐου","Ιουνίου","Ιουλίου","Αυγούστου","Σεπτεμβρίου","Οκτωβρίου","Νοεμβρίου","Δεκεμβρίου"],A="Έτη",F="Έτος",a="Μήνα",D="Εβδομάδα",e="Ημέρα",t="Σήμερα",s="Κανένα συμβάν",d="Ημερήσιο συμβάν",n="Διαγραφή",E="Δημιουργία συμβάντος",o="dddd D MMMMG YYYY",m="π.μ.",y="μ.μ.",r={weekDays:u,months:B,monthsGenitive:C,years:"Έτη",year:"Έτος",month:"Μήνα",week:"Εβδομάδα",day:"Ημέρα",today:"Σήμερα",noEvent:"Κανένα συμβάν",allDay:"Ημερήσιο συμβάν",deleteEvent:"Διαγραφή",createEvent:"Δημιουργία συμβάντος",dateFormat:"dddd D MMMMG YYYY",am:"π.μ.",pm:"μ.μ."};export{d as allDay,m as am,E as createEvent,o as dateFormat,e as day,r as default,n as deleteEvent,a as month,B as months,C as monthsGenitive,s as noEvent,y as pm,t as today,D as week,u as weekDays,F as year,A as years};

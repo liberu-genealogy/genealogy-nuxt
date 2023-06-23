@@ -1,0 +1,1 @@
+import{a as t,r as s,o as r,c as a}from"./entry.92cc3846.js";const n={meta:{breadcrumb:"logs",route:"system.logs.index",keepAlive:!1}};function c(e,p,l,u,_,d){const o=s("NuxtChild");return r(),a(o,{key:e.$route.path})}const m=t(n,[["render",c]]);export{m as default};

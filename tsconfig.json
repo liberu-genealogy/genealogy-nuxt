@@ -1,27 +1,33 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "module": "commonjs",
-    "strict": true,
+    "target": "ES2018",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": [
+      "ESNext",
+      "ESNext.AsyncIterable",
+      "DOM"
+    ],
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "noEmit": true,
     "baseUrl": ".",
- 
     "paths": {
-      "~/*": ["./*"],
-      "@/*": ["./*"]
+      "~/*": [
+        "./*"
+      ],
+      "@/*": [
+        "./*"
+      ]
     },
-    "lib": ["es2020"],
-    "types": ["@nuxt/types", "node"],
-    "plugins": [
-      {
-        "name": "typescript-styled-plugin"
-      }
+    "types": [
+      "@types/node",
+      "@nuxt/types"
     ]
   },
-  "exclude": ["node_modules"],
-  "include": ["./*", "./nuxt.config.ts"]
+  "exclude": [
+    "node_modules"
+  ]
 }

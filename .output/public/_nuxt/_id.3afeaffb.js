@@ -1,0 +1,1 @@
+import{a as e,o as t,b as a}from"./entry.92cc3846.js";const o={layout:"auth",meta:{permission:{name:"chan menu"},title:"Chan - Show"}};function n(s,c,r,i,p,_){return t(),a("div")}const u=e(o,[["render",n]]);export{u as default};

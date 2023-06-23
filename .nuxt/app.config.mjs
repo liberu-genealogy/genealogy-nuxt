@@ -1,5 +1,5 @@
 
-import { defuFn } from 'E:/vuejs/genealogy-master/node_modules/defu/dist/defu.mjs'
+import { defuFn } from 'E:/vuejs/genealogy-mas/node_modules/nuxt/node_modules/defu/dist/defu.mjs'
 
 const inlineConfig = {}
 

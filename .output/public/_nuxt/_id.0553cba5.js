@@ -1,0 +1,1 @@
+import{a as e,o,b as t}from"./entry.92cc3846.js";const s={layout:"auth",meta:{permission:{name:"personsubm menu"},title:"Person Subm - Show"}};function n(a,r,c,m,p,i){return o(),t("div")}const _=e(s,[["render",n]]);export{_ as default};
