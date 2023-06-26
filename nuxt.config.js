@@ -120,7 +120,7 @@ export default defineNuxtConfig({
     '~/plugins/date-fns/formatDistance.js',
     '~/plugins/vue-select.js',
     '~/plugins/vuelidate.js',
-    //'~/plugins/echo.js',
+    '~/plugins/echo.js',
   '~/plugins/vue-fb-customer-chat.js',
     {src: '~/plugins/vue-stripe.js', ssr: false},
   ],
@@ -130,32 +130,12 @@ export default defineNuxtConfig({
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/eslint
-    // "@nuxtjs/eslint-module",
-      
+
     '@invictus.codes/nuxt-vuetify',
     '@nuxtjs/i18n',
   ],
  
-  // Modules: https://go.nuxtjs.dev/config-modules
-  // modules: [
-  //   // https://go.nuxtjs.dev/axios
-  //   // '@nuxtjs/axios',
-  //   'nuxt-vuex-router-sync',
-  //   'nuxt-route-meta',
-  // ],
-  // modules: [
-  //   // Using package name
-  //   '@nuxtjs/axios',
-
-  //   'nuxt-vuex-router-sync',
-  //   'nuxt-route-meta',
-
-  //   // Inline definition
-  //   function () {}
-  // ],
-
-
+  
   fontawesome: {
     icons: {
       solid: true,

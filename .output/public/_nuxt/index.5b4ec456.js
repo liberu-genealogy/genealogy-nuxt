@@ -1,1 +1,0 @@
-import{a as t,o,b as n}from"./entry.92cc3846.js";window.io=require("socket.io-client");const s={mounted(){this.$echo.channel("chat").listen("TestEvent",e=>{console.log("test data",e)})}};function a(e,c,r,i,l,p){return o(),n("h1",null,"this is inbox page")}const _=t(s,[["render",a]]);export{_ as default};

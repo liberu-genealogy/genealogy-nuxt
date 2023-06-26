@@ -1,1 +1,0 @@
-import{a as o,r as t,b as s,h as n,o as c}from"./entry.92cc3846.js";const a={},r={class:"has-background-white"};function _(p,d,i,u,f,l){const e=t("Nuxt");return c(),s("div",r,[n(e)])}const x=o(a,[["render",_]]);export{x as default};

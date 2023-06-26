@@ -1,1 +1,0 @@
-import{a as e,o as t,b as o}from"./entry.92cc3846.js";const a={layout:"auth",meta:{permission:{name:"object menu"},title:"Object - Show"}};function c(n,s,r,i,p,_){return t(),o("div")}const u=e(a,[["render",c]]);export{u as default};

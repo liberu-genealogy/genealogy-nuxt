@@ -1,1 +1,0 @@
-import{a as t,r as n,o as a,c as r}from"./entry.92cc3846.js";const s={meta:{breadcrumb:"companies",route:"administration.companies.index"}};function c(e,p,i,m,d,u){const o=n("NuxtChild");return a(),r(o,{key:e.$route.path})}const f=t(s,[["render",c]]);export{f as default};

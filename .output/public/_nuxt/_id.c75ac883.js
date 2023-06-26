@@ -1,1 +1,0 @@
-import{a as e,o as t,b as o}from"./entry.92cc3846.js";const a={name:"Show",layout:"auth",meta:{permission:{name:"types menu"},title:"Types - Show"}};function s(n,r,c,p,i,m){return t(),o("div")}const u=e(a,[["render",s]]);export{u as default};

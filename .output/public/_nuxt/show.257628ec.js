@@ -1,1 +1,0 @@
-import{a as e,o,b as t}from"./entry.92cc3846.js";const a={name:"Show",layout:"auth",meta:{permission:{name:"sourcedata menu"},title:"Sourcedata - Show"}};function s(n,r,c,m,p,u){return o(),t("div")}const _=e(a,[["render",s]]);export{_ as default};

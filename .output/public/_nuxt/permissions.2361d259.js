@@ -1,1 +1,0 @@
-import{a as o,r as t,o as r,c as n}from"./entry.92cc3846.js";const a={meta:{breadcrumb:"permissions",route:"system.permissions.index"}};function c(e,p,i,m,u,_){const s=t("NuxtChild");return r(),n(s,{key:e.$route.path})}const f=o(a,[["render",c]]);export{f as default};

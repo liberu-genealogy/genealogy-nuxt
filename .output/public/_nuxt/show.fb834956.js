@@ -1,1 +1,0 @@
-import{a as e,o,b as t}from"./entry.92cc3846.js";const n={name:"Show",layout:"auth",meta:{permission:{name:"subn menu"},title:"subn - Show"}};function s(a,r,c,m,p,u){return o(),t("div")}const _=e(n,[["render",s]]);export{_ as default};

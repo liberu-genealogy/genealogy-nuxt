@@ -1,1 +1,0 @@
-.is-divider{height:1px}.is-divider.left{text-align:left}.is-divider.left[data-title]:after{margin-left:.5em}.is-divider.center{text-align:center}.is-divider.right{text-align:right}.is-divider.right[data-title]:after{margin-right:.5em}.is-divider[data-title]:after{content:attr(data-title);display:inline-block;font-size:1rem;padding:0 .3rem;transform:translateY(-.8rem)}

@@ -1,1 +1,0 @@
-import{a as e,o as t,b as a}from"./entry.92cc3846.js";const o={layout:"auth",meta:{permission:{name:"familyevents menu"},title:"Family Events - Show"}};function n(s,r,c,i,m,p){return t(),a("div")}const l=e(o,[["render",n]]);export{l as default};

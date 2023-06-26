@@ -1,1 +1,0 @@
-import{a as t,r,o as a,c}from"./entry.92cc3846.js";const n={meta:{breadcrumb:"google"}};function s(o,p,_,l,u,d){const e=r("NuxtChild");return a(),c(e,{key:o.$route.path})}const f=t(n,[["render",s]]);export{f as default};

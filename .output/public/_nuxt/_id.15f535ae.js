@@ -1,1 +1,0 @@
-import{a as e,o as t,b as a}from"./entry.92cc3846.js";const o={name:"Show",layout:"auth",meta:{permission:{name:"places menu"},title:"Places - Show"}};function s(n,c,r,p,i,m){return t(),a("div")}const l=e(o,[["render",s]]);export{l as default};
