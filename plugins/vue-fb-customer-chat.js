@@ -1,10 +1,12 @@
 
 import { createApp } from 'vue';
-import { Vue3FBChat } from './vue3-fb-chat/dist/main'
 
+import VueSocialChat from 'vue-social-chat'
+import 'vue-social-chat/dist/style.css'
 const app = createApp({});
-app.use(Vue3FBChat, {
-  page_id: '2089062604669120',
+app.use(VueSocialChat, {
+  number: '2089062604669120',
   theme_color: '#333333',
   locale: 'en_US',
 });
+export default app;

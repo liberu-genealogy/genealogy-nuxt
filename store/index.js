@@ -1,9 +1,9 @@
-import Vue from 'vue'
+import { createApp } from 'vue';
 import { init as sentryInit, setContext } from '@sentry/browser'
 import { Vue as SentryVue } from '@sentry/integrations'
 import reportable from '@enso-ui/sentry'
 import bootEnums from '~/utils/bootEnums'
-
+const app = createApp({});
 const legacyBuild = (data, state, commit, _router, _i18n) => {
   const enums = bootEnums(data.enums, _i18n)
   commit('setUser', data.user)
@@ -132,7 +132,7 @@ export const actions = {
           sentryInit({
             environment: state.meta.env,
             dsn: state.meta.sentryDsn,
-            integrations: [new SentryVue({ Vue, logErrors: true })],
+            integrations: [new SentryVue({ app, logErrors: true })],
             beforeSend: (event) => reportable(event),
           })
 

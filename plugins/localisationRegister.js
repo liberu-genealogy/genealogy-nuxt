@@ -8,8 +8,10 @@ app.component('setting-key-collector', KeyCollector);
 app.component('setting-language-selector', LanguageSelector);
 
 export default ({ store }, inject) => {
+    if (store) {
     store.commit('layout/settings/registerItem', { component: 'setting-language-selector', order: 100 })
     store.commit('layout/settings/registerItem', { component: 'setting-key-collector', order: 600 })
     store.commit('layout/navbar/registerItem', { component: 'navbar-missing-key', order: 100, permission: undefined });
+}
 }
 app.mount('#app');

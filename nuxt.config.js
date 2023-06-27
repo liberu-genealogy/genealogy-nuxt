@@ -132,7 +132,7 @@ export default defineNuxtConfig({
   modules: [
 
     '@invictus.codes/nuxt-vuetify',
-    '@nuxtjs/i18n',
+    // '@nuxtjs/i18n',
   ],
  
   

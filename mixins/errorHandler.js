@@ -1,7 +1,10 @@
 import { showReportDialog } from '@sentry/browser';
-import Router from 'vue-router';
+import { createRouter, createWebHistory, isNavigationFailure } from 'vue-router';
 
-const { isNavigationFailure } = Router;
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [] // Define your routes here
+});
 
 const routerErrorHandler = error => {
     if (!isNavigationFailure(error)) {
