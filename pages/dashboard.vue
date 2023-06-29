@@ -366,32 +366,32 @@
     </div>
   </v-app>
 </template>
-<router>
+<!-- <router>
 {
 name: 'dashboard.index'
 }
-</router>
-<script>
-import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css'
+</router> -->
+<script setup>
+import {Loading} from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
 import { mapGetters, mapActions } from 'vuex'
 import PieChart from '../components/charts/PieChart'
 import { EnsoChartCard as ChartCard } from '@enso-ui/charts/bulma';
 import { Chart, colors } from '@enso-ui/charts';
-export default {
-  layout: 'auth',
+
+  layout: 'auth';
   components: {
     Loading,
     PieChart,
     ChartCard
-  },
-  inject: ['errorHandler', 'route', 'toastr'],
+  };
+  inject: ['errorHandler', 'route', 'toastr'];
   //middleware: ['permission', 'verification'],
   meta: {
-    permission: { name: 'dashboard menu' },
-    title: 'Dashboard',
-  },
-  data() {
+    permission: { name: 'dashboard menu' };
+    title: 'Dashboard';
+  };
+ function data() {
     return {
       loaded: false,
       trees: [],
@@ -420,10 +420,10 @@ export default {
       },
       totalCount: 0,
       result: null,
-      loading: true,
+      LoadingPlugin: true,
       options: {},
     }
-  },
+  };
   computed: {
     ...mapGetters(['loggedInUser']),
     headers() {
@@ -475,7 +475,7 @@ export default {
           { text: 'Archive', value: 'archive', sortable: false },
         ]
     },
-  },
+  };
   watch: {
     options: {
       handler() {
@@ -484,7 +484,7 @@ export default {
       },
       deep: false,
     },
-  },
+  };
   methods: {
     setSelectedCompany(value) {
       this.selected_tree = null
@@ -605,9 +605,9 @@ export default {
           })
           .catch(this.errorHandler)
     },
-  },
+  };
   created() {
     this.getCompanies()
-  },
-}
+  };
+
 </script>

@@ -6,26 +6,26 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { mapState, mapGetters, mapMutations } from 'vuex';
 
-export default {
-	layout: 'index',
+
+	layout: 'index';
 	meta: {
-        guestGuard: true,
-        title: 'Login',
-    },
-    data() {
+        guestGuard: true;
+        title: 'Login';
+    };
+    function data() {
         return {
             token: this.$route.query.token ? this.$route.query.token : null,
             status: this.$route.query.status ? this.$route.query.status : null
         }
-    },
+    };
     methods: {
         ...mapMutations('auth', ['login']),
         ...mapMutations('layout', ['home']),
         ...mapMutations(['setShowQuote', 'setCsrfToken'])
-    },
+    };
     mounted() {
         
         if(this.status == 'success'){
@@ -44,8 +44,7 @@ export default {
             }, 500);        
         }
         
-    }
-}
+    };
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,4 @@
-w<template>
+<template>
     <div>
      <section class="hero main-hero" id="home">
         <div class="hero-body is-flex ai--c">
@@ -260,14 +260,15 @@ w<template>
     </footer>
     </div>
 </template>
-<script>
+<script setup>
 import { mapState, mapMutations, mapActions } from 'vuex'
-export default {
+
+    
     meta: {
-        guestGuard: true,
-        title: 'Landing Page'
+        guestGuard: true;
+        title: 'Landing Page';
     },
-    data() {
+    function data() {
         return {
             isDark: false,
             isClear: true,
@@ -298,7 +299,7 @@ export default {
             }
         },
     },
-}
+})
 </script>
 
 <style scoped>

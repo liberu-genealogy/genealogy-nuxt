@@ -21,35 +21,35 @@
 </template>
 
 
-<script>
+<script setup>
 import { mapMutations } from 'vuex';
 import EnsoCalendar from '~/components/calendar/bulma/pages/calendar/components/EnsoCalendar.vue';
 import CalendarFilter from '~/components/calendar/bulma/pages/calendar/components/CalendarFilter.vue';
 import EventForm from '~/components/calendar/bulma/pages/calendar/components/EventForm.vue';
 
-export default {
+
     meta: {
-        breadcrumb: 'calendar',
-        title: 'Calendar',
-    },
+        breadcrumb: 'calendar';
+        title: 'Calendar';
+    };
 
-    components: { EnsoCalendar, CalendarFilter, EventForm },
+    components: { EnsoCalendar, CalendarFilter, EventForm };
 
-    inject: ['errorHandler', 'route'],
+    inject: ['errorHandler', 'route'];
 
     data: () => ({
         event: null,
         selectedDate: null,
         calendars: [],
-    }),
+    });
 
     created() {
         this.hideFooter();
-    },
+    };
 
     beforeDestroy() {
         this.showFooter();
-    },
+    };
 
     methods: {
         ...mapMutations('layout', ['showFooter', 'hideFooter']),
@@ -57,6 +57,6 @@ export default {
             this.$refs.calendar.fetch();
             this.event = null;
         },
-    },
-};
+    };
+
 </script>

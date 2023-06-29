@@ -22,29 +22,29 @@
 		</template>
 	</AuthIndex>
 </template>
-<router>
+<!-- <router>
 {
     name: 'password.email'
 }
-</router>
+</router> -->
 
-<script>
+<script setup>
 import AuthIndex from "~/components/auth/Index.vue";
 import AuthForm from "~/components/auth/AuthForm.vue";
 import Email from "~/components/auth/fields/Email.vue";
 
-export default {
+
 	meta: {
-		guestGuard: true,
-		title: "Email Reset Link",
-	},
-	components: { AuthForm, Email, AuthIndex },
+		guestGuard: true;
+		title: "Email Reset Link";
+	};
+	components: { AuthForm, Email, AuthIndex };
 
 	data: () => ({
 		payload: {
 			email: "",
 		},
 		status: null,
-	}),
-};
+	});
+
 </script>

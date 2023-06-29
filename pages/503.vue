@@ -11,19 +11,19 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTools } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faTools);
 
-export default {
+
     // head: {
     //     title: 'Maintenance Mode'
     // },
     meta: {
-        title: 'Maintenance Mode'
-    },
-    inject: ['i18n'],
-};
+        title: 'Maintenance Mode';
+    };
+    inject: ['i18n'];
+
 </script>

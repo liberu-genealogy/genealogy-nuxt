@@ -535,26 +535,26 @@
     </footer>
   </div>
 </template>
-<script>
+<script setup>
     import { mapGetters } from 'vuex'
-export default {
+
 
     meta: {
-        guestGuard: true,
-    },
+        guestGuard: true;
+    };
     
-    data() {
+   function data() {
         return {
             isDark: false,
             isClear: true,
         };
-    },
+    };
     computed: {
          ...mapGetters(['loggedInUser'])
-    },
+    };
     created() {
         window.addEventListener('scroll', this.handleScroll);
-    },
+    };
     methods: {
         async logout() {
           await this.$auth.logout();
@@ -568,14 +568,13 @@ export default {
                 this.isDark = false;
             }
         },
-    },
-}
+    };
 </script>
-<router>
+<!-- <router>
 {
     name: 'privacy'
 }
-</router>
+</router> -->
  <style scoped>
     @import '~/assets/css/base.css';
 </style>

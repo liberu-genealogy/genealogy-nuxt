@@ -21,18 +21,18 @@
   </div>
 </template>
 
-<script>
-export default {
-  layout: 'default',
+<script setup>
+
+  layout: 'default';
   head: {
     title: 'Stripe'
-  },
+  };
   meta: {
-    guestGuard: true,
-    breadcrumb: 'stripe',
+    guestGuard: true;
+    breadcrumb: 'stripe';
     // permission: { name: 'subscription menu' },
-    title: 'Stripe',
-  },
+    title: 'Stripe';
+  };
 
   data () {
     this.pk = process.env.STRIPE_PK;
@@ -58,7 +58,7 @@ export default {
       state: state,
       plans: []
     };
-  },
+  };
   methods: {
     checkout () {
       this.$refs.checkoutRef.redirectToCheckout();
@@ -76,17 +76,16 @@ export default {
     async confirmCheckout(price, id) {
       const response = await this.$axios.$post('/api/confirm_checkout', { price, id })
     },
-  },
+  };
   created() {
     this.getplans();
-  },
-};
+  };
 </script>
-<router>
+<!-- <router>
 {
 name: 'planDetail'
 }
-</router>
+</router> -->
 <style lang="scss" scoped>
   .checkout {
     width: 100%;

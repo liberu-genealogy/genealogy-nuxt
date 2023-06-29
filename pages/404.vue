@@ -11,19 +11,19 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faExclamationTriangle);
 
-export default {
+
     // head: {
     //     title: '404'
     // },
     meta: {
-        title: '404'
-    },
-    inject: ['i18n'],
-};
+        title: '404';
+    };
+    inject: ['i18n'];
+
 </script>

@@ -80,7 +80,7 @@
 </template>
 
 
-<script>
+<script setup>
 import { debounce } from 'lodash';
 import { mapState, mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -94,17 +94,17 @@ import File from '~/components/files/bulma/pages/files/components/File.vue';
 
 library.add(faSearch, faUndo, faSyncAlt);
 
-export default {
-    meta: {
-        breadcrumb: 'files',
-        title: 'Files',
-    },
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    meta: {
+        breadcrumb: 'files';
+        title: 'Files';
+    };
+
+    inject: ['errorHandler', 'i18n', 'route'];
 
     components: {
         EnsoTabs, Tab, File, Chart, EnsoDateFilter, EnsoUploader,
-    },
+    };
 
     data: () => ({
         loading: false,
@@ -117,7 +117,7 @@ export default {
             min: null,
             max: null,
         },
-    }),
+    });
 
     computed: {
         ...mapState('layout', ['isMobile']),
@@ -154,17 +154,17 @@ export default {
                 ? 'has-text-success'
                 : 'has-text-danger';
         },
-    },
+    };
 
     watch: {
         query() {
             this.reset();
         },
-    },
+    };
 
     created() {
         this.fetch = debounce(this.fetch, 300);
-    },
+    };
 
     methods: {
         reset() {
@@ -209,8 +209,8 @@ export default {
                 this.fetch();
             }
         },
-    },
-};
+    };
+
 </script>
 
 <style lang="scss">

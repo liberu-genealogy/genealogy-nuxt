@@ -12,17 +12,17 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import Timeline from '~/components/activity-log/bulma/pages/activityLog/components/Timeline.vue';
 import Filters from '~/components/activity-log/bulma/pages/activityLog/components/Filters.vue';
 
-export default {
+
     meta: {
-        breadcrumb: 'activity log',
-        title: 'Activity Log',
-    },
-    inject: ['errorHandler', 'route'],
-    components: { Timeline, Filters },
+        breadcrumb: 'activity log';
+        title: 'Activity Log';
+    };
+    inject: ['errorHandler', 'route'];
+    components: { Timeline, Filters };
     data: () => ({
         loading: false,
         axiosRequest: null,
@@ -37,9 +37,9 @@ export default {
             },
             events: [],
         },
-    }),
+    });
     methods: {
-        fetch() {
+        function fetch() {
             this.loading = true;
             if (this.axiosRequest) {
                 this.axiosRequest.cancel();
@@ -65,11 +65,11 @@ export default {
                 }
                 this.errorHandler(error);
             });
-        },
-        length(feed) {
+        };
+        function length(feed) {
             return feed.reduce((total, { entries }) => (total += entries.length), 0);
-        },
-        merge(feed) {
+        };
+        function merge(feed) {
             if (!feed.length) {
                 return;
             }
@@ -77,7 +77,6 @@ export default {
                 this.feed[this.feed.length - 1].entries.push(...feed.shift().entries);
             }
             this.feed.push(...feed);
-        },
-    },
-};
+        };
+    };
 </script>

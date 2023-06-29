@@ -69,6 +69,7 @@
     "flag-icon-css": "^4.1.7",
     "flatpickr": "^4.6.13",
     "laravel-echo": "^1.15.1",
+    "lodash": "^4.17.21",
     "nuxt": "^3.5.3",
     "nuxt-fontawesome": "^0.4.0",
     "opencollective": "^1.0.3",
@@ -96,7 +97,8 @@
     "vue-social-chat": "^1.0.0",
     "vue-template-compiler": "^2.7.14",
     "vue-video-player": "^5.0.2",
-    "vuelidate": "^0.7.7"
+    "vuelidate": "^0.7.7",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

@@ -2,35 +2,36 @@
     <register-form action="Register" route="register" @success="init"></register-form>
 </template>
 
-<script>
+<script setup>
 import { mapState, mapGetters, mapMutations } from 'vuex';
-import Errors from '@enso-ui/laravel-validation';
+// import Errors from "@enso-ui/laravel-validation/src/Errors";
 import RegisterForm from '~/components/auth/RegisterForm.vue';
 // import Email from '~/components/auth/fields/Email.vue';
 // import Password from '~/components/auth/fields/Password.vue';
 // import Remember from '~/components/auth/fields/Remember.vue';
 
-export default {
-    meta: {
-        guestGuard: true,
-        title: 'Register',
-    },
 
-    components: { RegisterForm },
+    meta: {
+        guestGuard: true;
+        title: 'Register';
+    };
+
+    components: { RegisterForm };
 
     data: () => ({
-        errors: new Errors(),
+        // errors: new Errors(),
+        errors:'',
         payload: {
             email: '',
             password: '',
             remember: false,
         }
-    }),
+    });
 
     computed: {
         ...mapState(['meta']),
         ...mapGetters(['isWebview']),
-    },
+    };
 
     methods: {
         ...mapMutations('auth', ['login']),
@@ -57,6 +58,5 @@ export default {
 
             }, 500);
         },
-    },
-};
+    };
 </script>

@@ -11,19 +11,19 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBan } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faBan);
 
-export default {
+
     // head: {
     //     title: 'Unauthorized'
     // },
     meta: {
-        title: 'Unauthorized'
-    },
-    inject: ['i18n'],
-};
+        title: 'Unauthorized';
+    };
+    inject: ['i18n'];
+
 </script>

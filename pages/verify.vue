@@ -2,20 +2,20 @@
   <verify-form action="Resend" @verified="init" />
 </template>
 
-<script>
+<script setup>
   import { mapMutations, mapState } from "vuex";
   import VerifyForm from "~/components/auth/VerifyForm.vue";
 
-  export default {
-    name: "Verify",
+  
+    name: "Verify";
     meta: {
-      guestGuard: true,
-    },
-    components: { VerifyForm },
+      guestGuard: true;
+    };
+    components: { VerifyForm };
 
     computed: {
       ...mapState(["meta"]),
-    },
+    };
 
     methods: {
       ...mapMutations("auth", ["login"]),
@@ -29,6 +29,5 @@
           this.home(true);
         }, 3000);
       },
-    },
-  };
+    };
 </script>

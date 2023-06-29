@@ -63,7 +63,7 @@
 </template>
 
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -77,13 +77,13 @@ import Param from '~/components/data-import/bulma/pages/dataImport/components/Pa
 
 library.add(faDownload, faTrashAlt, faFileExcel, faBan, faSync);
 
-export default {
-    meta: {
-        breadcrumb: 'data import',
-        title: 'Data Import',
-    },
 
-    inject: ['canAccess', 'errorHandler', 'i18n', 'route'],
+    meta: {
+        breadcrumb: 'data import';
+        title: 'Data Import';
+    };
+
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route'];
 
     components: {
         Avatar,
@@ -91,12 +91,12 @@ export default {
         EnsoTable,
         ImportUploader,
         Param,
-    },
+    };
 
     data: () => ({
         type: null,
         params: [],
-    }),
+    });
 
     computed: {
         ...mapState(['enums']),
@@ -114,7 +114,7 @@ export default {
                 return params;
             }, { type: this.type });
         },
-    },
+    };
 
     methods: {
         template() {
@@ -126,6 +126,6 @@ export default {
         rejected({ rejected_id }) {
             window.location.href = this.route('import.rejected', rejected_id);
         },
-    },
-};
+    };
+
 </script>

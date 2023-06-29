@@ -19,36 +19,37 @@
     </auth-form> -->
 </template>
 
-<script>
+<script setup>
 import { mapState, mapGetters, mapMutations } from 'vuex';
-import Errors from '@enso-ui/laravel-validation';
+// import Errors from '@enso-ui/laravel-validation/src/Errors';
 import LoginForm from '~/components/auth/LoginForm.vue';
 // import Email from '~/components/auth/fields/Email.vue';
 // import Password from '~/components/auth/fields/Password.vue';
 // import Remember from '~/components/auth/fields/Remember.vue';
 
-export default {
-    layout: 'index',
-    meta: {
-        guestGuard: true,
-        title: 'Login',
-    },
 
-    components: { LoginForm },
+    layout: 'index';
+    meta: {
+        guestGuard: true;
+        title: 'Login';
+    };
+
+    components: { LoginForm };
 
     data: () => ({
-        errors: new Errors(),
+        // errors: new Errors(),
+        errors:'',
         payload: {
             email: '',
             password: '',
             remember: false,
         }
-    }),
+    });
 
     computed: {
         ...mapState(['meta']),
         ...mapGetters(['isWebview']),
-    },
+    };
 
     methods: {
         ...mapMutations('auth', ['login']),
@@ -66,6 +67,5 @@ export default {
                 this.home(true);
             }, 500);
         },
-    },
-};
+    };
 </script>
