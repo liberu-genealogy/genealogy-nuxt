@@ -23,18 +23,18 @@
     </core-theme-selector>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import CoreThemeSelector from '~/components/themes/core/ThemeSelector.vue';
 
 library.add(faLightbulb);
 
-export default {
-    name: 'ThemeSelector',
 
-    components: { CoreThemeSelector },
+    name: 'ThemeSelector';
 
-    inject: ['i18n'],
-};
+    components: { CoreThemeSelector };
+
+    inject: ['i18n'];
+
 </script>

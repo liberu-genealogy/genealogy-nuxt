@@ -20,15 +20,14 @@
     </core-menu-organizer>
 </template>
 
-<script>
+<script setup>
 import VueSwitch from '@enso-ui/switch/bulma';
 import CoreMenuOrganizer from '../../../core/components/settings/MenuOrganizer.vue';
 
-export default {
-    name: 'MenuOrganizer',
 
-    components: { CoreMenuOrganizer, VueSwitch },
+    name: 'MenuOrganizer';
 
-    inject: ['canAccess', 'i18n'],
-};
+    components: { CoreMenuOrganizer, VueSwitch };
+
+    inject: ['canAccess', 'i18n'];
 </script>

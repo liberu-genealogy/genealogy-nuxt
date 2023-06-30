@@ -5,23 +5,22 @@
         </div>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'types.create'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-    name: 'Create',
-    layout: 'auth',
+
+    name: 'Create';
+    layout: 'auth';
     meta: {
-        permission: { name: 'types menu' },
-        title: 'Types - Create'
-    },
-    components: { EnsoForm },
-};
+        permission: { name: 'types menu' };
+        title: 'Types - Create';
+    };
+    components: { EnsoForm };
 </script>
 
 <style lang="scss">

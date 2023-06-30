@@ -22,17 +22,16 @@
 </template>
 
 
-<script>
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
+
     meta: {
-        breadcrumb: 'edit',
-        title: 'Edit Language',
-    },
+        breadcrumb: 'edit';
+        title: 'Edit Language';
+    };
 
-    components: { EnsoForm },
+    components: { EnsoForm };
 
-    inject: ['i18n'],
-};
+    inject: ['i18n'];
 </script>

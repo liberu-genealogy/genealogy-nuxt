@@ -1,17 +1,16 @@
-<script>
+<script setup>
 import { mapMutations } from 'vuex';
 
-export default {
-    name: 'CoreSettingsControl',
+
+    name: 'CoreSettingsControl';
 
     methods: {
         ...mapMutations('layout/settings', ['toggle']),
-    },
+    };
 
     render() {
         return this.$scopedSlots.default({
             toggle: this.toggle,
         });
-    },
-};
+    };
 </script>

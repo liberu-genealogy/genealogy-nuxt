@@ -8,23 +8,22 @@
         </div>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'chan.edit'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-layout: 'auth',
-    meta: {
-        permission: { name: 'chan menu' },
-        title: 'Chan - Edit'
-    },
 
-    components: { EnsoForm },
-};
+layout: 'auth';
+    meta: {
+        permission: { name: 'chan menu' };
+        title: 'Chan - Edit';
+    };
+
+    components: { EnsoForm };
 </script>
 
 <style lang="scss">

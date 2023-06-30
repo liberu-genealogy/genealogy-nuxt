@@ -6,30 +6,29 @@
     </figure>
 </template>
 
-<script>
+<script setup>
 import { VTooltip } from 'v-tooltip';
 
-export default {
-    name: 'Avatar',
 
-    directives: { tooltip: VTooltip },
+    name: 'Avatar';
 
-    inject: ['route'],
+    directives: { tooltip: VTooltip };
+
+    inject: ['route'];
 
     props: {
         user: {
-            type: Object,
-            required: true,
-        },
-    },
+            type: Object;
+            required: true;
+        };
+    };
 
     computed: {
-        tooltip() {
+       function tooltip() {
             return this.user.person?.appellative
                 ?? this.user.person?.name;
         }
-    }
-};
+    };
 </script>
 
 <style lang="scss">

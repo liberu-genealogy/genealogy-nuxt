@@ -1,16 +1,16 @@
-<script>
+<script setup>
 import { mapState, mapMutations } from 'vuex';
 
-export default {
-    name: 'CoreMenuOrganizer',
+
+    name: 'CoreMenuOrganizer';
 
     computed: {
         ...mapState('menu', ['editable']),
-    },
+    };
 
     methods: {
         ...mapMutations('menu', ['edit']),
-    },
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -21,7 +21,6 @@ export default {
                 input: this.edit,
             },
         });
-    },
-};
+    }
 
 </script>

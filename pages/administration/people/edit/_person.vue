@@ -70,7 +70,7 @@
 }
 </router> -->
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Tab } from '@enso-ui/tabs/bulma';
@@ -80,31 +80,30 @@ import { Addresses } from '@enso-ui/addresses/bulma';
 
 library.add(faUser);
 
-export default {
+
     meta: {
-        breadcrumb: 'edit',
-        title: 'Edit Person',
-    },
+        breadcrumb: 'edit';
+        title: 'Edit Person';
+    };
 
     components: {
-        EnsoForm, Accessories, Tab, Addresses, FormField,
-    },
+        EnsoForm, Accessories, Tab, Addresses, FormField
+    };
 
-    inject: ['i18n', 'routerErrorHandler'],
+    inject: ['i18n', 'routerErrorHandler'];
 
     data: () => ({
         companies: [],
-    }),
+    });
 
     computed: {
-        personId() {
+       function personId() {
             return Number.parseInt(this.$route.params.person, 10);
-        },
-        params() {
+        };
+       function params() {
             return {
                 id: this.companies,
             };
-        },
-    },
-};
+        };
+    };
 </script>

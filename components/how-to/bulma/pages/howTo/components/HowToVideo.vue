@@ -89,7 +89,7 @@
     </card>
 </template>
 
-<script>
+<script setup>
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faInfo, faTags, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
@@ -106,12 +106,12 @@ import 'video.js/dist/video-js.css';
 
 library.add([faTrashAlt, faInfo, faTags, faEdit, faImage, faInfoCircle]);
 
-export default {
-    name: 'HowToVideo',
 
-    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'],
+    name: 'HowToVideo';
 
-    directives: { tooltip: VTooltip },
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'];
+
+    directives: { tooltip: VTooltip };
 
     components: {
         Card,
@@ -123,32 +123,32 @@ export default {
         CardFooter,
         CardFooterItem,
         CardContent,
-        Uploader,
-    },
+        Uploader
+    };
 
     props: {
         video: {
-            type: Object,
-            required: true,
-        },
+            type: Object;
+            required: true;
+        };
         tags: {
-            type: Array,
-            required: true,
-        },
-    },
+            type: Array;
+            required: true;
+        };
+    };
 
     data: () => ({
         tagging: false,
-    }),
+    });
 
     computed: {
-        tagList() {
+        function tagList() {
             return this.tags.filter(({ id }) => this.video.tagList.includes(id));
-        },
-    },
+        };
+    };
 
     methods: {
-        options() {
+        function options() {
             return {
                 muted: false,
                 language: 'en',
@@ -162,27 +162,26 @@ export default {
                     ? this.route('howTo.posters.show', this.video.poster.id)
                     : '',
             };
-        },
-        destroyPoster() {
+        };
+        function destroyPoster() {
             this.$axios.delete(this.route('howTo.posters.destroy', this.video.poster.id))
                 .then(({ data }) => {
                     this.toastr.success(data.message);
                     this.video.poster = null;
                 }).catch(this.errorHandler);
-        },
-        destroyVideo() {
+        };
+        function destroyVideo() {
             this.$axios.delete(this.route('howTo.videos.destroy', this.video.id))
                 .then(({ data }) => {
                     this.toastr.success(data.message);
                     this.$emit('delete');
                 }).catch(this.errorHandler);
-        },
-        removeTag(tag) {
+        };
+        function removeTag(tag) {
             const index = this.video.tagList.findIndex(id => id === tag.id);
             this.video.tagList.splice(index, 1);
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss" scoped>

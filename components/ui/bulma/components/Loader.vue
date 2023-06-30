@@ -10,13 +10,13 @@
     </core-loader>
 </template>
 
-<script>
+<script setup>
 import ProgressBar from '@enso-ui/progress-bar';
 import CoreLoader from '~/components/ui/core/components/Loader.vue';
 
-export default {
-    name: 'Loader',
 
-    components: { CoreLoader, ProgressBar },
-};
+    name: 'Loader';
+
+    components: { CoreLoader, ProgressBar };
+
 </script>

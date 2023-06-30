@@ -22,16 +22,16 @@
     </core-menus>
 </template>
 
-<script>
+<script setup>
 import Draggable from 'vuedraggable';
 import CoreMenus from '../../../core/components/menu/Menus.vue';
 import MenuItem from './MenuItem.vue';
 
-export default {
-    name: 'Menus',
 
-    components: { CoreMenus, MenuItem, Draggable },
-};
+    name: 'Menus';
+
+    components: { CoreMenus, MenuItem, Draggable };
+
 </script>
 
 <style lang="scss" scoped>

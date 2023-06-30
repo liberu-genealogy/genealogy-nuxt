@@ -16,22 +16,22 @@
 }
 </router> -->
 
-<script>
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
-    meta: {
-        breadcrumb: 'index',
-        title: 'Companies',
-    },
 
-    components: { EnsoTable },
+    meta: {
+        breadcrumb: 'index';
+        title: 'Companies';
+    };
+
+    components: { EnsoTable };
 
     methods: {
-        visit({ row }) {
+       function visit({ row }) {
             window.open(row.website, '_blank').focus();
-        },
-        status(column, { status }) {
+        };
+       function status(column, { status }) {
             switch (`${status}`) {
             case column.enum.Active:
                 return 'is-success';
@@ -44,7 +44,6 @@ export default {
             default:
                 throw Error(`Unknown status: ${status}`);
             }
-        },
-    },
-};
+        };
+    };
 </script>

@@ -14,25 +14,24 @@
         </div>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'administration.users.create'
 }
-</router>
+</router> -->
 
-<script>
+<script setup>
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 
-export default {
-    meta: {
-        breadcrumb: 'create',
-        title: 'Create User',
-    },
 
-    components: { EnsoForm, FormField },
+    meta: {
+        breadcrumb: 'create';
+        title: 'Create User';
+    };
+
+    components: { EnsoForm, FormField };
 
     data: () => ({
         pivotParams: { userGroups: { id: null } },
-    }),
-};
+    });
 </script>

@@ -1,20 +1,19 @@
 <template>
     <div/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'notes.show'
 }
-</router>
-<script>
-export default {
+</router> -->
+<script setup>
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'notes menu' },
-        title: 'Notes - Show'
-    },
-};
+        permission: { name: 'notes menu' };
+        title: 'Notes - Show';
+    };
 </script>
 
 <style lang="scss">

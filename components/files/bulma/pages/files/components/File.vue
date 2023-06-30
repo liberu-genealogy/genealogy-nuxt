@@ -68,7 +68,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faEye, faCloudDownloadAlt, faTrashAlt, faLink, faCalendarAlt, faDatabase,
@@ -81,57 +81,56 @@ import Preview from './Preview.vue';
 
 library.add(faEye, faCloudDownloadAlt, faTrashAlt, faLink, faCalendarAlt, faDatabase);
 
-export default {
-    name: 'File',
 
-    inject: ['canAccess', 'errorHandler', 'route'],
+    name: 'File';
 
-    directives: { tooltip: VTooltip },
+    inject: ['canAccess', 'errorHandler', 'route'];
 
-    components: { Confirmation, Url, Preview },
+  const directives = {  tooltip: VTooltip };
 
-    mixins: [files],
+    components: { Confirmation, Url, Preview };
+
+    mixins: [files];
 
     props: {
         file: {
-            type: Object,
-            required: true,
-        },
-    },
+            type: Object;
+            required: true;
+        };
+    };
 
     data: () => ({
         preview: null,
         temporaryLink: '',
-    }),
+    });
 
     computed: {
-        size() {
+       function size() {
             return this.$numberFormat(this.file.size / 1000);
-        },
-    },
+        };
+    };
 
     methods: {
-        link() {
+        function link() {
             this.$axios.get(this.route('core.files.link', this.file.id))
                 .then(({ data }) => (this.temporaryLink = data.link))
                 .catch(this.errorHandler);
-        },
-        show() {
+        };
+       function show() {
             if (this.file.mimeType === 'application/pdf') {
                 this.preview = this.file;
                 return;
             }
 
             window.open(this.route('core.files.show', this.file.id), '_blank').focus();
-        },
-        timeFromNow(date) {
+        };
+       function timeFromNow(date) {
             return this.$formatDistance(date);
-        },
-        date(date) {
+        };
+        function date(date) {
             return this.$format(date);
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss" scoped>

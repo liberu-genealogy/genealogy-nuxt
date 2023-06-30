@@ -9,25 +9,24 @@
     </div>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'familyslugs.edit'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'familyslugs menu' },
-        title: 'Family Slugs - Edit'
-    },
+        permission: { name: 'familyslugs menu' };
+        title: 'Family Slugs - Edit';
+    };
 
 
-    components: { EnsoForm },
-};
+    components: { EnsoForm };
 </script>
 
 <style lang="scss">

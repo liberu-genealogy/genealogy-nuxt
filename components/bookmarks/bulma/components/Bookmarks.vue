@@ -49,7 +49,7 @@
     </core-bookmarks>
 </template>
 
-<script>
+<script setup>
 import Draggable from 'vuedraggable';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faTrashAlt, faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -57,13 +57,13 @@ import CoreBookmarks from '~/components/bookmarks/core/components/Bookmarks.vue'
 
 library.add(faCheck, faTrashAlt, faCircle);
 
-export default {
-    name: 'Bookmarks',
 
-    components: { CoreBookmarks, Draggable },
+    name: 'Bookmarks';
 
-    inject: ['i18n'],
-};
+    components: { CoreBookmarks, Draggable };
+
+    inject: ['i18n'];
+
 </script>
 
 <style lang="scss">

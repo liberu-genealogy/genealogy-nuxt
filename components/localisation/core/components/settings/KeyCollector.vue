@@ -1,18 +1,28 @@
-<script>
-import { mapMutations, mapState } from 'vuex';
+<script setup>
+import { computed, useStore } from 'vuex';
 
-export default {
-    name: 'CoreKeyCollector',
+
+    name: 'CoreKeyCollector';
 
     data: () => ({
         collect: false,
-    }),
+    });
 
-    computed: mapState(['meta']),
+    computed: mapState(['meta']);
 
     methods: {
-        ...mapMutations('localisation', ['setKeyCollector']),
-    },
+       function useMutations() {
+  const store = useStore();
+
+  const setKeyCollector = (value) => {
+    store.commit('localisation/setKeyCollector', value);
+  };
+
+  return {
+    setKeyCollector,
+  };
+};
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -27,7 +37,7 @@ export default {
                 },
             },
         });
-    },
-};
+    };
+
 
 </script>

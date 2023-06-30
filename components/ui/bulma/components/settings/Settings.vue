@@ -20,22 +20,21 @@
     </core-settings>
 </template>
 
-<script>
+<script setup>
 import CoreSettings from '../../../core/components/settings/Settings.vue';
 import VueAside from '../VueAside.vue';
 import SidebarState from './SidebarState.vue';
 
-export default {
-    name: 'Settings',
 
-    inject: ['canAccess', 'i18n'],
+    name: 'Settings';
+
+    inject: ['canAccess', 'i18n'];
 
     components: {
         CoreSettings,
         VueAside,
         SidebarState,
-    },
-};
+    };
 
 </script>
 

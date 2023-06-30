@@ -38,7 +38,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -48,32 +48,32 @@ import Event from './Event.vue';
 
 library.add(faSpinner, faSyncAlt, faPlus, faPencilAlt, faTrashAlt, faFlag);
 
-export default {
-    name: 'Timeline',
-    components: { Event },
-    inject: ['i18n'],
+
+    name: 'Timeline';
+    components: { Event };
+    inject: ['i18n'];
     props: {
         feed: {
-            type: Array,
-            required: true,
-        },
+            type: Array;
+            required: true;
+        };
         loading: {
-            type: Boolean,
-            required: true,
-        },
-    },
+            type: Boolean;
+            required: true;
+        };
+    };
     computed: {
         ...mapState('layout', ['isTouch']),
-        days() {
+       function days() {
             return this.feed.reduce();
-        },
-    },
+        };
+    };
     methods: {
-        formatDate(date) {
+       function formatDate(date) {
             return this.$format(date, 'l F d');
-        },
-    },
-};
+        };
+    };
+
 </script>
 
 <style lang="scss">

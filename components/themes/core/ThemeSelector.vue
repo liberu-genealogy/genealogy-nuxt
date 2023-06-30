@@ -1,25 +1,25 @@
-<script>
+<script setup>
 import { mapState, mapGetters, mapActions } from 'vuex';
 
-export default {
-    name: 'CoreThemeSelector',
+
+    name: 'CoreThemeSelector';
 
     computed: {
         ...mapState('layout', ['themes']),
         ...mapGetters('preferences', ['theme']),
         ...mapGetters('localisation', ['rtl']),
-        alternate() {
+       function alternate() {
             return Object.keys(this.themes)
                 .find(theme => theme.replace('-rtl', '') !== this.theme.replace('-rtl', '')) + (this.rtl ? '-rtl' : '');
-        },
-        multiTheme() {
+        };
+       function multiTheme() {
             return Object.keys(this.themes).length > 1;
-        },
-    },
+        };
+    };
 
     methods: {
         ...mapActions('preferences', ['setTheme']),
-    },
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -28,7 +28,6 @@ export default {
                 click: () => this.setTheme(this.alternate),
             },
         });
-    },
-};
+    }
 
 </script>

@@ -9,30 +9,29 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { VTooltip } from 'v-tooltip';
 import Avatar from '~/components/users/bulma/pages/users/components/Avatar.vue';
 
-export default {
-    name: 'AvatarList',
 
-    directives: { tooltip: VTooltip },
+    name: 'AvatarList';
 
-    components: { Avatar },
+    directives: { tooltip: VTooltip };
 
-    inject: ['route'],
+    components: { Avatar };
+
+    inject: ['route'];
 
     props: {
         users: {
-            type: Array,
-            required: true,
-        },
+            type: Array;
+            required: true;
+        };
         isSmall: {
-            type: Boolean,
-            default: false,
-        },
-    },
-};
+            type: Boolean;
+            defaultValue: false;
+        };
+    };
 </script>
 
 <style lang="scss">

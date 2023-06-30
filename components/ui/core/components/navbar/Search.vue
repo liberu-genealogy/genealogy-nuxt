@@ -1,37 +1,37 @@
-<script>
+<script setup>
 import { mapState, mapMutations } from 'vuex';
 
-export default {
-    name: 'CoreSearch',
 
-    inject: ['errorHandler', 'i18n', 'routerErrorHandler'],
+    name: 'CoreSearch';
+
+    inject: ['errorHandler', 'i18n', 'routerErrorHandler'];
 
     props: {
         labels: {
-            type: Object,
-            default: () => ({
+            type: Object;
+            defaultValue: () => ({
                 placeholder: 'Search something',
                 searching: 'Searching...',
                 noResults: 'Nothing found',
-            }),
-        },
-    },
+            });
+        };
+    };
 
     data: () => ({
         selectedTags: [],
-    }),
+    });
 
     computed: {
         ...mapState('layout/navbar', ['isVisible']),
-    },
+    };
 
-    mounted() {
+   function mounted() {
         this.addShortcut();
-    },
+    };
 
     methods: {
         ...mapMutations('layout/navbar', ['show', 'hide']),
-        redirect(item, to = null) {
+       function redirect(item, to = null) {
             if (!to && !item.routes.length) {
                 return;
             }
@@ -43,16 +43,16 @@ export default {
 
             this.selectedTags = [];
             this.hide();
-        },
-        tags(items) {
+        };
+       function tags(items) {
             return items.reduce((tags, { group }) => {
                 if (!tags.includes(group)) {
                     tags.push(group);
                 }
                 return tags;
             }, []);
-        },
-        filter(items) {
+        };
+       function filter(items) {
             let filtered = this.filtered(items);
 
             if (!filtered.length && this.selectedTags.length) {
@@ -60,13 +60,13 @@ export default {
                 filtered = this.filtered(items);
             }
             return filtered;
-        },
-        filtered(items) {
+        };
+       function filtered(items) {
             return this.selectedTags.length
                 ? items.filter(item => this.selectedTags.includes(item.group))
                 : items;
-        },
-        keyDown(event) {
+        };
+       function keyDown(event) {
             const { target, key } = event;
 
             const shouldFocus = !this.isVisible && key === '/'
@@ -84,31 +84,31 @@ export default {
                 event.preventDefault();
                 this.hide();
             }
-        },
-        showSearch() {
+        };
+       function showSearch() {
             this.show();
 
             this.$nextTick(() => this.$el.querySelector('input').focus());
-        },
-        toggle(tag) {
+        };
+       function toggle(tag) {
             const index = this.selectedTags.indexOf(tag);
             if (index > -1) {
                 this.selectedTags.splice(index, 1);
                 return;
             }
             this.selectedTags.push(tag);
-        },
-        selected(tag) {
+        };
+       function selected(tag) {
             return this.selectedTags.includes(tag);
-        },
-        addShortcut() {
+        };
+       function addShortcut() {
             document.addEventListener('keydown', this.keyDown);
 
             this.$once('hook:destroyed', () => {
                 document.removeEventListener('keydown', this.keyDown);
             });
-        },
-    },
+        };
+    };
     render() {
         return this.$scopedSlots.default({
             bindings: {
@@ -135,6 +135,5 @@ export default {
             selected: this.selected,
             tags: this.tags,
         });
-    },
-};
+    };
 </script>

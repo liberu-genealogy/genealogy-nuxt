@@ -65,25 +65,25 @@
     </div>
   </div>
 </template>
-<router>
+<!-- <router>
 {
   name: 'gedcomexport.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
   import {required} from 'vuelidate/lib/validators'
   import Loading from 'vue-loading-overlay';
-  import 'vue-loading-overlay/dist/vue-loading.css';
+import 'vue-loading-overlay/dist/css/index.css';
   import FileSaver  from 'file-saver';
-  export default {
-    layout: 'auth',
+  
+    layout: 'auth';
     components: {
       Loading
-    },
+    };
     head: {
       title: 'Gedcom Export'
-    },
-    data() {
+    };
+    function data() {
       return {
         error: false,
         message: "",
@@ -100,9 +100,9 @@
         generatedFile: null,
         fileName: ''
       };
-    },
+    };
     methods: {
-      handleExportFiles() {
+     function handleExportFiles() {
         this.$axios.$get('/api/gedcom-export', {
           headers: {
             'content-type': 'multipart/form-data'
@@ -116,14 +116,14 @@
           console.log("error");
           console.log(err);
         })
-      },
-      downloadFile() {
+      };
+     function downloadFile() {
         FileSaver.saveAs(this.generatedFile, this.fileName);
         this.generatedFile = null
         this.fileName = ''
-      },
-      async checkJobCompleted() {
-        await this.$axios
+      };
+      function checkJobCompleted() {
+         this.$axios
            .$post("/api/check-gedcom-export", {}, {
             headers: {
               'content-type': 'multipart/form-data',
@@ -132,9 +132,7 @@
           })
           console.log(response);
       }
-    }
-  }
-
+    };
 </script>
 <style type="text/css" scoped>
 .file.is-large.is-boxed{

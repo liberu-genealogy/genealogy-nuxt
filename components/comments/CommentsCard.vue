@@ -24,7 +24,7 @@
     </card>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faComments, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
@@ -35,66 +35,65 @@ import Comments from './Comments.vue';
 
 library.add(faComments, faPlusSquare);
 
-export default {
-    name: 'CommentsCard',
+
+    name: 'CommentsCard';
 
     components: {
         Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent, Comments,
-    },
+    };
 
-    inject: ['i18n'],
+    inject: ['i18n'];
 
     props: {
         collapsed: {
-            type: Boolean,
-            default: false,
-        },
+            type: Boolean;
+            defaultValue: false;
+        };
         id: {
-            type: [String, Number],
-            required: true,
-        },
+            type: [String, Number];
+            required: true;
+        };
         type: {
-            type: String,
-            required: true,
-        },
+            type: String;
+            required: true;
+        };
         title: {
-            type: String,
-            default: '',
-        },
+            type: String;
+            defaultValue: '';
+        };
         icon: {
-            type: [String, Array, Object],
-            default: () => faComments,
-        },
-    },
+            type: [String, Array, Object];
+            defaultValue: () => faComments;
+        };
+    };
 
     data: () => ({
         count: 0,
         query: null,
-    }),
+    });
 
     computed: {
         ...mapState('layout', ['isMobile']),
-        displayTitle() {
+       function displayTitle() {
             return !this.isMobile
                 ? this.title || this.i18n('Comments')
                 : null;
-        },
-        isEmpty() {
+        };
+       function isEmpty() {
             return this.count === 0;
-        },
-    },
+        };
+    };
 
     watch: {
-        count() {
+       function count() {
             this.$refs.card.resize();
-        },
-    },
+        };
+    }
 
     methods: {
-        addComment() {
+       function addComment() {
             this.$refs.comments.create();
             this.$nextTick(() => this.$refs.card.expand());
-        },
-    },
-};
+        };
+    };
 </script>

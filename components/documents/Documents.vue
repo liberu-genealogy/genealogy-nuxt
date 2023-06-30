@@ -59,99 +59,99 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSync, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { EnsoUploader } from '@enso-ui/uploader/bulma';
 import File from '@enso-ui/files/src/bulma/pages/files/components/File.vue';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash';
 import Document from './Document.vue';
 
 library.add(faPlus, faSync, faSearch);
 
-export default {
-    name: 'Documents',
 
-    components: { Document, File, EnsoUploader },
+    name: 'Documents';
 
-    inject: ['errorHandler', 'i18n', 'route', 'canAccess'],
+    components: { Document, File, EnsoUploader };
+
+    inject: ['errorHandler', 'i18n', 'route', 'canAccess'];
 
     props: {
         id: {
-            type: [String, Number],
-            required: true,
-        },
+            type: [String, Number];
+            required: true;
+        };
         type: {
-            type: String,
-            required: true,
-        },
+            type: String
+            required: true;
+        };
         query: {
-            type: String,
-            default: '',
-        },
+            type: String;
+            defaultValue: '';
+        };
         compact: {
-            type: Boolean,
-            default: false,
-        },
+            type: Boolean;
+            defaultValue: false;
+        };
         disableControls: {
-            type: Boolean,
-            default: false,
-        },
+            type: Boolean;
+            defaultValue: false;
+        };
         disableUpload: {
-            type: Boolean,
-            default: false,
-        },
+            type: Boolean;
+            defaultValue: false;
+        };
         fileSizeLimit: {
-            default: 20 * 1024 * 1024,
-            type: Number,
-        },
-    },
+            defaultValue: 20 * 1024 * 1024;
+            type: Number;
+        };
+    };
 
     data: () => ({
         documents: [],
         loading: false,
         internalQuery: '',
-    }),
+    });
 
     computed: {
-        params() {
+       function params() {
             return {
                 documentable_type: this.type,
                 documentable_id: this.id,
                 query: this.internalQuery,
             };
-        },
-        count() {
+        };
+       function count() {
             return this.documents.length;
-        },
-        uploadLink() {
+        };
+       function uploadLink() {
             return this.canAccess('core.documents.store')
                 ? this.route('core.documents.store')
                 : null;
-        },
-        component() {
+        };
+       function component() {
             return this.compact
                 ? 'document'
                 : 'file';
-        },
-    },
+        };
+    };
 
     watch: {
-        query() {
+       function query() {
             this.internalQuery = this.query;
-        },
-        internalQuery() {
+        };
+       function internalQuery() {
             this.fetch();
-        },
-    },
+        };
+    };
 
-    created() {
+   function created() {
         this.fetch();
         this.fetch = debounce(this.fetch, 300);
-    },
+    };
 
     methods: {
-        fetch() {
+       function fetch() {
             this.loading = true;
 
             this.$axios.get(this.route('core.documents.index'), {
@@ -161,8 +161,8 @@ export default {
                 this.loading = false;
                 this.$emit('update');
             }).catch(this.errorHandler);
-        },
-        destroy(index) {
+        };
+       function destroy(index) {
             this.loading = true;
 
             this.$axios.delete(this.route(
@@ -173,9 +173,8 @@ export default {
                 this.documents.splice(index, 1);
                 this.$emit('update');
             }).catch(this.errorHandler);
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

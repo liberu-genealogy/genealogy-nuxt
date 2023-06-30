@@ -33,7 +33,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { focus } from '@enso-ui/directives';
@@ -41,36 +41,35 @@ import RevealPassword from '@enso-ui/forms/src/bulma/parts/RevealPassword.vue';
 
 library.add(faExclamationTriangle);
 
-export default {
-    name: 'Password',
 
-    directives: { focus },
+    name: 'Password';
 
-    inject: ['errors', 'i18n', 'state'],
+    directives: { focus };
 
-    components: { RevealPassword },
+    inject: ['errors', 'i18n', 'state'];
+
+    components: { RevealPassword };
 
     props: {
         autocomplete: {
-            type: String,
-            default: 'current-password',
-        },
+            type: String;
+            defaultValue: 'current-password';
+        };
         value: {
-            type: String,
-            required: true,
-        },
-    },
+            type: String;
+            required: true;
+        };
+    };
 
     computed: {
-        successful() {
+       function successful() {
             return this.state.successful;
-        },
-    },
+        };
+    };
 
     data: () => ({
         meta: {
-            content: 'password',
+            content: 'password'
         },
-    }),
-};
+    });
 </script>

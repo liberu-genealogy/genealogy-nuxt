@@ -35,7 +35,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { Uploader } from '@enso-ui/uploader/bulma';
@@ -43,55 +43,54 @@ import Summary from './Summary.vue';
 
 library.add(faUpload);
 
-export default {
-    name: 'ImportUploader',
 
-    components: { Uploader, Summary },
+    name: 'ImportUploader';
 
-    inject: ['canAccess', 'i18n', 'route'],
+    components: { Uploader, Summary };
+
+    inject: ['canAccess', 'i18n', 'route'];
 
     props: {
         fileSizeLimit: {
-            type: Number,
-            default: 100 * 1000 * 1000,
-        },
+            type: Number;
+            defaultValue: 100 * 1000 * 1000;
+        };
         params: {
-            type: Object,
-            required: true,
-            validator: (v) => Object.keys(v).includes('type'),
-        },
+            type: Object;
+            required: true;
+            validator: (v) => Object.keys(v).includes('type');
+        };
         path: {
-            type: String,
-            required: true,
-        },
-    },
+            type: String;
+            required: true;
+        };
+    };
 
     data: () => ({
         loading: false,
         summary: null,
-    }),
+    });
 
     computed: {
-        hasErrors() {
+        function hasErrors() {
             return !!this.summary
                 && !!this.summary.errors
                 && Object.keys(this.summary.errors).length > 0;
-        },
-        templateLink() {
+        };
+       function templateLink() {
             return this.canAccess('import.template')
                 && this.route('import.template', this.params.type);
-        },
-    },
+        };
+    };
 
     methods: {
-        uploaded($event) {
+       function uploaded($event) {
             this.summary = $event;
             this.loading = false;
             // this.$emit('upload-successful');
-        },
-        browseFiles() {
+        };
+       function browseFiles() {
             this.$refs.uploader.browseFiles();
-        },
-    },
-};
+        };
+    };
 </script>

@@ -9,14 +9,13 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'MainRouter',
+<script setup>
+
+    name: 'MainRouter';
 
     computed: {
         keepAlive() {
             return this.$route.meta?.keepAlive
         },
-    },
-};
+    };
 </script>

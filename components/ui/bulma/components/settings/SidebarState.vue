@@ -19,15 +19,14 @@
     </core-sidebar-state>
 </template>
 
-<script>
+<script setup>
 import VueSwitch from '@enso-ui/switch/bulma';
 import CoreSidebarState from '../../../core/components/settings/SidebarState.vue';
 
-export default {
-    name: 'SidebarState',
 
-    components: { CoreSidebarState, VueSwitch },
+    name: 'SidebarState';
 
-    inject: ['i18n'],
-};
+    components: { CoreSidebarState, VueSwitch };
+
+    inject: ['i18n'];
 </script>

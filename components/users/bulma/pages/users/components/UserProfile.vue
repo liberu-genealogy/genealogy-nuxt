@@ -150,7 +150,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import {
   mapState, mapMutations, mapActions, mapGetters,
 } from 'vuex';
@@ -163,57 +163,57 @@ import Divider from '@enso-ui/divider';
 
 library.add(faUser, faUserCircle, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt, faPencilAlt);
 
-export default {
-  name: 'UserProfile',
 
-  inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'routerErrorHandler'],
+  name: 'UserProfile';
 
-  components: { Uploader, Divider },
+  inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'routerErrorHandler'];
+
+  components: { Uploader, Divider };
 
   data: () => ({
     profile: null,
-  }),
+  });
 
   computed: {
     ...mapState(['user', 'meta', 'enums', 'impersonating']),
     ...mapState('auth', ['isAuth']),
     ...mapState('layout', ['isMobile']),
     ...mapGetters(['isWebview']),
-    isSelfVisiting() {
+   function isSelfVisiting() {
       return this.user.id === this.profile.id;
-    },
-    avatarId() {
+    };
+   function avatarId() {
       return this.isSelfVisiting
           ? this.user.avatar.id
           : this.profile.avatar.id;
-    },
-  },
+    };
+  };
 
-  created() {
+  function created() {
     if (this.isAuth) {
       this.fetch();
     }
-  },
+  };
 
   methods: {
     ...mapMutations(['setUserAvatar']),
-    fetch() {
+    function fetch() {
       this.$axios.get(this.route(this.$route.name, this.$route.params.user))
           .then(response => (this.profile = response.data.user))
           .catch(this.errorHandler);
-    },
-    updateAvatar() {
+    };
+    function updateAvatar() {
       this.$axios.patch(this.route('core.avatars.update', this.user.avatar.id))
           .then(({ data }) => this.setUserAvatar(data.avatarId))
           .catch(this.errorHandler);
-    },
-    dateFormat(date) {
+    };
+    function dateFormat(date) {
       return date
           ? this.$format(date, this.meta.dateFormat)
           : null;
-    },
-  },
-};
+    };
+  };
+
 </script>
 
 <style lang="scss" scoped>

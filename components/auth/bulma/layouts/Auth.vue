@@ -11,13 +11,13 @@
     </core-auth>
 </template>
 
-<script>
+<script setup>
 import CoreAuth from '~/components/auth/core/layouts/Auth.vue';
 import Router from '~/components/ui/bulma/pages/Router.vue';
 
-export default {
-    name: 'Auth',
 
-    components: { CoreAuth, Router },
-};
+    name: 'Auth';
+
+    components: { CoreAuth, Router };
+
 </script>

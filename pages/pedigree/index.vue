@@ -3,24 +3,23 @@
         id="notes"/>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'trees.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'trees menu' },
-        title: 'Trees - Index'
-    },
+        permission: { name: 'trees menu' };
+        title: 'Trees - Index';
+    };
 
-    components: { EnsoTable },
-};
+    components: { EnsoTable };
 </script>
 
 <style lang="scss">

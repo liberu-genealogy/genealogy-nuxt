@@ -118,7 +118,7 @@
 </template>
 
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { FilterState } from '@enso-ui/filters/renderless';
 import { EnsoTable } from '@enso-ui/tables/bulma';
@@ -128,22 +128,22 @@ import { EnsoDatepicker } from '@enso-ui/datepicker/bulma';
 import Avatar from '~/components/users/bulma/pages/users/components/Avatar.vue';
 import { faClock, faInfoCircle, faCog } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { VTooltip, VPopover } from 'v-tooltip';
+import  VTooltip from 'v-tooltip';
 import { clickOutside } from '@enso-ui/directives';
 import Filters from '~/components/tasks/bulma/pages/tasks/components/Filters.vue';
 import Flags from '~/components/tasks/bulma/pages/tasks/components/Flags.vue';
 
 library.add(faClock, faInfoCircle, faCog);
 
-export default {
+
     meta: {
-        breadcrumb: 'index',
-        title: 'Tasks',
-    },
+        breadcrumb: 'index';
+        title: 'Tasks';
+    };
 
-    inject: ['i18n', 'route', 'toastr', 'errorHandler'],
+    inject: ['i18n', 'route', 'toastr', 'errorHandler'];
 
-    directives: { tooltip: VTooltip, clickOutside },
+    directives: { tooltip: VTooltip, clickOutside };
 
     components: {
         Avatar,
@@ -151,11 +151,11 @@ export default {
         EnsoTable,
         FilterState,
         VueSwitch,
-        VPopover,
+        // VPopover,
         Filters,
         Flags,
-        EnsoSelect,
-    },
+        EnsoSelect
+    };
 
     data: () => ({
         apiVersion: 1.1,
@@ -179,22 +179,22 @@ export default {
             dateInterval: 'today',
             overdue: null,
         },
-    }),
+    });
 
     computed: {
         ...mapState(['enums', 'user', 'meta']),
-        canChangeAllocation() {
+        function canChangeAllocation() {
             return [
                 this.enums.roles.Admin, this.enums.roles.Supervisor,
             ].includes(`${this.user.role.id}`);
-        },
-        dateFormat() {
+        };
+       function dateFormat() {
             return this.meta.dateTimeFormat.split(':s').shift();
-        },
-    },
+        };
+    };
 
     methods: {
-        update(id, attribute, value) {
+       function update(id, attribute, value) {
             this.$axios.patch(this.route('tasks.update', { task: id }), {
                 [attribute]: value,
             }).then(({ data: { message } }) => {
@@ -207,13 +207,12 @@ export default {
                     this.errorHandler(error);
                 }
             });
-        },
+        };
 
-        isOpen(ref) {
+        function isOpen(ref) {
             return this.$refs[ref]?.isOpen;
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

@@ -6,22 +6,21 @@
     </div>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'trees.create'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'trees menu' },
-        title: 'Trees - Create'
-    },
-    components: { EnsoForm },
-};
+        permission: { name: 'trees menu' };
+        title: 'Trees - Create';
+    };
+    components: { EnsoForm };
 </script>
 
 <style lang="scss">

@@ -556,8 +556,8 @@
         window.addEventListener('scroll', this.handleScroll);
     };
     methods: {
-        async logout() {
-          await this.$auth.logout();
+        function logout() {
+           this.$auth.logout();
         },
         handleScroll() {
             if (window.scrollY >= 500) {

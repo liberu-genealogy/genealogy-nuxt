@@ -30,33 +30,32 @@
     </modal>
 </template>
 
-<script>
+<script setup>
 import { focus } from '@enso-ui/directives';
 import { Modal } from '@enso-ui/modal/bulma';
 
-export default {
-    name: 'DeleteModal',
 
-    components: { Modal },
+    name: 'DeleteModal';
 
-    directives: { focus },
+    components: { Modal };
 
-    inject: ['i18n', 'errorHandler', 'route'],
+    const directives = { focus };
+
+    inject: ['i18n', 'errorHandler', 'route'];
 
     props: {
         userId: {
-            type: Number,
-            required: true,
-        },
-    },
+            type: Number;
+            required: true;
+        };
+    };
 
     methods: {
-        destroy(person = false) {
+       function destroy(person = false) {
             axios.delete(this.route('administration.users.destroy', this.userId),
                 { params: { person: !!person } })
                 .then(({ data }) => this.$emit('destroyed', data))
                 .catch(this.errorHandler);
-        },
-    },
-};
+        };
+    };
 </script>

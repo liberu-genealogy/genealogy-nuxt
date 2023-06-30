@@ -3,25 +3,24 @@
         id="family_slgs"/>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'familyslugs.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'familyslugs menu' },
-        title: 'Family Slugs - Index'
-    },
+        permission: { name: 'familyslugs menu' };
+        title: 'Family Slugs - Index';
+    };
 
 
-    components: { EnsoTable },
-};
+    components: { EnsoTable };
 </script>
 
 <style lang="scss">

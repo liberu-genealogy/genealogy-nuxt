@@ -64,7 +64,7 @@
 
 
 <script setup>
-import { mapState } from 'vuex';
+import { computed, useStore } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faDownload, faTrashAlt, faFileExcel, faBan, faSync,
@@ -90,7 +90,7 @@ library.add(faDownload, faTrashAlt, faFileExcel, faBan, faSync);
         EnsoSelect,
         EnsoTable,
         ImportUploader,
-        Param,
+        Param
     };
 
     data: () => ({
@@ -99,33 +99,43 @@ library.add(faDownload, faTrashAlt, faFileExcel, faBan, faSync);
     });
 
     computed: {
-        ...mapState(['enums']),
-        filters() {
+        function useComputedValues() {
+  const store = useStore();
+
+  const enums = computed(() => {
+    return store.state.enums;
+  });
+
+  return {
+    enums,
+  };
+};
+       function filters() {
             return { data_imports: { type: this.type } };
-        },
-        importLink() {
+        };
+       function importLink() {
             return this.canAccess('import.store')
                 && this.type
                 && this.route('import.store');
-        },
-        uploadParams() {
+        };
+       function uploadParams() {
             return this.params.reduce((params, param) => {
                 params[param.name] = param.value;
                 return params;
             }, { type: this.type });
-        },
+        };
     };
 
     methods: {
-        template() {
+       function template() {
             this.$axios.get(this.route('import.show', this.type))
                 .then(({ data: { params } }) => (this.params = params))
                 .catch(this.errorHandler);
-        },
+        };
         //  eslint-disable-next-line camelcase
-        rejected({ rejected_id }) {
+       function rejected({ rejected_id }) {
             window.location.href = this.route('import.rejected', rejected_id);
-        },
+        };
     };
 
 </script>

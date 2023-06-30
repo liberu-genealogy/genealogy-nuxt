@@ -25,48 +25,47 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { VTooltip } from 'v-tooltip';
 import { clickOutside } from '@enso-ui/directives';
 import Loader from '@enso-ui/loader/bulma';
 
 
-export default {
-    name: 'NavbarItem',
 
-    directives: { clickOutside, tooltip: VTooltip },
+    name: 'NavbarItem';
 
-    components: { Loader },
+    const directives = { clickOutside, tooltip: VTooltip };
 
-    inject: ['i18n'],
+    components: { Loader };
+
+    inject: ['i18n'];
 
     props: {
         icon: {
-            type: String,
-            required: true,
-        },
+            type: String;
+            required: true;
+        };
         loading: {
-            type: Boolean,
-            default: false,
-        },
-    },
+            type: Boolean;
+            defaultValue: false;
+        };
+    };
 
     data: () => ({
         dropdown: false,
-    }),
+    });
 
     methods: {
-        hide() {
+        function hide() {
             this.dropdown = false;
-        },
-        show() {
+        };
+        function show() {
             this.dropdown = true;
-        },
-        toggle() {
+        };
+        function toggle() {
             this.dropdown = !this.dropdown;
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

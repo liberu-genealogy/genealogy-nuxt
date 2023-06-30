@@ -196,26 +196,26 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css'
+import 'vue-loading-overlay/dist/css/index.css';
 import vSelect from 'vue-select'
 
-export default {
-  layout: 'default',
+
+  layout: 'default';
   head: {
-    title: 'Paypal',
-  },
+    title: 'Paypal';
+  };
   meta: {
-    breadcrumb: 'paypal',
-    title: 'Paypal',
-    permission: { name: 'subscription menu' },
-  },
+    breadcrumb: 'paypal';
+    title: 'Paypal';
+    permission: { name: 'subscription menu' };
+  };
   components: {
     vSelect,
-    Loading,
-  },
-  data() {
+    Loading
+  };
+  function data() {
     return {
       error: false,
       message: '',
@@ -228,25 +228,25 @@ export default {
       currency_options: ['USD', 'GBP', 'EUR', 'AUD'],
       selected_currency: 'GBP',
       selected_currency_symbol: '£',
-      selected_currency_rate: 1,
+      selected_currency_rate: 1
     }
-  },
-  mounted() {
+  };
+ function mounted() {
     this.loadPlans()
-  },
+  };
   methods: {
-    async loadPlans() {
+    function loadPlans() {
       this.isLoading = true
-      const response = await this.$axios.get('/api/paypal/plans', {
+      const response = this.$axios.get('/api/paypal/plans', {
         email: 'heru0502@gmail.com',
-      })
+      });
 
-      this.plans = response.data
-      this.isLoading = false
-    },
-    async selectCurrency(currency) {
+      this.plans = response.data;
+      this.isLoading = false;
+    };
+    function selectCurrency(currency) {
       this.selected_currency = currency
-      const response = await this.$axios
+      const response =  this.$axios
         .$get(
           'https://api.currencyfreaks.com/latest?apikey=b864b83a27f5411c804e70762945b59a'
         )
@@ -276,8 +276,8 @@ export default {
           }
         })
         .catch(() => {})
-    },
-    async subscribe(plan) {
+    };
+    function subscribe(plan) {
       this.isLoading = true
       var sendData = {
         ...plan,
@@ -287,20 +287,19 @@ export default {
         selected_currency: this.selected_currency,
       }
       console.log('LOGGED', sendData)
-      const response = await this.$axios.$post(
+      const response =  this.$axios.$post(
         '/api/paypal/subscribe',
         sendData
       )
       console.log(response)
       window.location.href = response
       this.isLoading = false
-    },
-  },
-}
+    };
+  };
 </script>
-<router>
+<!-- <router>
 {
     name: 'subscription.paypal.index'
 }
-</router>
+</router> -->
 

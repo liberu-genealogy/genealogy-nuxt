@@ -6,32 +6,32 @@
   </div>
 
 </template>
-<router>
+<!-- <router>
 {
 name: 'dnamatching.show'
 }
-</router>
+</router> -->
 
-<script>
+<script setup>
 
-export default {
-layout: 'auth',
+
+layout: 'auth';
   meta: {
-    breadcrumb: 'show',
-    title: 'DNA Matching - Show',
-    permission: { name: 'dnamatching menu' }
-  },
+    breadcrumb: 'show';
+    title: 'DNA Matching - Show';
+    permission: { name: 'dnamatching menu' };
+  };
 
-  inject: ['route', 'routerErrorHandler'],
+  inject: ['route', 'routerErrorHandler'];
 
-  data() {
+  function data() {
     return {
       imageUrl: null
     }
-  },
+  };
 
   methods: {
-    fetchData() {
+    function fetchData() {
       if (!this.$route.params.dnaMatching)
         return
 
@@ -41,12 +41,11 @@ layout: 'auth',
         })
         .catch(this.errorHandler);
     }
-  },
+  };
 
-  created() {
+ function created() {
     this.fetchData();
-  },
-};
+  };
 
 </script>
 

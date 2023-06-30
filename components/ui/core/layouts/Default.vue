@@ -1,12 +1,12 @@
-<script>
+<script setup>
 import {
     mapState, mapGetters, mapMutations, mapActions,
 } from 'vuex';
 
-export default {
-    name: 'CoreDefault',
 
-    inject: ['errorHandler', 'route', 'toastr'],
+    name: 'CoreDefault';
+
+    inject: ['errorHandler', 'route', 'toastr'];
 
     computed: {
         ...mapState(['meta', 'appState']),
@@ -19,7 +19,7 @@ export default {
         slideOut() {
             return this.rtl ? 'slideOutLeft' : 'slideOutRight';
         },
-    },
+    };
 
     watch: {
         isTablet: {
@@ -29,22 +29,22 @@ export default {
                     : this.showSidebar();
             },
         },
-    },
+    };
 
     created() {
         this.$root.$on('start-impersonating', this.startImpersonating);
         this.$root.$on('stop-impersonating', this.stopImpersonating);
-    },
+    };
 
     beforeMount() {
         this.addTouchBreakpointsListeners();
-    },
+    };
 
     methods: {
         ...mapMutations('layout', ['setIsTablet', 'setIsMobile', 'setIsTouch']),
         ...mapMutations('layout/sidebar', { showSidebar: 'show', hideSidebar: 'hide' }),
         ...mapActions(['loadAppState']),
-        addTouchBreakpointsListeners() {
+       function addTouchBreakpointsListeners() {
             const { body } = document;
             const TabletMaxWidth = 1023;
             const MobileMaxWidth = 768;
@@ -71,22 +71,22 @@ export default {
             });
 
             handler();
-        },
-        startImpersonating(id) {
+        };
+       function startImpersonating(id) {
             this.$axios.get(this.route('core.impersonate.start', id))
                 .then(({ data }) => {
                     this.toastr.warning(data.message);
                     this.loadAppState();
                 }).catch(this.errorHandler);
-        },
-        stopImpersonating() {
+        };
+       function stopImpersonating() {
             this.$axios.get(this.route('core.impersonate.stop'))
                 .then(({ data }) => {
                     this.toastr.info(data.message);
                     this.loadAppState();
                 }).catch(this.errorHandler);
-        },
-    },
+        };
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -100,6 +100,5 @@ export default {
             bookmarks: this.bookmarks,
             footer: this.footer,
         });
-    },
-};
+    };
 </script>

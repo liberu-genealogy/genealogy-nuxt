@@ -143,7 +143,7 @@
 </template>
 
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -153,17 +153,17 @@ import VueSwitch from '@enso-ui/switch/bulma';
 
 library.add(faSearch, faTrashAlt);
 
-export default {
+
     meta: {
-        breadcrumb: 'edit texts',
-        title: 'Edit Texts',
-    },
+        breadcrumb: 'edit texts';
+        title: 'Edit Texts';
+    };
 
-    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'],
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'];
 
-    directives: { focus, selectOnFocus },
+    directives: { focus, selectOnFocus };
 
-    components: { EnsoSelect, VueSwitch },
+    components: { EnsoSelect, VueSwitch };
 
     data: () => ({
         langFile: {},
@@ -175,24 +175,24 @@ export default {
         loading: false,
         filterMissing: false,
         filterCore: true,
-    }),
+    });
 
     computed: {
         ...mapState('layout', ['isMobile']),
         ...mapState(['meta']),
-        styleObject() {
+       function styleObject() {
             return {
                 'max-height': this.boxHeight,
                 'overflow-y': 'auto',
                 'overflow-x': 'hidden',
             };
-        },
-        langKeys() {
+        };
+       function langKeys() {
             return this.filterMissing
                 ? Object.keys(this.originalLangFile).filter(key => !this.originalLangFile[key])
                 : Object.keys(this.langFile);
-        },
-        filteredKeys() {
+        };
+       function filteredKeys() {
             if (!this.query) {
                 return this.sortedKeys();
             }
@@ -201,18 +201,18 @@ export default {
 
             return this.langKeys.filter(key => (key.toLowerCase().indexOf(query) > -1
                 || (this.langFile[key] && this.langFile[key].toLowerCase().indexOf(query) > -1)));
-        },
-        isNewKey() {
+        };
+        function isNewKey() {
             return this.selectedLocale
                 && this.query && this.filteredKeys.indexOf(this.query) === -1;
-        },
-        keysCount() {
+        };
+       function keysCount() {
             return this.langKeys.length;
-        },
-        subDir() {
+        };
+       function subDir() {
             return this.filterCore ? 'app' : 'enso';
-        },
-    },
+        };
+    };
 
     watch: {
         isMobile: {
@@ -223,13 +223,13 @@ export default {
         },
     },
 
-    created() {
+   function created() {
         this.init();
         this.setBoxHeight();
-    },
+    };
 
     methods: {
-        init() {
+       function init() {
             this.loading = true;
 
             this.$axios.get(this.route('system.localisation.editTexts'))
@@ -237,8 +237,8 @@ export default {
                     this.loading = false;
                     this.locales = data;
                 }).catch(this.errorHandler);
-        },
-        getLangFile() {
+        };
+       function getLangFile() {
             if (!this.selectedLocale) {
                 this.langFile = {};
                 this.updateOriginal();
@@ -255,8 +255,8 @@ export default {
                 this.langFile = data;
                 this.updateOriginal();
             }).catch(this.errorHandler);
-        },
-        saveLangFile() {
+        };
+       function saveLangFile() {
             this.loading = true;
 
             this.$axios.patch(this.route('system.localisation.saveLangFile', {
@@ -268,37 +268,37 @@ export default {
                 this.loading = false;
                 this.toastr.success(data.message);
             }).catch(this.errorHandler);
-        },
-        addKey() {
+        };
+       function addKey() {
             this.$set(this.langFile, this.query, null);
             this.updateOriginal();
             this.focusIt();
-        },
-        removeKey(key) {
+        };
+       function removeKey(key) {
             this.$delete(this.langFile, key);
             this.updateOriginal();
-        },
-        focusIt(id = null) {
+        };
+       function focusIt(id = null) {
             id = id || this.query;
 
             this.$nextTick(() => {
                 document.getElementById(id).focus();
             });
-        },
-        setBoxHeight() {
+        };
+       function setBoxHeight() {
             this.boxHeight = document.body.clientHeight - (this.isMobile ? 420 : 388);
-        },
-        updateOriginal() {
+        };
+       function updateOriginal() {
             this.originalLangFile = JSON.parse(JSON.stringify(this.langFile));
-        },
-        merge() {
+        };
+       function merge() {
             this.$axios.patch(this.route('system.localisation.merge'))
                 .then(({ data }) => {
                     this.loading = false;
                     this.toastr.success(data.message);
                 }).catch(this.errorHandler);
-        },
-        sortedKeys() {
+        };
+       function sortedKeys() {
             return this.langKeys.sort((a, b) => {
                 if (a.toLowerCase() < b.toLowerCase()) {
                     return -1;
@@ -310,9 +310,8 @@ export default {
 
                 return 0;
             });
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss" scoped>

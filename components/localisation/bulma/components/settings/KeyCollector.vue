@@ -20,15 +20,15 @@
     </core-key-collector>
 </template>
 
-<script>
+<script setup>
 import VueSwitch from '@enso-ui/switch/bulma';
 import CoreKeyCollector from '../../../core/components/settings/KeyCollector.vue';
 
-export default {
-    name: 'KeyCollector',
 
-    components: { CoreKeyCollector, VueSwitch },
+    name: 'KeyCollector';
 
-    inject: ['i18n'],
-};
+    components: { CoreKeyCollector, VueSwitch };
+
+    inject: ['i18n'];
+
 </script>

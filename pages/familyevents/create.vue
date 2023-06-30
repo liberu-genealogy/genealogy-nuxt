@@ -6,23 +6,23 @@
     </div>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'familyevents.create'
-}
-</router>
-<script>
+} -->
+<!-- </router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-layout: 'auth',
-    meta: {
-        permission: { name: 'familyevents menu' },
-        title: 'Family Events - Create'
-    },
 
-    components: { EnsoForm },
-};
+layout: 'auth';
+    meta: {
+        permission: { name: 'familyevents menu' };
+        title: 'Family Events - Create';
+    };
+
+    components: { EnsoForm };
+
 </script>
 
 <style lang="scss">

@@ -47,7 +47,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
   import { mapState } from "vuex";
   import { library } from "@fortawesome/fontawesome-svg-core";
   import {
@@ -58,15 +58,15 @@
     faUser,
   } from "@fortawesome/free-solid-svg-icons";
   import { focus } from "@enso-ui/directives";
-  import Errors from "@enso-ui/laravel-validation";
+//  import Errors from "@enso-ui/laravel-validation/src/Errors";
   import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
 
   library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
-  export default {
-    name: "VerifyForm",
-    directives: { focus },
-    inject: ["i18n", "route"],
+
+    name: "VerifyForm";
+    directives: { focus };
+    inject: ["i18n", "route"];
 
     props: {
       action: {
@@ -74,24 +74,25 @@
         type: String,
       },
       isLogin: {
-        default: false,
+        defaultValue: false,
         type: Boolean,
       },
       isReset: {
-        default: false,
+        defaultValue: false,
         type: Boolean,
       },
       route: {
         required: true,
         type: String,
       },
-    },
+    };
 
     data: () => ({
-      errors: new Errors(),
+      // errors: new Errors(),
+      errors:'',
       isSuccessful: false,
       loading: false,
-    }),
+    });
 
     computed: {
       ...mapState(["meta"]),
@@ -112,12 +113,12 @@
       resendLink() {
         return "/api/resend";
       },
-    },
+    };
     mounted() {
       this.verify();
-    },
+    };
     methods: {
-      verify() {
+      function verify() {
         this.loading = true;
         this.isSuccessful = false;
 
@@ -143,8 +144,8 @@
                 throw error;
             }
           });
-      },
-      resend() {
+      };
+      function resend() {
         this.loading = true;
         this.isSuccessful = false;
 
@@ -170,9 +171,8 @@
                 throw error;
             }
           });
-      },
-    },
-  };
+      };
+    };
 </script>
 
 <style lang="scss">

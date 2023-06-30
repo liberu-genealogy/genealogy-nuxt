@@ -22,27 +22,27 @@
     <div style="height: 700px" id="webtrees-fan-chart-container"></div>
   </div>
 </template>
-<router>
+<!-- <router>
 {
 name: 'fanchart.show'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { FanChart } from "/assets/js/fan-chart/modules/index";
 import vSelect from 'vue-select'
 import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css'
+import 'vue-loading-overlay/dist/css/index.css';
 import {createDisplayName, getBirthYear, getDeathYear } from '/utils/personHelper';
 
-export default {
-  layout: "auth",
+
+  layout: "auth";
   meta: {
-    title: "Fanchart - Show",
-  },
+    title: "Fanchart - Show";
+  };
   components: {
     vSelect,
     Loading
-  },
+  };
   data: () => ({
     familyData: {},
     persons: [],
@@ -54,9 +54,9 @@ export default {
     generation: { label: 1, value: 1 },
     thumbnail_man: "/images/thumbnail-man.svg",
     thumbnail_woman: "/images/thumbnail-woman.svg",
-  }),
+  });
   methods: {
-    async fetchData() {
+    function fetchData() {
       if(!this.selected_person.value) return
       let params = {start_id: this.selected_person.value, generation: this.generation.value }
       this.$axios
@@ -80,9 +80,9 @@ export default {
           });
           fanChart.draw(this.familyData);
         });
-    },
+    };
 
-    checkBirthDeathDate(birth, death) {
+   function checkBirthDeathDate(birth, death) {
       if(death) {
         if(!birth) return ""
         return `${birth.toString().slice(0, 4)}-${death.toString().slice(0, 4)}`
@@ -90,9 +90,9 @@ export default {
         if(!birth) return ""
         return `Born ${birth.toString().slice(0, 4)}`
       }
-    },
+    };
 
-    getPersons() {
+   function getPersons() {
       this.isLoading = true;
       this.$axios
         .$get("/api/persons")
@@ -110,9 +110,9 @@ export default {
           });
           this.isLoading = false;
         });
-    },
+    };
 
-    checkChildren(id) {
+   function checkChildren(id) {
       let children = [];
       let childIds = [];
 
@@ -144,9 +144,9 @@ export default {
         })
       })
       return children;
-    },
+    };
 
-    checkParents(id) {
+   function checkParents(id) {
       const parents = [];
       const person = this.data.persons[id]
 
@@ -181,15 +181,15 @@ export default {
             timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
             thumbnail: person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : thumbnail_middle,
             children: this.checkParents(parentId),
-          })
-        })
-      })
+          });
+        });
+      });
 
       // console.log("parents: ", parents);
       return parents.length == 0 ? null : parents
-    },
+    };
 
-    checkFamilyData(id = null) {
+    function checkFamilyData(id = null) {
       const person = id ? this.data.persons[id] : this.data.persons[this.data.start]
       return {
         id: person.id,
@@ -205,13 +205,12 @@ export default {
         timespan: this.checkBirthDeathDate(person.birthday ? person.birthday : person.birth_year, person.deathday ? person.deathday : person.death_year),
         children: this.checkParents(this.data.start)
       }
-    },
-  },
+    };
+  };
 
-  mounted() {
+ function mounted() {
     this.getPersons();
-  },
-};
+  };
 </script>
 
 <style lang="scss">

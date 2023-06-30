@@ -61,42 +61,42 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { mapState, mapGetters } from 'vuex';
 import VueCal from 'vue-cal';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFlag, faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 import EventConfirmation from './EventConfirmation';
 
-import 'vue-cal/dist/drag-and-drop.js';
-import 'vue-cal/dist/i18n/ar.js';
-import 'vue-cal/dist/i18n/de.js';
-import 'vue-cal/dist/i18n/fr.js';
-import 'vue-cal/dist/i18n/hu.js';
-import 'vue-cal/dist/i18n/nl.js';
-import 'vue-cal/dist/i18n/ro.js';
-import 'vue-cal/dist/i18n/es.js';
+import 'vue-cal/dist/drag-and-drop.amd.js';
+import 'vue-cal/dist/i18n/ar.es.js';
+import 'vue-cal/dist/i18n/de.es.js';
+import 'vue-cal/dist/i18n/fr.es.js';
+import 'vue-cal/dist/i18n/hu.es.js';
+import 'vue-cal/dist/i18n/nl.es.js';
+import 'vue-cal/dist/i18n/ro.es.js';
+import 'vue-cal/dist/i18n/es.es.js';
 
 import('../styles/colors.scss');
 
 library.add(faFlag, faArrowsAltH);
 
-export default {
-    name: 'EnsoCalendar',
 
-    components: { VueCal, EventConfirmation },
+    name: 'EnsoCalendar';
 
-    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'],
+    components: { VueCal, EventConfirmation };
+
+    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'];
 
     props: {
         date: {
-            required: true,
+            required: true;
         },
         calendars: {
-            type: Array,
-            required: true,
-        },
-    },
+            type: Array;
+            required: true;
+        };
+    };
 
     data: () => ({
         events: [],
@@ -106,7 +106,7 @@ export default {
         interval: null,
         dragedEvent: null,
         deleteEventFunction: null,
-    }),
+    });
 
     computed: {
         ...mapState(['enums', 'meta']),
@@ -141,44 +141,44 @@ export default {
             return this.vuecalEvent && this.vuecalEvent.oldDate && this.vuecalEvent.newDate
                 && this.dateFormat(this.vuecalEvent.oldDate) !== this.dateFormat(this.vuecalEvent.newDate);
         },
-    },
+    };
 
     watch: {
         calendars: 'fetch',
-    },
+    };
 
     mounted() {
         this.resize();
 
         window.addEventListener('resize', this.resize);
-    },
+    };
     beforeDestroy() {
         window.removeEventListener('resize', this.resize);
-    },
+    };
 
     methods: {
-        resize() {
+        function resize() {
             this.$el.style.height = `${document.body.clientHeight - 170}px`;
-        },
-        fetch() {
+        };
+       function fetch() {
             if (this.calendars) {
                 this.$axios.get(this.route('core.calendar.events.index'), { params: this.params })
                     .then(({ data }) => (this.events = data))
                     .catch(this.errorHandler);
             }
-        },
-        setDragedEvent(event, deleteEventFunction) {
+        };
+       function setDragedEvent(event, deleteEventFunction) {
             this.dragedEvent = event;
             this.deleteEventFunction = deleteEventFunction;
             return event;
-        },
-        revert() {
+        };
+       function revert() {
             const index = this.events.findIndex((event) => event.id === this.event.id);
             this.events[index].end = new Date(this.vuecalEvent.originalEvent.end);
             this.events[index].start = new Date(this.vuecalEvent.originalEvent.start);
             this.events.splice(index, 1, this.events[index]);
-        },
-        update(updateType = null) {
+        };
+       function update(updateType = null) {
             if (this.needsConfirmation(updateType)) {
                 this.confirm = (updateType) => this.update(updateType);
                 return;
@@ -202,12 +202,12 @@ export default {
                 this.revert();
                 this.errorHandler(e);
             });
-        },
-        updateInterval(interval) {
+        };
+        function updateInterval(interval) {
             this.interval = interval;
             this.fetch();
-        },
-        selectEvent(event, e) {
+        };
+       function selectEvent(event, e) {
             if (event.route) {
                 this.$router.push(event.route)
                     .catch(this.routerErrorHandler);
@@ -217,8 +217,8 @@ export default {
                 this.$emit('edit-event', event);
             }
             e.stopPropagation();
-        },
-        destroy(event, updateType = null) {
+        };
+       function destroy(event, updateType = null) {
             this.vuecalEvent = { event, originalEvent: event };
 
             if (this.needsConfirmation(updateType)) {
@@ -233,36 +233,35 @@ export default {
                 this.toastr.success(data.message);
                 this.fetch();
             }).catch(this.errorHandler);
-        },
-        needsConfirmation(updateType) {
+        };
+       function needsConfirmation(updateType) {
             return updateType === null
                 && this.isFrequent;
-        },
-        dateTimeFormat(daysCount, date) {
+        };
+       function dateTimeFormat(daysCount, date) {
             return daysCount > 1
                 ? this.$format(date, 'm-d h:i')
                 : this.$format(date, 'h:i');
-        },
-        dateFormat(date) {
+        };
+       function dateFormat(date) {
             return this.$format(date, 'Y-m-d');
-        },
-        timeFormat(dateTime) {
+        };
+        function timeFormat(dateTime) {
             return this.$format(dateTime, 'H:i');
-        },
-        cancelUpdate() {
+        };
+       function cancelUpdate() {
             this.revert();
             this.confirm = null;
             this.vuecalEvent = null;
-        },
-        eventDragCreated() {
+        };
+       function eventDragCreated() {
             if (this.dragedEvent) {
                 this.$emit('edit-event', this.dragedEvent);
                 this.deleteEventFunction();
                 this.dragedEvent = null;
             }
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

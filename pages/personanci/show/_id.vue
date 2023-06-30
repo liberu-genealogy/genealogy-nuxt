@@ -2,20 +2,19 @@
     <div/>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'personanci.show'
 }
-</router>
-<script>
-export default {
+</router> -->
+<script setup>
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'personanci menu' },
-        title: 'Person Anci - Show'
-    },
-};
+        permission: { name: 'personanci menu' };
+        title: 'Person Anci - Show';
+    };
 </script>
 
 <style lang="scss">

@@ -16,7 +16,7 @@
     </modal>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { EnsoForm } from '@enso-ui/forms/bulma';
 import { Modal } from '@enso-ui/modal/bulma';
@@ -26,7 +26,7 @@ import ColorSelect from './ColorSelect.vue';
 
 library.add(faUserClock, faPlus, faMinus);
 
-export default {
+
     name: 'CalendarForm',
 
     components: { Modal, EnsoForm, ColorSelect },
@@ -47,8 +47,7 @@ export default {
                 ? this.route('core.calendar.edit', { calendar: this.calendar.id })
                 : this.route('core.calendar.create');
         },
-    },
-};
+    };
 </script>
 
 <style lang="scss">

@@ -82,7 +82,7 @@
 
 <script setup>
 import { debounce } from 'lodash';
-import { mapState, mapGetters } from 'vuex';
+import { computed, useStore } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch, faUndo, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import { Tab, EnsoTabs } from '@enso-ui/tabs/bulma';
@@ -103,7 +103,7 @@ library.add(faSearch, faUndo, faSyncAlt);
     inject: ['errorHandler', 'i18n', 'route'];
 
     components: {
-        EnsoTabs, Tab, File, Chart, EnsoDateFilter, EnsoUploader,
+        EnsoTabs, Tab, File, Chart, EnsoDateFilter, EnsoUploader
     };
 
     data: () => ({
@@ -120,19 +120,33 @@ library.add(faSearch, faUndo, faSyncAlt);
     });
 
     computed: {
-        ...mapState('layout', ['isMobile']),
-        ...mapGetters('preferences', { locale: 'lang' }),
-        uploadUrl() {
+       function useComputedValues() {
+  const store = useStore();
+
+  const isMobile = computed(() => {
+    return store.state.layout.isMobile;
+  });
+
+  const locale = computed(() => {
+    return store.getters['preferences/lang'];
+  });
+
+  return {
+    isMobile,
+    locale,
+  };
+};
+       function uploadUrl() {
             return this.route('core.uploads.store');
-        },
-        colors() {
+        };
+       function colors() {
             return colors.slice(0, this.folders.length);
-        },
-        foldersStats() {
+        };
+       function foldersStats() {
             return this.folders.map(folder => this.content(folder)
                 .reduce((total, { size }) => (total += size), 0));
-        },
-        chartData() {
+        };
+       function chartData() {
             return {
                 labels: this.folders,
                 datasets: [{
@@ -141,38 +155,38 @@ library.add(faSearch, faUndo, faSyncAlt);
                     datalabels: {
                         backgroundColor: this.colors,
                         formatter: val => `${this.$numberFormat(val / 1000)} KB`,
-                    },
-                }],
+                    };
+                }];
             };
-        },
-        storageUsage() {
+        };
+        function storageUsage() {
             return this.stats.totalSpaceUsed
                 && this.$numberFormat(this.stats.totalSpaceUsed * 100 / this.stats.storageLimit, 2);
-        },
-        status() {
+        };
+        function status() {
             return this.storageUsage < 95
                 ? 'has-text-success'
                 : 'has-text-danger';
-        },
+        };
     };
 
     watch: {
-        query() {
+        function query() {
             this.reset();
-        },
+        };
     };
 
-    created() {
+    function created() {
         this.fetch = debounce(this.fetch, 300);
     };
 
     methods: {
-        reset() {
+       function reset() {
             this.files = [];
             this.offset = 0;
             this.fetch();
-        },
-        fetch() {
+        };
+       function fetch() {
             this.loading = true;
 
             this.$axios.get(this.route('core.files.index'), {
@@ -184,8 +198,8 @@ library.add(faSearch, faUndo, faSyncAlt);
                 this.stats = data.stats;
                 this.loading = false;
             }).catch(this.errorHandler);
-        },
-        destroy(id) {
+        };
+       function destroy(id) {
             this.loading = true;
 
             this.$axios.delete(this.route('core.files.destroy', id, false))
@@ -194,21 +208,21 @@ library.add(faSearch, faUndo, faSyncAlt);
                     this.files.splice(index, 1);
                     this.loading = false;
                 }).catch(this.errorHandler);
-        },
-        content(folder) {
+        };
+       function content(folder) {
             return this.files.filter(({ type }) => type === folder);
-        },
-        addUploadedFiles(files) {
+        };
+       function addUploadedFiles(files) {
             this.files.push(...files);
-        },
-        computeScrollPosition(event) {
+        };
+       function computeScrollPosition(event) {
             const position = event.target.scrollTop;
             const total = event.target.scrollHeight - event.target.clientHeight;
 
             if (position / total > 0.8) {
                 this.fetch();
             }
-        },
+        };
     };
 
 </script>

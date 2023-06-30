@@ -2,10 +2,9 @@
     <NuxtChild :key="$route.path"/>
 </template>
 
-<script>
-export default {
+<script setup>
+
     meta: {
-        breadcrumb: 'google',
-    },
-};
+        breadcrumb: 'google';
+    };
 </script>

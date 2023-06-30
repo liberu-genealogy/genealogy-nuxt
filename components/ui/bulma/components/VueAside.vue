@@ -4,10 +4,10 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'VueAside',
-};
+<script setup>
+
+    name: 'VueAside';
+
 </script>
 
 <style lang="scss">

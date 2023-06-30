@@ -74,9 +74,9 @@
 </template>
 
 
-<script>
-import debounce from 'lodash/debounce';
-import { mapState } from 'vuex';
+<script setup>
+import debounce from 'lodash';
+import { computed, useStore } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync,
@@ -84,34 +84,53 @@ import {
 
 library.add(faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync);
 
-export default {
+
     // path: '/core/notifications/index',
     meta: {
-        breadcrumb: 'notifications',
-        title: 'Notifications',
-    },
+        breadcrumb: 'notifications';
+        title: 'Notifications';
+    };
 
-    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler'],
+    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler'];
 
     data: () => ({
         paginate: 200,
         notifications: [],
         offset: 0,
         loading: false,
-    }),
+    });
 
     computed: {
-        ...mapState(['user', 'meta']),
-        ...mapState('layout', ['isTouch']),
-    },
+       function useComputedValues() {
+  const store = useStore();
 
-    created() {
+  const user = computed(() => {
+    return store.state.user;
+  });
+
+  const meta = computed(() => {
+    return store.state.meta;
+  });
+
+  const isTouch = computed(() => {
+    return store.state.layout.isTouch;
+  });
+
+  return {
+    user,
+    meta,
+    isTouch,
+  };
+};
+    };
+
+   function created() {
         this.fetch = debounce(this.fetch, 500);
         this.fetch();
-    },
+    };
 
     methods: {
-        fetch() {
+       function fetch() {
             if (this.loading) {
                 return;
             }
@@ -125,8 +144,8 @@ export default {
                 this.offset = this.notifications.length;
                 this.loading = false;
             }).catch(this.errorHandler);
-        },
-        read(notification) {
+        };
+       function read(notification) {
             this.$axios.patch(this.route('core.notifications.read', notification.id))
                 .then(({ data }) => {
                     notification.read_at = data.read_at;
@@ -137,13 +156,13 @@ export default {
                             .catch(this.routerErrorHandler);
                     }
                 }).catch(this.errorHandler);
-        },
-        readAll() {
+        };
+       function readAll() {
             this.$axios.post(this.route('core.notifications.readAll'))
                 .then(() => this.updateAll())
                 .catch(this.errorHandler);
-        },
-        updateAll() {
+        };
+        function updateAll() {
             this.notifications.forEach(notification => {
                 notification.read_at = notification.read_at || this.$format(new Date(), 'Y-MM-DD H:mm:s');
             });
@@ -151,22 +170,21 @@ export default {
             this.unreadCount = 0;
 
             this.$root.$emit('read-all-notifications');
-        },
-        destroyAll() {
+        };
+        function destroyAll() {
             this.$axios.delete(this.route('core.notifications.destroyAll')).then(() => {
                 this.notifications = [];
                 this.$root.$emit('destroy-all-notifications');
             }).catch(this.errorHandler);
-        },
-        destroy(notification, index) {
+        };
+       function destroy(notification, index) {
             this.$axios.delete(this.route('core.notifications.destroy', notification.id)).then(() => {
                 this.notifications.splice(index, 1);
                 this.$root.$emit('destroy-notification', notification);
             }).catch(this.errorHandler);
-        },
-        timeFromNow(date) {
+        };
+       function timeFromNow(date) {
             return this.$formatDistance(date);
-        },
-    },
-};
+        };
+    };
 </script>

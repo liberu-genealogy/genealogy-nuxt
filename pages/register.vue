@@ -37,7 +37,7 @@ import RegisterForm from '~/components/auth/RegisterForm.vue';
         ...mapMutations('auth', ['login']),
         ...mapMutations('layout', ['home']),
         ...mapMutations(['setShowQuote', 'setCsrfToken']),
-        init(data) {
+       function init(data) {
             this.setShowQuote(this.meta.showQuote);
 
             if (data.csrfToken) {
@@ -57,6 +57,6 @@ import RegisterForm from '~/components/auth/RegisterForm.vue';
               }
 
             }, 500);
-        },
+        };
     };
 </script>

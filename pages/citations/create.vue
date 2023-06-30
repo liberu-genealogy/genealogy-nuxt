@@ -5,24 +5,24 @@
         </div>
     </div>
 </template>
-
+<!-- 
 <router>
 {
     name: 'citations.create'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-layout: 'auth',
-    meta: {
-        permission: { name: 'citations menu' },
-        title: 'Citations - Create'
-    },
 
-    components: { EnsoForm },
-};
+layout: 'auth';
+    meta: {
+        permission: { name: 'citations menu' };
+        title: 'Citations - Create';
+    };
+
+    components: { EnsoForm };
+
 </script>
 
 <style lang="scss">

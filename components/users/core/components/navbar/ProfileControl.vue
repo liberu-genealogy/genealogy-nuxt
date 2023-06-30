@@ -1,34 +1,34 @@
-<script>
+<script setup>
 import { mapState } from 'vuex';
 
-export default {
-    name: 'CoreProfileControl',
 
-    inject: ['route', 'routerErrorHandler'],
+    name: 'CoreProfileControl';
+
+    inject: ['route', 'routerErrorHandler'];
 
     data: () => ({
         visible: false,
-    }),
+    });
 
     computed: {
         ...mapState(['user']),
         ...mapState('layout', ['isTouch']),
-    },
+    };
 
     methods: {
-        hide() {
+       function hide() {
             this.visible = false;
-        },
-        toggle() {
+        };
+       function toggle() {
             this.visible = !this.visible;
-        },
-        visitProfile() {
+        };
+       function visitProfile() {
             this.$router.push({
                 name: 'administration.users.show',
                 params: { user: this.user.id },
             })
-        },
-    },
+        };
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -40,6 +40,6 @@ export default {
             toggle: this.toggle,
             visible: this.visible,
         });
-    },
-};
+    };
+
 </script>

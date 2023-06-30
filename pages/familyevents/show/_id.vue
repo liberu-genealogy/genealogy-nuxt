@@ -1,21 +1,19 @@
 <template>
     <div/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'familyevents.show'
 }
-</router>
-<script>
-export default {
+</router> -->
+<script setup>
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'familyevents menu' },
-        title: 'Family Events - Show'
-    },
-
-};
+        permission: { name: 'familyevents menu' };
+        title: 'Family Events - Show';
+    };
 </script>
 
 <style lang="scss">

@@ -37,8 +37,8 @@
     </core-default>
 </template>
 
-<script>
-import { SlideDown, HorizontalSlide } from '@enso-ui/transitions';
+<script setup>
+// import { SlideDown, HorizontalSlide } from '@enso-ui/transitions';
 import ScrollToTop from '@enso-ui/scroll-to-top/bulma';
 import Bookmarks from '~/components/bookmarks/bulma/components/Bookmarks.vue';
 import CoreDefault from '../../core/layouts/Default.vue';
@@ -49,13 +49,13 @@ import AppFooter from '../components/AppFooter.vue';
 import MainRouter from '../pages/MainRouter.vue';
 import PageHeader from '../components/PageHeader.vue';
 
-export default {
-    name: 'Default',
+
+    name: 'Default';
 
     components: {
         CoreDefault,
-        SlideDown,
-        HorizontalSlide,
+        // SlideDown,
+        // HorizontalSlide,
         NavbarRefresh,
         Sidebar,
         Settings,
@@ -64,8 +64,7 @@ export default {
         MainRouter,
         Bookmarks,
         PageHeader,
-    },
-};
+    };
 </script>
 
 <style lang="scss">

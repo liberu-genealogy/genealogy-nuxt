@@ -1,17 +1,16 @@
-<script>
+<script setup>
 import { mapState } from 'vuex';
 
-export default {
-    name: 'CoreAppFooter',
+
+    name: 'CoreAppFooter';
 
     computed: {
         ...mapState(['meta']),
-    },
+    };
 
     render() {
         return this.$scopedSlots.default({
-            meta: this.meta,
+            meta: this.meta;
         });
-    },
-};
+    };
 </script>

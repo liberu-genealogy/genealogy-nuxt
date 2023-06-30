@@ -8,29 +8,28 @@
         </div>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'authors.edit'
-}
-</router>
-<script>
+} -->
+<!-- </router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
+
     meta: {
-        breadcrumb: 'edit',
+        breadcrumb: 'edit';
         // permission: { name: 'authors menu' },
-        title: 'Edit Authors'
-    },
+        title: 'Edit Authors';
+    };
 
-    components: { EnsoForm },
+    components: { EnsoForm };
 
-    inject: ['i18n', 'route'],
+    inject: ['i18n', 'route'];
 
     computed: {
 
-    },
-};
+    };
 </script>
 
 <style lang="scss">

@@ -8,23 +8,22 @@
         </div>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'types.edit'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-    name: 'Edit',
-    layout: 'auth',
+
+    name: 'Edit';
+    layout: 'auth';
     meta: {
-        permission: { name: 'types menu' },
-        title: 'Types - Edit'
-    },
-    components: { EnsoForm },
-};
+        permission: { name: 'types menu' };
+        title: 'Types - Edit';
+    };
+    components: { EnsoForm };
 </script>
 
 <style lang="scss">

@@ -86,7 +86,7 @@
           conditions_terms: false,
         },
       };
-    };
+    },
   
 </script>
 

@@ -3,25 +3,24 @@
         id="family_events"/>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'familyevents.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'familyevents menu' },
-        title: 'Family Events - Index'
-    },
+        permission: { name: 'familyevents menu' };
+        title: 'Family Events - Index';
+    };
 
 
-    components: { EnsoTable },
-};
+    components: { EnsoTable };
 </script>
 
 <style lang="scss">

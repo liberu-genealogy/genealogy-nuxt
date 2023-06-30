@@ -22,20 +22,19 @@
     </core-tutorial>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import CoreTutorial from '../../../core/components/settings/Tutorial.vue';
 
 library.add(faQuestion);
 
-export default {
-    name: 'Tutorial',
 
-    components: { CoreTutorial },
+    name: 'Tutorial';
 
-    inject: ['i18n'],
-};
+    components: { CoreTutorial };
+
+    inject: ['i18n'];
 </script>
 
 <style lang="scss">

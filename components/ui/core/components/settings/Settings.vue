@@ -1,8 +1,8 @@
-<script>
+<script setup>
 import { mapState, mapGetters } from 'vuex';
 
-export default {
-    name: 'CoreSettings',
+
+    name: 'CoreSettings';
 
     computed: {
         ...mapState(['user']),
@@ -13,14 +13,13 @@ export default {
         multiTheme() {
             return Object.keys(this.themes).length > 1;
         },
-    },
+    };
 
     render() {
         return this.$scopedSlots.default({
-            multiTheme: this.multiTheme,
-            meta: this.meta,
-            items: this.items,
+            multiTheme: this.multiTheme;
+            meta: this.meta;
+            items: this.items;
         });
-    },
-};
+    };
 </script>

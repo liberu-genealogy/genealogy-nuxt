@@ -88,23 +88,24 @@
   </div>
 </template>
 
-<script>
-import Vue from 'vue'
+<script setup>
+import {createApp} from 'vue';
 import Vuelidate from 'vuelidate'
 import { required, minLength } from 'vuelidate/lib/validators'
-Vue.use(Vuelidate)
+const app = createApp({});
+app.use(Vuelidate)
 
-export default {
-  layout: 'default',
+
+  layout: 'default';
   head: {
     title: 'Stripe'
-  },
+  };
   meta: {
-    breadcrumb: 'stripe',
-    permission: { name: 'subscription menu' },
-    title: 'Stripe',
-  },
-  data() {
+    breadcrumb: 'stripe';
+    permission: { name: 'subscription menu' };
+    title: 'Stripe';
+  };
+  function data() {
     return {
       error: false,
       message: "",
@@ -116,26 +117,26 @@ export default {
         plan_id: 'price_1JUYYOAGwU4VOfbzZ1Gmdm8P',
       }
     };
-  },
+  };
   validations: {
     payment: {
       card_holder_name: {
-        required,
-      },
+        required
+      };
       card_number: {
-        required,
-      },
+        required
+      };
       month_year: {
-        required,
-      },
+        required
+      };
       cvv: {
-        required,
-        minLength:minLength(3)
-      },
-    },
-  },
+        required;
+        minLength:minLength(3);
+      };
+    };
+  };
   methods: {
-    submit() {
+    function submit() {
       this.$v.$touch();
       if (this.$v.$invalid) {
         console.log("fail")
@@ -149,14 +150,13 @@ export default {
             });
       }
     }
-  }
-}
+  };
 
 </script>
 
-<router>
+<!-- <router>
 {
     name: 'subscription.stripe.index'
 }
-</router>
+</router> -->
 

@@ -22,25 +22,25 @@
     </div>
   </template>
   
-  <script>
-  export default {
+  <script setup>
+
     props: {
       options: {
-        type: Array,
-        required: true,
-      },
-      default: {
-        type: String,
-        required: false,
-        default: null,
-      },
+        type: Array;
+        required: true;
+      };
+      defaultValue: {
+        type: String;
+        required: false;
+        defaultValue: null;
+      };
       tabindex: {
-        type: Number,
-        required: false,
-        default: 0,
-      },
-    },
-    data() {
+        type: Number;
+        required: false;
+        defaultValue: 0;
+      };
+    };
+   function data() {
       return {
         selected: this.default
           ? this.default
@@ -51,11 +51,10 @@
           },
         open: false,
       };
-    },
-    mounted() {
+    };
+    function mounted() {
       this.$emit("input", this.selected);
-    },
-  };
+    };
   </script>
   
   <style scoped>

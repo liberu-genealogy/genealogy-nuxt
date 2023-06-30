@@ -10,7 +10,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import {
     mapState, mapActions, mapGetters, mapMutations,
 } from 'vuex';
@@ -20,35 +20,35 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faExclamationTriangle);
 
-export default {
-    name: 'AppUpdate',
 
-    directives: { tooltip: VTooltip },
+    name: 'AppUpdate';
 
-    inject: ['i18n', 'toastr'],
+   const directives = { tooltip: VTooltip };
+
+    inject: ['i18n', 'toastr'];
 
     data: () => ({
         message: null,
         title: null,
         tooltip: null,
-    }),
+    });
 
     computed: {
         ...mapState(['meta']),
         ...mapState('layout', ['isTouch']),
         ...mapGetters('websockets', ['channels']),
-    },
+    };
 
-    created() {
+   function created() {
         this.connect();
         this.listen();
         this.$root.$on('notify-new-release', () => this.notify());
-    },
+    };
 
     methods: {
         ...mapMutations(['newRelease']),
         ...mapActions('websockets', ['connect']),
-        listen() {
+       function listen() {
             window.Echo.private(this.channels.appUpdates)
                 .listen('.new-update', ({ title, message, tooltip }) => {
                     this.newRelease();
@@ -57,15 +57,14 @@ export default {
                     this.tooltip = this.i18n(tooltip);
                     this.notify();
                 });
-        },
-        notify() {
+        };
+       function notify() {
             this.toastr.duration(30000)
                 .title(this.title)
                 .warning(this.message);
-        },
-        reload() {
+        };
+       function reload() {
             window.location.reload(true);
-        },
-    },
-};
+        };
+    };
 </script>

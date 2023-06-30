@@ -5,23 +5,23 @@
         :alt-format="dateFormat"/>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { Datepicker } from '@enso-ui/datepicker/bulma';
 
-export default {
-    name: 'Date',
 
-    components: { Datepicker },
+    name: 'Date';
 
-    inject: ['i18n'],
+    components: { Datepicker };
+
+    inject: ['i18n'];
 
     props: {
         param: {
             type: Object,
             required: true,
         },
-    },
+    };
 
     computed: {
         ...mapState(['meta']),
@@ -29,10 +29,9 @@ export default {
             return this.param.meta?.dateFormat
                 ?? this.meta.dateFormat;
         },
-    },
+    };
 
     created() {
         this.param.type = 'date';
-    },
-};
+    };
 </script>

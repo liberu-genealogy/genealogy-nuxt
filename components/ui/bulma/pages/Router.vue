@@ -2,8 +2,7 @@
     <NuxtChild :key="$route.path"/>
 </template>
 
-<script>
-export default {
-    name: 'Router',
-};
+<script setup>
+
+    name: 'Router';
 </script>

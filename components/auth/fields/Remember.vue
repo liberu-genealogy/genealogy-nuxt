@@ -12,17 +12,16 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'Remember',
+<script setup>
 
-    inject: ['i18n'],
+    name: 'Remember';
+
+    inject: ['i18n'];
 
     props: {
         value: {
             type: Boolean,
             required: true,
         },
-    },
-};
+    };
 </script>

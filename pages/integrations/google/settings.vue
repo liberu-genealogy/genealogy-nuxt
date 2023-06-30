@@ -11,28 +11,27 @@
 </template>
 
 
-<script>
+<script setup>
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 
-export default {
-    meta: {
-        breadcrumb: 'settings',
-        title: 'Settings',
-    },
 
-    components: { EnsoForm, FormField },
+    meta: {
+        breadcrumb: 'settings';
+        title: 'Settings';
+    };
+
+    components: { EnsoForm, FormField };
 
     data: () => ({
         form: null,
         key: 1,
-    }),
+    });
 
     methods: {
-        submit() {
+       function submit() {
             if (!this.form.routeParam('settings')) {
                 this.key++;
             }
-        },
-    },
-};
+        };
+    };
 </script>

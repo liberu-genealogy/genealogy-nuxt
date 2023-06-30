@@ -5,21 +5,20 @@
         </div>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'administration.users.show'
 }
-</router>
+</router> -->
 
-<script>
+<script setup>
 import UserProfile from '~/components/users/bulma/pages/users/components/UserProfile.vue';
 
-export default {
-    meta: {
-        breadcrumb: 'show',
-        title: 'User Profile',
-    },
 
-    components: { UserProfile },
-};
+    meta: {
+        breadcrumb: 'show';
+        title: 'User Profile';
+    };
+
+    components: { UserProfile };
 </script>

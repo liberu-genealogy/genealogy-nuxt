@@ -267,39 +267,57 @@ import { mapState, mapMutations, mapActions } from 'vuex'
     meta: {
         guestGuard: true;
         title: 'Landing Page';
-    },
+    };
     function data() {
         return {
             isDark: false,
             isClear: true,
         };
-    },
-    computed: {
-        ...mapState('auth', ['isAuth']),
-    },
-    created() {
-        window.addEventListener('scroll', this.handleScroll);
-    },
-    methods: {
-        ...mapActions('auth', ['logout']),
-        async logoutAccount() {
-            await this.logout();
-            // setTimeout(() => {
-            //     this.$router.push('/')
-            // }, 500)
-        },
+    };
+    function useComputedValues() {
+  const store = useStore();
 
-        handleScroll() {
-            if (window.scrollY >= 10) {
-                this.isClear = false;
-                this.isDark = true;
-            } else {
-                this.isClear = true;
-                this.isDark = false;
-            }
-        },
-    },
-})
+  const isAuth = computed(() => {
+    return store.state.auth.isAuth;
+  });
+
+  return {
+    isAuth,
+  };
+};
+   function created() {
+        window.addEventListener('scroll', this.handleScroll);
+    };
+    function method() {
+    const store = useStore();
+
+  const logout = () => {
+     store.dispatch('auth/logout');
+    // setTimeout(() => {
+    //     router.push('/');
+    // }, 500);
+  };
+
+  const handleScroll = () => {
+    if (window.scrollY >= 10) {
+      // Update the relevant properties based on your component's data
+      // For example:
+      this.isClear = false;
+      this.isDark = true;
+    } else {
+      // Update the relevant properties based on your component's data
+      // For example:
+      this.isClear = true;
+      this.isDark = false;
+    }
+  };
+
+  return {
+    logout,
+    handleScroll,
+  };
+}
+
 </script>
 
 <style scoped>

@@ -36,7 +36,7 @@
     </core-i-o>
 </template>
 
-<script>
+<script setup>
 import { clickOutside } from '@enso-ui/directives';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSyncAlt, faDatabase } from '@fortawesome/free-solid-svg-icons';
@@ -47,13 +47,13 @@ import Export from './io/Export.vue';
 
 library.add(faSyncAlt, faDatabase);
 
-export default {
-    name: 'IO',
 
-    directives: { clickOutside },
+    name: 'IO';
 
-    components: { CoreIO, Import, Export, NavbarItem },
-};
+    directives: { clickOutside };
+
+    components: { CoreIO, Import, Export, NavbarItem };
+
 </script>
 
 <style lang="scss">

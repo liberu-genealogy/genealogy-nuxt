@@ -6,23 +6,22 @@
     </div>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'familyslugs.create'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-layout: 'auth',
-    meta: {
-        permission: { name: 'familyslugs menu' },
-        title: 'Family Slugs - Create'
-    },
 
-    components: { EnsoForm },
-};
+layout: 'auth';
+    meta: {
+        permission: { name: 'familyslugs menu' };
+        title: 'Family Slugs - Create';
+    };
+
+    components: { EnsoForm };
 </script>
 
 <style lang="scss">

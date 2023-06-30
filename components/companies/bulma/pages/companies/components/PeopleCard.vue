@@ -23,7 +23,7 @@
     </card>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faAddressCard, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
@@ -34,34 +34,34 @@ import People from './People.vue';
 
 library.add(faAddressCard, faPlusSquare);
 
-export default {
-    name: 'PeopleCard',
+
+    name: 'PeopleCard';
 
     components: {
         Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent, People,
-    },
+    };
 
-    inject: ['i18n'],
+    inject: ['i18n'];
 
     props: {
         id: {
-            type: Number,
-            required: true,
-        },
+            type: Number;
+            required: true;
+        };
         open: {
-            type: Boolean,
-            default: false,
-        },
+            type: Boolean;
+            defaultValue: false;
+        };
         title: {
-            type: String,
-            default: null,
-        },
-    },
+            type: String;
+            defaultValue: null;
+        };
+    };
 
     data: () => ({
         query: '',
         count: 0,
-    }),
+    });
 
     computed: {
         ...mapState('layout', ['isMobile']),
@@ -73,12 +73,11 @@ export default {
         isEmpty() {
             return this.count === 0;
         },
-    },
+    };
 
     watch: {
         count() {
             this.$refs.card.resize();
         },
-    },
-};
+    };
 </script>

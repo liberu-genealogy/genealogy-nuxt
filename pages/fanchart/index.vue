@@ -1,18 +1,17 @@
 <template></template>
 
-<router>
+<!-- <router>
 {
     name: 'fanchart.index'
 }
-</router>
-<script>
-export default {
-  layout: "auth",
+</router> -->
+<script setup>
+
+  layout: "auth";
   meta: {
-    permission: { name: "fanchart menu" },
-    title: "Fancharts - Index",
-  },
-};
+    permission: { name: "fanchart menu" };
+    title: "Fancharts - Index";
+  };
 </script>
 
 <style lang="scss">

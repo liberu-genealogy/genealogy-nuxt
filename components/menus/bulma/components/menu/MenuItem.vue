@@ -47,7 +47,7 @@
     </core-menu-item>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGripLines } from '@fortawesome/free-solid-svg-icons';
 import { Zoom } from '@enso-ui/transitions';
@@ -56,36 +56,35 @@ import CoreMenuItem from '../../../core/components/menu/MenuItem.vue';
 
 library.add(faGripLines);
 
-export default {
-    name: 'MenuItem',
 
-    components: { Zoom, CoreMenuItem, DropdownIndicator },
+    name: 'MenuItem';
 
-    inject: ['i18n'],
+    components: { Zoom, CoreMenuItem, DropdownIndicator };
+
+    inject: ['i18n'];
 
     data: () => ({
         dropdown: false,
-    }),
+    });
 
     computed: {
-        sidebar() {
+       function sidebar() {
             return document.querySelector('.aside.sidebar');
-        },
-    },
+        };
+    };
 
     methods: {
-        adjust() {
+       function adjust() {
             this.$refs.dropdown.style['margin-top'] = `-${this.sidebar.scrollTop + 2}px`;
-        },
-        enter() {
+        };
+       function enter() {
             this.adjust();
             this.sidebar.addEventListener('scroll', this.adjust);
-        },
-        leave() {
+        };
+       function leave() {
             this.sidebar.removeEventListener('scroll', this.adjust);
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

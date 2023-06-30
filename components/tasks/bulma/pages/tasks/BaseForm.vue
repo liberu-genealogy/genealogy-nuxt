@@ -16,15 +16,15 @@
         </template>
     </enso-form>
 </template>
-<script>
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 import Flags from './components/Flags.vue';
 
-export default {
-    name: 'BaseForm',
 
-    components: { EnsoForm, Flags },
+    name: 'BaseForm';
 
-    inject: ['i18n'],
-};
+    components: { EnsoForm, Flags };
+
+    inject: ['i18n'];
+
 </script>

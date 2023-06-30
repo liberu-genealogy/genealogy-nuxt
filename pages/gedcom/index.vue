@@ -78,31 +78,31 @@
             </form>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'gedcom.index'
 }
-</router>
-<script>
-import { mapGetters } from 'vuex'
+</router> -->
+<script setup>
+import { computed, useStore } from 'vuex';
 import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css'
+import 'vue-loading-overlay/dist/css/index.css';
 import { required } from 'vuelidate/lib/validators'
 
-export default {
-    layout: 'auth',
+
+    layout: 'auth';
 
     components: {
       Loading
-    },
+    };
     head: {
         title: 'Gedcom Import'
-    },
+    };
     // middleware: 'permission',
 
-    // meta: {
-    //   permission: { name: 'gedcom import menu' }
-    // },
+    meta: {
+      permission: { name: 'gedcom import menu' };
+    };
 
     data: () => ({
       error: false,
@@ -117,31 +117,41 @@ export default {
       response : null,
       total: 100,
       complete: 0,
-    }),
+    });
 
     validations: {
       fileName: {
-        required,
-      },
-    },
+        required
+      };
+    };
 
     computed: {
-       ...mapGetters(['loggedInUser']),
-    },
+       function useGetters() {
+  const store = useStore();
 
-    mounted() {
+  const loggedInUser = computed(() => {
+    return store.getters.loggedInUser;
+  });
+
+  return {
+    loggedInUser,
+  };
+};
+    };
+
+   function mounted() {
       this.subscribeToUploadProgress()
-    },
+    };
 
     methods: {
-      handleSelectedFiles(event) {
+     function handleSelectedFiles(event) {
         console.log(this.$refs.fileInput.files[0])
         this.file = this.$refs.fileInput.files[0]
         this.fileName = this.file.name
-      },
+      };
 
       
-      async submit() {
+      function submit() {
         this.$v.$touch();
 
         if (this.$v.$invalid) {
@@ -158,7 +168,7 @@ export default {
 
        
         try {
-          const response = await this.$axios
+          const response =  this.$axios
             .$post("/api/gedcom/store", formData, {
                 headers: {
                   'content-type': 'multipart/form-data',
@@ -176,17 +186,16 @@ export default {
           this.message = error.response.data.message
           this.errors =  error.response.data.errors
         }
-      },
+      };
 
-      subscribeToUploadProgress() {
+     function subscribeToUploadProgress() {
         this.$echo.channel(`user.${this.loggedInUser.id}`)
           .listen('.gedcomProgress', message => {
             this.total = message.total
             this.complete = message.complete
           })
-      }
-      }
-    }
+      };
+      };
 
 </script>
 <style scoped>

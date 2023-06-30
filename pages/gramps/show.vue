@@ -1,19 +1,18 @@
 <template>
     <div/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'gramps.show'
 }
-</router>
-<script>
-export default {
-    name: 'Show',
+</router> -->
+<script setup>
+
+    name: 'Show';
     meta: {
-        permission: { name: 'gramps menu' },
-        title: 'Gramps - Show'
-    },
-};
+        permission: { name: 'gramps menu' };
+        title: 'Gramps - Show';
+    };
 </script>
 
 <style lang="scss">

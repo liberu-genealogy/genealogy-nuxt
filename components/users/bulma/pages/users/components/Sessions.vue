@@ -38,35 +38,35 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSync, faSearch } from '@fortawesome/free-solid-svg-icons';
 import Session from './Session.vue';
 
 library.add(faPlus, faSync, faSearch);
 
-export default {
-    name: 'Sessions',
 
-    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'],
+    name: 'Sessions';
 
-    components: { Session },
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'];
+
+    components: { Session };
 
     props: {
         id: {
-            type: [Number, String],
-            required: true,
-        },
-    },
+            type: [Number, String];
+            required: true;
+        };
+    };
 
     data: () => ({
         sessions: [],
         query: '',
         form: false,
-    }),
+    });
 
     computed: {
-        filteredSessions() {
+       function filteredSessions() {
             const query = this.query.toLowerCase();
 
             return query
@@ -74,25 +74,25 @@ export default {
                     || ipAddress.toLowerCase().indexOf(query) > -1
                     || browser.toLowerCase().indexOf(query) > -1)
                 : this.sessions;
-        },
-        count() {
+        };
+        function count() {
             return this.filteredSessions.length;
-        },
-    },
+        };
+    };
 
-    created() {
+    function created() {
         this.fetch();
-    },
+    };
 
     methods: {
-        fetch() {
+       function fetch() {
             this.$axios.get(this.route('administration.users.sessions.index', this.$route.params))
                 .then(({ data }) => {
                     this.sessions = data;
                     this.$emit('update');
                 }).catch(this.errorHandler);
-        },
-        destroy({ id }, index) {
+        };
+       function destroy({ id }, index) {
             this.$axios.delete(
                 this.route('administration.users.sessions.destroy', this.$route.params),
                 { params: { id } },
@@ -102,7 +102,6 @@ export default {
                 this.$emit('update');
                 this.toastr.success(data.message);
             }).catch(this.errorHandler);
-        },
-    },
-};
+        };
+    };
 </script>

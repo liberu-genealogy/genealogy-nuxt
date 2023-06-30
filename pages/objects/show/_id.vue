@@ -1,19 +1,18 @@
 <template>
     <div/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'objects.show'
 }
-</router>
-<script>
-export default {
-layout: 'auth',
+</router> -->
+<script setup>
+
+layout: 'auth';
     meta: {
-        permission: { name: 'object menu' },
-        title: 'Object - Show'
-    },
-};
+        permission: { name: 'object menu' };
+        title: 'Object - Show';
+    };
 </script>
 
 <style lang="scss">

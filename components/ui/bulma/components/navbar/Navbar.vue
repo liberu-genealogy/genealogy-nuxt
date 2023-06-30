@@ -69,7 +69,7 @@
     </core-navbar>
 </template>
 
-<script>
+<script setup>
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -82,23 +82,22 @@ import Search from './Search.vue';
 import { mapGetters, mapActions } from "vuex";
 library.add(faBars, faCode, faUser, faTimes);
 
-export default {
-    name: 'Navbar',
 
-    directives: { tooltip: VTooltip },
+    name: 'Navbar';
+
+    directives: { tooltip: VTooltip };
 
     computed: {
         ...mapGetters(['loggedInUser'])
-    },
+    };
     components: {
         AppUpdate,
         CoreNavbar,
         Search,
         SettingsControl,
-    },
+    };
 
-    inject: ['i18n'],
-};
+    inject: ['i18n'];
 </script>
 
 <style lang="scss">

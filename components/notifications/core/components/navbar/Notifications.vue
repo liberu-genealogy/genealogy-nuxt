@@ -1,25 +1,23 @@
-<script>
-import { debounce } from 'lodash';
-import {
-    mapState, mapGetters, mapActions,
-} from 'vuex';
+<script setup>
+import debounce from 'lodash';
+import { computed, useStore } from 'vuex';
 import Favico from 'favico.js';
 
-export default {
-    name: 'CoreNotifications',
 
-    inject: ['errorHandler', 'route', 'routerErrorHandler', 'toastr'],
+    name: 'CoreNotifications';
+
+    inject: ['errorHandler', 'route', 'routerErrorHandler', 'toastr'];
 
     props: {
         favicoAnimation: {
-            type: String,
-            default: 'popFade',
-        },
+            type: String;
+            defaultValue: 'popFade';
+        };
         paginate: {
-            type: Number,
-            default: 200,
-        },
-    },
+            type: Number;
+            defaultValue: 200;
+        };
+    };
 
     data: v => ({
         favico: new Favico({ animation: v.favicoAnimation }),
@@ -30,32 +28,50 @@ export default {
         loading: false,
         echo: null,
         desktopNotifications: false,
-    }),
+    });
 
     computed: {
-        ...mapGetters('websockets', ['channels']),
-        ...mapGetters(['isWebview']),
-        ...mapState(['user']),
-    },
+     function useComputedValues() {
+  const store = useStore();
+
+  const channels = computed(() => {
+    return store.getters['websockets/channels'];
+  });
+
+  const isWebview = computed(() => {
+    return store.getters.isWebview;
+  });
+
+  const user = computed(() => {
+    return store.state.user;
+  });
+
+  return {
+    channels,
+    isWebview,
+    user,
+  };
+};
+    };
 
     watch: {
-        unread(unread) {
+       function unread(unread) {
             this.favico.badge(unread);
-        },
-    },
+        };
+    };
 
-    created() {
+    function created() {
         this.fetch = debounce(this.fetch, 500);
         this.initDesktopNotification();
         this.count();
         this.addBusListeners();
         this.connect();
         this.listen();
-    },
+    };
 
     methods: {
         ...mapActions('websockets', ['connect']),
-        addBusListeners() {
+       function addBusListeners() {
             this.$root.$on('read-notification', notification => {
                 this.unread = Math.max(--this.unread, 0);
                 const existing = this.notifications
@@ -85,8 +101,8 @@ export default {
                 this.notifications = [];
                 this.unread = 0;
             });
-        },
-        computeScrollPosition(event) {
+        };
+       function computeScrollPosition(event) {
             const a = event.target.scrollTop;
             const b = event.target.scrollHeight - event.target.clientHeight;
 
@@ -94,13 +110,13 @@ export default {
                 this.needsUpdate = true;
                 this.fetch();
             }
-        },
-        count() {
+        };
+       function count() {
             this.$axios.get(this.route('core.notifications.count'))
                 .then(({ data }) => (this.unread = data.count))
                 .catch(this.errorHandler);
         },
-        desktop({ body, title, path }) {
+       function desktop({ body, title, path }) {
             if (document.hidden && this.desktopNotifications) {
                 const notification = new Notification(title, { body });
 
@@ -119,8 +135,8 @@ export default {
             }
 
             return false;
-        },
-        fetch() {
+        };
+       function fetch() {
             if (!this.needsUpdate || this.loading) {
                 return;
             }
@@ -135,8 +151,8 @@ export default {
                 this.needsUpdate = false;
                 this.loading = false;
             }).catch(this.errorHandler);
-        },
-        initDesktopNotification() {
+        };
+       function initDesktopNotification() {
             if (!('Notification' in window) || Notification.permission === 'denied') {
                 return;
             }
@@ -152,8 +168,8 @@ export default {
                 }
                 this.desktopNotifications = permission === 'granted';
             });
-        },
-        listen() {
+        };
+       function listen() {
             window.Echo.private(this.channels.private).notification(notification => {
                 this.unread++;
                 this.needsUpdate = true;
@@ -164,11 +180,11 @@ export default {
                 return this.webview(notification)
                     || this.desktop(notification);
             });
-        },
-        now() {
+        };
+       function now() {
             return this.$format(new Date());
-        },
-        read(notification) {
+        };
+       function read(notification) {
             this.$axios.patch(this.route('core.notifications.read', notification.id))
                 .then(({ data }) => {
                     this.unread = Math.max(--this.unread, 0);
@@ -179,35 +195,35 @@ export default {
                             .catch(this.routerErrorHandler);
                     }
                 }).catch(this.errorHandler);
-        },
-        readAll() {
+        };
+       function readAll() {
             this.$axios.post(this.route('core.notifications.readAll'))
                 .then(this.updateAll)
                 .catch(this.errorHandler);
-        },
-        updateAll() {
+        };
+       function updateAll() {
             this.notifications
                 .filter(notification => !notification.read_at)
                 .forEach(notification => (notification.read_at = this.now()));
 
             this.unread = 0;
-        },
-        timeFromNow(date) {
+        };
+       function timeFromNow(date) {
             return this.$formatDistance(date);
-        },
-        toast({
+        };
+       function toast({
             level, body, title, icon,
         }) {
             this.toastr.when(title, toastr => toastr.title(title))
                 .when(icon, toastr => toastr.icon(icon))
                 .when(level, toastr => toastr[level](body), toastr => toastr.info(body));
-        },
-        visitNotifications() {
+        };
+       function visitNotifications() {
             const name = 'core.notifications.index';
             this.$router.push({ name })
                 .catch(this.routerErrorHandler);
-        },
-        webview({ body, title }) {
+        };
+       function webview({ body, title }) {
             if (this.isWebview) {
                 // eslint-disable-next-line no-undef
                 ReactNativeWebView.postMessage(JSON.stringify({
@@ -220,8 +236,8 @@ export default {
             }
 
             return false;
-        },
-    },
+        };
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -235,8 +251,7 @@ export default {
             readAll: this.readAll,
             timeFromNow: this.timeFromNow,
             unread: this.unread,
-            visitNotifications: this.visitNotifications,
+            visitNotifications: this.visitNotifications
         });
-    },
-};
+    }
 </script>

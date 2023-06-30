@@ -26,7 +26,7 @@ import { mapState, mapGetters, mapMutations } from 'vuex';
         ...mapMutations('layout', ['home']),
         ...mapMutations(['setShowQuote', 'setCsrfToken'])
     };
-    mounted() {
+    function mounted() {
         
         if(this.status == 'success'){
             if (this.token) {

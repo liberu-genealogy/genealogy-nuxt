@@ -9,19 +9,18 @@
     </slide-right>
 </template>
 
-<script>
+<script setup>
 import { mapGetters } from 'vuex';
 import { SlideRight } from '@enso-ui/transitions';
 
-export default {
-    name: 'QuickView',
 
-    components: { SlideRight },
+    name: 'QuickView';
+
+    components: { SlideRight };
 
     computed: {
         ...mapGetters('preferences', ['bookmarks']),
-    },
-};
+    };
 </script>
 
 <style lang="scss">

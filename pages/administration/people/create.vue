@@ -16,27 +16,26 @@
 </template>
 
 
-<script>
+<script setup>
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 
-export default {
-    meta: {
-        breadcrumb: 'create',
-        title: 'Create Person',
-    },
 
-    components: { EnsoForm, FormField },
+    meta: {
+        breadcrumb: 'create';
+        title: 'Create Person';
+    };
+
+    components: { EnsoForm, FormField };
 
     data: () => ({
         companies: [],
-    }),
+    });
 
     computed: {
-        params() {
+       function params() {
             return {
                 id: this.companies,
             };
-        },
-    },
-};
+        };
+    };
 </script>

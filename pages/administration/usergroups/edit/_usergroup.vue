@@ -13,16 +13,15 @@
 }
 </router> -->
 
-<script>
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
+
     // path: ':userGroup/edit',
     meta: {
-        breadcrumb: 'edit',
-        title: 'Edit User Group',
-    },
+        breadcrumb: 'edit';
+        title: 'Edit User Group';
+    };
 
-    components: { EnsoForm },
-};
+    components: { EnsoForm };
 </script>

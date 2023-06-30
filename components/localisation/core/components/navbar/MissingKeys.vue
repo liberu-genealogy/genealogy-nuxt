@@ -1,30 +1,65 @@
-<script>
-import { mapState, mapMutations } from 'vuex';
+<script setup>
+import { computed, useStore } from 'vuex';
 
-export default {
-    name: 'CoreMissingKeys',
 
-    inject: ['errorHandler', 'route', 'toastr'],
+    name: 'CoreMissingKeys';
+
+    inject: ['errorHandler', 'route', 'toastr'];
 
     data: () => ({
         hover: false,
-    }),
+    });
 
     computed: {
-        ...mapState('localisation', ['keyCollector', 'missingKeys']),
-        ...mapState('layout', ['isTouch']),
-        count() {
+      function useComputedValues() {
+  const store = useStore();
+
+  const keyCollector = computed(() => {
+    return store.state.localisation.keyCollector;
+  });
+
+  const missingKeys = computed(() => {
+    return store.state.localisation.missingKeys;
+  });
+
+  const isTouch = computed(() => {
+    return store.state.layout.isTouch;
+  });
+
+  return {
+    keyCollector,
+    missingKeys,
+    isTouch,
+  };
+};
+
+       function count() {
             return this.missingKeys.length;
-        },
-        mappedKeys() {
+        };
+       function mappedKeys() {
             return this.missingKeys
                 .map(key => ({ [key]: null }));
-        },
-    },
+        };
+    };
 
     methods: {
-        ...mapMutations('localisation', ['addKey', 'clearMissingKeys']),
-        persist() {
+        function useMutations() {
+  const store = useStore();
+
+  const addKey = (key) => {
+    store.commit('localisation/addKey', key);
+  };
+
+  const clearMissingKeys = () => {
+    store.commit('localisation/clearMissingKeys');
+  };
+
+  return {
+    addKey,
+    clearMissingKeys,
+  };
+};
+       function persist() {
             this.$axios.patch(
                 this.route('system.localisation.addKey'),
                 { keys: this.missingKeys },
@@ -33,8 +68,8 @@ export default {
                 this.clearMissingKeys();
                 this.toastr.success(data.message);
             }).catch(this.errorHandler);
-        },
-    },
+        };
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -48,6 +83,6 @@ export default {
                 mouseleave: () => (this.hover = false),
             },
         });
-    },
-};
+    };
+
 </script>

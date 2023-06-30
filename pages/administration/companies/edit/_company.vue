@@ -41,18 +41,18 @@
 </template>
 
 
-<script>
+<script setup>
 import { Tab } from '@enso-ui/tabs/bulma';
 import Accessories from '@enso-ui/accessories/bulma';
 import { Addresses } from '@enso-ui/addresses/bulma';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import People from '~/components/companies/bulma/pages/companies/components/People.vue';
 
-export default {
+
     meta: {
-        breadcrumb: 'edit',
-        title: 'Edit Company',
-    },
+        breadcrumb: 'edit';
+        title: 'Edit Company';
+    };
 
     components: {
         EnsoForm,
@@ -60,26 +60,25 @@ export default {
         Accessories,
         Tab,
         Addresses,
-        People,
-    },
+        People
+    };
 
     computed: {
-        companyId() {
+       function companyId() {
             return Number.parseInt(this.$route.params.company, 10);
-        },
-        pivotParams() {
+        };
+       function pivotParams() {
             return {
                 companies: { id: this.companyId },
             };
-        },
-    },
+        };
+    };
 
     methods: {
-        personRemoved(personId) {
+       function personRemoved(personId) {
             if (this.$refs.form.field('mandatary').value === personId) {
                 this.$refs.form.field('mandatary').value = null;
             }
-        },
-    },
-};
+        };
+    };
 </script>

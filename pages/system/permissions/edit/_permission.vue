@@ -7,15 +7,14 @@
 </template>
 
 
-<script>
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-    meta: {
-        breadcrumb: 'edit',
-        title: 'Edit Permission',
-    },
 
-    components: { EnsoForm },
-};
+    meta: {
+        breadcrumb: 'edit';
+        title: 'Edit Permission';
+    };
+
+    components: { EnsoForm };
 </script>

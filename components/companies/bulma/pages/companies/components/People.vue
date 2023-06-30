@@ -98,7 +98,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSync, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from '@enso-ui/modal/bulma';
@@ -107,23 +107,23 @@ import PersonForm from './PersonForm.vue';
 
 library.add(faPlus, faSync, faSearch);
 
-export default {
-    name: 'People',
 
-    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'],
+    name: 'People';
 
-    components: { Person, PersonForm, Modal },
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'];
+
+    components: { Person, PersonForm, Modal };
 
     props: {
         id: {
-            type: Number,
-            required: true,
-        },
+            type: Number;
+            required: true;
+        };
         query: {
-            type: String,
-            default: '',
-        },
-    },
+            type: String;
+            defaultValue: '';
+        };
+    };
 
     data: () => ({
         loading: false,
@@ -131,34 +131,34 @@ export default {
         path: null,
         internalQuery: '',
         removedPerson: null,
-    }),
+    });
 
     computed: {
-        filteredPeople() {
+       function filteredPeople() {
             const query = this.internalQuery.toLowerCase();
 
             return query
                 ? this.people.filter(({ name, position }) => name.toLowerCase().indexOf(query) > -1
                     || position.toLowerCase().indexOf(query) > -1)
                 : this.people;
-        },
-        count() {
+        };
+       function count() {
             return this.filteredPeople.length;
-        },
-    },
+        };
+    };
 
     watch: {
-        query() {
+       function query() {
             this.internalQuery = this.query;
-        },
-    },
+        };
+    };
 
-    created() {
+   function created() {
         this.fetch();
-    },
+    };
 
     methods: {
-        fetch() {
+       function fetch() {
             this.loading = true;
 
             this.$axios.get(this.route(
@@ -169,20 +169,20 @@ export default {
                 this.$emit('update');
             }).catch(this.errorHandler)
                 .finally(() => (this.loading = false));
-        },
-        create() {
+        };
+       function create() {
             this.path = this.route(
                 'administration.companies.people.create',
                 { company: this.id },
             );
-        },
-        edit(person) {
+        };
+       function edit(person) {
             this.path = this.route(
                 'administration.companies.people.edit',
                 { company: this.id, person: person.id },
             );
-        },
-        destroy() {
+        };
+       function destroy() {
             this.loading = true;
 
             return this.$axios.delete(this.route(
@@ -195,8 +195,8 @@ export default {
                 this.$emit('update');
             }).catch(this.errorHandler)
                 .finally(() => (this.loading = false));
-        },
-        destroyPerson() {
+        };
+       function destroyPerson() {
             this.loading = true;
 
             return this.$axios.delete(
@@ -207,8 +207,8 @@ export default {
                     this.loading = false;
                     this.removedPerson = null;
                 });
-        },
-        navigateToPerson($event) {
+        };
+       function navigateToPerson($event) {
             this.path = null;
 
             this.$nextTick(() => {
@@ -217,9 +217,8 @@ export default {
                     params: { person: $event },
                 }).catch(this.routerErrorHandler);
             });
-        },
-    },
-};
+        };
+    };
 </script>
 <style>
 @media screen and (min-width: 1023px) {

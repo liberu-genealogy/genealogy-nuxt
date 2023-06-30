@@ -2,14 +2,13 @@
     <NuxtChild :key="$route.path"/>
 </template>
 
-<script>
-export default {
+<script setup>
+
     // key(route) {
     //     return route.path
     // },
     meta: {
-        breadcrumb: 'user groups',
-        route: 'administration.userGroups.index',
-    },
-};
+        breadcrumb: 'user groups';
+        route: 'administration.userGroups.index';
+    };
 </script>

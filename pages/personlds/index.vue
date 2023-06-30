@@ -2,24 +2,23 @@
     <enso-table class="box is-paddingless raises-on-hover"
         id="person_lds"/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'personlds.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'personlds menu' },
-        title: 'Person LDS - Index'
-    },
+        permission: { name: 'personlds menu' };
+        title: 'Person LDS - Index';
+    };
 
-    components: { EnsoTable },
-};
+    components: { EnsoTable };
 </script>
 
 <style lang="scss">

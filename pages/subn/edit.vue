@@ -5,23 +5,22 @@
         </div>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'subn.edit'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-    name: 'Edit',
-    layout: 'auth',
+
+    name: 'Edit';
+    layout: 'auth';
     meta: {
-        permission: { name: 'subn menu' },
-        title: 'subn - Index'
-    },
-    components: { EnsoForm },
-};
+        permission: { name: 'subn menu' };
+        title: 'subn - Index';
+    };
+    components: { EnsoForm };
 </script>
 
 <style lang="scss">

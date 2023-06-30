@@ -1,53 +1,63 @@
-<script>
-import { mapState } from 'vuex';
+<script setup>
+import { computed, useStore } from 'vuex';
 import { isAfter } from 'date-fns';
 
-export default {
-    name: 'CoreOperation',
+
+    name: 'CoreOperation';
 
     props: {
         operation: {
-            type: Object,
-            required: true,
-        },
-    },
+            type: Object;
+            required: true;
+        };
+    };
 
     data: () => ({
         end: true,
         elapsed: null,
         remaining: null,
         updater: null,
-    }),
+    });
 
     computed: {
-        ...mapState(['enums']),
-    },
+        function useComputedValues() {
+  const store = useStore();
 
-    beforeMount() {
+  const enums = computed(() => {
+    return store.state.enums;
+  });
+
+  return {
+    enums,
+  };
+};
+    };
+
+   function beforeMount() {
         this.update();
         this.autoUpdate();
-    },
+    };
 
-    beforeDestroy() {
+   function beforeDestroy() {
         clearInterval(this.updater);
-    },
+    };
 
     methods: {
-        autoUpdate() {
+       function autoUpdate() {
             this.updater = setInterval(() => this.update(), 1000);
-        },
-        toggle() {
+        };
+       function toggle() {
             this.end = !this.end;
-        },
-        update() {
+        };
+       function update() {
             this.elapsed = this.$formatDistance(this.operation.createdAt);
 
             this.remaining = this.operation.estimatedEnd
                 && isAfter(new Date(this.operation.estimatedEnd), new Date())
                 ? this.$formatDistance(this.operation.estimatedEnd)
                 : null;
-        },
-    },
+        };
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -55,12 +65,12 @@ export default {
             end: this.end,
             events: {
                 click: () => this.$emit('cancel', this.operation),
-            },
+            };
             ioTypes: this.enums.ioTypes,
             operation: this.operation,
             remaining: this.remaining,
             toggle: this.toggle,
         });
-    },
-};
+    };
+
 </script>

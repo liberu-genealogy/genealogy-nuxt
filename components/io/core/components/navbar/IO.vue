@@ -1,44 +1,79 @@
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { computed, useStore } from 'vuex';
 
-export default {
-    name: 'CoreIO',
 
-    inject: ['route', 'errorHandler', 'toastr'],
+    name: 'CoreIO';
+
+    inject: ['route', 'errorHandler', 'toastr'];
 
     data: () => ({
         imports: [],
         exports: [],
-    }),
+    });
 
     computed: {
-        ...mapGetters('websockets', ['channels']),
-        ...mapState(['user', 'meta', 'enums']),
-        count() {
-            return this.imports.length + this.exports.length;
-        },
-    },
+       function useComputedValues() {
+  const store = useStore();
 
-    created() {
+  const channels = computed(() => {
+    return store.getters['websockets/channels'];
+  });
+
+  const user = computed(() => {
+    return store.state.user;
+  });
+
+  const meta = computed(() => {
+    return store.state.meta;
+  });
+
+  const enums = computed(() => {
+    return store.state.enums;
+  });
+
+  return {
+    channels,
+    user,
+    meta,
+    enums,
+  };
+};
+
+       function count() {
+            return this.imports.length + this.exports.length;
+        };
+    };
+
+    function created() {
         this.connect();
         this.listen();
-    },
+    };
 
     methods: {
-        ...mapActions('websockets', ['connect']),
-        cancel(operation) {
+       function useActions() {
+  const store = useStore();
+
+  const connect = () => {
+    store.dispatch('websockets/connect');
+  };
+
+  return {
+    connect,
+  };
+};
+       function cancel(operation) {
             const type = this.enums.ioTypes._get(operation.type);
 
             this.$axios.patch(this.route(`${type}.cancel`, { [type]: operation.id }))
                 .then(({ data: { message } }) => this.toastr.warning(message))
                 .catch(this.errorHandler);
-        },
-        listen() {
+        };
+       function listen() {
             window.Echo.private(this.channels.io)
                 .listen('.import', ({ operation }) => this.process(operation))
                 .listen('.export', ({ operation }) => this.process(operation));
-        },
-        process(operation) {
+        };
+       function process(operation) {
             switch (`${operation.status}`) {
                 case this.enums.ioStatuses.Started:
                     this.push(operation);
@@ -50,15 +85,15 @@ export default {
                     this.update(operation);
                     break;
             }
-        },
-        push(operation) {
+        };
+       function push(operation) {
             const index = this.index(operation);
 
             if (index === -1) {
                 this.bag(operation.type).push(operation);
             }
-        },
-        update(operation) {
+        };
+       function update(operation) {
             const index = this.index(operation);
 
             if (index !== -1) {
@@ -67,22 +102,22 @@ export default {
                 this.push(operation);
             }
 
-        },
-        remove(operation) {
+        };
+       function remove(operation) {
             const index = this.index(operation);
 
             if (index >= 0) {
                 this.bag(operation.type).splice(index, 1);
             }
-        },
-        index(operation) {
+        };
+       function index(operation) {
             return this.bag(operation.type)
                 .findIndex(({ id }) => id === operation.id);
-        },
-        bag(type) {
+        };
+       function bag(type) {
             return this[this.type(type)];
-        },
-        type(type) {
+        };
+       function type(type) {
             switch (this.enums.ioTypes._get(type)) {
                 case 'import':
                     return 'imports';
@@ -91,8 +126,8 @@ export default {
                 default:
                     throw Error(`Unknown io type: ${this.enums.ioTypes._get(type)}`)
             }
-        },
-    },
+        };
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -102,5 +137,5 @@ export default {
             imports: this.imports,
         });
     },
-};
+
 </script>

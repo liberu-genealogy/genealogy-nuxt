@@ -176,30 +176,30 @@
     </div>
   </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'subscription.index'
 }
-</router>
+</router> -->
 
-<script>
+<script setup>
 import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css'
+import 'vue-loading-overlay/dist/css/index.css';
 import { mapGetters, mapActions } from 'vuex'
 
-export default {
-  layout: 'default',
+
+  layout: 'default';
   head: {
-    title: 'Subscription'
-  },
+    title: 'Subscription';
+  };
   meta: {
-    breadcrumb: 'subscription',
-    title: 'Subscription'
-  },
+    breadcrumb: 'subscription';
+    title: 'Subscription';
+  };
   components: {
     Loading
-  },
-  data() {
+  };
+  function data() {
     return {
       error: false,
       message: '',
@@ -217,25 +217,25 @@ export default {
       selected_currency_rate: 1,
       isActive: false
     }
-  },
+  };
   computed: {
     ...mapGetters(['loggedInUser'])
-  },
+  };
   methods: {
-    handleSelectedFiles(event) {
+   function handleSelectedFiles(event) {
       this.file = this.$refs.fileInput.files[0]
       this.fileName = this.file.name
-    },
-    submit() {},
-    async loadPlans() {
-      const response = await this.$axios.$get('/api/stripe/plans')
+    };
+   function submit() {},
+    function loadPlans() {
+      const response =  this.$axios.$get('/api/stripe/plans')
 
       this.getCurrentSubscription()
       this.plans = response
       this.isLoading = false
-    },
-    async getCurrentSubscription() {
-      const response = await this.$axios.$get(
+    };
+    function getCurrentSubscription() {
+      const response =  this.$axios.$get(
         '/api/stripe/current-subscription'
       )
 
@@ -257,8 +257,8 @@ export default {
         })
       }
       this.isLoading = false
-    },
-    subscribe() {
+    };
+   function subscribe() {
       this.isLoading = false
       this.isActive = false
       this.$axios.$post('/api/stripe/subscribe', {
@@ -267,17 +267,17 @@ export default {
 
       this.getCurrentSubscription()
       this.isLoading = false
-    },
-    unsubscribe() {
+    };
+   function unsubscribe() {
       this.isLoading = false
       this.isActive = false
       this.$axios.post('/api/stripe/unsubscribe')
 
       this.getCurrentSubscription()
       this.isLoading = false
-    },
-    async selectCurrency(currency) {
-      await fetch(
+    };
+    function selectCurrency(currency) {
+       fetch(
         'https://api.freecurrencyapi.com/v1/latest?apikey=9WkmXwTgkCNODiQbpgzXrgt1SZkSBsIA1B3xZyMe'
       )
         .then(response => response.json())
@@ -307,17 +307,16 @@ export default {
           }
         })
         .catch(() => {})
-    },
-    open(planId) {
+    };
+   function open(planId) {
       this.isActive = true
       this.selectedPlanId = planId
-    },
-    close() {
+    };
+   function close() {
       this.isActive = false
-    }
-  },
-  created() {
+    };
+  };
+ function created() {
     this.loadPlans()
-  }
-}
+  };
 </script>

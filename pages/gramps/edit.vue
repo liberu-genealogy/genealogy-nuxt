@@ -6,14 +6,13 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-    name: 'Edit',
 
-    components: { EnsoForm },
-};
+    name: 'Edit';
+
+    components: { EnsoForm };
 </script>
 
 <style lang="scss">

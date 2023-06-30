@@ -11,16 +11,15 @@
     </core-settings-control>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCogs } from '@fortawesome/free-solid-svg-icons';
 import CoreSettingsControl from '../../../core/components/navbar/SettingsControl.vue';
 
 library.add(faCogs);
 
-export default {
-    name: 'SettingsControl',
 
-    components: { CoreSettingsControl },
-};
+    name: 'SettingsControl';
+
+    components: { CoreSettingsControl };
 </script>

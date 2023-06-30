@@ -55,7 +55,7 @@ import LoginForm from '~/components/auth/LoginForm.vue';
         ...mapMutations('auth', ['login']),
         ...mapMutations('layout', ['home']),
         ...mapMutations(['setShowQuote', 'setCsrfToken']),
-        init(data) {
+        function init(data) {
             this.setShowQuote(this.meta.showQuote);
             if (data.csrfToken) {
                 this.setCsrfToken({token: data.csrfToken, $axios: this.$axios});
@@ -66,6 +66,6 @@ import LoginForm from '~/components/auth/LoginForm.vue';
                 this.login();
                 this.home(true);
             }, 500);
-        },
+        };
     };
 </script>

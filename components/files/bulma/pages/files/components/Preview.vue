@@ -15,33 +15,32 @@
     </modal>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from '@enso-ui/modal/bulma';
 
 library.add(faExternalLinkAlt);
 
-export default {
-    name: 'Preview',
 
-    components: { Modal },
+    name: 'Preview';
 
-    inject: ['i18n', 'route'],
+    components: { Modal };
+
+    inject: ['i18n', 'route'];
 
     props: {
         file: {
             type: Object,
             required: true,
         },
-    },
+    };
 
     computed: {
         url() {
             return this.route('core.files.show', this.file.id);
         },
-    },
-};
+    };
 </script>
 
 <style lang="scss">

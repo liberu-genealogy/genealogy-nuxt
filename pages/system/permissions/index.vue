@@ -11,22 +11,21 @@
 </template>
 
 
-<script>
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import cssClass from '~/utils/permission';
 
-export default {
-    meta: {
-        breadcrumb: 'index',
-        title: 'Permissions',
-    },
 
-    components: { EnsoTable },
+    meta: {
+        breadcrumb: 'index';
+        title: 'Permissions';
+    };
+
+    components: { EnsoTable };
 
     methods: {
-        cssClass(columnEnum, row) {
+        function cssClass(columnEnum, row) {
             return cssClass(columnEnum, row);
-        },
-    },
-};
+        };
+    };
 </script>

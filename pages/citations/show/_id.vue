@@ -1,21 +1,19 @@
 <template>
     <div/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'citations.show'
 }
-</router>
-<script>
-export default {
+</router> -->
+<script setup>
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'citations menu' },
-        title: 'Citations - Show'
-    },
-
-};
+        permission: { name: 'citations menu' };
+        title: 'Citations - Show';
+    };
 </script>
 
 <style lang="scss">

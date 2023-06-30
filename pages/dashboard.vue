@@ -374,7 +374,7 @@ name: 'dashboard.index'
 <script setup>
 import {Loading} from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
-import { mapGetters, mapActions } from 'vuex'
+import { computed, useStore } from 'vuex';
 import PieChart from '../components/charts/PieChart'
 import { EnsoChartCard as ChartCard } from '@enso-ui/charts/bulma';
 import { Chart, colors } from '@enso-ui/charts';
@@ -425,8 +425,18 @@ import { Chart, colors } from '@enso-ui/charts';
     }
   };
   computed: {
-    ...mapGetters(['loggedInUser']),
-    headers() {
+    function useComputedValues() {
+  const store = useStore();
+
+  const loggedInUser = computed(() => {
+    return store.getters.loggedInUser;
+  });
+
+  return {
+    loggedInUser,
+  };
+};
+   function headers() {
       if (this.apiSelected == 'Geneanum')
         return [
           { text: 'ID', value: 'identifier', sortable: false },
@@ -474,24 +484,24 @@ import { Chart, colors } from '@enso-ui/charts';
           { text: 'Type', value: 'eventtype', sortable: false },
           { text: 'Archive', value: 'archive', sortable: false },
         ]
-    },
+    };
   };
   watch: {
     options: {
-      handler() {
+     function handler() {
         console.log(this.loading, this.options)
         this.search()
-      },
-      deep: false,
-    },
+      };
+      deep: false;
+    };
   };
   methods: {
-    setSelectedCompany(value) {
+   function setSelectedCompany(value) {
       this.selected_tree = null
       this.getTree()
-    },
-    async setSelected(value) {
-      const response = await this.$axios.$post('/api/dashboard/changedb', {
+    };
+    function setSelected(value) {
+      const response = this.$axios.$post('/api/dashboard/changedb', {
         company_id: value,
         // tree_id: this.selected_tree,
       })
@@ -502,9 +512,9 @@ import { Chart, colors } from '@enso-ui/charts';
       console.log('changedb response', response)
       console.log('familiesjoined', response.familiesjoined)
       console.log('peoplesattached', response.peoplesattached)
-    },
-    async getCompanies() {
-      const response = await this.$axios.$get('/api/get_companies')
+    };
+    function getCompanies() {
+      const response = this.$axios.$get('/api/get_companies')
       this.companies = response.my_comps;
       this.invited_companies = response.invited_comps;
       this.companies.map((company) => {
@@ -514,10 +524,10 @@ import { Chart, colors } from '@enso-ui/charts';
           this.getTree()
         }
       })
-    },
-    async getTree() {
+    };
+    function getTree() {
       this.selected_tree = null
-      const response = await this.$axios.$get('/api/trees/show', {
+      const response = this.$axios.$get('/api/trees/show', {
         params: { start_id: this.selected_company, nest: 3 },
       })
       this.trees = Object.values(response.persons)
@@ -526,19 +536,19 @@ import { Chart, colors } from '@enso-ui/charts';
           this.selected_tree = tree.id
         }
       })
-    },
-    async loadChart() {
+    };
+    function loadChart() {
       this.loaded = false
-      const chartResponse = await this.$axios.get('/api/dashboard/pie')
-      // const { data: trial } = await this.$axios.get('/api/dashboard/trial')
+      const chartResponse = this.$axios.get('/api/dashboard/pie')
+      // const { data: trial } =  this.$axios.get('/api/dashboard/trial')
       this.pieChartData = chartResponse.data
       this.chartOptions = chartResponse.options
 
       this.loaded = true
       this.isLoading = false
       //this.trial = trial
-    },
-    search() {
+    };
+   function search() {
       //this.result = null
       this.loading = true
       let url = '',
@@ -604,9 +614,9 @@ import { Chart, colors } from '@enso-ui/charts';
             this.loading = false
           })
           .catch(this.errorHandler)
-    },
+    };
   };
-  created() {
+ function created() {
     this.getCompanies()
   };
 

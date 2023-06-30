@@ -63,7 +63,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSync, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { mapState } from 'vuex';
@@ -71,31 +71,31 @@ import Comment from './Comment.vue';
 
 library.add(faPlus, faSync, faSearch);
 
-export default {
-    name: 'Comments',
 
-    components: { Comment },
+    name: 'Comments';
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    components: { Comment };
+
+    inject: ['errorHandler', 'i18n', 'route'];
 
     props: {
         id: {
-            type: [String, Number],
-            required: true,
-        },
+            type: [String, Number];
+            required: true;
+        };
         type: {
-            type: String,
-            required: true,
-        },
+            type: String;
+            required: true;
+        };
         query: {
-            type: String,
-            default: null,
-        },
+            type: String;
+            defaultValue: null;
+        };
         compact: {
-            type: Boolean,
-            default: false,
-        },
-    },
+            type: Boolean;
+            default: false;
+        };
+    };
 
     data: (v) => ({
         comments: [],
@@ -104,41 +104,41 @@ export default {
         internalQuery: '',
         path: v.$route.path,
         diffForHumansDate: null,
-    }),
+    });
 
     computed: {
         ...mapState(['user']),
-        filteredComments() {
+       function filteredComments() {
             const query = this.internalQuery.toLowerCase();
 
             return query
                 ? this.comments.filter(({ body, owner }) => body.toLowerCase().indexOf(query) > -1
                     || owner.person.name.toLowerCase().indexOf(query) > -1)
                 : this.comments;
-        },
-        count() {
+        };
+       function count() {
             return this.filteredComments.length;
-        },
-        params() {
+        };
+       function params() {
             return {
                 commentable_id: this.id,
                 commentable_type: this.type,
             };
-        },
-    },
+        };
+    };
 
     watch: {
-        query() {
+       function query() {
             this.internalQuery = this.query;
-        },
-    },
+        };
+    };
 
-    created() {
+   function created() {
         this.fetch();
-    },
+    };
 
     methods: {
-        fetch() {
+       function fetch() {
             this.loading = true;
 
             this.$axios.get(
@@ -150,23 +150,23 @@ export default {
                 this.loading = false;
                 this.$emit('update');
             }).catch(this.errorHandler);
-        },
+        };
 
-        factory() {
+       function factory() {
             return {
                 body: '',
                 taggedUsers: [],
                 owner: this.user,
             };
-        },
-        create() {
+        };
+       function create() {
             if (this.comment) {
                 return;
             }
 
             this.comment = this.factory();
-        },
-        add() {
+        };
+       function add() {
             if (!this.comment.body.trim()) {
                 return;
             }
@@ -182,16 +182,16 @@ export default {
                 this.$emit('update');
                 this.loading = false;
             }).catch(this.errorHandler);
-        },
-        postParams() {
+        };
+       function postParams() {
             return {
                 body: this.comment.body,
                 taggedUsers: this.comment.taggedUsers,
                 path: this.path,
                 ...this.params,
             };
-        },
-        update(comment) {
+        };
+       function update(comment) {
             this.syncTaggedUsers(comment);
             comment.path = this.path;
             this.loading = true;
@@ -203,15 +203,15 @@ export default {
                 Object.assign(comment, data);
                 this.loading = false;
             }).catch(this.errorHandler);
-        },
-        syncTaggedUsers(comment) {
+        };
+       function syncTaggedUsers(comment) {
             comment.taggedUsers.forEach((user, index) => {
                 if (!comment.body.includes(user.name)) {
                     comment.taggedUsers.splice(index, 1);
                 }
             });
-        },
-        destroy(index) {
+        };
+       function destroy(index) {
             this.loading = true;
 
             this.$axios.delete(this.route('core.comments.destroy', this.comments[index].id))
@@ -220,9 +220,9 @@ export default {
                     this.$emit('update');
                     this.loading = false;
                 }).catch(this.errorHandler);
-        },
-    },
-};
+        };
+    };
+
 </script>
 
 <style lang="scss">

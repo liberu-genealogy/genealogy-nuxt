@@ -1,20 +1,19 @@
 <template>
     <div/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'personalias.show'
 }
-</router>
-<script>
-export default {
+</router> -->
+<script setup>
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'personalias menu' },
-        title: 'Person Alias - Show'
-    },
-};
+        permission: { name: 'personalias menu' };
+        title: 'Person Alias - Show';
+    };
 </script>
 
 <style lang="scss">

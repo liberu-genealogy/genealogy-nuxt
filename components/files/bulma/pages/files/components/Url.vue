@@ -23,7 +23,7 @@
     </modal>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { focus, selectOnFocus } from '@enso-ui/directives';
@@ -32,32 +32,31 @@ import Clipboard from '@enso-ui/clipboard';
 
 library.add(faCopy);
 
-export default {
-    name: 'Url',
 
-    directives: { focus, selectOnFocus },
+    name: 'Url';
 
-    components: { Modal, Clipboard },
+    directives: { focus, selectOnFocus };
 
-    inject: ['i18n', 'toastr'],
+    components: { Modal, Clipboard };
+
+    inject: ['i18n', 'toastr'];
 
     props: {
         show: {
-            type: Boolean,
-            required: true,
-        },
+            type: Boolean;
+            required: true;
+        };
         link: {
-            type: String,
-            default: '',
-            required: true,
-        },
-    },
+            type: String;
+            defaultValue: '';
+            required: true;
+        };
+    };
 
     methods: {
-        copy() {
+        function copy() {
             this.$refs.clipboard.copy(this.link);
             this.toastr.success(this.i18n('Copied to clipboard'));
-        },
-    },
-};
+        };
+    };
 </script>

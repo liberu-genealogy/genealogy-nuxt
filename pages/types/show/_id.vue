@@ -1,20 +1,20 @@
 <template>
     <div/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'types.show'
 }
-</router>
-<script>
-export default {
-    name: 'Show',
-    layout: 'auth',
+</router> -->
+<script setup>
+
+    name: 'Show';
+    layout: 'auth';
     meta: {
-        permission: { name: 'types menu' },
-        title: 'Types - Show'
-    },
-};
+        permission: { name: 'types menu' };
+        title: 'Types - Show';
+    };
+
 </script>
 
 <style lang="scss">

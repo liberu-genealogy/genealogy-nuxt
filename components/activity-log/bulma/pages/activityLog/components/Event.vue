@@ -19,38 +19,36 @@
     </article>
 </template>
 
-<script>
-export default {
-    name: 'Event',
-    inject: ['i18n', 'route', 'routerErrorHandler'],
-    props: {
-        event: {
-            type: Object,
-            required: true,
-        },
+<script setup>
+name: 'Event';
+inject: ['i18n', 'route', 'routerErrorHandler'];
+props: {
+    event: {
+        type: Object,
+        required: true,
     },
-    computed: {
-        message() {
-            return Object.keys(this.event.meta.attributes)
-                .reduce((message, attribute) => message.split(`:${attribute}`)
-                    .join(this.label(attribute)),
-                this.parsedMessage);
-        },
-        parsedMessage() {
-            return Array.isArray(this.event.meta.message)
-                ? this.event.meta.message
-                    .map((segment) => this.i18n(segment))
-                    .join(' ')
-                : this.event.meta.message;
-        },
+};
+computed: {
+   function message() {
+        return Object.keys(this.event.meta.attributes)
+            .reduce((message, attribute) => message.split(`:${attribute}`)
+                .join(this.label(attribute)),
+            this.parsedMessage);
     },
-    methods: {
-        label(attribute) {
-            const { attributes } = this.event.meta;
-            return ['user', 'label'].includes(attribute)
-                ? `<strong>${attributes[attribute]}</strong>`
-                : attributes[attribute];
-        },
+   function parsedMessage() {
+        return Array.isArray(this.event.meta.message)
+            ? this.event.meta.message
+                .map((segment) => this.i18n(segment))
+                .join(' ')
+            : this.event.meta.message;
     },
+};
+methods: {
+    function label(attribute) {
+        const { attributes } = this.event.meta;
+        return ['user', 'label'].includes(attribute)
+            ? `<strong>${attributes[attribute]}</strong>`
+            : attributes[attribute];
+    };
 };
 </script>

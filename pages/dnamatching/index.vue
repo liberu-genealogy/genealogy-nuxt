@@ -7,22 +7,21 @@
   </enso-table>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'dnamatching.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
-export default {
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'dnamatching menu' },
-        title: 'DNA Matching - Index'
-    },
-    components: { EnsoTable },
-  inject: ['canAccess', 'i18n'],
-};
+        permission: { name: 'dnamatching menu' };
+        title: 'DNA Matching - Index';
+    };
+    components: { EnsoTable };
+  inject: ['canAccess', 'i18n'];
 </script>
 
 <style lang="scss">

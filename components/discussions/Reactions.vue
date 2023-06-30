@@ -12,34 +12,34 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { VTooltip } from 'v-tooltip';
 
-export default {
-    name: 'Reactions',
 
-    directives: { tooltip: VTooltip },
+    name: 'Reactions';
 
-    inject: ['errorHandler', 'route'],
+    directives: { tooltip: VTooltip };
+
+    inject: ['errorHandler', 'route'];
 
     props: {
         reactable: {
-            type: Object,
-            required: true,
-        },
+            type: Object;
+            required: true;
+        };
         type: {
-            type: String,
-            required: true,
-        },
-    },
+            type: String;
+            required: true;
+        };
+    };
 
     computed: {
         ...mapState(['user']),
-    },
+    };
 
     methods: {
-        react() {
+       function react() {
             this.$axios.post(this.route('core.discussions.react'), {
                 reactableId: this.reactable.id,
                 reactableType: this.type,
@@ -47,12 +47,11 @@ export default {
                 type: 1,
             }).then(({ data }) => (this.reactable.reactions = data))
                 .catch(this.errorHandler);
-        },
-        avatar(avatarId) {
+        };
+       function avatar(avatarId) {
             return this.route('core.avatars.show', avatarId);
-        },
-    },
-};
+        };
+    };
 
 </script>
 

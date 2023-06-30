@@ -22,28 +22,29 @@
     <div style="height: 700px" id="webtrees-descendants-chart-container"></div>
   </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'decendent.show'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { DescendantsChart } from "/assets/js/descendants-chart/modules/index";
 import vSelect from 'vue-select'
 import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css'
-import style from '/assets/css/svg.css'
+import 'vue-loading-overlay/dist/css/index.css';
+import style from '/assets/css/svg.css?inline';
+
 import {createDisplayName, getBirthYear, getDeathYear } from '/utils/personHelper';
-export default {
-  layout: "auth",
+
+  layout: "auth";
   meta: {
-    permission: { name: "decendentchart menu" },
-    title: "DecendentChart - Show",
-  },
+    permission: { name: "decendentchart menu" };
+    title: "DecendentChart - Show";
+  };
   components: {
     vSelect,
     Loading
-  },
+  };
   data: () => ({
     familyData: {},
     persons: [],
@@ -56,9 +57,9 @@ export default {
     thumbnail_man: "/images/thumbnail-man.svg",
     thumbnail_woman: "/images/thumbnail-woman.svg",
     thumbnail_middle: "/images/thumbnail-unknown.svg"
-  }),
+  });
   methods: {
-    getPersons() {
+   function getPersons() {
       this.isLoading = true;
       this.$axios
         .$get("/api/getPersons")
@@ -76,8 +77,8 @@ export default {
           });
           this.isLoading = false;
         });
-    },
-    async fetchData() {
+    };
+    function fetchData() {
       if(!this.selected_person.value) return
       let params = {start_id: this.selected_person.value, generation: this.generation.value }
       this.$axios
@@ -100,8 +101,8 @@ export default {
 
           descendantsChart.draw(this.familyData)
         });
-    },
-    checkBirthDeathDate(birth, death) {
+    };
+   function checkBirthDeathDate(birth, death) {
       if(death) {
         if(!birth) return ""
         return `${birth.toString().slice(0, 4)}-${death.toString().slice(0, 4)}`
@@ -109,8 +110,8 @@ export default {
         if(!birth) return ""
         return `Born ${birth.toString().slice(0, 4)}`
       }
-    },
-    checkChildren(id) {
+    };
+   function checkChildren(id) {
       let children = [];
       let childIds = [];
 
@@ -148,9 +149,9 @@ export default {
         })
       })
       return children;
-    },
+    };
 
-    checkFamilyData(id = null) {
+   function checkFamilyData(id = null) {
       const person = id ? this.data.persons[id] : this.data.persons[this.data.start]
       return {
         id: person.id,
@@ -167,17 +168,16 @@ export default {
         thumbnail : person.sex ? person.sex == 'F' ? this.thumbnail_woman : this.thumbnail_man : thumbnail_middle,
         children: this.checkChildren(this.data.start)
       }
-    },
-  },
-  mounted() {
+    };
+  };
+  function mounted() {
     this.getPersons();
-  },
+  };
   computed: {
-    style() {
+    function style() {
       return style
     }
-  }
-};
+  };
 </script>
 
 <style lang="scss">

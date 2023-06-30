@@ -24,7 +24,7 @@
 	</AuthIndex>
 </template>
 
-<script>
+<script setup>
 import AuthIndex from "~/components/auth/Index.vue";
 import AuthForm from "~/components/auth/AuthForm.vue";
 import PasswordStrength from "~/components/auth/PasswordStrength.vue";
@@ -32,18 +32,18 @@ import Email from "~/components/auth/fields/Email.vue";
 import Password from "~/components/auth/fields/Password.vue";
 import Confirmation from "~/components/auth/fields/Confirmation.vue";
 
-export default {
+
 	// head: {
 	//     title: 'Reset Password'
 	// },
 	meta: {
-		guestGuard: true,
-		title: "Reset Password",
-	},
+		guestGuard: true;
+		title: "Reset Password";
+	};
 
-	components: { AuthForm, Email, PasswordStrength, Password, Confirmation, AuthIndex },
+	components: { AuthForm, Email, PasswordStrength, Password, Confirmation, AuthIndex };
 
-	inject: ["routerErrorHandler"],
+	inject: ["routerErrorHandler"];
 
 	data: (v) => ({
 		payload: {
@@ -53,21 +53,20 @@ export default {
 			token: v.$route.params.token || v.$route.query.token,
 		},
 		status: null,
-	}),
+	});
 
 	computed: {
-		match() {
+		function match() {
 			const { password, password_confirmation } = this.payload;
 
 			return password.length > 0 && password === password_confirmation;
-		},
-	},
+		};
+	};
 
 	methods: {
-		success({ status }) {
+	function success({ status }) {
 			this.status = status;
 			setTimeout(() => this.$router.push({ name: "login" }).catch(this.routerErrorHandler), 500);
-		},
-	},
-};
+		};
+	};
 </script>

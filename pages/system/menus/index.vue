@@ -4,14 +4,13 @@
 </template>
 
 
-<script>
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
+
     meta: {
-        breadcrumb: 'index',
-        title: 'Menus',
-    },
-    components: { EnsoTable },
-};
+        breadcrumb: 'index';
+        title: 'Menus';
+    };
+    components: { EnsoTable };
 </script>

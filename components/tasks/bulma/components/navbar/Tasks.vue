@@ -78,7 +78,7 @@
         </template>
     </core-tasks>
 </template>
-<script>
+<script setup>
 import { clickOutside } from '@enso-ui/directives';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -90,15 +90,15 @@ import CoreTasks from '../../../core/components/navbar/Tasks.vue';
 
 library.add(faEye, faTasks, faClock, faFlag);
 
-export default {
-    name: 'Tasks',
 
-    directives: { clickOutside, tooltip: VTooltip },
+    name: 'Tasks';
 
-    components: { CoreTasks, NavbarItem },
+   const directives = { clickOutside, tooltip: VTooltip };
 
-    inject: ['i18n'],
-};
+    components: { CoreTasks, NavbarItem };
+
+    inject: ['i18n'];
+
 
 </script>
 

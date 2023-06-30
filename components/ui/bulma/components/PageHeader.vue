@@ -19,17 +19,16 @@
     </core-page-header>
 </template>
 
-<script>
+<script setup>
 import CorePageHeader from '../../core/components/PageHeader.vue';
 import Breadcrumbs from './Breadcrumbs.vue';
 
-export default {
-    name: 'PageHeader',
 
-    components: { CorePageHeader, Breadcrumbs },
+    name: 'PageHeader';
 
-    inject: ['i18n'],
-};
+    components: { CorePageHeader, Breadcrumbs };
+
+    inject: ['i18n'];
 </script>
 
 <style lang="scss" scoped>

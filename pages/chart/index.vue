@@ -3,24 +3,24 @@
   <div id="webtrees-pedigree-chart-container"></div>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'pedigree.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from "@enso-ui/tables/bulma";
 import { PedigreeChart } from "/assets/js/pedigree-chart/modules/index";
-export default {
-  layout: "auth",
-  meta: {
-    permission: { name: "trees menu" },
-    title: "Trees - Index",
-  },
 
-  components: { EnsoTable },
+  layout: "auth";
+  meta: {
+    permission: { name: "trees menu" };
+    title: "Trees - Index";
+  };
+
+  components: { EnsoTable };
   methods: {
-    fetchData() {
+   function fetchData() {
       this.$axios
         .$get("/api/trees/show")
         // .then((res) => res.json())
@@ -47,12 +47,11 @@ export default {
           console.log(res);
           pedigreeChart.draw(res);
         });
-    },
-  },
-  mounted() {
+    };
+  };
+ function mounted() {
     this.fetchData();
-  },
-};
+  };
 </script>
 
 <style lang="scss">

@@ -368,14 +368,14 @@
     computed: {
          ...mapGetters(['loggedInUser'])
     };
-    created() {
+    function created() {
         window.addEventListener('scroll', this.handleScroll);
     };
     methods: {
-        async logout() {
-          await this.$auth.logout();
+        function logout() {
+           this.$auth.logout();
         },
-        handleScroll() {
+       function handleScroll() {
             if (window.scrollY >= 500) {
                 this.isClear = false;
                 this.isDark = true;
@@ -383,7 +383,7 @@
                 this.isClear = true;
                 this.isDark = false;
             }
-        },
+        };
     };
 
 </script>

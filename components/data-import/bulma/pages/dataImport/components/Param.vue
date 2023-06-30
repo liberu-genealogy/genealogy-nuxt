@@ -15,7 +15,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { ucfirst } from '@enso-ui/strings';
@@ -26,27 +26,26 @@ import Select from './params/Select.vue';
 
 library.add(faFilter);
 
-export default {
-    name: 'Param',
+
+    name: 'Param';
 
     components: {
-        Checkbox, Input, Date, Select,
-    },
+        Checkbox, Input, Date, Select
+    };
 
-    inject: ['i18n'],
+    inject: ['i18n'];
 
     props: {
         param: {
             type: Object,
             required: true,
         },
-    },
+    };
     
     computed: {
         component() {
             return ucfirst(this.param.type);
         },
-    },
-};
+    };
 </script>
 

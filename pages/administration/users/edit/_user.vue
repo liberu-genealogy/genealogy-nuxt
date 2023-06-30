@@ -113,13 +113,13 @@
         </div>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'administration.users.edit'
 }
-</router>
+</router> -->
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faUserTie, faTrashAlt, faKey, faRedo,
@@ -127,7 +127,8 @@ import {
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import Accessories from '@enso-ui/accessories/bulma';
 import { Tab } from '@enso-ui/tabs/bulma';
-import { mapState } from 'vuex';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import PasswordStrength from '~/components/auth/PasswordStrength.vue'; // TODO::FIX IT!
 import DeleteModal from '~/components/users/bulma/pages/users/components/DeleteModal.vue';
 import Tokens from '~/components/users/bulma/pages/users/components/Tokens.vue';
@@ -135,11 +136,11 @@ import Sessions from '~/components/users/bulma/pages/users/components/Sessions.v
 
 library.add(faUserTie, faTrashAlt, faKey, faRedo);
 
-export default {
+
     meta: {
-        breadcrumb: 'edit',
-        title: 'Edit User',
-    },
+        breadcrumb: 'edit';
+        title: 'Edit User';
+    };
 
     components: {
         Accessories,
@@ -149,10 +150,10 @@ export default {
         PasswordStrength,
         Sessions,
         Tab,
-        Tokens,
-    },
+        Tokens
+    };
 
-    inject: ['i18n', 'canAccess', 'errorHandler', 'route', 'routerErrorHandler', 'toastr'],
+    inject: ['i18n', 'canAccess', 'errorHandler', 'route', 'routerErrorHandler', 'toastr'];
 
     data: () => ({
         deletableUser: null,
@@ -160,33 +161,43 @@ export default {
         pivotParams: { userGroups: { id: null } },
         password: null,
         passwordConfirmation: null,
-    }),
+    });
 
-    computed: {
-        ...mapState(['enums', 'user']),
-        canAccessSessions() {
-            return this.canAccess('administration.users.sessions.index')
-                && (`${this.user.role.id}` === this.enums.roles.Admin
-                || this.user.id === this.$route.params.user);
-        },
-        canAccessTokens() {
-            return this.canAccess('administration.users.tokens.index');
-        },
-    },
+   function useComputedValues() {
+  const store = useStore();
+
+  const canAccessSessions = computed(() => {
+    const { role, id } = store.state.user;
+    const { roles } = store.state.enums;
+
+    return (
+      store.getters.canAccess('administration.users.sessions.index') &&
+      (id === this.$route.params.user || role.id === roles.Admin)
+    );
+  });
+
+  const canAccessTokens = computed(() => {
+    return store.getters.canAccess('administration.users.tokens.index');
+  });
+
+  return {
+    canAccessSessions,
+    canAccessTokens,
+  };
+};
 
     methods: {
-        navigateToIndex() {
+       function navigateToIndex() {
             this.deletableUser = null;
 
             this.$nextTick(() => this.$router
                 .push({ name: 'administration.users.index' })
                 .catch(this.routerErrorHandler));
-        },
-        resetPassword() {
+        };
+       function resetPassword() {
             axios.post(this.route('administration.users.resetPassword', this.$route.params))
                 .then(({ data }) => this.toastr.success(data.message))
                 .catch(this.errorHandler);
-        },
-    },
-};
+        };
+    };
 </script>

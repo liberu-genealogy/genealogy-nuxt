@@ -36,7 +36,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -48,32 +48,31 @@ library.add([
     faCalendarAlt, faInfoCircle, faPencilAlt, faTrashAlt,
 ]);
 
-export default {
-    name: 'Token',
 
-    inject: ['canAccess'],
+    name: 'Token';
 
-    directives: { tooltip: VTooltip },
+    inject: ['canAccess'];
 
-    components: { Confirmation },
+    const directives = { tooltip: VTooltip };
+
+    components: { Confirmation };
 
     props: {
         token: {
-            type: Object,
-            required: true,
-        },
-    },
+            type: Object;
+            required: true;
+        };
+    };
 
     data: () => ({
         confirmation: false,
-    }),
+    });
 
     methods: {
-        lastUsed({ lastUsedAt }) {
+       function lastUsed({ lastUsedAt }) {
             return lastUsedAt
                 ? `last used: ${this.$formatDistance(lastUsedAt)}`
                 : 'Not used yet';
-        },
-    },
-};
+        };
+    };
 </script>

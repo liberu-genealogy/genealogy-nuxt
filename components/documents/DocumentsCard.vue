@@ -26,7 +26,7 @@
     </card>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
@@ -37,42 +37,42 @@ import Documents from './Documents.vue';
 
 library.add(faCopy, faPlusSquare);
 
-export default {
-    name: 'DocumentsCard',
+
+    name: 'DocumentsCard';
 
     components: {
         Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent, Documents,
-    },
+    };
 
-    inject: ['i18n', 'route'],
+    inject: ['i18n', 'route'];
 
     props: {
         icon: {
-            type: [String, Array, Object],
-            default: () => faCopy,
+            type: [String, Array, Object];
+            defaultValue: () => faCopy;
         },
         collapsed: {
-            type: Boolean,
-            default: false,
-        },
+            type: Boolean;
+            defaultValue: false;
+        };
         id: {
-            type: [String, Number],
-            required: true,
-        },
+            type: [String, Number];
+            required: true;
+        };
         type: {
-            type: String,
-            required: true,
-        },
+            type: String;
+            required: true;
+        };
         title: {
-            type: String,
-            default: '',
-        },
-    },
+            type: String;
+            defaultValue: '';
+        };
+    };
 
     data: () => ({
         query: '',
         count: 0,
-    }),
+    });
 
     computed: {
         ...mapState('layout', ['isMobile']),
@@ -87,12 +87,12 @@ export default {
                 ? this.title || this.i18n('Documents')
                 : null;
         },
-    },
+    };
 
     watch: {
         count() {
             this.$refs.card.resize();
         },
-    },
-};
+    };
+
 </script>

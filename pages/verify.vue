@@ -21,13 +21,13 @@
       ...mapMutations("auth", ["login"]),
       ...mapMutations("layout", ["home"]),
       ...mapMutations(["setShowQuote", "setCsrfToken"]),
-      init(data) {
+     function init(data) {
         this.setShowQuote(this.meta.showQuote);
         this.setCsrfToken(data.csrfToken);
         setTimeout(() => {
           this.login();
           this.home(true);
         }, 3000);
-      },
+      };
     };
 </script>

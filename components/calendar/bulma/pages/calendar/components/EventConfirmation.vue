@@ -37,7 +37,7 @@
     </modal>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFlag, faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
@@ -47,12 +47,12 @@ import('../styles/colors.scss');
 
 library.add(faFlag, faArrowsAltH);
 
-export default {
-    name: 'EventConfirmation',
 
-    components: { Modal },
+    name: 'EventConfirmation';
 
-    inject: ['i18n'],
+    components: { Modal };
+
+    inject: ['i18n'];
 
     props: {
         event: {
@@ -64,13 +64,12 @@ export default {
             required: false,
             default: false,
         },
-    },
+    };
 
     computed: {
         ...mapState(['enums']),
         update() {
             return this.enums.eventUpdateType;
         },
-    },
-};
+    };
 </script>

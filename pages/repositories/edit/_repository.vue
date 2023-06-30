@@ -8,25 +8,24 @@
         </div>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'repositories.edit'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-    name: 'Edit',
+
+    name: 'Edit';
     meta: {
-        breadcrumb: 'edit',
+        breadcrumb: 'edit';
         // permission: { name: 'authors menu' },
-        title: 'Edit Repositories'
-    },
-    components: { EnsoForm },
+        title: 'Edit Repositories';
+    };
+    components: { EnsoForm };
     
-    inject: ['i18n', 'route'],
-};
+    inject: ['i18n', 'route'];
 </script>
 
 <style lang="scss">

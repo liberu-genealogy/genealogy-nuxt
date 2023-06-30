@@ -15871,10 +15871,10 @@
   "resolved" "https://registry.npmjs.org/vuetify/-/vuetify-3.3.5.tgz"
   "version" "3.3.5"
 
-"vuex@^4.0.0":
-  "integrity" "sha512-hmV6UerDrPcgbSy9ORAtNXDr9M4wlNP4pEFKye4ujJF8oqgFFuxDCdOLS3eNoRTtq5O3hoBDh9Doj1bQMYHRbQ=="
-  "resolved" "https://registry.npmjs.org/vuex/-/vuex-4.1.0.tgz"
-  "version" "4.1.0"
+"vuex@^4.0.0", "vuex@^4.0.2":
+  "integrity" "sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q=="
+  "resolved" "https://registry.npmjs.org/vuex/-/vuex-4.0.2.tgz"
+  "version" "4.0.2"
   dependencies:
     "@vue/devtools-api" "^6.0.0-beta.11"
 

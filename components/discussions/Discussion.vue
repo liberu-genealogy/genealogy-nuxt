@@ -109,7 +109,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faArrowLeft, faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
@@ -119,62 +119,62 @@ import Reactions from './Reactions.vue';
 
 library.add(faArrowLeft, faTrashAlt, faPencilAlt);
 
-export default {
-    name: 'Discussion',
 
-    components: { Reply, Reactions, Confirmation },
+    name: 'Discussion';
 
-    inject: ['i18n', 'route'],
+    components: { Reply, Reactions, Confirmation };
+
+    inject: ['i18n', 'route'];
 
     props: {
         discussion: {
-            type: Object,
-            required: true,
-        },
-    },
+            type: Object;
+            required: true;
+        };
+    };
 
     data: () => ({
         controls: false,
         confirmation: false,
         reply: null,
-    }),
+    });
 
     computed: {
         ...mapState(['user']),
-        avatar() {
+       function avatar() {
             return this.route(
                 'core.avatars.show',
                 this.discussion.owner.avatar.id,
             );
-        },
-        edited() {
+        };
+       function edited() {
             return this.discussion.createdAt !== this.discussion.updatedAt;
-        },
-    },
+        };
+    };
 
     methods: {
-        store() {
+       function store() {
             this.$axios.post(this.route('core.discussions.storeReply'), this.reply)
                 .then(({ data }) => {
                     this.discussion.replies.push(data);
                     this.reply = null;
                 })
                 .catch((error) => this.handleErorr(error));
-        },
-        update(reply, index) {
+        };
+       function update(reply, index) {
             this.$axios.patch(this.route('core.discussions.updateReply', reply.id), reply)
                 .then(({ data }) => this.discussion.replies.splice(index, 1, data))
                 .catch((error) => this.handleErorr(error));
-        },
-        destroy(reply, index) {
+        };
+       function destroy(reply, index) {
             this.$axios.delete(this.route('core.discussions.destroyReply', reply.id))
                 .then(() => this.discussion.replies.splice(index, 1))
                 .catch((error) => this.handleErorr(error));
-        },
-        timeFromNow(date) {
+        };
+       function timeFromNow(date) {
             return this.$formatDistance(date);
-        },
-        replyFactory() {
+        };
+       function replyFactory() {
             return {
                 discussion_id: this.discussion.id,
                 body: null,
@@ -185,9 +185,8 @@ export default {
                     },
                 },
             };
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

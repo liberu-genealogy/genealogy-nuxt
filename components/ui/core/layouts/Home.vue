@@ -1,45 +1,45 @@
-<script>
+<script setup>
 import { mapState, mapMutations, mapActions } from 'vuex';
 
-export default {
-    name: 'CoreHome',
+
+    name: 'CoreHome';
 
     data: () => ({
         loading: true,
-    }),
+    });
 
     computed: {
         ...mapState(['meta']),
         ...mapState('auth', ['isAuth', 'intendedRoute', 'intendedPath']),
         ...mapState(['appState', 'showQuote']),
-    },
+    };
 
     watch: {
-        appState(appState) {
+       function appState(appState) {
             if (appState) {
                 this.enterApp();
             }
-        },
-    },
+        };
+    };
 
-    created() {
+   function created() {
         this.loadAppState();
-    },
+    };
 
     methods: {
         ...mapMutations('auth', ['setIntendedRoute', 'setIntendedPath']),
         ...mapMutations('layout', ['home']),
         ...mapActions(['loadAppState']),
         ...mapActions('layout', ['setTheme']),
-        enterApp() {
+       function enterApp() {
             this.redirectIfNeeded();
             this.loading = false;
 
             if (!this.showQuote) {
                 this.hide();
             }
-        },
-        redirectIfNeeded() {
+        };
+       function redirectIfNeeded() {
             if (this.intendedRoute) {
                 const { name, params, query } = this.intendedRoute;
                 this.$router.push({ name, params, query })
@@ -51,11 +51,11 @@ export default {
                 // this.$router.push({ path: '/' })
                 this.$router.push({ name: 'dashboard.index' })
             }
-        },
-        hide() {
+        };
+       function hide() {
             this.home(false);
-        },
-    },
+        };
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -64,6 +64,5 @@ export default {
             quote: this.meta.quote,
             hide: this.hide,
         });
-    },
-};
+    };
 </script>

@@ -8,15 +8,14 @@
 }
 </router> -->
 
-<script>
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
-    meta: {
-        breadcrumb: 'index',
-        title: 'User Groups',
-    },
 
-    components: { EnsoTable },
-};
+    meta: {
+        breadcrumb: 'index';
+        title: 'User Groups';
+    };
+
+    components: { EnsoTable };
 </script>

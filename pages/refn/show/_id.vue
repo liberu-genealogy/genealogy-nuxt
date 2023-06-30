@@ -1,20 +1,19 @@
 <template>
     <div/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'refn.show'
 }
-</router>
-<script>
-export default {
-    name: 'Show',
-    layout: 'auth',
+</router> -->
+<script setup>
+
+    name: 'Show';
+    layout: 'auth';
     meta: {
-        permission: { name: 'refn menu' },
-        title: 'Refn - Show'
-    },
-};
+        permission: { name: 'refn menu' };
+        title: 'Refn - Show';
+    };
 </script>
 
 <style lang="scss">

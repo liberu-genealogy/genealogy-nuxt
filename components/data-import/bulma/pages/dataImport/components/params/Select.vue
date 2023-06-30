@@ -7,22 +7,22 @@
          :params="param.params"/>
 </template>
 
-<script>
+<script setup>
 import { EnsoSelect } from '@enso-ui/select/bulma';
 
-export default {
-    name: 'Select',
 
-    components: { EnsoSelect },
+    name: 'Select';
 
-    inject: ['i18n'],
+    components: { EnsoSelect };
+
+    inject: ['i18n'];
 
     props: {
         param: {
             type: Object,
             required: true,
         },
-    },
+    };
 
     computed: {
         placeholder() {
@@ -30,6 +30,5 @@ export default {
                 ? this.i18n(this.param.placeholder)
                 : this.param.placeholder;
         }
-    }
-};
+    };
 </script>

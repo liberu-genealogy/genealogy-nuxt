@@ -88,21 +88,21 @@
 		</template>
 	</AuthIndex>
 </template>
-<script>
+<script setup>
 import AuthIndex from "~/components/auth/Index.vue";
 import { mapState, mapGetters } from "vuex";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEnvelope, faCheck, faExclamationTriangle, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { focus } from "@enso-ui/directives";
-import Errors from "@enso-ui/laravel-validation";
+// import Errors from "@enso-ui/laravel-validation/src/Errors";
 import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
 
 library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
-export default {
-	name: "LoginForm",
-	components: { AuthIndex },
-	directives: { focus },
+
+	name: "LoginForm";
+	components: { AuthIndex };
+	directives: { focus };
 	// inject: {
 	//   i18n: { from: "i18n" },
 	// },
@@ -116,17 +116,17 @@ export default {
 			required: true,
 			type: String,
 		},
-	},
+	};
 
 	data: () => ({
-		errors: new Errors(),
+		// errors: new Errors(),
 		hasError: false,
 		provider: null,
 		email: "",
 		password: "",
 		remember: false,
 		device_name: "mac",
-	}),
+	});
 
 	computed: {
 		...mapState(["meta"]),
@@ -157,24 +157,24 @@ export default {
 		},
 	},
 	methods: {
-		validate() {
+		function validate() {
 			this.$refs.email.validate().then((res) => {
 				console.log(res.valid);
 			});
-		},
+		};
 
-		loginSocial(provider) {
+		function loginSocial(provider) {
 			this.provider = provider;
 			window.location.href = `${process.env.baseUrl}/api/login/${provider}`;
-		},
+		};
 
-		submit() {
+		function submit() {
 			this.loading = true;
 			this.isSuccessful = false;
 			this.hasError = false;
 			this.oldLogin();
-		},		
-		oldLogin() {
+		};		
+		 function oldLogin() {
 			this.$axios.get("/sanctum/csrf-cookie").then(() => {
 				this.$axios
 					.post(
@@ -212,9 +212,8 @@ export default {
 						}
 					});
 			});
-		},
-	},
-};
+		};
+	};
 
 function openWindow(url, title, options = {}) {
 	if (typeof url === "object") {

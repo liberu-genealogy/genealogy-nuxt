@@ -1,5 +1,5 @@
 import Quill from 'quill';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash';
 // import route from '@enso-ui/ui/src/modules/plugins/route';
 import Keys from './constants/keys';
 import './blots/mention';

@@ -12,19 +12,19 @@
   </div>
 </template>
 
-<script>
-export default {
-  layout: 'default',
+<script setup>
+
+  layout: 'default';
   head: {
     title: 'Stripe'
-  },
+  };
   meta: {
-    breadcrumb: 'stripe',
-    permission: { name: 'subscription menu' },
-    title: 'Stripe',
-  },
+    breadcrumb: 'stripe';
+    permission: { name: 'subscription menu' };
+    title: 'Stripe';
+  };
 
-  data () {
+ function data () {
     this.pk = process.env.STRIPE_PK;
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -41,16 +41,15 @@ export default {
       successUrl: process.env.HOSTNAME,
       cancelUrl: process.env.HOSTNAME,
     };
-  },
+  };
   methods: {
-    checkout () {
+   function checkout () {
       this.$refs.checkoutRef.redirectToCheckout();
-    },
-  },
-};
+    };
+  };
 </script>
-<router>
+<!-- <router>
 {
     name: 'subscription.stripe.index'
 }
-</router>
+</router> -->

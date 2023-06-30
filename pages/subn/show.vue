@@ -1,20 +1,20 @@
 <template>
     <div/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'subn.show'
 }
-</router>
-<script>
-export default {
-    name: 'Show',
-    layout: 'auth',
+</router> -->
+<script setup>
+
+    name: 'Show';
+    layout: 'auth';
     meta: {
-        permission: { name: 'subn menu' },
-        title: 'subn - Show'
-    },
-};
+        permission: { name: 'subn menu' };
+        title: 'subn - Show';
+    };
+
 </script>
 
 <style lang="scss">

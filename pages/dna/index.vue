@@ -3,21 +3,20 @@
         id="dna"/>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'dna.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
-export default {
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'dna menu' },
-        title: 'DNA - Index'
-    },
-    components: { EnsoTable },
-};
+        permission: { name: 'dna menu' };
+        title: 'DNA - Index';
+    };
+    components: { EnsoTable };
 </script>
 
 <style lang="scss">

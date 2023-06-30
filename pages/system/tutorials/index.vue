@@ -10,15 +10,14 @@
 </template>
 
 
-<script>
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
-    meta: {
-        breadcrumb: 'index',
-        title: 'Tutorials',
-    },
 
-    components: { EnsoTable },
-};
+    meta: {
+        breadcrumb: 'index';
+        title: 'Tutorials';
+    };
+
+    components: { EnsoTable };
 </script>

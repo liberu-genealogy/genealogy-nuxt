@@ -63,25 +63,25 @@
         </form>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'dna.create'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { required } from 'vuelidate/lib/validators'
-import Loading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
-export default {
-layout: 'auth',
+import {Loading} from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
+
+layout: 'auth';
     meta: {
-        permission: { name: 'dna menu' },
-        title: 'DNA - Upload'
-    },
+        permission: { name: 'dna menu' };
+        title: 'DNA - Upload';
+    };
     components: {
         Loading
-    },
-    data() {
+    };
+    function data() {
         return {
             error: false,
             message: "",
@@ -92,35 +92,35 @@ layout: 'auth',
             fullPage: true,
             color: '#4fcf8d',
             backgroundColor: '#ffffff',
-            response : null,
+            response : null
         };
-    },
+    };
     validations: {
         fileName: {
-            required,
-        },
-    },
+            required
+        };
+    };
     methods: {
-        handleSelectedFiles(event) {
+       function handleSelectedFiles(event) {
             this.file = this.$refs.fileInput.files[0]
             this.fileName = this.file.name
-        },
-        submit() {
+        };
+       function submit() {
             this.$v.$touch();
             if (this.$v.$invalid) {
                 console.log("fail")
             } else {
-                this.isLoading = true
-                const formData = new FormData()
-                formData.append('file',  this.file)
+                this.isLoading = true;
+                const formData = new Formfunction data();
+                formData.append('file',  this.file);
                 this.$axios
                 .$post("/api/dna", formData, {
                     headers: {
                       'Content-Type': 'multipart/form-data'
                     }
-                })
+                });
 
-                    this.isLoading = false
+                    this.isLoading = false;
                     this.$router.push('/dna')
                 .catch(error => {
                     this.error = true;
@@ -128,8 +128,7 @@ layout: 'auth',
                     this.message = error.response.data[0];
                     this.errors =  error.response.data.errors;
                 });
-            }
-        }
-    }
-}
+            };
+        };
+    };
 </script>

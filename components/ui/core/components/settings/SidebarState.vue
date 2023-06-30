@@ -1,16 +1,16 @@
-<script>
+<script setup>
 import { mapGetters, mapActions } from 'vuex';
 
-export default {
-    name: 'CoreSidebarState',
+
+    name: 'CoreSidebarState';
 
     computed: {
         ...mapGetters('preferences', ['expandedSidebar']),
-    },
+    };
 
     methods: {
         ...mapActions('preferences', ['setSidebarState']),
-    },
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -21,7 +21,5 @@ export default {
                 input: state => (this.setSidebarState(state)),
             },
         });
-    },
-};
-
+    };
 </script>

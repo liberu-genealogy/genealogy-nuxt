@@ -3,24 +3,24 @@
         id="person_alias"/>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'personalias.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'personalias menu' },
-        title: 'Person Alias - Index'
-    },
+        permission: { name: 'personalias menu' };
+        title: 'Person Alias - Index';
+    };
 
-    components: { EnsoTable },
-};
+    components: { EnsoTable };
+
 </script>
 
 <style lang="scss">

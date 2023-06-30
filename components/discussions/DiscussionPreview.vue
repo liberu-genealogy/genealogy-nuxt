@@ -32,43 +32,43 @@
     </article>
 </template>
 
-<script>
-export default {
-    name: 'DiscussionPreview',
+<script setup>
 
-    inject: ['route'],
+    name: 'DiscussionPreview';
+
+    inject: ['route'];
 
     props: {
         discussion: {
-            type: Object,
-            required: true,
-        },
+            type: Object;
+            required: true;
+        };
         last: {
-            type: Boolean,
-            required: true,
-        },
-    },
+            type: Boolean;
+            required: true;
+        };
+    };
 
     computed: {
-        avatar() {
+       function avatar() {
             return this.route(
                 'core.avatars.show',
                 this.discussion.owner.avatar.id || 'null',
             );
-        },
-        body() {
+        };
+       function body() {
             const div = document.createElement('div');
             div.innerHTML = this.discussion.body;
             return div.textContent || div.innerText || '';
-        },
-    },
+        };
+    };
 
     methods: {
-        timeFromNow(date) {
+       function timeFromNow(date) {
             return this.$formatDistance(date);
-        },
-    },
-};
+        };
+    };
+
 </script>
 
 <style lang="scss">

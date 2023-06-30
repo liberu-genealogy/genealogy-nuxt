@@ -2,23 +2,22 @@
     <enso-table class="box is-paddingless raises-on-hover"
         id="types"/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'types.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
-    name: 'Index',
-    layout: 'auth',
+
+    name: 'Index';
+    layout: 'auth';
     meta: {
-        permission: { name: 'types menu' },
-        title: 'Types - Index'
-    },
-    components: { EnsoTable },
-};
+        permission: { name: 'types menu' };
+        title: 'Types - Index';
+    };
+    components: { EnsoTable };
 </script>
 
 <style lang="scss">

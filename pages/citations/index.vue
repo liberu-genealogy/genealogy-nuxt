@@ -3,25 +3,24 @@
         id="citations"/>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'citations.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'citations menu' },
-        title: 'Citations - Index'
-    },
+        permission: { name: 'citations menu' };
+        title: 'Citations - Index';
+    };
 
 
-    components: { EnsoTable },
-};
+    components: { EnsoTable };
 </script>
 
 <style lang="scss">

@@ -104,9 +104,9 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import Loader from '@enso-ui/loader/bulma'
-import Errors from '@enso-ui/laravel-validation';
+// import Errors from "@enso-ui/laravel-validation/src/Errors";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faSearch, faPlus, faBan, faDatabase,
@@ -116,45 +116,46 @@ import Items from './Items.vue';
 
 library.add(faSearch, faPlus, faBan, faDatabase);
 
-export default {
-    name: 'Tree',
 
-    directives: { focus },
+    name: 'Tree';
 
-    components: { Items, Loader },
+    directives: { focus };
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    components: { Items, Loader };
+
+    inject: ['errorHandler', 'i18n', 'route'];
 
     props: {
         editable: {
-            type: Boolean,
-            default: false,
-        },
+            type: Boolean;
+            defaultValue: false;
+        };
         expanded: {
-            type: Array,
-            default: () => ([]),
-        },
+            type: Array;
+            defaultValue: () => ([]);
+        };
         objects: {
-            type: Boolean,
-            default: false,
-        },
+            type: Boolean;
+            defaultValue: false;
+        };
         routeGroup: {
-            type: [String, Function],
-            required: true,
-        },
+            type: [String, Function];
+            required: true;
+        };
         title: {
-            type: String,
-            default: null,
-        },
+            type: String;
+            defaultValue: null;
+        };
         value: {
-            type: [Number, Object],
-            default: null,
-        },
-    },
+            type: [Number, Object];
+            defaultValue: null;
+        };
+    };
 
     data: v => ({
         cache: null,
-        errors: new Errors(),
+        // errors: new Errors(),
+        errors:'',
         items: null,
         loaded: false,
         state: {
@@ -169,28 +170,28 @@ export default {
             query: '',
             selected: null,
         },
-    }),
+    });
 
     computed: {
-        canAdd() {
+       function canAdd() {
             return this.maxNestingLevel === null
                 || this.level() <= this.maxNestingLevel;
-        },
-        exceedsMaxLevel() {
+        };
+        function exceedsMaxLevel() {
             return this.maxLevel > this.maxNestingLevel + 1;
-        },
-        filtered() {
+        };
+       function filtered() {
             return this.state.query
                 ? this.filter(this.clone())
                 : this.items;
-        },
-        maxLevel() {
+        };
+       function maxLevel() {
             return this.level(null, true);
-        },
-    },
+        };
+    };
 
     watch: {
-        editable(editable) {
+       function editable(editable) {
             this.state.editable = editable;
         },
         'state.query': {
@@ -199,28 +200,28 @@ export default {
                     this.expanded.splice(0, this.expanded.length);
                     this.expand(this.filtered);
                 }
-            },
-        },
-    },
+            };
+        };
+    };
 
-    created() {
+   function created() {
         this.fetch();
-    },
+    };
 
     methods: {
-        backup() {
+       function backup() {
             this.cache = JSON.stringify(this.items);
-        },
-        cancel() {
+        };
+       function cancel() {
             this.state.item.name = this.state.original;
             this.state.item = null;
             this.state.original = null;
             this.errors.empty();
-        },
-        clone() {
+        };
+       function clone() {
             return JSON.parse(JSON.stringify(this.items));
-        },
-        create() {
+        };
+       function create() {
             this.state.loading = true;
             const route = this.route(`${this.routePrefix()}.store`);
 
@@ -230,8 +231,8 @@ export default {
                     this.state.item = null;
                 }).catch(this.handler)
                 .finally(() => (this.state.loading = false));
-        },
-        expand(items) {
+        };
+       function expand(items) {
             items.forEach(item => {
                 this.expanded.push(item);
 
@@ -239,8 +240,8 @@ export default {
                     this.expand(item.items);
                 }
             });
-        },
-        expandParents(item) {
+        };
+       function expandParents(item) {
             const parent = this.flatten()
                 .filter(({ items }) => items)
                 .find(({ items }) => items.some(current => this.is(current, item)));
@@ -249,16 +250,16 @@ export default {
                 this.state.expanded.push(parent);
                 this.expandParents(parent);
             }
-        },
-        factory() {
+        };
+       function factory() {
             return {
                 id: null,
                 name: '',
                 items: [],
                 orderIndex: null,
             };
-        },
-        fetch() {
+        };
+       function fetch() {
             this.$axios.get(this.route(`${this.routePrefix()}.index`))
                 .then(({ data: { items, maxNestingLevel } }) => {
                     this.items = items;
@@ -268,22 +269,22 @@ export default {
                     this.loaded = true;
                     this.$emit('loaded', items);
                 }).catch(this.errorHandler);
-        },
-        filter(items) {
+        };
+       function filter(items) {
             return items.filter(item => this.matches(item))
                 .map(item => this.map(item));
-        },
-        isLeaf(item) {
+        };
+       function isLeaf(item) {
             return !item.items || item.items.length === 0;
-        },
-        is(first, second) {
+        };
+       function is(first, second) {
             return first.id === second.id && first.group === second.group;
-        },
-        find(id, group) {
+        };
+       function find(id, group) {
             return this.flatten()
                 .find(current => this.is(current, { id, group }));
-        },
-        flatten(items = this.items) {
+        };
+       function flatten(items = this.items) {
             return items.reduce((flat, item) => {
                 flat.push(item);
 
@@ -293,8 +294,8 @@ export default {
 
                 return flat;
             }, []);
-        },
-        handler(error) {
+        };
+       function handler(error) {
             this.state.loading = false;
 
             const { status, data } = error.response;
@@ -304,9 +305,9 @@ export default {
             } else {
                 this.errorHandler(error);
             }
-        },
+        };
 
-        level(item = null, max = false) {
+       function level(item = null, max = false) {
             if (this.items.length === 0) {
                 return 0;
             }
@@ -331,24 +332,24 @@ export default {
                 .sort().reverse();
 
             return level >= 0 ? level + 1 : level;
-        },
-        map(item) {
+        };
+       function map(item) {
             if (item.items) {
                 item.items = this.filter(item.items);
             }
 
             return item;
-        },
-        matches(item) {
+        };
+       function matches(item) {
             return item.name.toLowerCase()
                 .indexOf(this.state.query.toLowerCase()) > -1
                 || item.items?.some(child => this.matches(child));
-        },
-        matchesSelection(item) {
+        };
+       function matchesSelection(item) {
             return item.id === this.state.selected?.id
                 && item.parentId === this.state.selected?.parentId;
-        },
-        moved(item) {
+        };
+       function moved(item) {
             const { id, parentId, newIndex } = item;
 
             if (this.exceedsMaxLevel) {
@@ -366,7 +367,7 @@ export default {
                     this.errorHandler(error);
                 });
         },
-        preselect() {
+       function preselect() {
             if (this.value) {
                 const value = this.objects ? this.value.id : this.value;
 
@@ -376,8 +377,8 @@ export default {
                 this.state.selected.selected = true;
                 this.expandParents(this.state.selected);
             }
-        },
-        payload() {
+        };
+       function payload() {
             return {
                 ...this.state.item,
                 parentId: this.state.selected ? this.state.selected.id : null,
@@ -385,31 +386,31 @@ export default {
                     ? this.state.selected.items.length + 1
                     : this.items.length + 1,
             };
-        },
-        push(item) {
+        };
+       function push(item) {
             if (this.state.selected) {
                 this.flatten().find(({ id, parentId }) => id === this.state.selected.id
                     && parentId === this.state.selected.parentId).items.push(item);
             } else {
                 this.items.push(item);
             }
-        },
-        restore() {
+        };
+       function restore() {
             this.items = JSON.parse(this.cache);
-        },
-        routePrefix(item = null) {
+        };
+       function routePrefix(item = null) {
             return typeof this.routeGroup === 'string'
                 ? this.routeGroup
                 : this.routeGroup(item);
-        },
-        save() {
+        };
+       function save() {
             if (this.state.item.id) {
                 this.update();
             } else {
                 this.create();
             }
-        },
-        update() {
+        };
+       function update() {
             this.state.loading = true;
             const { item } = this.state;
             const route = this.route(`${this.routePrefix(item)}.update`, item.id);
@@ -418,17 +419,16 @@ export default {
                 .then(() => (this.state.item = null))
                 .catch(this.handler)
                 .finally(() => (this.state.loading = false));
-        },
-    },
+        };
+    };
 
-    provide() {
+   function provide() {
         return {
             is: this.is,
             routePrefix: this.routePrefix,
             state: this.state,
         };
-    },
-};
+    };
 </script>
 
 <style lang="scss">

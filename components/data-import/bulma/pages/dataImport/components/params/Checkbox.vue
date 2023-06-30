@@ -3,21 +3,20 @@
         v-model="param.value"/>
 </template>
 
-<script>
+<script setup>
 import VueSwitch from '@enso-ui/switch/bulma';
 
-export default {
-    name: 'Checkbox',
 
-    components: { VueSwitch },
+    name: 'Checkbox';
 
-    inject: ['i18n'],
+    components: { VueSwitch };
+
+    inject: ['i18n'];
 
     props: {
         param: {
             type: Object,
             required: true,
         },
-    },
-};
+    };
 </script>

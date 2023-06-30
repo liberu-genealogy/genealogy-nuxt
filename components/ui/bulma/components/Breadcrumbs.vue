@@ -20,14 +20,13 @@
     </core-breadcrumbs>
 </template>
 
-<script>
+<script setup>
 import CoreBreadcrumbs from '../../core/components/Breadcrumbs.vue';
 
-export default {
-    name: 'Breadcrumbs',
 
-    components: { CoreBreadcrumbs },
+    name: 'Breadcrumbs';
 
-    inject: ['i18n'],
-};
+    components: { CoreBreadcrumbs };
+
+    inject: ['i18n'];
 </script>

@@ -27,53 +27,53 @@
     </draggable>
 </template>
 
-<script>
+<script setup>
 import Draggable from 'vuedraggable';
 
-export default {
-    name: 'Items',
 
-    components: { Draggable, Item: () => import('./Item.vue') },
+    name: 'Items';
 
-    inject: ['state'],
+    components: { Draggable, Item: () => import('./Item.vue') };
+
+    inject: ['state'];
 
     props: {
         items: {
-            type: Array,
-            required: true,
-        },
+            type: Array;
+            required: true;
+        };
         parentId: {
-            type: Number,
-            default: null,
-        },
-    },
+            type: Number;
+            defaultValue: null;
+        };
+    };
 
     methods: {
-        checkMove({ draggedContext: { element }, relatedContext }) {
+       function checkMove({ draggedContext: { element }, relatedContext }) {
             return !relatedContext.element
                 || relatedContext.element.group === element.group;
-        },
-        change(event) {
+        };
+       function change(event) {
             if (event.moved) {
                 this.move(event.moved);
             } else if (event.added) {
                 this.move(event.added);
             }
-        },
-        endDragging() {
+        };
+       function endDragging() {
             this.state.dragging = null;
-        },
-        splice(item) {
+        };
+       function splice(item) {
             const index = this.items.findIndex(({ id }) => id === item.id);
 
             this.items.splice(index, 1);
-        },
-        move({ element, newIndex }) {
+        };
+       function move({ element, newIndex }) {
             newIndex++;
             const payload = { ...element, parentId: this.parentId, newIndex };
             this.$emit('moved', payload);
-        },
-        startDragging(event) {
+        };
+       function startDragging(event) {
             if (this.state.selected) {
                 this.state.selected.selected = false;
                 this.state.selected = null;
@@ -81,14 +81,14 @@ export default {
 
             // eslint-disable-next-line no-underscore-dangle
             this.state.dragging = event.item.__vue__.$options.propsData.item;
-        },
-        unique(to) {
+        };
+       function unique(to) {
             // eslint-disable-next-line no-underscore-dangle
             const instanceProps = to.el.__vue__.$options.propsData;
             const items = instanceProps.list || instanceProps.items;
 
             return !items.some(item => item.name === this.state.dragging.name);
-        },
-    },
-};
+        };
+    };
+
 </script>

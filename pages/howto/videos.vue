@@ -170,7 +170,7 @@
 </template>
 
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faPlus, faUpload, faBan, faCheck, faPencilAlt, faTags,
@@ -181,17 +181,17 @@ import HowToVideo from '~/components/how-to/bulma/pages/howTo/components/HowToVi
 
 library.add([faPlus, faUpload, faBan, faCheck, faPencilAlt, faTags]);
 
-export default {
+
     meta: {
-        breadcrumb: 'how to',
-        title: 'How To',
-    },
+        breadcrumb: 'how to';
+        title: 'How To';
+    };
 
-    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'],
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'];
 
-    directives: { focus },
+    directives: { focus };
 
-    components: { Uploader, HowToVideo },
+    components: { Uploader, HowToVideo };
 
     data: () => ({
         videos: [],
@@ -206,13 +206,13 @@ export default {
         editingVideo: false,
         taggingId: null,
         editingTag: false,
-    }),
+    });
 
     computed: {
-        uploadLink() {
+        function uploadLink() {
             return this.route('howTo.videos.store');
-        },
-        filteredVideos() {
+        };
+       function filteredVideos() {
             if (this.taggingId) {
                 return this.videos.filter(({ id }) => id === this.taggingId);
             }
@@ -223,43 +223,43 @@ export default {
                     .filter(
                         (tagId) => this.selectedTags.findIndex(({ id }) => tagId === id) !== -1,
                     ).length === this.selectedTags.length);
-        },
-        filteredTags() {
+        };
+       function filteredTags() {
             return !this.query
                 ? this.tags.filter(({ id }) => !this.video.tagList.includes(id))
                 : this.tags.filter(({ name, id }) => !this.video.tagList.includes(id)
                     && name.toLowerCase().indexOf(this.query.toLowerCase()) > -1);
-        },
-        tagIsNew() {
+        };
+       function tagIsNew() {
             return !!this.query && this.tags
                 .findIndex(({ name }) => name
                     .toLowerCase() === this.query.toLowerCase()) === -1;
-        },
-        selectedTags() {
+        };
+       function selectedTags() {
             return this.tags.filter(({ selected }) => selected);
-        },
-        selectedTag() {
+        };
+       function selectedTag() {
             return this.selectedTags.length === 1 && this.selectedTags[0];
-        },
-    },
+        };
+    };
 
-    created() {
+   function created() {
         this.getVideos();
         this.getTags();
-    },
+    };
 
     methods: {
-        getVideos() {
+       function getVideos() {
             this.$axios.get(this.route('howTo.videos.index'))
                 .then(({ data }) => (this.videos = data))
                 .catch(this.errorHandler);
-        },
-        getTags() {
+        };
+       function getTags() {
             this.$axios.get(this.route('howTo.tags.index'))
                 .then(({ data }) => (this.tags = data))
                 .catch(this.errorHandler);
-        },
-        reset() {
+        };
+       function reset() {
             this.video = {
                 name: null,
                 description: null,
@@ -270,22 +270,22 @@ export default {
             this.editingVideo = false;
             this.taggingId = null;
             this.editingTag = false;
-        },
-        tagVideo(tagMode) {
+        };
+       function tagVideo(tagMode) {
             if (!tagMode) {
                 this.video.tagList.push(...this.selectedTags);
                 this.update();
             }
 
             this.deselectTags();
-        },
-        deselectTags() {
+        };
+       function deselectTags() {
             this.tags.map((tag) => {
                 tag.selected = false;
                 return tag;
             });
-        },
-        addTag() {
+        };
+       function addTag() {
             if (!this.tagIsNew || !this.canAccess('howTo.tags.store')) {
                 return;
             }
@@ -295,26 +295,25 @@ export default {
                     this.tags.push(data);
                     this.query = '';
                 }).catch(this.errorHandler);
-        },
-        updateTag() {
+        };
+       function updateTag() {
             this.$axios.patch(this.route('howTo.tags.update', this.selectedTag.id), {
                 name: this.selectedTag.name,
             }).catch(this.errorHandler);
-        },
-        deleteTag(tagId) {
+        };
+       function deleteTag(tagId) {
             this.$axios.delete(this.route('howTo.tags.destroy', tagId))
                 .then(() => {
                     const index = this.tags.findIndex(({ id }) => id === tagId);
                     this.tags.splice(index, 1);
                 }).catch(this.errorHandler);
-        },
-        update() {
+        };
+        function update() {
             this.$axios.patch(this.route('howTo.videos.update', this.video.id), this.video)
                 .then(({ data }) => {
                     this.toastr.success(data.message);
                     this.reset();
                 }).catch(this.errorHandler);
-        },
-    },
-};
+        };
+    };
 </script>

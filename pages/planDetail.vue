@@ -34,7 +34,7 @@
     title: 'Stripe';
   };
 
-  data () {
+ function data () {
     this.pk = process.env.STRIPE_PK;
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -60,11 +60,11 @@
     };
   };
   methods: {
-    checkout () {
+   function checkout () {
       this.$refs.checkoutRef.redirectToCheckout();
-    },
-    async getplans() {
-      const response = await this.$axios.$get('/api/get-subscription-plan')
+    };
+    function getplans() {
+      const response = this.$axios.$get('/api/get-subscription-plan')
       this.plans = response.map((plan) => {
         // console.log('this.loggedInUser.id',this.start_id+' ==' +company.id);
         if (plan.nickname == 'free') {
@@ -72,12 +72,12 @@
         }
         return plan;
       })
-    },
-    async confirmCheckout(price, id) {
-      const response = await this.$axios.$post('/api/confirm_checkout', { price, id })
-    },
+    };
+    function confirmCheckout(price, id) {
+      const response =  this.$axios.$post('/api/confirm_checkout', { price, id })
+    };
   };
-  created() {
+ function created() {
     this.getplans();
   };
 </script>

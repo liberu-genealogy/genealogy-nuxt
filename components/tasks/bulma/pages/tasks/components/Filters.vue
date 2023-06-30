@@ -35,7 +35,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import {
     BooleanFilter, EnsoDateFilter, EnsoFilter, EnsoSelectFilter,
@@ -45,14 +45,14 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 
 library.add(faFlag, faExclamation);
 
-export default {
-    name: 'Filters',
+
+    name: 'Filters';
 
     components: {
         BooleanFilter, EnsoDateFilter, EnsoFilter, EnsoSelectFilter,
-    },
+    };
 
-    inject: ['i18n'],
+    inject: ['i18n'];
 
     props: {
         filters: {
@@ -67,13 +67,13 @@ export default {
             type: Object,
             required: true,
         },
-    },
+    };
 
     data: () => ({
         overdueOptions: [
             { value: true, icon: 'exclamation', class: 'has-text-danger' },
         ],
-    }),
+    });
 
     computed: {
         ...mapState(['enums']),
@@ -86,8 +86,7 @@ export default {
                 class: `has-text-${this.enums.flags._get(flag).toLowerCase()}`,
             }));
         },
-    },
-};
+    };
 </script>
 
 <style lang="scss">

@@ -90,7 +90,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { VTooltip } from 'v-tooltip';
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -102,39 +102,39 @@ import Inputor from './Inputor.vue';
 
 library.add(faPencilAlt, faTrashAlt, faCheck, faBan);
 
-export default {
-    name: 'Comment',
 
-    directives: { tooltip: VTooltip },
+    name: 'Comment';
 
-    components: { Inputor, Confirmation },
+    directives: { tooltip: VTooltip };
+
+    components: { Inputor, Confirmation };
 
     inject: ['i18n', 'route'],
 
     props: {
         comment: {
-            type: Object,
-            required: true,
-        },
+            type: Object;
+            required: true;
+        };
         humanReadableDates: {
-            type: Boolean,
-            default: true,
-        },
+            type: Boolean;
+            defaultValue: true;
+        };
         index: {
-            type: Number,
-            default: null,
-        },
+            type: Number;
+            defaultValue: null;
+        };
         isNew: {
-            type: Boolean,
-            default: false,
-        },
-    },
+            type: Boolean;
+            defaultValue: false;
+        };
+    };
 
     data: () => ({
         controls: false,
         confirmation: false,
         originalBody: null,
-    }),
+    });
 
     computed: {
         ...mapState(['meta', 'user']),
@@ -155,16 +155,16 @@ export default {
         commentedAt() {
             return this.comment.updatedAt || this.comment.createdAt;
         },
-    },
+    };
 
     methods: {
-        cancelAdd() {
+        function cancelAdd() {
             this.comment.body = this.originalBody;
             this.controls = false;
             this.originalBody = null;
             this.$emit('cancel-edit');
-        },
-        update() {
+        };
+        function update() {
             if (!this.comment.body.trim()) {
                 return;
             }
@@ -179,15 +179,14 @@ export default {
             this.$emit('save');
 
             this.originalBody = null;
-        },
-        timeFromNow(date) {
+        };
+       function timeFromNow(date) {
             return this.$formatDistance(date);
-        },
-        dateFormat(date) {
+        };
+       function dateFormat(date) {
             return this.$format(date, `${this.meta.dateFormat} H:i`);
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

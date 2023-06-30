@@ -33,17 +33,16 @@
     </core-toastr-position>
 </template>
 
-<script>
+<script setup>
 import { Dropdown, DropdownItem } from '@enso-ui/dropdown/bulma';
 import CoreToastrPosition from '../../../core/components/settings/ToastrPosition.vue';
 
-export default {
-    name: 'ToastrPosition',
 
-    components: { CoreToastrPosition, Dropdown, DropdownItem },
+    name: 'ToastrPosition';
 
-    inject: ['i18n'],
-};
+    components: { CoreToastrPosition, Dropdown, DropdownItem };
+
+    inject: ['i18n'];
 </script>
 
 <style lang="scss">

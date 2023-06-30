@@ -16,16 +16,16 @@
     </core-missing-keys>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLanguage, faCheck } from '@fortawesome/free-solid-svg-icons';
 import CoreMissingKeys from '../../../core/components/navbar/MissingKeys.vue';
 
 library.add(faLanguage, faCheck);
 
-export default {
-    name: 'MissingKeys',
 
-    components: { CoreMissingKeys },
-};
+    name: 'MissingKeys';
+
+    components: { CoreMissingKeys };
+
 </script>

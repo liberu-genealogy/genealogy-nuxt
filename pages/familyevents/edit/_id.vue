@@ -8,25 +8,24 @@
     </div>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'familyevents.edit'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'familyevents menu' },
-        title: 'Family Events - Edit'
-    },
+        permission: { name: 'familyevents menu' };
+        title: 'Family Events - Edit';
+    };
 
 
-    components: { EnsoForm },
-};
+    components: { EnsoForm };
 </script>
 
 <style lang="scss">

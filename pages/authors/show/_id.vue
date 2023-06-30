@@ -1,19 +1,18 @@
 <template>
     <div/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'authors.show'
 }
-</router>
-<script>
-export default {
-layout: 'auth',
+</router> -->
+<script setup>
+
+layout: 'auth';
     meta: {
-        permission: { name: 'authors menu' },
-        title: 'Authors - Show'
-    },
-};
+        permission: { name: 'authors menu' };
+        title: 'Authors - Show';
+    };
 </script>
 
 <style lang="scss">

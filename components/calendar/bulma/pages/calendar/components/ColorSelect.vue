@@ -27,31 +27,30 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { VueSelect } from '@enso-ui/select/bulma';
 
-export default {
-    name: 'ColorSelect',
 
-    components: { VueSelect },
+    name: 'ColorSelect';
 
-    inject: ['i18n', 'route'],
+    components: { VueSelect };
+
+    inject: ['i18n', 'route'];
 
     props: {
         field: {
-            type: Object,
-            required: true,
-        },
+            type: Object;
+            required: true;
+        };
         errors: {
-            type: Object,
-            required: true,
-        },
+            type: Object;
+            required: true
+        };
         colorField: {
-            type: String,
-            default: 'color',
+            type: String;
+            defaultValue: 'color';
         },
-    },
-};
+    };
 </script>
 
 <style lang="scss">

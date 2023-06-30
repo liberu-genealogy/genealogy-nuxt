@@ -40,36 +40,35 @@
 </template>
 
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSave, faSlidersH } from '@fortawesome/free-solid-svg-icons';
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 library.add([faSave, faSlidersH]);
 
-export default {
+
     // path: ':role/edit',
     meta: {
-        breadcrumb: 'edit',
-        title: 'Edit Role',
-    },
+        breadcrumb: 'edit';
+        title: 'Edit Role';
+    };
 
-    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'],
+    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'];
 
-    components: { EnsoForm },
+    components: { EnsoForm };
 
     data: () => ({
         ready: false,
-    }),
+    });
 
     methods: {
-        writeConfig() {
+       function writeConfig() {
             this.$axios.post(this.route(
                 'system.roles.permissions.write',
                 this.$refs.form.routeParam('role'),
             )).then(({ data }) => this.toastr.success(data.message))
                 .catch(this.errorHandler);
-        },
-    },
-};
+        };
+    };
 </script>

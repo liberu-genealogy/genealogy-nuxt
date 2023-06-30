@@ -23,7 +23,7 @@
     </base-app-footer>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -31,17 +31,16 @@ import BaseAppFooter from '../../core/components/AppFooter.vue';
 import { mapGetters, mapActions } from "vuex";
 library.add(faHeart, faGithub);
 
-export default {
-    name: 'AppFooter',
 
-    inject: ['i18n'],
+    name: 'AppFooter';
 
-    components: { BaseAppFooter },
+    inject: ['i18n'];
+
+    components: { BaseAppFooter };
 
     computed: {
          ...mapGetters(['loggedInUser'])
-    },
-};
+    };
 </script>
 
 <style lang="scss">

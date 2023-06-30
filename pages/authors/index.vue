@@ -2,23 +2,22 @@
     <enso-table class="box is-paddingless raises-on-hover"
         id="authors"/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'authors.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
-layout: 'auth',
-    meta: {
-        permission: { name: 'authors menu' },
-        title: 'Authors - Index'
-    },
 
-    components: { EnsoTable },
-};
+layout: 'auth';
+    meta: {
+        permission: { name: 'authors menu' };
+        title: 'Authors - Index';
+    };
+
+    components: { EnsoTable };
 </script>
 
 <style lang="scss">

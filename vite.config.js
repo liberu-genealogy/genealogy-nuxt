@@ -6,7 +6,11 @@ export default {
     },
     build: {
       rollupOptions: {
-        external: ['vuex',"vee-validate"],
+        external: ['vuex',
+                   "vee-validate",
+                   'vue-loading-overlay/dist/css/index.css',
+                   'vue-video-player',
+                   'vue-cal/dist/drag-and-drop.js'],
         plugins: [
           {
             name: 'replace-d3-dsv',

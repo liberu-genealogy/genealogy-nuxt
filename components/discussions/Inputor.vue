@@ -41,7 +41,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 
@@ -55,31 +55,31 @@ import './mention/mention.scss';
 
 library.add(faCheck, faBan);
 
-export default {
-    name: 'Inputor',
 
-    components: { quillEditor },
+    name: 'Inputor';
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    components: { quillEditor };
+
+    inject: ['errorHandler', 'i18n', 'route'];
 
     props: {
         title: {
-            type: Boolean,
-            default: false,
-        },
+            type: Boolean;
+            defaultValue: false;
+        };
         attachments: {
-            type: Boolean,
-            default: false,
-        },
+            type: Boolean;
+            defaultValue: false;
+        };
         placeholder: {
-            type: String,
-            required: true,
-        },
+            type: String;
+            required: true;
+        };
         message: {
-            type: Object,
-            required: true,
-        },
-    },
+            type: Object;
+            required: true;
+        };
+    };
 
     data: (v) => ({
         tribute: null,
@@ -108,40 +108,40 @@ export default {
                 },
             },
         },
-    }),
+    });
 
     computed: {
-        filled() {
+       function filled() {
             return (this.title
                 ? this.message.title
                     && this.message.title.trim().length > 3
                 : true)
                 && this.message.body
                 && this.message.body.trim().length > 10;
-        },
-    },
+        };
+    };
 
     methods: {
-        openFileBrowser() {
+       function openFileBrowser() {
             this.$refs.fileInput.click();
-        },
-        save() {
+        };
+       function save() {
             if (this.message.id) {
                 this.$emit('update', this.taggedUsers());
                 return;
             }
 
             this.$emit('store', this.taggedUsers());
-        },
-        tag(user) {
+        };
+       function tag(user) {
             if (!this.tagged.find(({ id }) => id === user.id)) {
                 this.tagged.push(user);
             }
-        },
-        taggedUsers() {
+        };
+       function taggedUsers() {
             return this.tagged.filter((user) => this.message.body.indexOf(this.template(user)) > 0);
-        },
-        upload($event) {
+        };
+       function upload($event) {
             const Editor = this.$refs.quillEditor.quill;
             const formData = new FormData();
 
@@ -157,15 +157,14 @@ export default {
 
                     this.$refs.inputForm.reset();
                 }).catch(this.errorHandler);
-        },
-        avatar(avatarId) {
+        };
+       function avatar(avatarId) {
             return this.route('core.avatars.show', avatarId);
-        },
-        template(user) {
+        };
+       function template(user) {
             return `<img src="${this.route('core.avatars.show', user.avatar.id)}"> ${user.person.name}`;
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

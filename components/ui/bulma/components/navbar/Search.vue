@@ -51,7 +51,7 @@
     </core-search>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faPencilAlt, faListUl } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTypeahead } from '@enso-ui/typeahead/bulma';
@@ -60,21 +60,20 @@ import CoreSearch from '../../../core/components/navbar/Search.vue';
 
 library.add(faEye, faPencilAlt, faListUl);
 
-export default {
-    name: 'Search',
 
-    directives: { clickOutside },
+    name: 'Search';
 
-    components: { CoreSearch, EnsoTypeahead },
+   const directives = { clickOutside };
 
-    inject: ['i18n'],
+    components: { CoreSearch, EnsoTypeahead };
+
+    inject: ['i18n'];
 
     methods: {
-        clear() {
+       function clear() {
             this.$refs.typeahead.clear();
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

@@ -3,23 +3,22 @@
         id="objects"/>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'objects.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
-layout: 'auth',
-    meta: {
-        permission: { name: 'object menu' },
-        title: 'Object - Index'
-    },
 
-    components: { EnsoTable },
-};
+layout: 'auth';
+    meta: {
+        permission: { name: 'object menu' };
+        title: 'Object - Index';
+    };
+
+    components: { EnsoTable };
 </script>
 
 <style lang="scss">

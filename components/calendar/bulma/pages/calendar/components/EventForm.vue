@@ -93,7 +93,7 @@
     </modal>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import { Modal } from '@enso-ui/modal/bulma';
@@ -106,26 +106,25 @@ import EventConfirmation from './EventConfirmation.vue';
 
 library.add(faUserClock, faPlus, faMinus);
 
-export default {
-    name: 'EventForm',
+    name: 'EventForm';
 
     components: {
-        Modal, EnsoForm, FormField, EnsoDatepicker, Fade, ColorSelect, EventConfirmation,
-    },
+        Modal, EnsoForm, FormField, EnsoDatepicker, Fade, ColorSelect, EventConfirmation
+    };
 
-    inject: ['i18n', 'route', 'toastr'],
+    inject: ['i18n', 'route', 'toastr'];
 
     props: {
         event: {
             type: Object,
             required: true,
         },
-    },
+    };
 
     data: () => ({
         timeFormat: 'H:i',
         confirm: null,
-    }),
+    });
 
     computed: {
         ...mapState(['meta', 'enums']),
@@ -140,44 +139,44 @@ export default {
         reminderFormat() {
             return `${this.meta.dateFormat} ${this.timeFormat}`;
         },
-    },
+    };
 
     methods: {
-        init() {
+       function init() {
             this.$refs.form.field('start_date').value = this.date(this.event.start);
             this.$refs.form.field('start_time').value = this.time(this.event.start);
             this.$refs.form.field('end_date').value = this.date(this.event.end);
             this.$refs.form.field('end_time').value = this.time(this.event.end);
-        },
-        reminderFactory() {
+        };
+       function reminderFactory() {
             return {
                 id: null,
                 event_id: this.event.id,
                 scheduled_at: null,
             };
-        },
-        addReminder() {
+        };
+       function addReminder() {
             this.$refs.form.field('reminders')
                 .value.push(this.reminder());
-        },
-        date(date) {
+        };
+       function date(date) {
             return this.$format(date, 'Y-m-d');
-        },
-        time(dateTime) {
+        };
+       function time(dateTime) {
             return this.$format(dateTime, 'H:i');
-        },
-        changeFrequency(frequency) {
+        };
+       function changeFrequency(frequency) {
             this.$refs.form.field('recurrence_ends_at')
                 .meta.hidden = frequency === this.enums.eventFrequencies.Once;
-        },
-        submit($event, updateType) {
+        };
+       function submit($event, updateType) {
             if (this.needConfirm(updateType)) {
                 this.confirm = (updateType) => this.submit($event, updateType);
                 return;
             }
             this.submitForm({ ...this.$refs.form.formData, updateType });
-        },
-        submitForm(params) {
+        };
+       function submitForm(params) {
             this.$axios.patch(
                 this.route('core.calendar.events.update', { event: this.event.id }),
                 params,
@@ -195,13 +194,12 @@ export default {
 
                 this.$refs.form.errorHandler(error);
             });
-        },
-        needConfirm(updateType) {
+        };
+       function needConfirm(updateType) {
             return this.isEdit && updateType === undefined
                 && this.enums.eventFrequencies.Once !== `${this.event.frequency}`;
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

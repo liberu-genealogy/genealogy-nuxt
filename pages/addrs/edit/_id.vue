@@ -7,22 +7,22 @@
         </div>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'addrs.edit'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'addresses menu' },
-        title: 'Address - Edit'
-    },
-    components: { EnsoForm },
-};
+        permission: { name: 'addresses menu' };
+        title: 'Address - Edit';
+    };
+    components: { EnsoForm };
+
 </script>
 
 <style lang="scss">

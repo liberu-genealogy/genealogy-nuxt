@@ -7,15 +7,14 @@
 </template>
 
 
-<script>
+<script setup>
 import BaseForm from '~/components/tasks/bulma/pages/tasks/BaseForm.vue';
 
-export default {
-    meta: {
-        breadcrumb: 'create',
-        title: 'Create Task',
-    },
 
-    components: { BaseForm },
-};
+    meta: {
+        breadcrumb: 'create';
+        title: 'Create Task';
+    };
+
+    components: { BaseForm };
 </script>

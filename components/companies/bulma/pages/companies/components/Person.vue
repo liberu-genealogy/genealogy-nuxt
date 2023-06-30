@@ -32,7 +32,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -43,22 +43,21 @@ library.add([
     faCheck, faTimes, faEnvelope, faPhone, faInfoCircle, faPencilAlt, faTrashAlt,
 ]);
 
-export default {
-    name: 'Person',
 
-    inject: ['canAccess'],
+    name: 'Person';
 
-    directives: { tooltip: VTooltip },
+    inject: ['canAccess'];
+
+    directives: { tooltip: VTooltip };
 
     props: {
         person: {
-            type: Object,
-            required: true,
-        },
-    },
+            type: Object;
+            required: true;
+        };
+    };
 
     data: () => ({
         controls: false,
-    }),
-};
+    });
 </script>

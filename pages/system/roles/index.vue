@@ -9,21 +9,20 @@
 </template>
 
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSave, faSlidersH } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
 library.add([faSave, faSlidersH]);
 
-export default {
+
     meta: {
-        breadcrumb: 'index',
-        title: 'Roles',
-    },
+        breadcrumb: 'index';
+        title: 'Roles';
+    };
 
-    components: { EnsoTable },
+    components: { EnsoTable };
 
-    inject: ['routerErrorHandler', 'toastr'],
-};
+    inject: ['routerErrorHandler', 'toastr'];
 </script>

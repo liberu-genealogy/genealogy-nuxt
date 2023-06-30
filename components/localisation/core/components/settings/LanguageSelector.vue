@@ -1,20 +1,44 @@
-<script>
-import { mapState, mapGetters, mapActions } from 'vuex';
+<script setup>
+import { computed, useStore } from 'vuex';
 
-export default {
-    name: 'LanguageSelector',
+
+    name: 'LanguageSelector';
 
     computed: {
-        ...mapState('localisation', ['languages']),
-        ...mapGetters('preferences', ['lang']),
-        multiLanguage() {
+       function useComputedValues() {
+  const store = useStore();
+
+  const languages = computed(() => {
+    return store.state.localisation.languages;
+  });
+
+  const lang = computed(() => {
+    return store.getters['preferences/lang'];
+  });
+
+  return {
+    languages,
+    lang,
+  };
+};
+       const multiLanguage() {
             return Object.keys(this.languages).length > 1;
-        },
-    },
+        };
+    };
 
     methods: {
-        ...mapActions('preferences', ['setLang']),
-    },
+       function useActions() {
+  const store = useStore();
+
+  const setLang = (lang) => {
+    store.dispatch('preferences/setLang', lang);
+  };
+
+  return {
+    setLang,
+  };
+};
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -23,7 +47,7 @@ export default {
             languages: this.languages,
             update: this.setLang,
         });
-    },
-};
+    };
+
 
 </script>

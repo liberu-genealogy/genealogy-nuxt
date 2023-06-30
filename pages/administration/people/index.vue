@@ -8,17 +8,17 @@
 }
 </router> -->
 
-<script>
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
-    meta: {
-        breadcrumb: 'index',
-        title: 'People',
-    },
 
-    components: { EnsoTable },
+    meta: {
+        breadcrumb: 'index';
+        title: 'People';
+    };
+
+    components: { EnsoTable };
     
-    inject: ['canAccess', 'i18n'],
-};
+    inject: ['canAccess', 'i18n'];
+
 </script>

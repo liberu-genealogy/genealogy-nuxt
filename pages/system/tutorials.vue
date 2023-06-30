@@ -2,14 +2,13 @@
     <NuxtChild :key="$route.path"/>
 </template>
 
-<script>
-export default {
+<script setup>
+
     // key(route) {
     //     return route.path
     // },
     meta: {
-        breadcrumb: 'tutorials',
-        route: 'system.tutorials.index',
-    },
-};
+        breadcrumb: 'tutorials';
+        route: 'system.tutorials.index';
+    };
 </script>

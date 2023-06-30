@@ -22,7 +22,7 @@
 
 
 <script setup>
-import { mapMutations } from 'vuex';
+import { useStore } from 'vuex';
 import EnsoCalendar from '~/components/calendar/bulma/pages/calendar/components/EnsoCalendar.vue';
 import CalendarFilter from '~/components/calendar/bulma/pages/calendar/components/CalendarFilter.vue';
 import EventForm from '~/components/calendar/bulma/pages/calendar/components/EventForm.vue';
@@ -43,20 +43,35 @@ import EventForm from '~/components/calendar/bulma/pages/calendar/components/Eve
         calendars: [],
     });
 
-    created() {
+    function created() {
         this.hideFooter();
     };
 
-    beforeDestroy() {
+   function beforeDestroy() {
         this.showFooter();
     };
 
     methods: {
-        ...mapMutations('layout', ['showFooter', 'hideFooter']),
-        reloadEvents() {
+       function useMutations() {
+  const store = useStore();
+
+  const showFooter = () => {
+    store.commit('layout/showFooter');
+  };
+
+  const hideFooter = () => {
+    store.commit('layout/hideFooter');
+  };
+
+  return {
+    showFooter,
+    hideFooter,
+  };
+};
+        function reloadEvents() {
             this.$refs.calendar.fetch();
             this.event = null;
-        },
+        };
     };
 
 </script>

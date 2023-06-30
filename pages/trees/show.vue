@@ -11,7 +11,7 @@
     <button id="saveButton">Export my PNG</button>
   </div>
 </template>
-<script>
+<script setup>
 import * as d3Base from "d3";
 import {
   coordQuad,
@@ -40,11 +40,11 @@ Array.prototype.remove = function () {
   }
   return this;
 };
-export default {
-  layout: "auth",
+
+  layout: "auth";
   components: {
-    vSelect,
-  },
+    vSelect;
+  };
   data: () => ({
     persons: [],
     selected_option: null,
@@ -60,22 +60,22 @@ export default {
     isLoading: true,
     fullPage: true,
     color: "#4fcf8d",
-    backgroundColor: "#ffffff",
-  }),
-  mounted() {
+    backgroundColor: "#ffffff"
+  });
+  function mounted() {
     this.fetchdata();
-  },
-  async created() {
-    this.persons = await this.$axios.$get("/api/person");
-  },
+  };
+  function created() {
+    this.persons = this.$axios.$get("/api/person");
+  };
   methods: {
-    async setSelected(value) {
+    function setSelected(value) {
       this.isLoading = true;
       const params = {
         start_id: value,
       };
       try {
-        await this.$axios.$get("/api/tree/show", { params });
+         this.$axios.$get("/api/tree/show", { params });
         this.data = gedcom;
         this.data.links = this.data.links.map((item) =>
           item.map((childItem) => childItem.toString())
@@ -85,18 +85,18 @@ export default {
         // setTimeout(this.generate, 1000)
       } catch {}
       this.isLoading = false;
-    },
-    async fetchdata() {
+    };
+    function fetchdata() {
       this.isLoading = true;
       try {
-        // this.data = await this.$axios.$get("/api/pedigree/show")
+        // this.data =  this.$axios.$get("/api/pedigree/show")
         this.data = sampleData;
         this.isLoading = false;
         this.generate();
       } catch {}
       this.isLoading = false;
-    },
-    generate() {
+    };
+    function generate() {
       // mark unions
       Object.keys(this.data.unions).forEach(
         (key) => (this.data.unions[key].isUnion = true)
@@ -206,9 +206,9 @@ export default {
       console.log("root.dag ====", this.dag);
       // draw dag
       this.update(root);
-    },
+    };
     // remove root nodes and circle-connections
-    remove_inserted_root_nodes(n) {
+    function remove_inserted_root_nodes(n) {
       // remove all inserted root nodes
       // this.dag.__private_0_t = this.dag.__private_0_t.filter(c => !n.inserted_roots.includes(c))
       // remove inserted connections
@@ -222,9 +222,9 @@ export default {
       });
       // repeat for all inserted nodes
       n.inserted_nodes.forEach(this.remove_inserted_root_nodes);
-    },
+    };
     // collapse a node
-    collapse(d) {
+    function collapse(d) {
       this.remove_inserted_root_nodes(d);
       // collapse neighbors which are visible and have been inserted by this node
       const vis_inserted_neighbors = d.neighbors.filter(
@@ -251,8 +251,8 @@ export default {
         // remove neighbor handle from clicked node
         d.inserted_nodes.remove(n);
       });
-    },
-    add_root_nodes(n) {
+    };
+   function add_root_nodes(n) {
       // add previously inserted root nodes (partners, parents)
       // n.inserted_roots.forEach(p => this.dag.__private_0_t.push(p));
       // add previously inserted connections (circles)
@@ -266,9 +266,9 @@ export default {
       });
       // repeat with all inserted nodes
       n.inserted_nodes.forEach(this.add_root_nodes);
-    },
+    };
     // uncollapse a node
-    uncollapse(d, make_roots) {
+   function uncollapse(d, make_roots) {
       if (d === undefined) return;
       // neighbor nodes that are already visible (happens when
       // circles occur): make connections, save them to
@@ -318,17 +318,17 @@ export default {
       if (!make_roots) {
         this.add_root_nodes(d);
       }
-    },
-    is_extendable(node) {
+    };
+   function is_extendable(node) {
       return node.neighbors.filter((n) => !n.visible).length > 0;
-    },
-    getNeighbors(node) {
+    };
+   function getNeighbors(node) {
       if (node.data.isUnion) {
         return this.getChildren(node).concat(this.getPartners(node));
       }
       return this.getOwnUnions(node).concat(this.getParentUnions(node));
-    },
-    getParentUnions(node) {
+    };
+   function getParentUnions(node) {
       if (node === undefined) return [];
       if (node.data.isUnion) return [];
       const u_id = node.data.parent_union;
@@ -337,8 +337,8 @@ export default {
         return [union].filter((u) => u !== undefined);
       }
       return [];
-    },
-    getParents(node) {
+    };
+   function getParents(node) {
       let parents = [];
       if (node.data.isUnion) {
         node.data.partner.forEach((p_id) =>
@@ -351,14 +351,14 @@ export default {
         );
       }
       return parents.filter((p) => p !== undefined);
-    },
-    getOtherPartner(node, union_data) {
+    };
+   function getOtherPartner(node, union_data) {
       const partner_id = union_data.partner.find(
         (p_id) => p_id !== node.data.id && p_id !== undefined
       );
       return this.all_nodes.find((n) => n.data.id === partner_id);
-    },
-    getPartners(node) {
+    };
+   function getPartners(node) {
       const partners = [];
       // return both partners if node argument is a union
       if (node.data.isUnion) {
@@ -374,16 +374,16 @@ export default {
         });
       }
       return partners.filter((p) => p !== undefined);
-    },
-    getOwnUnions(node) {
+    };
+   function getOwnUnions(node) {
       if (node.data.isUnion) return [];
       const unions = [];
       node.data.own_unions.forEach((u_id) =>
         unions.push(this.all_nodes.find((n) => n.data.id === u_id))
       );
       return unions.filter((u) => u !== undefined);
-    },
-    getChildren(node) {
+    };
+   function getChildren(node) {
       let children = [];
       if (node.data.isUnion) {
         children = node.childrens.concat(node._children);
@@ -400,14 +400,14 @@ export default {
           Math.sign((this.getBirthYear(a) || 0) - (this.getBirthYear(b) || 0))
         );
       return children;
-    },
-    getBirthYear(node) {
+    };
+   function getBirthYear(node) {
       return new Date(node.data.birthyear || NaN).getFullYear();
-    },
-    getDeathYear(node) {
+    };
+    function getDeathYear(node) {
       return new Date(node.data.deathyear || NaN).getFullYear();
-    },
-    find_path(n) {
+    };
+    function find_path(n) {
       const parents = this.getParents(n);
       let found = false;
       let result = null;
@@ -426,8 +426,8 @@ export default {
         }
       });
       return result;
-    },
-    update(source) {
+    };
+   function update(source) {
       // Assigns the x and y position for the nodes
       console.log("update dag ====== ", this.dag);
       if (source.data.id !== this.data.start) return false;
@@ -558,16 +558,16 @@ export default {
           this.onSave
         ); // passes Blob and filesize String to the callback
       });
-    },
+    };
     // Creates a curved (diagonal) path from parent to the child nodes
-    diagonal(s, d) {
+   function diagonal(s, d) {
       const path = `M ${s.y} ${s.x}
                 C ${(s.y + d.y) / 2} ${s.x},
                   ${(s.y + d.y) / 2} ${d.x},
                   ${d.y} ${d.x}`;
       return path;
-    },
-    getCSSStyles(parentElement) {
+    };
+   function getCSSStyles(parentElement) {
       const selectorTextArr = [];
       // Add Parent element Id and Classes to the list
       selectorTextArr.push(`#${parentElement.id}`);
@@ -605,17 +605,17 @@ export default {
       function contains(str, arr) {
         return arr.indexOf(str) !== -1;
       }
-    },
-    appendCSS(cssText, element) {
+    };
+    function appendCSS(cssText, element) {
       const styleElement = document.createElement("style");
       styleElement.setAttribute("type", "text/css");
       styleElement.innerHTML = cssText;
       const refNode = element.hasChildNodes() ? element.children[0] : null;
       element.insertBefore(styleElement, refNode);
-    },
+    };
     // Below are the functions that handle actual exporting:
     // getSVGString ( svgNode ) and svgString2Image( svgString, width, height, format, callback )
-    getSVGString(svgNode) {
+   function getSVGString(svgNode) {
       svgNode.setAttribute("xlink", "http://www.w3.org/1999/xlink");
       const cssStyleText = this.getCSSStyles(svgNode);
       this.appendCSS(cssStyleText, svgNode);
@@ -624,8 +624,8 @@ export default {
       svgString = svgString.replace(/(\w+)?:?xlink=/g, "xmlns:xlink="); // Fix root xlink without namespace
       svgString = svgString.replace(/NS\d+:href/g, "xlink:href"); // Safari NS namespace fix
       return svgString;
-    },
-    svgString2Image(svgString, width, height, format, callback) {
+    };
+   function svgString2Image(svgString, width, height, format, callback) {
       format = format || "png";
       const imgsrc = `data:image/svg+xml;base64,${btoa(
         unescape(encodeURIComponent(svgString))
@@ -644,9 +644,9 @@ export default {
         });
       };
       image.src = imgsrc;
-    },
+    };
     // Toggle unions, children, partners on click.
-    onClick(e, d) {
+   function onClick(e, d) {
       // do nothing if node is union
       if (d.data.isUnion) return;
       console.log("click d ===============", this.is_extendable(d));
@@ -655,12 +655,12 @@ export default {
       // collapse if fully uncollapsed
       else this.collapse(d);
       this.update(d);
-    },
-    onSave(dataBlob, filesize) {
+    };
+   function onSave(dataBlob, filesize) {
       // saveAs(dataBlob, 'D3 vis exported to PNG.png'); // FileSaver.js function
-    },
-  },
-};
+    };
+  };
+
 </script>
 <style>
 .node circle {
@@ -685,11 +685,11 @@ export default {
 }
 </style>
 <!-- <script src="https://cdn.jsdelivr.net/npm/d3-dag@0.3.4/dist/d3-dag.min.js"></script>
-<script>
+<script setup>
 import * as d3 from 'd3';
 import * as _dag from 'd3-dag';
 import {tip} from 'd3-tip';
-export default {
+
     name: 'Show',
     data() {
         return{

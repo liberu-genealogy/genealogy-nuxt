@@ -28,26 +28,26 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { faFlag, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 library.add(faFlag, faTimes);
 
-export default {
-    name: 'Flags',
+
+    name: 'Flags';
 
     props: {
         value: {
-            type: [Number, String],
-            required: false,
-            default: null,
-        },
-    },
+            type: [Number, String];
+            required: false;
+            defaultValue: null;
+        };
+    };
 
-    computed: mapState(['enums']),
-};
+    computed: mapState(['enums']);
+
 </script>
 <style lang="scss">
 .flags {

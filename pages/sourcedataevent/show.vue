@@ -1,20 +1,19 @@
 <template>
     <div/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'sourcedataevent.show'
 }
-</router>
-<script>
-export default {
-    name: 'Show',
-    layout: 'auth',
+</router> -->
+<script setup>
+
+    name: 'Show';
+    layout: 'auth';
     meta: {
-        permission: { name: 'sourcedataevent menu' },
-        title: 'Sourcedataevent - Show'
-    },
-};
+        permission: { name: 'sourcedataevent menu' };
+        title: 'Sourcedataevent - Show';
+    };
 </script>
 
 <style lang="scss">

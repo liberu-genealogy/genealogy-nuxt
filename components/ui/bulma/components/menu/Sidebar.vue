@@ -10,16 +10,16 @@
     </core-sidebar>
 </template>
 
-<script>
+<script setup>
 import Menus from '~/components/menus/bulma/components/menu/Menus.vue';
 import CoreSidebar from '../../../core/components/menu/Sidebar.vue';
 import VueAside from '../VueAside.vue';
 
-export default {
-    name: 'Sidebar',
-    components: { CoreSidebar, Menus, VueAside },
-    inject: ['i18n'],
-};
+
+    name: 'Sidebar';
+    components: { CoreSidebar, Menus, VueAside };
+    inject: ['i18n'];
+
 </script>
 
 <style lang="scss">

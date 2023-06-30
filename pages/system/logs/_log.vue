@@ -45,7 +45,7 @@
 </template>
 
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCloudDownloadAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -56,47 +56,46 @@ import { hljs } from '@enso-ui/directives';
 
 library.add(faCloudDownloadAlt, faTrashAlt);
 
-export default {
+
     meta: {
-        breadcrumb: 'show',
-        title: 'Show Log',
-    },
+        breadcrumb: 'show';
+        title: 'Show Log';
+    };
 
-    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'],
+    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'];
 
-    directives: { hljs },
+    directives: { hljs };
 
     components: {
-        Card, CardHeader, CardRefresh, CardRemove, CardControl, CardContent, Confirmation,
-    },
+        Card, CardHeader, CardRefresh, CardRemove, CardControl, CardContent, Confirmation
+    };
 
     data: () => ({
         log: null,
-        content: null,
-    }),
+        content: null
+    });
 
-    created() {
+   function created() {
         this.fetch();
-    },
+    };
 
     methods: {
-        fetch() {
+       function fetch() {
             this.$axios.get(this.route('system.logs.show', this.$route.params.log))
                 .then(({ data }) => {
                     this.log = data;
                 }).catch(this.errorHandler);
-        },
-        empty() {
+        };
+       function empty() {
             this.$axios.delete(this.route('system.logs.destroy', this.log.name)).then(({ data }) => {
                 this.log = data.log;
                 this.toastr.success(data.message);
             }).catch(this.errorHandler);
-        },
-        timeFromNow(date) {
+        };
+        function timeFromNow(date) {
             return this.$formatDistance(date);
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style src="highlight.js/styles/atom-one-light.css"></style>

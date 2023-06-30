@@ -13,24 +13,24 @@
   </v-app>
 </template>
 
-<router>
+<!-- <router>
 {
   name: 'social.categories.index'
 }
-</router>
+</router> -->
 
-<script>
+<script setup>
 import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css'
+import 'vue-loading-overlay/dist/css/index.css';
 import { mapGetters, mapActions } from 'vuex'
 
-export default {
-  layout: 'auth',
-  inject: ['errorHandler', 'route', 'toastr'],
+
+  layout: 'auth';
+  inject: ['errorHandler', 'route', 'toastr'];
   //middleware: ['permission', 'verification'],
   meta: {
-    permission: { name: 'dashboard menu' },
-    title: 'Groups',
-  },
-}
+    permission: { name: 'dashboard menu' };
+    title: 'Groups';
+  };
+
 </script>

@@ -19,15 +19,15 @@
     </core-bookmark-state>
 </template>
 
-<script>
+<script setup>
 import VueSwitch from '@enso-ui/switch/bulma';
 import CoreBookmarkState from '~/components/bookmarks/core/components/settings/BookmarksState.vue';
 
-export default {
-    name: 'BookmarksState',
 
-    components: { CoreBookmarkState, VueSwitch },
+    name: 'BookmarksState';
 
-    inject: ['i18n'],
-};
+    components: { CoreBookmarkState, VueSwitch };
+
+    inject: ['i18n'];
+
 </script>

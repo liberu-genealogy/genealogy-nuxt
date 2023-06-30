@@ -28,31 +28,30 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faExclamationTriangle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { focus } from '@enso-ui/directives';
 
 library.add(faCheck, faExclamationTriangle, faEnvelope);
 
-export default {
-    name: 'Email',
 
-    directives: { focus },
+    name: 'Email';
 
-    inject: ['errors', 'i18n', 'state'],
+    directives: { focus };
+
+    inject: ['errors', 'i18n', 'state'];
 
     props: {
         value: {
-            type: String,
-            required: true,
-        },
-    },
+            type: String;
+            required: true;
+        };
+    };
 
     computed: {
-        successful() {
+       function successful() {
             return this.state.successful;
-        },
-    },
-};
+        };
+    };
 </script>

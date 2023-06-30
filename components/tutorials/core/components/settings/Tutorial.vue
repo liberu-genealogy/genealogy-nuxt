@@ -1,23 +1,23 @@
-<script>
+<script setup>
 import { mapMutations } from 'vuex';
 import Driver from 'driver.js';
 
-export default {
-    name: 'CoreTutorial',
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    name: 'CoreTutorial';
+
+    inject: ['errorHandler', 'i18n', 'route'];
 
     props: {
         labels: {
-            type: Object,
-            default: () => ({
-                done: 'Done',
-                close: 'Close',
-                next: 'Next',
-                previous: 'Previous',
-            }),
-        },
-    },
+            type: Object;
+            function Bydefault(){
+                done: 'Done';
+                close: 'Close';
+                next: 'Next';
+                previous: 'Previous'
+            };
+        };
+    };
 
     data: v => ({
         driver: new Driver({
@@ -27,17 +27,17 @@ export default {
             nextBtnText: v.i18n(v.labels.next),
             prevBtnText: v.i18n(v.labels.previous),
         }),
-    }),
+    });
 
     methods: {
         ...mapMutations('layout/settings', { toggleSettingsBar: 'toggle' }),
-        fetch() {
+       function fetch() {
             this.$axios.get(this.route('system.tutorials.load'), {
                 params: { route: this.$route.name },
             }).then(({ data }) => this.start(data))
                 .catch(this.errorHandler);
-        },
-        start(steps) {
+        };
+       function start(steps) {
             if (!steps.length) {
                 return;
             }
@@ -45,25 +45,24 @@ export default {
             this.toggleSettingsBar();
             this.driver.defineSteps(this.localise(steps));
             this.driver.start();
-        },
-        localise(steps) {
+        };
+        function localise(steps) {
             return steps.map(({ element, popover }) => ({
                 element,
                 popover: {
                     description: this.i18n(popover.description),
                     position: popover.position,
                     title: this.i18n(popover.title),
-                },
+                };
             }));
-        },
-    },
+        };
+    };
 
     render() {
         return this.$scopedSlots.default({
             itemEvents: {
-                click: this.fetch,
-            },
+                click: this.fetch;
+            };
         });
-    },
-};
+    }
 </script>

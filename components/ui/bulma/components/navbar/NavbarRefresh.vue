@@ -6,19 +6,19 @@
     </vue-pull-refresh>
 </template>
 
-<script>
+<script setup>
 
 import VuePullRefresh from 'vue-pull-refresh';
 import Navbar from './Navbar.vue';
 
-export default {
-    name: 'NavbarRefresh',
+
+    name: 'NavbarRefresh';
 
     components: {
         VuePullRefresh, Navbar,
-    },
+    };
 
-    inject: ['i18n'],
+    inject: ['i18n'];
 
     data: v => ({
         config: {
@@ -27,14 +27,13 @@ export default {
             loadingLabel: v.i18n('Refreshing...'),
             errorLabel: v.i18n('Something wrong happened'),
         },
-    }),
+    });
 
     methods: {
-        refresh() {
+       function refresh() {
             return new Promise(() => window.location.reload(true));
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style>

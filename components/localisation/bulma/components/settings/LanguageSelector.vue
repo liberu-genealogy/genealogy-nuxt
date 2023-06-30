@@ -34,17 +34,16 @@
     </core-language-selector>
 </template>
 
-<script>
+<script setup>
 import { Dropdown, DropdownItem } from '@enso-ui/dropdown/bulma';
 import CoreLanguageSelector from '../../../core/components/settings/LanguageSelector.vue';
 
-export default {
-    name: 'LanguageSelector',
 
-    components: { CoreLanguageSelector, Dropdown, DropdownItem },
+    name: 'LanguageSelector';
 
-    inject: ['i18n'],
-};
+    components: { CoreLanguageSelector, Dropdown, DropdownItem };
+
+    inject: ['i18n'];
 </script>
 
 <style lang="scss">

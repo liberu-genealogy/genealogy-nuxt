@@ -69,7 +69,7 @@
     </core-profile-control>
 </template>
 
-<script>
+<script setup>
 import { mapActions } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
@@ -78,19 +78,18 @@ import CoreProfileControl from '../../../core/components/navbar/ProfileControl.v
 import Avatar from '../../pages/users/components/Avatar.vue';
 
 library.add(faEye, faSignOutAlt);
-export default {
-    name: 'ProfileControl',
 
-    directives: { clickOutside },
+    name: 'ProfileControl';
 
-    components: { CoreProfileControl, Avatar },
+   const directives =  { clickOutside };
+
+    components: { CoreProfileControl, Avatar };
 
     methods: {
         ...mapActions('auth', ['logout']),
-    },
+    };
 
-    inject: ['i18n'],
-};
+    inject: ['i18n'];
 </script>
 
 <style lang="scss">

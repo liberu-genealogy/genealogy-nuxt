@@ -2,23 +2,22 @@
     <enso-table class="box is-paddingless raises-on-hover"
         id="publications"/>
 </template>
-<router>
+<!-- <router>
 {
     name: 'publications.index'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 
-export default {
-    name: 'Index',
-    layout: 'auth',
+
+    name: 'Index';
+    layout: 'auth';
 	meta: {
-        permission: { name: 'publications menu' },
-        title: 'Publications - Index'
-    },
-    components: { EnsoTable },
-};
+        permission: { name: 'publications menu' };
+        title: 'Publications - Index';
+    };
+    components: { EnsoTable };
 </script>
 
 <style lang="scss">

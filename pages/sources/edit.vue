@@ -5,23 +5,23 @@
         </div>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'sources.edit'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-    name: 'Edit',
-    layout: 'auth',
+
+    name: 'Edit';
+    layout: 'auth';
     meta: {
-        permission: { name: 'sources menu' },
-        title: 'Sources - Edit'
-    },
-    components: { EnsoForm },
-};
+        permission: { name: 'sources menu' };
+        title: 'Sources - Edit';
+    };
+    components: { EnsoForm };
+
 </script>
 
 <style lang="scss">

@@ -60,30 +60,30 @@
     </article>
 </template>
 
-<script>
+<script setup>
 
 import Confirmation from '@enso-ui/confirmation/bulma';
 import Inputor from './Inputor.vue';
 
-export default {
-    name: 'Reply',
 
-    inject: ['i18n', 'route'],
+    name: 'Reply';
 
-    components: { Inputor, Confirmation },
+    inject: ['i18n', 'route'];
+
+    components: { Inputor, Confirmation };
 
     props: {
         reply: {
             type: Object,
             required: true,
         },
-    },
+    };
 
     data: () => ({
         controls: false,
         confirmation: false,
         edit: false,
-    }),
+    });
 
     computed: {
         avatar() {
@@ -95,7 +95,7 @@ export default {
         edited() {
             return this.reply.createdAt !== this.reply.updatedAt;
         },
-    },
+    };
 
     methods: {
         timeFromNow(date) {
@@ -106,8 +106,7 @@ export default {
                 .replace(/<h1>/gm, '<h1 class="is-marginless">')
                 .replace(/<h2>/gm, '<h2 class="is-marginless">');
         },
-    },
-};
+    };
 </script>
 
 <style lang="scss">

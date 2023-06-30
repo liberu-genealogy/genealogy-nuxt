@@ -23,29 +23,29 @@
             v-if="!!deletableUser"/>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'administration.users.index'
 }
-</router>
+</router> -->
 
-<script>
+<script setup>
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import Avatar from '~/components/users/bulma/pages/users/components/Avatar.vue';
 import DeleteModal from '~/components/users/bulma/pages/users/components/DeleteModal.vue';
 
-export default {
+
     meta: {
-        breadcrumb: 'index',
-        title: 'Users',
-    },
+        breadcrumb: 'index';
+        title: 'Users';
+    };
 
-    components: { EnsoTable, Avatar, DeleteModal },
+    components: { EnsoTable, Avatar, DeleteModal };
 
-    inject: ['canAccess', 'i18n'],
+    inject: ['canAccess', 'i18n'];
 
     data: () => ({
         deletableUser: null,
-    }),
-};
+    });
+
 </script>

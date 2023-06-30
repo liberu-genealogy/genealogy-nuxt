@@ -97,36 +97,7 @@ export default defineNuxtConfig({
   router: {
     middleware: 'auth'
   },
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '~/plugins/bootEnums.js',
-    '~/plugins/i18n.js',
-    '~/plugins/pRoute.js',
-    '~/plugins/filters.js',
-    '~/plugins/numberFormat.js',
-    '~/plugins/shortNumber.js',
-    '~/plugins/toastr.js',
-    '~/plugins/fontawesome.js',
-    '~/plugins/themesSettingRegister.js',
-    '~/plugins/bookmarksSettingRegister.js',
-    '~/plugins/tutorialSettingRegister.js',
-    '~/plugins/notificationsRegister.js',
-    '~/plugins/localisationRegister.js',
-    '~/plugins/ioRegister.js',
-    '~/plugins/tasksNavbarRegister.js',
-    '~/plugins/usersRegister.js',
-    '~/plugins/Validator.js',
-    '~/plugins/date-fns/format.js',
-    '~/plugins/date-fns/formatDistance.js',
-    '~/plugins/vue-select.js',
-    '~/plugins/vuelidate.js',
-    '~/plugins/echo.js',
-  '~/plugins/vue-fb-customer-chat.js',
-    {src: '~/plugins/vue-stripe.js', ssr: false},
-  ],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  // components: true,
+  
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   modules: [

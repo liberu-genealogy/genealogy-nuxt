@@ -1,50 +1,50 @@
-<script>
+<script setup>
 import { mapState, mapMutations } from 'vuex';
 
-export default {
-    name: 'CoreMenus',
 
-    inject: ['errorHandler', 'route'],
+    name: 'CoreMenus';
+
+    inject: ['errorHandler', 'route'];
 
     props: {
         menus: {
-            type: Array,
-            required: true,
-        },
+            type: Array;
+            required: true;
+        };
         collapsed: {
-            type: Boolean,
-            default: false,
-        },
-    },
+            type: Boolean;
+            defaultValue: false;
+        };
+    };
 
     computed: {
         ...mapState('menu', ['editable']),
         disabled() {
             return !this.editable;
-        },
-    },
+        };
+    };
 
     watch: {
         collapsed: 'toggle',
-    },
+    };
 
-    mounted() {
+   function mounted() {
         if (this.collapsed) {
             this.$el.style.height = 0;
         }
-    },
+    };
 
     methods: {
         ...mapMutations('menu', ['organize']),
-        shrink(height) {
+       function shrink(height) {
             this.$el.style.height = `${parseInt(this.$el.style.height, 10) - height}px`;
             this.$emit('shrink', height);
-        },
-        extend(height) {
+        };
+       function extend(height) {
             this.$el.style.height = `${height + parseInt(this.$el.style.height, 10)}px`;
             this.$emit('extend', height);
-        },
-        toggle() {
+        };
+       function toggle() {
             if (this.collapsed) {
                 const height = this.$el.scrollHeight;
 
@@ -62,12 +62,12 @@ export default {
 
             this.$el.style.height = `${this.$el.scrollHeight}px`;
             this.$emit('extend', this.$el.scrollHeight);
-        },
-        persist() {
+        };
+       function persist() {
             this.$axios.put(this.route('system.menus.organize'), { menus: this.menus })
                 .catch(this.errorHandler);
-        },
-    },
+        };
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -85,6 +85,5 @@ export default {
                 end: this.persist,
             },
         });
-    },
-};
+    };
 </script>

@@ -82,7 +82,7 @@
     </core-notifications>
 </template>
 
-<script>
+<script setup>
 
 import { clickOutside } from '@enso-ui/directives';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -94,15 +94,14 @@ import CoreNotifications from '../../../core/components/navbar/Notifications.vue
 
 library.add(faBell, faCheck, faEye, faCogs, faQuestion, faEnvelope, faFileExcel);
 
-export default {
-    name: 'Notifications',
 
-    directives: { clickOutside },
+    name: 'Notifications';
 
-    components: { CoreNotifications, NavbarItem },
+    directives: { clickOutside };
 
-    inject: ['i18n'],
-};
+    components: { CoreNotifications, NavbarItem };
+
+    inject: ['i18n'];
 
 </script>
 

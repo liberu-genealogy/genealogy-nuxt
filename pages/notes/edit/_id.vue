@@ -9,24 +9,23 @@
     </div>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'notes.edit'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'notes menu' },
-        title: 'Notes - Edit'
-    },
+        permission: { name: 'notes menu' };
+        title: 'Notes - Edit';
+    };
 
-    components: { EnsoForm },
-};
+    components: { EnsoForm };
 </script>
 
 <style lang="scss">

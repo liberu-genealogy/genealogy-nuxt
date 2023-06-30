@@ -1,18 +1,17 @@
 <template></template>
 
-<router>
+<!-- <router>
 {
     name: 'decendent.index'
 }
-</router>
-<script>
-export default {
-  layout: "auth",
+</router> -->
+<script setup>
+
+  layout: "auth";
   meta: {
-    permission: { name: "decendent menu" },
-    title: "Decendent - Index",
-  },
-};
+    permission: { name: "decendent menu" };
+    title: "Decendent - Index";
+  };
 </script>
 
 <style lang="scss">

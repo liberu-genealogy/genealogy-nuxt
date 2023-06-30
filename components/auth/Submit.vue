@@ -10,17 +10,17 @@
     </button>
 </template>
 
-<script>
+<script setup>
 import { mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faLock, faUser);
 
-export default {
-    name: 'Submit',
 
-    inject: ['errors', 'i18n', 'route', 'state', 'toastr'],
+    name: 'Submit';
+
+    inject: ['errors', 'i18n', 'route', 'state', 'toastr'];
 
     props: {
         action: {
@@ -39,11 +39,11 @@ export default {
             type: Object,
             required: true,
         },
-    },
+    };
 
     data: () => ({
         loading: false,
-    }),
+    });
 
     computed: {
         ...mapGetters(['isWebview']),
@@ -52,10 +52,10 @@ export default {
                 ? { headers: { isWebview: true } }
                 : {};
         },
-    },
+    };
 
     methods: {
-        submit() {
+        function submit() {
             this.loading = true;
             this.state.successful = false;
             this.$emit('submitting');
@@ -78,7 +78,6 @@ export default {
                         throw error;
                     }
                 }).finally(() => (this.loading = false));
-        },
-    },
-};
+        };
+    };
 </script>

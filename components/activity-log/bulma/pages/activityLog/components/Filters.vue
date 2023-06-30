@@ -34,34 +34,34 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { EnsoDateFilter, EnsoSelectFilter as SelectFilter } from '@enso-ui/filters/bulma';
 
-export default {
-    name: 'Filters',
-    components: { EnsoDateFilter, SelectFilter },
-    inject: ['i18n'],
+
+    name: 'Filters';
+    components: { EnsoDateFilter, SelectFilter };
+    inject: ['i18n'];
     props: {
         loading: {
-            type: Boolean,
-            required: true,
-        },
+            type: Boolean;
+            required: true;
+        };
         filters: {
-            type: Object,
-            required: true,
-        },
-    },
+            type: Object;
+            required: true;
+        };
+    };
     computed: {
-        ...mapState(['enums']),
-    },
+        ...mapState(['enums'])
+    };
     watch: {
         filters: {
-            handler() {
+           function handler() {
                 this.$emit('reload');
-            },
-            deep: true,
-        },
-    },
-};
+            };
+            deep: true;
+        };
+    }
+
 </script>

@@ -2,19 +2,18 @@
     <div/>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'personasso.show'
 }
-</router>
-<script>
-export default {
-layout: 'auth',
+</router> -->
+<script setup>
+
+layout: 'auth';
     meta: {
-        permission: { name: 'personasso menu' },
-        title: 'Person Asso - Show'
-    },
-};
+        permission: { name: 'personasso menu' };
+        title: 'Person Asso - Show';
+    };
 </script>
 
 <style lang="scss">

@@ -1,22 +1,22 @@
-<script>
+<script setup>
 import { mapState, mapGetters, mapMutations } from 'vuex';
 
-export default {
-    name: 'CoreBookmarks',
 
-    inject: ['routerErrorHandler'],
+    name: 'CoreBookmarks';
+
+    inject: ['routerErrorHandler'];
 
     props: {
         excluded: {
             type: Array,
-            default: () => ([]),
+            defaultValue: () => ([]),
         },
-    },
+    };
 
     data: () => ({
         scrollInterval: null,
         scrollStep: 5,
-    }),
+    });
 
     computed: {
         ...mapState('bookmarks', ['bookmarks']),
@@ -24,42 +24,42 @@ export default {
         container() {
             return this.$el.querySelector('.bookmark-items');
         },
-    },
+    };
 
     watch: {
         $route(route) {
             this.add(route);
         },
-    },
+    };
 
     created() {
         this.init();
         this.exclude(this.excluded);
         this.add(this.$route);
-    },
+    };
 
     methods: {
         ...mapMutations('bookmarks', ['init', 'set', 'exclude', 'push', 'stick', 'clear']),
         ...mapMutations('bookmarks', { splice: 'remove' }),
-        add(bookmark) {
+        function add(bookmark) {
             this.push(bookmark);
             this.$nextTick(this.focus);
-        },
-        uniqueId(bookmark) {
+        };
+        function uniqueId(bookmark) {
             const { name, params, query } = bookmark;
 
             return JSON.stringify({ name, params, query });
-        },
-        remove(bookmark) {
+        };
+        function remove(bookmark) {
             this.splice(bookmark);
             const { name, params, query } = this.bookmarks[this.bookmarks.length - 1];
             this.$router.push({ name, params, query })
-        },
-        item(index) {
+        };
+       function item(index) {
             const items = this.container.querySelectorAll('.control');
             return items[index];
-        },
-        focus() {
+        };
+        function focus() {
             clearInterval(this.scrollInterval);
 
             const bookmark = this.item(this.index(this.$route));
@@ -83,8 +83,8 @@ export default {
                 const remaining = amount % this.scrollStep;
                 this.scroll(amount, 1, remaining);
             }
-        },
-        scroll(amount, direction, remaining) {
+        };
+       function scroll(amount, direction, remaining) {
             if (remaining) {
                 this.container.scrollLeft += remaining * direction;
             }
@@ -97,8 +97,8 @@ export default {
 
                 this.container.scrollLeft += this.scrollStep * direction;
             }, 1);
-        },
-    },
+        };
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -129,6 +129,5 @@ export default {
                 input: bookmarks => (this.set(bookmarks)),
             },
         });
-    },
-};
+    };
 </script>

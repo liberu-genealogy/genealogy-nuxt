@@ -10,28 +10,28 @@
     <div style="height: 700px" id="webtrees-pedigree-chart-container"></div>
   </div>
 </template>
-<router>
+<!-- <router>
 {
   name: 'pedigree.show'
 }
-</router>
+</router> -->
 
 
-<script>
+<script setup>
 
 
 import { EnsoTable } from "@enso-ui/tables/bulma";
 import { PedigreeChart } from "/assets/js/pedigree-chart/modules/index";
 import Loading from 'vue-loading-overlay'
 import vSelect from 'vue-select'
-import style from '/assets/css/svg.css'
+import style from '/assets/css/svg.css?inline'
 import {createDisplayName, getBirthYear, getDeathYear } from '/utils/personHelper';
-export default {
-  layout: "auth",
+
+  layout: "auth";
   meta: {
-    permission: { name: "trees menu" },
-    title: "Trees - Index",
-  },
+    permission: { name: "trees menu" };
+    title: "Trees - Index";
+  };
   data: () => ({
     familyData: {},
     persons: [],
@@ -44,14 +44,14 @@ export default {
     thumbnail_man: "/images/thumbnail-man.svg",
     thumbnail_woman: "/images/thumbnail-woman.svg",
     thumbnail_middle: "/images/thumbnail-unknown.svg"
-  }),
+  });
   components: {
     EnsoTable,
     Loading,
     vSelect
-  },
+  };
   methods: {
-    checkBirthDeathDate(birth, death) {
+   function checkBirthDeathDate(birth, death) {
       if (death) {
         if (!birth) return ""
         return `${birth.toString().slice(0, 4)}-${death.toString().slice(0, 4)}`
@@ -59,9 +59,9 @@ export default {
         if (!birth) return ""
         return `Born ${birth.toString().slice(0, 4)}`
       }
-    },
+    };
 
-    checkParents(id) {
+   function checkParents(id) {
       const parents = [];
       const person = this.data.persons[id]
 
@@ -102,9 +102,9 @@ export default {
 
       // console.log("parents: ", parents);
       return parents.length == 0 ? null : parents
-    },
+    };
 
-    checkFamilyData(id = null) {     
+   function checkFamilyData(id = null) {     
       const person = id ? this.data.persons[id] : this.data.persons[this.data.start]
       const data = {
         id: person.id,
@@ -124,8 +124,8 @@ export default {
 
       // console.log("xxxdata: ", data);
       return data;
-    },
-    async fetchData() {
+    };
+    function fetchData() {
       if (!this.selected_person.value) return;
       let params = { start_id: this.selected_person.value, generation: this.generation.value }
       this.$axios
@@ -150,9 +150,9 @@ export default {
           );
           pedigreeChart.draw(this.familyData);
         });
-    },
+    };
 
-    getPersons() {
+   function getPersons() {
       this.isLoading = true
       this.$axios
         .$get("/api/persons")
@@ -170,17 +170,16 @@ export default {
           });
           this.isLoading = false;
         });
-    },
-  },
-  mounted() {
+    };
+  };
+ function mounted() {
     this.getPersons();
-  },
+  };
   computed: {
-    style() {
+    function style() {
       return style
     }
-  }
-};
+  };
 </script>
 
 <style lang="scss">

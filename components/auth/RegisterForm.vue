@@ -296,7 +296,7 @@
   </AuthIndex>
 </template>
 
-<script>
+<script setup>
 import AuthIndex from "~/components/auth/Index.vue";
 import { mapState } from "vuex";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -309,15 +309,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { focus } from "@enso-ui/directives";
 import PlanSelect from "~/components/auth/PlanSelect.vue";
-import Errors from "@enso-ui/laravel-validation";
+// import Errors from "@enso-ui/laravel-validation/src/Errors";
 import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
 
 library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
-export default {
-  name: "RegisterForm",
-  components: { AuthIndex, PlanSelect },
-  directives: { focus },
+
+  name: "RegisterForm";
+  components: { AuthIndex, PlanSelect };
+  directives: { focus };
   // inject: {
   //   i18n: { from: "i18n" },
   // },
@@ -331,7 +331,7 @@ export default {
       required: true,
       type: String,
     },
-  },
+  };
   data: () => ({
         // for plans
         plans: [],
@@ -341,6 +341,7 @@ export default {
       last_name: "",
       email: "",
       // errors: new Errors(),
+      errors:'',
       errorInput: "",
       message: "",
       isSuccessful: false,
@@ -402,8 +403,8 @@ export default {
     //     }
     //   });
     // },
-    async getplans() {
-      const response = await this.$axios.$get('/api/get-subscription-plan')
+    function getplans() {
+      const response =  this.$axios.$get('/api/get-subscription-plan')
       this.plans = response.map((plan) => {
         // console.log('this.loggedInUser.id',this.start_id+' ==' +company.id);
         if (plan.nickname == 'free') {
@@ -411,12 +412,12 @@ export default {
         }
         return plan;
       })
-    },
-    loginSocial(provider) {
+    };
+    function loginSocial(provider) {
       this.provider = provider;
       window.location.href = `${process.env.baseUrl}/api/login/${provider}`;
-    },
-    submit() {
+    };
+    function submit() {
 
       this.loading = true;
       this.isSuccessful = false;
@@ -452,12 +453,11 @@ export default {
               }
             });
       })
-    },
-  },
-  created() {
+    };
+  };
+  function created() {
     this.getplans();
-  },
-};
+  };
 
 function openWindow(url, title, options = {}) {
   if (typeof url === 'object') {

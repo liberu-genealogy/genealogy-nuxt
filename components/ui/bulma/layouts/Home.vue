@@ -23,20 +23,19 @@
     </core-home>
 </template>
 
-<script>
+<script setup>
 import { focus } from '@enso-ui/directives';
 import Loader from '@enso-ui/loader/bulma';
 import CoreHome from '~/components/ui/core/layouts/Home.vue';
 
-export default {
-    name: 'Home',
 
-    components: { CoreHome, Loader },
+    name: 'Home';
 
-    directives: { focus },
+    components: { CoreHome, Loader };
 
-    inject: ['i18n'],
-};
+    directives: { focus };
+
+    inject: ['i18n'];
 </script>
 
 <style>

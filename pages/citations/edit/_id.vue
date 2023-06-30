@@ -9,24 +9,24 @@
     </div>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'citations.edit'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'citations menu' },
-        title: 'Citations - Edit'
-    },
+        permission: { name: 'citations menu' };
+        title: 'Citations - Edit';
+    };
 
-    components: { EnsoForm },
-};
+    components: { EnsoForm };
+
 </script>
 
 <style lang="scss">

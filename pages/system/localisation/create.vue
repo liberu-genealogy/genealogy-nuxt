@@ -7,15 +7,14 @@
 </template>
 
 
-<script>
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-    meta: {
-        breadcrumb: 'create',
-        title: 'Create Language',
-    },
 
-    components: { EnsoForm },
-};
+    meta: {
+        breadcrumb: 'create';
+        title: 'Create Language';
+    };
+
+    components: { EnsoForm };
 </script>

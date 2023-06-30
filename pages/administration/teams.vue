@@ -58,28 +58,28 @@
         </div>
     </div>
 </template>
-<router>
+<!-- <router>
 {
     name: 'administration.teams.index'
 }
-</router>
+</router> -->
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Team from '~/components/teams/bulma/pages/teams/components/Team.vue';
 
 library.add(faPlus, faSearch, faSpinner);
 
-export default {
+
     meta: {
-        breadcrumb: 'index',
-        title: 'Teams',
-    },
+        breadcrumb: 'index';
+        title: 'Teams';
+    };
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    inject: ['errorHandler', 'i18n', 'route'];
 
-    components: { Team },
+    components: { Team };
 
     data: () => ({
         loading: false,
@@ -87,23 +87,23 @@ export default {
         teams: [],
         team: null,
         query: null,
-    }),
+    });
 
     computed: {
-        filteredTeams() {
+       function filteredTeams() {
             return this.query
                 ? this.teams.filter(({ edit, name }) => edit || name.toLowerCase()
                     .indexOf(this.query.toLowerCase()) > -1)
                 : this.teams;
-        },
-    },
+        };
+    };
 
-    created() {
+   function created() {
         this.fetch();
-    },
+    };
 
     methods: {
-        fetch() {
+       function fetch() {
             this.loading = true;
 
             this.$axios.get(this.route('administration.teams.index'))
@@ -113,18 +113,17 @@ export default {
                     this.ready = true;
                 })
                 .catch(this.errorHandler);
-        },
-        factory() {
+        };
+       function factory() {
             return {
                 id: null,
                 name: null,
                 userIds: [],
                 users: [],
-                edit: true,
+                edit: true
             };
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss" scoped>

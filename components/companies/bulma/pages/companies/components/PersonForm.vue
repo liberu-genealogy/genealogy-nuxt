@@ -23,35 +23,34 @@
     </modal>
 </template>
 
-<script>
+<script setup>
 import { Modal } from '@enso-ui/modal/bulma';
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-    name: 'PersonForm',
 
-    components: { Modal, EnsoForm },
+    name: 'PersonForm';
 
-    inject: ['i18n'],
+    components: { Modal, EnsoForm };
+
+    inject: ['i18n'];
 
     props: {
         companyId: {
-            type: Number,
-            required: true,
-        },
-    },
+            type: Number;
+            required: true;
+        };
+    };
 
     data: () => ({
         id: null,
-    }),
+    });
 
     methods: {
-        init({ form }) {
+       function init({ form }) {
             this.id = form.field('id').value;
             form.field('company_id').value = this.companyId;
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

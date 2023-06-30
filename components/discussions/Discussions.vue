@@ -71,7 +71,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
 import Discussion from './Discussion.vue';
@@ -80,23 +80,23 @@ import Inputor from './Inputor.vue';
 
 library.add(faPlus, faSearch, faSync);
 
-export default {
-    name: 'Discussions',
 
-    components: { Discussion, DiscussionPreview, Inputor },
+    name: 'Discussions';
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    components: { Discussion, DiscussionPreview, Inputor };
+
+    inject: ['errorHandler', 'i18n', 'route'];
 
     props: {
         id: {
-            type: [String, Number],
-            required: true,
-        },
+            type: [String, Number];
+            required: true;
+        };
         type: {
-            type: String,
-            required: true,
-        },
-    },
+            type: String;
+            required: true;
+        };
+    };
 
     data: () => ({
         query: '',
@@ -104,25 +104,25 @@ export default {
         discussion: null,
         discussions: [],
         loading: false,
-    }),
+    });
 
     computed: {
-        filteredDiscussions() {
+       function filteredDiscussions() {
             return this.query
                 ? this.discussions.filter((discussion) => this.containsQuery(discussion))
                 : this.discussions;
-        },
-        count() {
+        };
+       function count() {
             return this.filteredDiscussions.length;
-        },
-    },
+        };
+    };
 
-    created() {
+   function created() {
         this.fetch();
-    },
+    };
 
     methods: {
-        fetch() {
+       function fetch() {
             this.loading = true;
 
             this.$axios.get(this.route('core.discussions.index'), {
@@ -135,8 +135,8 @@ export default {
                 this.$emit('update');
                 this.loading = false;
             }).catch(this.errorHandler);
-        },
-        store() {
+        };
+       function store() {
             this.$axios.post(this.route('core.discussions.store'), this.discussion)
                 .then(({ data }) => {
                     this.discussion = data;
@@ -144,16 +144,16 @@ export default {
                     this.$emit('update');
                     this.inputor = false;
                 }).catch(this.errorHandler);
-        },
-        update() {
+        };
+       function update() {
             this.$axios.patch(
                 this.route('core.discussions.update', this.discussion.id),
                 this.discussion,
             )
                 .then(() => (this.inputor = false))
                 .catch(this.errorHandler);
-        },
-        destroy() {
+        };
+       function destroy() {
             this.$axios.delete(this.route('core.discussions.destroy', this.discussion.id))
                 .then(() => {
                     const index = this.discussions.findIndex(({ id }) => id === this.discussion.id);
@@ -162,8 +162,8 @@ export default {
                     this.discussion = null;
                     this.fetch();
                 }).catch(this.errorHandler);
-        },
-        factory() {
+        };
+       function factory() {
             return {
                 id: null,
                 discussable_id: this.id,
@@ -171,15 +171,14 @@ export default {
                 title: null,
                 body: null,
             };
-        },
-        containsQuery({ title, body }) {
+        };
+       function containsQuery({ title, body }) {
             const query = this.query.toLowerCase();
 
             return title.toLowerCase().indexOf(query) >= 0
                 || body.toLowerCase().indexOf(query) >= 0;
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

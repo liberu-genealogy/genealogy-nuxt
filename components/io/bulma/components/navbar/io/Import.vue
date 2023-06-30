@@ -37,7 +37,7 @@
     </operation>
 </template>
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -45,19 +45,19 @@ import Operation from './Operation.vue';
 
 library.add(faCheck, faTimes);
 
-export default {
-    name: 'Import',
 
-    components: { Operation },
+    name: 'Import';
 
-    inject: ['i18n'],
+    components: { Operation };
 
-    computed: mapState(['enums']),
+    inject: ['i18n'];
+
+    computed: mapState(['enums']);
 
     methods: {
-        shortNumber(value) {
+       function shortNumber(value) {
             return this.$shortNumber(value);
-        },
-    },
-};
+        };
+    };
+
 </script>

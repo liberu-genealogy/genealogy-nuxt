@@ -23,25 +23,24 @@
     </modal>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from '@enso-ui/modal/bulma';
 
 library.add(faExclamationTriangle);
 
-export default {
-    name: 'Summary',
 
-    components: { Modal },
+    name: 'Summary';
 
-    inject: ['i18n'],
+    components: { Modal };
+
+    inject: ['i18n'];
 
     props: {
         summary: {
-            type: Object,
-            required: true,
-        },
-    },
-};
+            type: Object;
+            required: true;
+        };
+    };
 </script>

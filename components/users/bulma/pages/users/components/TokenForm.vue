@@ -8,17 +8,17 @@
     </modal>
 </template>
 
-<script>
+<script setup>
 import { Modal } from '@enso-ui/modal/bulma';
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
-    name: 'TokenForm',
 
-    components: { Modal, EnsoForm },
+    name: 'TokenForm';
 
-    inject: ['i18n'],
-};
+    components: { Modal, EnsoForm };
+
+    inject: ['i18n'];
+
 </script>
 
 <style lang="scss">

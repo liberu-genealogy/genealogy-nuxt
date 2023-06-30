@@ -1,35 +1,55 @@
-<script>
-import { mapGetters, mapActions } from 'vuex';
+<script setup>
+import { computed, useStore } from 'vuex';
 import { positions } from '@enso-ui/toastr/config';
 
-export default {
-    name: 'CoreToastrPosition',
 
-    inject: ['toastr'],
+    name: 'CoreToastrPosition';
+
+    inject: ['toastr'];
 
     data: () => ({
         positions,
-    }),
+    });
 
     computed: {
-        ...mapGetters('preferences', ['toastrPosition']),
-    },
+        function useComputedValues() {
+  const store = useStore();
 
-    created() {
+  const toastrPosition = computed(() => {
+    return store.getters['preferences/toastrPosition'];
+  });
+
+  return {
+    toastrPosition,
+  };
+};
+    };
+
+   function created() {
         if (this.toastrPosition) {
             this.toastr.defaults({ position: this.toastrPosition }).reset();
             this.$toastr.defaults({ position: this.toastrPosition }).reset();
         }
-    },
+    };
 
     methods: {
-        ...mapActions('preferences', ['setToastrPosition']),
-        update(position) {
+        function useActions() {
+  const store = useStore();
+
+  const setToastrPosition = (position) => {
+    store.dispatch('preferences/setToastrPosition', position);
+  };
+
+  return {
+    setToastrPosition,
+  };
+};
+       function update(position) {
             this.setToastrPosition(position);
             this.toastr.defaults({ position }).reset();
             this.$toastr.defaults({ position }).reset();
-        },
-    },
+        };
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -37,7 +57,6 @@ export default {
             positions: this.positions,
             update: this.update,
         });
-    },
-};
+    }
 
 </script>

@@ -2,19 +2,18 @@
     <div/>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'personevent.show'
 }
-</router>
-<script>
-export default {
-layout: 'auth',
+</router> -->
+<script setup>
+
+layout: 'auth';
     meta: {
-        permission: { name: 'personevent menu' },
-        title: 'Person Event - Show'
-    },
-};
+        permission: { name: 'personevent menu' };
+        title: 'Person Event - Show';
+    };
 </script>
 
 <style lang="scss">

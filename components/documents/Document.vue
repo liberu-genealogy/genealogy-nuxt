@@ -85,8 +85,8 @@
     </div>
 </template>
 
-<script>
-import { VTooltip, VPopover } from 'v-tooltip';
+<script setup>
+import VTooltip from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faEye, faCloudDownloadAlt, faTrashAlt, faLink,
@@ -103,56 +103,54 @@ library.add(
     faInfoCircle, faUser, faCalendarAlt, faDatabase,
 );
 
-export default {
-    name: 'Document',
 
-    directives: { tooltip: VTooltip },
+    name: 'Document';
+const directives = { clickOutside, tooltip: VTooltip };
 
     components: {
-        VPopover, Confirmation, Url, Fade,
-    },
+         Confirmation, Url, Fade
+    };
 
-    mixins: [files],
+    mixins: [files];
 
-    inject: ['canAccess', 'errorHandler', 'route'],
+    inject: ['canAccess', 'errorHandler', 'route'];
 
     props: {
         file: {
-            type: Object,
-            required: true,
-        },
-    },
+            type: Object;
+            required: true;
+        };
+    };
 
     data: () => ({
         temporaryLink: '',
-    }),
+    });
 
     computed: {
-        downloadLink() {
+         function downloadLink() {
             return this.route('core.files.download', this.file.id);
-        },
-        openLink() {
+        };
+       function openLink() {
             return this.route('core.files.show', this.file.id);
-        },
-        size() {
+        };
+       function size() {
             return this.$numberFormat(this.file.size);
-        },
-    },
+        };
+    };
 
     methods: {
-        link() {
+       function link() {
             this.$axios.get(this.route('core.files.link', this.file.id))
                 .then(({ data }) => (this.temporaryLink = data.link))
                 .catch(this.errorHandler);
-        },
-        show() {
+        };
+       function show() {
             window.open(this.openLink, '_blank').focus();
-        },
-        timeFromNow(date) {
+        };
+       function timeFromNow(date) {
             return formatDistance(date);
-        },
-    },
-};
+        };
+    };
 </script>
 
 <style lang="scss">

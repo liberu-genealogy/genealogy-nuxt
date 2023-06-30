@@ -44,7 +44,7 @@ import Submit from "./Submit.vue";
 			state: this.state,
 			errors: this.errors,
 		};
-	};
+	}
 
 </script>
 

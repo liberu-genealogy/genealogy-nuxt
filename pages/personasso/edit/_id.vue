@@ -9,24 +9,23 @@
     </div>
 </template>
 
-<router>
+<!-- <router>
 {
     name: 'personasso.edit'
 }
-</router>
-<script>
+</router> -->
+<script setup>
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
-export default {
 
-layout: 'auth',
+
+layout: 'auth';
     meta: {
-        permission: { name: 'personasso menu' },
-        title: 'Person Asso - Edit'
-    },
+        permission: { name: 'personasso menu' };
+        title: 'Person Asso - Edit';
+    };
 
-    components: { EnsoForm },
-};
+    components: { EnsoForm };
 </script>
 
 <style lang="scss">

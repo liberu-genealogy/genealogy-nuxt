@@ -81,7 +81,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faBan, faPencilAlt, faTrash, faCheck,
@@ -93,28 +93,28 @@ import AvatarList from './AvatarList.vue';
 
 library.add([faBan, faPencilAlt, faTrash, faCheck]);
 
-export default {
-    name: 'Team',
 
-    inject: ['errorHandler', 'i18n', 'route', 'toastr'],
+    name: 'Team';
 
-    directives: { focus },
+    inject: ['errorHandler', 'i18n', 'route', 'toastr'];
 
-    components: { Fade, EnsoSelect, AvatarList },
+    directives: { focus };
+
+    components: { Fade, EnsoSelect, AvatarList };
 
     props: {
         team: {
-            type: Object,
-            required: true,
-        },
-    },
+            type: Object;
+            required: true;
+        };
+    };
 
     data: () => ({
         loading: false,
-    }),
+    });
 
     methods: {
-        store() {
+        function store() {
             this.loading = true;
 
             this.$axios.post(this.route('administration.teams.store'), this.team)
@@ -132,8 +132,8 @@ export default {
                     }
                     this.errorHandler(error);
                 });
-        },
-        destroy() {
+        };
+       function destroy() {
             this.loading = true;
 
             this.$axios.delete(this.route('administration.teams.destroy', this.team.id))
@@ -143,9 +143,8 @@ export default {
                     this.team.edit = false;
                     this.$emit('destroy');
                 }).catch(this.errorHandler);
-        },
-    },
-};
+        };
+    }
 </script>
 
 <style lang="scss">

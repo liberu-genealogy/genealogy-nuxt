@@ -1,18 +1,18 @@
-<script>
+<script setup>
 import { debounce } from 'lodash';
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { computed, useStore } from 'vuex';
 
-export default {
-    name: 'Tasks',
 
-    inject: ['errorHandler', 'route', 'routerErrorHandler', 'toastr'],
+    name: 'Tasks';
+
+    inject: ['errorHandler', 'route', 'routerErrorHandler', 'toastr'];
 
     props: {
         paginate: {
-            type: Number,
-            default: 200,
-        },
-    },
+            type: Number;
+            defaultValue: 200;
+        };
+    };
 
     data: () => ({
         echo: null,
@@ -21,44 +21,78 @@ export default {
         overdue: 0,
         pending: 0,
         tasks: [],
-    }),
+    });
 
     computed: {
-        ...mapGetters('websockets', ['channels']),
-        ...mapState('layout', ['isTouch']),
-        ...mapState(['enums', 'meta']),
-    },
+        function useComputedValues() {
+  const store = useStore();
 
-    created() {
+  const channels = computed(() => {
+    return store.getters['websockets/channels'];
+  });
+
+  const isTouch = computed(() => {
+    return store.state.layout.isTouch;
+  });
+
+  const enums = computed(() => {
+    return store.state.enums;
+  });
+
+  const meta = computed(() => {
+    return store.state.meta;
+  });
+
+  return {
+    channels,
+    isTouch,
+    enums,
+    meta,
+  };
+};
+
+    };
+
+   function created() {
         this.fetch = debounce(this.fetch, 500);
         this.count();
         this.connect();
         this.listen();
-    },
+    };
 
     methods: {
-        ...mapActions('websockets', ['connect']),
-        computeScrollPosition(event) {
+       function useActions() {
+  const store = useStore();
+
+  const connect = () => {
+    store.dispatch('websockets/connect');
+  };
+
+  return {
+    connect,
+  };
+};
+       function computeScrollPosition(event) {
             const a = event.target.scrollTop;
             const b = event.target.scrollHeight - event.target.clientHeight;
 
             if (a / b > 0.7) {
                 this.fetch();
             }
-        },
-        count() {
+        };
+       function count() {
             this.$axios.get(this.route('tasks.count'))
                 .then(({ data }) => this.updateCounters(data))
                 .catch(this.errorHandler);
-        },
-        dateTime(dateTime) {
+        };
+       function dateTime(dateTime) {
             return this.$format(dateTime, `${this.meta.dateFormat} H:i`);
-        },
-        flagClass(id) {
+        };
+       function flagClass(id) {
             // eslint-disable-next-line no-underscore-dangle
             return `has-text-${this.enums.flags._get(id).toLowerCase()}`;
-        },
-        fetch() {
+        };
+       function fetch() {
             if (this.loading) {
                 return;
             }
@@ -72,28 +106,28 @@ export default {
                 this.offset = this.tasks.length;
                 this.loading = false;
             }).catch(this.errorHandler);
-        },
-        listen() {
+        };
+       function listen() {
             window.Echo.private(this.channels.task)
                 .listen('.updated', data => {
                     this.offset = 0;
                     this.tasks = [];
                     this.updateCounters(data);
                 });
-        },
-        updateCounters({ overdueCount, pendingCount }) {
+        };
+       function updateCounters({ overdueCount, pendingCount }) {
             this.overdue = overdueCount;
             this.pending = pendingCount;
-        },
-        visitTask({ id }) {
+        };
+       function visitTask({ id }) {
             this.$router.push({ name: 'tasks.edit', params: { task: id } })
                 .catch(this.routerErrorHandler);
-        },
-        visitTasks() {
+        };
+       function visitTasks() {
             this.$router.push({ name: 'tasks.index' })
                 .catch(this.routerErrorHandler);
-        },
-    },
+        };
+    };
 
     render() {
         return this.$scopedSlots.default({
@@ -110,6 +144,5 @@ export default {
             visitTask: this.visitTask,
             visitTasks: this.visitTasks,
         });
-    },
-};
+    }
 </script>

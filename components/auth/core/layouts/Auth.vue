@@ -1,25 +1,24 @@
-<script>
+<script setup>
 import { mapState, mapActions } from 'vuex';
 
-export default {
-    name: 'CoreAuth',
+
+    name: 'CoreAuth';
 
     computed: {
         ...mapState(['guestState']),
-    },
+    };
 
     created() {
         this.loadGuestState();
-    },
+    };
 
     methods: {
         ...mapActions(['loadGuestState']),
-    },
+    };
 
     render() {
         return this.$scopedSlots.default({
             guestState: this.guestState,
         });
-    },
-};
+    };
 </script>
