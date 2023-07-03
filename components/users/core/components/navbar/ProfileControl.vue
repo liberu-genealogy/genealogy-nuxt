@@ -10,7 +10,7 @@ import { mapState } from 'vuex';
         visible: false,
     });
 
-    computed: {
+    const computed = {
         ...mapState(['user']),
         ...mapState('layout', ['isTouch']),
     };
@@ -30,7 +30,7 @@ import { mapState } from 'vuex';
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             user: this.user,
             isTouch: this.isTouch,

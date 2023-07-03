@@ -81,7 +81,7 @@
 </template>
 
 <script setup>
-import { mapGetters } from 'vuex';
+import { useStore } from 'vuex';
 import VueCal from 'vue-cal';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -111,7 +111,7 @@ library.add(faPlus, faFlag, faArrowsAltH, faCrosshairs);
         },
     });
 
-    computed: {
+   const computed = {
         ...mapGetters('preferences', ['lang']),
     };
 

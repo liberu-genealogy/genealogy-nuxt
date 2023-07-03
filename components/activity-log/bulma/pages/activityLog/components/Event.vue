@@ -22,20 +22,20 @@
 <script setup>
 name: 'Event';
 inject: ['i18n', 'route', 'routerErrorHandler'];
-props: {
+const props = {
     event: {
         type: Object,
         required: true,
     },
 };
-computed: {
-   function message() {
+const computed = {
+    message() {
         return Object.keys(this.event.meta.attributes)
             .reduce((message, attribute) => message.split(`:${attribute}`)
                 .join(this.label(attribute)),
             this.parsedMessage);
     },
-   function parsedMessage() {
+    parsedMessage() {
         return Array.isArray(this.event.meta.message)
             ? this.event.meta.message
                 .map((segment) => this.i18n(segment))
@@ -43,12 +43,12 @@ computed: {
             : this.event.meta.message;
     },
 };
-methods: {
-    function label(attribute) {
+const methods = {
+     label(attribute) {
         const { attributes } = this.event.meta;
         return ['user', 'label'].includes(attribute)
             ? `<strong>${attributes[attribute]}</strong>`
             : attributes[attribute];
-    };
+    }
 };
 </script>

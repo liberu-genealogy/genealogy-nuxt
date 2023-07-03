@@ -181,7 +181,7 @@ import { required } from 'vuelidate/lib/validators'
           this.message = error.response.data.message
           this.errors =  error.response.data.errors
         }
-      },
+      }
 
      function subscribeToUploadProgress() {
         this.$echo.channel(`user.${this.loggedInUser.id}`)

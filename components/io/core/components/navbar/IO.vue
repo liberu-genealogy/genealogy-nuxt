@@ -129,13 +129,13 @@ import { computed, useStore } from 'vuex';
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             count: this.count,
             events: { cancel: this.cancel },
             exports: this.exports,
             imports: this.imports,
-        });
-    },
+        })
+    };
 
 </script>

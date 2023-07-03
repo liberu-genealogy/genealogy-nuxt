@@ -4,13 +4,13 @@ import { mapState } from 'vuex';
 
     name: 'CoreAppFooter';
 
-    computed: {
+   const computed = {
         ...mapState(['meta']),
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
-            meta: this.meta;
-        });
+            meta: this.meta,
+        })
     };
 </script>

@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { mapState } from 'vuex';
+import { useStore } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faSpinner, faSyncAlt, faPlus, faPencilAlt, faTrashAlt, faFlag,
@@ -63,7 +63,18 @@ library.add(faSpinner, faSyncAlt, faPlus, faPencilAlt, faTrashAlt, faFlag);
         };
     };
     computed: {
-        ...mapState('layout', ['isTouch']),
+      function useState() {
+  const store = useStore();
+
+  const layoutState = computed(() => {
+    return store.state.layout.isTouch;
+  });
+
+  return {
+    isTouch: layoutState,
+  };
+}
+
        function days() {
             return this.feed.reduce();
         };

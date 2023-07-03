@@ -139,15 +139,15 @@ library.add(faArrowLeft, faTrashAlt, faPencilAlt);
         reply: null,
     });
 
-    computed: {
+   const computed = {
         ...mapState(['user']),
-       function avatar() {
+        avatar() {
             return this.route(
                 'core.avatars.show',
                 this.discussion.owner.avatar.id,
             );
         };
-       function edited() {
+        edited() {
             return this.discussion.createdAt !== this.discussion.updatedAt;
         };
     };

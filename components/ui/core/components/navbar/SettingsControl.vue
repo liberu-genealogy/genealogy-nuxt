@@ -4,11 +4,11 @@ import { mapMutations } from 'vuex';
 
     name: 'CoreSettingsControl';
 
-    methods: {
+   const methods = {
         ...mapMutations('layout/settings', ['toggle']),
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             toggle: this.toggle,
         });

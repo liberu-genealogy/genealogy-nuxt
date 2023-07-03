@@ -13,7 +13,7 @@
 
     name: 'MainRouter';
 
-    computed: {
+    const computed = {
         keepAlive() {
             return this.$route.meta?.keepAlive
         },

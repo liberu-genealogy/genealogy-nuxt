@@ -35,7 +35,7 @@ import Submit from "./Submit.vue";
 		},
 	});
 
-	computed: {
+const computed = {
 		...mapState(["meta"]),
 	};
 

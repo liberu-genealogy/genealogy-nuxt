@@ -18,7 +18,7 @@ import { SlideRight } from '@enso-ui/transitions';
 
     components: { SlideRight };
 
-    computed: {
+   const computed = {
         ...mapGetters('preferences', ['bookmarks']),
     };
 </script>

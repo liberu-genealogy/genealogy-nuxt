@@ -322,7 +322,7 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
   //   i18n: { from: "i18n" },
   // },
   // inject: ['errorHandler', 'route', 'routerErrorHandler', 'toastr'],
-  props: {
+  const props= {
     action: {
       required: true,
       type: String,
@@ -356,9 +356,9 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
       },
       terms: "",
       device_name: 'mac',
-    }),
+    });
 
-  computed: {
+  const computed = {
     ...mapState(["meta"]),
     hasPassword() {
       return this.password !== null && this.password.length;
@@ -391,7 +391,7 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
     registerLink() {
       return "api/register";
     },
-  },
+  };
 
   methods: {
     // #stripe(){

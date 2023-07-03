@@ -126,14 +126,14 @@ const directives = { clickOutside, tooltip: VTooltip };
         temporaryLink: '',
     });
 
-    computed: {
-         function downloadLink() {
+   const computed = {
+          downloadLink() {
             return this.route('core.files.download', this.file.id);
         };
-       function openLink() {
+        openLink() {
             return this.route('core.files.show', this.file.id);
         };
-       function size() {
+        size() {
             return this.$numberFormat(this.file.size);
         };
     };

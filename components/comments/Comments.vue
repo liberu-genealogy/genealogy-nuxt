@@ -106,7 +106,7 @@ library.add(faPlus, faSync, faSearch);
         diffForHumansDate: null,
     });
 
-    computed: {
+   const computed = {
         ...mapState(['user']),
        function filteredComments() {
             const query = this.internalQuery.toLowerCase();

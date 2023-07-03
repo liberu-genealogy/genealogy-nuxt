@@ -1,5 +1,5 @@
 <script setup>
-import { mapState, mapGetters } from 'vuex';
+import { useStore } from 'vuex';
 
 
     name: 'CoreDocumentTitle';
@@ -7,8 +7,30 @@ import { mapState, mapGetters } from 'vuex';
     inject: ['i18n'];
 
     computed: {
-        ...mapState(['meta', 'pageTitle']),
-        ...mapGetters('preferences', ['lang']),
+     function useStateGetters() {
+  const store = useStore();
+
+  const metaState = computed(() => {
+    return store.state.meta;
+  });
+
+  const pageTitleState = computed(() => {
+    return store.state.pageTitle;
+  });
+
+  const preferencesGetters = {
+    lang: computed(() => {
+      return store.getters['preferences/lang'];
+    }),
+  };
+
+  return {
+    meta: metaState,
+    pageTitle: pageTitleState,
+    ...preferencesGetters,
+  };
+}
+
        function documentTitle() {
             if (this.$route.name === 'notFound') {
                 return '';
@@ -21,12 +43,12 @@ import { mapState, mapGetters } from 'vuex';
             return extendedDocumentTitle
                 ? `${this.i18n(title)} | ${appName}`
                 : this.i18n(title);
-        },
+        }
     };
 
     watch: {
-        lang: 'update',
-        $route: 'update',
+        lang: 'update';
+        $route: 'update';
     };
 
     methods: {
@@ -35,7 +57,7 @@ import { mapState, mapGetters } from 'vuex';
         };
     };
 
-    render() {
+    function render() {
         return this.$slots.default;
     };
 </script>

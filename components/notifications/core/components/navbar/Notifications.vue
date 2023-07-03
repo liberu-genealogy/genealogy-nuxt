@@ -70,7 +70,19 @@ import Favico from 'favico.js';
     };
 
     methods: {
-        ...mapActions('websockets', ['connect']),
+        function useActions() {
+  const store = useStore();
+
+  const websocketsActions = {
+    connect: (payload) => {
+      return store.dispatch('websockets/connect', payload);
+    },
+  };
+
+  return {
+    ...websocketsActions,
+  };
+}
        function addBusListeners() {
             this.$root.$on('read-notification', notification => {
                 this.unread = Math.max(--this.unread, 0);
@@ -115,7 +127,7 @@ import Favico from 'favico.js';
             this.$axios.get(this.route('core.notifications.count'))
                 .then(({ data }) => (this.unread = data.count))
                 .catch(this.errorHandler);
-        },
+        };
        function desktop({ body, title, path }) {
             if (document.hidden && this.desktopNotifications) {
                 const notification = new Notification(title, { body });
@@ -239,7 +251,7 @@ import Favico from 'favico.js';
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             events: {
                 scroll: e => this.computeScrollPosition(e),
@@ -252,6 +264,6 @@ import Favico from 'favico.js';
             timeFromNow: this.timeFromNow,
             unread: this.unread,
             visitNotifications: this.visitNotifications
-        });
+        })
     }
 </script>

@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import { mapState, mapGetters, mapMutations } from 'vuex';
+  import { useStore } from 'vuex';
 
 
 	layout: 'index';
@@ -22,9 +22,39 @@ import { mapState, mapGetters, mapMutations } from 'vuex';
         }
     };
     methods: {
-        ...mapMutations('auth', ['login']),
-        ...mapMutations('layout', ['home']),
-        ...mapMutations(['setShowQuote', 'setCsrfToken'])
+      
+
+function useMutations() {
+  const store = useStore();
+
+  const authMutations = {
+    login() {
+      store.commit('auth/login');
+    },
+  };
+
+  const layoutMutations = {
+    home() {
+      store.commit('layout/home');
+    },
+  };
+
+  const rootMutations = {
+    setShowQuote(value) {
+      store.commit('setShowQuote', value);
+    },
+    setCsrfToken(token) {
+      store.commit('setCsrfToken', token);
+    },
+  };
+
+  return {
+    ...authMutations,
+    ...layoutMutations,
+    ...rootMutations,
+  };
+}
+
     };
     function mounted() {
         

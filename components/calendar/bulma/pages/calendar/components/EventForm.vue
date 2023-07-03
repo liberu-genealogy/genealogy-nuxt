@@ -94,7 +94,7 @@
 </template>
 
 <script setup>
-import { mapState } from 'vuex';
+import { useStore } from 'vuex';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import { Modal } from '@enso-ui/modal/bulma';
 import { EnsoDatepicker } from '@enso-ui/datepicker/bulma';
@@ -116,9 +116,9 @@ library.add(faUserClock, faPlus, faMinus);
 
     props: {
         event: {
-            type: Object,
-            required: true,
-        },
+            type: Object;
+            required: true;
+        };
     };
 
     data: () => ({
@@ -127,18 +127,34 @@ library.add(faUserClock, faPlus, faMinus);
     });
 
     computed: {
-        ...mapState(['meta', 'enums']),
-        isEdit() {
+        function useState() {
+  const store = useStore();
+
+  const metaState = computed(() => {
+    return store.state.meta;
+  });
+
+  const enumsState = computed(() => {
+    return store.state.enums;
+  });
+
+  return {
+    meta: metaState,
+    enums: enumsState,
+  };
+}
+
+        function isEdit() {
             return this.event.id;
-        },
-        path() {
+        };
+       function path() {
             return this.isEdit
                 ? this.route('core.calendar.events.edit', { event: this.event.id })
                 : this.route('core.calendar.events.create');
-        },
-        reminderFormat() {
+        };
+       function reminderFormat() {
             return `${this.meta.dateFormat} ${this.timeFormat}`;
-        },
+        };
     };
 
     methods: {

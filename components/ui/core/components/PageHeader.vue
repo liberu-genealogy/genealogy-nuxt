@@ -4,7 +4,7 @@ import { mapState, mapMutations } from 'vuex';
 
     name: 'CorePageHeader';
 
-    computed: {
+   const computed = {
         ...mapState(['pageTitle']),
     };
 
@@ -14,11 +14,11 @@ import { mapState, mapMutations } from 'vuex';
         }
     };
 
-    methods: {
+   const methods = {
         ...mapMutations(['setPageTitle']),
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             pageTitle: this.pageTitle,
         });

@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { mapState } from "vuex";
+import { useStore } from "vuex";
 // import Errors from "@enso-ui/laravel-validation/src/Errors";
 import Submit from "./Submit.vue";
 
@@ -36,14 +36,25 @@ import Submit from "./Submit.vue";
 	});
 
 	computed: {
-		...mapState(["meta"]),
+		function useComputedValues() {
+  const store = useStore();
+
+  const meta = computed(() => {
+    return store.state.meta;
+  });
+
+  return {
+    meta,
+  };
+}
 	};
 
-	provide() {
+	function provide() {
 		return {
 			state: this.state,
 			errors: this.errors,
 		};
+		
 	};
 
 </script>

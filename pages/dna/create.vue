@@ -111,7 +111,7 @@ layout: 'auth';
                 console.log("fail")
             } else {
                 this.isLoading = true;
-                const formData = new Formfunction data();
+                const formData = new FormData();
                 formData.append('file',  this.file);
                 this.$axios
                 .$post("/api/dna", formData, {

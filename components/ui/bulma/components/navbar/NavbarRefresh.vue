@@ -14,7 +14,7 @@ import Navbar from './Navbar.vue';
 
     name: 'NavbarRefresh';
 
-    components: {
+    const components = {
         VuePullRefresh, Navbar,
     };
 

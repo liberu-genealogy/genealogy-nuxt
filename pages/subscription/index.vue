@@ -185,7 +185,7 @@
 <script setup>
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css';
-import { mapGetters, mapActions } from 'vuex'
+import { useStore } from 'vuex'
 
 
   layout: 'default';
@@ -219,14 +219,24 @@ import { mapGetters, mapActions } from 'vuex'
     }
   };
   computed: {
-    ...mapGetters(['loggedInUser'])
+    function useGetters() {
+  const store = useStore();
+
+  const loggedInUser = computed(() => {
+    return store.getters.loggedInUser;
+  });
+
+  return {
+    loggedInUser,
+  };
+}
   };
   methods: {
    function handleSelectedFiles(event) {
       this.file = this.$refs.fileInput.files[0]
       this.fileName = this.file.name
     };
-   function submit() {},
+   function submit() {};
     function loadPlans() {
       const response =  this.$axios.$get('/api/stripe/plans')
 

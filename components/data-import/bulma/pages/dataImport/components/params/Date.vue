@@ -16,14 +16,14 @@ import { Datepicker } from '@enso-ui/datepicker/bulma';
 
     inject: ['i18n'];
 
-    props: {
+    const props = {
         param: {
             type: Object,
             required: true,
         },
     };
 
-    computed: {
+   const computed = {
         ...mapState(['meta']),
         dateFormat() {
             return this.param.meta?.dateFormat
@@ -31,7 +31,7 @@ import { Datepicker } from '@enso-ui/datepicker/bulma';
         },
     };
 
-    created() {
+    function created() {
         this.param.type = 'date';
     };
 </script>

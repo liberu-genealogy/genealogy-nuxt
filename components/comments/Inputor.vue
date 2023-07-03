@@ -66,15 +66,15 @@ import { focus, clickOutside } from '@enso-ui/directives';
         query: null,
     });
 
-    computed: {
+   const computed = {
         ...mapState(['user']),
-       function hasText() {
+        hasText() {
             return this.comment.body.trim();
         };
-        function atwhoContainer() {
+         atwhoContainer() {
             return this.$el.querySelector('.atwho');
         };
-       function textarea() {
+        textarea() {
             return this.$el.querySelector('textarea');
         };
     };

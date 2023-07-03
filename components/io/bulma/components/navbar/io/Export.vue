@@ -45,7 +45,7 @@ library.add(faCheck);
 
     inject: ['i18n'];
 
-    computed: mapState(['enums']);
+   const computed = mapState(['enums']);
 
     methods: {
        function shortNumber(value) {

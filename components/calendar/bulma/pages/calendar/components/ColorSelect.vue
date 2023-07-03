@@ -37,18 +37,18 @@ import { VueSelect } from '@enso-ui/select/bulma';
 
     inject: ['i18n', 'route'];
 
-    props: {
+   const props = {
         field: {
-            type: Object;
-            required: true;
-        };
+            type: Object,
+            required: true,
+        },
         errors: {
-            type: Object;
-            required: true
-        };
+            type: Object,
+            required: true,
+        },
         colorField: {
-            type: String;
-            defaultValue: 'color';
+            type: String,
+            defaultValue: 'color',
         },
     };
 </script>

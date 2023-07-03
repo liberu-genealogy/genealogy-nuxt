@@ -129,7 +129,7 @@ import { computed, useStore } from 'vuex';
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             dateTime: this.dateTime,
             events: {

@@ -38,7 +38,7 @@ library.add(faHeart, faGithub);
 
     components: { BaseAppFooter };
 
-    computed: {
+   const computed = {
          ...mapGetters(['loggedInUser'])
     };
 </script>

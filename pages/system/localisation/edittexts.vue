@@ -144,7 +144,7 @@
 
 
 <script setup>
-import { mapState } from 'vuex';
+import { useStore } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { focus, selectOnFocus } from '@enso-ui/directives';
@@ -178,8 +178,22 @@ library.add(faSearch, faTrashAlt);
     });
 
     computed: {
-        ...mapState('layout', ['isMobile']),
-        ...mapState(['meta']),
+         function useStateValues() {
+  const store = useStore();
+
+  const isMobile = computed(() => {
+    return store.state.layout.isMobile;
+  });
+
+  const meta = computed(() => {
+    return store.state.meta;
+  });
+
+  return {
+    isMobile,
+    meta,
+  };
+}
        function styleObject() {
             return {
                 'max-height': this.boxHeight,
@@ -216,12 +230,12 @@ library.add(faSearch, faTrashAlt);
 
     watch: {
         isMobile: {
-            handler: 'setBoxHeight',
-        },
+            handler: 'setBoxHeight'
+        }
         filterCore: {
-            handler: 'getLangFile',
-        },
-    },
+            handler: 'getLangFile'
+        }
+    }
 
    function created() {
         this.init();

@@ -51,7 +51,7 @@ import { positions } from '@enso-ui/toastr/config';
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             toastrPosition: this.toastrPosition,
             positions: this.positions,

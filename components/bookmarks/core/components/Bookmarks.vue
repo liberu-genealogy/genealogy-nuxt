@@ -1,12 +1,12 @@
 <script setup>
-import { mapState, mapGetters, mapMutations } from 'vuex';
+import { useStore } from 'vuex';
 
 
     name: 'CoreBookmarks';
 
     inject: ['routerErrorHandler'];
 
-    props: {
+   const props = {
         excluded: {
             type: Array,
             defaultValue: () => ([]),
@@ -19,28 +19,88 @@ import { mapState, mapGetters, mapMutations } from 'vuex';
     });
 
     computed: {
-        ...mapState('bookmarks', ['bookmarks']),
-        ...mapGetters('bookmarks', ['isExcluded', 'matches', 'stickies', 'index']),
-        container() {
+       function useStateGetters() {
+  const store = useStore();
+
+  const bookmarks = computed(() => {
+    return store.state.bookmarks.bookmarks;
+  });
+
+  const isExcluded = computed(() => {
+    return store.getters['bookmarks/isExcluded'];
+  });
+
+  const matches = computed(() => {
+    return store.getters['bookmarks/matches'];
+  });
+
+  const stickies = computed(() => {
+    return store.getters['bookmarks/stickies'];
+  });
+
+  const index = computed(() => {
+    return store.getters['bookmarks/index'];
+  });
+
+  return {
+    bookmarks,
+    isExcluded,
+    matches,
+    stickies,
+    index,
+  };
+}
+
+       function container() {
             return this.$el.querySelector('.bookmark-items');
-        },
+        };
     };
 
-    watch: {
+   const watch = {
         $route(route) {
             this.add(route);
         },
     };
 
-    created() {
+   function created() {
         this.init();
         this.exclude(this.excluded);
         this.add(this.$route);
     };
 
     methods: {
-        ...mapMutations('bookmarks', ['init', 'set', 'exclude', 'push', 'stick', 'clear']),
-        ...mapMutations('bookmarks', { splice: 'remove' }),
+      function useMutations() {
+  const store = useStore();
+
+  const bookmarksMutations = {
+    init: () => {
+      store.commit('bookmarks/init');
+    },
+    set: (payload) => {
+      store.commit('bookmarks/set', payload);
+    },
+    exclude: (payload) => {
+      store.commit('bookmarks/exclude', payload);
+    },
+    push: (payload) => {
+      store.commit('bookmarks/push', payload);
+    },
+    stick: (payload) => {
+      store.commit('bookmarks/stick', payload);
+    },
+    clear: () => {
+      store.commit('bookmarks/clear');
+    },
+    remove: (payload) => {
+      store.commit('bookmarks/remove', payload);
+    },
+  };
+
+  return {
+    ...bookmarksMutations,
+  };
+}
+
         function add(bookmark) {
             this.push(bookmark);
             this.$nextTick(this.focus);
@@ -100,7 +160,7 @@ import { mapState, mapGetters, mapMutations } from 'vuex';
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             bookmarks: this.bookmarks,
             hasClear: this.stickies.length,

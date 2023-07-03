@@ -71,7 +71,7 @@ import { computed, useStore } from 'vuex';
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             keyCollector: this.keyCollector,
             isTouch: this.isTouch,

@@ -52,7 +52,7 @@ import { EnsoDateFilter, EnsoSelectFilter as SelectFilter } from '@enso-ui/filte
             required: true;
         };
     };
-    computed: {
+    const computed = {
         ...mapState(['enums'])
     };
     watch: {

@@ -85,9 +85,11 @@ library.add(faEye, faSignOutAlt);
 
     components: { CoreProfileControl, Avatar };
 
-    methods: {
-        ...mapActions('auth', ['logout']),
-    };
+   const logoutAccount = async () => {
+  const store = useStore();
+  await store.dispatch('auth/logout');
+};
+
 
     inject: ['i18n'];
 </script>

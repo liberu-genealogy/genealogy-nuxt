@@ -8,7 +8,7 @@ import { mapState, mapMutations, mapActions } from 'vuex';
         loading: true,
     });
 
-    computed: {
+    const computed = {
         ...mapState(['meta']),
         ...mapState('auth', ['isAuth', 'intendedRoute', 'intendedPath']),
         ...mapState(['appState', 'showQuote']),
@@ -26,20 +26,20 @@ import { mapState, mapMutations, mapActions } from 'vuex';
         this.loadAppState();
     };
 
-    methods: {
+   const methods = {
         ...mapMutations('auth', ['setIntendedRoute', 'setIntendedPath']),
         ...mapMutations('layout', ['home']),
         ...mapActions(['loadAppState']),
         ...mapActions('layout', ['setTheme']),
-       function enterApp() {
+      enterApp() {
             this.redirectIfNeeded();
             this.loading = false;
 
             if (!this.showQuote) {
                 this.hide();
             }
-        };
-       function redirectIfNeeded() {
+        },
+        redirectIfNeeded() {
             if (this.intendedRoute) {
                 const { name, params, query } = this.intendedRoute;
                 this.$router.push({ name, params, query })
@@ -51,13 +51,13 @@ import { mapState, mapMutations, mapActions } from 'vuex';
                 // this.$router.push({ path: '/' })
                 this.$router.push({ name: 'dashboard.index' })
             }
-        };
-       function hide() {
+        },
+        hide() {
             this.home(false);
-        };
+        },
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             loading: this.loading,
             showQuote: this.showQuote,

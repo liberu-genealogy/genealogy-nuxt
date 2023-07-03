@@ -119,7 +119,7 @@
 
 
 <script setup>
-import { mapState } from 'vuex';
+import { useStore } from 'vuex';
 import { FilterState } from '@enso-ui/filters/renderless';
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import { EnsoSelect } from '@enso-ui/select/bulma';
@@ -182,7 +182,28 @@ library.add(faClock, faInfoCircle, faCog);
     });
 
     computed: {
-        ...mapState(['enums', 'user', 'meta']),
+    function useStateValues() {
+  const store = useStore();
+
+  const enums = computed(() => {
+    return store.state.enums;
+  });
+
+  const user = computed(() => {
+    return store.state.user;
+  });
+
+  const meta = computed(() => {
+    return store.state.meta;
+  });
+
+  return {
+    enums,
+    user,
+    meta,
+  };
+}
+
         function canChangeAllocation() {
             return [
                 this.enums.roles.Admin, this.enums.roles.Supervisor,

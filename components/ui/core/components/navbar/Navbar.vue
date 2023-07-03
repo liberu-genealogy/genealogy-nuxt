@@ -4,24 +4,24 @@ import { mapState, mapMutations, mapGetters } from 'vuex';
 
     name: 'CoreNavbar';
     inject: ['canAccess'];
-    computed: {
+   const computed = {
         ...mapState(['meta', 'impersonating']),
         ...mapState('layout', ['isMobile', 'isTouch', 'sidebar']),
         ...mapGetters('layout/navbar', ['items']),
     };
-    methods: {
+    const methods = {
         ...mapMutations('layout/sidebar', { toggleSidebar: 'toggle' }),
     };
-    render() {
+    function render() {
         return this.$scopedSlots.default({
-            meta: this.meta;
-            impersonating: this.impersonating;
-            isMobile: this.isMobile;
-            isTouch: this.isTouch;
-            sidebar: this.sidebar;
-            items: this.items;
-            canAccessTasks: this.canAccess('tasks.index');
-            toggleSidebar: this.toggleSidebar;
-        });
+            meta: this.meta,
+            impersonating: this.impersonating,
+            isMobile: this.isMobile,
+            isTouch: this.isTouch,
+            sidebar: this.sidebar,
+            items: this.items,
+            canAccessTasks: this.canAccess('tasks.index'),
+            toggleSidebar: this.toggleSidebar,
+        })
     }
 </script>

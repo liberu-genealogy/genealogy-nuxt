@@ -68,7 +68,7 @@
     directives: { focus };
     inject: ["i18n", "route"];
 
-    props: {
+   const props = {
       action: {
         required: true,
         type: String,
@@ -94,7 +94,7 @@
       loading: false,
     });
 
-    computed: {
+    const computed = {
       ...mapState(["meta"]),
       token() {
         return this.route.query.token;
@@ -114,11 +114,11 @@
         return "/api/resend";
       },
     };
-    mounted() {
+    function mounted() {
       this.verify();
     };
-    methods: {
-      function verify() {
+   const methods = {
+      verify() {
         this.loading = true;
         this.isSuccessful = false;
 
@@ -144,8 +144,8 @@
                 throw error;
             }
           });
-      };
-      function resend() {
+      },
+      resend() {
         this.loading = true;
         this.isSuccessful = false;
 
@@ -170,9 +170,9 @@
               default:
                 throw error;
             }
-          });
-      };
-    };
+          })
+      }
+    }
 </script>
 
 <style lang="scss">

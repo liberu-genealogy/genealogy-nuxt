@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-  import { mapMutations, mapState } from "vuex";
+  import { useStore } from "vuex";
   import VerifyForm from "~/components/auth/VerifyForm.vue";
 
   
@@ -13,14 +13,42 @@
     };
     components: { VerifyForm };
 
-    computed: {
+   const computed = {
       ...mapState(["meta"]),
     };
 
     methods: {
-      ...mapMutations("auth", ["login"]),
-      ...mapMutations("layout", ["home"]),
-      ...mapMutations(["setShowQuote", "setCsrfToken"]),
+     function useMutations() {
+  const store = useStore();
+
+  const authMutations = {
+    login: (payload) => {
+      store.commit('auth/login', payload);
+    },
+  };
+
+  const layoutMutations = {
+    home: (payload) => {
+      store.commit('layout/home', payload);
+    },
+  };
+
+  const generalMutations = {
+    setShowQuote: (payload) => {
+      store.commit('setShowQuote', payload);
+    },
+    setCsrfToken: (payload) => {
+      store.commit('setCsrfToken', payload);
+    },
+  };
+
+  return {
+    ...authMutations,
+    ...layoutMutations,
+    ...generalMutations,
+  };
+}
+
      function init(data) {
         this.setShowQuote(this.meta.showQuote);
         this.setCsrfToken(data.csrfToken);
@@ -28,6 +56,6 @@
           this.login();
           this.home(true);
         }, 3000);
-      };
+      }; 45
     };
 </script>

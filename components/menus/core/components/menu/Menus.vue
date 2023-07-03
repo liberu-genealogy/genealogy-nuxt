@@ -1,5 +1,5 @@
 <script setup>
-import { mapState, mapMutations } from 'vuex';
+import { useStore } from 'vuex';
 
 
     name: 'CoreMenus';
@@ -18,8 +18,18 @@ import { mapState, mapMutations } from 'vuex';
     };
 
     computed: {
-        ...mapState('menu', ['editable']),
-        disabled() {
+        function useState() {
+  const store = useStore();
+
+  const editableState = computed(() => {
+    return store.state.menu.editable;
+  });
+
+  return {
+    editable: editableState,
+  };
+};
+       function disabled() {
             return !this.editable;
         };
     };
@@ -35,7 +45,19 @@ import { mapState, mapMutations } from 'vuex';
     };
 
     methods: {
-        ...mapMutations('menu', ['organize']),
+      function useMutations() {
+  const store = useStore();
+
+  const menuMutations = {
+    organize: () => {
+      store.commit('menu/organize');
+    },
+  };
+
+  return {
+    ...menuMutations,
+  };
+};
        function shrink(height) {
             this.$el.style.height = `${parseInt(this.$el.style.height, 10) - height}px`;
             this.$emit('shrink', height);
@@ -69,7 +91,7 @@ import { mapState, mapMutations } from 'vuex';
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             menus: this.menus,
             parentMenuEvents: {

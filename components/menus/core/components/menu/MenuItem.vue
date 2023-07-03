@@ -1,6 +1,6 @@
 <script setup>
 import {
-    mapState, mapGetters, mapMutations, mapActions,
+    useStore
 } from 'vuex';
 
 
@@ -16,10 +16,35 @@ import {
     };
 
     computed: {
-        ...mapState('menu', ['editable']),
-        ...mapState('layout', ['isTouch']),
-        ...mapState('layout/sidebar', ['isExpanded']),
-        ...mapGetters('menu', ['hasActiveChild']),
+       function useStateGetters() {
+  const store = useStore();
+
+  const menuState = computed(() => {
+    return store.state.menu.editable;
+  });
+
+  const layoutState = computed(() => {
+    return store.state.layout.isTouch;
+  });
+
+  const sidebarState = computed(() => {
+    return store.state.layout.sidebar.isExpanded;
+  });
+
+  const menuGetters = {
+    hasActiveChild: computed(() => {
+      return store.getters['menu/hasActiveChild'];
+    }),
+  };
+
+  return {
+    editable: menuState,
+    isTouch: layoutState,
+    isExpanded: sidebarState,
+    ...menuGetters,
+  };
+};
+
         function active() {
             return this.menu.route !== null
                 && (this.matchesName || this.matchesPath);
@@ -53,9 +78,37 @@ import {
     };
 
     methods: {
-        ...mapMutations('layout/sidebar', ['hide']),
-        ...mapMutations('menu', ['activate', 'toggle']),
-        ...mapActions('menu', ['refresh']),
+      function useMutationsActions() {
+  const store = useStore();
+
+  const layoutSidebarMutations = {
+    hide: () => {
+      store.commit('layout/sidebar/hide');
+    },
+  };
+
+  const menuMutations = {
+    activate: (payload) => {
+      store.commit('menu/activate', payload);
+    },
+    toggle: () => {
+      store.commit('menu/toggle');
+    },
+  };
+
+  const menuActions = {
+    refresh: () => {
+      store.dispatch('menu/refresh');
+    },
+  };
+
+  return {
+    ...layoutSidebarMutations,
+    ...menuMutations,
+    ...menuActions,
+  };
+}
+
        function select() {
             if (this.menu.children) {
                 this.toggle(this.menu);
@@ -71,7 +124,7 @@ import {
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             menu: this.menu,
             editable: this.editable,
@@ -80,6 +133,6 @@ import {
             menuEvents: {
                 click: this.select,
             },
-        });
+        })
     };
 </script>

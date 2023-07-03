@@ -1,5 +1,5 @@
 <script setup>
-import { mapMutations } from 'vuex';
+import { useStore } from 'vuex';
 import Driver from 'driver.js';
 
 
@@ -30,7 +30,18 @@ import Driver from 'driver.js';
     });
 
     methods: {
-        ...mapMutations('layout/settings', { toggleSettingsBar: 'toggle' }),
+        
+function setup() {
+  const store = useStore();
+
+  const toggleSettingsBar = () => {
+    store.commit('layout/settings/toggle');
+  };
+
+  return {
+    toggleSettingsBar,
+  };
+}
        function fetch() {
             this.$axios.get(this.route('system.tutorials.load'), {
                 params: { route: this.$route.name },
@@ -53,16 +64,16 @@ import Driver from 'driver.js';
                     description: this.i18n(popover.description),
                     position: popover.position,
                     title: this.i18n(popover.title),
-                };
+                },
             }));
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             itemEvents: {
-                click: this.fetch;
-            };
+                click: this.fetch,
+            },
         });
     }
 </script>

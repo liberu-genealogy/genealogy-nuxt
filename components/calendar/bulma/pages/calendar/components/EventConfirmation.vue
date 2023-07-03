@@ -54,7 +54,7 @@ library.add(faFlag, faArrowsAltH);
 
     inject: ['i18n'];
 
-    props: {
+    const props = {
         event: {
             type: Object,
             required: true,
@@ -66,7 +66,7 @@ library.add(faFlag, faArrowsAltH);
         },
     };
 
-    computed: {
+   const computed= {
         ...mapState(['enums']),
         update() {
             return this.enums.eventUpdateType;

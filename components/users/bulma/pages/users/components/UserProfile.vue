@@ -151,9 +151,7 @@
 </template>
 
 <script setup>
-import {
-  mapState, mapMutations, mapActions, mapGetters,
-} from 'vuex';
+import { useStore } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faUser, faUserCircle, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt, faPencilAlt,
@@ -175,10 +173,48 @@ library.add(faUser, faUserCircle, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt,
   });
 
   computed: {
-    ...mapState(['user', 'meta', 'enums', 'impersonating']),
-    ...mapState('auth', ['isAuth']),
-    ...mapState('layout', ['isMobile']),
-    ...mapGetters(['isWebview']),
+    function useStateGetters() {
+  const store = useStore();
+
+  const userState = computed(() => {
+    return store.state.user;
+  });
+
+  const metaState = computed(() => {
+    return store.state.meta;
+  });
+
+  const enumsState = computed(() => {
+    return store.state.enums;
+  });
+
+  const impersonatingState = computed(() => {
+    return store.state.impersonating;
+  });
+
+  const authState = computed(() => {
+    return store.state.auth.isAuth;
+  });
+
+  const layoutState = computed(() => {
+    return store.state.layout.isMobile;
+  });
+
+  const isWebviewGetter = computed(() => {
+    return store.getters.isWebview;
+  });
+
+  return {
+    user: userState,
+    meta: metaState,
+    enums: enumsState,
+    impersonating: impersonatingState,
+    isAuth: authState,
+    isMobile: layoutState,
+    isWebview: isWebviewGetter,
+  };
+}
+
    function isSelfVisiting() {
       return this.user.id === this.profile.id;
     };
@@ -196,7 +232,17 @@ library.add(faUser, faUserCircle, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt,
   };
 
   methods: {
-    ...mapMutations(['setUserAvatar']),
+     function useMutations() {
+  const store = useStore();
+
+  const setUserAvatarMutation = (payload) => {
+    store.commit('setUserAvatar', payload);
+  };
+
+  return {
+    setUserAvatar: setUserAvatarMutation,
+  };
+}
     function fetch() {
       this.$axios.get(this.route(this.$route.name, this.$route.params.user))
           .then(response => (this.profile = response.data.user))

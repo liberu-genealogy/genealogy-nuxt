@@ -22,7 +22,7 @@ library.add(faLock, faUser);
 
     inject: ['errors', 'i18n', 'route', 'state', 'toastr'];
 
-    props: {
+   const props = {
         action: {
             type: String,
             required: true,
@@ -45,7 +45,7 @@ library.add(faLock, faUser);
         loading: false,
     });
 
-    computed: {
+    const computed = {
         ...mapGetters(['isWebview']),
         config() {
             return this.isWebview

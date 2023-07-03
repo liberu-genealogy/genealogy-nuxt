@@ -8,7 +8,7 @@ import {
 
     inject: ['errorHandler', 'route', 'toastr'];
 
-    computed: {
+   const computed = {
         ...mapState(['meta', 'appState']),
         ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'sidebar', 'settings', 'footer']),
         ...mapGetters('preferences', ['bookmarks']),
@@ -21,7 +21,7 @@ import {
         },
     };
 
-    watch: {
+   const watch = {
         isTablet: {
             handler() {
                 return this.isTablet
@@ -31,20 +31,20 @@ import {
         },
     };
 
-    created() {
+   function created() {
         this.$root.$on('start-impersonating', this.startImpersonating);
         this.$root.$on('stop-impersonating', this.stopImpersonating);
     };
 
-    beforeMount() {
+   function beforeMount() {
         this.addTouchBreakpointsListeners();
     };
 
-    methods: {
+   const methods = {
         ...mapMutations('layout', ['setIsTablet', 'setIsMobile', 'setIsTouch']),
         ...mapMutations('layout/sidebar', { showSidebar: 'show', hideSidebar: 'hide' }),
         ...mapActions(['loadAppState']),
-       function addTouchBreakpointsListeners() {
+        addTouchBreakpointsListeners() {
             const { body } = document;
             const TabletMaxWidth = 1023;
             const MobileMaxWidth = 768;
@@ -71,24 +71,24 @@ import {
             });
 
             handler();
-        };
-       function startImpersonating(id) {
+        },
+       startImpersonating(id) {
             this.$axios.get(this.route('core.impersonate.start', id))
                 .then(({ data }) => {
                     this.toastr.warning(data.message);
                     this.loadAppState();
                 }).catch(this.errorHandler);
-        };
-       function stopImpersonating() {
+        },
+        stopImpersonating() {
             this.$axios.get(this.route('core.impersonate.stop'))
                 .then(({ data }) => {
                     this.toastr.info(data.message);
                     this.loadAppState();
                 }).catch(this.errorHandler);
-        };
+        },
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             appState: this.appState,
             lightsOff: this.lightsOff,

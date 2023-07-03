@@ -155,9 +155,9 @@ library.add(faSearch, faUndo, faSyncAlt);
                     datalabels: {
                         backgroundColor: this.colors,
                         formatter: val => `${this.$numberFormat(val / 1000)} KB`,
-                    };
-                }];
-            };
+                    }
+                }]
+            }
         };
         function storageUsage() {
             return this.stats.totalSpaceUsed

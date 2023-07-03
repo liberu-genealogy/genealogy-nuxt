@@ -4,7 +4,7 @@ import { mapState, mapGetters } from 'vuex';
 
     name: 'CoreSettings';
 
-    computed: {
+  const computed = {
         ...mapState(['user']),
         ...mapState(['meta']),
         ...mapState('layout', ['themes']),
@@ -15,11 +15,11 @@ import { mapState, mapGetters } from 'vuex';
         },
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
-            multiTheme: this.multiTheme;
-            meta: this.meta;
-            items: this.items;
-        });
-    };
+            multiTheme: this.multiTheme,
+            meta: this.meta,
+            items: this.items,
+        })
+    }
 </script>

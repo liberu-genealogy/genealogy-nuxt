@@ -4,11 +4,11 @@ import { mapState } from 'vuex';
 
     name: 'CoreSidebar';
 
-    computed: {
+   const computed = {
         ...mapState('menu', ['menus']),
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             menus: this.menus,
         });

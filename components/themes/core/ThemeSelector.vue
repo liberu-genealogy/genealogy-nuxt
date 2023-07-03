@@ -1,13 +1,36 @@
 <script setup>
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { useStore } from 'vuex';
 
 
     name: 'CoreThemeSelector';
 
     computed: {
-        ...mapState('layout', ['themes']),
-        ...mapGetters('preferences', ['theme']),
-        ...mapGetters('localisation', ['rtl']),
+      function useStateGetters() {
+  const store = useStore();
+
+  const layoutState = computed(() => {
+    return store.state.layout.themes;
+  });
+
+  const preferencesGetters = {
+    theme: computed(() => {
+      return store.getters['preferences/theme'];
+    }),
+  };
+
+  const localisationGetters = {
+    rtl: computed(() => {
+      return store.getters['localisation/rtl'];
+    }),
+  };
+
+  return {
+    themes: layoutState,
+    ...preferencesGetters,
+    ...localisationGetters,
+  };
+}
+
        function alternate() {
             return Object.keys(this.themes)
                 .find(theme => theme.replace('-rtl', '') !== this.theme.replace('-rtl', '')) + (this.rtl ? '-rtl' : '');
@@ -18,10 +41,23 @@ import { mapState, mapGetters, mapActions } from 'vuex';
     };
 
     methods: {
-        ...mapActions('preferences', ['setTheme']),
+    function useActions() {
+  const store = useStore();
+
+  const preferencesActions = {
+    setTheme: (payload) => {
+      return store.dispatch('preferences/setTheme', payload);
+    },
+  };
+
+  return {
+    ...preferencesActions,
+  };
+}
+
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             multiTheme: this.multiTheme,
             itemEvents: {

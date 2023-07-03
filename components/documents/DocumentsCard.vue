@@ -74,7 +74,7 @@ library.add(faCopy, faPlusSquare);
         count: 0,
     });
 
-    computed: {
+   const computed = {
         ...mapState('layout', ['isMobile']),
         isEmpty() {
             return this.count === 0;
@@ -89,7 +89,7 @@ library.add(faCopy, faPlusSquare);
         },
     };
 
-    watch: {
+   const watch = {
         count() {
             this.$refs.card.resize();
         },

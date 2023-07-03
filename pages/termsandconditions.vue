@@ -365,7 +365,7 @@
             isClear: true,
         };
     };
-    computed: {
+    const computed = {
          ...mapGetters(['loggedInUser'])
     };
     function created() {
@@ -374,7 +374,7 @@
     methods: {
         function logout() {
            this.$auth.logout();
-        },
+        };
        function handleScroll() {
             if (window.scrollY >= 500) {
                 this.isClear = false;

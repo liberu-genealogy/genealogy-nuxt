@@ -1,5 +1,5 @@
 <script setup>
-import { computed, useStore } from 'vuex';
+import { useStore } from 'vuex';
 
 
     name: 'CoreKeyCollector';
@@ -8,7 +8,7 @@ import { computed, useStore } from 'vuex';
         collect: false,
     });
 
-    computed: mapState(['meta']);
+   const computed = mapState(['meta']);
 
     methods: {
        function useMutations() {
@@ -24,7 +24,7 @@ import { computed, useStore } from 'vuex';
 };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             isLocal: this.meta.env === 'local',
             bindings: {

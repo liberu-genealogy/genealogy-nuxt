@@ -12,7 +12,7 @@ import { mapGetters, mapActions } from 'vuex';
         ...mapActions('preferences', ['setSidebarState']),
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             bindings: {
                 value: this.expandedSidebar,

@@ -136,7 +136,7 @@ library.add(faPencilAlt, faTrashAlt, faCheck, faBan);
         originalBody: null,
     });
 
-    computed: {
+   const computed = {
         ...mapState(['meta', 'user']),
         highlightTaggedUsers() {
             let { body } = this.comment;

@@ -13,7 +13,7 @@ import VueSwitch from '@enso-ui/switch/bulma';
 
     inject: ['i18n'];
 
-    props: {
+   const props = {
         param: {
             type: Object,
             required: true,

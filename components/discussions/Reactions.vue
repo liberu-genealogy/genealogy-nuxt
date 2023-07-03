@@ -34,7 +34,7 @@ import { VTooltip } from 'v-tooltip';
         };
     };
 
-    computed: {
+   const computed = {
         ...mapState(['user']),
     };
 

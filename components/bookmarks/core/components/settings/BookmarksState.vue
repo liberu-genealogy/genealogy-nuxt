@@ -52,15 +52,15 @@ import { computed, useStore } from 'vuex';
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             bindings: {
                 value: this.bookmarks,
-            };
+            },
             events: {
                 input: state => this.update(state),
-            };
-        });
+            },
+        })
     };
 
 </script>

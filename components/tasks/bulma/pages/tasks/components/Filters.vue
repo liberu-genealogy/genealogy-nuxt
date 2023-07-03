@@ -49,12 +49,12 @@ library.add(faFlag, faExclamation);
     name: 'Filters';
 
     components: {
-        BooleanFilter, EnsoDateFilter, EnsoFilter, EnsoSelectFilter,
+        BooleanFilter, EnsoDateFilter, EnsoFilter, EnsoSelectFilter
     };
 
     inject: ['i18n'];
 
-    props: {
+   const props = {
         filters: {
             type: Object,
             required: true,
@@ -75,7 +75,7 @@ library.add(faFlag, faExclamation);
         ],
     });
 
-    computed: {
+    const computed = {
         ...mapState(['enums']),
         flagOptions() {
             // eslint-disable-next-line no-underscore-dangle

@@ -23,8 +23,8 @@ import { VTooltip } from 'v-tooltip';
         };
     };
 
-    computed: {
-       function tooltip() {
+   const computed = {
+        tooltip() {
             return this.user.person?.appellative
                 ?? this.user.person?.name;
         }

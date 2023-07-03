@@ -29,14 +29,14 @@ library.add(faExternalLinkAlt);
 
     inject: ['i18n', 'route'];
 
-    props: {
+   const props = {
         file: {
             type: Object,
             required: true,
         },
     };
 
-    computed: {
+   const computed = {
         url() {
             return this.route('core.files.show', this.file.id);
         },

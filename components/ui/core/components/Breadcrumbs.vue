@@ -22,7 +22,7 @@
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             breadcrumbs: this.breadcrumbs,
             hasNavigation: this.hasNavigation,

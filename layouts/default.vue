@@ -28,7 +28,7 @@ import Default from '~/components/ui/bulma/layouts/Default.vue';
     name: 'Root';
 
     components: {
-        CoreApp, DocumentTitle, Loader, Fade, Auth, Home, Default,
+        CoreApp, DocumentTitle, Loader, Fade, Auth, Home, Default
     };
 
 </script>

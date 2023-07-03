@@ -1,5 +1,5 @@
 <script setup>
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { useStore } from 'vuex';
 import canAccess from '~/mixins/canAccess';
 import errorHandler from '~/mixins/errorHandler';
 import routerErrorHandler from '~/mixins/routerErrorHandler';
@@ -16,7 +16,7 @@ import toastr from '@enso-ui/toastr';
         toastr,
     });
 
-    computed: {
+   const computed = {
         ...mapState(['meta', 'routes']),
         ...mapState('auth', ['isAuth']),
         ...mapState('layout', ['home']),
@@ -27,9 +27,9 @@ import toastr from '@enso-ui/toastr';
         routes: {
            function handler() {
                 this.routeMapper = new RouteMapper(this.meta.appUrl, this.routes);
-            },
-            immediate: true,
-            deep: true,
+            };
+            immediate: true;
+            deep: true;
         };
     };
 
@@ -38,7 +38,19 @@ import toastr from '@enso-ui/toastr';
     };
 
     methods: {
-        ...mapActions('layout', ['loadTheme']),
+         function useActions() {
+  const store = useStore();
+
+  const layoutActions = {
+    loadTheme: (payload) => {
+      return store.dispatch('layout/loadTheme', payload);
+    },
+  };
+
+  return {
+    ...layoutActions,
+  };
+}
        function i18n(key, params = null) {
             return this.$i18n(key, params);
         };
@@ -47,7 +59,7 @@ import toastr from '@enso-ui/toastr';
         };
     };
 
-    provide() {
+   function provide() {
         return {
             canAccess: this.canAccess,
             errorHandler: this.errorHandler,
@@ -58,11 +70,11 @@ import toastr from '@enso-ui/toastr';
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             isAuth: this.isAuth,
             home: this.home,
             direction: this.rtl ? 'rtl' : 'ltr',
-        });
+        })
     };
 </script>

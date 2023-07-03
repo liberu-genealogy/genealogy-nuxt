@@ -63,7 +63,7 @@ library.add(faAddressCard, faPlusSquare);
         count: 0,
     });
 
-    computed: {
+    const computed = {
         ...mapState('layout', ['isMobile']),
         displayTitle() {
             return !this.isMobile

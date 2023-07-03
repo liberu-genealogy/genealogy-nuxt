@@ -4,15 +4,28 @@ import { mapState, mapMutations } from 'vuex';
 
     name: 'CoreMenuOrganizer';
 
-    computed: {
+   const computed = {
         ...mapState('menu', ['editable']),
     };
 
     methods: {
-        ...mapMutations('menu', ['edit']),
+       function useMutations() {
+  const store = useStore();
+
+  const menuMutations = {
+    edit: (payload) => {
+      store.commit('menu/edit', payload);
+    },
+  };
+
+  return {
+    ...menuMutations,
+  };
+};
+
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             bindings: {
                 value: this.editable,

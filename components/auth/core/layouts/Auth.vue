@@ -4,19 +4,19 @@ import { mapState, mapActions } from 'vuex';
 
     name: 'CoreAuth';
 
-    computed: {
+   const computed = {
         ...mapState(['guestState']),
     };
 
-    created() {
+    function created() {
         this.loadGuestState();
     };
 
-    methods: {
+    const methods = {
         ...mapActions(['loadGuestState']),
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             guestState: this.guestState,
         });

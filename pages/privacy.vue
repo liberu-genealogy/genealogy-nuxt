@@ -550,16 +550,26 @@
         };
     };
     computed: {
-         ...mapGetters(['loggedInUser'])
+        function useGetters() {
+  const store = useStore();
+
+  const loggedInUser = computed(() => {
+    return store.getters.loggedInUser;
+  });
+
+  return {
+    loggedInUser,
+  };
+}
     };
-    created() {
+   function created() {
         window.addEventListener('scroll', this.handleScroll);
     };
     methods: {
         function logout() {
            this.$auth.logout();
-        },
-        handleScroll() {
+        };
+       function handleScroll() {
             if (window.scrollY >= 500) {
                 this.isClear = false;
                 this.isDark = true;
@@ -567,7 +577,7 @@
                 this.isClear = true;
                 this.isDark = false;
             }
-        },
+        }
     };
 </script>
 <!-- <router>

@@ -28,15 +28,42 @@ import RegisterForm from '~/components/auth/RegisterForm.vue';
         }
     });
 
-    computed: {
+    const computed = {
         ...mapState(['meta']),
         ...mapGetters(['isWebview']),
     };
 
     methods: {
-        ...mapMutations('auth', ['login']),
-        ...mapMutations('layout', ['home']),
-        ...mapMutations(['setShowQuote', 'setCsrfToken']),
+       function useMutations() {
+  const store = useStore();
+
+  const authMutations = {
+    login() {
+      store.commit('auth/login');
+    },
+  };
+
+  const layoutMutations = {
+    home() {
+      store.commit('layout/home');
+    },
+  };
+
+  const rootMutations = {
+    setShowQuote(value) {
+      store.commit('setShowQuote', value);
+    },
+    setCsrfToken(token) {
+      store.commit('setCsrfToken', token);
+    },
+  };
+
+  return {
+    ...authMutations,
+    ...layoutMutations,
+    ...rootMutations,
+  };
+}
        function init(data) {
             this.setShowQuote(this.meta.showQuote);
 

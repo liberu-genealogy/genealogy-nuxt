@@ -59,13 +59,13 @@ import { isAfter } from 'date-fns';
         };
     };
 
-    render() {
+     function render() {
         return this.$scopedSlots.default({
             elapsed: this.elapsed,
             end: this.end,
             events: {
                 click: () => this.$emit('cancel', this.operation),
-            };
+            },
             ioTypes: this.enums.ioTypes,
             operation: this.operation,
             remaining: this.remaining,

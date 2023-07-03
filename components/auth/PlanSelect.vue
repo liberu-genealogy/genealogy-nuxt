@@ -24,21 +24,21 @@
   
   <script setup>
 
-    props: {
+   const props = {
       options: {
-        type: Array;
-        required: true;
-      };
+        type: Array,
+        required: true,
+      },
       defaultValue: {
-        type: String;
-        required: false;
-        defaultValue: null;
-      };
+        type: String,
+        required: false,
+        defaultValue: null,
+      },
       tabindex: {
-        type: Number;
-        required: false;
-        defaultValue: 0;
-      };
+        type: Number,
+        required: false,
+        defaultValue: 0,
+      }
     };
    function data() {
       return {

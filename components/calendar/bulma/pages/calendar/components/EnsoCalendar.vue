@@ -62,7 +62,7 @@
 </template>
 
 <script setup>
-import { mapState, mapGetters } from 'vuex';
+import { useStore } from 'vuex';
 import VueCal from 'vue-cal';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFlag, faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
@@ -91,7 +91,7 @@ library.add(faFlag, faArrowsAltH);
     props: {
         date: {
             required: true;
-        },
+        };
         calendars: {
             type: Array;
             required: true;
@@ -109,12 +109,34 @@ library.add(faFlag, faArrowsAltH);
     });
 
     computed: {
-        ...mapState(['enums', 'meta']),
-        ...mapGetters('preferences', ['lang']),
-        event() {
+     function useStateGetters() {
+  const store = useStore();
+
+  const enumsState = computed(() => {
+    return store.state.enums;
+  });
+
+  const metaState = computed(() => {
+    return store.state.meta;
+  });
+
+  const preferencesGetters = {
+    lang: computed(() => {
+      return store.getters['preferences/lang'];
+    }),
+  };
+
+  return {
+    enums: enumsState,
+    meta: metaState,
+    ...preferencesGetters,
+  };
+}
+
+       function event() {
             return this.vuecalEvent?.event;
-        },
-        params() {
+        };
+       function params() {
             if (!this.interval) {
                 return { calendars: this.calendars };
             }
@@ -131,28 +153,28 @@ library.add(faFlag, faArrowsAltH);
                 calendars: this.calendars,
                 startDate: `${this.dateFormat(this.interval.startDate)} 00:00:00`,
                 endDate: `${this.dateFormat(this.interval.endDate)} 23:59:59`,
-            };
-        },
-        isFrequent() {
+            }
+        };
+       function isFrequent() {
             return this.event
                 && `${this.event.frequency}` !== this.enums.eventFrequencies.Once;
-        },
-        dateChanged() {
+        };
+       function dateChanged() {
             return this.vuecalEvent && this.vuecalEvent.oldDate && this.vuecalEvent.newDate
                 && this.dateFormat(this.vuecalEvent.oldDate) !== this.dateFormat(this.vuecalEvent.newDate);
-        },
+        };
     };
 
     watch: {
-        calendars: 'fetch',
+        calendars: 'fetch'
     };
 
-    mounted() {
+   function mounted() {
         this.resize();
 
         window.addEventListener('resize', this.resize);
     };
-    beforeDestroy() {
+    function beforeDestroy() {
         window.removeEventListener('resize', this.resize);
     };
 

@@ -30,7 +30,7 @@ import SidebarState from './SidebarState.vue';
 
     inject: ['canAccess', 'i18n'];
 
-    components: {
+    const components = {
         CoreSettings,
         VueAside,
         SidebarState,

@@ -23,7 +23,7 @@
         };
     };
 
-    watch: {
+   const watch = {
         $route: 'handleRouting',
     };
 
@@ -76,10 +76,10 @@
         };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             visible: this.visible,
-            progress: this.progress,
+            progSress: this.progress,
         });
     };
 </script>

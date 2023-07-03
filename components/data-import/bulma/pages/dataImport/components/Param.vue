@@ -37,15 +37,15 @@ library.add(faFilter);
 
     props: {
         param: {
-            type: Object,
-            required: true,
-        },
+            type: Object;
+            required: true;
+        };
     };
     
     computed: {
-        component() {
+       function component() {
             return ucfirst(this.param.type);
-        },
+        };
     };
 </script>
 

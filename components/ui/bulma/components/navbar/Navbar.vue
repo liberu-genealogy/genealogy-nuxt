@@ -87,14 +87,14 @@ library.add(faBars, faCode, faUser, faTimes);
 
     directives: { tooltip: VTooltip };
 
-    computed: {
+    const computed = {
         ...mapGetters(['loggedInUser'])
     };
     components: {
         AppUpdate,
         CoreNavbar,
         Search,
-        SettingsControl,
+        SettingsControl
     };
 
     inject: ['i18n'];

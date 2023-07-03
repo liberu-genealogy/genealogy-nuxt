@@ -17,14 +17,14 @@ import { EnsoSelect } from '@enso-ui/select/bulma';
 
     inject: ['i18n'];
 
-    props: {
+   const props = {
         param: {
             type: Object,
             required: true,
         },
     };
 
-    computed: {
+   const computed = {
         placeholder() {
             return this.param.placeholder
                 ? this.i18n(this.param.placeholder)

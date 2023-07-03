@@ -109,13 +109,13 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
 	props: {
 		action: {
-			required: true,
-			type: String,
-		},
+			required: true;
+			type: String;
+		};
 		route: {
-			required: true,
-			type: String,
-		},
+			required: true;
+			type: String;
+		};
 	};
 
 	data: () => ({
@@ -129,18 +129,32 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 	});
 
 	computed: {
-		...mapState(["meta"]),
-		...mapGetters(["isWebview"]),
-		hasPassword() {
+		function useStateGetters() {
+  const store = useStore();
+
+  const metaState = computed(() => {
+    return store.state.meta;
+  });
+
+  const isWebviewGetter = computed(() => {
+    return store.getters.isWebview;
+  });
+
+  return {
+    meta: metaState,
+    isWebview: isWebviewGetter,
+  };
+};
+		function hasPassword() {
 			return this.password !== null && this.password.length;
-		},
-		match() {
+		};
+		function match() {
 			return this.hasPassword && this.password === this.password_confirmation;
-		},
-		postParams() {
+		};
+		function postParams() {
 			return this.loginParams;
-		},
-		loginParams() {
+		};
+		function loginParams() {
 			const { email, password, remember } = this;
 
 			return {
@@ -148,14 +162,14 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 				password,
 				remember,
 			};
-		},
-		loginLink() {
+		};
+		function loginLink() {
 			return "api/login";
-		},
-		config() {
+		};
+		function config() {
 			return this.isWebview ? { headers: { isWebview: true } } : {};
-		},
-	},
+		};
+	};
 	methods: {
 		function validate() {
 			this.$refs.email.validate().then((res) => {

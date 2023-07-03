@@ -27,20 +27,20 @@ import ColorSelect from './ColorSelect.vue';
 library.add(faUserClock, faPlus, faMinus);
 
 
-    name: 'CalendarForm',
+    name: 'CalendarForm';
 
-    components: { Modal, EnsoForm, ColorSelect },
+   const components = { Modal, EnsoForm, ColorSelect };
 
-    inject: ['i18n', 'route'],
+    inject: ['i18n', 'route'];
 
-    props: {
+    const props = {
         calendar: {
             type: Object,
             required: true,
         },
-    },
+    };
 
-    computed: {
+   const computed =  {
         ...mapState(['meta']),
         path() {
             return this.calendar.id

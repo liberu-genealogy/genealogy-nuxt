@@ -31,7 +31,7 @@ import { mapState, mapMutations } from 'vuex';
 
     methods: {
         ...mapMutations('layout/navbar', ['show', 'hide']),
-       function redirect(item, to = null) {
+        redirect(item, to = null) {
             if (!to && !item.routes.length) {
                 return;
             }
@@ -44,7 +44,7 @@ import { mapState, mapMutations } from 'vuex';
             this.selectedTags = [];
             this.hide();
         };
-       function tags(items) {
+        tags(items) {
             return items.reduce((tags, { group }) => {
                 if (!tags.includes(group)) {
                     tags.push(group);
@@ -52,7 +52,7 @@ import { mapState, mapMutations } from 'vuex';
                 return tags;
             }, []);
         };
-       function filter(items) {
+        filter(items) {
             let filtered = this.filtered(items);
 
             if (!filtered.length && this.selectedTags.length) {
@@ -61,12 +61,12 @@ import { mapState, mapMutations } from 'vuex';
             }
             return filtered;
         };
-       function filtered(items) {
+        filtered(items) {
             return this.selectedTags.length
                 ? items.filter(item => this.selectedTags.includes(item.group))
                 : items;
         };
-       function keyDown(event) {
+        keyDown(event) {
             const { target, key } = event;
 
             const shouldFocus = !this.isVisible && key === '/'
@@ -85,12 +85,12 @@ import { mapState, mapMutations } from 'vuex';
                 this.hide();
             }
         };
-       function showSearch() {
+        showSearch() {
             this.show();
 
             this.$nextTick(() => this.$el.querySelector('input').focus());
         };
-       function toggle(tag) {
+        toggle(tag) {
             const index = this.selectedTags.indexOf(tag);
             if (index > -1) {
                 this.selectedTags.splice(index, 1);
@@ -98,10 +98,10 @@ import { mapState, mapMutations } from 'vuex';
             }
             this.selectedTags.push(tag);
         };
-       function selected(tag) {
+        selected(tag) {
             return this.selectedTags.includes(tag);
         };
-       function addShortcut() {
+        addShortcut() {
             document.addEventListener('keydown', this.keyDown);
 
             this.$once('hook:destroyed', () => {
@@ -109,7 +109,7 @@ import { mapState, mapMutations } from 'vuex';
             });
         };
     };
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             bindings: {
                 source: 'core.search.index',

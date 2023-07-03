@@ -21,7 +21,7 @@ import { computed, useStore } from 'vuex';
     lang,
   };
 };
-       const multiLanguage() {
+       function multiLanguage() {
             return Object.keys(this.languages).length > 1;
         };
     };
@@ -40,7 +40,7 @@ import { computed, useStore } from 'vuex';
 };
     };
 
-    render() {
+    function render() {
         return this.$scopedSlots.default({
             multiLanguage: this.multiLanguage,
             locale: this.lang,

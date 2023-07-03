@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { mapState, mapGetters, mapMutations } from 'vuex';
+import { useStore } from 'vuex';
 // import Errors from '@enso-ui/laravel-validation/src/Errors';
 import LoginForm from '~/components/auth/LoginForm.vue';
 // import Email from '~/components/auth/fields/Email.vue';
@@ -46,15 +46,42 @@ import LoginForm from '~/components/auth/LoginForm.vue';
         }
     });
 
-    computed: {
-        ...mapState(['meta']),
-        ...mapGetters(['isWebview']),
-    };
+  const computed = {
+  ...mapState(['meta']),
+  ...mapGetters(['isWebview']),
+};
 
     methods: {
-        ...mapMutations('auth', ['login']),
-        ...mapMutations('layout', ['home']),
-        ...mapMutations(['setShowQuote', 'setCsrfToken']),
+     function useMutations() {
+  const store = useStore();
+
+  const authMutations = {
+    login: () => {
+      store.commit('auth/login');
+    },
+  };
+
+  const layoutMutations = {
+    home: () => {
+      store.commit('layout/home');
+    },
+  };
+
+  const rootMutations = {
+    setShowQuote: (value) => {
+      store.commit('setShowQuote', value);
+    },
+    setCsrfToken: (token) => {
+      store.commit('setCsrfToken', token);
+    },
+  };
+
+  return {
+    ...authMutations,
+    ...layoutMutations,
+    ...rootMutations,
+  };
+}
         function init(data) {
             this.setShowQuote(this.meta.showQuote);
             if (data.csrfToken) {

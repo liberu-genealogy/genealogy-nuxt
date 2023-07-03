@@ -63,7 +63,7 @@ import PageHeader from '../components/PageHeader.vue';
         AppFooter,
         MainRouter,
         Bookmarks,
-        PageHeader,
+        PageHeader
     };
 </script>
 

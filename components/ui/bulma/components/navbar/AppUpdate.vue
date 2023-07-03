@@ -12,7 +12,7 @@
 
 <script setup>
 import {
-    mapState, mapActions, mapGetters, mapMutations,
+    useStore
 } from 'vuex';
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -33,7 +33,7 @@ library.add(faExclamationTriangle);
         tooltip: null,
     });
 
-    computed: {
+   const computed = {
         ...mapState(['meta']),
         ...mapState('layout', ['isTouch']),
         ...mapGetters('websockets', ['channels']),
@@ -45,26 +45,26 @@ library.add(faExclamationTriangle);
         this.$root.$on('notify-new-release', () => this.notify());
     };
 
-    methods: {
+    const methods = {
         ...mapMutations(['newRelease']),
         ...mapActions('websockets', ['connect']),
-       function listen() {
+        listen() {
             window.Echo.private(this.channels.appUpdates)
                 .listen('.new-update', ({ title, message, tooltip }) => {
-                    this.newRelease();
-                    this.message = this.i18n(message);
-                    this.title = this.i18n(title);
-                    this.tooltip = this.i18n(tooltip);
-                    this.notify();
-                });
-        };
-       function notify() {
+                    this.newRelease(),
+                    this.message = this.i18n(message),
+                    this.title = this.i18n(title),
+                    this.tooltip = this.i18n(tooltip),
+                    this.notify(),
+                }),
+        },
+       notify() {
             this.toastr.duration(30000)
                 .title(this.title)
                 .warning(this.message);
-        };
-       function reload() {
+        },
+       reload() {
             window.location.reload(true);
-        };
+        },
     };
 </script>
