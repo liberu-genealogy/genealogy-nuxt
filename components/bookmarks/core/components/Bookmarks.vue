@@ -1,10 +1,10 @@
 <script setup>
-import { useStore } from 'vuex';
+import { mapState, mapGetters, mapMutations } from 'vuex';
 
 
-    name: 'CoreBookmarks';
+   const name= 'CoreBookmarks';
 
-    inject: ['routerErrorHandler'];
+    const inject= ['routerErrorHandler'];
 
    const props = {
         excluded: {
@@ -13,49 +13,18 @@ import { useStore } from 'vuex';
         },
     };
 
-    data: () => ({
+    const data= () => ({
         scrollInterval: null,
         scrollStep: 5,
     });
 
-    computed: {
-       function useStateGetters() {
-  const store = useStore();
-
-  const bookmarks = computed(() => {
-    return store.state.bookmarks.bookmarks;
-  });
-
-  const isExcluded = computed(() => {
-    return store.getters['bookmarks/isExcluded'];
-  });
-
-  const matches = computed(() => {
-    return store.getters['bookmarks/matches'];
-  });
-
-  const stickies = computed(() => {
-    return store.getters['bookmarks/stickies'];
-  });
-
-  const index = computed(() => {
-    return store.getters['bookmarks/index'];
-  });
-
-  return {
-    bookmarks,
-    isExcluded,
-    matches,
-    stickies,
-    index,
-  };
-}
-
-       function container() {
+     const computed= {
+        ...mapState('bookmarks', ['bookmarks']),
+        ...mapGetters('bookmarks', ['isExcluded', 'matches', 'stickies', 'index']),
+        container() {
             return this.$el.querySelector('.bookmark-items');
-        };
+        },
     };
-
    const watch = {
         $route(route) {
             this.add(route);

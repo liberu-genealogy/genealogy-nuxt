@@ -1,5 +1,5 @@
 <script setup>
-import { useStore } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import canAccess from '~/mixins/canAccess';
 import errorHandler from '~/mixins/errorHandler';
 import routerErrorHandler from '~/mixins/routerErrorHandler';

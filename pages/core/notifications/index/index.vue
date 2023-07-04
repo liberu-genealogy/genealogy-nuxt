@@ -72,11 +72,15 @@
         </div>
     </div>
 </template>
-
+<!-- <router>
+{
+    name: 'core.notifications.index',
+}
+</router> -->
 
 <script setup>
-import debounce from 'lodash';
-import { computed, useStore } from 'vuex';
+import debounce from 'lodash/debounce';
+import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync,
@@ -86,51 +90,32 @@ library.add(faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync);
 
 
     // path: '/core/notifications/index',
-    meta: {
-        breadcrumb: 'notifications';
-        title: 'Notifications';
+   const meta= {
+        breadcrumb: 'notifications',
+        title: 'Notifications',
     };
 
-    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler'];
+    const inject= ['errorHandler', 'i18n', 'route', 'routerErrorHandler'];
 
-    data: () => ({
+    const data= () => ({
         paginate: 200,
         notifications: [],
         offset: 0,
         loading: false,
     });
 
-    computed: {
-       function useComputedValues() {
-  const store = useStore();
-
-  const user = computed(() => {
-    return store.state.user;
-  });
-
-  const meta = computed(() => {
-    return store.state.meta;
-  });
-
-  const isTouch = computed(() => {
-    return store.state.layout.isTouch;
-  });
-
-  return {
-    user,
-    meta,
-    isTouch,
-  };
-};
+    const computed= {
+        ...mapState(['user', 'meta']),
+        ...mapState('layout', ['isTouch']),
     };
 
-   function created() {
+    function created() {
         this.fetch = debounce(this.fetch, 500);
         this.fetch();
     };
 
-    methods: {
-       function fetch() {
+    const methods= {
+        fetch() {
             if (this.loading) {
                 return;
             }
@@ -144,8 +129,8 @@ library.add(faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync);
                 this.offset = this.notifications.length;
                 this.loading = false;
             }).catch(this.errorHandler);
-        };
-       function read(notification) {
+        },
+        read(notification) {
             this.$axios.patch(this.route('core.notifications.read', notification.id))
                 .then(({ data }) => {
                     notification.read_at = data.read_at;
@@ -156,13 +141,13 @@ library.add(faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync);
                             .catch(this.routerErrorHandler);
                     }
                 }).catch(this.errorHandler);
-        };
-       function readAll() {
+        },
+        readAll() {
             this.$axios.post(this.route('core.notifications.readAll'))
                 .then(() => this.updateAll())
                 .catch(this.errorHandler);
-        };
-        function updateAll() {
+        },
+        updateAll() {
             this.notifications.forEach(notification => {
                 notification.read_at = notification.read_at || this.$format(new Date(), 'Y-MM-DD H:mm:s');
             });
@@ -170,21 +155,21 @@ library.add(faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync);
             this.unreadCount = 0;
 
             this.$root.$emit('read-all-notifications');
-        };
-        function destroyAll() {
+        },
+        destroyAll() {
             this.$axios.delete(this.route('core.notifications.destroyAll')).then(() => {
                 this.notifications = [];
                 this.$root.$emit('destroy-all-notifications');
             }).catch(this.errorHandler);
-        };
-       function destroy(notification, index) {
+        },
+        destroy(notification, index) {
             this.$axios.delete(this.route('core.notifications.destroy', notification.id)).then(() => {
                 this.notifications.splice(index, 1);
                 this.$root.$emit('destroy-notification', notification);
             }).catch(this.errorHandler);
-        };
-       function timeFromNow(date) {
+        },
+        timeFromNow(date) {
             return this.$formatDistance(date);
-        };
+        },
     };
 </script>

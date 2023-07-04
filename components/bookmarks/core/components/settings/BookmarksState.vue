@@ -1,47 +1,17 @@
 <script setup>
-import { computed, useStore } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
+
 
     name: 'CoreBookmarksState';
 
-    computed: {
-   
- function useComputedValues() {
-  const store = useStore();
-
-  const bookmarks = computed(() => {
-    return store.getters['preferences/bookmarks'];
-  });
-
-  return {
-    bookmarks,
-  };
-};
-
+   const computed = {
+        ...mapGetters('preferences', ['bookmarks']),
     };
 
-    methods: {
-       function useMutationsAndActions() {
-  const store = useStore();
-
-  const emptyBookmarks = () => {
-    store.commit('bookmarks/empty');
-  };
-
-  const pushBookmark = (bookmark) => {
-    store.commit('bookmarks/push', bookmark);
-  };
-
-  const setBookmarksState = (state) => {
-    store.dispatch('preferences/setBookmarksState', state);
-  };
-
-  return {
-    emptyBookmarks,
-    pushBookmark,
-    setBookmarksState,
-  };
-};
-        function update(state) {
+   const methods = {
+        ...mapMutations('bookmarks', ['empty', 'push']),
+        ...mapActions('preferences', ['setBookmarksState']),
+        update(state) {
             if (state) {
                 this.push(this.$route);
             } else {
@@ -49,10 +19,10 @@ import { computed, useStore } from 'vuex';
             }
 
             this.setBookmarksState(state);
-        };
+        },
     };
 
-    function render() {
+   function render() {
         return this.$scopedSlots.default({
             bindings: {
                 value: this.bookmarks,
@@ -60,7 +30,7 @@ import { computed, useStore } from 'vuex';
             events: {
                 input: state => this.update(state),
             },
-        })
-    };
+        });
+    }
 
 </script>

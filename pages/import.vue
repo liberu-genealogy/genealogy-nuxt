@@ -62,9 +62,14 @@
     </div>
 </template>
 
+<!-- <router>
+{
+    name: 'import.index',
+}
+</router> -->
 
 <script setup>
-import { computed, useStore } from 'vuex';
+import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faDownload, faTrashAlt, faFileExcel, faBan, faSync,
@@ -78,64 +83,53 @@ import Param from '~/components/data-import/bulma/pages/dataImport/components/Pa
 library.add(faDownload, faTrashAlt, faFileExcel, faBan, faSync);
 
 
-    meta: {
-        breadcrumb: 'data import';
-        title: 'Data Import';
+    const meta= {
+        breadcrumb: 'data import',
+        title: 'Data Import',
     };
 
-    inject: ['canAccess', 'errorHandler', 'i18n', 'route'];
+    const inject= ['canAccess', 'errorHandler', 'i18n', 'route'];
 
-    components: {
+    const components= {
         Avatar,
         EnsoSelect,
         EnsoTable,
         ImportUploader,
-        Param
+        Param,
     };
 
-    data: () => ({
+    const data= () => ({
         type: null,
         params: [],
     });
 
-    computed: {
-        function useComputedValues() {
-  const store = useStore();
-
-  const enums = computed(() => {
-    return store.state.enums;
-  });
-
-  return {
-    enums,
-  };
-};
-       function filters() {
+    const computed= {
+        ...mapState(['enums']),
+        filters() {
             return { data_imports: { type: this.type } };
-        };
-       function importLink() {
+        },
+        importLink() {
             return this.canAccess('import.store')
                 && this.type
                 && this.route('import.store');
-        };
-       function uploadParams() {
+        },
+        uploadParams() {
             return this.params.reduce((params, param) => {
                 params[param.name] = param.value;
                 return params;
             }, { type: this.type });
-        };
+        },
     };
 
-    methods: {
-       function template() {
+    const methods= {
+        template() {
             this.$axios.get(this.route('import.show', this.type))
                 .then(({ data: { params } }) => (this.params = params))
                 .catch(this.errorHandler);
-        };
+        },
         //  eslint-disable-next-line camelcase
-       function rejected({ rejected_id }) {
+        rejected({ rejected_id }) {
             window.location.href = this.route('import.rejected', rejected_id);
-        };
-    };
-
+        },
+    }
 </script>

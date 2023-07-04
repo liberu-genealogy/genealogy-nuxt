@@ -84,27 +84,26 @@
 }
 </router> -->
 <script setup>
-import { computed, useStore } from 'vuex';
+import { mapGetters } from 'vuex'
 import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/css/index.css';
+
 import { required } from 'vuelidate/lib/validators'
 
+    const layout= 'auth';
 
-    layout: 'auth';
-
-    components: {
+    const components= {
       Loading
     };
-    head: {
+    const head= {
         title: 'Gedcom Import'
     };
     // middleware: 'permission',
 
-    meta: {
-      permission: { name: 'gedcom import menu' };
-    };
+    // meta: {
+    //   permission: { name: 'gedcom import menu' }
+    // },
 
-    data: () => ({
+    const data= () => ({
       error: false,
       message: "",
       errors:null,
@@ -119,39 +118,29 @@ import { required } from 'vuelidate/lib/validators'
       complete: 0,
     });
 
-    validations: {
+    const validations= {
       fileName: {
-        required
-      };
+        required,
+      },
     };
 
-    computed: {
-       function useGetters() {
-  const store = useStore();
-
-  const loggedInUser = computed(() => {
-    return store.getters.loggedInUser;
-  });
-
-  return {
-    loggedInUser,
-  };
-};
+    const computed= {
+       ...mapGetters(['loggedInUser']),
     };
 
    function mounted() {
       this.subscribeToUploadProgress()
     };
 
-    methods: {
-     function handleSelectedFiles(event) {
+    const methods= {
+      handleSelectedFiles(event) {
         console.log(this.$refs.fileInput.files[0])
         this.file = this.$refs.fileInput.files[0]
         this.fileName = this.file.name
-      };
+      },
 
       
-      function submit() {
+      async submit() {
         this.$v.$touch();
 
         if (this.$v.$invalid) {
@@ -168,7 +157,7 @@ import { required } from 'vuelidate/lib/validators'
 
        
         try {
-          const response =  this.$axios
+          const response = await this.$axios
             .$post("/api/gedcom/store", formData, {
                 headers: {
                   'content-type': 'multipart/form-data',
@@ -186,16 +175,17 @@ import { required } from 'vuelidate/lib/validators'
           this.message = error.response.data.message
           this.errors =  error.response.data.errors
         }
-      };
+      },
 
-     function subscribeToUploadProgress() {
+      subscribeToUploadProgress() {
         this.$echo.channel(`user.${this.loggedInUser.id}`)
           .listen('.gedcomProgress', message => {
             this.total = message.total
             this.complete = message.complete
           })
-      };
-      };
+      }
+      }
+    
 
 </script>
 <style scoped>

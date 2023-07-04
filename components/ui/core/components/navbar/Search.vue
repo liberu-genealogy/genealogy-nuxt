@@ -21,7 +21,7 @@ import { mapState, mapMutations } from 'vuex';
         selectedTags: [],
     });
 
-    computed: {
+    const computed = {
         ...mapState('layout/navbar', ['isVisible']),
     };
 
@@ -29,7 +29,7 @@ import { mapState, mapMutations } from 'vuex';
         this.addShortcut();
     };
 
-    methods: {
+   const methods = {
         ...mapMutations('layout/navbar', ['show', 'hide']),
         redirect(item, to = null) {
             if (!to && !item.routes.length) {
@@ -43,7 +43,7 @@ import { mapState, mapMutations } from 'vuex';
 
             this.selectedTags = [];
             this.hide();
-        };
+        },
         tags(items) {
             return items.reduce((tags, { group }) => {
                 if (!tags.includes(group)) {
@@ -51,7 +51,7 @@ import { mapState, mapMutations } from 'vuex';
                 }
                 return tags;
             }, []);
-        };
+        },
         filter(items) {
             let filtered = this.filtered(items);
 
@@ -60,12 +60,12 @@ import { mapState, mapMutations } from 'vuex';
                 filtered = this.filtered(items);
             }
             return filtered;
-        };
+        },
         filtered(items) {
             return this.selectedTags.length
                 ? items.filter(item => this.selectedTags.includes(item.group))
                 : items;
-        };
+        },
         keyDown(event) {
             const { target, key } = event;
 
@@ -84,12 +84,12 @@ import { mapState, mapMutations } from 'vuex';
                 event.preventDefault();
                 this.hide();
             }
-        };
+        },
         showSearch() {
             this.show();
 
             this.$nextTick(() => this.$el.querySelector('input').focus());
-        };
+        },
         toggle(tag) {
             const index = this.selectedTags.indexOf(tag);
             if (index > -1) {
@@ -97,17 +97,17 @@ import { mapState, mapMutations } from 'vuex';
                 return;
             }
             this.selectedTags.push(tag);
-        };
+        },
         selected(tag) {
             return this.selectedTags.includes(tag);
-        };
+        },
         addShortcut() {
             document.addEventListener('keydown', this.keyDown);
 
             this.$once('hook:destroyed', () => {
                 document.removeEventListener('keydown', this.keyDown);
             });
-        };
+        },
     };
     function render() {
         return this.$scopedSlots.default({

@@ -4,6 +4,7 @@ export default {
     optimizeDeps: {
       exclude: ['d3-dsv']
     },
+    base: './',
     build: {
       rollupOptions: {
         external: ['vuex',

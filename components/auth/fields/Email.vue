@@ -36,22 +36,22 @@ import { focus } from '@enso-ui/directives';
 library.add(faCheck, faExclamationTriangle, faEnvelope);
 
 
-    name: 'Email';
+   const name= 'Email';
 
-    directives: { focus };
+    const directives= { focus };
 
-    inject: ['errors', 'i18n', 'state'];
+    const inject= ['errors', 'i18n', 'state'];
 
-    props: {
+   const props= {
         value: {
-            type: String;
-            required: true;
-        };
+            type: String,
+            required: true,
+        }
     };
 
-    computed: {
-       function successful() {
+   const computed= {
+        successful() {
             return this.state.successful;
-        };
+        }
     };
 </script>

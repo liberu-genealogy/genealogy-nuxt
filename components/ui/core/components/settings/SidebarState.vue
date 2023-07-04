@@ -4,11 +4,11 @@ import { mapGetters, mapActions } from 'vuex';
 
     name: 'CoreSidebarState';
 
-    computed: {
+   const computed = {
         ...mapGetters('preferences', ['expandedSidebar']),
     };
 
-    methods: {
+   const methods = {
         ...mapActions('preferences', ['setSidebarState']),
     };
 

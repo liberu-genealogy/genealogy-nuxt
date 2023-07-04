@@ -1,79 +1,44 @@
-<script>
-import { computed, useStore } from 'vuex';
+<script setup>
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 
-    name: 'CoreIO';
+   const name = 'CoreIO';
 
-    inject: ['route', 'errorHandler', 'toastr'];
+    const inject = ['route', 'errorHandler', 'toastr'];
 
-    data: () => ({
+   const data = () => ({
         imports: [],
         exports: [],
     });
 
-    computed: {
-       function useComputedValues() {
-  const store = useStore();
-
-  const channels = computed(() => {
-    return store.getters['websockets/channels'];
-  });
-
-  const user = computed(() => {
-    return store.state.user;
-  });
-
-  const meta = computed(() => {
-    return store.state.meta;
-  });
-
-  const enums = computed(() => {
-    return store.state.enums;
-  });
-
-  return {
-    channels,
-    user,
-    meta,
-    enums,
-  };
-};
-
-       function count() {
+    const computed = {
+        ...mapGetters('websockets', ['channels']),
+        ...mapState(['user', 'meta', 'enums']),
+        count() {
             return this.imports.length + this.exports.length;
-        };
+        },
     };
 
     function created() {
         this.connect();
         this.listen();
-    };
+    }
 
-    methods: {
-       function useActions() {
-  const store = useStore();
-
-  const connect = () => {
-    store.dispatch('websockets/connect');
-  };
-
-  return {
-    connect,
-  };
-};
-       function cancel(operation) {
+    const methods = {
+        ...mapActions('websockets', ['connect']),
+        cancel(operation) {
             const type = this.enums.ioTypes._get(operation.type);
 
             this.$axios.patch(this.route(`${type}.cancel`, { [type]: operation.id }))
                 .then(({ data: { message } }) => this.toastr.warning(message))
                 .catch(this.errorHandler);
-        };
-       function listen() {
+        },
+        listen() {
             window.Echo.private(this.channels.io)
                 .listen('.import', ({ operation }) => this.process(operation))
                 .listen('.export', ({ operation }) => this.process(operation));
-        };
-       function process(operation) {
+        },
+        process(operation) {
             switch (`${operation.status}`) {
                 case this.enums.ioStatuses.Started:
                     this.push(operation);
@@ -85,15 +50,15 @@ import { computed, useStore } from 'vuex';
                     this.update(operation);
                     break;
             }
-        };
-       function push(operation) {
+        },
+        push(operation) {
             const index = this.index(operation);
 
             if (index === -1) {
                 this.bag(operation.type).push(operation);
             }
-        };
-       function update(operation) {
+        },
+        update(operation) {
             const index = this.index(operation);
 
             if (index !== -1) {
@@ -102,22 +67,22 @@ import { computed, useStore } from 'vuex';
                 this.push(operation);
             }
 
-        };
-       function remove(operation) {
+        },
+        remove(operation) {
             const index = this.index(operation);
 
             if (index >= 0) {
                 this.bag(operation.type).splice(index, 1);
             }
-        };
-       function index(operation) {
+        },
+        index(operation) {
             return this.bag(operation.type)
                 .findIndex(({ id }) => id === operation.id);
-        };
-       function bag(type) {
+        },
+        bag(type) {
             return this[this.type(type)];
-        };
-       function type(type) {
+        },
+        type(type) {
             switch (this.enums.ioTypes._get(type)) {
                 case 'import':
                     return 'imports';
@@ -126,16 +91,16 @@ import { computed, useStore } from 'vuex';
                 default:
                     throw Error(`Unknown io type: ${this.enums.ioTypes._get(type)}`)
             }
-        };
-    };
+        },
+    }
 
-    function render() {
+   function render() {
         return this.$scopedSlots.default({
             count: this.count,
             events: { cancel: this.cancel },
             exports: this.exports,
             imports: this.imports,
-        })
-    };
+        });
+    }
 
 </script>

@@ -1,20 +1,20 @@
 <script setup>
 import { debounce } from 'lodash';
-import { computed, useStore } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 
-    name: 'Tasks';
+    const name= 'Tasks';
 
-    inject: ['errorHandler', 'route', 'routerErrorHandler', 'toastr'];
+   const inject= ['errorHandler', 'route', 'routerErrorHandler', 'toastr'];
 
-    props: {
+   const props= {
         paginate: {
-            type: Number;
-            defaultValue: 200;
-        };
+            type: Number,
+            default: 200,
+        },
     };
 
-    data: () => ({
+   const data= () => ({
         echo: null,
         loading: false,
         offset: 0,
@@ -23,34 +23,10 @@ import { computed, useStore } from 'vuex';
         tasks: [],
     });
 
-    computed: {
-        function useComputedValues() {
-  const store = useStore();
-
-  const channels = computed(() => {
-    return store.getters['websockets/channels'];
-  });
-
-  const isTouch = computed(() => {
-    return store.state.layout.isTouch;
-  });
-
-  const enums = computed(() => {
-    return store.state.enums;
-  });
-
-  const meta = computed(() => {
-    return store.state.meta;
-  });
-
-  return {
-    channels,
-    isTouch,
-    enums,
-    meta,
-  };
-};
-
+   const computed= {
+        ...mapGetters('websockets', ['channels']),
+        ...mapState('layout', ['isTouch']),
+        ...mapState(['enums', 'meta']),
     };
 
    function created() {
@@ -58,41 +34,31 @@ import { computed, useStore } from 'vuex';
         this.count();
         this.connect();
         this.listen();
-    };
+    }
 
-    methods: {
-       function useActions() {
-  const store = useStore();
-
-  const connect = () => {
-    store.dispatch('websockets/connect');
-  };
-
-  return {
-    connect,
-  };
-};
-       function computeScrollPosition(event) {
+   const methods= {
+        ...mapActions('websockets', ['connect']),
+        computeScrollPosition(event) {
             const a = event.target.scrollTop;
             const b = event.target.scrollHeight - event.target.clientHeight;
 
             if (a / b > 0.7) {
                 this.fetch();
             }
-        };
-       function count() {
+        },
+        count() {
             this.$axios.get(this.route('tasks.count'))
                 .then(({ data }) => this.updateCounters(data))
                 .catch(this.errorHandler);
-        };
-       function dateTime(dateTime) {
+        },
+        dateTime(dateTime) {
             return this.$format(dateTime, `${this.meta.dateFormat} H:i`);
-        };
-       function flagClass(id) {
+        },
+        flagClass(id) {
             // eslint-disable-next-line no-underscore-dangle
             return `has-text-${this.enums.flags._get(id).toLowerCase()}`;
-        };
-       function fetch() {
+        },
+        fetch() {
             if (this.loading) {
                 return;
             }
@@ -106,30 +72,30 @@ import { computed, useStore } from 'vuex';
                 this.offset = this.tasks.length;
                 this.loading = false;
             }).catch(this.errorHandler);
-        };
-       function listen() {
+        },
+        listen() {
             window.Echo.private(this.channels.task)
                 .listen('.updated', data => {
                     this.offset = 0;
                     this.tasks = [];
                     this.updateCounters(data);
                 });
-        };
-       function updateCounters({ overdueCount, pendingCount }) {
+        },
+        updateCounters({ overdueCount, pendingCount }) {
             this.overdue = overdueCount;
             this.pending = pendingCount;
-        };
-       function visitTask({ id }) {
+        },
+        visitTask({ id }) {
             this.$router.push({ name: 'tasks.edit', params: { task: id } })
                 .catch(this.routerErrorHandler);
-        };
-       function visitTasks() {
+        },
+        visitTasks() {
             this.$router.push({ name: 'tasks.index' })
                 .catch(this.routerErrorHandler);
-        };
+        },
     };
 
-    function render() {
+   function render() {
         return this.$scopedSlots.default({
             dateTime: this.dateTime,
             events: {

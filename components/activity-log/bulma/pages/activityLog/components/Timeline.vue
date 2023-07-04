@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex';
+import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faSpinner, faSyncAlt, faPlus, faPencilAlt, faTrashAlt, faFlag,
@@ -49,40 +49,29 @@ import Event from './Event.vue';
 library.add(faSpinner, faSyncAlt, faPlus, faPencilAlt, faTrashAlt, faFlag);
 
 
-    name: 'Timeline';
-    components: { Event };
-    inject: ['i18n'];
-    props: {
+   const name= 'Timeline';
+   const components= { Event };
+   const inject= ['i18n'];
+   const props = {
         feed: {
-            type: Array;
-            required: true;
-        };
+            type: Array,
+            required: true,
+        },
         loading: {
-            type: Boolean;
-            required: true;
-        };
+            type: Boolean,
+            required: true,
+        },
     };
-    computed: {
-      function useState() {
-  const store = useStore();
-
-  const layoutState = computed(() => {
-    return store.state.layout.isTouch;
-  });
-
-  return {
-    isTouch: layoutState,
-  };
-}
-
-       function days() {
+   const computed = {
+        ...mapState('layout', ['isTouch']),
+        days() {
             return this.feed.reduce();
-        };
+        },
     };
-    methods: {
-       function formatDate(date) {
+   const methods= {
+        formatDate(date) {
             return this.$format(date, 'l F d');
-        };
+        },
     };
 
 </script>

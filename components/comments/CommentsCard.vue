@@ -36,64 +36,64 @@ import Comments from './Comments.vue';
 library.add(faComments, faPlusSquare);
 
 
-    name: 'CommentsCard';
+    const name= 'CommentsCard';
 
-    components: {
+    const components= {
         Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent, Comments,
     };
 
-    inject: ['i18n'];
+    const inject= ['i18n'];
 
-    props: {
+    const props= {
         collapsed: {
-            type: Boolean;
-            defaultValue: false;
-        };
+            type: Boolean,
+            default: false,
+        },
         id: {
-            type: [String, Number];
-            required: true;
-        };
+            type: [String, Number],
+            required: true,
+        },
         type: {
-            type: String;
-            required: true;
-        };
+            type: String,
+            required: true,
+        },
         title: {
-            type: String;
-            defaultValue: '';
-        };
+            type: String,
+            default: '',
+        },
         icon: {
-            type: [String, Array, Object];
-            defaultValue: () => faComments;
-        };
+            type: [String, Array, Object],
+            default: () => faComments,
+        },
     };
 
-    data: () => ({
+    const data= () => ({
         count: 0,
         query: null,
     });
 
-    computed: {
+    const computed= {
         ...mapState('layout', ['isMobile']),
-       function displayTitle() {
+        displayTitle() {
             return !this.isMobile
                 ? this.title || this.i18n('Comments')
                 : null;
-        };
-       function isEmpty() {
+        },
+        isEmpty() {
             return this.count === 0;
-        };
+        },
     };
 
-    watch: {
-       function count() {
+    const watch= {
+        count() {
             this.$refs.card.resize();
-        };
-    }
+        },
+    };
 
-    methods: {
-       function addComment() {
+    const methods= {
+        addComment() {
             this.$refs.comments.create();
             this.$nextTick(() => this.$refs.card.expand());
-        };
+        },
     };
 </script>

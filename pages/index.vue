@@ -5,16 +5,15 @@
 import Home from '~/components/Home.vue'
 
 
-	layout: 'index';
-	components: { Home };
-		meta: {
-			guestGuard: true;
+	const layout= 'index';
+	const components= { Home };
+	const meta= {
+			guestGuard: true,
 	};
 
 
 </script>
-<!-- <router>
-{
+var router{
 	name: 'index'
 }
-</router> -->
+

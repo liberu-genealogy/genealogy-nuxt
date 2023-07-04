@@ -78,11 +78,14 @@
         </div>
     </enso-tabs>
 </template>
+var route={
+    name: 'core.files.index',
+};
 
 
-<script setup>
+<script>
 import { debounce } from 'lodash';
-import { computed, useStore } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch, faUndo, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import { Tab, EnsoTabs } from '@enso-ui/tabs/bulma';
@@ -94,19 +97,18 @@ import File from '~/components/files/bulma/pages/files/components/File.vue';
 
 library.add(faSearch, faUndo, faSyncAlt);
 
-
-    meta: {
-        breadcrumb: 'files';
-        title: 'Files';
+   const meta= {
+        breadcrumb: 'files',
+        title: 'Files',
     };
 
-    inject: ['errorHandler', 'i18n', 'route'];
+   const inject= ['errorHandler', 'i18n', 'route'];
 
-    components: {
+    const components= {
         EnsoTabs, Tab, File, Chart, EnsoDateFilter, EnsoUploader
     };
 
-    data: () => ({
+    const data= () => ({
         loading: false,
         files: [],
         folders: [],
@@ -119,34 +121,20 @@ library.add(faSearch, faUndo, faSyncAlt);
         },
     });
 
-    computed: {
-       function useComputedValues() {
-  const store = useStore();
-
-  const isMobile = computed(() => {
-    return store.state.layout.isMobile;
-  });
-
-  const locale = computed(() => {
-    return store.getters['preferences/lang'];
-  });
-
-  return {
-    isMobile,
-    locale,
-  };
-};
-       function uploadUrl() {
+   const computed= {
+        ...mapState('layout', ['isMobile']),
+        ...mapGetters('preferences', { locale: 'lang' }),
+        uploadUrl() {
             return this.route('core.uploads.store');
-        };
-       function colors() {
+        },
+        colors() {
             return colors.slice(0, this.folders.length);
-        };
-       function foldersStats() {
+        },
+        foldersStats() {
             return this.folders.map(folder => this.content(folder)
                 .reduce((total, { size }) => (total += size), 0));
-        };
-       function chartData() {
+        },
+        chartData() {
             return {
                 labels: this.folders,
                 datasets: [{
@@ -155,38 +143,38 @@ library.add(faSearch, faUndo, faSyncAlt);
                     datalabels: {
                         backgroundColor: this.colors,
                         formatter: val => `${this.$numberFormat(val / 1000)} KB`,
-                    }
-                }]
-            }
-        };
-        function storageUsage() {
+                    },
+                }],
+            };
+        },
+        storageUsage() {
             return this.stats.totalSpaceUsed
                 && this.$numberFormat(this.stats.totalSpaceUsed * 100 / this.stats.storageLimit, 2);
-        };
-        function status() {
+        },
+        status() {
             return this.storageUsage < 95
                 ? 'has-text-success'
                 : 'has-text-danger';
-        };
+        },
     };
 
-    watch: {
-        function query() {
+    const watch= {
+        query() {
             this.reset();
-        };
+        },
     };
 
     function created() {
         this.fetch = debounce(this.fetch, 300);
     };
 
-    methods: {
-       function reset() {
+    const methods= {
+        reset() {
             this.files = [];
             this.offset = 0;
             this.fetch();
-        };
-       function fetch() {
+        },
+        fetch() {
             this.loading = true;
 
             this.$axios.get(this.route('core.files.index'), {
@@ -198,8 +186,8 @@ library.add(faSearch, faUndo, faSyncAlt);
                 this.stats = data.stats;
                 this.loading = false;
             }).catch(this.errorHandler);
-        };
-       function destroy(id) {
+        },
+        destroy(id) {
             this.loading = true;
 
             this.$axios.delete(this.route('core.files.destroy', id, false))
@@ -208,23 +196,22 @@ library.add(faSearch, faUndo, faSyncAlt);
                     this.files.splice(index, 1);
                     this.loading = false;
                 }).catch(this.errorHandler);
-        };
-       function content(folder) {
+        },
+        content(folder) {
             return this.files.filter(({ type }) => type === folder);
-        };
-       function addUploadedFiles(files) {
+        },
+        addUploadedFiles(files) {
             this.files.push(...files);
-        };
-       function computeScrollPosition(event) {
+        },
+        computeScrollPosition(event) {
             const position = event.target.scrollTop;
             const total = event.target.scrollHeight - event.target.clientHeight;
 
             if (position / total > 0.8) {
                 this.fetch();
             }
-        };
-    };
-
+        },
+    }
 </script>
 
 <style lang="scss">

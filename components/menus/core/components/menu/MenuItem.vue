@@ -64,17 +64,17 @@ import {
         };
     };
 
-    watch: {
+  const watch = {
         active: {
-           function handler(active) {
+            handler(active) {
                 this.activate({ menu: this.menu, active });
 
                 if (active) {
                     this.$nextTick(this.refresh);
                 }
-            };
+            },
             immediate: true,
-        };
+        }
     };
 
     methods: {

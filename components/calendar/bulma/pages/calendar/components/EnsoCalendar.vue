@@ -62,43 +62,37 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import VueCal from 'vue-cal';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFlag, faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 import EventConfirmation from './EventConfirmation';
 
-import 'vue-cal/dist/drag-and-drop.amd.js';
-import 'vue-cal/dist/i18n/ar.es.js';
-import 'vue-cal/dist/i18n/de.es.js';
-import 'vue-cal/dist/i18n/fr.es.js';
-import 'vue-cal/dist/i18n/hu.es.js';
-import 'vue-cal/dist/i18n/nl.es.js';
-import 'vue-cal/dist/i18n/ro.es.js';
-import 'vue-cal/dist/i18n/es.es.js';
+
+
 
 import('../styles/colors.scss');
 
 library.add(faFlag, faArrowsAltH);
 
 
-    name: 'EnsoCalendar';
+   const name= 'EnsoCalendar';
 
-    components: { VueCal, EventConfirmation };
+    const components= { VueCal, EventConfirmation };
 
-    inject: ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'];
+    const inject= ['errorHandler', 'i18n', 'route', 'routerErrorHandler', 'toastr'];
 
-    props: {
+   const props= {
         date: {
-            required: true;
-        };
+            required: true,
+        },
         calendars: {
-            type: Array;
-            required: true;
-        };
+            type: Array,
+            required: true,
+        },
     };
 
-    data: () => ({
+    const data= () => ({
         events: [],
         vuecalEvent: null,
         confirm: null,
@@ -108,35 +102,13 @@ library.add(faFlag, faArrowsAltH);
         deleteEventFunction: null,
     });
 
-    computed: {
-     function useStateGetters() {
-  const store = useStore();
-
-  const enumsState = computed(() => {
-    return store.state.enums;
-  });
-
-  const metaState = computed(() => {
-    return store.state.meta;
-  });
-
-  const preferencesGetters = {
-    lang: computed(() => {
-      return store.getters['preferences/lang'];
-    }),
-  };
-
-  return {
-    enums: enumsState,
-    meta: metaState,
-    ...preferencesGetters,
-  };
-}
-
-       function event() {
+   const computed= {
+        ...mapState(['enums', 'meta']),
+        ...mapGetters('preferences', ['lang']),
+        event() {
             return this.vuecalEvent?.event;
-        };
-       function params() {
+        },
+        params() {
             if (!this.interval) {
                 return { calendars: this.calendars };
             }
@@ -153,23 +125,23 @@ library.add(faFlag, faArrowsAltH);
                 calendars: this.calendars,
                 startDate: `${this.dateFormat(this.interval.startDate)} 00:00:00`,
                 endDate: `${this.dateFormat(this.interval.endDate)} 23:59:59`,
-            }
-        };
-       function isFrequent() {
+            };
+        },
+        isFrequent() {
             return this.event
                 && `${this.event.frequency}` !== this.enums.eventFrequencies.Once;
-        };
-       function dateChanged() {
+        },
+        dateChanged() {
             return this.vuecalEvent && this.vuecalEvent.oldDate && this.vuecalEvent.newDate
                 && this.dateFormat(this.vuecalEvent.oldDate) !== this.dateFormat(this.vuecalEvent.newDate);
-        };
+        },
     };
 
-    watch: {
-        calendars: 'fetch'
+    const watch= {
+        calendars: 'fetch',
     };
 
-   function mounted() {
+    function mounted() {
         this.resize();
 
         window.addEventListener('resize', this.resize);
@@ -178,29 +150,29 @@ library.add(faFlag, faArrowsAltH);
         window.removeEventListener('resize', this.resize);
     };
 
-    methods: {
-        function resize() {
+   const methods= {
+        resize() {
             this.$el.style.height = `${document.body.clientHeight - 170}px`;
-        };
-       function fetch() {
+        },
+        fetch() {
             if (this.calendars) {
                 this.$axios.get(this.route('core.calendar.events.index'), { params: this.params })
                     .then(({ data }) => (this.events = data))
                     .catch(this.errorHandler);
             }
-        };
-       function setDragedEvent(event, deleteEventFunction) {
+        },
+        setDragedEvent(event, deleteEventFunction) {
             this.dragedEvent = event;
             this.deleteEventFunction = deleteEventFunction;
             return event;
-        };
-       function revert() {
+        },
+        revert() {
             const index = this.events.findIndex((event) => event.id === this.event.id);
             this.events[index].end = new Date(this.vuecalEvent.originalEvent.end);
             this.events[index].start = new Date(this.vuecalEvent.originalEvent.start);
             this.events.splice(index, 1, this.events[index]);
-        };
-       function update(updateType = null) {
+        },
+        update(updateType = null) {
             if (this.needsConfirmation(updateType)) {
                 this.confirm = (updateType) => this.update(updateType);
                 return;
@@ -224,12 +196,12 @@ library.add(faFlag, faArrowsAltH);
                 this.revert();
                 this.errorHandler(e);
             });
-        };
-        function updateInterval(interval) {
+        },
+        updateInterval(interval) {
             this.interval = interval;
             this.fetch();
-        };
-       function selectEvent(event, e) {
+        },
+        selectEvent(event, e) {
             if (event.route) {
                 this.$router.push(event.route)
                     .catch(this.routerErrorHandler);
@@ -239,8 +211,8 @@ library.add(faFlag, faArrowsAltH);
                 this.$emit('edit-event', event);
             }
             e.stopPropagation();
-        };
-       function destroy(event, updateType = null) {
+        },
+        destroy(event, updateType = null) {
             this.vuecalEvent = { event, originalEvent: event };
 
             if (this.needsConfirmation(updateType)) {
@@ -255,34 +227,34 @@ library.add(faFlag, faArrowsAltH);
                 this.toastr.success(data.message);
                 this.fetch();
             }).catch(this.errorHandler);
-        };
-       function needsConfirmation(updateType) {
+        },
+        needsConfirmation(updateType) {
             return updateType === null
                 && this.isFrequent;
-        };
-       function dateTimeFormat(daysCount, date) {
+        },
+        dateTimeFormat(daysCount, date) {
             return daysCount > 1
                 ? this.$format(date, 'm-d h:i')
                 : this.$format(date, 'h:i');
-        };
-       function dateFormat(date) {
+        },
+        dateFormat(date) {
             return this.$format(date, 'Y-m-d');
-        };
-        function timeFormat(dateTime) {
+        },
+        timeFormat(dateTime) {
             return this.$format(dateTime, 'H:i');
-        };
-       function cancelUpdate() {
+        },
+        cancelUpdate() {
             this.revert();
             this.confirm = null;
             this.vuecalEvent = null;
-        };
-       function eventDragCreated() {
+        },
+        eventDragCreated() {
             if (this.dragedEvent) {
                 this.$emit('edit-event', this.dragedEvent);
                 this.deleteEventFunction();
                 this.dragedEvent = null;
             }
-        };
+        },
     };
 </script>
 

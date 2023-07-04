@@ -34,7 +34,7 @@ import { useStore } from 'vuex';
         };
     };
 
-    watch: {
+   const watch = {
         collapsed: 'toggle',
     };
 

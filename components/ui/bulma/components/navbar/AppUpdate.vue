@@ -55,8 +55,8 @@ library.add(faExclamationTriangle);
                     this.message = this.i18n(message),
                     this.title = this.i18n(title),
                     this.tooltip = this.i18n(tooltip),
-                    this.notify(),
-                }),
+                    this.notify()
+                })
         },
        notify() {
             this.toastr.duration(30000)

@@ -17,36 +17,26 @@
 </template>
 
 <script setup>
-import { useStore } from "vuex";
-// import Errors from "@enso-ui/laravel-validation/src/Errors";
+import { mapState } from "vuex";
+import Errors from "@enso-ui/laravel-validation";
 import Submit from "./Submit.vue";
 
 
-	name: "AuthForm";
+	const name= "AuthForm";
 
-	components: { Submit };
+	const components= { Submit };
 
-	inject: ["routerErrorHandler"];
+	const inject= ["routerErrorHandler"];
 
-	data: () => ({
-		// errors: new Errors(),
+	const data= () => ({
+		errors: new Errors(),
 		state: {
 			successful: false,
 		},
 	});
 
-	computed: {
-		function useComputedValues() {
-  const store = useStore();
-
-  const meta = computed(() => {
-    return store.state.meta;
-  });
-
-  return {
-    meta,
-  };
-}
+	const computed= {
+		...mapState(["meta"]),
 	};
 
 	function provide() {
@@ -54,9 +44,7 @@ import Submit from "./Submit.vue";
 			state: this.state,
 			errors: this.errors,
 		};
-		
-	};
-
+	}
 </script>
 
 <style lang="scss">

@@ -42,32 +42,32 @@ import RevealPassword from '@enso-ui/forms/src/bulma/parts/RevealPassword.vue';
 library.add(faExclamationTriangle);
 
 
-    name: 'Password';
+    const name= 'Password';
 
-    directives: { focus };
+    const directives= { focus };
 
-    inject: ['errors', 'i18n', 'state'];
+    const inject= ['errors', 'i18n', 'state'];
 
-    components: { RevealPassword };
+    const components= { RevealPassword };
 
-    props: {
+    const props= {
         autocomplete: {
-            type: String;
-            defaultValue: 'current-password';
-        };
+            type: String,
+            defaultValue: 'current-password',
+        },
         value: {
-            type: String;
-            required: true;
-        };
+            type: String,
+            required: true,
+        },
     };
 
-    computed: {
-       function successful() {
+    const computed= {
+       successful() {
             return this.state.successful;
-        };
+        }
     };
 
-    data: () => ({
+    const data= () => ({
         meta: {
             content: 'password'
         },

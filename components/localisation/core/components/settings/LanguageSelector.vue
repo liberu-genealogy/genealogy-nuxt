@@ -1,43 +1,19 @@
-<script setup>
-import { computed, useStore } from 'vuex';
+<script>
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 
-    name: 'LanguageSelector';
+   const name= 'LanguageSelector';
 
-    computed: {
-       function useComputedValues() {
-  const store = useStore();
-
-  const languages = computed(() => {
-    return store.state.localisation.languages;
-  });
-
-  const lang = computed(() => {
-    return store.getters['preferences/lang'];
-  });
-
-  return {
-    languages,
-    lang,
-  };
-};
-       function multiLanguage() {
+   const computed= {
+        ...mapState('localisation', ['languages']),
+        ...mapGetters('preferences', ['lang']),
+        multiLanguage() {
             return Object.keys(this.languages).length > 1;
-        };
+        },
     };
 
-    methods: {
-       function useActions() {
-  const store = useStore();
-
-  const setLang = (lang) => {
-    store.dispatch('preferences/setLang', lang);
-  };
-
-  return {
-    setLang,
-  };
-};
+   const methods= {
+        ...mapActions('preferences', ['setLang']),
     };
 
     function render() {
@@ -47,7 +23,6 @@ import { computed, useStore } from 'vuex';
             languages: this.languages,
             update: this.setLang,
         });
-    };
-
+    }
 
 </script>

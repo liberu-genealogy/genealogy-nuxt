@@ -38,34 +38,34 @@ import RevealPassword from '@enso-ui/forms/src/bulma/parts/RevealPassword.vue';
 library.add(faCheck, faExclamationTriangle, faLock);
 
 
-    name: 'Confirmation';
+    const name= 'Confirmation';
 
-    directives: { focus };
+    const directives= { focus };
 
-    inject: ['errors', 'i18n', 'state'];
+    const inject= ['errors', 'i18n', 'state'];
 
-    components: { RevealPassword };
+    const components= { RevealPassword };
 
-    props: {
+    const props= {
         match: {
-            type: Boolean;
-            required: true;
-        };
-        value: {
-            type: String;
-            required: true;
-        };
-    };
-
-    computed: {
-       function successful() {
-            return this.state.successful;
-        };
-    };
-
-    data: () => ({
-        meta: {
-            content: 'password'
+            type: Boolean,
+            required: true,
         },
-    });
+        value: {
+            type: String,
+            required: true,
+        },
+    };
+
+   const computed= {
+        successful() {
+            return this.state.successful;
+        },
+    };
+
+    const data= () => ({
+        meta: {
+            content: 'password',
+        },
+    })
 </script>

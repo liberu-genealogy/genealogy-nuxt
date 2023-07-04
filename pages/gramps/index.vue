@@ -84,28 +84,28 @@
 }
 </router> -->
 <script setup>
-import { computed, useStore } from 'vuex';
+import { mapGetters } from 'vuex'
 import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/css/index.css';
+
 import { required } from 'vuelidate/lib/validators'
 
 
-    layout: 'auth';
+    const layout= 'auth';
 
-    components: {
+    const components= {
       Loading
     };
-    head: {
-        title: 'Gramps XML Import';
+    const head= {
+        title: 'Gramps XML Import'
     };
     // middleware: 'permission',
 
-    meta: {
-        permission: { name: 'gramps menu' };
-        title: 'Gramps - Import';
+    const meta= {
+        permission: { name: 'gramps menu' },
+        title: 'Gramps - Import'
     };
 
-    data: () => ({
+    const data= () => ({
       error: false,
       message: "",
       errors:null,
@@ -120,38 +120,28 @@ import { required } from 'vuelidate/lib/validators'
       complete: 0,
     });
 
-    validations: {
+    const validations= {
       fileName: {
-        required;
-      };
+        required,
+      },
     };
 
-    computed: {
-       function useGetters() {
-  const store = useStore();
-
-  const loggedInUser = computed(() => {
-    return store.getters.loggedInUser;
-  });
-
-  return {
-    loggedInUser,
-  };
-};
+    const computed= {
+       ...mapGetters(['loggedInUser']),
     };
 
-   function mounted() {
+    function mounted() {
       this.subscribeToUploadProgress()
     };
 
-    methods: {
-     function handleSelectedFiles(event) {
+    const methods= {
+      handleSelectedFiles(event) {
         console.log(this.$refs.fileInput.files[0])
         this.file = this.$refs.fileInput.files[0]
         this.fileName = this.file.name
-      };
+      },
 
-      function submit() {
+      async submit() {
         this.$v.$touch();
 
         if (this.$v.$invalid) {
@@ -166,7 +156,7 @@ import { required } from 'vuelidate/lib/validators'
         formData.append('file',  this.file)
 
         try {
-          const response =  this.$axios
+          const response = await this.$axios
             .$post("/api/gramps-import", formData, {
                 headers: {
                   'content-type': 'multipart/form-data',
@@ -181,16 +171,17 @@ import { required } from 'vuelidate/lib/validators'
           this.message = error.response.data.message
           this.errors =  error.response.data.errors
         }
-      }
+      },
 
-     function subscribeToUploadProgress() {
+      subscribeToUploadProgress() {
         this.$echo.channel(`user.${this.loggedInUser.id}`)
           .listen('.grampsProgress', message => {
             this.total = message.total
             this.complete = message.complete
           })
-      };
-      };
+      }
+      }
+    
 
 </script>
 <style scoped>

@@ -94,32 +94,32 @@ import { mapState, mapGetters } from "vuex";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEnvelope, faCheck, faExclamationTriangle, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { focus } from "@enso-ui/directives";
-// import Errors from "@enso-ui/laravel-validation/src/Errors";
+import Errors from "@enso-ui/laravel-validation";
 import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
 
 library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
 
-	name: "LoginForm";
-	components: { AuthIndex };
-	directives: { focus };
+	const name= "LoginForm";
+	const components= { AuthIndex };
+	const directives= { focus };
 	// inject: {
 	//   i18n: { from: "i18n" },
 	// },
 
-	props: {
+	const props= {
 		action: {
-			required: true;
-			type: String;
-		};
+			required: true,
+			type: String,
+		},
 		route: {
-			required: true;
-			type: String;
-		};
+			required: true,
+			type: String,
+		},
 	};
 
-	data: () => ({
-		// errors: new Errors(),
+	const data = () => ({
+		errors: new Errors(),
 		hasError: false,
 		provider: null,
 		email: "",
@@ -128,33 +128,19 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 		device_name: "mac",
 	});
 
-	computed: {
-		function useStateGetters() {
-  const store = useStore();
-
-  const metaState = computed(() => {
-    return store.state.meta;
-  });
-
-  const isWebviewGetter = computed(() => {
-    return store.getters.isWebview;
-  });
-
-  return {
-    meta: metaState,
-    isWebview: isWebviewGetter,
-  };
-};
-		function hasPassword() {
+	const computed= {
+		...mapState(["meta"]),
+		...mapGetters(["isWebview"]),
+		hasPassword() {
 			return this.password !== null && this.password.length;
-		};
-		function match() {
+		},
+		match() {
 			return this.hasPassword && this.password === this.password_confirmation;
-		};
-		function postParams() {
+		},
+		postParams() {
 			return this.loginParams;
-		};
-		function loginParams() {
+		},
+		loginParams() {
 			const { email, password, remember } = this;
 
 			return {
@@ -162,33 +148,33 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 				password,
 				remember,
 			};
-		};
-		function loginLink() {
+		},
+		loginLink() {
 			return "api/login";
-		};
-		function config() {
+		},
+		config() {
 			return this.isWebview ? { headers: { isWebview: true } } : {};
-		};
+		},
 	};
-	methods: {
-		function validate() {
+	const methods= {
+		validate() {
 			this.$refs.email.validate().then((res) => {
 				console.log(res.valid);
 			});
-		};
+		},
 
-		function loginSocial(provider) {
+		loginSocial(provider) {
 			this.provider = provider;
 			window.location.href = `${process.env.baseUrl}/api/login/${provider}`;
-		};
+		},
 
-		function submit() {
+		submit() {
 			this.loading = true;
 			this.isSuccessful = false;
 			this.hasError = false;
 			this.oldLogin();
-		};		
-		 function oldLogin() {
+		},		
+		oldLogin() {
 			this.$axios.get("/sanctum/csrf-cookie").then(() => {
 				this.$axios
 					.post(
@@ -226,7 +212,7 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 						}
 					});
 			});
-		};
+		},
 	};
 
 function openWindow(url, title, options = {}) {

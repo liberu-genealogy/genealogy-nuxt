@@ -1,65 +1,30 @@
-<script setup>
-import { computed, useStore } from 'vuex';
+<script>
+import { mapState, mapMutations } from 'vuex';
 
 
-    name: 'CoreMissingKeys';
+   const name= 'CoreMissingKeys';
 
-    inject: ['errorHandler', 'route', 'toastr'];
+    const inject= ['errorHandler', 'route', 'toastr'];
 
-    data: () => ({
+   const data= () => ({
         hover: false,
     });
 
-    computed: {
-      function useComputedValues() {
-  const store = useStore();
-
-  const keyCollector = computed(() => {
-    return store.state.localisation.keyCollector;
-  });
-
-  const missingKeys = computed(() => {
-    return store.state.localisation.missingKeys;
-  });
-
-  const isTouch = computed(() => {
-    return store.state.layout.isTouch;
-  });
-
-  return {
-    keyCollector,
-    missingKeys,
-    isTouch,
-  };
-};
-
-       function count() {
+   const computed= {
+        ...mapState('localisation', ['keyCollector', 'missingKeys']),
+        ...mapState('layout', ['isTouch']),
+        count() {
             return this.missingKeys.length;
-        };
-       function mappedKeys() {
+        },
+        mappedKeys() {
             return this.missingKeys
                 .map(key => ({ [key]: null }));
-        };
+        },
     };
 
-    methods: {
-        function useMutations() {
-  const store = useStore();
-
-  const addKey = (key) => {
-    store.commit('localisation/addKey', key);
-  };
-
-  const clearMissingKeys = () => {
-    store.commit('localisation/clearMissingKeys');
-  };
-
-  return {
-    addKey,
-    clearMissingKeys,
-  };
-};
-       function persist() {
+   const methods= {
+        ...mapMutations('localisation', ['addKey', 'clearMissingKeys']),
+        persist() {
             this.$axios.patch(
                 this.route('system.localisation.addKey'),
                 { keys: this.missingKeys },
@@ -68,10 +33,10 @@ import { computed, useStore } from 'vuex';
                 this.clearMissingKeys();
                 this.toastr.success(data.message);
             }).catch(this.errorHandler);
-        };
+        },
     };
 
-    function render() {
+   function render() {
         return this.$scopedSlots.default({
             keyCollector: this.keyCollector,
             isTouch: this.isTouch,
@@ -82,7 +47,7 @@ import { computed, useStore } from 'vuex';
                 mouseenter: () => (this.hover = true),
                 mouseleave: () => (this.hover = false),
             },
-        });
-    };
+        })
+    }
 
 </script>

@@ -1,28 +1,18 @@
 <script setup>
-import { computed, useStore } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import { positions } from '@enso-ui/toastr/config';
 
 
-    name: 'CoreToastrPosition';
+    const name= 'CoreToastrPosition';
 
-    inject: ['toastr'];
+    const inject= ['toastr'];
 
-    data: () => ({
+    const data= () => ({
         positions,
     });
 
-    computed: {
-        function useComputedValues() {
-  const store = useStore();
-
-  const toastrPosition = computed(() => {
-    return store.getters['preferences/toastrPosition'];
-  });
-
-  return {
-    toastrPosition,
-  };
-};
+   const computed= {
+        ...mapGetters('preferences', ['toastrPosition']),
     };
 
    function created() {
@@ -32,23 +22,13 @@ import { positions } from '@enso-ui/toastr/config';
         }
     };
 
-    methods: {
-        function useActions() {
-  const store = useStore();
-
-  const setToastrPosition = (position) => {
-    store.dispatch('preferences/setToastrPosition', position);
-  };
-
-  return {
-    setToastrPosition,
-  };
-};
-       function update(position) {
+   const methods= {
+        ...mapActions('preferences', ['setToastrPosition']),
+        update(position) {
             this.setToastrPosition(position);
             this.toastr.defaults({ position }).reset();
             this.$toastr.defaults({ position }).reset();
-        };
+        },
     };
 
     function render() {
@@ -57,6 +37,6 @@ import { positions } from '@enso-ui/toastr/config';
             positions: this.positions,
             update: this.update,
         });
-    }
+    };
 
 </script>

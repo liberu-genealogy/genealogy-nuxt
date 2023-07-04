@@ -1,25 +1,27 @@
-<script setup>
-import debounce from 'lodash';
-import { computed, useStore } from 'vuex';
+<script>
+import { debounce } from 'lodash';
+import {
+    mapState, mapGetters, mapActions,
+} from 'vuex';
 import Favico from 'favico.js';
 
 
-    name: 'CoreNotifications';
+   const name= 'CoreNotifications';
 
-    inject: ['errorHandler', 'route', 'routerErrorHandler', 'toastr'];
+   const inject= ['errorHandler', 'route', 'routerErrorHandler', 'toastr'];
 
-    props: {
+   const props= {
         favicoAnimation: {
-            type: String;
-            defaultValue: 'popFade';
-        };
+            type: String,
+            default: 'popFade',
+        },
         paginate: {
-            type: Number;
-            defaultValue: 200;
-        };
+            type: Number,
+            default: 200,
+        },
     };
 
-    data: v => ({
+    const data= (v) => ({
         favico: new Favico({ animation: v.favicoAnimation }),
         notifications: [],
         unread: 0,
@@ -30,37 +32,19 @@ import Favico from 'favico.js';
         desktopNotifications: false,
     });
 
-    computed: {
-     function useComputedValues() {
-  const store = useStore();
-
-  const channels = computed(() => {
-    return store.getters['websockets/channels'];
-  });
-
-  const isWebview = computed(() => {
-    return store.getters.isWebview;
-  });
-
-  const user = computed(() => {
-    return store.state.user;
-  });
-
-  return {
-    channels,
-    isWebview,
-    user,
-  };
-};
+    const computed= {
+        ...mapGetters('websockets', ['channels']),
+        ...mapGetters(['isWebview']),
+        ...mapState(['user']),
     };
 
-    watch: {
-       function unread(unread) {
+    const watch= {
+        unread(unread) {
             this.favico.badge(unread);
-        };
+        },
     };
 
-    function created() {
+   function created() {
         this.fetch = debounce(this.fetch, 500);
         this.initDesktopNotification();
         this.count();
@@ -69,21 +53,9 @@ import Favico from 'favico.js';
         this.listen();
     };
 
-    methods: {
-        function useActions() {
-  const store = useStore();
-
-  const websocketsActions = {
-    connect: (payload) => {
-      return store.dispatch('websockets/connect', payload);
-    },
-  };
-
-  return {
-    ...websocketsActions,
-  };
-}
-       function addBusListeners() {
+   const methods= {
+        ...mapActions('websockets', ['connect']),
+        addBusListeners() {
             this.$root.$on('read-notification', notification => {
                 this.unread = Math.max(--this.unread, 0);
                 const existing = this.notifications
@@ -113,8 +85,8 @@ import Favico from 'favico.js';
                 this.notifications = [];
                 this.unread = 0;
             });
-        };
-       function computeScrollPosition(event) {
+        },
+        computeScrollPosition(event) {
             const a = event.target.scrollTop;
             const b = event.target.scrollHeight - event.target.clientHeight;
 
@@ -122,13 +94,13 @@ import Favico from 'favico.js';
                 this.needsUpdate = true;
                 this.fetch();
             }
-        };
-       function count() {
+        },
+        count() {
             this.$axios.get(this.route('core.notifications.count'))
                 .then(({ data }) => (this.unread = data.count))
                 .catch(this.errorHandler);
-        };
-       function desktop({ body, title, path }) {
+        },
+        desktop({ body, title, path }) {
             if (document.hidden && this.desktopNotifications) {
                 const notification = new Notification(title, { body });
 
@@ -147,8 +119,8 @@ import Favico from 'favico.js';
             }
 
             return false;
-        };
-       function fetch() {
+        },
+        fetch() {
             if (!this.needsUpdate || this.loading) {
                 return;
             }
@@ -163,8 +135,8 @@ import Favico from 'favico.js';
                 this.needsUpdate = false;
                 this.loading = false;
             }).catch(this.errorHandler);
-        };
-       function initDesktopNotification() {
+        },
+        initDesktopNotification() {
             if (!('Notification' in window) || Notification.permission === 'denied') {
                 return;
             }
@@ -180,8 +152,8 @@ import Favico from 'favico.js';
                 }
                 this.desktopNotifications = permission === 'granted';
             });
-        };
-       function listen() {
+        },
+        listen() {
             window.Echo.private(this.channels.private).notification(notification => {
                 this.unread++;
                 this.needsUpdate = true;
@@ -192,11 +164,11 @@ import Favico from 'favico.js';
                 return this.webview(notification)
                     || this.desktop(notification);
             });
-        };
-       function now() {
+        },
+        now() {
             return this.$format(new Date());
-        };
-       function read(notification) {
+        },
+        read(notification) {
             this.$axios.patch(this.route('core.notifications.read', notification.id))
                 .then(({ data }) => {
                     this.unread = Math.max(--this.unread, 0);
@@ -207,35 +179,35 @@ import Favico from 'favico.js';
                             .catch(this.routerErrorHandler);
                     }
                 }).catch(this.errorHandler);
-        };
-       function readAll() {
+        },
+        readAll() {
             this.$axios.post(this.route('core.notifications.readAll'))
                 .then(this.updateAll)
                 .catch(this.errorHandler);
-        };
-       function updateAll() {
+        },
+        updateAll() {
             this.notifications
                 .filter(notification => !notification.read_at)
                 .forEach(notification => (notification.read_at = this.now()));
 
             this.unread = 0;
-        };
-       function timeFromNow(date) {
+        },
+        timeFromNow(date) {
             return this.$formatDistance(date);
-        };
-       function toast({
+        },
+        toast({
             level, body, title, icon,
         }) {
             this.toastr.when(title, toastr => toastr.title(title))
                 .when(icon, toastr => toastr.icon(icon))
                 .when(level, toastr => toastr[level](body), toastr => toastr.info(body));
-        };
-       function visitNotifications() {
+        },
+        visitNotifications() {
             const name = 'core.notifications.index';
             this.$router.push({ name })
                 .catch(this.routerErrorHandler);
-        };
-       function webview({ body, title }) {
+        },
+        webview({ body, title }) {
             if (this.isWebview) {
                 // eslint-disable-next-line no-undef
                 ReactNativeWebView.postMessage(JSON.stringify({
@@ -248,10 +220,10 @@ import Favico from 'favico.js';
             }
 
             return false;
-        };
+        },
     };
 
-    function render() {
+   function render() {
         return this.$scopedSlots.default({
             events: {
                 scroll: e => this.computeScrollPosition(e),
@@ -263,7 +235,7 @@ import Favico from 'favico.js';
             readAll: this.readAll,
             timeFromNow: this.timeFromNow,
             unread: this.unread,
-            visitNotifications: this.visitNotifications
-        })
+            visitNotifications: this.visitNotifications,
+        });
     }
 </script>

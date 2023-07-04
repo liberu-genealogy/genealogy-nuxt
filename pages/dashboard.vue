@@ -371,27 +371,27 @@
 name: 'dashboard.index'
 }
 </router> -->
-<script setup>
-import {Loading} from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/css/index.css';
-import { computed, useStore } from 'vuex';
+<script >
+import Loading from 'vue-loading-overlay'
+
+import { mapGetters, mapActions } from 'vuex'
 import PieChart from '../components/charts/PieChart'
 import { EnsoChartCard as ChartCard } from '@enso-ui/charts/bulma';
 import { Chart, colors } from '@enso-ui/charts';
 
-  layout: 'auth';
-  components: {
+  const layout= 'auth';
+  const components= {
     Loading,
     PieChart,
     ChartCard
   };
-  inject: ['errorHandler', 'route', 'toastr'];
+  const inject= ['errorHandler', 'route', 'toastr'];
   //middleware: ['permission', 'verification'],
-  meta: {
-    permission: { name: 'dashboard menu' };
-    title: 'Dashboard';
+  const meta= {
+    permission: { name: 'dashboard menu' },
+    title: 'Dashboard',
   };
- function data() {
+  function data() {
     return {
       loaded: false,
       trees: [],
@@ -420,23 +420,13 @@ import { Chart, colors } from '@enso-ui/charts';
       },
       totalCount: 0,
       result: null,
-      LoadingPlugin: true,
+      loading: true,
       options: {},
     }
   };
-  computed: {
-    function useComputedValues() {
-  const store = useStore();
-
-  const loggedInUser = computed(() => {
-    return store.getters.loggedInUser;
-  });
-
-  return {
-    loggedInUser,
-  };
-};
-   function headers() {
+  const computed= {
+    ...mapGetters(['loggedInUser']),
+    headers() {
       if (this.apiSelected == 'Geneanum')
         return [
           { text: 'ID', value: 'identifier', sortable: false },
@@ -484,24 +474,24 @@ import { Chart, colors } from '@enso-ui/charts';
           { text: 'Type', value: 'eventtype', sortable: false },
           { text: 'Archive', value: 'archive', sortable: false },
         ]
-    };
+    },
   };
-  watch: {
+  const watch= {
     options: {
-     function handler() {
+      handler() {
         console.log(this.loading, this.options)
         this.search()
-      };
-      deep: false;
-    };
+      },
+      deep: false,
+    },
   };
-  methods: {
-   function setSelectedCompany(value) {
+  const methods= {
+    setSelectedCompany(value) {
       this.selected_tree = null
       this.getTree()
-    };
-    function setSelected(value) {
-      const response = this.$axios.$post('/api/dashboard/changedb', {
+    },
+    async setSelected(value) {
+      const response = await this.$axios.$post('/api/dashboard/changedb', {
         company_id: value,
         // tree_id: this.selected_tree,
       })
@@ -512,9 +502,9 @@ import { Chart, colors } from '@enso-ui/charts';
       console.log('changedb response', response)
       console.log('familiesjoined', response.familiesjoined)
       console.log('peoplesattached', response.peoplesattached)
-    };
-    function getCompanies() {
-      const response = this.$axios.$get('/api/get_companies')
+    },
+    async getCompanies() {
+      const response = await this.$axios.$get('/api/get_companies')
       this.companies = response.my_comps;
       this.invited_companies = response.invited_comps;
       this.companies.map((company) => {
@@ -524,10 +514,10 @@ import { Chart, colors } from '@enso-ui/charts';
           this.getTree()
         }
       })
-    };
-    function getTree() {
+    },
+    async getTree() {
       this.selected_tree = null
-      const response = this.$axios.$get('/api/trees/show', {
+      const response = await this.$axios.$get('/api/trees/show', {
         params: { start_id: this.selected_company, nest: 3 },
       })
       this.trees = Object.values(response.persons)
@@ -536,19 +526,19 @@ import { Chart, colors } from '@enso-ui/charts';
           this.selected_tree = tree.id
         }
       })
-    };
-    function loadChart() {
+    },
+    async loadChart() {
       this.loaded = false
-      const chartResponse = this.$axios.get('/api/dashboard/pie')
-      // const { data: trial } =  this.$axios.get('/api/dashboard/trial')
+      const chartResponse = await this.$axios.get('/api/dashboard/pie')
+      // const { data: trial } = await this.$axios.get('/api/dashboard/trial')
       this.pieChartData = chartResponse.data
       this.chartOptions = chartResponse.options
 
       this.loaded = true
       this.isLoading = false
       //this.trial = trial
-    };
-   function search() {
+    },
+    search() {
       //this.result = null
       this.loading = true
       let url = '',
@@ -614,10 +604,9 @@ import { Chart, colors } from '@enso-ui/charts';
             this.loading = false
           })
           .catch(this.errorHandler)
-    };
+    },
   };
  function created() {
     this.getCompanies()
   };
-
 </script>

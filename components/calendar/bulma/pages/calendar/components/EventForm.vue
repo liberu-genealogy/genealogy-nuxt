@@ -94,7 +94,7 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex';
+import { mapState } from 'vuex';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import { Modal } from '@enso-ui/modal/bulma';
 import { EnsoDatepicker } from '@enso-ui/datepicker/bulma';
@@ -106,93 +106,78 @@ import EventConfirmation from './EventConfirmation.vue';
 
 library.add(faUserClock, faPlus, faMinus);
 
-    name: 'EventForm';
 
-    components: {
-        Modal, EnsoForm, FormField, EnsoDatepicker, Fade, ColorSelect, EventConfirmation
+    const name= 'EventForm';
+
+    const components= {
+        Modal, EnsoForm, FormField, EnsoDatepicker, Fade, ColorSelect, EventConfirmation,
     };
 
-    inject: ['i18n', 'route', 'toastr'];
+    const inject= ['i18n', 'route', 'toastr'];
 
-    props: {
+    const props= {
         event: {
-            type: Object;
-            required: true;
-        };
+            type: Object,
+            required: true,
+        },
     };
 
-    data: () => ({
+    const data= () => ({
         timeFormat: 'H:i',
         confirm: null,
     });
 
-    computed: {
-        function useState() {
-  const store = useStore();
-
-  const metaState = computed(() => {
-    return store.state.meta;
-  });
-
-  const enumsState = computed(() => {
-    return store.state.enums;
-  });
-
-  return {
-    meta: metaState,
-    enums: enumsState,
-  };
-}
-
-        function isEdit() {
+    const computed= {
+        ...mapState(['meta', 'enums']),
+        isEdit() {
             return this.event.id;
-        };
-       function path() {
+        },
+        path() {
             return this.isEdit
                 ? this.route('core.calendar.events.edit', { event: this.event.id })
                 : this.route('core.calendar.events.create');
-        };
-       function reminderFormat() {
+        },
+        reminderFormat() {
             return `${this.meta.dateFormat} ${this.timeFormat}`;
-        };
+        },
     };
 
-    methods: {
-       function init() {
+   const methods= {
+        init() {
             this.$refs.form.field('start_date').value = this.date(this.event.start);
             this.$refs.form.field('start_time').value = this.time(this.event.start);
             this.$refs.form.field('end_date').value = this.date(this.event.end);
             this.$refs.form.field('end_time').value = this.time(this.event.end);
-        };
-       function reminderFactory() {
+        },
+        reminderFactory() {
             return {
                 id: null,
                 event_id: this.event.id,
                 scheduled_at: null,
             };
-        };
-       function addReminder() {
+        },
+        addReminder() {
             this.$refs.form.field('reminders')
                 .value.push(this.reminder());
-        };
-       function date(date) {
+        },
+        date(date) {
             return this.$format(date, 'Y-m-d');
-        };
-       function time(dateTime) {
+        },
+        time(dateTime) {
             return this.$format(dateTime, 'H:i');
-        };
-       function changeFrequency(frequency) {
+        },
+        changeFrequency(frequency) {
             this.$refs.form.field('recurrence_ends_at')
                 .meta.hidden = frequency === this.enums.eventFrequencies.Once;
-        };
-       function submit($event, updateType) {
+        },
+        submit($event, updateType) {
             if (this.needConfirm(updateType)) {
                 this.confirm = (updateType) => this.submit($event, updateType);
                 return;
             }
             this.submitForm({ ...this.$refs.form.formData, updateType });
-        };
-       function submitForm(params) {
+        },
+        submitForm(params) {
             this.$axios.patch(
                 this.route('core.calendar.events.update', { event: this.event.id }),
                 params,
@@ -210,12 +195,12 @@ library.add(faUserClock, faPlus, faMinus);
 
                 this.$refs.form.errorHandler(error);
             });
-        };
-       function needConfirm(updateType) {
+        },
+        needConfirm(updateType) {
             return this.isEdit && updateType === undefined
                 && this.enums.eventFrequencies.Once !== `${this.event.frequency}`;
-        };
-    };
+        },
+    }
 </script>
 
 <style lang="scss">

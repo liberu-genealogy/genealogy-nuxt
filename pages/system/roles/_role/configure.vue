@@ -46,63 +46,57 @@
     </div>
 </template>
 
+<!-- <router>
+{
+    name: 'system.roles.configure',
+}
+</router> -->
 
-<script setup>
-import { computed, useStore } from 'vuex';
+<script>
+import { mapState } from 'vuex';
 import cssClass from '~/utils/permission';
 import { CheckboxManager } from '@enso-ui/checkbox/bulma';
 
 
     // path: ':role/configure',
-    meta: {
-        breadcrumb: 'configure';
-        title: 'Configure Role';
+    const meta= {
+        breadcrumb: 'configure',
+        title: 'Configure Role',
     };
 
-    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'];
+    const inject= ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'];
 
-    components: { CheckboxManager };
+    const components= { CheckboxManager };
 
-    data: () => ({
-        data: null
+    const data= () => ({
+        data: null,
     });
 
-    computed: {
-       function useComputedValues() {
-  const store = useStore();
-
-  const enums = computed(() => {
-    return store.state.enums;
-  });
-
-  return {
-    enums,
-  };
-};
+    const computed= {
+        ...mapState(['enums']),
     };
 
     function created() {
         this.fetch();
-    };
+    }
 
-    methods: {
-        function cssClass(item) {
+   const methods= {
+        cssClass(item) {
             return cssClass(this.enums.permissionTypes, item);
-        };
-        function fetch() {
+        },
+        fetch() {
             this.$axios.get(this.route('system.roles.permissions.get', this.$route.params.role))
                 .then(({ data }) => (this.data = data))
                 .catch(this.errorHandler);
-        };
-       function update() {
+        },
+        update() {
             this.$axios.post(
                 this.route('system.roles.permissions.set', this.$route.params.role),
                 { rolePermissions: this.data.rolePermissions },
             ).then(({ data }) => this.toastr.success(data.message))
                 .catch(this.errorHandler);
-        };
-    };
-
+        },
+    }
 </script>
 
 <style lang="scss">

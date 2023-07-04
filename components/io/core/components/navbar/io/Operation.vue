@@ -1,36 +1,26 @@
 <script setup>
-import { computed, useStore } from 'vuex';
+import { mapState } from 'vuex';
 import { isAfter } from 'date-fns';
 
 
-    name: 'CoreOperation';
+    const name= 'CoreOperation';
 
-    props: {
+   const props = {
         operation: {
-            type: Object;
-            required: true;
-        };
+            type: Object,
+            required: true,
+        },
     };
 
-    data: () => ({
+   const data = () => ({
         end: true,
         elapsed: null,
         remaining: null,
         updater: null,
     });
 
-    computed: {
-        function useComputedValues() {
-  const store = useStore();
-
-  const enums = computed(() => {
-    return store.state.enums;
-  });
-
-  return {
-    enums,
-  };
-};
+   const computed = {
+        ...mapState(['enums']),
     };
 
    function beforeMount() {
@@ -42,24 +32,24 @@ import { isAfter } from 'date-fns';
         clearInterval(this.updater);
     };
 
-    methods: {
-       function autoUpdate() {
+   const methods = {
+        autoUpdate() {
             this.updater = setInterval(() => this.update(), 1000);
-        };
-       function toggle() {
+        },
+        toggle() {
             this.end = !this.end;
-        };
-       function update() {
+        },
+        update() {
             this.elapsed = this.$formatDistance(this.operation.createdAt);
 
             this.remaining = this.operation.estimatedEnd
                 && isAfter(new Date(this.operation.estimatedEnd), new Date())
                 ? this.$formatDistance(this.operation.estimatedEnd)
                 : null;
-        };
+        },
     };
 
-     function render() {
+    function render() {
         return this.$scopedSlots.default({
             elapsed: this.elapsed,
             end: this.end,
@@ -71,6 +61,5 @@ import { isAfter } from 'date-fns';
             remaining: this.remaining,
             toggle: this.toggle,
         });
-    };
-
+    }
 </script>
