@@ -1,19 +1,20 @@
 <template>
+
 	<Home/>
 </template>
-<script setup>
-import Home from '~/components/Home.vue'
+<script setup lang="ts">
 
+import Home from '~/components/Home';
 
-	const layout= 'index';
-	const components= { Home };
-	const meta= {
-			guestGuard: true,
-	};
+	const name='index';
+	
+	const components= { Home }
+
 
 
 </script>
-var router{
+<!-- <router>
+{
 	name: 'index'
 }
-
+</router> -->

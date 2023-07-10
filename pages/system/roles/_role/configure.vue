@@ -52,7 +52,7 @@
 }
 </router> -->
 
-<script>
+<script setup>
 import { mapState } from 'vuex';
 import cssClass from '~/utils/permission';
 import { CheckboxManager } from '@enso-ui/checkbox/bulma';

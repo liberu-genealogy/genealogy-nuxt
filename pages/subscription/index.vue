@@ -6,7 +6,7 @@
       >PayPal</NuxtLink
     >
     <loading
-      :active.sync="isLoading"
+      v-model:active.sync="isLoading"
       :color="color"
       :background-color="backgroundColor"
     >

@@ -26,12 +26,12 @@
 import { EnsoForm } from '@enso-ui/forms/bulma';
 
 
-    meta: {
-        breadcrumb: 'edit';
-        title: 'Edit Language';
+   const meta= {
+        breadcrumb: 'edit',
+        title: 'Edit Language',
     };
 
-    components: { EnsoForm };
+   const components= { EnsoForm };
 
-    inject: ['i18n'];
+   const inject= ['i18n'];
 </script>

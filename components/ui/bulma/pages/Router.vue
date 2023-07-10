@@ -4,5 +4,5 @@
 
 <script setup>
 
-    name: 'Router';
+    const name= 'Router';
 </script>

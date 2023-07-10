@@ -83,7 +83,7 @@ var route={
 };
 
 
-<script>
+<script setup>
 import { debounce } from 'lodash';
 import { mapState, mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';

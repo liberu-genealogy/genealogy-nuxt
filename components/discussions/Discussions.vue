@@ -64,7 +64,7 @@
                     <discussion-preview class="is-clickable"
                         :discussion="topic"
                         :last="index === discussions.length - 1"
-                        @click.native="discussion = topic"/>
+                        @click="discussion = topic"/>
                 </div>
             </div>
         </template>

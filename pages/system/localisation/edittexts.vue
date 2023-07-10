@@ -141,10 +141,14 @@
         </div>
     </div>
 </template>
+<!-- <router>
+{
+    name: 'system.localisation.editTexts',
+}
+</router> -->
 
-
-<script setup>
-import { useStore } from 'vuex';
+<script>
+import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { focus, selectOnFocus } from '@enso-ui/directives';
@@ -154,18 +158,18 @@ import VueSwitch from '@enso-ui/switch/bulma';
 library.add(faSearch, faTrashAlt);
 
 
-    meta: {
-        breadcrumb: 'edit texts';
-        title: 'Edit Texts';
+   const meta= {
+        breadcrumb: 'edit texts',
+        title: 'Edit Texts',
     };
 
-    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'];
+    const inject= ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'];
 
-    directives: { focus, selectOnFocus };
+    const directives= { focus, selectOnFocus };
 
-    components: { EnsoSelect, VueSwitch };
+    const components= { EnsoSelect, VueSwitch };
 
-    data: () => ({
+    const data= () => ({
         langFile: {},
         originalLangFile: {},
         locales: [],
@@ -177,36 +181,22 @@ library.add(faSearch, faTrashAlt);
         filterCore: true,
     });
 
-    computed: {
-         function useStateValues() {
-  const store = useStore();
-
-  const isMobile = computed(() => {
-    return store.state.layout.isMobile;
-  });
-
-  const meta = computed(() => {
-    return store.state.meta;
-  });
-
-  return {
-    isMobile,
-    meta,
-  };
-}
-       function styleObject() {
+    const computed= {
+        ...mapState('layout', ['isMobile']),
+        ...mapState(['meta']),
+        styleObject() {
             return {
                 'max-height': this.boxHeight,
                 'overflow-y': 'auto',
                 'overflow-x': 'hidden',
             };
-        };
-       function langKeys() {
+        },
+        langKeys() {
             return this.filterMissing
                 ? Object.keys(this.originalLangFile).filter(key => !this.originalLangFile[key])
                 : Object.keys(this.langFile);
-        };
-       function filteredKeys() {
+        },
+        filteredKeys() {
             if (!this.query) {
                 return this.sortedKeys();
             }
@@ -215,35 +205,35 @@ library.add(faSearch, faTrashAlt);
 
             return this.langKeys.filter(key => (key.toLowerCase().indexOf(query) > -1
                 || (this.langFile[key] && this.langFile[key].toLowerCase().indexOf(query) > -1)));
-        };
-        function isNewKey() {
+        },
+        isNewKey() {
             return this.selectedLocale
                 && this.query && this.filteredKeys.indexOf(this.query) === -1;
-        };
-       function keysCount() {
+        },
+        keysCount() {
             return this.langKeys.length;
-        };
-       function subDir() {
+        },
+        subDir() {
             return this.filterCore ? 'app' : 'enso';
-        };
+        },
     };
 
-    watch: {
+   const watch= {
         isMobile: {
-            handler: 'setBoxHeight'
-        }
+            handler: 'setBoxHeight',
+        },
         filterCore: {
-            handler: 'getLangFile'
-        }
-    }
+            handler: 'getLangFile',
+        },
+    };
 
    function created() {
         this.init();
         this.setBoxHeight();
-    };
+    }
 
-    methods: {
-       function init() {
+    const methods= {
+        init() {
             this.loading = true;
 
             this.$axios.get(this.route('system.localisation.editTexts'))
@@ -251,8 +241,8 @@ library.add(faSearch, faTrashAlt);
                     this.loading = false;
                     this.locales = data;
                 }).catch(this.errorHandler);
-        };
-       function getLangFile() {
+        },
+        getLangFile() {
             if (!this.selectedLocale) {
                 this.langFile = {};
                 this.updateOriginal();
@@ -269,8 +259,8 @@ library.add(faSearch, faTrashAlt);
                 this.langFile = data;
                 this.updateOriginal();
             }).catch(this.errorHandler);
-        };
-       function saveLangFile() {
+        },
+        saveLangFile() {
             this.loading = true;
 
             this.$axios.patch(this.route('system.localisation.saveLangFile', {
@@ -282,37 +272,37 @@ library.add(faSearch, faTrashAlt);
                 this.loading = false;
                 this.toastr.success(data.message);
             }).catch(this.errorHandler);
-        };
-       function addKey() {
+        },
+        addKey() {
             this.$set(this.langFile, this.query, null);
             this.updateOriginal();
             this.focusIt();
-        };
-       function removeKey(key) {
+        },
+        removeKey(key) {
             this.$delete(this.langFile, key);
             this.updateOriginal();
-        };
-       function focusIt(id = null) {
+        },
+        focusIt(id = null) {
             id = id || this.query;
 
             this.$nextTick(() => {
                 document.getElementById(id).focus();
             });
-        };
-       function setBoxHeight() {
+        },
+        setBoxHeight() {
             this.boxHeight = document.body.clientHeight - (this.isMobile ? 420 : 388);
-        };
-       function updateOriginal() {
+        },
+        updateOriginal() {
             this.originalLangFile = JSON.parse(JSON.stringify(this.langFile));
-        };
-       function merge() {
+        },
+        merge() {
             this.$axios.patch(this.route('system.localisation.merge'))
                 .then(({ data }) => {
                     this.loading = false;
                     this.toastr.success(data.message);
                 }).catch(this.errorHandler);
-        };
-       function sortedKeys() {
+        },
+        sortedKeys() {
             return this.langKeys.sort((a, b) => {
                 if (a.toLowerCase() < b.toLowerCase()) {
                     return -1;
@@ -324,11 +314,11 @@ library.add(faSearch, faTrashAlt);
 
                 return 0;
             });
-        };
+        },
     };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .has-shadow-bottom {
         -webkit-box-shadow: 0px 3px 5px -4px lightgray;
         box-shadow: 0px 3px 5px -4px lightgray;

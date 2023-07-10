@@ -1,4 +1,4 @@
-<script>
+<script setup>
 import { debounce } from 'lodash';
 import {
     mapState, mapGetters, mapActions,

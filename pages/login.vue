@@ -27,7 +27,7 @@ import LoginForm from '~/components/auth/LoginForm.vue';
 // import Password from '~/components/auth/fields/Password.vue';
 // import Remember from '~/components/auth/fields/Remember.vue';
 
-
+name:'login';
     layout: 'index';
     meta: {
         guestGuard: true;

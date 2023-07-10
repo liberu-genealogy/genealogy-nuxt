@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <loading
-        :active.sync="isLoading"
+        v-model:active.sync="isLoading"
         :color="color"
         :background-color="backgroundColor"
     >
@@ -87,7 +87,7 @@
       <v-data-table
           :headers="headers"
           :items="result || []"
-          :options.sync="options"
+          v-model:options.sync="options"
           :server-items-length="totalCount"
           :loading="loading"
           class="elevation-1"

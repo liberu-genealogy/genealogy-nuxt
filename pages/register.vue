@@ -10,7 +10,7 @@ import RegisterForm from '~/components/auth/RegisterForm.vue';
 // import Password from '~/components/auth/fields/Password.vue';
 // import Remember from '~/components/auth/fields/Remember.vue';
 
-
+name:"register";
     meta: {
         guestGuard: true;
         title: 'Register';

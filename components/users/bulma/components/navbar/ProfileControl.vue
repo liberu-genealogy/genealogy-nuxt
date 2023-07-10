@@ -79,19 +79,18 @@ import Avatar from '../../pages/users/components/Avatar.vue';
 
 library.add(faEye, faSignOutAlt);
 
-    name: 'ProfileControl';
+    const name= 'ProfileControl';
 
-   const directives =  { clickOutside };
+    const directives= { clickOutside };
 
-    components: { CoreProfileControl, Avatar };
+    const components= { CoreProfileControl, Avatar };
 
-   const logoutAccount = async () => {
-  const store = useStore();
-  await store.dispatch('auth/logout');
-};
+    const methods= {
+        ...mapActions('auth', ['logout']),
+    };
 
+    const inject= ['i18n'];
 
-    inject: ['i18n'];
 </script>
 
 <style lang="scss">

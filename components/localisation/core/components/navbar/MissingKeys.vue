@@ -1,4 +1,4 @@
-<script>
+<script setup>
 import { mapState, mapMutations } from 'vuex';
 
 

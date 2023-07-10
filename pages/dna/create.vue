@@ -1,6 +1,6 @@
 <template>
     <div>
-        <loading :active.sync="isLoading" :color="color" :background-color="backgroundColor"> </loading>
+        <loading v-model:active.sync="isLoading" :color="color" :background-color="backgroundColor"> </loading>
         <div class="columns is-gapless is-multiline is-mobile">
             <div class="column is-12">
                 <h1 class="is-size-4 has-text-black">

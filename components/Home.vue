@@ -143,7 +143,7 @@
                             <img src="~assets/images/Checkmark.svg" alt="" class="bullet mt-2 mr-3">
                       Set up your first family tree free of charge. We offer different pricing levels with optional subscriptions
                       if you need to create extra trees</div>
-                        <NuxtLink to="/register" v-if="!isAuth"
+                        <NuxtLink to="/register"
                             class="button theme-button theme-button-xl has-background-primary has-text-weight-medium has-text-white mt-5">
                             Create Your Own Tree
                         </NuxtLink>
@@ -260,67 +260,49 @@
     </footer>
     </div>
 </template>
-<script setup>
+<script>
 import { mapState, mapMutations, mapActions } from 'vuex'
-
-    
+export default {
+    name:"Home",
     meta: {
-        guestGuard: true;
-        title: 'Landing Page';
-    };
-    function data() {
+        guestGuard: true,
+        title: 'Landing Page'
+    },
+    data() {
         return {
             isDark: false,
             isClear: true,
         };
-    };
-    function useComputedValues() {
-  const store = useStore();
-
-  const isAuth = computed(() => {
-    return store.state.auth.isAuth;
-  });
-
-  return {
-    isAuth,
-  };
-};
-   function created() {
+    },
+    computed: {
+        // ...mapState('auth', ['isAuth']),
+    },
+    created() {
         window.addEventListener('scroll', this.handleScroll);
-    };
-    function method() {
-    const store = useStore();
+    },
+    methods: {
+        // ...mapActions('auth', ['logout']),
+        async logoutAccount() {
+            await this.logout();
+            // setTimeout(() => {
+            //     this.$router.push('/')
+            // }, 500)
+        },
 
-  const logout = () => {
-     store.dispatch('auth/logout');
-    // setTimeout(() => {
-    //     router.push('/');
-    // }, 500);
-  };
-
-  const handleScroll = () => {
-    if (window.scrollY >= 10) {
-      // Update the relevant properties based on your component's data
-      // For example:
-      this.isClear = false;
-      this.isDark = true;
-    } else {
-      // Update the relevant properties based on your component's data
-      // For example:
-      this.isClear = true;
-      this.isDark = false;
-    }
-  };
-
-  return {
-    logout,
-    handleScroll,
-  };
+        handleScroll() {
+            if (window.scrollY >= 10) {
+                this.isClear = false;
+                this.isDark = true;
+            } else {
+                this.isClear = true;
+                this.isDark = false;
+            }
+        },
+    },
 }
-
 </script>
 
-<style scoped>
+<style>
     @import '~/assets/css/base.css';
     @media screen and (max-width: 1006px) {
         .navbar.is-fixed-top  {

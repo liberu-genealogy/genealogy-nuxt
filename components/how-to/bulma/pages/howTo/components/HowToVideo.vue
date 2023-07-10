@@ -94,8 +94,8 @@ import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faInfo, faTags, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt, faEdit, faImage } from '@fortawesome/free-regular-svg-icons';
-import { videoPlayer } from 'vue-video-player';
-import 'vue-video-player/src/custom-theme.css';
+// import { videoPlayer } from 'vue-video-player';
+// import 'vue-video-player/src/custom-theme.css';
 import {
     Card, CardHeader, CardCollapse, CardControl, CardContent,
     CardFooter, CardFooterItem,

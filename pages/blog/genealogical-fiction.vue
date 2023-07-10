@@ -125,7 +125,7 @@
 		</footer>
 	</div>
 </template>
-<script>
+<script setup>
 import { mapState, mapMutations, mapActions } from "vuex";
 
 	const meta= {
