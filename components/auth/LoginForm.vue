@@ -1,8 +1,8 @@
 <template>
 	<AuthIndex>
 		<template #form>
-			<ValidationObserver slim v-slot="{ handleSubmit }">
-				<form @submit.prevent="handleSubmit(submit)" class="column is-6-tablet is-7-desktop is-7-widescreen is-7-fullhd is-gapless is-flex ai--c">
+			
+				<form @submit.prevent="submit" class="column is-6-tablet is-7-desktop is-7-widescreen is-7-fullhd is-gapless is-flex ai--c">
 					<div class="auth-form is-gapless">
 						<div>
 							<div class="mb-5">
@@ -80,7 +80,7 @@
 						</a>
 					</div>
 				</form>
-			</ValidationObserver>
+			
 		</template>
 
 		<template #footerImageForm>
@@ -88,7 +88,7 @@
 		</template>
 	</AuthIndex>
 </template>
-<script setup>
+<script>
 import AuthIndex from "~/components/auth/Index.vue";
 import { mapState, mapGetters } from "vuex";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -97,17 +97,19 @@ import { focus } from "@enso-ui/directives";
 import Errors from "@enso-ui/laravel-validation";
 import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
 
+
 library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
-
-
-	const name= "LoginForm";
-	const components= { AuthIndex };
-	const directives= { focus };
+const { errors } = 'required';
+export default {
+	
+	name: "LoginForm",
+	components: { AuthIndex },
+	directives: { focus },
 	// inject: {
 	//   i18n: { from: "i18n" },
 	// },
 
-	const props= {
+	props: {
 		action: {
 			required: true,
 			type: String,
@@ -116,9 +118,9 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 			required: true,
 			type: String,
 		},
-	};
+	},
 
-	const data = () => ({
+	data: () => ({
 		errors: new Errors(),
 		hasError: false,
 		provider: null,
@@ -126,9 +128,9 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 		password: "",
 		remember: false,
 		device_name: "mac",
-	});
+	}),
 
-	const computed= {
+	computed: {
 		...mapState(["meta"]),
 		...mapGetters(["isWebview"]),
 		hasPassword() {
@@ -155,8 +157,9 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 		config() {
 			return this.isWebview ? { headers: { isWebview: true } } : {};
 		},
-	};
-	const methods= {
+	},
+	methods: {
+		
 		validate() {
 			this.$refs.email.validate().then((res) => {
 				console.log(res.valid);
@@ -213,7 +216,8 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 					});
 			});
 		},
-	};
+	},
+};
 
 function openWindow(url, title, options = {}) {
 	if (typeof url === "object") {

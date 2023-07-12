@@ -261,6 +261,8 @@
     </div>
 </template>
 <script>
+
+
 import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
     name:"Home",
@@ -275,7 +277,7 @@ export default {
         };
     },
     computed: {
-        // ...mapState('auth', ['isAuth']),
+        // mapState('auth', ['isAuth']),
     },
     created() {
         window.addEventListener('scroll', this.handleScroll);
@@ -302,11 +304,16 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     @import '~/assets/css/base.css';
     @media screen and (max-width: 1006px) {
         .navbar.is-fixed-top  {
             display: inline !important;
         }
     }
+ 
+#home {
+   background: url('~/assets/images/main-hero.webp') #4fcf8d no-repeat;
+
+}
 </style>

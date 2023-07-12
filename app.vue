@@ -1,11 +1,11 @@
 <template>
   <div>
-     <index />
+    <NuxtPage />
   </div>
 </template>
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import index from "~/pages/index";
 // import Home from '~/components/Home'
 
 components:{index}
-</script>
+</script> -->

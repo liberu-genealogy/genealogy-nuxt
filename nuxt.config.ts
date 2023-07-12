@@ -25,7 +25,8 @@ export default defineNuxtConfig({
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   
-  head: {
+  app: {
+    head: {
     htmlAttrs: {
       lang: 'en-GB',
     },
@@ -56,6 +57,48 @@ export default defineNuxtConfig({
         href: process.env.BASE_URL,
       },
     ],
+  }
+},
+  css: [
+    'animate.css/animate.compat.css',
+    '~/assets/css/base.css',
+    '~/assets/style/enso.scss',
+    '~/assets/css/fontawesome.min.css',
+    '@fortawesome/fontawesome-svg-core/styles.css',
+    '~/assets/css/fan-chart/svg.css',
+    '~/assets/css/fan-chart/fan-chart.css',
+  ],
+  plugins: [
+    '~/plugins/bootEnums.js',
+    '~/plugins/i18n.js',
+    '~/plugins/pRoute.js',
+    '~/plugins/filters.js',
+    '~/plugins/numberFormat.js',
+    '~/plugins/shortNumber.js',
+    '~/plugins/toastr.js',
+    '~/plugins/fontawesome.js',
+    '~/plugins/themesSettingRegister.js',
+    '~/plugins/bookmarksSettingRegister.js',
+    '~/plugins/tutorialSettingRegister.js',
+    '~/plugins/notificationsRegister.js',
+    '~/plugins/localisationRegister.js',
+    '~/plugins/ioRegister.js',
+    '~/plugins/tasksNavbarRegister.js',
+    '~/plugins/usersRegister.js',
+    '~/plugins/Validator.js',
+    '~/plugins/date-fns/format.js',
+    '~/plugins/date-fns/formatDistance.js',
+    '~/plugins/vue-select.js',
+    '~/plugins/vuelidate.js',
+    //'~/plugins/echo.js',
+    "~/plugins/vue-fb-customer-chat.js",
+    {src: '~/plugins/vue-stripe.js', ssr: false},
+  ],
+  router: {
+    middleware: 'auth'
   },
+  modules: [
+    '@nuxt/ui'
+  ]
    
 })

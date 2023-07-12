@@ -147,7 +147,7 @@ a.navbar-item.is-active,
 }
 
 .main-hero {
-  background: url('~assets/images/main-hero.webp') #4fcf8d no-repeat;
+  /* background: url('~assets/images/main-hero.webp') #4fcf8d no-repeat; */
   background-size: cover;
   min-height: 768px;
 }
