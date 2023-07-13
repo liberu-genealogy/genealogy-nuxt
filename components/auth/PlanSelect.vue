@@ -1,8 +1,8 @@
 <template>
     <div class="custom-select" :tabindex="tabindex" @blur="open = false">
       <div class="selected" :class="{ open: open }" @click="open = !open">
-        <div>{{ selected.title }}</div>
-        <div>£{{ (selected.amount / 100).toFixed(2) }}</div>
+        <div>{{ selected?selected.title:'' }}</div>
+        <div>£{{ (selected?selected.amount:0 / 100).toFixed(2) }}</div>
       </div>
       <div class="items" :class="{ selectHide: !open }">
         <div

@@ -37,6 +37,7 @@
     "@vee-validate/rules": "^4.10.6",
     "@vue-stripe/vue-stripe": "^4.5.0",
     "animate.css": "^4.1.1",
+    "axios": "^1.4.0",
     "chart.js": "^4.3.0",
     "d3": "^7.8.5",
     "d3-dag": "^0.11.5",
@@ -52,6 +53,7 @@
     "vue-social-chat": "^1.0.0",
     "vue-video-player": "^6.0.0",
     "vuelidate": "^0.7.7",
-    "vuetify": "^3.3.7"
+    "vuetify": "^3.3.7",
+    "yup": "^1.2.0"
   }
 }

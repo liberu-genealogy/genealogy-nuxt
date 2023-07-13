@@ -20,7 +20,7 @@
 </template>
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex';
-import Errors from '@enso-ui/laravel-validation/src/Errors';
+// import Errors from '@enso-ui/laravel-validation/src/Errors';
 import LoginForm from '~/components/auth/LoginForm.vue';
 // import Email from '~/components/auth/fields/Email.vue';
 // import Password from '~/components/auth/fields/Password.vue';

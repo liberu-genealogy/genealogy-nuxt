@@ -1,8 +1,8 @@
 <template>
+
 	<AuthIndex>
-		<template #form>
-			
-				<form @submit.prevent="submit" class="column is-6-tablet is-7-desktop is-7-widescreen is-7-fullhd is-gapless is-flex ai--c">
+	<template #form>
+				<form @submit.prevent="onSubmit" class="column is-6-tablet is-7-desktop is-7-widescreen is-7-fullhd is-gapless is-flex ai--c">
 					<div class="auth-form is-gapless">
 						<div>
 							<div class="mb-5">
@@ -12,34 +12,34 @@
 
 							<template v-if="hasError">
 								<div
-									v-for="(error, index) in errors"
+									
 									:key="index"
 									class="notification is-danger"
 								>
-									{{ error[0] }}
+								
 								</div>
 							</template>
 
 							<div class="mb-5">
 								<div class="field">
-									<ValidationProvider name="Email" ref="email" rules="required|email" v-slot="{ errors }">
+									
 										<p class="control has-icons-left has-icons-right">
-											<input class="input" :class="{ 'is-danger': errors[0] }" type="email" placeholder="Email address" v-model="email" />
+											<input class="input"  type="email" placeholder="Email address" v-bind="email" />
 										</p>
 
-										<p v-if="errors[0]" class="has-text-danger p-2" v-text="errors[0]"></p>
-									</ValidationProvider>
+										<p v-if="errors.email" >{{ errors.email }}</p>
+									
 								</div>
 							</div>
 							<div class="mb-5">
 								<div class="field">
-									<ValidationProvider name="Password" ref="password" v-slot="{ errors }" rules="required">
+									
 										<p class="control has-icons-left has-icons-right">
-											<input class="input" :class="{ 'is-danger': errors[0] }" type="password" placeholder="Password" v-model="password" />
+											<input class="input" :class="{ 'is-danger': errors[0] }" type="password" placeholder="Password"  v-bind="password" />
 										</p>
 
-										<p v-if="errors[0]" class="has-text-danger p-2" v-text="errors[0]"></p>
-									</ValidationProvider>
+										<p v-if="errors.password">{{ errors.password }}</p>
+									
 								</div>
 							</div>
 							<div class="mb-5">
@@ -80,36 +80,70 @@
 						</a>
 					</div>
 				</form>
-			
 		</template>
-
 		<template #footerImageForm>
 			<img class="auth-img" src="~assets/images/mockup01@2x.webp" alt="" />
 		</template>
 	</AuthIndex>
 </template>
-<script>
+<script setup>
+import { ref } from 'vue';
 import AuthIndex from "~/components/auth/Index.vue";
 import { mapState, mapGetters } from "vuex";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEnvelope, faCheck, faExclamationTriangle, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { focus } from "@enso-ui/directives";
-import Errors from "@enso-ui/laravel-validation";
-import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
-
-
+import { useForm } from 'vee-validate';
+import * as yup from 'yup';
+import axios from 'axios';
 library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
-const { errors } = 'required';
-export default {
+// const { errors } = 'required';
+
 	
-	name: "LoginForm",
-	components: { AuthIndex },
-	directives: { focus },
+	const name= "LoginForm";
+	const components= { AuthIndex };
+	const directives= { focus };
+	const isWebview = ref(false); 
 	// inject: {
 	//   i18n: { from: "i18n" },
 	// },
+	
+	function data() {
+		const isWebview=false;
+		const loading= false; 
+        const isSuccessful= false;
+		const errors='';
+		const hasError= false;
+		const provider= null;
+		const email= "";
+		const password= "";
+		const remember= false;
+		const device_name= "mac";
+	}
+const { errors, handleSubmit, defineInputBinds } = useForm({
+  validationSchema: yup.object({
+    email: yup.string().email().required(),
+    password: yup.string().min(6).required(),
+  }),
+});
 
-	props: {
+// Creates a submission handler
+// It validate all fields and doesn't call your function unless all fields are valid
+const loading = ref(false);
+const isSuccessful = ref(false);
+const hasError = ref(false);
+
+const onSubmit = handleSubmit(values => {
+  loading.value = true;
+  isSuccessful.value = false;
+  hasError.value = false;
+  oldLogin();
+//   alert(JSON.stringify(values, null, 2));
+});
+
+const email = defineInputBinds('email');
+const password = defineInputBinds('password');
+	const props= {
 		action: {
 			required: true,
 			type: String,
@@ -118,106 +152,73 @@ export default {
 			required: true,
 			type: String,
 		},
-	},
+	};
+	async function oldLogin() {
+  await axios.get("/sanctum/csrf-cookie"); // Use axios directly
+  await axios
+    .post(
+      "/api/login",
+      {
+        email: email.value, // Use the value of the email ref
+        password: password.value, // Use the value of the password ref
+      },
+      config()
+    )
+    .then(({ data }) => {
+      loading.value = false;
+      isSuccessful.value = true;
+      // ...
+    })
+    .catch((error) => {
+      console.log("err", error);
+      loading.value = false;
+      // ...
+    });
+}
 
-	data: () => ({
-		errors: new Errors(),
-		hasError: false,
-		provider: null,
-		email: "",
-		password: "",
-		remember: false,
-		device_name: "mac",
-	}),
-
-	computed: {
-		...mapState(["meta"]),
-		...mapGetters(["isWebview"]),
-		hasPassword() {
-			return this.password !== null && this.password.length;
-		},
-		match() {
-			return this.hasPassword && this.password === this.password_confirmation;
-		},
-		postParams() {
-			return this.loginParams;
-		},
-		loginParams() {
-			const { email, password, remember } = this;
-
-			return {
-				email,
-				password,
-				remember,
-			};
-		},
-		loginLink() {
-			return "api/login";
-		},
-		config() {
-			return this.isWebview ? { headers: { isWebview: true } } : {};
-		},
-	},
-	methods: {
+function  config() {
+    return isWebview.value ? { headers: { isWebview: true } } : {};
+  }
+	const computed = {
 		
-		validate() {
-			this.$refs.email.validate().then((res) => {
-				console.log(res.valid);
-			});
-		},
+  hasPassword() {
+    return this.password !== null && this.password.length;
+  },
+  match() {
+    return this.hasPassword && this.password === this.password_confirmation;
+  },
+  postParams() {
+    return this.loginParams;
+  },
+  loginParams() {
+    const { email, password, remember } = this;
 
-		loginSocial(provider) {
-			this.provider = provider;
-			window.location.href = `${process.env.baseUrl}/api/login/${provider}`;
-		},
-
-		submit() {
-			this.loading = true;
-			this.isSuccessful = false;
-			this.hasError = false;
-			this.oldLogin();
-		},		
-		oldLogin() {
-			this.$axios.get("/sanctum/csrf-cookie").then(() => {
-				this.$axios
-					.post(
-						"/api/login",
-						{
-							email: this.email,
-							password: this.password,
-						},
-						this.config
-					)
-					.then(({ data }) => {
-						this.loading = false;
-						this.isSuccessful = true;
-						this.$emit("success", data);
-					})
-					.catch((error) => {
-						console.log("err", error)
-						this.loading = false;
-						const { status, data } = error.response;
-						switch (status) {
-							case 422:
-								this.errors = data.errors;
-								this.hasError = true;
-								break;
-							case 429:
-								// this.$toastr.error(data.message); // error Toastr can't displayed
-								this.message = data.message;
-								break;
-							case 500:
-								this.message = data.message;
-								this.$forceUpdate();
-								break;
-							default:
-								throw error;
-						}
-					});
-			});
-		},
-	},
+    return {
+      email,
+      password,
+      remember,
+    };
+  },
+  loginLink() {
+    return "api/login";
+  },
+ 
 };
+	const methods = {
+  validate() {
+    this.$refs.email.validate().then((res) => {
+      console.log(res.valid);
+    });
+  },
+
+  loginSocial(provider) {
+    this.provider = provider;
+    window.location.href = `${process.env.baseUrl}/api/login/${provider}`;
+  },
+
+
+};
+
 
 function openWindow(url, title, options = {}) {
 	if (typeof url === "object") {

@@ -1,9 +1,9 @@
 <template>
   <AuthIndex>
     <template #form>
-      <ValidationObserver slim v-slot="{ handleSubmit }">
+    
         <form
-            @submit.prevent="handleSubmit(submit)"
+            @submit.prevent="onSubmit"
             class="
             column
             is-6-tablet
@@ -42,7 +42,7 @@
                 :key="index"
                 class="notification is-danger"
             >
-              {{ error[0] }}
+              {{ error }}
             </div>
             <div class="mb-5">
               <div class="columns">
@@ -51,21 +51,21 @@
                     <ValidationProvider
                         name="First Name"
                         rules="required|min:3"
-                        v-slot="{ errors }"
+                        
                     >
                       <p class="control has-icons-left has-icons-right">
                         <input
                             class="input is-large"
                             type="text"
-                            :class="{ 'is-danger': errors[0] }"
+                            :class="{ 'is-danger': errors.first_name }"
                             placeholder="First name"
-                            v-model="first_name"
+                           v-bind="first_name"
                         />
                       </p>
                       <p
-                          v-if="errors[0]"
+                          v-if="errors.first_name"
                           class="has-text-danger p-2 is-size-7"
-                          v-text="errors[0]"
+                          v-text="errors.first_name"
                       ></p>
                     </ValidationProvider>
                   </div>
@@ -74,16 +74,16 @@
                   <div class="field">
                     <ValidationProvider
                         name="Last Name"
-                        v-slot="{ errors }"
+                      
                         rules="required|min:3"
                     >
                       <p class="control has-icons-left has-icons-right">
                         <input
                             class="input is-large"
                             type="text"
-                            :class="{ 'is-danger': errors[0] }"
+                            :class="{ 'is-danger': errors.last_name }"
                             placeholder="Last name"
-                            v-model="last_name"
+                            v-bind="last_name"
                         />
                         <span class="icon is-small is-left">
                           <font-awesome-icon :icon="['fas', 'user']" />
@@ -91,9 +91,9 @@
                       </p>
 
                       <p
-                          v-if="errors[0]"
+                          v-if="errors.last_name"
                           class="has-text-danger p-2 is-size-7"
-                          v-text="errors[0]"
+                          v-text="errors.last_name"
                       ></p>
                     </ValidationProvider>
                   </div>
@@ -105,25 +105,25 @@
               <div class="field">
                 <ValidationProvider
                     name="Email"
-                    v-slot="{ errors }"
+                   
                     rules="required|email"
                 >
                   <p class="control has-icons-left has-icons-right">
                     <input
                         class="input is-large"
                         type="text"
-                        :class="{ 'is-danger': errors[0] }"
+                        :class="{ 'is-danger': errors.email }"
                         placeholder="Email address"
-                        v-model="email"
+                        v-bind="email"
                     />
                     <span class="icon is-small is-left">
                       <font-awesome-icon :icon="['fas', 'envelope']" />
                     </span>
                   </p>
                   <p
-                      v-if="errors[0]"
+                      v-if="errors.email"
                       class="has-text-danger p-2 is-size-7"
-                      v-text="errors[0]"
+                      v-text="errors.email"
                   ></p>
                 </ValidationProvider>
               </div>
@@ -131,7 +131,7 @@
             <div class="mb-5">
               <div class="field">
                 <ValidationProvider
-                    v-slot="{ errors }"
+                   
                     name="Password"
                     vid="password"
                     rules="required|min:8"
@@ -139,19 +139,19 @@
                   <p class="control has-icons-left has-icons-right">
                     <input
                         class="input is-large"
-                        :class="{ 'is-danger': errors[0] }"
+                        :class="{ 'is-danger': errors.password }"
                         type="password"
                         placeholder="Password"
-                        v-model="password"
+                        v-bind="password"
                     />
                     <span class="icon is-small is-left">
                       <font-awesome-icon :icon="['fas', 'lock']" />
                     </span>
                   </p>
                   <p
-                      v-if="errors[0]"
+                      v-if="errors.password"
                       class="has-text-danger p-2 is-size-7"
-                      v-text="errors[0]"
+                      v-text="errors.password"
                   ></p>
                 </ValidationProvider>
               </div>
@@ -161,15 +161,15 @@
                 <ValidationProvider
                     name="Password Confirm"
                     rules="required|confirmed:password"
-                    v-slot="{ errors }"
+                   
                 >
                   <p class="control has-icons-left has-icons-right">
                     <input
                         class="input is-large"
-                        :type="passwordMeta.content"
-                        :class="{ 'is-danger': errors[0] }"
+                        type="password"
+                        :class="{ 'is-danger': errors.password_confirmation }"
                         placeholder="Confirm Password"
-                        v-model="password_confirmation"
+                        v-bind="password_confirmation"
                     />
                     <span class="icon is-small is-left">
                       <font-awesome-icon :icon="['fas', 'lock']" />
@@ -177,9 +177,9 @@
                   </p>
 
                   <p
-                      v-if="errors[0]"
+                      v-if="errors.password_confirmation"
                       class="has-text-danger p-2 is-size-7"
-                      v-text="errors[0]"
+                      v-text="errors.password_confirmation"
                   ></p>
                 </ValidationProvider>
               </div>
@@ -212,10 +212,10 @@
                   <ValidationProvider
                       name="Terms And Conditions"
                       :rules="{ required: { allowFalse: false } }"
-                      v-slot="{ errors }"
+                     
                   >
                     <label class="checkbox">
-                      <input type="checkbox" v-model="terms" />
+                      <input type="checkbox" v-bind="terms" />
                       Agree to
                       <NuxtLink
                           to="/termsandconditions"
@@ -224,8 +224,8 @@
                       >
                     </label>
 
-                    <div v-if="errors[0]">
-                      <p class="help has-text-danger" v-text="errors[0]"></p>
+                    <div v-if="errors.terms">
+                      <p class="help has-text-danger" v-text="errors.terms"></p>
                     </div>
                   </ValidationProvider>
                 </div>
@@ -287,7 +287,7 @@
             </a>
           </div>
         </form>
-      </ValidationObserver>
+     
     </template>
 
     <template #footerImageForm>
@@ -309,9 +309,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { focus } from "@enso-ui/directives";
 import PlanSelect from "~/components/auth/PlanSelect.vue";
-// import Errors from "@enso-ui/laravel-validation/src/Errors";
-import RevealPassword from "@enso-ui/forms/src/bulma/parts/RevealPassword.vue";
-
+import { useForm } from 'vee-validate';
+import * as yup from 'yup';
 library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
 
@@ -322,6 +321,23 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
   //   i18n: { from: "i18n" },
   // },
   // inject: ['errorHandler', 'route', 'routerErrorHandler', 'toastr'],
+
+  const { errors, handleSubmit, defineInputBinds } = useForm({
+  validationSchema: yup.object({
+    email: yup.string().email().required(),
+    password: yup.string().min(6).required(),
+  }),
+});
+
+// Creates a submission handler
+// It validate all fields and doesn't call your function unless all fields are valid
+const onSubmit = handleSubmit(values => {
+  alert(JSON.stringify(values, null, 2));
+});
+const first_name = defineInputBinds('first_name');
+const last_name = defineInputBinds('last_name');
+const email = defineInputBinds('email');
+const password = defineInputBinds('password');
   const props= {
     action: {
       required: true,
@@ -332,31 +348,31 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
       type: String,
     },
   };
-  data: () => ({
+  function data (){
         // for plans
-        plans: [],
-      selected_plan: null,
+       const plans= [];
+     const selected_plan= null;
       // for plans
-      first_name: "",
-      last_name: "",
-      email: "",
+      const first_name= "";
+     const last_name= "";
+      const email= "";
       // errors: new Errors(),
-      errors:'',
-      errorInput: "",
-      message: "",
-      isSuccessful: false,
-      loading: false,
-      password: "",
-      passwordMeta: {
+     const errors='';
+     const errorInput= "";
+     const message= "";
+     const isSuccessful= false;
+     const loading= false;
+     const password= "";
+     const passwordMeta= {
         content: "password",
-      },
-      password_confirmation: null,
-      confirmationMeta: {
+      };
+      const password_confirmation= null;
+      const confirmationMeta= {
         content: "password",
-      },
-      terms: "",
-      device_name: 'mac',
-    });
+      };
+     const terms= "";
+     const device_name= 'mac';
+    }
 
   const computed = {
     ...mapState(["meta"]),
