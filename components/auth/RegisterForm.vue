@@ -169,7 +169,7 @@
                         type="password"
                         :class="{ 'is-danger': errors.password_confirmation }"
                         placeholder="Confirm Password"
-                        v-bind="password_confirmation"
+                        v-bind="password_confirmation" name="password_confirmation" rules="confirmed:@password"
                     />
                     <span class="icon is-small is-left">
                       <font-awesome-icon :icon="['fas', 'lock']" />
@@ -184,28 +184,7 @@
                 </ValidationProvider>
               </div>
             </div>
-            <!--            Subscription plan-->
-            <div class="mb-5">
-              <div class="field">
-                <p class="control has-icons-left has-icons-right">
-                  <!-- <vue-select
-                      label="title"
-                      class="is-large"
-                      v-model="selected_plan"
-                      :reduce="(plan) => plan.id"
-                      :options="plans"
-                      placeholder="Select a Plan"
-                  >
-                  </vue-select> -->
-                  <plan-select 
-                    :options="plans"
-                    class="select"
-                    @input="selected_plan = $event"
-                  />
-                </p>
-              </div>
-            </div>
-            <!--            Subscription plan end-->
+          
             <div class="mb-5 px-1">
               <div class="columns is-mobile is-gapless">
                 <div class="column">
@@ -308,14 +287,14 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { focus } from "@enso-ui/directives";
-import PlanSelect from "~/components/auth/PlanSelect.vue";
-import { useForm } from 'vee-validate';
+
+import { useForm} from 'vee-validate';
 import * as yup from 'yup';
 library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
 
   name: "RegisterForm";
-  components: { AuthIndex, PlanSelect };
+  components: { AuthIndex };
   directives: { focus };
   // inject: {
   //   i18n: { from: "i18n" },
@@ -324,20 +303,74 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 
   const { errors, handleSubmit, defineInputBinds } = useForm({
   validationSchema: yup.object({
+    first_name: yup.string().min(3).required(),
+    last_name: yup.string().min(3).required(),
     email: yup.string().email().required(),
-    password: yup.string().min(6).required(),
+    password: yup.string().min(6).required('Password is required'),
+    password_confirmation: yup.string()
+     .oneOf([yup.ref('password'), null], 'Passwords must match')
   }),
 });
 
 // Creates a submission handler
 // It validate all fields and doesn't call your function unless all fields are valid
-const onSubmit = handleSubmit(values => {
-  alert(JSON.stringify(values, null, 2));
-});
 const first_name = defineInputBinds('first_name');
 const last_name = defineInputBinds('last_name');
 const email = defineInputBinds('email');
 const password = defineInputBinds('password');
+const password_confirmation = defineInputBinds('password_confirmation');
+async function getToken() {
+  const { data } = await useFetch('http://localhost:8000/sanctum/csrf-cookie', {
+    method: 'GET',
+    credentials:"include",
+  });
+  console.log(data,"cook")
+  return data.token;
+}
+
+const token = useCookie('XSRF-TOKEN');
+const onSubmit = handleSubmit(async (values) => {
+  try {
+   
+    console.log('token',token)
+    const { data, error } = await useFetch('http://localhost:8000/api/register', {
+      method: 'POST',
+      credentials:'include',
+      query: {
+        first_name: values.first_name,
+        last_name: values.last_name,
+        email: values.email,
+        password: values.password,
+        confirm:values.confirm,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-XSRF-TOKEN': token.value
+      },
+    });
+
+    if (error) {
+      let errorMessage = 'Unknown error occurred during registration.';
+      
+      if (error.message) {
+        errorMessage = error.message;
+      } else if (error._defaultValue) {
+        errorMessage = error._defaultValue.toString();
+      }
+      
+      console.error('Error registering user:', errorMessage);
+      return;
+    }
+
+    // Process the response data or handle success
+
+    localStorage.setItem('token', data.token);
+  } catch (error) {
+    console.error('Error registering user:', error);
+  }
+
+   
+});
   const props= {
     action: {
       required: true,
@@ -382,9 +415,7 @@ const password = defineInputBinds('password');
     match() {
       return this.hasPassword && this.password === this.password_confirmation;
     },
-    postParams() {
-      return this.registerParams;
-    },
+   
     registerParams() {
       const {
         email,
@@ -409,7 +440,7 @@ const password = defineInputBinds('password');
     },
   };
 
-  methods: {
+  // methods: {
     // #stripe(){
     //   // window.location.href='https://www.google.com/';
     //   this.$router.push({
@@ -420,15 +451,23 @@ const password = defineInputBinds('password');
     //   });
     // },
     function getplans() {
-      const response =  this.$axios.$get('/api/get-subscription-plan')
-      this.plans = response.map((plan) => {
-        // console.log('this.loggedInUser.id',this.start_id+' ==' +company.id);
-        if (plan.nickname == 'free') {
-          this.selected_plan = plan
-        }
-        return plan;
-      })
-    };
+  const { fetch } = useFetch();
+  const { data, error } = fetch('/api/get-subscription-plan');
+
+  if (error) {
+    console.error('Error fetching subscription plans:', error);
+    return;
+  }
+
+  const plans = data.map((plan) => {
+    if (plan.nickname === 'free') {
+      this.selected_plan = plan;
+    }
+    return plan;
+  });
+
+  this.plans = plans;
+}
     function loginSocial(provider) {
       this.provider = provider;
       window.location.href = `${process.env.baseUrl}/api/login/${provider}`;
@@ -470,7 +509,7 @@ const password = defineInputBinds('password');
             });
       })
     };
-  };
+  // };
   function created() {
     this.getplans();
   };

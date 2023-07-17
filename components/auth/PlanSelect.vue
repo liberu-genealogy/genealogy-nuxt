@@ -1,7 +1,7 @@
 <template>
     <div class="custom-select" :tabindex="tabindex" @blur="open = false">
       <div class="selected" :class="{ open: open }" @click="open = !open">
-        <div>{{ selected?selected.title:'' }}</div>
+        <div>{{ selected?selected.title:'Select a Plan' }}</div>
         <div>£{{ (selected?selected.amount:0 / 100).toFixed(2) }}</div>
       </div>
       <div class="items" :class="{ selectHide: !open }">
@@ -40,20 +40,21 @@
         defaultValue: 0,
       }
     };
-   function data() {
-      return {
-        selected: this.default
-          ? this.default
-          : this.options.length > 0
-          ? this.options[0]
+    const selected = ref('');
+    const defaultValue = ref('Select a Plan');
+    const options =ref('');
+    const open = ref(true);
+   const data=() =>{
+     
+        selected.value= defaultValue.value ? defaultValue.value : options.length > 0 ? options[0]
           : {
             title: 'Select a plan', amount: 0 
-          },
-        open: false,
-      };
+          };
+        open.value= false;
+     
     };
     function mounted() {
-      this.$emit("input", this.selected);
+    emit("input", this.selected);
     };
   </script>
   

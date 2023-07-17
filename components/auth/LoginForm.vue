@@ -22,26 +22,60 @@
 
 							<div class="mb-5">
 								<div class="field">
-									
-										<p class="control has-icons-left has-icons-right">
-											<input class="input"  type="email" placeholder="Email address" v-bind="email" />
-										</p>
-
-										<p v-if="errors.email" >{{ errors.email }}</p>
-									
+								  <ValidationProvider
+									  name="Email"
+									 
+									  rules="required|email"
+								  >
+									<p class="control has-icons-left has-icons-right">
+									  <input
+										  class="input is-large"
+										  type="text"
+										  :class="{ 'is-danger': errors.email }"
+										  placeholder="Email address"
+										  v-bind="email"
+										  name="email"
+									  />
+									  <span class="icon is-small is-left">
+										<font-awesome-icon :icon="['fas', 'envelope']" />
+									  </span>
+									</p>
+									<p
+										v-if="errors.email"
+										class="has-text-danger p-2 is-size-7"
+										v-text="errors.email"
+									></p>
+								  </ValidationProvider>
 								</div>
-							</div>
-							<div class="mb-5">
+							  </div>
+							  <div class="mb-5">
 								<div class="field">
-									
-										<p class="control has-icons-left has-icons-right">
-											<input class="input" :class="{ 'is-danger': errors[0] }" type="password" placeholder="Password"  v-bind="password" />
-										</p>
-
-										<p v-if="errors.password">{{ errors.password }}</p>
-									
+								  <ValidationProvider
+									 
+									  name="Password"
+									  vid="password"
+									  rules="required|min:8"
+								  >
+									<p class="control has-icons-left has-icons-right">
+									  <input
+										  class="input is-large"
+										  :class="{ 'is-danger': errors.password }"
+										  type="password"
+										  placeholder="Password"
+										  v-bind="password"
+									  />
+									  <span class="icon is-small is-left">
+										<font-awesome-icon :icon="['fas', 'lock']" />
+									  </span>
+									</p>
+									<p
+										v-if="errors.password"
+										class="has-text-danger p-2 is-size-7"
+										v-text="errors.password"
+									></p>
+								  </ValidationProvider>
 								</div>
-							</div>
+							  </div>
 							<div class="mb-5">
 								<div class="columns is-mobile is-gapless">
 									<div class="column">
@@ -95,7 +129,7 @@ import { faEnvelope, faCheck, faExclamationTriangle, faLock, faUser } from "@for
 import { focus } from "@enso-ui/directives";
 import { useForm } from 'vee-validate';
 import * as yup from 'yup';
-import axios from 'axios';
+
 library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 // const { errors } = 'required';
 
@@ -104,45 +138,74 @@ library.add([faEnvelope, faCheck, faExclamationTriangle, faLock, faUser]);
 	const components= { AuthIndex };
 	const directives= { focus };
 	const isWebview = ref(false); 
-	// inject: {
-	//   i18n: { from: "i18n" },
-	// },
-	
-	function data() {
-		const isWebview=false;
-		const loading= false; 
-        const isSuccessful= false;
-		const errors='';
-		const hasError= false;
-		const provider= null;
-		const email= "";
-		const password= "";
-		const remember= false;
-		const device_name= "mac";
-	}
-const { errors, handleSubmit, defineInputBinds } = useForm({
-  validationSchema: yup.object({
-    email: yup.string().email().required(),
-    password: yup.string().min(6).required(),
-  }),
-});
 
-// Creates a submission handler
-// It validate all fields and doesn't call your function unless all fields are valid
-const loading = ref(false);
-const isSuccessful = ref(false);
-const hasError = ref(false);
+	let loading = ref(false);
+    let isSuccessful = ref(false);
+    let hasError = ref(false);
 
-const onSubmit = handleSubmit(values => {
-  loading.value = true;
-  isSuccessful.value = false;
-  hasError.value = false;
-  oldLogin();
-//   alert(JSON.stringify(values, null, 2));
-});
-
-const email = defineInputBinds('email');
+	const { errors, handleSubmit, defineInputBinds } = useForm({
+	validationSchema: yup.object({
+		email: yup.string().email().required(),
+		password: yup.string().min(6).required(),
+	}),
+	});
+	const email = defineInputBinds('email');
 const password = defineInputBinds('password');
+// console.log(values.email,"ggh")
+
+async function getToken() {
+  const { data } = await useFetch('http://localhost:8000/sanctum/csrf-cookie', {
+    method: 'GET',
+    credentials:"include",
+  });
+  console.log(data,"cook")
+  return data.token;
+}
+
+const token = useCookie('XSRF-TOKEN');
+
+const onSubmit = handleSubmit(async (values) => {
+  try {
+   
+    console.log('token',token)
+    const { data, error } = await useFetch('http://localhost:3000/api/login', {
+      method: 'POST',
+      credentials:'include',
+      query: {
+        email: values.email,
+        password: values.password,
+        
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-XSRF-TOKEN': token.value
+      },
+    });
+
+    if (error) {
+      let errorMessage = 'Unknown error occurred during login.';
+      
+      if (error.message) {
+        errorMessage = error.message;
+      } else if (error._defaultValue) {
+        errorMessage = error._defaultValue.toString();
+      }
+      
+      console.error('Error login user:', errorMessage);
+      return;
+    }
+
+    // Process the response data or handle success
+
+    localStorage.setItem('token', data.token);
+  } catch (error) {
+    console.error('Error registering user:', error);
+  }
+
+   
+});
+
+// console.log(values)
 	const props= {
 		action: {
 			required: true,
@@ -153,28 +216,9 @@ const password = defineInputBinds('password');
 			type: String,
 		},
 	};
-	async function oldLogin() {
-  await axios.get("/sanctum/csrf-cookie"); // Use axios directly
-  await axios
-    .post(
-      "/api/login",
-      {
-        email: email.value, // Use the value of the email ref
-        password: password.value, // Use the value of the password ref
-      },
-      config()
-    )
-    .then(({ data }) => {
-      loading.value = false;
-      isSuccessful.value = true;
-      // ...
-    })
-    .catch((error) => {
-      console.log("err", error);
-      loading.value = false;
-      // ...
-    });
-}
+
+	
+
 
 function  config() {
     return isWebview.value ? { headers: { isWebview: true } } : {};
