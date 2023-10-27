@@ -303,87 +303,78 @@
 name: 'dashboard.index'
 }
 </router>
-<script>
+<script setup>
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import { mapGetters, mapActions } from 'vuex'
 import PieChart from '../components/charts/PieChart'
 import { EnsoChartCard as ChartCard } from '@enso-ui/charts/bulma';
 import { Chart, colors } from '@enso-ui/charts';
-export default {
-  layout: 'auth',
-  components: {
-    Loading,
-    PieChart,
-    ChartCard
-  },
-  inject: ['errorHandler', 'route', 'toastr'],
-  //middleware: ['permission', 'verification'],
-  meta: {
-    permission: { name: 'dashboard menu' },
-    title: 'Dashboard',
-  },
-  data() {
-    return {
-      loaded: false,
-      trees: [],
-      companies: [],
-      invited_companies: [],
-      selected_company: null,
-      invited_company: null,
-      selected_tree: null,
-      isLoading: false,
-      fullPage: true,
-      color: '#4fcf8d',
-      changedb: null,
-      backgroundColor: '#ffffff',
-      trial: null,
-      familiesjoined: 0,
-      peoplesattached: 0,
-      pieChartData: null,
-      chartOptions: null,
-      apiList: ['Member tree', 'Open arch', 'Wikitree', 'Family search', 'UK national arch', 'Genealogy cloud'],
-      apiSelected: 'Member tree',
-      dateMenu: false,
-      filter: {
-        firstName: '',
-        lastName: '',
-        date: '',
-      },
-      totalCount: 0,
-      result: null,
-      loading: true,
-      options: {},
-    }
-  },
-  computed: {
-    ...mapGetters(['loggedInUser']),
-    headers() {
-      if (this.apiSelected == 'Geneanum')
-        return [
-          { text: 'ID', value: 'identifier', sortable: false },
-          { text: 'PID', value: 'pid', sortable: false },
-          { text: 'Name', value: 'personname', sortable: false },
-          { text: 'Place', value: 'eventplace', sortable: false },
-          { text: 'Type', value: 'eventtype', sortable: false },
-          { text: 'Archive', value: 'archive', sortable: false },
-        ]
-      else if (this.apiSelected == 'Open arch')
-        return [
-          { text: 'ID', value: 'identifier', sortable: false },
-          { text: 'PID', value: 'pid', sortable: false },
-          { text: 'Name', value: 'personname', sortable: false },
-          { text: 'Event Place', value: 'eventplace', sortable: false },
-          { text: 'Event Type', value: 'eventtype', sortable: false },
-          { text: 'Date', value: 'eventdate.year', sortable: false },
-          { text: 'Relation Type', value: 'relationtype', sortable: false },
-          { text: 'Source Type', value: 'sourcetype', sortable: false },
-          { text: 'Archive', value: 'archive', sortable: false },
-          { text: 'Code', value: 'archive_code', sortable: false },
-          { text: 'Org', value: 'archive_org', sortable: false },
 
-        ]
-      else if (this.apiSelected == 'Family search')
+  // layout: 'auth',
+  // inject: ['errorHandler', 'route', 'toastr'],
+  //middleware: ['permission', 'verification'],
+  // meta: {
+  //   permission: { name: 'dashboard menu' },
+  //   title: 'Dashboard',
+  // },
+
+  const errorHandler = inject('errorHandler')
+  const route = inject('route')
+  const toastr = inject('toastr')
+  const loaded = ref(false)
+  const trees = ref([])
+  const companies = ref([])
+  const invited_companies = ref([])
+  const selected_company = ref(null)
+  const invited_company = ref(null)
+  const selected_tree = ref(null)
+  const isLoading = ref(false)
+  const fullPage = ref(true)
+  const color = '#4fcf8d'
+  const changedb = ref(null)
+  const backgroundColor = '#ffffff'
+  const trial = ref(null)
+  const familiesjoined = ref(0)
+  const peoplesattached = ref(0)
+  const pieChartData = ref(null)
+  const chartOptions = ref(null)
+  const apiList = ref(['Member tree', 'Open arch', 'Wikitree', 'Family search', 'UK national arch', 'Genealogy cloud'])  
+  const apiSelected = ref('Member tree')
+  const dateMenu = ref(false)
+  const filter = reactive({
+         firstName: '',
+         lastName: '',
+         date: '',
+       })
+  const totalCount = ref(0)
+  const result = ref(null)
+  const options = ref({})     
+  const headers = computed(()=> {
+         if (apiSelected.value === 'Geneanum')
+         return [
+           { text: 'ID', value: 'identifier', sortable: false },
+           { text: 'PID', value: 'pid', sortable: false },
+           { text: 'Name', value: 'personname', sortable: false },
+           { text: 'Place', value: 'eventplace', sortable: false },
+           { text: 'Type', value: 'eventtype', sortable: false },
+           { text: 'Archive', value: 'archive', sortable: false },
+         ]
+         else if (apiSelected.value === 'Open arch')
+         return [
+           { text: 'ID', value: 'identifier', sortable: false },
+           { text: 'PID', value: 'pid', sortable: false },
+           { text: 'Name', value: 'personname', sortable: false },
+           { text: 'Event Place', value: 'eventplace', sortable: false },
+           { text: 'Event Type', value: 'eventtype', sortable: false },
+           { text: 'Date', value: 'eventdate.year', sortable: false },
+           { text: 'Relation Type', value: 'relationtype', sortable: false },
+           { text: 'Source Type', value: 'sourcetype', sortable: false },
+           { text: 'Archive', value: 'archive', sortable: false },
+           { text: 'Code', value: 'archive_code', sortable: false },
+           { text: 'Org', value: 'archive_org', sortable: false }     
+         ]
+       else if (apiSelected.value === 'Family search')
         return [
           { text: 'ID', value: 'identifier', sortable: false },
           { text: 'PID', value: 'pid', sortable: false },
@@ -392,13 +383,13 @@ export default {
           { text: 'Type', value: 'eventtype', sortable: false },
           { text: 'Archive', value: 'archive', sortable: false },
         ]
-      else if (this.apiSelected == 'Member tree')
+      else if (apiSelected.vale === 'Member tree')
         return [
           { text: 'ID', value: 'id', sortable: false },
           { text: 'Name', value: 'name', sortable: false },
           { text: 'User', value: 'user_name', sortable: false },
         ]
-      else if (this.apiSelected == 'Wikitree')
+      else if (apiSelected.vale === 'Wikitree')
         return [
           { text: 'ID', value: 'identifier', sortable: false },
           { text: 'PID', value: 'pid', sortable: false },
@@ -407,7 +398,7 @@ export default {
           { text: 'Type', value: 'eventtype', sortable: false },
           { text: 'Archive', value: 'archive', sortable: false },
         ]
-      else if (this.apiSelected == 'UK national arch')
+      else if (apiSelected.vale === 'UK national arch')
         return [
           { text: 'ID', value: 'id', sortable: false },
           { text: 'Title', value: 'title', sortable: false },
@@ -419,7 +410,7 @@ export default {
           { text: 'End Date', value: 'endDate', sortable: false },
           { text: 'Reference', value: 'reference', sortable: false }
         ]
-      else if (this.apiSelected == 'Genealogy cloud')
+      else if (apiSelected.vale === 'Genealogy cloud')
         return [
           { text: 'ID', value: 'identifier', sortable: false },
           { text: 'PID', value: 'pid', sortable: false },
@@ -434,54 +425,53 @@ export default {
           { text: 'Org', value: 'archive_org', sortable: false },
 
         ]
-    },
-  },
-  watch: {
-    options: {
-      handler() {
-        console.log(this.loading, this.options)
-        this.search()
-      },
-      deep: false,
-    },
-  },
-  methods: {
-    searchInputKeydown(event) {
-        this.options.page = 1;
+      })
+
+      const loggedInUser = computed(()=> mapGetters(['loggedInUser']))
+
+  // watch: {
+  //   options: {
+  //     handler() {
+  //       console.log(this.loading, this.options)
+  //       this.search()
+  //     },
+  //     deep: false,
+  //   },
+  // },
+ 
+  function  searchInputKeydown(event) {
+        options.value.page = 1;
         if (event.keyCode == 13) {
-            this.search();
+            search();
         }
-    },
-    setSelectedCompany(value) {
-      this.selected_tree = null
-      this.getTree()
-    },
-    async setSelected(value) {
+    }
+    function setSelectedCompany(value) {
+      selected_tree.value = null
+      getTree()
+    }
+
+    async function setSelected(value) {
       const response = await this.$axios.$post('/api/dashboard/changedb', {
         company_id: value,
-        // tree_id: this.selected_tree,
       })
-      this.loadChart()
-      this.changedb = response.changedb
-      this.familiesjoined = response.familiesjoined
-      this.peoplesattached = response.peoplesattached
-      console.log('changedb response', response)
-      console.log('familiesjoined', response.familiesjoined)
-      console.log('peoplesattached', response.peoplesattached)
-    },
-    async getCompanies() {
+      loadChart()
+      changedb.value = response.changedb
+      familiesjoined.value = response.familiesjoined
+      peoplesattached.value = response.peoplesattached
+    }
+    async function getCompanies() {
       const response = await this.$axios.$get('/api/get_companies')
-      this.companies = response.my_comps;
-      this.invited_companies = response.invited_comps;
-      this.companies.map((company) => {
+      companies.value = response.my_comps;
+      invited_companies.value = response.invited_comps;
+      companies.value.map((company) => {
         // console.log('this.loggedInUser.id',this.start_id+' ==' +company.id);
-        if (company.is_tenant == 1 && company.email === this.loggedInUser.email) {
-          this.selected_company = company.id
-          this.getTree()
+        if (company.is_tenant == 1 && company.email === loggedInUser.email) {
+          selected_company.value = company.id
+          getTree()
         }
       })
-    },
-    async getTree() {
+    }
+    async function  getTree() {
       this.selected_tree = null
       const response = await this.$axios.$get('/api/trees/show', {
         params: { start_id: this.selected_company, nest: 3 },
@@ -492,80 +482,79 @@ export default {
           this.selected_tree = tree.id
         }
       })
-    },
-    async loadChart() {
-      this.loaded = false
+    }
+    async function loadChart() {
+      loaded.value = false
       const chartResponse = await this.$axios.get('/api/dashboard/pie')
-      // const { data: trial } = await this.$axios.get('/api/dashboard/trial')
-      this.pieChartData = chartResponse.data
-      this.chartOptions = chartResponse.options
+    
+      pieChartData.value = chartResponse.data
+      chartOptions.value = chartResponse.options
 
-      this.loaded = true
-      this.isLoading = false
-      //this.trial = trial
-    },
-    search() {
-      //this.result = null
-      this.loading = true
+      loaded.value = true
+      isLoading.value = false
+     
+    }
+
+    function search() {
+     
+      loading.value = true
       let url = '',
         params = {}
-      if (this.apiSelected == 'Geneanum') {
+      if (apiSelected.value === 'Geneanum') {
         url = '/api/geneanum/search-person/malta/burials'
         params = {
-          FirstName: this.filter.firstName || '',
-          LastName: this.filter.lastName || '',
-          per_page: this.options?.itemsPerPage || 10,
-          page: this.options?.page || 1,
-          sidx: this.options?.sidx || 100,
-          row: this.options?.row || 100,
+          FirstName: filter.firstName || '',
+          LastName: filter.lastName || '',
+          per_page: options?.itemsPerPage || 10,
+          page: options?.page || 1,
+          sidx: options?.sidx || 100,
+          row: options?.row || 100,
         }
-      } else if (this.apiSelected == 'Open arch') {
+      } else if (apiSelected.value === 'Open arch') {
         url = '/api/open-arch/search-person'
         params = {
           name:
-            (this.filter.firstName || '') + ' ' + (this.filter.lastName || '') + ' ' + (this.filter.date || ''),
-          per_page: this.options?.itemsPerPage || 10,
-          page: this.options?.page || 1,
+            (filter.firstName || '') + ' ' + (filter.lastName || '') + ' ' + (filter.date || ''),
+          per_page: options?.itemsPerPage || 10,
+          page: options?.page || 1,
         }
-      } else if (this.apiSelected == 'Member tree') {
+      } else if (apiSelected.value == 'Member tree') {
         url = '/api/member-tree/search-person'
         params = {
           name:
-            (this.filter.firstName || '') + ' ' + (this.filter.lastName || '') + ' ' + (this.filter.date || ''),
-          per_page: this.options?.itemsPerPage || 10,
-          page: this.options?.page || 1,
+            (filter.firstName || '') + ' ' + (filter.lastName || '') + ' ' + (filter.date || ''),
+          per_page: options?.itemsPerPage || 10,
+          page: options?.page || 1,
         }
-      } else if (this.apiSelected == 'Family search') {
+      } else if (apiSelected.value == 'Family search') {
         url = '/api/family-search/search'
         params = {
-          givenName: this.filter.firstName || '',
-          surname: this.filter.lastName || '',
-          count: this.options?.itemsPerPage || 10,
+          givenName: filter.firstName || '',
+          surname: filter.lastName || '',
+          count: options?.itemsPerPage || 10,
           offset:
-            ((this.options?.page || 1) - 1) *
-            (this.options?.itemsPerPage || 10),
+            ((options?.page || 1) - 1) *
+            (options?.itemsPerPage || 10),
         }
-      } else if (this.apiSelected == 'Wikitree') {
+      } else if (apiSelected.value == 'Wikitree') {
         url = '/api/wikitree/search-person'
         params = {
-          FirstName: this.filter.firstName || '',
-          LastName: this.filter.lastName || '',
-          per_page: this.options?.itemsPerPage || 10,
-          page: this.options?.page || 1,
+          FirstName: filter.firstName || '',
+          LastName: filter.lastName || '',
+          per_page: options?.itemsPerPage || 10,
+          page: options?.page || 1,
         }
-      } else if (this.apiSelected == 'UK national arch') {
+      } else if (apiSelected.value === 'UK national arch') {
         url = '/api/uk-national-arch/search-person'
         params = {
-          firstName: this.filter.firstName || '',
-          lastName: this.filter.lastName || '',
-          // dateOfBirthFrom: this.filter.date || ''
+          firstName: filter.firstName || '',
+          lastName: filter.lastName || '',
         }
-      } else if (this.apiSelected == 'Genealogy cloud') {
+      } else if (apiSelected.value === 'Genealogy cloud') {
         url = '/api/genealogy-cloud/search-person'
         params = {
           GivenNames: this.filter.firstName || '',
           Surname: this.filter.lastName || '',
-          // dateOfBirthFrom: this.filter.date || ''
         }
       }
 
@@ -585,10 +574,8 @@ export default {
           this.loading = false
         })
         .catch(this.errorHandler)
-    },
-  },
-  created() {
-    this.getCompanies()
-  },
-}
+    }
+
+    getCompanies()
+  
 </script>
